@@ -14,7 +14,7 @@ public class MenuControl : MonoBehaviour
 	private string[] dinos = new string[]{"Diloph", "Hesp", "Raptor"};
 
 	//the different level to choose
-	private string[] levels = new string[]{"Test map", "Track1"};
+	private string[] levels = new string[]{"Test map", "Track1", "CityTrack"};
 	
 	//the rects for the buttons
 	public Rect[] mainMenuRect;
@@ -61,10 +61,15 @@ public class MenuControl : MonoBehaviour
 	//the vector3 of the touch
 	private Vector3 touchVec3;
 
+	//the swipe detection script
+	private TouchSwipeClass swipeCtrl;
+
 
 	// Use this for initialization
 	void Awake () 
 	{
+		swipeCtrl = gameObject.GetComponent<TouchSwipeClass>() as TouchSwipeClass;
+
 		//the names of the players in the order that they past the finished line
 		placesNames = new string[6];
 
@@ -101,7 +106,7 @@ public class MenuControl : MonoBehaviour
 		}*/
 
 		//if more then 0 touches detected
-		if(Input.touches.Length > 0)
+		if(Input.touches.Length == 1)
 		{
 			//loop through the touches 
 			for(int i = 0; i < Input.touchCount; i++)
@@ -138,6 +143,7 @@ public class MenuControl : MonoBehaviour
 
 	void OnGUI()
 	{
+
 		//if menuSelet is the main menu
 		if(menuSelect == Menu.mainMenu)
 		{
@@ -200,6 +206,10 @@ public class MenuControl : MonoBehaviour
 				{
 					Application.LoadLevel("Track1");
 				}
+				else if(levelIndex == 2)
+				{
+					Application.LoadLevel("CityTrack");
+				}
 			}
 		}
 		//if menuSelet is the dino select menu
@@ -207,7 +217,62 @@ public class MenuControl : MonoBehaviour
 		{
 			GUI.Box(dinoMenuRect[0], dinos[dinoIndex]);
 
-			if(GUI.Button(dinoMenuRect[1], "^\n|") || dinoMenuRect[1].Contains(touchVec3))
+			if(swipeCtrl.swipeDirection == TouchSwipeClass.Swipe.up)
+			{
+				ResetTouchPos();
+				
+				if(dinoIndex >= dinos.Length - 1)
+				{
+					dinoIndex = 0;
+				}
+				else
+				{
+					dinoIndex++;
+				}
+
+				swipeCtrl.swipeDirection = TouchSwipeClass.Swipe.none;
+			}
+			else if(swipeCtrl.swipeDirection == TouchSwipeClass.Swipe.down)
+			{
+				ResetTouchPos();
+				
+				if(dinoIndex <= 0)
+				{
+					dinoIndex = dinos.Length - 1;
+				}
+				else
+				{
+					dinoIndex--;
+				}
+
+				swipeCtrl.swipeDirection = TouchSwipeClass.Swipe.none;
+			}
+
+			if(Input.GetKeyDown(KeyCode.UpArrow))
+			{
+				if(dinoIndex >= dinos.Length - 1)
+				{
+					dinoIndex = 0;
+				}
+				else
+				{
+					dinoIndex++;
+				}
+			}
+
+			if(Input.GetKeyDown(KeyCode.DownArrow))
+			{
+				if(dinoIndex <= 0)
+				{
+					dinoIndex = dinos.Length - 1;
+				}
+				else
+				{
+					dinoIndex--;
+				}
+			}
+
+			/*if(GUI.Button(dinoMenuRect[1], "^\n|") || dinoMenuRect[1].Contains(touchVec3))
 			{
 				ResetTouchPos();
 
@@ -233,9 +298,9 @@ public class MenuControl : MonoBehaviour
 				{
 					dinoIndex--;
 				}
-			}
+			}*/
 
-			if(GUI.Button(dinoMenuRect[3], "Back") || dinoMenuRect[3].Contains(touchVec3))
+			if(GUI.Button(dinoMenuRect[1], "Back") || dinoMenuRect[1].Contains(touchVec3))
 			{
 				if(singlePlayer == true)
 				{
@@ -252,7 +317,63 @@ public class MenuControl : MonoBehaviour
 		{
 			GUI.Box(levelMenuRect[0], levels[levelIndex]);
 
-			if(GUI.Button(levelMenuRect[1], "^\n|") || levelMenuRect[1].Contains(touchVec3))
+			if(swipeCtrl.swipeDirection == TouchSwipeClass.Swipe.up)
+			{
+				ResetTouchPos();
+				
+				if(levelIndex >= levels.Length - 1)
+				{
+					levelIndex = 0;
+				}
+				else
+				{
+					levelIndex++;
+				}
+				
+				swipeCtrl.swipeDirection = TouchSwipeClass.Swipe.none;
+			}
+
+			if(swipeCtrl.swipeDirection == TouchSwipeClass.Swipe.down)
+			{
+				ResetTouchPos();
+				
+				if(levelIndex <= 0)
+				{
+					levelIndex = levels.Length - 1;
+				}
+				else
+				{
+					levelIndex--;
+				}
+				
+				swipeCtrl.swipeDirection = TouchSwipeClass.Swipe.none;
+			}
+
+			if(Input.GetKeyDown(KeyCode.UpArrow))
+			{
+				if(levelIndex >= levels.Length - 1)
+				{
+					levelIndex = 0;
+				}
+				else
+				{
+					levelIndex++;
+				}
+			}
+			
+			if(Input.GetKeyDown(KeyCode.DownArrow))
+			{
+				if(levelIndex <= 0)
+				{
+					levelIndex = levels.Length - 1;
+				}
+				else
+				{
+					levelIndex--;
+				}
+			}
+
+			/*if(GUI.Button(levelMenuRect[1], "^\n|") || levelMenuRect[1].Contains(touchVec3))
 			{
 				ResetTouchPos();
 
@@ -278,9 +399,9 @@ public class MenuControl : MonoBehaviour
 				{
 					levelIndex--;
 				}
-			}
+			}*/
 			
-			if(GUI.Button(levelMenuRect[3], "Back") || levelMenuRect[3].Contains(touchVec3))
+			if(GUI.Button(levelMenuRect[1], "Back") || levelMenuRect[1].Contains(touchVec3))
 			{
 				if(singlePlayer == true)
 				{

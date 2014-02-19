@@ -1,4 +1,7 @@
-﻿using UnityEngine;
+﻿// Name: Robert Reed
+// Project: Cyber-Dino Racing
+// Date: 12/15/2013
+using UnityEngine;
 using System.Collections;
 
 public class RaceData : MonoBehaviour 
