@@ -21,7 +21,7 @@ public class TrainCarClass : MonoBehaviour
 	{
 
 		//if it's time to start the timer
-		if(timerStart == true && timer > 0)
+		/*if(timerStart == true && timer > 0)
 		{
 			timer -= 1;
 		}
@@ -31,7 +31,7 @@ public class TrainCarClass : MonoBehaviour
 		{
 			//turn off the object
 			gameObject.SetActive(false);
-		}
+		}*/
 
 
 
@@ -46,7 +46,9 @@ public class TrainCarClass : MonoBehaviour
 
 			timerStart = true;
 
+			gameObject.SetActive(false);
 			//Physics.IgnoreLayerCollision(0, 10);
+
 		}
 	}
 	

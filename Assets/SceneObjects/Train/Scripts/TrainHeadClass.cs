@@ -67,7 +67,7 @@ public class TrainHeadClass : MonoBehaviour
 
 		//Debug.Log(speed / dist);
 		
-		Debug.Log(startPoint.position);
+		//Debug.Log(startPoint.position);
 	}
 }
 
