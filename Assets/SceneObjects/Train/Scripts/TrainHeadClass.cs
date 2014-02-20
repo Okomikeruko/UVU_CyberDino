@@ -29,7 +29,7 @@ public class TrainHeadClass : MonoBehaviour
 	}
 	
 	// Update is called once per frame
-	void LateUpdate () 
+	void FixedUpdate () 
 	{
 		if(transform.position == endPoint.position)
 		{
@@ -66,6 +66,8 @@ public class TrainHeadClass : MonoBehaviour
 		transform.LookAt(endPoint);
 
 		//Debug.Log(speed / dist);
+		
+		Debug.Log(startPoint.position);
 	}
 }
 
