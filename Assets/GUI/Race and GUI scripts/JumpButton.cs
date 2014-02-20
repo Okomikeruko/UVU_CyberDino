@@ -14,12 +14,13 @@ public class JumpButton : MonoBehaviour
 	// Use this for initialization
 	void Start () 
 	{
-		dMoveScript = player.GetComponent<DinoMoveScript>() as DinoMoveScript;
+		//dMoveScript = player.GetComponent<DinoMoveScript>() as DinoMoveScript;
 
 		transform.position = Vector3.zero;
 		transform.localScale = Vector3.zero;
 		
 		Resize(this.gameObject.guiTexture, buttonPos);
+		
 	}
 	
 	// Update is called once per frame
