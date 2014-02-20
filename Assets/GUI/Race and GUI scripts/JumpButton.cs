@@ -14,7 +14,7 @@ public class JumpButton : MonoBehaviour
 	// Use this for initialization
 	void Start () 
 	{
-		//dMoveScript = player.GetComponent<DinoMoveScript>() as DinoMoveScript;
+		//MoveScript = player.GetComponent<DinoMoveScript>() as DinoMoveScript;
 
 		transform.position = Vector3.zero;
 		transform.localScale = Vector3.zero;

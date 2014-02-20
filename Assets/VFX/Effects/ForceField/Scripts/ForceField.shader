@@ -65,6 +65,9 @@ CGPROGRAM
 
 #pragma fragmentoption ARB_fog_exp2 
 
+// This line added
+#pragma target 3.0
+
 #include "UnityCG.cginc" 
 
  
@@ -107,11 +110,13 @@ v2f vert (appdata_base v)
 
     float t = _Time[0]*_Rate*_Scale;
 
-    o.vert = sin((v.vertex.xyz + t) * s);  
+ //   o.vert = sin((v.vertex.xyz + t) * s);  
 
-    o.uv = sin((v.texcoord.xyz + t) * s) * _Distortion;
+//    o.uv = sin((v.texcoord.xyz + t) * s) * _Distortion;
 
-    
+    o.vert = (v.vertex.xyz + t) * s;  
+
+    o.uv = (v.texcoord.xyz + t) * s * _Distortion;
 
     return o; 
 
@@ -123,9 +128,13 @@ half4 frag (v2f i) : COLOR
 
 { 
 
-    float3 vert = i.vert;
+ //   float3 vert = i.vert;
 
-    float3 uv = i.uv;
+  //  float3 uv = i.uv;
+
+    float3 vert = sin(i.vert);
+
+    float3 uv = sin(i.uv);
 
     float mix = 1 + sin((vert.x - uv.x) + (vert.y - uv.y) + (vert.z - uv.z));
 

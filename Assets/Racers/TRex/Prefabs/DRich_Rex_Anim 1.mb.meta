@@ -1,0 +1,871 @@
+fileFormatVersion: 2
+guid: e73e55ffa14c281459bc25792db8f0b6
+ModelImporter:
+  serializedVersion: 16
+  fileIDToRecycleName:
+    100000: //RootNode
+    100002: final_Rexmk3:back
+    100004: final_Rexmk3:head
+    100006: final_Rexmk3:left_ankle
+    100008: final_Rexmk3:left_hand
+    100010: final_Rexmk3:left_hip
+    100012: final_Rexmk3:left_knee
+    100014: final_Rexmk3:neck
+    100016: final_Rexmk3:right_ankle
+    100018: final_Rexmk3:right_hand
+    100020: final_Rexmk3:right_hip
+    100022: final_Rexmk3:right_knee
+    100024: final_Rexmk3:Root
+    100026: final_Rexmk3:T_Rex_conceptart_new_legs:Armor_GRP
+    100028: final_Rexmk3:T_Rex_conceptart_new_legs:Bipedal_Generic_Mesh_2014:transform1
+    100030: final_Rexmk3:T_Rex_conceptart_new_legs:Bipedal_Generic_Mesh_2014:transform2
+    100032: final_Rexmk3:T_Rex_conceptart_new_legs:Cannon_GRP
+    100034: final_Rexmk3:T_Rex_conceptart_new_legs:group1
+    100036: final_Rexmk3:T_Rex_conceptart_new_legs:group2
+    100038: final_Rexmk3:T_Rex_conceptart_new_legs:imagePlane1
+    100040: final_Rexmk3:T_Rex_conceptart_new_legs:imagePlane2
+    100042: final_Rexmk3:T_Rex_conceptart_new_legs:polySurface14
+    100044: final_Rexmk3:T_Rex_conceptart_new_legs:polySurface16
+    100046: final_Rexmk3:T_Rex_conceptart_new_legs:polySurface18
+    100048: final_Rexmk3:T_Rex_conceptart_new_legs:polySurface20
+    100050: final_Rexmk3:T_Rex_conceptart_new_legs:polySurface22
+    100052: final_Rexmk3:T_Rex_conceptart_new_legs:polySurface33
+    100054: final_Rexmk3:T_Rex_conceptart_new_legs:Trex_Armored_Wep
+    100056: final_Rexmk3:T_Rex_conceptart_new_legs:turnTableCamera1
+    100058: final_Rexmk3:T_Rex_conceptart_new_legs:turnTableCamera2
+    100060: final_Rexmk3:tail_end
+    100062: final_Rexmk3:tail_mid
+    100064: final_Rexmk3:tail_start
+    400000: //RootNode
+    400002: final_Rexmk3:back
+    400004: final_Rexmk3:head
+    400006: final_Rexmk3:left_ankle
+    400008: final_Rexmk3:left_hand
+    400010: final_Rexmk3:left_hip
+    400012: final_Rexmk3:left_knee
+    400014: final_Rexmk3:neck
+    400016: final_Rexmk3:right_ankle
+    400018: final_Rexmk3:right_hand
+    400020: final_Rexmk3:right_hip
+    400022: final_Rexmk3:right_knee
+    400024: final_Rexmk3:Root
+    400026: final_Rexmk3:T_Rex_conceptart_new_legs:Armor_GRP
+    400028: final_Rexmk3:T_Rex_conceptart_new_legs:Bipedal_Generic_Mesh_2014:transform1
+    400030: final_Rexmk3:T_Rex_conceptart_new_legs:Bipedal_Generic_Mesh_2014:transform2
+    400032: final_Rexmk3:T_Rex_conceptart_new_legs:Cannon_GRP
+    400034: final_Rexmk3:T_Rex_conceptart_new_legs:group1
+    400036: final_Rexmk3:T_Rex_conceptart_new_legs:group2
+    400038: final_Rexmk3:T_Rex_conceptart_new_legs:imagePlane1
+    400040: final_Rexmk3:T_Rex_conceptart_new_legs:imagePlane2
+    400042: final_Rexmk3:T_Rex_conceptart_new_legs:polySurface14
+    400044: final_Rexmk3:T_Rex_conceptart_new_legs:polySurface16
+    400046: final_Rexmk3:T_Rex_conceptart_new_legs:polySurface18
+    400048: final_Rexmk3:T_Rex_conceptart_new_legs:polySurface20
+    400050: final_Rexmk3:T_Rex_conceptart_new_legs:polySurface22
+    400052: final_Rexmk3:T_Rex_conceptart_new_legs:polySurface33
+    400054: final_Rexmk3:T_Rex_conceptart_new_legs:Trex_Armored_Wep
+    400056: final_Rexmk3:T_Rex_conceptart_new_legs:turnTableCamera1
+    400058: final_Rexmk3:T_Rex_conceptart_new_legs:turnTableCamera2
+    400060: final_Rexmk3:tail_end
+    400062: final_Rexmk3:tail_mid
+    400064: final_Rexmk3:tail_start
+    4300000: final_Rexmk3:T_Rex_conceptart_new_legs:polySurface33
+    7400000: Idle
+    7400002: Walk
+    7400004: Run
+    7400006: Run Left
+    7400008: Run Right
+    7400010: Jump Up
+    7400012: Jumping
+    7400014: Landing
+    9500000: //RootNode
+    13700000: final_Rexmk3:T_Rex_conceptart_new_legs:polySurface33
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    optimizeGameObjects: 0
+    animationCompression: 1
+    animationRotationError: .5
+    animationPositionError: .5
+    animationScaleError: .5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    clipAnimations:
+    - serializedVersion: 16
+      name: Idle
+      takeName: Take 001
+      firstFrame: 1
+      lastFrame: 25
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      loopTime: 1
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: final_Rexmk3:Root
+        weight: 1
+      - path: final_Rexmk3:Root/final_Rexmk3:back
+        weight: 1
+      - path: final_Rexmk3:Root/final_Rexmk3:back/final_Rexmk3:neck
+        weight: 1
+      - path: final_Rexmk3:Root/final_Rexmk3:back/final_Rexmk3:neck/final_Rexmk3:head
+        weight: 1
+      - path: final_Rexmk3:Root/final_Rexmk3:back/final_Rexmk3:neck/final_Rexmk3:left_hand
+        weight: 1
+      - path: final_Rexmk3:Root/final_Rexmk3:back/final_Rexmk3:neck/final_Rexmk3:right_hand
+        weight: 1
+      - path: final_Rexmk3:Root/final_Rexmk3:left_hip
+        weight: 1
+      - path: final_Rexmk3:Root/final_Rexmk3:left_hip/final_Rexmk3:left_knee
+        weight: 1
+      - path: final_Rexmk3:Root/final_Rexmk3:left_hip/final_Rexmk3:left_knee/final_Rexmk3:left_ankle
+        weight: 1
+      - path: final_Rexmk3:Root/final_Rexmk3:right_hip
+        weight: 1
+      - path: final_Rexmk3:Root/final_Rexmk3:right_hip/final_Rexmk3:right_knee
+        weight: 1
+      - path: final_Rexmk3:Root/final_Rexmk3:right_hip/final_Rexmk3:right_knee/final_Rexmk3:right_ankle
+        weight: 1
+      - path: final_Rexmk3:Root/final_Rexmk3:tail_start
+        weight: 1
+      - path: final_Rexmk3:Root/final_Rexmk3:tail_start/final_Rexmk3:tail_mid
+        weight: 1
+      - path: final_Rexmk3:Root/final_Rexmk3:tail_start/final_Rexmk3:tail_mid/final_Rexmk3:tail_end
+        weight: 1
+      - path: final_Rexmk3:T_Rex_conceptart_new_legs:Armor_GRP
+        weight: 1
+      - path: final_Rexmk3:T_Rex_conceptart_new_legs:Armor_GRP/final_Rexmk3:T_Rex_conceptart_new_legs:polySurface22
+        weight: 1
+      - path: final_Rexmk3:T_Rex_conceptart_new_legs:Bipedal_Generic_Mesh_2014:transform1
+        weight: 1
+      - path: final_Rexmk3:T_Rex_conceptart_new_legs:Bipedal_Generic_Mesh_2014:transform2
+        weight: 1
+      - path: final_Rexmk3:T_Rex_conceptart_new_legs:Cannon_GRP
+        weight: 1
+      - path: final_Rexmk3:T_Rex_conceptart_new_legs:group1
+        weight: 1
+      - path: final_Rexmk3:T_Rex_conceptart_new_legs:group1/final_Rexmk3:T_Rex_conceptart_new_legs:turnTableCamera1
+        weight: 1
+      - path: final_Rexmk3:T_Rex_conceptart_new_legs:group2
+        weight: 1
+      - path: final_Rexmk3:T_Rex_conceptart_new_legs:group2/final_Rexmk3:T_Rex_conceptart_new_legs:turnTableCamera2
+        weight: 1
+      - path: final_Rexmk3:T_Rex_conceptart_new_legs:imagePlane1
+        weight: 1
+      - path: final_Rexmk3:T_Rex_conceptart_new_legs:imagePlane2
+        weight: 1
+      - path: final_Rexmk3:T_Rex_conceptart_new_legs:polySurface14
+        weight: 1
+      - path: final_Rexmk3:T_Rex_conceptart_new_legs:polySurface14/final_Rexmk3:T_Rex_conceptart_new_legs:polySurface16
+        weight: 1
+      - path: final_Rexmk3:T_Rex_conceptart_new_legs:polySurface14/final_Rexmk3:T_Rex_conceptart_new_legs:polySurface16/final_Rexmk3:T_Rex_conceptart_new_legs:polySurface18
+        weight: 1
+      - path: final_Rexmk3:T_Rex_conceptart_new_legs:polySurface14/final_Rexmk3:T_Rex_conceptart_new_legs:polySurface16/final_Rexmk3:T_Rex_conceptart_new_legs:polySurface18/final_Rexmk3:T_Rex_conceptart_new_legs:polySurface20
+        weight: 1
+      - path: final_Rexmk3:T_Rex_conceptart_new_legs:polySurface33
+        weight: 1
+      - path: final_Rexmk3:T_Rex_conceptart_new_legs:Trex_Armored_Wep
+        weight: 1
+      maskType: 0
+      maskSource: {instanceID: 0}
+    - serializedVersion: 16
+      name: Walk
+      takeName: Take 001
+      firstFrame: 30
+      lastFrame: 55
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      loopTime: 1
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: final_Rexmk3:Root
+        weight: 1
+      - path: final_Rexmk3:Root/final_Rexmk3:back
+        weight: 1
+      - path: final_Rexmk3:Root/final_Rexmk3:back/final_Rexmk3:neck
+        weight: 1
+      - path: final_Rexmk3:Root/final_Rexmk3:back/final_Rexmk3:neck/final_Rexmk3:head
+        weight: 1
+      - path: final_Rexmk3:Root/final_Rexmk3:back/final_Rexmk3:neck/final_Rexmk3:left_hand
+        weight: 1
+      - path: final_Rexmk3:Root/final_Rexmk3:back/final_Rexmk3:neck/final_Rexmk3:right_hand
+        weight: 1
+      - path: final_Rexmk3:Root/final_Rexmk3:left_hip
+        weight: 1
+      - path: final_Rexmk3:Root/final_Rexmk3:left_hip/final_Rexmk3:left_knee
+        weight: 1
+      - path: final_Rexmk3:Root/final_Rexmk3:left_hip/final_Rexmk3:left_knee/final_Rexmk3:left_ankle
+        weight: 1
+      - path: final_Rexmk3:Root/final_Rexmk3:right_hip
+        weight: 1
+      - path: final_Rexmk3:Root/final_Rexmk3:right_hip/final_Rexmk3:right_knee
+        weight: 1
+      - path: final_Rexmk3:Root/final_Rexmk3:right_hip/final_Rexmk3:right_knee/final_Rexmk3:right_ankle
+        weight: 1
+      - path: final_Rexmk3:Root/final_Rexmk3:tail_start
+        weight: 1
+      - path: final_Rexmk3:Root/final_Rexmk3:tail_start/final_Rexmk3:tail_mid
+        weight: 1
+      - path: final_Rexmk3:Root/final_Rexmk3:tail_start/final_Rexmk3:tail_mid/final_Rexmk3:tail_end
+        weight: 1
+      - path: final_Rexmk3:T_Rex_conceptart_new_legs:Armor_GRP
+        weight: 1
+      - path: final_Rexmk3:T_Rex_conceptart_new_legs:Armor_GRP/final_Rexmk3:T_Rex_conceptart_new_legs:polySurface22
+        weight: 1
+      - path: final_Rexmk3:T_Rex_conceptart_new_legs:Bipedal_Generic_Mesh_2014:transform1
+        weight: 1
+      - path: final_Rexmk3:T_Rex_conceptart_new_legs:Bipedal_Generic_Mesh_2014:transform2
+        weight: 1
+      - path: final_Rexmk3:T_Rex_conceptart_new_legs:Cannon_GRP
+        weight: 1
+      - path: final_Rexmk3:T_Rex_conceptart_new_legs:group1
+        weight: 1
+      - path: final_Rexmk3:T_Rex_conceptart_new_legs:group1/final_Rexmk3:T_Rex_conceptart_new_legs:turnTableCamera1
+        weight: 1
+      - path: final_Rexmk3:T_Rex_conceptart_new_legs:group2
+        weight: 1
+      - path: final_Rexmk3:T_Rex_conceptart_new_legs:group2/final_Rexmk3:T_Rex_conceptart_new_legs:turnTableCamera2
+        weight: 1
+      - path: final_Rexmk3:T_Rex_conceptart_new_legs:imagePlane1
+        weight: 1
+      - path: final_Rexmk3:T_Rex_conceptart_new_legs:imagePlane2
+        weight: 1
+      - path: final_Rexmk3:T_Rex_conceptart_new_legs:polySurface14
+        weight: 1
+      - path: final_Rexmk3:T_Rex_conceptart_new_legs:polySurface14/final_Rexmk3:T_Rex_conceptart_new_legs:polySurface16
+        weight: 1
+      - path: final_Rexmk3:T_Rex_conceptart_new_legs:polySurface14/final_Rexmk3:T_Rex_conceptart_new_legs:polySurface16/final_Rexmk3:T_Rex_conceptart_new_legs:polySurface18
+        weight: 1
+      - path: final_Rexmk3:T_Rex_conceptart_new_legs:polySurface14/final_Rexmk3:T_Rex_conceptart_new_legs:polySurface16/final_Rexmk3:T_Rex_conceptart_new_legs:polySurface18/final_Rexmk3:T_Rex_conceptart_new_legs:polySurface20
+        weight: 1
+      - path: final_Rexmk3:T_Rex_conceptart_new_legs:polySurface33
+        weight: 1
+      - path: final_Rexmk3:T_Rex_conceptart_new_legs:Trex_Armored_Wep
+        weight: 1
+      maskType: 0
+      maskSource: {instanceID: 0}
+    - serializedVersion: 16
+      name: Run
+      takeName: Take 001
+      firstFrame: 60
+      lastFrame: 73
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      loopTime: 1
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: final_Rexmk3:Root
+        weight: 1
+      - path: final_Rexmk3:Root/final_Rexmk3:back
+        weight: 1
+      - path: final_Rexmk3:Root/final_Rexmk3:back/final_Rexmk3:neck
+        weight: 1
+      - path: final_Rexmk3:Root/final_Rexmk3:back/final_Rexmk3:neck/final_Rexmk3:head
+        weight: 1
+      - path: final_Rexmk3:Root/final_Rexmk3:back/final_Rexmk3:neck/final_Rexmk3:left_hand
+        weight: 1
+      - path: final_Rexmk3:Root/final_Rexmk3:back/final_Rexmk3:neck/final_Rexmk3:right_hand
+        weight: 1
+      - path: final_Rexmk3:Root/final_Rexmk3:left_hip
+        weight: 1
+      - path: final_Rexmk3:Root/final_Rexmk3:left_hip/final_Rexmk3:left_knee
+        weight: 1
+      - path: final_Rexmk3:Root/final_Rexmk3:left_hip/final_Rexmk3:left_knee/final_Rexmk3:left_ankle
+        weight: 1
+      - path: final_Rexmk3:Root/final_Rexmk3:right_hip
+        weight: 1
+      - path: final_Rexmk3:Root/final_Rexmk3:right_hip/final_Rexmk3:right_knee
+        weight: 1
+      - path: final_Rexmk3:Root/final_Rexmk3:right_hip/final_Rexmk3:right_knee/final_Rexmk3:right_ankle
+        weight: 1
+      - path: final_Rexmk3:Root/final_Rexmk3:tail_start
+        weight: 1
+      - path: final_Rexmk3:Root/final_Rexmk3:tail_start/final_Rexmk3:tail_mid
+        weight: 1
+      - path: final_Rexmk3:Root/final_Rexmk3:tail_start/final_Rexmk3:tail_mid/final_Rexmk3:tail_end
+        weight: 1
+      - path: final_Rexmk3:T_Rex_conceptart_new_legs:Armor_GRP
+        weight: 1
+      - path: final_Rexmk3:T_Rex_conceptart_new_legs:Armor_GRP/final_Rexmk3:T_Rex_conceptart_new_legs:polySurface22
+        weight: 1
+      - path: final_Rexmk3:T_Rex_conceptart_new_legs:Bipedal_Generic_Mesh_2014:transform1
+        weight: 1
+      - path: final_Rexmk3:T_Rex_conceptart_new_legs:Bipedal_Generic_Mesh_2014:transform2
+        weight: 1
+      - path: final_Rexmk3:T_Rex_conceptart_new_legs:Cannon_GRP
+        weight: 1
+      - path: final_Rexmk3:T_Rex_conceptart_new_legs:group1
+        weight: 1
+      - path: final_Rexmk3:T_Rex_conceptart_new_legs:group1/final_Rexmk3:T_Rex_conceptart_new_legs:turnTableCamera1
+        weight: 1
+      - path: final_Rexmk3:T_Rex_conceptart_new_legs:group2
+        weight: 1
+      - path: final_Rexmk3:T_Rex_conceptart_new_legs:group2/final_Rexmk3:T_Rex_conceptart_new_legs:turnTableCamera2
+        weight: 1
+      - path: final_Rexmk3:T_Rex_conceptart_new_legs:imagePlane1
+        weight: 1
+      - path: final_Rexmk3:T_Rex_conceptart_new_legs:imagePlane2
+        weight: 1
+      - path: final_Rexmk3:T_Rex_conceptart_new_legs:polySurface14
+        weight: 1
+      - path: final_Rexmk3:T_Rex_conceptart_new_legs:polySurface14/final_Rexmk3:T_Rex_conceptart_new_legs:polySurface16
+        weight: 1
+      - path: final_Rexmk3:T_Rex_conceptart_new_legs:polySurface14/final_Rexmk3:T_Rex_conceptart_new_legs:polySurface16/final_Rexmk3:T_Rex_conceptart_new_legs:polySurface18
+        weight: 1
+      - path: final_Rexmk3:T_Rex_conceptart_new_legs:polySurface14/final_Rexmk3:T_Rex_conceptart_new_legs:polySurface16/final_Rexmk3:T_Rex_conceptart_new_legs:polySurface18/final_Rexmk3:T_Rex_conceptart_new_legs:polySurface20
+        weight: 1
+      - path: final_Rexmk3:T_Rex_conceptart_new_legs:polySurface33
+        weight: 1
+      - path: final_Rexmk3:T_Rex_conceptart_new_legs:Trex_Armored_Wep
+        weight: 1
+      maskType: 0
+      maskSource: {instanceID: 0}
+    - serializedVersion: 16
+      name: Run Left
+      takeName: Take 001
+      firstFrame: 76
+      lastFrame: 88
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      loopTime: 1
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: final_Rexmk3:Root
+        weight: 1
+      - path: final_Rexmk3:Root/final_Rexmk3:back
+        weight: 1
+      - path: final_Rexmk3:Root/final_Rexmk3:back/final_Rexmk3:neck
+        weight: 1
+      - path: final_Rexmk3:Root/final_Rexmk3:back/final_Rexmk3:neck/final_Rexmk3:head
+        weight: 1
+      - path: final_Rexmk3:Root/final_Rexmk3:back/final_Rexmk3:neck/final_Rexmk3:left_hand
+        weight: 1
+      - path: final_Rexmk3:Root/final_Rexmk3:back/final_Rexmk3:neck/final_Rexmk3:right_hand
+        weight: 1
+      - path: final_Rexmk3:Root/final_Rexmk3:left_hip
+        weight: 1
+      - path: final_Rexmk3:Root/final_Rexmk3:left_hip/final_Rexmk3:left_knee
+        weight: 1
+      - path: final_Rexmk3:Root/final_Rexmk3:left_hip/final_Rexmk3:left_knee/final_Rexmk3:left_ankle
+        weight: 1
+      - path: final_Rexmk3:Root/final_Rexmk3:right_hip
+        weight: 1
+      - path: final_Rexmk3:Root/final_Rexmk3:right_hip/final_Rexmk3:right_knee
+        weight: 1
+      - path: final_Rexmk3:Root/final_Rexmk3:right_hip/final_Rexmk3:right_knee/final_Rexmk3:right_ankle
+        weight: 1
+      - path: final_Rexmk3:Root/final_Rexmk3:tail_start
+        weight: 1
+      - path: final_Rexmk3:Root/final_Rexmk3:tail_start/final_Rexmk3:tail_mid
+        weight: 1
+      - path: final_Rexmk3:Root/final_Rexmk3:tail_start/final_Rexmk3:tail_mid/final_Rexmk3:tail_end
+        weight: 1
+      - path: final_Rexmk3:T_Rex_conceptart_new_legs:Armor_GRP
+        weight: 1
+      - path: final_Rexmk3:T_Rex_conceptart_new_legs:Armor_GRP/final_Rexmk3:T_Rex_conceptart_new_legs:polySurface22
+        weight: 1
+      - path: final_Rexmk3:T_Rex_conceptart_new_legs:Bipedal_Generic_Mesh_2014:transform1
+        weight: 1
+      - path: final_Rexmk3:T_Rex_conceptart_new_legs:Bipedal_Generic_Mesh_2014:transform2
+        weight: 1
+      - path: final_Rexmk3:T_Rex_conceptart_new_legs:Cannon_GRP
+        weight: 1
+      - path: final_Rexmk3:T_Rex_conceptart_new_legs:group1
+        weight: 1
+      - path: final_Rexmk3:T_Rex_conceptart_new_legs:group1/final_Rexmk3:T_Rex_conceptart_new_legs:turnTableCamera1
+        weight: 1
+      - path: final_Rexmk3:T_Rex_conceptart_new_legs:group2
+        weight: 1
+      - path: final_Rexmk3:T_Rex_conceptart_new_legs:group2/final_Rexmk3:T_Rex_conceptart_new_legs:turnTableCamera2
+        weight: 1
+      - path: final_Rexmk3:T_Rex_conceptart_new_legs:imagePlane1
+        weight: 1
+      - path: final_Rexmk3:T_Rex_conceptart_new_legs:imagePlane2
+        weight: 1
+      - path: final_Rexmk3:T_Rex_conceptart_new_legs:polySurface14
+        weight: 1
+      - path: final_Rexmk3:T_Rex_conceptart_new_legs:polySurface14/final_Rexmk3:T_Rex_conceptart_new_legs:polySurface16
+        weight: 1
+      - path: final_Rexmk3:T_Rex_conceptart_new_legs:polySurface14/final_Rexmk3:T_Rex_conceptart_new_legs:polySurface16/final_Rexmk3:T_Rex_conceptart_new_legs:polySurface18
+        weight: 1
+      - path: final_Rexmk3:T_Rex_conceptart_new_legs:polySurface14/final_Rexmk3:T_Rex_conceptart_new_legs:polySurface16/final_Rexmk3:T_Rex_conceptart_new_legs:polySurface18/final_Rexmk3:T_Rex_conceptart_new_legs:polySurface20
+        weight: 1
+      - path: final_Rexmk3:T_Rex_conceptart_new_legs:polySurface33
+        weight: 1
+      - path: final_Rexmk3:T_Rex_conceptart_new_legs:Trex_Armored_Wep
+        weight: 1
+      maskType: 0
+      maskSource: {instanceID: 0}
+    - serializedVersion: 16
+      name: Run Right
+      takeName: Take 001
+      firstFrame: 92
+      lastFrame: 104
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      loopTime: 1
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: final_Rexmk3:Root
+        weight: 1
+      - path: final_Rexmk3:Root/final_Rexmk3:back
+        weight: 1
+      - path: final_Rexmk3:Root/final_Rexmk3:back/final_Rexmk3:neck
+        weight: 1
+      - path: final_Rexmk3:Root/final_Rexmk3:back/final_Rexmk3:neck/final_Rexmk3:head
+        weight: 1
+      - path: final_Rexmk3:Root/final_Rexmk3:back/final_Rexmk3:neck/final_Rexmk3:left_hand
+        weight: 1
+      - path: final_Rexmk3:Root/final_Rexmk3:back/final_Rexmk3:neck/final_Rexmk3:right_hand
+        weight: 1
+      - path: final_Rexmk3:Root/final_Rexmk3:left_hip
+        weight: 1
+      - path: final_Rexmk3:Root/final_Rexmk3:left_hip/final_Rexmk3:left_knee
+        weight: 1
+      - path: final_Rexmk3:Root/final_Rexmk3:left_hip/final_Rexmk3:left_knee/final_Rexmk3:left_ankle
+        weight: 1
+      - path: final_Rexmk3:Root/final_Rexmk3:right_hip
+        weight: 1
+      - path: final_Rexmk3:Root/final_Rexmk3:right_hip/final_Rexmk3:right_knee
+        weight: 1
+      - path: final_Rexmk3:Root/final_Rexmk3:right_hip/final_Rexmk3:right_knee/final_Rexmk3:right_ankle
+        weight: 1
+      - path: final_Rexmk3:Root/final_Rexmk3:tail_start
+        weight: 1
+      - path: final_Rexmk3:Root/final_Rexmk3:tail_start/final_Rexmk3:tail_mid
+        weight: 1
+      - path: final_Rexmk3:Root/final_Rexmk3:tail_start/final_Rexmk3:tail_mid/final_Rexmk3:tail_end
+        weight: 1
+      - path: final_Rexmk3:T_Rex_conceptart_new_legs:Armor_GRP
+        weight: 1
+      - path: final_Rexmk3:T_Rex_conceptart_new_legs:Armor_GRP/final_Rexmk3:T_Rex_conceptart_new_legs:polySurface22
+        weight: 1
+      - path: final_Rexmk3:T_Rex_conceptart_new_legs:Bipedal_Generic_Mesh_2014:transform1
+        weight: 1
+      - path: final_Rexmk3:T_Rex_conceptart_new_legs:Bipedal_Generic_Mesh_2014:transform2
+        weight: 1
+      - path: final_Rexmk3:T_Rex_conceptart_new_legs:Cannon_GRP
+        weight: 1
+      - path: final_Rexmk3:T_Rex_conceptart_new_legs:group1
+        weight: 1
+      - path: final_Rexmk3:T_Rex_conceptart_new_legs:group1/final_Rexmk3:T_Rex_conceptart_new_legs:turnTableCamera1
+        weight: 1
+      - path: final_Rexmk3:T_Rex_conceptart_new_legs:group2
+        weight: 1
+      - path: final_Rexmk3:T_Rex_conceptart_new_legs:group2/final_Rexmk3:T_Rex_conceptart_new_legs:turnTableCamera2
+        weight: 1
+      - path: final_Rexmk3:T_Rex_conceptart_new_legs:imagePlane1
+        weight: 1
+      - path: final_Rexmk3:T_Rex_conceptart_new_legs:imagePlane2
+        weight: 1
+      - path: final_Rexmk3:T_Rex_conceptart_new_legs:polySurface14
+        weight: 1
+      - path: final_Rexmk3:T_Rex_conceptart_new_legs:polySurface14/final_Rexmk3:T_Rex_conceptart_new_legs:polySurface16
+        weight: 1
+      - path: final_Rexmk3:T_Rex_conceptart_new_legs:polySurface14/final_Rexmk3:T_Rex_conceptart_new_legs:polySurface16/final_Rexmk3:T_Rex_conceptart_new_legs:polySurface18
+        weight: 1
+      - path: final_Rexmk3:T_Rex_conceptart_new_legs:polySurface14/final_Rexmk3:T_Rex_conceptart_new_legs:polySurface16/final_Rexmk3:T_Rex_conceptart_new_legs:polySurface18/final_Rexmk3:T_Rex_conceptart_new_legs:polySurface20
+        weight: 1
+      - path: final_Rexmk3:T_Rex_conceptart_new_legs:polySurface33
+        weight: 1
+      - path: final_Rexmk3:T_Rex_conceptart_new_legs:Trex_Armored_Wep
+        weight: 1
+      maskType: 0
+      maskSource: {instanceID: 0}
+    - serializedVersion: 16
+      name: Jump Up
+      takeName: Take 001
+      firstFrame: 110
+      lastFrame: 121
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: final_Rexmk3:Root
+        weight: 1
+      - path: final_Rexmk3:Root/final_Rexmk3:back
+        weight: 1
+      - path: final_Rexmk3:Root/final_Rexmk3:back/final_Rexmk3:neck
+        weight: 1
+      - path: final_Rexmk3:Root/final_Rexmk3:back/final_Rexmk3:neck/final_Rexmk3:head
+        weight: 1
+      - path: final_Rexmk3:Root/final_Rexmk3:back/final_Rexmk3:neck/final_Rexmk3:left_hand
+        weight: 1
+      - path: final_Rexmk3:Root/final_Rexmk3:back/final_Rexmk3:neck/final_Rexmk3:right_hand
+        weight: 1
+      - path: final_Rexmk3:Root/final_Rexmk3:left_hip
+        weight: 1
+      - path: final_Rexmk3:Root/final_Rexmk3:left_hip/final_Rexmk3:left_knee
+        weight: 1
+      - path: final_Rexmk3:Root/final_Rexmk3:left_hip/final_Rexmk3:left_knee/final_Rexmk3:left_ankle
+        weight: 1
+      - path: final_Rexmk3:Root/final_Rexmk3:right_hip
+        weight: 1
+      - path: final_Rexmk3:Root/final_Rexmk3:right_hip/final_Rexmk3:right_knee
+        weight: 1
+      - path: final_Rexmk3:Root/final_Rexmk3:right_hip/final_Rexmk3:right_knee/final_Rexmk3:right_ankle
+        weight: 1
+      - path: final_Rexmk3:Root/final_Rexmk3:tail_start
+        weight: 1
+      - path: final_Rexmk3:Root/final_Rexmk3:tail_start/final_Rexmk3:tail_mid
+        weight: 1
+      - path: final_Rexmk3:Root/final_Rexmk3:tail_start/final_Rexmk3:tail_mid/final_Rexmk3:tail_end
+        weight: 1
+      - path: final_Rexmk3:T_Rex_conceptart_new_legs:Armor_GRP
+        weight: 1
+      - path: final_Rexmk3:T_Rex_conceptart_new_legs:Armor_GRP/final_Rexmk3:T_Rex_conceptart_new_legs:polySurface22
+        weight: 1
+      - path: final_Rexmk3:T_Rex_conceptart_new_legs:Bipedal_Generic_Mesh_2014:transform1
+        weight: 1
+      - path: final_Rexmk3:T_Rex_conceptart_new_legs:Bipedal_Generic_Mesh_2014:transform2
+        weight: 1
+      - path: final_Rexmk3:T_Rex_conceptart_new_legs:Cannon_GRP
+        weight: 1
+      - path: final_Rexmk3:T_Rex_conceptart_new_legs:group1
+        weight: 1
+      - path: final_Rexmk3:T_Rex_conceptart_new_legs:group1/final_Rexmk3:T_Rex_conceptart_new_legs:turnTableCamera1
+        weight: 1
+      - path: final_Rexmk3:T_Rex_conceptart_new_legs:group2
+        weight: 1
+      - path: final_Rexmk3:T_Rex_conceptart_new_legs:group2/final_Rexmk3:T_Rex_conceptart_new_legs:turnTableCamera2
+        weight: 1
+      - path: final_Rexmk3:T_Rex_conceptart_new_legs:imagePlane1
+        weight: 1
+      - path: final_Rexmk3:T_Rex_conceptart_new_legs:imagePlane2
+        weight: 1
+      - path: final_Rexmk3:T_Rex_conceptart_new_legs:polySurface14
+        weight: 1
+      - path: final_Rexmk3:T_Rex_conceptart_new_legs:polySurface14/final_Rexmk3:T_Rex_conceptart_new_legs:polySurface16
+        weight: 1
+      - path: final_Rexmk3:T_Rex_conceptart_new_legs:polySurface14/final_Rexmk3:T_Rex_conceptart_new_legs:polySurface16/final_Rexmk3:T_Rex_conceptart_new_legs:polySurface18
+        weight: 1
+      - path: final_Rexmk3:T_Rex_conceptart_new_legs:polySurface14/final_Rexmk3:T_Rex_conceptart_new_legs:polySurface16/final_Rexmk3:T_Rex_conceptart_new_legs:polySurface18/final_Rexmk3:T_Rex_conceptart_new_legs:polySurface20
+        weight: 1
+      - path: final_Rexmk3:T_Rex_conceptart_new_legs:polySurface33
+        weight: 1
+      - path: final_Rexmk3:T_Rex_conceptart_new_legs:Trex_Armored_Wep
+        weight: 1
+      maskType: 0
+      maskSource: {instanceID: 0}
+    - serializedVersion: 16
+      name: Jumping
+      takeName: Take 001
+      firstFrame: 121
+      lastFrame: 121.099991
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: final_Rexmk3:Root
+        weight: 1
+      - path: final_Rexmk3:Root/final_Rexmk3:back
+        weight: 1
+      - path: final_Rexmk3:Root/final_Rexmk3:back/final_Rexmk3:neck
+        weight: 1
+      - path: final_Rexmk3:Root/final_Rexmk3:back/final_Rexmk3:neck/final_Rexmk3:head
+        weight: 1
+      - path: final_Rexmk3:Root/final_Rexmk3:back/final_Rexmk3:neck/final_Rexmk3:left_hand
+        weight: 1
+      - path: final_Rexmk3:Root/final_Rexmk3:back/final_Rexmk3:neck/final_Rexmk3:right_hand
+        weight: 1
+      - path: final_Rexmk3:Root/final_Rexmk3:left_hip
+        weight: 1
+      - path: final_Rexmk3:Root/final_Rexmk3:left_hip/final_Rexmk3:left_knee
+        weight: 1
+      - path: final_Rexmk3:Root/final_Rexmk3:left_hip/final_Rexmk3:left_knee/final_Rexmk3:left_ankle
+        weight: 1
+      - path: final_Rexmk3:Root/final_Rexmk3:right_hip
+        weight: 1
+      - path: final_Rexmk3:Root/final_Rexmk3:right_hip/final_Rexmk3:right_knee
+        weight: 1
+      - path: final_Rexmk3:Root/final_Rexmk3:right_hip/final_Rexmk3:right_knee/final_Rexmk3:right_ankle
+        weight: 1
+      - path: final_Rexmk3:Root/final_Rexmk3:tail_start
+        weight: 1
+      - path: final_Rexmk3:Root/final_Rexmk3:tail_start/final_Rexmk3:tail_mid
+        weight: 1
+      - path: final_Rexmk3:Root/final_Rexmk3:tail_start/final_Rexmk3:tail_mid/final_Rexmk3:tail_end
+        weight: 1
+      - path: final_Rexmk3:T_Rex_conceptart_new_legs:Armor_GRP
+        weight: 1
+      - path: final_Rexmk3:T_Rex_conceptart_new_legs:Armor_GRP/final_Rexmk3:T_Rex_conceptart_new_legs:polySurface22
+        weight: 1
+      - path: final_Rexmk3:T_Rex_conceptart_new_legs:Bipedal_Generic_Mesh_2014:transform1
+        weight: 1
+      - path: final_Rexmk3:T_Rex_conceptart_new_legs:Bipedal_Generic_Mesh_2014:transform2
+        weight: 1
+      - path: final_Rexmk3:T_Rex_conceptart_new_legs:Cannon_GRP
+        weight: 1
+      - path: final_Rexmk3:T_Rex_conceptart_new_legs:group1
+        weight: 1
+      - path: final_Rexmk3:T_Rex_conceptart_new_legs:group1/final_Rexmk3:T_Rex_conceptart_new_legs:turnTableCamera1
+        weight: 1
+      - path: final_Rexmk3:T_Rex_conceptart_new_legs:group2
+        weight: 1
+      - path: final_Rexmk3:T_Rex_conceptart_new_legs:group2/final_Rexmk3:T_Rex_conceptart_new_legs:turnTableCamera2
+        weight: 1
+      - path: final_Rexmk3:T_Rex_conceptart_new_legs:imagePlane1
+        weight: 1
+      - path: final_Rexmk3:T_Rex_conceptart_new_legs:imagePlane2
+        weight: 1
+      - path: final_Rexmk3:T_Rex_conceptart_new_legs:polySurface14
+        weight: 1
+      - path: final_Rexmk3:T_Rex_conceptart_new_legs:polySurface14/final_Rexmk3:T_Rex_conceptart_new_legs:polySurface16
+        weight: 1
+      - path: final_Rexmk3:T_Rex_conceptart_new_legs:polySurface14/final_Rexmk3:T_Rex_conceptart_new_legs:polySurface16/final_Rexmk3:T_Rex_conceptart_new_legs:polySurface18
+        weight: 1
+      - path: final_Rexmk3:T_Rex_conceptart_new_legs:polySurface14/final_Rexmk3:T_Rex_conceptart_new_legs:polySurface16/final_Rexmk3:T_Rex_conceptart_new_legs:polySurface18/final_Rexmk3:T_Rex_conceptart_new_legs:polySurface20
+        weight: 1
+      - path: final_Rexmk3:T_Rex_conceptart_new_legs:polySurface33
+        weight: 1
+      - path: final_Rexmk3:T_Rex_conceptart_new_legs:Trex_Armored_Wep
+        weight: 1
+      maskType: 0
+      maskSource: {instanceID: 0}
+    - serializedVersion: 16
+      name: Landing
+      takeName: Take 001
+      firstFrame: 121
+      lastFrame: 136
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: final_Rexmk3:Root
+        weight: 1
+      - path: final_Rexmk3:Root/final_Rexmk3:back
+        weight: 1
+      - path: final_Rexmk3:Root/final_Rexmk3:back/final_Rexmk3:neck
+        weight: 1
+      - path: final_Rexmk3:Root/final_Rexmk3:back/final_Rexmk3:neck/final_Rexmk3:head
+        weight: 1
+      - path: final_Rexmk3:Root/final_Rexmk3:back/final_Rexmk3:neck/final_Rexmk3:left_hand
+        weight: 1
+      - path: final_Rexmk3:Root/final_Rexmk3:back/final_Rexmk3:neck/final_Rexmk3:right_hand
+        weight: 1
+      - path: final_Rexmk3:Root/final_Rexmk3:left_hip
+        weight: 1
+      - path: final_Rexmk3:Root/final_Rexmk3:left_hip/final_Rexmk3:left_knee
+        weight: 1
+      - path: final_Rexmk3:Root/final_Rexmk3:left_hip/final_Rexmk3:left_knee/final_Rexmk3:left_ankle
+        weight: 1
+      - path: final_Rexmk3:Root/final_Rexmk3:right_hip
+        weight: 1
+      - path: final_Rexmk3:Root/final_Rexmk3:right_hip/final_Rexmk3:right_knee
+        weight: 1
+      - path: final_Rexmk3:Root/final_Rexmk3:right_hip/final_Rexmk3:right_knee/final_Rexmk3:right_ankle
+        weight: 1
+      - path: final_Rexmk3:Root/final_Rexmk3:tail_start
+        weight: 1
+      - path: final_Rexmk3:Root/final_Rexmk3:tail_start/final_Rexmk3:tail_mid
+        weight: 1
+      - path: final_Rexmk3:Root/final_Rexmk3:tail_start/final_Rexmk3:tail_mid/final_Rexmk3:tail_end
+        weight: 1
+      - path: final_Rexmk3:T_Rex_conceptart_new_legs:Armor_GRP
+        weight: 1
+      - path: final_Rexmk3:T_Rex_conceptart_new_legs:Armor_GRP/final_Rexmk3:T_Rex_conceptart_new_legs:polySurface22
+        weight: 1
+      - path: final_Rexmk3:T_Rex_conceptart_new_legs:Bipedal_Generic_Mesh_2014:transform1
+        weight: 1
+      - path: final_Rexmk3:T_Rex_conceptart_new_legs:Bipedal_Generic_Mesh_2014:transform2
+        weight: 1
+      - path: final_Rexmk3:T_Rex_conceptart_new_legs:Cannon_GRP
+        weight: 1
+      - path: final_Rexmk3:T_Rex_conceptart_new_legs:group1
+        weight: 1
+      - path: final_Rexmk3:T_Rex_conceptart_new_legs:group1/final_Rexmk3:T_Rex_conceptart_new_legs:turnTableCamera1
+        weight: 1
+      - path: final_Rexmk3:T_Rex_conceptart_new_legs:group2
+        weight: 1
+      - path: final_Rexmk3:T_Rex_conceptart_new_legs:group2/final_Rexmk3:T_Rex_conceptart_new_legs:turnTableCamera2
+        weight: 1
+      - path: final_Rexmk3:T_Rex_conceptart_new_legs:imagePlane1
+        weight: 1
+      - path: final_Rexmk3:T_Rex_conceptart_new_legs:imagePlane2
+        weight: 1
+      - path: final_Rexmk3:T_Rex_conceptart_new_legs:polySurface14
+        weight: 1
+      - path: final_Rexmk3:T_Rex_conceptart_new_legs:polySurface14/final_Rexmk3:T_Rex_conceptart_new_legs:polySurface16
+        weight: 1
+      - path: final_Rexmk3:T_Rex_conceptart_new_legs:polySurface14/final_Rexmk3:T_Rex_conceptart_new_legs:polySurface16/final_Rexmk3:T_Rex_conceptart_new_legs:polySurface18
+        weight: 1
+      - path: final_Rexmk3:T_Rex_conceptart_new_legs:polySurface14/final_Rexmk3:T_Rex_conceptart_new_legs:polySurface16/final_Rexmk3:T_Rex_conceptart_new_legs:polySurface18/final_Rexmk3:T_Rex_conceptart_new_legs:polySurface20
+        weight: 1
+      - path: final_Rexmk3:T_Rex_conceptart_new_legs:polySurface33
+        weight: 1
+      - path: final_Rexmk3:T_Rex_conceptart_new_legs:Trex_Armored_Wep
+        weight: 1
+      maskType: 0
+      maskSource: {instanceID: 0}
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importBlendShapes: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+  tangentSpace:
+    normalSmoothAngle: 60
+    splitTangentsAcrossUV: 1
+    normalImportMode: 0
+    tangentImportMode: 1
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    human: []
+    skeleton: []
+    armTwist: .5
+    foreArmTwist: .5
+    upperLegTwist: .5
+    legTwist: .5
+    armStretch: .0500000007
+    legStretch: .0500000007
+    feetSpacing: 0
+    rootMotionBoneName: 
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  additionalBone: 0
+  userData: 

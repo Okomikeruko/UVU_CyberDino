@@ -29,7 +29,7 @@ public class InputLRPad : MonoBehaviour
 	
 	//variables to hold the player and the motion script
 	public GameObject player;
-	public OldDinoMoveScript motionConScript;
+	public MotionControl motionConScript;
 	
 	private float currentTurn = 0;
 	public float velocityRight = 0.5f;
@@ -56,9 +56,9 @@ public class InputLRPad : MonoBehaviour
 		Resize(rightArrow, rightArrowPos);
 		
 		//assign the motion script to the variable
-		if(player.GetComponent<OldDinoMoveScript>())
+		if(player.GetComponent<MotionControl>())
 		{
-			motionConScript = player.GetComponent<OldDinoMoveScript>();
+			motionConScript = player.GetComponent<MotionControl>();
 		}
 
 	}
@@ -80,18 +80,19 @@ public class InputLRPad : MonoBehaviour
 						currentTurn = Mathf.SmoothDamp(currentTurn, -1, ref velocityLeft, smoothTimeLeft);
 						
 						//turn to the left
-						motionConScript.h = currentTurn;
+						motionConScript.SetTurn(currentTurn);
 						
 						//Debug.Log(motionConScript.h);
 					}
-					/*else if(Input.GetTouch(i).phase == TouchPhase.)
+					else if(Input.GetTouch(i).phase == TouchPhase.Ended)
 					{
-						currentTurn = Mathf.SmoothDamp(currentTurn, 0, ref velocity, smoothTime);
+						currentTurn = Mathf.SmoothDamp(currentTurn, 0, ref velocityLeft, smoothTimeLeft);
 						
 						//turn to the left
-						motionConScript.y = currentTurn;
+						motionConScript.SetTurn(currentTurn);
+						
+					}
 
-					}*/
 				}
 				else if(rightArrow.HitTest(Input.GetTouch(i).position))
 				{
@@ -101,24 +102,24 @@ public class InputLRPad : MonoBehaviour
 						currentTurn = Mathf.SmoothDamp(currentTurn, 1, ref velocityRight, smoothTimeRight);
 						
 						//turn to the left
-						motionConScript.h = currentTurn;
+						motionConScript.SetTurn(currentTurn);
 
 					}
-					/*else if(Input.GetTouch(i).phase == TouchPhase.Ended)
+					else if(Input.GetTouch(i).phase == TouchPhase.Ended)
 					{
-						currentTurn = Mathf.SmoothDamp(currentTurn, 0, ref velocity, smoothTime);
+						currentTurn = Mathf.SmoothDamp(currentTurn, 0, ref velocityRight, smoothTimeRight);
 						
 						//turn to the left
-						motionConScript.y = currentTurn;
+						motionConScript.SetTurn(currentTurn);
 						
-					}*/
+					}
 				}
 				else
 				{
 					currentTurn = Mathf.SmoothDamp(currentTurn, 0, ref velBack, smoothTimeBack);
 						
 					//turn to the left
-					motionConScript.h = currentTurn;
+					motionConScript.SetTurn(currentTurn);
 				}
 			}
 		}
@@ -127,20 +128,17 @@ public class InputLRPad : MonoBehaviour
 			currentTurn = Mathf.SmoothDamp(currentTurn, 0, ref velBack, smoothTimeBack);
 			
 			//turn to the left
-			motionConScript.h = currentTurn;
+			motionConScript.SetTurn(currentTurn);
 		}
 
-		//make the dino always move forward
-		motionConScript.v = 0.5f;
-
-		if(Input.GetButton("Jump"))
+		/*if(Input.GetButton("Jump"))
 		{
 			motionConScript.jumper = true;
 		}
 		else
 		{
 			motionConScript.jumper = false;
-		}
+		}*/
 		
 		if(Input.GetKeyDown(KeyCode.F))
 		{

@@ -29,9 +29,15 @@ public class OldProjectileMG : OldProjectileClass {
 //			Physics.IgnoreCollision(this.collider, other);
 //		}
 		if(other.gameObject.tag == "Racer"){
-			Debug.Log("Hit Racer");
-			theRacer = other.gameObject.GetComponent<RacerHealthClass>();
-			theRacer.Health -= DealDamage(theRacer.Armor);
+			theRacer = other.gameObject.GetComponentInChildren<RacerHealthClass>();
+			if(theRacer == null)
+			{
+				Debug.Log("Collided with " + other.gameObject + " but there is no RacerHealthClass attached.");
+			}
+			else
+			{
+				theRacer.Health -= DealDamage(theRacer.Armor);
+			}
 			GameObject spawnedHitParticle = Instantiate(HitParticle, this.transform.position, this.transform.rotation) as GameObject;
 			Destroy(gameObject);
 		}

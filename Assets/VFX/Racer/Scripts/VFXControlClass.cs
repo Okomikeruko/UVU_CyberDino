@@ -17,6 +17,8 @@ public class VFXControlClass : MonoBehaviour {
 	[SerializeField]
 	private ParticleSystem boostVFX;
 
+	private MotionControl move;
+
 	//Turbo Variables
 	bool TurboActive
 	{
@@ -50,6 +52,18 @@ public class VFXControlClass : MonoBehaviour {
 			return boostVFX;
 		}
 	}
+	public MotionControl Move
+	{
+		get
+		{
+			return move;
+		}
+		set
+		{
+			move = value;
+		}
+	}
+
 
 	// Use this for initialization
 	void Start () {
@@ -84,6 +98,7 @@ public class VFXControlClass : MonoBehaviour {
 	{
 		Debug.Log("Using Turbo");
 		TurboActive = true;
+		Move.Turbo(true);
 		//Debug.Log(turboActive);
 		InitialBurstVFX.Play();
 		yield return new WaitForSeconds(0.3F);
@@ -96,6 +111,7 @@ public class VFXControlClass : MonoBehaviour {
 		yield return new WaitForSeconds(TurboDuration);
 		BoostVFX.Stop();
 		TurboActive = false;
+		Move.Turbo(false);
 		yield return null;
 	}
 

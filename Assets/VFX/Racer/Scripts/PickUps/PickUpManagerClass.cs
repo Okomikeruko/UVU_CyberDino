@@ -54,7 +54,6 @@ public class PickUpManagerClass : MonoBehaviour {
 
 	void OnTriggerEnter(Collider other)
 	{
-
 		string theTag = other.transform.gameObject.tag.ToString();
 		switch(theTag)
 		{

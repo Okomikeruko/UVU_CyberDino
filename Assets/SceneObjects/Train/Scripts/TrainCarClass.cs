@@ -6,49 +6,25 @@ using System.Collections;
 
 public class TrainCarClass : MonoBehaviour 
 {
-	//the size of the timer
-	public float timer;
-	private bool timerStart = false;
+	public GameObject explosionObj;
 
 	// Use this for initialization
 	void Start () 
 	{
+
+	}
+	
+	void OnTriggerStay(Collider hit)
+	{
+		Debug.Log("beeeeeeeeeeeeeeeeeepo");
 		
-	}
-	
-	// Update is called once per frame
-	void FixedUpdate () 
-	{
-
-		//if it's time to start the timer
-		/*if(timerStart == true && timer > 0)
-		{
-			timer -= 1;
-		}
-
-		//if the timer reaches zero
-		if(timer <= 0)
-		{
-			//turn off the object
-			gameObject.SetActive(false);
-		}*/
-
-
-
-	}
-	
-	void OnCollisionEnter(Collision hit)
-	{
 		if(hit.transform.tag == "Player")
 		{
-			//move this object to the ignore level
-			//gameObject.layer = 8;
+			Debug.Log("beeeeeeeeeeeeeeeeeepo");
+			
+			explosionObj.SetActive(true);
 
-			timerStart = true;
-
-			gameObject.SetActive(false);
-			//Physics.IgnoreLayerCollision(0, 10);
-
+			gameObject.SetActive(false);	
 		}
 	}
 	

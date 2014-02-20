@@ -20,13 +20,7 @@ public class PlayerHealthClass : RacerHealthClass {
 	
 	// Update is called once per frame
 	void Update () {
-//	
-////		CheckHealth();
-//		if(Input.GetKeyUp(KeyCode.R))
-//		{
-//			StartCoroutine("Respawn");
-//			Debug.Log ("Pressed R");
-//		}
+
 		RespawnManager();
 		RespawnNodeDistance();
 		

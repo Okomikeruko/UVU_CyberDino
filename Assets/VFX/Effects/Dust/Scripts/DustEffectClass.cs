@@ -20,6 +20,10 @@ public class DustEffectClass : MonoBehaviour {
 	{
 		get
 		{
+			if(runningDust == null)
+			{
+				runningDust = new ParticleSystem();
+			}
 			return runningDust;
 		}
 		set
@@ -45,34 +49,29 @@ public class DustEffectClass : MonoBehaviour {
 	#endregion Properties
 
 	// Use this for initialization
-	void Start () {
+	void OnEnable () {
 
-		//Debug.Log(transform.parent.gameObject.GetComponent<MotionClass>());
-//		DinoMotion = transform.parent.gameObject.GetComponent<DinoMoveScript>();
-//		Debug.Log(DinoMotion);
 		RunningDust = gameObject.GetComponent<ParticleSystem>();
 		RunningDust.Stop();
 
 	}
-	
-	// Update is called once per frame
-//	void Update () {
-//		RunDust();
-//	}
+
 
 	/// <summary>
 	/// Runs the dust particle system.
 	/// </summary>
 	public void RunDust(float speed)
 	{
-		if(speed > 0 || speed < 0)
-		{
-			RunningDust.Play();
-		}
-		else
-		{
-			RunningDust.Stop();
-		}
+
+		RunningDust.Play();
+//		if(speed > 0 || speed < 0)
+//		{
+//			RunningDust.Play();
+//		}
+//		else
+//		{
+//			RunningDust.Stop();
+//		}
 	}
 
 }

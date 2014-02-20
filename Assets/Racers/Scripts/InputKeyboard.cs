@@ -7,13 +7,13 @@ public class InputKeyboard : MonoBehaviour
 	private float turn;
 
 	//a var to hold the MotionController script
-	private OldDinoMoveScript dino;
+	private DinoMoveScript dino;
 
 	// Use this for initialization
 	void Start () 
 	{
 		//assign the MotionController script to the dino var
-		dino = gameObject.GetComponent<OldDinoMoveScript>() as OldDinoMoveScript;
+		dino = gameObject.GetComponent<DinoMoveScript>() as DinoMoveScript;
 	}
 	
 	// Update is called once per frame

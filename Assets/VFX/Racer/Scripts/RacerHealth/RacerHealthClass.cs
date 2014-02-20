@@ -10,6 +10,9 @@ public class RacerHealthClass : MonoBehaviour {
 	// Class Variables and Properties
 	
 	#region Fields
+
+	private MotionControl move;
+
 	[SerializeField]
 	private float totalHealth = 0.0F; // Total health of the racer.
 	[SerializeField]
@@ -18,17 +21,27 @@ public class RacerHealthClass : MonoBehaviour {
 	[Range(.00f, 1.00f)] private float armor = 0.0F; // This variable should be between .00 and .99, it is used to reduce damage taken by the racer.
 
 	// Respawn Variables
+	#region Not Used
 	private bool isDead = false; // This variable is used to determine whether or not the racer is dead.
-	private bool isRespawning = false;
 	[SerializeField]
 	private float respawnDistance;
 	[SerializeField]
 	private GameObject theTrack;
+	#endregion
 	[SerializeField]
-	private Transform respawnCheckpoint;
+	private bool isRespawning = false; // This variable is used to determine whether or not the racer is respawning.
 	[SerializeField]
-	private ParticleSystem respawnEffect;
-	private GameObject racer;
+	private Transform respawnCheckpoint; // The racer's current respawn point.
+	[SerializeField]
+	private ParticleSystem respawnEffect; // The respawn VFX.
+	[SerializeField]
+	private GameObject racer; // The racer game object that will be moved during respawn.
+
+	// Variables for respawning when the racer dies.
+	[SerializeField]
+	private bool isRagdoll = false;
+	[SerializeField]
+	private DinoRagdoll theRagdoll;
 
 	// Directional Respawn Variables
 	[SerializeField]
@@ -55,6 +68,19 @@ public class RacerHealthClass : MonoBehaviour {
 	#endregion Fields
 	
 	#region Properties
+
+	public MotionControl Move
+	{
+		get
+		{
+			return move;
+		}
+		set
+		{
+			move = value;
+		}
+	}
+
 	public float TotalHealth // Total health of the racer.
 	{
 		get
@@ -76,11 +102,11 @@ public class RacerHealthClass : MonoBehaviour {
 	{
 		get
 		{
-			if(health <= 0)
-			{
-				health = TotalHealth;
-			}
-			
+//			if(health <= 0)
+//			{
+//				health = TotalHealth;
+//			}
+//			
 			return health;
 		}
 		set
@@ -102,6 +128,7 @@ public class RacerHealthClass : MonoBehaviour {
 		}
 	}
 
+	// Respawn Variables
 	protected bool IsDead // This variable is used to determine whether or not the racer is dead.
 	{
 		get
@@ -201,6 +228,32 @@ public class RacerHealthClass : MonoBehaviour {
 		}
 	}
 
+	// Variables for respawning when the racer dies.
+	public bool IsRagdoll
+	{
+		get
+		{
+			return isRagdoll;
+		}
+		set
+		{
+			isRagdoll = value;
+		}
+	}
+	public DinoRagdoll TheRagdoll
+	{
+		get
+		{
+			return theRagdoll;
+		}
+		set
+		{
+			theRagdoll = value;
+		}
+	}
+
+
+	// Directional Respawn Variables
 	private bool InTurnArea
 	{
 		get
@@ -265,7 +318,8 @@ public class RacerHealthClass : MonoBehaviour {
 			return thresholdAngle;
 		}
 	}
-	
+
+	// Variables for Respawning when racer is off the track.
 	private bool OffTrack
 	{
 		get
@@ -327,14 +381,13 @@ public class RacerHealthClass : MonoBehaviour {
 	/// </summary>
 	public void RacerStart()
 	{
-
-		RespawnNode = RespawnCheckpoint.gameObject.GetComponent<RespawnNodeClass>();
-		CurrentNode = RespawnNode.gameObject;
-		PreviousNode = RespawnNode.previousNode;
-		NextNode = RespawnNode.nextNode;
-
 		//Set health equal to totalHealth at the begining of the race
 		Health = TotalHealth;
+
+		RespawnNode = RespawnCheckpoint.gameObject.GetComponent<RespawnNodeClass>();
+		CurrentNode = RespawnCheckpoint.gameObject;
+		PreviousNode = RespawnCheckpoint.gameObject;
+		NextNode = RespawnCheckpoint.gameObject;
 	}
 
 	public void RespawnManager()
@@ -344,13 +397,13 @@ public class RacerHealthClass : MonoBehaviour {
 		{
 			if(Health <= 0)
 			{
-				//StartCoroutine("Respawn");
-				UseRespawn(Racer);
 				Debug.Log ("Ran out of life");
+				IsDead = true;
+				UseRespawn(Racer);
+
 			}
 			if(OffTrack == true && Time.time >= OffTrackRespawnTime)
 			{
-				//StartCoroutine("Respawn");
 				UseRespawn(Racer);
 				OffTrack = false;
 				Debug.Log ("Way off track");
@@ -380,13 +433,13 @@ public class RacerHealthClass : MonoBehaviour {
 	public void RespawnNodeDistance()
 	{
 		float dist = Vector3.Distance(CurrentNode.transform.position, transform.position);
-		if(dist < RespawnNode.influenceSphere)
+		if(dist < RespawnNode.InfluenceSphere)
 		{
 			CurrentNode = NextNode;
 			RespawnCheckpoint = CurrentNode.transform;
 			RespawnNode = CurrentNode.gameObject.GetComponent<RespawnNodeClass>();
-			PreviousNode = RespawnNode.previousNode;
-			NextNode = RespawnNode.nextNode;
+			PreviousNode = RespawnNode.PreviousNode;
+			NextNode = RespawnNode.NextNode;
 		}
 
 	}
@@ -399,19 +452,31 @@ public class RacerHealthClass : MonoBehaviour {
 	IEnumerator Respawn(GameObject racer)
 	{
 		IsRespawning = true;
+		Move.SetRunning(false);
+		if(IsDead)
+		{
+			if(!IsRagdoll)
+			{
+				TheRagdoll.GoRagdoll();
+				IsRagdoll = true;
+			}
+		}
 		RespawnEffect.Play();
 		yield return new WaitForSeconds(1);
-		racer.transform.position = RespawnCheckpoint.position; //new Vector3(RespawnCheckpoint.position.x, RespawnCheckpoint.position.y + 2, RespawnCheckpoint.position.z);
+
+		racer.transform.position = RespawnCheckpoint.position;
 		racer.transform.rotation = RespawnCheckpoint.rotation;
 
 		if(Health <= 0)
 		{
 			RacerReset();
 		}
+
 		RespawnEffect.Play();
 		yield return new WaitForSeconds(1);
 		RespawnEffect.Stop();
 		IsRespawning = false;
+		Move.SetRunning(true);
 		yield return null;
 	}
 	
@@ -423,9 +488,11 @@ public class RacerHealthClass : MonoBehaviour {
 	/// Resets the racer.
 	/// </summary>
 	public void RacerReset(){
-		
 		IsDead = false;
+		IsRagdoll = false;
 		Health = TotalHealth;
+		TheRagdoll.ResetRacer();
+		//Destroy(TheRagdoll.newRagdoll);
 		
 	}
 	
@@ -436,7 +503,7 @@ public class RacerHealthClass : MonoBehaviour {
 		switch(theTag)
 		{
 		case "Weapon":
-			Debug.Log (this + " has been hit with a weapon!");
+//			Debug.Log (this + " has been hit with a weapon!");
 			break;
 		case "DirectionCheck":
 			if(!InTurnArea)

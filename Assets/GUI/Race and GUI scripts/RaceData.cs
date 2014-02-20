@@ -39,7 +39,7 @@ public class RaceData : MonoBehaviour
 
 		rStartScript = rStart.GetComponent<RaceStart>() as RaceStart;
 
-		lrPadScript = lrPad.GetComponent<InputLRPad>() as InputLRPad;
+//		lrPadScript = lrPad.GetComponent<InputLRPad>() as InputLRPad;
 
 		//jumpScript = jButton.GetComponent<JumpButton>() as JumpButton;
 
@@ -49,7 +49,7 @@ public class RaceData : MonoBehaviour
 		{
 			dinos[0].SetActive(true);
 			mCameraFollowScript.target = dinos[0].transform;
-			lrPadScript.player = dinos[0];
+//			lrPadScript.player = dinos[0];
 			rStartScript.player = dinos[0];
 			//jumpScript.player = dinos[0];
 			//fallScript.player = dinos[0];
@@ -59,7 +59,7 @@ public class RaceData : MonoBehaviour
 			dinos[1].SetActive(true);
 			mCameraFollowScript.target = dinos[1].transform;
 			mCameraFollowScript.distance = -(mCameraFollowScript.distance);
-			lrPadScript.player = dinos[1];
+//			lrPadScript.player = dinos[1];
 			rStartScript.player = dinos[1];
 			//jumpScript.player = dinos[1];
 			//fallScript.player = dinos[1];
@@ -68,7 +68,7 @@ public class RaceData : MonoBehaviour
 		{
 			dinos[2].SetActive(true);
 			mCameraFollowScript.target = dinos[2].transform;
-			lrPadScript.player = dinos[2];
+//			lrPadScript.player = dinos[2];
 			rStartScript.player = dinos[2];
 			//jumpScript.player = dinos[2];
 			//fallScript.player = dinos[2];
