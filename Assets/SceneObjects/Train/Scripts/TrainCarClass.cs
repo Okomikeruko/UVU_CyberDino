@@ -7,6 +7,8 @@ using System.Collections;
 public class TrainCarClass : MonoBehaviour 
 {
 	public GameObject explosionObj;
+	
+	public GameObject topPartObj;
 
 	// Use this for initialization
 	void Start () 
@@ -16,15 +18,11 @@ public class TrainCarClass : MonoBehaviour
 	
 	void OnTriggerStay(Collider hit)
 	{
-		Debug.Log("beeeeeeeeeeeeeeeeeepo");
-		
 		if(hit.transform.tag == "Player")
 		{
-			Debug.Log("beeeeeeeeeeeeeeeeeepo");
-			
 			explosionObj.SetActive(true);
 
-			gameObject.SetActive(false);	
+			topPartObj.gameObject.SetActive(false);	
 		}
 	}
 	

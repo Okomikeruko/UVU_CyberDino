@@ -16,6 +16,8 @@ public class FollowScript : MonoBehaviour
 	
 	private Vector3 boundary;
 	
+	private Vector3 dir;
+	
 	// Use this for initialization
 	void Start () 
 	{	
@@ -31,8 +33,12 @@ public class FollowScript : MonoBehaviour
 		//Vector3 newDir = Vector3.RotateTowards(transform.forward, target.position, rotateSpeed * Time.deltaTime, 0.0F);
 
 		//transform.rotation = Quaternion.LookRotation(newDir);
+		
+		dir = target.position - transform.position;
+		
+		transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(dir), rotateSpeed * Time.deltaTime);
 
-		transform.LookAt(target.position);
+		//transform.LookAt(target.position);
 
 		distance = transform.position - target.position;
 		

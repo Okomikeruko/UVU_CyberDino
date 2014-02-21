@@ -33,6 +33,9 @@ public class MenuControl : MonoBehaviour
 	
 	public GameObject networkHandlerObject;
 	private NetworkGameHandler networkHandler;
+	
+	public GameObject dinoSelected;
+	private DinoSelect dinoSelectScript;
 
 	//what mode is being played
 	public bool singlePlayer = true;
@@ -68,6 +71,15 @@ public class MenuControl : MonoBehaviour
 	// Use this for initialization
 	void Awake () 
 	{
+		if(dinoSelected != null)
+		{
+			dinoSelectScript = dinoSelected.GetComponent<DinoSelect>();
+			
+			dinoSelectScript.Index = dinoIndex;	
+			
+			Debug.Log(dinoIndex);
+		}
+		
 		swipeCtrl = gameObject.GetComponent<TouchSwipeClass>() as TouchSwipeClass;
 
 		//the names of the players in the order that they past the finished line
