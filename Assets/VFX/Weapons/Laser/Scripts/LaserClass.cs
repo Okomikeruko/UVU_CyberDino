@@ -42,7 +42,11 @@ public class LaserClass : WeaponClass
 
 	public void FireLaser ()
 	{
-
+//		StopCoroutine("Laser");
+//		StartCoroutine("Laser");
+//	}
+//	IEnumerator Laser()
+//	{
 		Line.enabled = true;
 
 //		Line.renderer.material.mainTextureOffset = new Vector2(0, Time.time);
@@ -72,7 +76,12 @@ public class LaserClass : WeaponClass
 
 		}
 		else
-				Line.SetPosition (1, ray.GetPoint(distance));
+		{
+			Line.SetPosition (1, ray.GetPoint(distance));
 		}
+//		yield return new WaitForSeconds(1);
+//		Line.enabled = false;
+//		yield return null;
+	}
 	
 }

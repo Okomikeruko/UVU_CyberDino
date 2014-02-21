@@ -15,6 +15,8 @@ public class UserControl : MonoBehaviour {
 	[SerializeField]
 	private DustEffectClass dust;
 
+	private bool firing = false;
+
 	#region Properties
 	private WeaponControlClass Weapons
 	{
@@ -110,6 +112,15 @@ public class UserControl : MonoBehaviour {
 
 	}
 
+	void OnEnable()
+	{
+		FireButton.shoot += this.shoot;
+	}
+	void Disable()
+	{
+		FireButton.shoot -= this.shoot;
+	}
+
 	// Update is called once per frame
 	void FixedUpdate () {
 		move.SetTurn( Input.GetAxis("Horizontal") );				
@@ -157,6 +168,8 @@ public class UserControl : MonoBehaviour {
 		{
 			racerHealth.UseRespawn(gameObject);
 		}
+
+
 		if(Input.GetKey(KeyCode.Q))
 		{
 			switch(weapons.CurrentWeapon.name.ToString())
@@ -164,19 +177,21 @@ public class UserControl : MonoBehaviour {
 			case "Laser_VFX":
 				weapons.Laser.FireLaser();
 				break;
-			case "MachineGun_Gun":
-				weapons.OldMachineGun.FireFunc();
-				break;
-			case "PlayerMissileLauncher":
-				weapons.MissileLauncher.FireFunc();
-				break;
+//			case "MachineGun_Gun":
+//				weapons.OldMachineGun.FireFunc();
+//				break;
+//			case "PlayerMissileLauncher":
+//				weapons.MissileLauncher.FireFunc();
+//				break;
 			default:
+				weapons.Laser.Line.enabled = false;
 				break;
 			}
 		}
 		else
 		{
 			weapons.Laser.Line.enabled = false;
+			firing = false;
 		}
 		
 	}
@@ -204,6 +219,21 @@ public class UserControl : MonoBehaviour {
 			break;
 		}
 		
+	}
+
+	public void shoot()
+	{
+		switch(weapons.CurrentWeapon.name.ToString())
+		{
+		case "MachineGun_Gun":
+			weapons.OldMachineGun.FireFunc();
+			break;
+		case "PlayerMissileLauncher":
+			weapons.MissileLauncher.FireFunc();
+			break;
+		default:
+			break;
+		}
 	}
 	
 }

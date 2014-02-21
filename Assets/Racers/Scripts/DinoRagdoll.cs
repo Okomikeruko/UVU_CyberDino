@@ -54,6 +54,7 @@ public class DinoRagdoll : MonoBehaviour {
 
 			// Instantiate ragdoll
 			newRagdoll = Instantiate(ragdoll, transform.position, transform.rotation) as GameObject;
+			newRagdoll.layer = gameObject.layer;
 			
 			// Copy bone transforms to ragdoll
 			CopyTransforms(transform, newRagdoll.transform);

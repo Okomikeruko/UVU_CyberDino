@@ -1,0 +1,717 @@
+fileFormatVersion: 2
+guid: 18870aa917bad499bb6172e13c7bae00
+ModelImporter:
+  serializedVersion: 16
+  fileIDToRecycleName:
+    100000: bend1Handle
+    100002: group
+    100004: group1
+    100006: //RootNode
+    100008: ikHandle1
+    100010: ikHandle2
+    100012: ikHandle3
+    100014: joint1
+    100016: joint10
+    100018: joint11
+    100020: joint12
+    100022: joint13
+    100024: joint2
+    100026: joint3
+    100028: joint4
+    100030: joint5
+    100032: joint6
+    100034: joint7
+    100036: joint8
+    100038: joint9
+    100040: pasted__bend1Handle
+    100042: pasted__bend1Handle 1
+    100044: pasted__ikHandle1
+    100046: pasted__ikHandle1 1
+    100048: pasted__ikHandle2
+    100050: pasted__ikHandle2 1
+    100052: pasted__ikHandle3
+    100054: pasted__ikHandle3 1
+    100056: pasted__joint1
+    100058: pasted__joint1 1
+    100060: pasted__joint10
+    100062: pasted__joint10 1
+    100064: pasted__joint11
+    100066: pasted__joint11 1
+    100068: pasted__joint12
+    100070: pasted__joint12 1
+    100072: pasted__joint13
+    100074: pasted__joint13 1
+    100076: pasted__joint2
+    100078: pasted__joint2 1
+    100080: pasted__joint3
+    100082: pasted__joint3 1
+    100084: pasted__joint4
+    100086: pasted__joint4 1
+    100088: pasted__joint5
+    100090: pasted__joint5 1
+    100092: pasted__joint6
+    100094: pasted__joint6 1
+    100096: pasted__joint7
+    100098: pasted__joint7 1
+    100100: pasted__joint8
+    100102: pasted__joint8 1
+    100104: pasted__joint9
+    100106: pasted__joint9 1
+    100108: pasted__polySurface1
+    100110: pasted__polySurface1 1
+    100112: pasted__polySurface10
+    100114: pasted__polySurface10 1
+    100116: pasted__polySurface2
+    100118: pasted__polySurface2 1
+    100120: pasted__polySurface3
+    100122: pasted__polySurface3 1
+    100124: pasted__polySurface4
+    100126: pasted__polySurface4 1
+    100128: pasted__polySurface5
+    100130: pasted__polySurface5 1
+    100132: pasted__polySurface6
+    100134: pasted__polySurface6 1
+    100136: pasted__polySurface7
+    100138: pasted__polySurface7 1
+    100140: pasted__polySurface8
+    100142: pasted__polySurface8 1
+    100144: pasted__polySurface9
+    100146: pasted__polySurface9 1
+    100148: pasted__pPlane1
+    100150: pasted__pPlane1 1
+    100152: pasted__pPlane1_segment_10_geo
+    100154: pasted__pPlane1_segment_10_geo 1
+    100156: pasted__pPlane1_segment_11_geo
+    100158: pasted__pPlane1_segment_11_geo 1
+    100160: pasted__pPlane1_segment_12_geo
+    100162: pasted__pPlane1_segment_12_geo 1
+    100164: pasted__pPlane1_segment_13_geo
+    100166: pasted__pPlane1_segment_13_geo 1
+    100168: pasted__pPlane1_segment_14_geo
+    100170: pasted__pPlane1_segment_14_geo 1
+    100172: pasted__pPlane1_segment_16_geo
+    100174: pasted__pPlane1_segment_16_geo 1
+    100176: pasted__pPlane1_segment_17_geo
+    100178: pasted__pPlane1_segment_17_geo 1
+    100180: pasted__pPlane1_segment_18_geo
+    100182: pasted__pPlane1_segment_18_geo 1
+    100184: pasted__pPlane1_segment_19_geo
+    100186: pasted__pPlane1_segment_19_geo 1
+    100188: pasted__pPlane1_segment_1_geo
+    100190: pasted__pPlane1_segment_1_geo 1
+    100192: pasted__pPlane1_segment_1_segment_10_geo
+    100194: pasted__pPlane1_segment_1_segment_10_geo 1
+    100196: pasted__pPlane1_segment_1_segment_11_geo
+    100198: pasted__pPlane1_segment_1_segment_11_geo 1
+    100200: pasted__pPlane1_segment_1_segment_12_geo
+    100202: pasted__pPlane1_segment_1_segment_12_geo 1
+    100204: pasted__pPlane1_segment_1_segment_1_geo
+    100206: pasted__pPlane1_segment_1_segment_1_geo 1
+    100208: pasted__pPlane1_segment_1_segment_2_geo
+    100210: pasted__pPlane1_segment_1_segment_2_geo 1
+    100212: pasted__pPlane1_segment_1_segment_3_geo
+    100214: pasted__pPlane1_segment_1_segment_3_geo 1
+    100216: pasted__pPlane1_segment_1_segment_4_geo
+    100218: pasted__pPlane1_segment_1_segment_4_geo 1
+    100220: pasted__pPlane1_segment_1_segment_5_geo
+    100222: pasted__pPlane1_segment_1_segment_5_geo 1
+    100224: pasted__pPlane1_segment_1_segment_6_geo
+    100226: pasted__pPlane1_segment_1_segment_6_geo 1
+    100228: pasted__pPlane1_segment_1_segment_8_geo
+    100230: pasted__pPlane1_segment_1_segment_8_geo 1
+    100232: pasted__pPlane1_segment_1_segment_9_geo
+    100234: pasted__pPlane1_segment_1_segment_9_geo 1
+    100236: pasted__pPlane1_segment_23_geo
+    100238: pasted__pPlane1_segment_23_geo 1
+    100240: pasted__pPlane1_segment_2_geo
+    100242: pasted__pPlane1_segment_2_geo 1
+    100244: pasted__pPlane1_segment_3_geo
+    100246: pasted__pPlane1_segment_3_geo 1
+    100248: pasted__pPlane1_segment_4_geo
+    100250: pasted__pPlane1_segment_4_geo 1
+    100252: pasted__pPlane1_segment_5_geo
+    100254: pasted__pPlane1_segment_5_geo 1
+    100256: pasted__pPlane1_segment_6_geo
+    100258: pasted__pPlane1_segment_6_geo 1
+    100260: pasted__pPlane1_segment_7_geo
+    100262: pasted__pPlane1_segment_7_geo 1
+    100264: pasted__pPlane1_segment_8_geo
+    100266: pasted__pPlane1_segment_8_geo 1
+    100268: pasted__pPlane1_segment_9_geo
+    100270: pasted__pPlane1_segment_9_geo 1
+    100272: pasted__transform1
+    100274: pasted__transform1 1
+    100276: pasted__transform10
+    100278: pasted__transform10 1
+    100280: pasted__transform11
+    100282: pasted__transform11 1
+    100284: pasted__transform12
+    100286: pasted__transform12 1
+    100288: pasted__transform13
+    100290: pasted__transform13 1
+    100292: pasted__transform14
+    100294: pasted__transform14 1
+    100296: pasted__transform15
+    100298: pasted__transform15 1
+    100300: pasted__transform16
+    100302: pasted__transform16 1
+    100304: pasted__transform17
+    100306: pasted__transform17 1
+    100308: pasted__transform18
+    100310: pasted__transform18 1
+    100312: pasted__transform19
+    100314: pasted__transform19 1
+    100316: pasted__transform2
+    100318: pasted__transform2 1
+    100320: pasted__transform20
+    100322: pasted__transform20 1
+    100324: pasted__transform21
+    100326: pasted__transform21 1
+    100328: pasted__transform3
+    100330: pasted__transform3 1
+    100332: pasted__transform4
+    100334: pasted__transform4 1
+    100336: pasted__transform5
+    100338: pasted__transform5 1
+    100340: pasted__transform6
+    100342: pasted__transform6 1
+    100344: pasted__transform7
+    100346: pasted__transform7 1
+    100348: pasted__transform8
+    100350: pasted__transform8 1
+    100352: pasted__transform9
+    100354: pasted__transform9 1
+    100356: polySurface1
+    100358: polySurface10
+    100360: polySurface2
+    100362: polySurface3
+    100364: polySurface4
+    100366: polySurface5
+    100368: polySurface6
+    100370: polySurface7
+    100372: polySurface8
+    100374: polySurface9
+    100376: pPlane1
+    100378: pPlane1_segment_10_geo
+    100380: pPlane1_segment_11_geo
+    100382: pPlane1_segment_12_geo
+    100384: pPlane1_segment_13_geo
+    100386: pPlane1_segment_14_geo
+    100388: pPlane1_segment_16_geo
+    100390: pPlane1_segment_17_geo
+    100392: pPlane1_segment_18_geo
+    100394: pPlane1_segment_19_geo
+    100396: pPlane1_segment_1_geo
+    100398: pPlane1_segment_1_segment_10_geo
+    100400: pPlane1_segment_1_segment_11_geo
+    100402: pPlane1_segment_1_segment_12_geo
+    100404: pPlane1_segment_1_segment_1_geo
+    100406: pPlane1_segment_1_segment_2_geo
+    100408: pPlane1_segment_1_segment_3_geo
+    100410: pPlane1_segment_1_segment_4_geo
+    100412: pPlane1_segment_1_segment_5_geo
+    100414: pPlane1_segment_1_segment_6_geo
+    100416: pPlane1_segment_1_segment_8_geo
+    100418: pPlane1_segment_1_segment_9_geo
+    100420: pPlane1_segment_20_geo
+    100422: pPlane1_segment_21_geo
+    100424: pPlane1_segment_22_geo
+    100426: pPlane1_segment_23_geo
+    100428: pPlane1_segment_2_geo
+    100430: pPlane1_segment_3_geo
+    100432: pPlane1_segment_4_geo
+    100434: pPlane1_segment_5_geo
+    100436: pPlane1_segment_6_geo
+    100438: pPlane1_segment_7_geo
+    100440: pPlane1_segment_8_geo
+    100442: pPlane1_segment_9_geo
+    100444: transform1
+    100446: transform10
+    100448: transform11
+    100450: transform12
+    100452: transform13
+    100454: transform14
+    100456: transform15
+    100458: transform16
+    100460: transform17
+    100462: transform18
+    100464: transform19
+    100466: transform2
+    100468: transform20
+    100470: transform21
+    100472: transform3
+    100474: transform4
+    100476: transform5
+    100478: transform6
+    100480: transform7
+    100482: transform8
+    100484: transform9
+    400000: bend1Handle
+    400002: group
+    400004: group1
+    400006: //RootNode
+    400008: ikHandle1
+    400010: ikHandle2
+    400012: ikHandle3
+    400014: joint1
+    400016: joint10
+    400018: joint11
+    400020: joint12
+    400022: joint13
+    400024: joint2
+    400026: joint3
+    400028: joint4
+    400030: joint5
+    400032: joint6
+    400034: joint7
+    400036: joint8
+    400038: joint9
+    400040: pasted__bend1Handle
+    400042: pasted__bend1Handle 1
+    400044: pasted__ikHandle1
+    400046: pasted__ikHandle1 1
+    400048: pasted__ikHandle2
+    400050: pasted__ikHandle2 1
+    400052: pasted__ikHandle3
+    400054: pasted__ikHandle3 1
+    400056: pasted__joint1
+    400058: pasted__joint1 1
+    400060: pasted__joint10
+    400062: pasted__joint10 1
+    400064: pasted__joint11
+    400066: pasted__joint11 1
+    400068: pasted__joint12
+    400070: pasted__joint12 1
+    400072: pasted__joint13
+    400074: pasted__joint13 1
+    400076: pasted__joint2
+    400078: pasted__joint2 1
+    400080: pasted__joint3
+    400082: pasted__joint3 1
+    400084: pasted__joint4
+    400086: pasted__joint4 1
+    400088: pasted__joint5
+    400090: pasted__joint5 1
+    400092: pasted__joint6
+    400094: pasted__joint6 1
+    400096: pasted__joint7
+    400098: pasted__joint7 1
+    400100: pasted__joint8
+    400102: pasted__joint8 1
+    400104: pasted__joint9
+    400106: pasted__joint9 1
+    400108: pasted__polySurface1
+    400110: pasted__polySurface1 1
+    400112: pasted__polySurface10
+    400114: pasted__polySurface10 1
+    400116: pasted__polySurface2
+    400118: pasted__polySurface2 1
+    400120: pasted__polySurface3
+    400122: pasted__polySurface3 1
+    400124: pasted__polySurface4
+    400126: pasted__polySurface4 1
+    400128: pasted__polySurface5
+    400130: pasted__polySurface5 1
+    400132: pasted__polySurface6
+    400134: pasted__polySurface6 1
+    400136: pasted__polySurface7
+    400138: pasted__polySurface7 1
+    400140: pasted__polySurface8
+    400142: pasted__polySurface8 1
+    400144: pasted__polySurface9
+    400146: pasted__polySurface9 1
+    400148: pasted__pPlane1
+    400150: pasted__pPlane1 1
+    400152: pasted__pPlane1_segment_10_geo
+    400154: pasted__pPlane1_segment_10_geo 1
+    400156: pasted__pPlane1_segment_11_geo
+    400158: pasted__pPlane1_segment_11_geo 1
+    400160: pasted__pPlane1_segment_12_geo
+    400162: pasted__pPlane1_segment_12_geo 1
+    400164: pasted__pPlane1_segment_13_geo
+    400166: pasted__pPlane1_segment_13_geo 1
+    400168: pasted__pPlane1_segment_14_geo
+    400170: pasted__pPlane1_segment_14_geo 1
+    400172: pasted__pPlane1_segment_16_geo
+    400174: pasted__pPlane1_segment_16_geo 1
+    400176: pasted__pPlane1_segment_17_geo
+    400178: pasted__pPlane1_segment_17_geo 1
+    400180: pasted__pPlane1_segment_18_geo
+    400182: pasted__pPlane1_segment_18_geo 1
+    400184: pasted__pPlane1_segment_19_geo
+    400186: pasted__pPlane1_segment_19_geo 1
+    400188: pasted__pPlane1_segment_1_geo
+    400190: pasted__pPlane1_segment_1_geo 1
+    400192: pasted__pPlane1_segment_1_segment_10_geo
+    400194: pasted__pPlane1_segment_1_segment_10_geo 1
+    400196: pasted__pPlane1_segment_1_segment_11_geo
+    400198: pasted__pPlane1_segment_1_segment_11_geo 1
+    400200: pasted__pPlane1_segment_1_segment_12_geo
+    400202: pasted__pPlane1_segment_1_segment_12_geo 1
+    400204: pasted__pPlane1_segment_1_segment_1_geo
+    400206: pasted__pPlane1_segment_1_segment_1_geo 1
+    400208: pasted__pPlane1_segment_1_segment_2_geo
+    400210: pasted__pPlane1_segment_1_segment_2_geo 1
+    400212: pasted__pPlane1_segment_1_segment_3_geo
+    400214: pasted__pPlane1_segment_1_segment_3_geo 1
+    400216: pasted__pPlane1_segment_1_segment_4_geo
+    400218: pasted__pPlane1_segment_1_segment_4_geo 1
+    400220: pasted__pPlane1_segment_1_segment_5_geo
+    400222: pasted__pPlane1_segment_1_segment_5_geo 1
+    400224: pasted__pPlane1_segment_1_segment_6_geo
+    400226: pasted__pPlane1_segment_1_segment_6_geo 1
+    400228: pasted__pPlane1_segment_1_segment_8_geo
+    400230: pasted__pPlane1_segment_1_segment_8_geo 1
+    400232: pasted__pPlane1_segment_1_segment_9_geo
+    400234: pasted__pPlane1_segment_1_segment_9_geo 1
+    400236: pasted__pPlane1_segment_23_geo
+    400238: pasted__pPlane1_segment_23_geo 1
+    400240: pasted__pPlane1_segment_2_geo
+    400242: pasted__pPlane1_segment_2_geo 1
+    400244: pasted__pPlane1_segment_3_geo
+    400246: pasted__pPlane1_segment_3_geo 1
+    400248: pasted__pPlane1_segment_4_geo
+    400250: pasted__pPlane1_segment_4_geo 1
+    400252: pasted__pPlane1_segment_5_geo
+    400254: pasted__pPlane1_segment_5_geo 1
+    400256: pasted__pPlane1_segment_6_geo
+    400258: pasted__pPlane1_segment_6_geo 1
+    400260: pasted__pPlane1_segment_7_geo
+    400262: pasted__pPlane1_segment_7_geo 1
+    400264: pasted__pPlane1_segment_8_geo
+    400266: pasted__pPlane1_segment_8_geo 1
+    400268: pasted__pPlane1_segment_9_geo
+    400270: pasted__pPlane1_segment_9_geo 1
+    400272: pasted__transform1
+    400274: pasted__transform1 1
+    400276: pasted__transform10
+    400278: pasted__transform10 1
+    400280: pasted__transform11
+    400282: pasted__transform11 1
+    400284: pasted__transform12
+    400286: pasted__transform12 1
+    400288: pasted__transform13
+    400290: pasted__transform13 1
+    400292: pasted__transform14
+    400294: pasted__transform14 1
+    400296: pasted__transform15
+    400298: pasted__transform15 1
+    400300: pasted__transform16
+    400302: pasted__transform16 1
+    400304: pasted__transform17
+    400306: pasted__transform17 1
+    400308: pasted__transform18
+    400310: pasted__transform18 1
+    400312: pasted__transform19
+    400314: pasted__transform19 1
+    400316: pasted__transform2
+    400318: pasted__transform2 1
+    400320: pasted__transform20
+    400322: pasted__transform20 1
+    400324: pasted__transform21
+    400326: pasted__transform21 1
+    400328: pasted__transform3
+    400330: pasted__transform3 1
+    400332: pasted__transform4
+    400334: pasted__transform4 1
+    400336: pasted__transform5
+    400338: pasted__transform5 1
+    400340: pasted__transform6
+    400342: pasted__transform6 1
+    400344: pasted__transform7
+    400346: pasted__transform7 1
+    400348: pasted__transform8
+    400350: pasted__transform8 1
+    400352: pasted__transform9
+    400354: pasted__transform9 1
+    400356: polySurface1
+    400358: polySurface10
+    400360: polySurface2
+    400362: polySurface3
+    400364: polySurface4
+    400366: polySurface5
+    400368: polySurface6
+    400370: polySurface7
+    400372: polySurface8
+    400374: polySurface9
+    400376: pPlane1
+    400378: pPlane1_segment_10_geo
+    400380: pPlane1_segment_11_geo
+    400382: pPlane1_segment_12_geo
+    400384: pPlane1_segment_13_geo
+    400386: pPlane1_segment_14_geo
+    400388: pPlane1_segment_16_geo
+    400390: pPlane1_segment_17_geo
+    400392: pPlane1_segment_18_geo
+    400394: pPlane1_segment_19_geo
+    400396: pPlane1_segment_1_geo
+    400398: pPlane1_segment_1_segment_10_geo
+    400400: pPlane1_segment_1_segment_11_geo
+    400402: pPlane1_segment_1_segment_12_geo
+    400404: pPlane1_segment_1_segment_1_geo
+    400406: pPlane1_segment_1_segment_2_geo
+    400408: pPlane1_segment_1_segment_3_geo
+    400410: pPlane1_segment_1_segment_4_geo
+    400412: pPlane1_segment_1_segment_5_geo
+    400414: pPlane1_segment_1_segment_6_geo
+    400416: pPlane1_segment_1_segment_8_geo
+    400418: pPlane1_segment_1_segment_9_geo
+    400420: pPlane1_segment_20_geo
+    400422: pPlane1_segment_21_geo
+    400424: pPlane1_segment_22_geo
+    400426: pPlane1_segment_23_geo
+    400428: pPlane1_segment_2_geo
+    400430: pPlane1_segment_3_geo
+    400432: pPlane1_segment_4_geo
+    400434: pPlane1_segment_5_geo
+    400436: pPlane1_segment_6_geo
+    400438: pPlane1_segment_7_geo
+    400440: pPlane1_segment_8_geo
+    400442: pPlane1_segment_9_geo
+    400444: transform1
+    400446: transform10
+    400448: transform11
+    400450: transform12
+    400452: transform13
+    400454: transform14
+    400456: transform15
+    400458: transform16
+    400460: transform17
+    400462: transform18
+    400464: transform19
+    400466: transform2
+    400468: transform20
+    400470: transform21
+    400472: transform3
+    400474: transform4
+    400476: transform5
+    400478: transform6
+    400480: transform7
+    400482: transform8
+    400484: transform9
+    2300000: pasted__polySurface1
+    2300002: pasted__polySurface1 1
+    2300004: pasted__polySurface10
+    2300006: pasted__polySurface10 1
+    2300008: pasted__polySurface2
+    2300010: pasted__polySurface2 1
+    2300012: pasted__polySurface3
+    2300014: pasted__polySurface3 1
+    2300016: pasted__polySurface5
+    2300018: pasted__polySurface5 1
+    2300020: pasted__polySurface9
+    2300022: pasted__polySurface9 1
+    2300024: pasted__pPlane1_segment_13_geo
+    2300026: pasted__pPlane1_segment_13_geo 1
+    2300028: pasted__pPlane1_segment_14_geo
+    2300030: pasted__pPlane1_segment_14_geo 1
+    2300032: pasted__pPlane1_segment_1_segment_10_geo
+    2300034: pasted__pPlane1_segment_1_segment_10_geo 1
+    2300036: pasted__pPlane1_segment_1_segment_11_geo
+    2300038: pasted__pPlane1_segment_1_segment_11_geo 1
+    2300040: pasted__pPlane1_segment_1_segment_12_geo
+    2300042: pasted__pPlane1_segment_1_segment_12_geo 1
+    2300044: pasted__pPlane1_segment_1_segment_4_geo
+    2300046: pasted__pPlane1_segment_1_segment_4_geo 1
+    2300048: pasted__pPlane1_segment_1_segment_5_geo
+    2300050: pasted__pPlane1_segment_1_segment_5_geo 1
+    2300052: pasted__pPlane1_segment_1_segment_6_geo
+    2300054: pasted__pPlane1_segment_1_segment_6_geo 1
+    2300056: pasted__pPlane1_segment_2_geo
+    2300058: pasted__pPlane1_segment_2_geo 1
+    2300060: pasted__pPlane1_segment_7_geo
+    2300062: pasted__pPlane1_segment_7_geo 1
+    2300064: pasted__pPlane1_segment_8_geo
+    2300066: pasted__pPlane1_segment_8_geo 1
+    2300068: pasted__pPlane1_segment_9_geo
+    2300070: pasted__pPlane1_segment_9_geo 1
+    2300072: polySurface1
+    2300074: polySurface10
+    2300076: polySurface2
+    2300078: polySurface3
+    2300080: polySurface5
+    2300082: polySurface9
+    2300084: pPlane1_segment_13_geo
+    2300086: pPlane1_segment_14_geo
+    2300088: pPlane1_segment_1_segment_10_geo
+    2300090: pPlane1_segment_1_segment_11_geo
+    2300092: pPlane1_segment_1_segment_12_geo
+    2300094: pPlane1_segment_1_segment_4_geo
+    2300096: pPlane1_segment_1_segment_5_geo
+    2300098: pPlane1_segment_1_segment_6_geo
+    2300100: pPlane1_segment_20_geo
+    2300102: pPlane1_segment_21_geo
+    2300104: pPlane1_segment_22_geo
+    2300106: pPlane1_segment_2_geo
+    2300108: pPlane1_segment_7_geo
+    2300110: pPlane1_segment_8_geo
+    2300112: pPlane1_segment_9_geo
+    3300000: pasted__polySurface1
+    3300002: pasted__polySurface1 1
+    3300004: pasted__polySurface10
+    3300006: pasted__polySurface10 1
+    3300008: pasted__polySurface2
+    3300010: pasted__polySurface2 1
+    3300012: pasted__polySurface3
+    3300014: pasted__polySurface3 1
+    3300016: pasted__polySurface5
+    3300018: pasted__polySurface5 1
+    3300020: pasted__polySurface9
+    3300022: pasted__polySurface9 1
+    3300024: pasted__pPlane1_segment_13_geo
+    3300026: pasted__pPlane1_segment_13_geo 1
+    3300028: pasted__pPlane1_segment_14_geo
+    3300030: pasted__pPlane1_segment_14_geo 1
+    3300032: pasted__pPlane1_segment_1_segment_10_geo
+    3300034: pasted__pPlane1_segment_1_segment_10_geo 1
+    3300036: pasted__pPlane1_segment_1_segment_11_geo
+    3300038: pasted__pPlane1_segment_1_segment_11_geo 1
+    3300040: pasted__pPlane1_segment_1_segment_12_geo
+    3300042: pasted__pPlane1_segment_1_segment_12_geo 1
+    3300044: pasted__pPlane1_segment_1_segment_4_geo
+    3300046: pasted__pPlane1_segment_1_segment_4_geo 1
+    3300048: pasted__pPlane1_segment_1_segment_5_geo
+    3300050: pasted__pPlane1_segment_1_segment_5_geo 1
+    3300052: pasted__pPlane1_segment_1_segment_6_geo
+    3300054: pasted__pPlane1_segment_1_segment_6_geo 1
+    3300056: pasted__pPlane1_segment_2_geo
+    3300058: pasted__pPlane1_segment_2_geo 1
+    3300060: pasted__pPlane1_segment_7_geo
+    3300062: pasted__pPlane1_segment_7_geo 1
+    3300064: pasted__pPlane1_segment_8_geo
+    3300066: pasted__pPlane1_segment_8_geo 1
+    3300068: pasted__pPlane1_segment_9_geo
+    3300070: pasted__pPlane1_segment_9_geo 1
+    3300072: polySurface1
+    3300074: polySurface10
+    3300076: polySurface2
+    3300078: polySurface3
+    3300080: polySurface5
+    3300082: polySurface9
+    3300084: pPlane1_segment_13_geo
+    3300086: pPlane1_segment_14_geo
+    3300088: pPlane1_segment_1_segment_10_geo
+    3300090: pPlane1_segment_1_segment_11_geo
+    3300092: pPlane1_segment_1_segment_12_geo
+    3300094: pPlane1_segment_1_segment_4_geo
+    3300096: pPlane1_segment_1_segment_5_geo
+    3300098: pPlane1_segment_1_segment_6_geo
+    3300100: pPlane1_segment_20_geo
+    3300102: pPlane1_segment_21_geo
+    3300104: pPlane1_segment_22_geo
+    3300106: pPlane1_segment_2_geo
+    3300108: pPlane1_segment_7_geo
+    3300110: pPlane1_segment_8_geo
+    3300112: pPlane1_segment_9_geo
+    4300000: pPlane1_segment_20_geo
+    4300002: pPlane1_segment_21_geo
+    4300004: pPlane1_segment_22_geo
+    4300006: pPlane1_segment_9_geo
+    4300008: pPlane1_segment_8_geo
+    4300010: polySurface5
+    4300012: pPlane1_segment_14_geo
+    4300014: pPlane1_segment_13_geo
+    4300016: polySurface10
+    4300018: polySurface1
+    4300020: pPlane1_segment_7_geo
+    4300022: pPlane1_segment_2_geo
+    4300024: pPlane1_segment_1_segment_5_geo
+    4300026: pPlane1_segment_1_segment_11_geo
+    4300028: pPlane1_segment_1_segment_6_geo
+    4300030: pPlane1_segment_1_segment_4_geo
+    4300032: pPlane1_segment_1_segment_10_geo
+    4300034: pPlane1_segment_1_segment_12_geo
+    4300036: polySurface3
+    4300038: polySurface2
+    4300040: polySurface9
+    4300042: pasted__pPlane1_segment_9_geo
+    4300044: pasted__pPlane1_segment_8_geo
+    4300046: pasted__polySurface5
+    4300048: pasted__pPlane1_segment_14_geo
+    4300050: pasted__pPlane1_segment_13_geo
+    4300052: pasted__polySurface10
+    4300054: pasted__polySurface1
+    4300056: pasted__pPlane1_segment_7_geo
+    4300058: pasted__pPlane1_segment_2_geo
+    4300060: pasted__pPlane1_segment_1_segment_5_geo
+    4300062: pasted__pPlane1_segment_1_segment_11_geo
+    4300064: pasted__pPlane1_segment_1_segment_6_geo
+    4300066: pasted__pPlane1_segment_1_segment_4_geo
+    4300068: pasted__pPlane1_segment_1_segment_10_geo
+    4300070: pasted__pPlane1_segment_1_segment_12_geo
+    4300072: pasted__polySurface3
+    4300074: pasted__polySurface2
+    4300076: pasted__polySurface9
+    4300078: pasted__pPlane1_segment_9_geo
+    4300080: pasted__pPlane1_segment_8_geo
+    4300082: pasted__polySurface5
+    4300084: pasted__pPlane1_segment_14_geo
+    4300086: pasted__pPlane1_segment_13_geo
+    4300088: pasted__polySurface10
+    4300090: pasted__polySurface1
+    4300092: pasted__pPlane1_segment_7_geo
+    4300094: pasted__pPlane1_segment_2_geo
+    4300096: pasted__pPlane1_segment_1_segment_5_geo
+    4300098: pasted__pPlane1_segment_1_segment_11_geo
+    4300100: pasted__pPlane1_segment_1_segment_6_geo
+    4300102: pasted__pPlane1_segment_1_segment_4_geo
+    4300104: pasted__pPlane1_segment_1_segment_10_geo
+    4300106: pasted__pPlane1_segment_1_segment_12_geo
+    4300108: pasted__polySurface3
+    4300110: pasted__polySurface2
+    4300112: pasted__polySurface9
+    7400000: Take 001
+    9500000: //RootNode
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    optimizeGameObjects: 0
+    animationCompression: 1
+    animationRotationError: .5
+    animationPositionError: .5
+    animationScaleError: .5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importBlendShapes: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+  tangentSpace:
+    normalSmoothAngle: 60
+    splitTangentsAcrossUV: 1
+    normalImportMode: 0
+    tangentImportMode: 1
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    human: []
+    skeleton: []
+    armTwist: .5
+    foreArmTwist: .5
+    upperLegTwist: .5
+    legTwist: .5
+    armStretch: .0500000007
+    legStretch: .0500000007
+    feetSpacing: 0
+    rootMotionBoneName: 
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  additionalBone: 0
+  userData: 

@@ -11,7 +11,7 @@ public class DustEffectClass : MonoBehaviour {
 	//Effect Variables
 	[SerializeField]
 	private ParticleSystem runningDust; // The dust particle system that runs behind the dino.
-	private DinoMoveScript dinoMotion; // The motion script of the dino that the object this script is on is parented to.
+	private MotionControl dinoMotion; // The motion script of the dino that the object this script is on is parented to.
 	#endregion Fields
 
 
@@ -63,15 +63,15 @@ public class DustEffectClass : MonoBehaviour {
 	public void RunDust(float speed)
 	{
 
-		RunningDust.Play();
-//		if(speed > 0 || speed < 0)
-//		{
-//			RunningDust.Play();
-//		}
-//		else
-//		{
-//			RunningDust.Stop();
-//		}
+//		RunningDust.Play();
+		if(speed > 0 || speed < 0)
+		{
+			RunningDust.Play();
+		}
+		else
+		{
+			RunningDust.Stop();
+		}
 	}
 
 }
