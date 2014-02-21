@@ -11,7 +11,7 @@ public class RaceStart : MonoBehaviour {
 	public GameObject player;
 	
 	//the motion scripts
-	private OldDinoMoveScript playerMotion;
+	private MotionControl playerMotion;
 	
 	//hold the children of this object
 	public GameObject[] childTex = new GameObject[4];
@@ -27,7 +27,7 @@ public class RaceStart : MonoBehaviour {
 		player = GameObject.FindGameObjectWithTag("Player");
 
 		//get the MotionControllers from the player and the cpu
-		playerMotion = player.GetComponent<OldDinoMoveScript>() as OldDinoMoveScript;
+		playerMotion = player.GetComponent<MotionControl>() as MotionControl;
 
 		//turn off the motion scripts for the player and the cpu
 		playerMotion.enabled = false;

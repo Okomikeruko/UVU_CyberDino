@@ -9,8 +9,7 @@ public class CartBlowUp : MonoBehaviour {
 		animation.Play();
 		
 		StartCoroutine(WaitThenDoThings(animation.clip.length));
-		
-		Debug.Log("beeeeeeeeeeeeeeeeeepo");
+
 	}
 	
 	IEnumerator WaitThenDoThings(float time)

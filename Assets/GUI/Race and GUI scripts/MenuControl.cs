@@ -11,7 +11,7 @@ public class MenuControl : MonoBehaviour
 	public Menu menuSelect;
 	
 	//the different dinos to choose
-	private string[] dinos = new string[]{"Diloph", "Hesp", "Raptor"};
+	private string[] dinos = new string[]{"Diloph", "Hesp", "Raptor", "TRex", "Troodon"};
 
 	//the different level to choose
 	private string[] levels = new string[]{"Test map", "Track1", "CityTrack"};
@@ -71,11 +71,12 @@ public class MenuControl : MonoBehaviour
 	// Use this for initialization
 	void Awake () 
 	{
+		Debug.Log(dinoSelected);
 		if(dinoSelected != null)
 		{
 			dinoSelectScript = dinoSelected.GetComponent<DinoSelect>();
 			
-			dinoSelectScript.Index = dinoIndex;	
+
 			
 			Debug.Log(dinoIndex);
 		}
@@ -606,13 +607,15 @@ public class MenuControl : MonoBehaviour
 		//if menuSelet is in a level
 		else if(menuSelect == Menu.goToLevel)
 		{
-
+			dinoSelectScript.Index = dinoIndex;	
 		}
 	}
 	
 	
 	void ResizeButtons(Rect[] _pos)
 	{
+
+		Debug.Log(_pos[0]);
 
 		//variables used to move the buttons
 		float xMulti = Screen.width / 100;
