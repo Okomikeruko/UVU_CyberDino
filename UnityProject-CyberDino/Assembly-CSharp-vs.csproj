@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+	<Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+	<Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+	<ProductVersion>10.0.20506</ProductVersion>
+	<SchemaVersion>2.0</SchemaVersion>
+	<ProjectGuid>{1FC2F761-ABAA-F419-4EED-9A98973E1910}</ProjectGuid>
+	<OutputType>Library</OutputType>
+	<AppDesignerFolder>Properties</AppDesignerFolder>
+	<RootNamespace></RootNamespace>
+	<AssemblyName>Assembly-CSharp</AssemblyName>
+	<TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+	<FileAlignment>512</FileAlignment>
+	<BaseDirectory>Assets</BaseDirectory>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+	<DebugSymbols>true</DebugSymbols>
+	<DebugType>full</DebugType>
+	<Optimize>false</Optimize>
+	<OutputPath>Temp\bin\Debug\</OutputPath>
+	<DefineConstants>DEBUG;TRACE;UNITY_IPHONE;ENABLE_MICROPHONE;ENABLE_TEXTUREID_MAP;ENABLE_AUDIO_FMOD;ENABLE_MONO;ENABLE_SPRITES;ENABLE_TERRAIN;ENABLE_GENERICS;ENABLE_SUBSTANCE;INCLUDE_WP8SUPPORT;ENABLE_WWW;ENABLE_IMAGEEFFECTS;UNITY_IPHONE_API;ENABLE_WEBCAM;INCLUDE_METROSUPPORT;ENABLE_NETWORK;ENABLE_PHYSICS;ENABLE_CACHING;ENABLE_CLOTH;ENABLE_2D_PHYSICS;ENABLE_GAMECENTER;UNITY_IOS;ENABLE_SHADOWS;ENABLE_AUDIO;ENABLE_NAVMESH_CARVING;ENABLE_SINGLE_INSTANCE_BUILD_SETTING;UNITY_4_3_3;UNITY_4_3;ENABLE_PROFILER;UNITY_EDITOR;UNITY_EDITOR_OSX</DefineConstants>
+	<ErrorReport>prompt</ErrorReport>
+	<WarningLevel>4</WarningLevel>
+	<NoWarn>0169</NoWarn>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+	<DebugType>pdbonly</DebugType>
+	<Optimize>true</Optimize>
+	<OutputPath>Temp\bin\Release\</OutputPath>
+	<DefineConstants>TRACE</DefineConstants>
+	<ErrorReport>prompt</ErrorReport>
+	<WarningLevel>4</WarningLevel>
+	<NoWarn>0169</NoWarn>
+  </PropertyGroup>
+  <ItemGroup>
+	<Reference Include="System" />
+    <Reference Include="System.XML" />
+	<Reference Include="System.Core" />
+	<Reference Include="System.Xml.Linq" />
+	<Reference Include="UnityEngine">
+	  <HintPath>/Applications/Unity/Unity.app/Contents/Frameworks/Managed/UnityEngine.dll</HintPath>
+	</Reference>
+	<Reference Include="UnityEditor">
+	  <HintPath>/Applications/Unity/Unity.app/Contents/Frameworks/Managed/UnityEditor.dll</HintPath>
+	</Reference>
+  </ItemGroup>
+  <ItemGroup>
+     <Compile Include="Assets\GUI\Race and GUI scripts\FadeOut.cs" />
+     <Compile Include="Assets\GUI\Race and GUI scripts\FireButton.cs" />
+     <Compile Include="Assets\GUI\Race and GUI scripts\InputLRPad.cs" />
+     <Compile Include="Assets\GUI\Race and GUI scripts\JumpButton.cs" />
+     <Compile Include="Assets\GUI\Race and GUI scripts\MenuControl.cs" />
+     <Compile Include="Assets\GUI\Race and GUI scripts\MenuDetect.cs" />
+     <Compile Include="Assets\GUI\Race and GUI scripts\PauseMenu.cs" />
+     <Compile Include="Assets\GUI\Race and GUI scripts\RaceData.cs" />
+     <Compile Include="Assets\GUI\Race and GUI scripts\RaceStart.cs" />
+     <Compile Include="Assets\GUI\Race and GUI scripts\RaceWin.cs" />
+     <Compile Include="Assets\GUI\Race and GUI scripts\TouchSwipeClass.cs" />
+     <Compile Include="Assets\MultiPlayer\Network scripts\NetworkGameHandler.cs" />
+     <Compile Include="Assets\Performance\HUDFPS.cs" />
+     <Compile Include="Assets\Racers\Scripts\AIControl.cs" />
+     <Compile Include="Assets\Racers\Scripts\DinoMoveScript.cs" />
+     <Compile Include="Assets\Racers\Scripts\DinoRagdoll.cs" />
+     <Compile Include="Assets\Racers\Scripts\DinoSelect.cs" />
+     <Compile Include="Assets\Racers\Scripts\InputKeyboard.cs" />
+     <Compile Include="Assets\Racers\Scripts\MotionControl backup.cs" />
+     <Compile Include="Assets\Racers\Scripts\MotionControl.cs" />
+     <Compile Include="Assets\Racers\Scripts\Old\OldDinoMoveScript.cs" />
+     <Compile Include="Assets\Racers\Scripts\Old\OldMotionControl.cs" />
+     <Compile Include="Assets\Racers\Scripts\SmoothFollow2.cs" />
+     <Compile Include="Assets\Racers\Scripts\SmoothLookAt.cs" />
+     <Compile Include="Assets\Racers\Scripts\UserControl.cs" />
+     <Compile Include="Assets\Racers\Scripts\pilotCarBehavior.cs" />
+     <Compile Include="Assets\SceneObjects\Train\Scripts\CargoHitClass.cs" />
+     <Compile Include="Assets\SceneObjects\Train\Scripts\FollowScript.cs" />
+     <Compile Include="Assets\SceneObjects\Train\Scripts\TrainCarClass.cs" />
+     <Compile Include="Assets\SceneObjects\Train\Scripts\TrainHeadClass.cs" />
+     <Compile Include="Assets\VFX\Effects\ArmorPulse\Scripts\RimPulse.cs" />
+     <Compile Include="Assets\VFX\Effects\Bump\Scripts\BumpEffectClass.cs" />
+     <Compile Include="Assets\VFX\Effects\Bump\Scripts\RacerBumpClass.cs" />
+     <Compile Include="Assets\VFX\Effects\Dust\Scripts\DustEffectClass.cs" />
+     <Compile Include="Assets\VFX\PickUps\Forcefield\Scripts\ForcefieldClass.cs" />
+     <Compile Include="Assets\VFX\PickUps\Forcefield\Scripts\ForcefieldPickUpClass.cs" />
+     <Compile Include="Assets\VFX\PickUps\PowerUpManagerClass.cs" />
+     <Compile Include="Assets\VFX\Racer\Scripts\Motion\MotionClass.cs" />
+     <Compile Include="Assets\VFX\Racer\Scripts\Motion\Old\Movement.cs" />
+     <Compile Include="Assets\VFX\Racer\Scripts\Motion\Old\MovementKeyInput.cs" />
+     <Compile Include="Assets\VFX\Racer\Scripts\Motion\PlayerMotionClass.cs" />
+     <Compile Include="Assets\VFX\Racer\Scripts\PickUps\PickUpManagerClass.cs" />
+     <Compile Include="Assets\VFX\Racer\Scripts\RacerHealth\ColorLerpClass.cs" />
+     <Compile Include="Assets\VFX\Racer\Scripts\RacerHealth\OpponentHealthClass.cs" />
+     <Compile Include="Assets\VFX\Racer\Scripts\RacerHealth\PlayerHealthClass.cs" />
+     <Compile Include="Assets\VFX\Racer\Scripts\RacerHealth\RacerHealthClass.cs" />
+     <Compile Include="Assets\VFX\Racer\Scripts\RacerHealth\RagdollAddForceClass.cs" />
+     <Compile Include="Assets\VFX\Racer\Scripts\RacerHealth\RespawnNodeClass.cs" />
+     <Compile Include="Assets\VFX\Racer\Scripts\VFXControlClass.cs" />
+     <Compile Include="Assets\VFX\Train\CartBlowUp.cs" />
+     <Compile Include="Assets\VFX\Weapons\Laser\Scripts\LaserClass.cs" />
+     <Compile Include="Assets\VFX\Weapons\Laser\Scripts\PlayerLaserClass.cs" />
+     <Compile Include="Assets\VFX\Weapons\Machine Gun\Scripts\AI\AIMachineGunClass.cs" />
+     <Compile Include="Assets\VFX\Weapons\Machine Gun\Scripts\AI\EnemyAIMG.cs" />
+     <Compile Include="Assets\VFX\Weapons\Machine Gun\Scripts\MachineGunClass.cs" />
+     <Compile Include="Assets\VFX\Weapons\Machine Gun\Scripts\MachineGunHitEffectClass.cs" />
+     <Compile Include="Assets\VFX\Weapons\Machine Gun\Scripts\Old\OldMachineGun.cs" />
+     <Compile Include="Assets\VFX\Weapons\Machine Gun\Scripts\Old\OldPlayerMG.cs" />
+     <Compile Include="Assets\VFX\Weapons\Machine Gun\Scripts\Old\OldProjectileClass.cs" />
+     <Compile Include="Assets\VFX\Weapons\Machine Gun\Scripts\Old\OldProjectileMG.cs" />
+     <Compile Include="Assets\VFX\Weapons\Machine Gun\Scripts\PlayerMachineGunClass.cs" />
+     <Compile Include="Assets\VFX\Weapons\Machine Gun\Scripts\ProjectileMachineGunClass.cs" />
+     <Compile Include="Assets\VFX\Weapons\Machine Gun\Scripts\StaticMachineGunClass.cs" />
+     <Compile Include="Assets\VFX\Weapons\MissileLauncher\Scripts\MissileLauncherClass.cs" />
+     <Compile Include="Assets\VFX\Weapons\MissileLauncher\Scripts\PlayerMissileLauncherClass.cs" />
+     <Compile Include="Assets\VFX\Weapons\MissileLauncher\Scripts\ProjectileMissileLauncherClass.cs" />
+     <Compile Include="Assets\VFX\Weapons\Scripts\ProjectileClass.cs" />
+     <Compile Include="Assets\VFX\Weapons\Scripts\RangedWeaponClass.cs" />
+     <Compile Include="Assets\VFX\Weapons\Scripts\StaticWeaponClass.cs" />
+     <Compile Include="Assets\VFX\Weapons\Scripts\WeaponClass.cs" />
+     <Compile Include="Assets\VFX\Weapons\Scripts\WeaponControlClass.cs" />
+     <None Include="Assets\VFX\Effects\ArmorPulse\Scripts\NewShader.shader" />
+     <None Include="Assets\VFX\Effects\ForceField\Scripts\ForceField.shader" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+	   Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+  
+</Project>

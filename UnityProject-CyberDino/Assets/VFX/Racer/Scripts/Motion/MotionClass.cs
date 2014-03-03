@@ -61,7 +61,7 @@ public class MotionClass : MonoBehaviour {
 	private int racePosition; // Their position on the map based on advancement of trackers.
 
 	[SerializeField]
-	bool turboActive;
+//	bool turboActive;
 
 	#endregion Fields
 
@@ -461,7 +461,7 @@ public class MotionClass : MonoBehaviour {
 	#endregion
 	IEnumerator Turbo()
 	{
-		turboActive = true;
+//		turboActive = true;
 		//Debug.Log(turboActive);
 		InitialBurstVFX.Play();
 		yield return new WaitForSeconds(0.3F);
@@ -473,7 +473,7 @@ public class MotionClass : MonoBehaviour {
 		}
 		yield return new WaitForSeconds(TurboDuration);
 		BoostVFX.Stop();
-		turboActive = false;
+//		turboActive = false;
 		yield return null;
 	}
 	

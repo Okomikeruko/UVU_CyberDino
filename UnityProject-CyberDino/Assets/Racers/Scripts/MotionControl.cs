@@ -24,7 +24,9 @@ public class MotionControl : MonoBehaviour {
 
 	private float oldAccelleration;
 	private float oldTopSpeed;
+	[SerializeField]
 	private float TurboAccelleration;
+	[SerializeField]
 	private float TurboTopSpeed;
 
 	public float accelleration = 10.0F;				// Public Stat controlling this object's rate of acceleration

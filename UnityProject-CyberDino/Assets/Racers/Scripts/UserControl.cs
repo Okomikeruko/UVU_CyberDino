@@ -15,8 +15,6 @@ public class UserControl : MonoBehaviour {
 	[SerializeField]
 	private DustEffectClass dust;
 
-	private bool firing = false;
-
 	#region Properties
 	private WeaponControlClass Weapons
 	{
@@ -116,7 +114,7 @@ public class UserControl : MonoBehaviour {
 	{
 		FireButton.shoot += this.shoot;
 	}
-	void Disable()
+	void OnDisable()
 	{
 		FireButton.shoot -= this.shoot;
 	}
@@ -191,7 +189,7 @@ public class UserControl : MonoBehaviour {
 		else
 		{
 			weapons.Laser.Line.enabled = false;
-			firing = false;
+
 		}
 		
 	}
