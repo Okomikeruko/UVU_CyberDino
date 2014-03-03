@@ -464,8 +464,8 @@ public class RacerHealthClass : MonoBehaviour {
 		RespawnEffect.Play();
 		yield return new WaitForSeconds(1);
 
-		racer.transform.position = RespawnCheckpoint.position;
-		racer.transform.rotation = RespawnCheckpoint.rotation;
+		racer.transform.position = PreviousNode.transform.position;
+		racer.transform.rotation = PreviousNode.transform.rotation;
 
 		if(Health <= 0)
 		{
