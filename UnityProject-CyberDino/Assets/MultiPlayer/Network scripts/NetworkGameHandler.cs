@@ -1,26 +1,51 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
+
+public class PlayerInformation {
+
+	public string playerName = "";
+	public string dinoName = "Diloph";
+	public string equipmentSlotOne = "Gun 1";
+	public string equipmentSlotTwo = "Armour 1";
+
+	public PlayerInformation () {
+	}
+
+	public PlayerInformation (string data) {
+		var datas = data.Split("^"[0]);
+		playerName = datas[0];
+		dinoName = datas[1];
+		equipmentSlotOne = datas[2];
+		equipmentSlotTwo = datas[3];
+	}
+
+	public override string ToString () {
+		string data = playerName + "^" + dinoName + "^" + equipmentSlotOne + "^" + equipmentSlotTwo;
+		return data;
+	}
+}
 
 [RequireComponent(typeof(NetworkView))]
 public class NetworkGameHandler : MonoBehaviour {
 
 	public enum ConnectionState { Disconnected, Looking, Waiting, Connecting, InGame, InLobby };
-	
-	private const int MAX_PLAYERS = 6;
+
+	public const int MAX_PLAYERS = 4;
 	private const int DEFAULT_PORT = 7777;
 	public string masterServerGameType = "CyberDinoRacingv0.1";
-	public string mainMenuScene = "NetworkMainMenuTest";
-	public string gameMap = "(selected track scene goes here)";
+	public string mainMenuScene = "Menu";
+	public string gameMap = "CityTrack";
 
 	private bool onConnectionDataSent = false;
+    private bool isGameRandom = false;
 	
 	ConnectionState connectionState;
-	private int playerCount;
 	private int lastLevelPrefix;
 
 	private string gameName;
 	private string playerName;
-	private string[] playerNames = new string[MAX_PLAYERS];
+	public Dictionary<string, PlayerInformation> playerInformation = new Dictionary<string, PlayerInformation>();
 	
 	private NetworkView netView;
 
@@ -30,13 +55,8 @@ public class NetworkGameHandler : MonoBehaviour {
 
 		netView = GetComponent("NetworkView") as NetworkView;
 		netView.group = 1;
-		playerCount = 0;
 		connectionState = ConnectionState.Disconnected;
 
-		for (int i=0; i < MAX_PLAYERS; i++){
-			playerNames[i] = "Empty Player Slot";
-		}
-		
 		Application.LoadLevel(mainMenuScene);
 	}
 	
@@ -47,7 +67,12 @@ public class NetworkGameHandler : MonoBehaviour {
 				HostData[] hostData = MasterServer.PollHostList();
 				// connectStatus = "" + hostData.Length + " hosts found";
 				foreach(var server in hostData) {
-					if(server.gameName == gameName) {
+                    if (isGameRandom == true)
+                    {
+                        Network.Connect(server);
+                        connectionState = ConnectionState.Connecting;
+                    }
+					else if(server.gameName == gameName) {
 						
 						// Game Found
 						// Attempt to connect to server	                	
@@ -64,9 +89,12 @@ public class NetworkGameHandler : MonoBehaviour {
 		connectionState = ConnectionState.Connecting;
 		this.gameName = gameName;
 		this.playerName = playerName;
-		playerNames[0] = playerName;
-		Network.InitializeServer(MAX_PLAYERS, DEFAULT_PORT, !Network.HavePublicAddress());
+        Network.InitializeServer(MAX_PLAYERS, DEFAULT_PORT, !Network.HavePublicAddress());
 		MasterServer.RegisterHost(masterServerGameType, gameName, "Open");
+
+		if(Network.isServer) {			
+			OnConnectedToServer();
+		}	
 	}
 
 	public void JoinGame (string gameName, string playerName) {
@@ -79,6 +107,16 @@ public class NetworkGameHandler : MonoBehaviour {
 		connectionState = ConnectionState.Looking;
 	}
 
+    public void JoinRandomGame(string playerName)
+    {
+        connectionState = ConnectionState.Connecting;
+        this.playerName = playerName;
+        MasterServer.ClearHostList();
+        MasterServer.RequestHostList(masterServerGameType);
+        isGameRandom = true;
+        connectionState = ConnectionState.Looking;
+    }
+
 	public ConnectionState GetConnectionStatus() {
 		return connectionState;
 	}
@@ -90,11 +128,19 @@ public class NetworkGameHandler : MonoBehaviour {
 		
 		Network.Disconnect();
 		connectionState = ConnectionState.Disconnected;
+		playerInformation.Clear();
 	}
 
 	void OnConnectedToServer() {
 		if (!onConnectionDataSent){
-			netView.RPC ("ReceivePlayerData", RPCMode.AllBuffered, playerName);
+			string playerID = Network.player.ToString();
+
+			var p = new PlayerInformation();
+			p.playerName = playerName;
+
+			playerInformation[playerID] = p;
+			netView = GetComponent("NetworkView") as NetworkView;
+			netView.RPC ("ReceivePlayerData", RPCMode.AllBuffered, Network.player.ToString(), p.ToString ());
 			onConnectionDataSent = true;
 			connectionState = ConnectionState.InLobby;
 		}
@@ -111,43 +157,43 @@ public class NetworkGameHandler : MonoBehaviour {
 			connectionState = ConnectionState.Disconnected;			
 		
 		Application.LoadLevel(mainMenuScene);
-		playerCount = 0;
 	}	
 	
 	void OnPlayerConnected(NetworkPlayer player) {				
-		if(Network.isServer) {			
-			OnConnectedToServer();
-		}	
+
 	}	
-	
+
 	void OnPlayerDisconnected(NetworkPlayer player) {
+		string disconnectedPlayer = player.ToString();
+		playerInformation.Remove(disconnectedPlayer);
 		Network.RemoveRPCs(player);
 		Network.DestroyPlayerObjects(player);
 
 		//figure out which player disconnected and remove name from list.
 	}
 
-	public string GetPlayerName (int playerNumber) {
-		return playerNames[playerNumber];
+	public void UpdatePlayerInformation(PlayerInformation p) {
+		playerInformation[Network.player.ToString()] = p;
+		netView.RPC ("ReceivePlayerData", RPCMode.AllBuffered, Network.player.ToString(), p.ToString ());
+	}
+
+	public PlayerInformation GetMyInfo () {
+		return playerInformation[Network.player.ToString()];
+	}
+
+	public void UpdateMapInformation(string gameMap){
+		netView.RPC ("ReceiveMapData", RPCMode.All, gameMap);
 	}
 
 	[RPC]
-	void ReceivePlayerData(string name) {
-		playerNames[playerCount] = name;
-		playerCount++;
-		Debug.Log (name);
-		//netView.RPC ("ReceivePlayerList", RPCMode.Others, playerCount, playerNames[0], playerNames[1], playerNames[2], playerNames[3], playerNames[4], playerNames[5]);
+	void ReceiveMapData(string mapName) {
+		gameMap = mapName;
 	}
 
 	[RPC]
-	void ReceivePlayerList(int playerCount, string player1, string player2, string player3, string player4, string player5, string player6) {
-		this.playerCount = playerCount;
-		playerNames[0] = player1;
-		playerNames[1] = player2;
-		playerNames[2] = player3;
-		playerNames[3] = player4;
-		playerNames[4] = player5;
-		playerNames[5] = player6;
+	void ReceivePlayerData(string playerID, string datas) {
+		PlayerInformation otherPlayer = new PlayerInformation(datas);
+		playerInformation[playerID] = otherPlayer;
 	}
 
 	[RPC]

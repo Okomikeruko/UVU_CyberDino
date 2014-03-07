@@ -97,7 +97,7 @@ public class WeaponControlClass : MonoBehaviour {
 	}
 
 	// Use this for initialization
-	void Start () {
+	void OnEnable () {
 		Weapons = new List<GameObject>();
 
 		CurrentWeapon = Weapons[0];

@@ -35,7 +35,7 @@ public class RaceData : MonoBehaviour
 
 		mControlScript = mControl.GetComponent<MenuControl>() as MenuControl;
 
-		mCameraFollowScript = mCamera.GetComponent<SmoothFollow2>() as SmoothFollow2;
+//mCameraFollowScript = mCamera.GetComponent<SmoothFollow2>() as SmoothFollow2;
 
 		rStartScript = rStart.GetComponent<RaceStart>() as RaceStart;
 
@@ -50,7 +50,7 @@ public class RaceData : MonoBehaviour
 			dinos[0].SetActive(true);
 			mCameraFollowScript.target = dinos[0].transform;
 //			lrPadScript.player = dinos[0];
-			rStartScript.player = dinos[0];
+//			rStartScript.player = dinos[0];
 			//jumpScript.player = dinos[0];
 			//fallScript.player = dinos[0];
 		}
@@ -60,7 +60,7 @@ public class RaceData : MonoBehaviour
 			mCameraFollowScript.target = dinos[1].transform;
 			mCameraFollowScript.distance = -(mCameraFollowScript.distance);
 //			lrPadScript.player = dinos[1];
-			rStartScript.player = dinos[1];
+//			rStartScript.player = dinos[1];
 			//jumpScript.player = dinos[1];
 			//fallScript.player = dinos[1];
 		}
@@ -69,7 +69,7 @@ public class RaceData : MonoBehaviour
 			dinos[2].SetActive(true);
 			mCameraFollowScript.target = dinos[2].transform;
 //			lrPadScript.player = dinos[2];
-			rStartScript.player = dinos[2];
+//			rStartScript.player = dinos[2];
 			//jumpScript.player = dinos[2];
 			//fallScript.player = dinos[2];
 

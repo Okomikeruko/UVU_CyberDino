@@ -20,11 +20,13 @@ public class MotionControl : MonoBehaviour {
 
 	private Vector3 moveDirection = Vector3.zero;	// The vector3 called to move this object
 
-	private Animator anim;
+	public Animator anim;
 
 	private float oldAccelleration;
 	private float oldTopSpeed;
+	[SerializeField]
 	private float TurboAccelleration;
+	[SerializeField]
 	private float TurboTopSpeed;
 
 	public float accelleration = 10.0F;				// Public Stat controlling this object's rate of acceleration
@@ -35,9 +37,14 @@ public class MotionControl : MonoBehaviour {
 	public float jump = 10.0F;						// Public controller being the initial velocity of the jump function
 
 	// Use this for initialization
-	void Start () {
+	void OnEnable () {
 		controller = GetComponent<CharacterController>(); 	// Get this object's character contoller component
-		anim = GetComponent<DinoSelect>().anim; 			// Get the selected dino's mechanim controller
+		anim = GetComponentInChildren<Animator>(); 			// Get the selected dino's mechanim controller
+
+//		foreach(Animator obj in transform)
+//		{
+//			anim = obj;
+//		}
 
 		oldTopSpeed = topSpeed;
 		oldAccelleration = accelleration;

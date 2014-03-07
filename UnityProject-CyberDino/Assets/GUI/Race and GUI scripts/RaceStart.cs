@@ -8,6 +8,7 @@ using System.Collections;
 public class RaceStart : MonoBehaviour {
 	
 	//the player
+	public GameObject[] players;
 	public GameObject player;
 	
 	//the motion scripts
@@ -24,13 +25,20 @@ public class RaceStart : MonoBehaviour {
 	{
 
 		//get the player dino and store in player
-		player = GameObject.FindGameObjectWithTag("Player");
+		players = GameObject.FindGameObjectsWithTag("Dino");
 
+		foreach (var unit in players){
+			if (unit.networkView.isMine){
+				player = unit;
+				break;
+			}
+		}
 		//get the MotionControllers from the player and the cpu
-		playerMotion = player.GetComponent<MotionControl>() as MotionControl;
+		playerMotion = player.GetComponent<MotionControl>();
 
 		//turn off the motion scripts for the player and the cpu
 		playerMotion.enabled = false;
+
 
 		//invoke the CountDown method
 		InvokeRepeating ("CountDown", 1.0f, 1.0f);
@@ -48,10 +56,10 @@ public class RaceStart : MonoBehaviour {
 		{
 			//get ride of the last child
 			childTex[index - 1].SetActive(false);
-		
+
 			//reenable the motion scripts
 			playerMotion.enabled = true;
-			
+
 			//stop the repeating
 			CancelInvoke("CountDown");
 		}

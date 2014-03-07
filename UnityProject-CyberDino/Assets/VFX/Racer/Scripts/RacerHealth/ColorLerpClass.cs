@@ -13,7 +13,7 @@ public class ColorLerpClass: MonoBehaviour {
 
 	public Renderer dinoRenderer;
 
-	void Start()
+	void OnEnable()
 	{
 		dinoRenderer = GetComponentInChildren<Renderer>();
 		dinoRenderer.material.color = colorStart;

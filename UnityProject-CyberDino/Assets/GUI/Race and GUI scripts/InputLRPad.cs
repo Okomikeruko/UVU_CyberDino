@@ -28,6 +28,7 @@ public class InputLRPad : MonoBehaviour
 	public Rect rightArrowPos;
 	
 	//variables to hold the player and the motion script
+	public GameObject[] players;
 	public GameObject player;
 	public MotionControl motionConScript;
 	
@@ -54,6 +55,16 @@ public class InputLRPad : MonoBehaviour
 		//call the resize function for both arrows
 		Resize(leftArrow, leftArrowPos);
 		Resize(rightArrow, rightArrowPos);
+
+		//get the player dino and store in player
+		players = GameObject.FindGameObjectsWithTag("Dino");
+		
+		foreach (var unit in players){
+			if (unit.networkView.isMine){
+				player = unit;
+				break;
+			}
+		}
 		
 		//assign the motion script to the variable
 		if(player.GetComponent<MotionControl>())

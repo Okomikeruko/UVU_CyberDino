@@ -58,15 +58,7 @@ public class ProjectileMissileLauncherClass : ProjectileClass {
 	//Parameters: Collider other
     //Returns: void
 	void OnTriggerEnter(Collider other){
-//		if(other.gameObject.tag == "Weapon"){
-//			Physics.IgnoreCollision(this.collider, other);
-//		}
-//		if(other.gameObject.tag == "Racer"){
-//			Debug.Log("Hit Racer");
-//			theRacer = other.gameObject.GetComponent<RacerHealthClass>();
-//			theRacer.Health -= DealDamage(theRacer.Armor);
-//			Destroy(gameObject);
-//		}
+
 
 		string theTag = other.gameObject.tag.ToString();
 

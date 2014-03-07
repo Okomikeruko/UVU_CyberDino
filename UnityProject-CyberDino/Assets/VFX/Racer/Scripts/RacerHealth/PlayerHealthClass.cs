@@ -8,18 +8,18 @@ using System.Collections;
 public class PlayerHealthClass : RacerHealthClass {
 
 	// Use this for initialization
-	void Start () {
+	void Awake () {
 		
 		RacerStart();
 		
 	}
 	
-	void Awake(){
-		//StaticWeaponVars.AddRacer();
-	}
+//	void Awake(){
+//		//StaticWeaponVars.AddRacer();
+//	}
 	
 	// Update is called once per frame
-	void Update () {
+	void FixedUpdate () {
 
 		RespawnManager();
 		RespawnNodeDistance();

@@ -14,6 +14,8 @@ public class RespawnNodeClass : MonoBehaviour {
 	private bool isStartNode = false;
 	[SerializeField]
 	private bool isEndNode = false;
+	[SerializeField]
+	private bool isEdgeNode = false;
 	private int nodeNumber;
 	private int nextNodeNumber;
 	private int previousNodeNumber;
@@ -75,6 +77,17 @@ public class RespawnNodeClass : MonoBehaviour {
 			isEndNode = value;
 		}
 	}
+	public bool IsEdgeNode
+	{
+		get
+		{
+			return isEdgeNode;
+		}
+		set
+		{
+			isEdgeNode = value;
+		}
+	}
 	public int NodeNumber
 	{
 		get
@@ -111,9 +124,10 @@ public class RespawnNodeClass : MonoBehaviour {
 	#endregion Properties
 
 
-	void Start()
+	void OnEnable()
 	{
-		InfluenceSphere = transform.localScale.x;
+		InfluenceSphere = transform.localScale.x/2;
+
 		//string name = gameObject.name;
 		string num = gameObject.name.Substring(13,3);
 
@@ -129,23 +143,27 @@ public class RespawnNodeClass : MonoBehaviour {
 
 		if(IsEndNode == false && IsStartNode == false)
 		{
-
 			PreviousNode = GameObject.Find(prev);
 			NextNode = GameObject.Find(next);
-
+			if(IsEdgeNode == false)
+			{
+				transform.LookAt(NextNode.transform);
+			}
 		}
 		else if(IsStartNode == true)
 		{
 			PreviousNode = gameObject;
 			NextNode = GameObject.Find(next);
+			transform.LookAt(NextNode.transform);
 		}
 		else
 		{
 			PreviousNode = GameObject.Find(prev);
 			NextNode = gameObject;
+			transform.LookAt(2 * transform.position - PreviousNode.transform.position);
 		}
 
-		transform.localScale = new Vector3(InfluenceSphere, InfluenceSphere, InfluenceSphere);
+		//transform.localScale = new Vector3(InfluenceSphere, InfluenceSphere, InfluenceSphere);
 
 	}
 

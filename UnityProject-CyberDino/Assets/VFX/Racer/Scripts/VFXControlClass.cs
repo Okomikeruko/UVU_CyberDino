@@ -66,7 +66,7 @@ public class VFXControlClass : MonoBehaviour {
 
 
 	// Use this for initialization
-	void Start () {
+	void OnEnable () {
 		InitialBurstVFX.Stop();
 		BoostVFX.Stop();
 	}

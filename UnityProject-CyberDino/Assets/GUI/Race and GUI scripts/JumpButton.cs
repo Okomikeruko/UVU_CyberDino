@@ -6,10 +6,11 @@ public class JumpButton : MonoBehaviour
 
 	public Rect buttonPos;
 
+	public GameObject[] players;
 	public GameObject player;
 	private DinoSelect dinoSelectScript;
 
-	private Animator anim;
+	//private Animator anim;
 
 	public GameObject dMove;
 	public DinoMoveScript dMoveScript;
@@ -18,8 +19,16 @@ public class JumpButton : MonoBehaviour
 	void Start () 
 	{
 		//MoveScript = player.GetComponent<DinoMoveScript>() as DinoMoveScript;
+		players = GameObject.FindGameObjectsWithTag("Dino");
 
-		anim = player.GetComponent<DinoSelect>().anim; 
+		foreach (var unit in players){
+			if(unit.networkView.isMine){
+				player = unit;
+				break;
+			}
+		}
+
+		//anim = player.GetComponentInChildren<Animator>(); 
 
 		transform.position = Vector3.zero;
 		transform.localScale = Vector3.zero;

@@ -189,7 +189,7 @@ public class RacerHealthClass : MonoBehaviour {
 		}
 	}
 
-	private Transform RespawnCheckpoint
+	public Transform RespawnCheckpoint
 	{
 		get
 		{
@@ -383,11 +383,11 @@ public class RacerHealthClass : MonoBehaviour {
 	{
 		//Set health equal to totalHealth at the begining of the race
 		Health = TotalHealth;
-
+		RespawnCheckpoint = GameObject.Find("RespawnPoint_001").transform;
 		RespawnNode = RespawnCheckpoint.gameObject.GetComponent<RespawnNodeClass>();
 		CurrentNode = RespawnCheckpoint.gameObject;
-		PreviousNode = RespawnCheckpoint.gameObject;
-		NextNode = RespawnCheckpoint.gameObject;
+		PreviousNode = RespawnNode.PreviousNode;//RespawnCheckpoint.gameObject;
+		NextNode = RespawnNode.PreviousNode;//RespawnCheckpoint.gameObject;
 	}
 
 	public void RespawnManager()
@@ -464,8 +464,8 @@ public class RacerHealthClass : MonoBehaviour {
 		RespawnEffect.Play();
 		yield return new WaitForSeconds(1);
 
-		racer.transform.position = RespawnCheckpoint.position;
-		racer.transform.rotation = RespawnCheckpoint.rotation;
+		racer.transform.position = PreviousNode.transform.position;
+		racer.transform.rotation = PreviousNode.transform.rotation;
 
 		if(Health <= 0)
 		{

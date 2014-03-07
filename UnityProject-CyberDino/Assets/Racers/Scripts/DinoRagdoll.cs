@@ -13,7 +13,7 @@ public class DinoRagdoll : MonoBehaviour {
 
 	private DinoSelect dinoSelection;
 
-	void Start()
+	void OnEnable()
 	{
 
 		dinoSelection = GetComponent<DinoSelect>();

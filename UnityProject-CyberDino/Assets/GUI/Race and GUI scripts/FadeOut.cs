@@ -17,7 +17,6 @@ public class FadeOut : MonoBehaviour
 	//a bool to see if it has faded
 	private bool isFaded = false;
 
-
 	// Use this for initialization
 	void Start () 
 	{
@@ -55,7 +54,7 @@ public class FadeOut : MonoBehaviour
 			//enable the main menu
 			//menuScript.enabled = true;
 
-			Application.LoadLevel("Menu");
+			Application.LoadLevel("PreMenu");
 		}
 	}
 	

@@ -15,8 +15,6 @@ public class UserControl : MonoBehaviour {
 	[SerializeField]
 	private DustEffectClass dust;
 
-	private bool firing = false;
-
 	#region Properties
 	private WeaponControlClass Weapons
 	{
@@ -97,7 +95,7 @@ public class UserControl : MonoBehaviour {
 	}
 	#endregion Properties
 
-	void Start()
+	void OnEnable()
 	{
 		move = this.GetComponent<MotionControl>();
 
@@ -110,13 +108,10 @@ public class UserControl : MonoBehaviour {
 		RacerHealth.Move = move;
 		Dust = GetComponentInChildren<DustEffectClass>();
 
-	}
-
-	void OnEnable()
-	{
 		FireButton.shoot += this.shoot;
 	}
-	void Disable()
+
+	void OnDisable()
 	{
 		FireButton.shoot -= this.shoot;
 	}
@@ -191,7 +186,7 @@ public class UserControl : MonoBehaviour {
 		else
 		{
 			weapons.Laser.Line.enabled = false;
-			firing = false;
+
 		}
 		
 	}
