@@ -323,7 +323,7 @@ public class MenuControl : MonoBehaviour
 			}
 
 			//if there is a swipe up
-			if(swipeCtrl.swipeDirection == TouchSwipeClass.Swipe.up)
+			if(swipeCtrl.swipeDirection == TouchSwipeClass.Swipe.up || Input.GetKeyDown(KeyCode.W))
 			{
 				//change the texture of the object depending on the tab selection
 				switch(tabSelection)
@@ -349,7 +349,7 @@ public class MenuControl : MonoBehaviour
 				}
 			}
 			//if you swipe down
-			else if(swipeCtrl.swipeDirection == TouchSwipeClass.Swipe.down)
+			else if(swipeCtrl.swipeDirection == TouchSwipeClass.Swipe.down || Input.GetKeyDown(KeyCode.S))
 			{
 				switch(tabSelection)
 				{
