@@ -110,6 +110,8 @@ public class MotionControl : MonoBehaviour {
 		controller.Move (moveDirection * Time.deltaTime); // Move character controller
 
 		// Control Dino Locomotion State
+		Debug.Log("  >>> velocity/topspeed " + velocity + "/" + topSpeed);
+		Debug.Log("  >>> RESULT: " + velocity/topSpeed);
 		anim.SetFloat("Speed", velocity/topSpeed);
 		anim.SetFloat("Direction", h);
 	}
