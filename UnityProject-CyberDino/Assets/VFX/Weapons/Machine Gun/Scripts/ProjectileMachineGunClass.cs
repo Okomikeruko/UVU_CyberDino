@@ -9,7 +9,7 @@ public class ProjectileMachineGunClass : ProjectileClass {
 	
 	//Class Variables	
 	private RacerHealthClass theRacer; // Used to access variables on a racer.
-	private GameObject spawnedHitParticle;
+	//private GameObject spawnedHitParticle;
 
 	void Start()
 	{
@@ -36,7 +36,7 @@ public class ProjectileMachineGunClass : ProjectileClass {
 		if(other.gameObject.tag == "Racer"){
 				theRacer = other.gameObject.GetComponent<RacerHealthClass>();
 				theRacer.Health -= DealDamage(theRacer.Armor);
-				spawnedHitParticle = Instantiate(HitParticle, this.transform.position, this.transform.rotation) as GameObject;
+				//spawnedHitParticle = Instantiate(HitParticle, this.transform.position, this.transform.rotation) as GameObject;
 	//			gameObject.transform.position = StartPosition.position;
 				gameObject.SetActive(false);
 		}

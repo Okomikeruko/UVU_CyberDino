@@ -9,7 +9,7 @@ public class OldProjectileMG : OldProjectileClass {
 
 	//Class Variables	
 	private RacerHealthClass theRacer; // Used to access variables on a racer.
-	private GameObject spawnedHitParticle;
+	//private GameObject spawnedHitParticle;
 	
 	// Update is called once per frame
 	void Update () {
@@ -38,12 +38,12 @@ public class OldProjectileMG : OldProjectileClass {
 			{
 				theRacer.Health -= DealDamage(theRacer.Armor);
 			}
-			spawnedHitParticle = Instantiate(HitParticle, this.transform.position, this.transform.rotation) as GameObject;
+			//spawnedHitParticle = Instantiate(HitParticle, this.transform.position, this.transform.rotation) as GameObject;
 			Destroy(gameObject);
 		}
 		else
 		{
-			spawnedHitParticle = Instantiate(HitParticle, this.transform.position, this.transform.rotation) as GameObject;
+			//spawnedHitParticle = Instantiate(HitParticle, this.transform.position, this.transform.rotation) as GameObject;
 			Destroy(gameObject);
 		}
 

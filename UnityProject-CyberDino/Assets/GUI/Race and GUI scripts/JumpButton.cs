@@ -9,7 +9,7 @@ public class JumpButton : MonoBehaviour
 	public GameObject player;
 	private DinoSelect dinoSelectScript;
 
-	private Animator anim;
+	//private Animator anim;
 
 	public GameObject dMove;
 	public DinoMoveScript dMoveScript;
@@ -19,7 +19,7 @@ public class JumpButton : MonoBehaviour
 	{
 		//MoveScript = player.GetComponent<DinoMoveScript>() as DinoMoveScript;
 
-		anim = player.GetComponent<DinoSelect>().anim; 
+		//anim = player.GetComponent<DinoSelect>().anim; 
 
 		transform.position = Vector3.zero;
 		transform.localScale = Vector3.zero;
