@@ -7,7 +7,7 @@ public class MotionControl : MonoBehaviour {
 
 	private CharacterController controller;			// This object's CharacterController reference
 
-	private float h; 								// The horizontal turning variable (between -1 and 1)
+	private float horizontalTurning; 				// range between -1 and 1
 	private float velocity = 0.0F;					// The speed at which this object is currently traveling
 	private float fallingSpeed = 0.0F;				// The speed at which this object is currently falling
 	private float gravity = 9.8F; 					// The rate that objects fall in meters/second 
@@ -22,16 +22,13 @@ public class MotionControl : MonoBehaviour {
 
 	private Animator anim;
 
-	private float oldAccelleration;
+	private float oldAcceleration;
 	private float oldTopSpeed;
-	[SerializeField]
-	private float TurboAccelleration;
-	[SerializeField]
+	private float TurboAcceleration;
 	private float TurboTopSpeed;
 
-	public float accelleration = 10.0F;				// Public Stat controlling this object's rate of acceleration
+	public float acceleration = 10.0F;				// Public Stat controlling this object's rate of acceleration
 	public float topSpeed = 10.0F;					// Public Stat controlling this object's top speed
-
 
 	public float handling = 1.0F;					// Public Stat controlling this object's turning radius
 	public float jump = 10.0F;						// Public controller being the initial velocity of the jump function
@@ -42,9 +39,9 @@ public class MotionControl : MonoBehaviour {
 		anim = GetComponent<DinoSelect>().anim; 			// Get the selected dino's mechanim controller
 
 		oldTopSpeed = topSpeed;
-		oldAccelleration = accelleration;
+		oldAcceleration = acceleration;
 		TurboTopSpeed = topSpeed * 1.5F;
-		TurboAccelleration = accelleration * 2.0F;
+		TurboAcceleration = acceleration * 2.0F;
 	}
 	
 	// Update is called once per frame
@@ -57,7 +54,7 @@ public class MotionControl : MonoBehaviour {
 			traction = handling * (1 - velocity/topSpeed); 				// Set traction based on speed
 			if (velocity / topSpeed > 0.8f) 
 			{
-				drift -= (handling * h); 
+				drift -= (handling * horizontalTurning); 
 				drift = (Mathf.Abs (drift) > 0.1F) ? drift + (drift * traction * 10) : 0 ; 	// Modify drift based on traction
 			} 
 			else
@@ -74,7 +71,7 @@ public class MotionControl : MonoBehaviour {
 			anim.SetBool ("Jump", false);
 			if(velocity < topSpeed && isRunning) // Test if this object is traveling at top speed
 			{
-				velocity += accelleration * Time.deltaTime; // Accelerate this object
+				velocity += acceleration * Time.deltaTime; // Accelerate this object
 			}
 
 			// The Jump Function
@@ -85,7 +82,7 @@ public class MotionControl : MonoBehaviour {
 			}
 
 			// Apply rotation
-			transform.Rotate(new Vector3(0, handling * h, 0)); // Rotate character controller
+			transform.Rotate(new Vector3(0, handling * horizontalTurning, 0)); // Rotate character controller
 		}
 		else
 		{
@@ -111,7 +108,7 @@ public class MotionControl : MonoBehaviour {
 
 		// Control Dino Locomotion State
 		anim.SetFloat("Speed", velocity/topSpeed);
-		anim.SetFloat("Direction", h);
+		anim.SetFloat("Direction", horizontalTurning);
 	}
 
 	// Call this function whenever the collider is hit
@@ -149,12 +146,12 @@ public class MotionControl : MonoBehaviour {
 
 	public void SetTurn(float turnControl)
 	{
-		h = (Mathf.Abs(turnControl) > 1) ?  Mathf.Sign(turnControl) : turnControl; // Set h to a value between -1.0 and 1.0
+		horizontalTurning = (Mathf.Abs(turnControl) > 1) ?  Mathf.Sign(turnControl) : turnControl; // Set h to a value between -1.0 and 1.0
 	}
 
 	public float GetTurn()
 	{
-		return h;
+		return horizontalTurning;
 	}
 
 	public float GetVelocity()
@@ -173,12 +170,33 @@ public class MotionControl : MonoBehaviour {
 		if (t) 
 		{
 			topSpeed = TurboTopSpeed;
-			accelleration = TurboAccelleration;
+			acceleration = TurboAcceleration;
 		} 
 		else 
 		{
 			topSpeed = oldTopSpeed;
-			accelleration = oldAccelleration;
+			acceleration = oldAcceleration;
 		}
+	}
+	
+	// Interface to all public variables
+	public float GetAcceleration()
+	{
+		return acceleration;
+	}
+	
+	public float GetTopSpeed()
+	{
+		return topSpeed;
+	}
+	
+	public float GetHandling()
+	{
+		return handling;
+	}
+	
+	public float GetJump()
+	{
+		return jump;
 	}
 }

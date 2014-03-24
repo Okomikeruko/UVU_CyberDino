@@ -138,7 +138,7 @@ public class UserControl : MonoBehaviour {
 //		}
 
 		// Added by Sam
-		Dust.RunDust(move.accelleration);
+		Dust.RunDust(move.GetAcceleration());
 		
 		if(Input.GetKeyUp(KeyCode.F))
 		{
