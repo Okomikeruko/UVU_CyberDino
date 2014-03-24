@@ -1,71 +1,154 @@
 ﻿// Name: Robert Reed
 // Project: Cyber-Dino Racing
-// Date: 12/15/2013
+// Date: 03/24/2014
 using UnityEngine;
 using System.Collections;
 
 public class TrainHeadClass : MonoBehaviour 
 {
+	//An array with the position of the wayPoints
 	public Transform[] wayPoints;
 
+	//the index for the array
 	private int index = 0;
 
-	public Transform startPoint;
-	
-	public Transform endPoint;
-	
+	//the point to start lerping from
+	public Vector3 startPoint;
+
+	//the point to end lerping
+	public Vector3 endPoint;
+
+	//the start rotation
+	private Quaternion startRotation;
+
+	//the speed of the head train
 	public float speed;
-	
+
+	//the corrected move variable
 	private float move;
+
+	//check to see if the script is ready to run
+	private bool ableToStart = false;
+
+	//The distance between the start point and the end point
+	private float dist;
+
+	//two vector3 for getting the direction to turn to
+	private Vector3 heading;
+	private Vector3 direction;
+
 	
 	// Use this for initialization
 	void Start () 
 	{
-		index = 1;
+		//check to see if any of the waypoints are null
+		for(int i = 0; i < wayPoints.Length; i++)
+		{
+			//if there's a waypoint to go to then it's able to start
+			if(wayPoints[i] != null)
+			{
+				ableToStart = true;
+			}
+			//else you can't start
+			else
+			{
+				ableToStart = false;
+				break;
+			}
+		}
 
-		startPoint = wayPoints[0];
+		//if the script can start
+		if(ableToStart == true)
+		{
+			//set the index to 0
+			index = 0;
 
-		endPoint = wayPoints[index];
+			//get the start position
+			startPoint = wayPoints[0].position;
+
+			//get the end position
+			endPoint = wayPoints[index].position;
+		}
+		else
+		{
+			Debug.Log("One of the elements in the wayPoint array is null!");
+		}
 	}
 	
 	// Update is called once per frame
-	void LateUpdate () 
+	void FixedUpdate () 
 	{
-		if(transform.position == endPoint.position)
+		//if the array of way points is full
+		if(ableToStart == true)
 		{
-			move = 0.0f;
-
-			if(index < wayPoints.Length)
+			//if the position is the same as the end position
+			if(transform.position == endPoint)
 			{
-				index++;
-		
-				//transform.position = startPoint.position;
+				//reset the move variable
+				move = 0.0f;
 
-				startPoint = wayPoints[index - 1];
+				//if it hasn't reached the last way point
+				if(index < wayPoints.Length - 1)
+				{
+					//increment the index
+					index++;
+	
+					//set the start point
+					startPoint = wayPoints[index - 1].position;
 
-				endPoint = wayPoints[index];
-			}
-			else
-			{
-				index = 0;
+					//set the end point
+					endPoint = wayPoints[index].position;
 
-				startPoint = wayPoints[wayPoints.Length - 1];
+					//set the starting rotation
+					startRotation = transform.rotation;
+
+					//get the distance of the start and end point
+					dist = Vector3.Distance(startPoint, endPoint);
+
+					//get the rotation point to turn to
+					heading = endPoint - startPoint;
+					direction = heading / heading.magnitude;
+				}
+				//if it is at the end of the array
+				else
+				{
+					//set the index to 0
+					index = 0;
+
+					//set the start point to the end of the array
+					startPoint = wayPoints[wayPoints.Length - 1].position;
 				
-				endPoint = wayPoints[index];
-			}
+					//set the end point to the start of the arraay
+					endPoint = wayPoints[index].position;
+
+					//set the starting rotation
+					startRotation = transform.rotation;
+
+					//get the distance between the start point and the end point
+					dist = Vector3.Distance(startPoint, endPoint);
+
+					//get the rotation point to turn to
+					heading = endPoint - startPoint;
+					direction = heading / heading.magnitude;
+				}
 			
-		}
+			}
 
-		float dist = Vector3.Distance(startPoint.position, endPoint.position);
+			//get the lerp move position
+			move += (speed / dist) * Time.deltaTime;
 
-		move += (speed / dist) * Time.deltaTime;
-		//move += speed * Time.deltaTime;
+			//set the position to the lerp
+			transform.position = Vector3.Lerp(startPoint, endPoint, move);
 
-		transform.position = Vector3.Lerp(startPoint.position, endPoint.position, move);
+			//Quaternion turnTo = Quaternion.LookRotation(direction, new Vector3(0, 1, 0));
 		
-		transform.LookAt(endPoint);
+			if(transform.rotation != Quaternion.Euler(direction))
+			{
+				//set the rotation to the lerp
+				transform.rotation = Quaternion.Lerp (startRotation, Quaternion.LookRotation(direction, new Vector3(0, 1, 0)), move * 25);
+			}
 
-		//Debug.Log(speed / dist);
+		}
 	}
 }
 
