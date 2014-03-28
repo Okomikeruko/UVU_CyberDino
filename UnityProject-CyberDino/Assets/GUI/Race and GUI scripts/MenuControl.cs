@@ -223,7 +223,6 @@ public class MenuControl : MonoBehaviour
 				
 				dinoSelected = (GameObject)Instantiate(dinoModels[dinoIndex], new Vector3(Screen.width, Screen.height, 0), Quaternion.identity);
 				dinoSelected.transform.localScale = new Vector3(10, 10, 10);
-				dinoSelected.transform.RotateAround(new Vector3(0, 180, 0), Vector3.up, 10 * Time.deltaTime);
 				
 			}
 			//multiplayer button
@@ -422,15 +421,7 @@ public class MenuControl : MonoBehaviour
 					}
 					
 					dinoSelected = (GameObject)Instantiate(dinoModels[dinoIndex], new Vector3(Screen.width, Screen.height, 0), Quaternion.identity);
-					
-					if(dinoModels[dinoIndex].name == "TRex")
-					{
-						dinoSelected.transform.localScale = new Vector3(tRexModelSize, tRexModelSize, tRexModelSize);
-					}
-					else
-					{
-						dinoSelected.transform.localScale = new Vector3(dinoModelSize, dinoModelSize, dinoModelSize);
-					}
+					dinoSelected.transform.Rotate(new Vector3(0, 180, 0));
 				}
 				
 				//right arrow for dino select
@@ -452,14 +443,6 @@ public class MenuControl : MonoBehaviour
 					
 					dinoSelected = (GameObject)Instantiate(dinoModels[dinoIndex], new Vector3(Screen.width, Screen.height, 0), Quaternion.identity);
 					
-					if(dinoModels[dinoIndex].name == "TRex")
-					{
-						dinoSelected.transform.localScale = new Vector3(tRexModelSize, tRexModelSize, tRexModelSize);
-					}
-					else
-					{
-						dinoSelected.transform.localScale = new Vector3(dinoModelSize, dinoModelSize, dinoModelSize);
-					}
 				}
 				
 				//right button for level select
