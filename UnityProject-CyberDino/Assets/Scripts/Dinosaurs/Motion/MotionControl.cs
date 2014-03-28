@@ -21,6 +21,7 @@ public class MotionControl : MonoBehaviour {
 	private Vector3 moveDirection = Vector3.zero;	// The vector3 called to move this object
 
 	public Animator anim;
+	private NetworkAnimations netanim;
 
 	private float oldAccelleration;
 	private float oldTopSpeed;
@@ -40,6 +41,7 @@ public class MotionControl : MonoBehaviour {
 	void OnEnable () {
 		controller = GetComponent<CharacterController>(); 	// Get this object's character contoller component
 		anim = GetComponentInChildren<Animator>(); 			// Get the selected dino's mechanim controller
+		netanim = GetComponentInChildren<NetworkAnimations>();
 
 //		foreach(Animator obj in transform)
 //		{
@@ -76,7 +78,8 @@ public class MotionControl : MonoBehaviour {
 			}
 
 			fallingSpeed = 0.0f; // Stop this object from falling
-			anim.SetBool ("Jump", false);
+			//anim.SetBool ("Jump", false);
+			netanim.AnimSetJump("Jump", false);
 			if(velocity < topSpeed && isRunning) // Test if this object is traveling at top speed
 			{
 				velocity += accelleration * Time.deltaTime; // Accelerate this object
@@ -86,7 +89,8 @@ public class MotionControl : MonoBehaviour {
 			if (Input.GetButton ("Jump") && anim.GetBool("Jump") == false ) // Test if Jump is pressed while on the ground
 			{
 				fallingSpeed = jump * velocity/topSpeed; // Apply jump accelleration to this object.
-				anim.SetBool ("Jump", true);
+				//anim.SetBool ("Jump", true);
+				netanim.AnimSetJump("Jump", true);
 			}
 
 			// Apply rotation
@@ -115,8 +119,10 @@ public class MotionControl : MonoBehaviour {
 		controller.Move (moveDirection * Time.deltaTime); // Move character controller
 
 		// Control Dino Locomotion State
-		anim.SetFloat("Speed", velocity/topSpeed);
-		anim.SetFloat("Direction", h);
+		//anim.SetFloat("Speed", velocity/topSpeed);
+		netanim.AnimSetSpeed("Speed", velocity, topSpeed);
+		//anim.SetFloat("Direction", h);
+		netanim.AnimSetDirection("Direction", h);
 	}
 
 	// Call this function whenever the collider is hit

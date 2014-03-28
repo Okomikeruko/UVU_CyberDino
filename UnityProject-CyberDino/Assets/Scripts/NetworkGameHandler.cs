@@ -36,6 +36,7 @@ public class NetworkGameHandler : MonoBehaviour {
 	public string masterServerGameType = "CyberDinoRacingv0.1";
 	public string mainMenuScene = "Menu";
 	public string gameMap = "CityTrack";
+	private string goToLevel = "goToLevel";
 
 	private bool onConnectionDataSent = false;
     private bool isGameRandom = false;
@@ -227,5 +228,16 @@ public class NetworkGameHandler : MonoBehaviour {
 			Network.RemoveRPCs(Network.player, 1);
 			netView.RPC ("LoadLevel", RPCMode.AllBuffered, gameMap, lastLevelPrefix+1);
 		}				
+	}
+
+	public void ChangeMenuSelect() {
+		netView.RPC ("MenuSelect", RPCMode.AllBuffered, goToLevel);
+	}
+
+	[RPC]
+	void MenuSelect(string goToLevel) {
+		GameObject menuControlObject = GameObject.FindGameObjectWithTag("Menu");
+		MenuControl menuControl = menuControlObject.GetComponent("MenuControl") as MenuControl;
+		menuControl.GoToLevel();
 	}
 }

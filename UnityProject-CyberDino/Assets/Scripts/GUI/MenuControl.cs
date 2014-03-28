@@ -613,7 +613,8 @@ public class MenuControl : MonoBehaviour
 				if (Network.isServer){
 					if(GUI.Button(new Rect(menuOrigin[5].x + singlePMenuRect[4].x, menuOrigin[5].y + singlePMenuRect[4].y, singlePMenuRect[4].width, singlePMenuRect[4].height), sPlayerMenuTexture[0]))
 					{
-						menuSelect = Menu.goToLevel;
+						//menuSelect = Menu.goToLevel;
+						networkHandler.ChangeMenuSelect();
 						networkHandler.ChangeLevel();
 					}
 				}
@@ -996,6 +997,10 @@ public class MenuControl : MonoBehaviour
 		}
 	
 		swipeCtrl.swipeDirection = TouchSwipeClass.Swipe.none;
+	}
+
+	public void GoToLevel() {
+		menuSelect = Menu.goToLevel;
 	}
 }
 
