@@ -70,7 +70,7 @@ public class MotionControl : MonoBehaviour {
 
 			fallingSpeed = 0.0f; // Stop this object from falling
 			anim.SetBool ("Jump", false);
-			if(velocity < topSpeed && isRunning) // Test if this object is traveling at top speed
+			if (velocity < topSpeed && isRunning) // Test if this object is traveling at top speed
 			{
 				velocity += acceleration * Time.deltaTime; // Accelerate this object
 			}
@@ -211,10 +211,10 @@ public class MotionControl : MonoBehaviour {
 	// Temporary - for testing
 	void OnGUI() 
 	{		
-		GUI.Label(new Rect(0, 0, 100, 20), "IsFalling: " + isFalling.ToString());		
-		GUI.Label(new Rect(0, 20, 100, 20), "Velocity: " + velocity.ToString());
-		GUI.Label(new Rect(0, 40, 100, 20), "Acceleration: " + acceleration.ToString());		
-		GUI.Label(new Rect(0, 60, 100, 20), "Slope: " + slope.ToString());				
+		GUI.Label(new Rect(2, 0, 100, 20), "IsFalling: " + isFalling.ToString());		
+		GUI.Label(new Rect(2, 20, 100, 20), "Velocity: " + velocity.ToString());
+		GUI.Label(new Rect(2, 40, 100, 20), "Acceleration: " + acceleration.ToString());		
+		GUI.Label(new Rect(2, 60, 100, 20), "Slope: " + slope.ToString());				
 				
 	}
 }
