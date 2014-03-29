@@ -3,7 +3,7 @@ using System.Collections;
 
 public class MotionControl : MonoBehaviour {
 
-	private bool isRunning = true;					// Accellerates while true. stops running while false.
+	private bool isRunning = true;					// accelerates while true. stops running while false.
 	private bool isFalling = false;					// Tracks the grounded state vs. jumping state
 
 	//private CharacterController controller;			// This object's CharacterController reference
@@ -48,7 +48,7 @@ public class MotionControl : MonoBehaviour {
 	// Update is called once per frame
 	void FixedUpdate () 
 	{
-		// Apply accelleration and drift or fall depending on grounded state
+		// Apply acceleration and drift or fall depending on grounded state
 		if (!isFalling)
 		{
 			// Update traction, drift, and driftRad every frame.
@@ -78,7 +78,7 @@ public class MotionControl : MonoBehaviour {
 			// The Jump Function
 			if (Input.GetButton ("Jump") && anim.GetBool("Jump") == false ) // Test if Jump is pressed while on the ground
 			{
-				fallingSpeed = jump * velocity/topSpeed; // Apply jump accelleration to this object.
+				fallingSpeed = jump * velocity/topSpeed; // Apply jump acceleration to this object.
 				anim.SetBool ("Jump", true);
 				isFalling = true;
 			}
@@ -107,7 +107,7 @@ public class MotionControl : MonoBehaviour {
 
 		// Apply movement
 		////controller.Move (moveDirection * Time.deltaTime); // Move character controller  //JNU!!! removed
-		rigidbody.AddForce(moveDirection * Time.deltaTime); // JNU!!! added
+		rigidbody.AddForce(moveDirection * velocity * Time.deltaTime); // JNU!!! added
 
 		// Control Dino Locomotion State
 		anim.SetFloat("Speed", velocity/topSpeed);
@@ -206,5 +206,14 @@ public class MotionControl : MonoBehaviour {
 	public float GetJump()
 	{
 		return jump;
+	}	
+	
+	
+	// temporary
+	void OnGUI() 
+	{		
+		GUI.Label (new Rect(0, 0, 100, 20), isFalling.ToString());		
+		GUI.Label (new Rect(0, 20, 100, 20), velocity.ToString());		
+		GUI.Label (new Rect(0, 40, 100, 20), slope.ToString());		
 	}
 }
