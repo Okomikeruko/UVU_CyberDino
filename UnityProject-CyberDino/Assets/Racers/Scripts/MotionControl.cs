@@ -10,7 +10,7 @@ public class MotionControl : MonoBehaviour {
 	private float horizontalTurning; 				// range between -1 and 1
 	private float velocity = 0.0F;					// The speed at which this object is currently traveling
 	private float fallingSpeed = 0.0F;				// The speed at which this object is currently falling
-	private float gravity = 9.8F; 					// The rate that objects fall in meters/second 
+	private float gravity = 98.0F; 					// The rate that objects fall in meters/second 
 	private float drag = 2.0F;						// The rate which an object slows without breaking or accelerating
 	private float slope = 0.0f;						// The angle of the ground beneath this object
 	private float drift = 0.0F;						// The angle of drift in degrees
