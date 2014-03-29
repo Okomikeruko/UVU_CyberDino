@@ -4,10 +4,11 @@ using System.Collections;
 public class MotionControl : MonoBehaviour {
 
 	private bool isRunning = true;					// Accellerates while true. stops running while false.
+	private bool isFalling = false;					// Tracks the grounded state vs. jumping state
 
-	private CharacterController controller;			// This object's CharacterController reference
+	//private CharacterController controller;			// This object's CharacterController reference
 
-	private float horizontalTurning; 				// range between -1 and 1
+	private float horizontalTurning; 				// A range between -1 and 1
 	private float velocity = 0.0F;					// The speed at which this object is currently traveling
 	private float fallingSpeed = 0.0F;				// The speed at which this object is currently falling
 	private float gravity = 9.8F; 					// The rate that objects fall in meters/second 
@@ -35,7 +36,7 @@ public class MotionControl : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		controller = GetComponent<CharacterController>(); 	// Get this object's character contoller component
+		//controller = GetComponent<CharacterController>(); 	// Get this object's character contoller component
 		anim = GetComponent<DinoSelect>().anim; 			// Get the selected dino's mechanim controller
 
 		oldTopSpeed = topSpeed;
@@ -48,7 +49,7 @@ public class MotionControl : MonoBehaviour {
 	void FixedUpdate () 
 	{
 		// Apply accelleration and drift or fall depending on grounded state
-		if(controller.isGrounded) //Test if charactercontroller is coliding with something below it.
+		if (!isFalling)
 		{
 			// Update traction, drift, and driftRad every frame.
 			traction = handling * (1 - velocity/topSpeed); 				// Set traction based on speed
@@ -79,6 +80,7 @@ public class MotionControl : MonoBehaviour {
 			{
 				fallingSpeed = jump * velocity/topSpeed; // Apply jump accelleration to this object.
 				anim.SetBool ("Jump", true);
+				isFalling = true;
 			}
 
 			// Apply rotation
@@ -104,11 +106,17 @@ public class MotionControl : MonoBehaviour {
 		moveDirection = transform.TransformDirection(moveDirection);// Convert local vectors to world vectors
 
 		// Apply movement
-		controller.Move (moveDirection * Time.deltaTime); // Move character controller
+		////controller.Move (moveDirection * Time.deltaTime); // Move character controller  //JNU!!! removed
+		rigidbody.AddForce(moveDirection * Time.deltaTime); // JNU!!! added
 
 		// Control Dino Locomotion State
 		anim.SetFloat("Speed", velocity/topSpeed);
 		anim.SetFloat("Direction", horizontalTurning);
+	}
+	
+	void OnCollisionStay(Collision collisionInfo) 
+	{
+		isFalling = false;
 	}
 
 	// Call this function whenever the collider is hit
