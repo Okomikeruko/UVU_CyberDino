@@ -29,7 +29,7 @@ public class MotionControl : MonoBehaviour {
 	private float TurboTopSpeed;
 
 	public float acceleration = 10.0F;				// Public Stat controlling this object's rate of acceleration
-	public float topSpeed = 10.0F;					// Public Stat controlling this object's top speed
+	public float topSpeed = 80.0F;					// Public Stat controlling this object's top speed
 
 	public float handling = 1.0F;					// Public Stat controlling this object's turning radius
 	public float jump = 10.0F;						// Public controller being the initial velocity of the jump function
