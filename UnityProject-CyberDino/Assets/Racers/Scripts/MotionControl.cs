@@ -93,6 +93,12 @@ public class MotionControl : MonoBehaviour {
 			}
 		}
 
+		if (Input.GetButtonUp ("Jump") && fallingSpeed > 0)
+		{
+			fallingSpeed = 0;
+		}
+
+
 		// Update velocity
 		velocity -= (drag + slope) * Mathf.Sign (velocity) * Time.deltaTime; // Reduce velocity by drag and slope
 
