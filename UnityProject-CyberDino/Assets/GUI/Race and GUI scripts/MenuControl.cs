@@ -192,6 +192,23 @@ public class MenuControl : MonoBehaviour
 
 	}
 
+	void Update()
+	{
+		if(menuSelect == Menu.lobbyMenu)
+		{
+			//left arrow for dino select
+			if(Input.GetKeyDown(KeyCode.LeftArrow))
+			{
+				DinoSelectionDecrement();
+			}
+		
+			//right arrow for dino select
+			if(Input.GetKeyDown(KeyCode.RightArrow))
+			{
+				DinoSelectionIncrement();
+			}
+		}
+	}
 	
 	void OnGUI()
 	{
@@ -260,6 +277,9 @@ public class MenuControl : MonoBehaviour
 				{
 					inLobby = true;
 					networkHandler.HostGame(serverName, playerName);
+
+					dinoSelected = (GameObject)Instantiate(dinoModels[dinoIndex], new Vector3(Screen.width, Screen.height, 0), Quaternion.identity);
+					dinoSelected.transform.localScale = new Vector3(10, 10, 10);
 
 					isMovingLeft = true;
 					
@@ -406,48 +426,18 @@ public class MenuControl : MonoBehaviour
 				//left arrow for dino select
 				if(GUI.Button(new Rect(menuOrigin[2].x + lobbyMenuBtnRect[2].x, menuOrigin[2].y + lobbyMenuBtnRect[2].y, lobbyMenuBtnRect[2].width, lobbyMenuBtnRect[2].height), lobbyMenuBtnTxtr[0]))
 				{
-					if(dinoIndex <= 0)
-					{
-						dinoIndex = dinoModels.Length - 1;
-					}
-					else
-					{
-						dinoIndex--;
-					}
-					
-					if(dinoSelected != null)
-					{
-						Destroy(dinoSelected);
-					}
-					
-					dinoSelected = (GameObject)Instantiate(dinoModels[dinoIndex], new Vector3(Screen.width, Screen.height, 0), Quaternion.identity);
-					dinoSelected.transform.Rotate(new Vector3(0, 180, 0));
+					DinoSelectionDecrement();
 				}
 				
 				//right arrow for dino select
 				if(GUI.Button(new Rect(menuOrigin[2].x + lobbyMenuBtnRect[3].x, menuOrigin[2].y + lobbyMenuBtnRect[3].y, lobbyMenuBtnRect[3].width, lobbyMenuBtnRect[3].height), lobbyMenuBtnTxtr[1]))
 				{
-					if(dinoIndex >= dinoModels.Length - 1)
-					{
-						dinoIndex = 0;
-					}
-					else
-					{
-						dinoIndex++;
-					}
-					
-					if(dinoSelected != null)
-					{
-						Destroy(dinoSelected);
-					}
-					
-					dinoSelected = (GameObject)Instantiate(dinoModels[dinoIndex], new Vector3(Screen.width, Screen.height, 0), Quaternion.identity);
-					
+					DinoSelectionIncrement();
 				}
 				
 				//right button for level select
 				
-				if(Input.GetKeyDown(KeyCode.RightArrow))
+			/*	if(Input.GetKeyDown(KeyCode.RightArrow))
 				{
 					if(dinoIndex >= levels.Length - 1)
 					{
@@ -469,7 +459,7 @@ public class MenuControl : MonoBehaviour
 					{
 						levelIndex--;
 					}
-				}
+				}*/
 				
 				
 
@@ -533,6 +523,9 @@ public class MenuControl : MonoBehaviour
 			if(isMovingLeft == false && isMovingRight == false){
 				if(networkHandler.GetConnectionStatus() == NetworkGameHandler.ConnectionState.InLobby) 
 				{
+					dinoSelected = (GameObject)Instantiate(dinoModels[dinoIndex], new Vector3(Screen.width, Screen.height, 0), Quaternion.identity);
+					dinoSelected.transform.localScale = new Vector3(10, 10, 10);
+
 					inLobby = true;
 					isMovingLeft = true;
 					
@@ -730,5 +723,46 @@ public class MenuControl : MonoBehaviour
 		
 		//enable the one with the right index
 		dinoModels[_index].SetActive(true);
+	}
+
+	void DinoSelectionDecrement()
+	{
+		if(dinoIndex <= 0)
+		{
+			dinoIndex = dinoModels.Length - 1;
+		}
+		else
+		{
+			dinoIndex--;
+		}
+		
+		if(dinoSelected != null)
+		{
+			Destroy(dinoSelected);
+		}
+		
+		dinoSelected = (GameObject)Instantiate(dinoModels[dinoIndex], new Vector3(Screen.width, Screen.height, 0), Quaternion.identity);
+		dinoSelected.transform.Rotate(new Vector3(0, 180, 0));
+	}
+
+	void DinoSelectionIncrement()
+	{
+		Debug.Log(dinoIndex);
+		if(dinoIndex >= dinoModels.Length - 1)
+		{
+			dinoIndex = 0;
+		}
+		else
+		{
+			dinoIndex++;
+		}
+		
+		if(dinoSelected != null)
+		{
+			Destroy(dinoSelected);
+		}
+		
+		dinoSelected = (GameObject)Instantiate(dinoModels[dinoIndex], new Vector3(Screen.width, Screen.height, 0), Quaternion.identity);
+		dinoSelected.transform.Rotate(new Vector3(0, 180, 0));
 	}
 }
