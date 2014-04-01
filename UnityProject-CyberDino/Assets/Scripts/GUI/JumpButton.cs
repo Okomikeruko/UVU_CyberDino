@@ -21,9 +21,9 @@ public class JumpButton : MonoBehaviour
 		//MoveScript = player.GetComponent<DinoMoveScript>() as DinoMoveScript;
 		players = GameObject.FindGameObjectsWithTag("Dino");
 
-<<<<<<< HEAD:UnityProject-CyberDino/Assets/GUI/Race and GUI scripts/JumpButton.cs
+
 		//anim = player.GetComponent<DinoSelect>().anim; 
-=======
+
 		foreach (var unit in players){
 			if(unit.networkView.isMine){
 				player = unit;
@@ -32,7 +32,7 @@ public class JumpButton : MonoBehaviour
 		}
 
 		//anim = player.GetComponentInChildren<Animator>(); 
->>>>>>> origin/File_Organization:UnityProject-CyberDino/Assets/Scripts/GUI/JumpButton.cs
+
 
 		transform.position = Vector3.zero;
 		transform.localScale = Vector3.zero;

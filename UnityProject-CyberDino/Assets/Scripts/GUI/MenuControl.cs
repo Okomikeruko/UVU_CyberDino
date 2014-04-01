@@ -99,28 +99,25 @@ public class MenuControl : MonoBehaviour
 	private GameObject dinoSelected;
 	
 	public float rotateSpeed;
-	
-	public float dinoModelSize;
-	public float tRexModelSize;
 
 	
 	// Use this for initialization
 	void Start () 
 	{
 		mainMenuBtnTxtr = new Texture[2];
-		mainMenuBtnTxtr[0] = (Texture)Resources.Load("menu graphics/SinglePlayerButton");
-		mainMenuBtnTxtr[1] = (Texture)Resources.Load("menu graphics/MultiPlayerButton");
+		mainMenuBtnTxtr[0] = (Texture)Resources.Load("GUI/Materials/SinglePlayerButton");
+		mainMenuBtnTxtr[1] = (Texture)Resources.Load("GUI/Materials/MultiPlayerButton");
 		
 		mPlayerMenuBtnTxtr = new Texture[2];
-		mPlayerMenuBtnTxtr[0] = (Texture)Resources.Load("menu graphics/HostGameButton");
-		mPlayerMenuBtnTxtr[1] = (Texture)Resources.Load("menu graphics/JoinGameButton");
+		mPlayerMenuBtnTxtr[0] = (Texture)Resources.Load("GUI/Materials/HostGameButton");
+		mPlayerMenuBtnTxtr[1] = (Texture)Resources.Load("GUI/Materials/JoinGameButton");
 		
 		lobbyMenuBtnTxtr = new Texture[3];
-		lobbyMenuBtnTxtr[0] = (Texture)Resources.Load("menu graphics/arrowLeft");
-		lobbyMenuBtnTxtr[1] = (Texture)Resources.Load("menu graphics/arrowRight");
-		lobbyMenuBtnTxtr[2] = (Texture)Resources.Load("menu graphics/PlayButton");
+		lobbyMenuBtnTxtr[0] = (Texture)Resources.Load("GUI/Materials/arrowLeft");
+		lobbyMenuBtnTxtr[1] = (Texture)Resources.Load("GUI/Materials/arrowRight");
+		lobbyMenuBtnTxtr[2] = (Texture)Resources.Load("GUI/Materials/PlayButton");
 		
-		backBtnTxtr = (Texture)Resources.Load("menu graphics/BackButton");
+		backBtnTxtr = (Texture)Resources.Load("GUI/Materials/BackButton");
 		
 		
 		//graphics ----------------------------------------

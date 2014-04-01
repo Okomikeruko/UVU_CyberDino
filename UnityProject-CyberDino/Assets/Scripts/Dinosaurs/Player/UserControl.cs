@@ -110,10 +110,10 @@ public class UserControl : MonoBehaviour {
 
 		FireButton.shoot += this.shoot;
 	}
-<<<<<<< HEAD:UnityProject-CyberDino/Assets/Racers/Scripts/UserControl.cs
-=======
+//<<<<<<< HEAD:UnityProject-CyberDino/Assets/Racers/Scripts/UserControl.cs
+//=======
 
->>>>>>> origin/File_Organization:UnityProject-CyberDino/Assets/Scripts/Dinosaurs/Player/UserControl.cs
+//>>>>>>> origin/File_Organization:UnityProject-CyberDino/Assets/Scripts/Dinosaurs/Player/UserControl.cs
 	void OnDisable()
 	{
 		FireButton.shoot -= this.shoot;

@@ -6,7 +6,7 @@ public class MotionControl : MonoBehaviour {
 	private bool isRunning = true;					// accelerates while true. stops running while false.
 	private bool isFalling = false;					// Tracks the grounded state vs. jumping state
 
-	//private CharacterController controller;			// This object's CharacterController reference
+	private CharacterController controller;			// This object's CharacterController reference
 
 	private float horizontalTurning; 				// A range between -1 and 1
 	private float velocity = 0.0F;					// The speed at which this object is currently traveling
@@ -28,13 +28,13 @@ public class MotionControl : MonoBehaviour {
 
 	private float oldAcceleration;
 	private float oldTopSpeed;
-<<<<<<< HEAD:UnityProject-CyberDino/Assets/Racers/Scripts/MotionControl.cs
+//<<<<<<< HEAD:UnityProject-CyberDino/Assets/Racers/Scripts/MotionControl.cs
 	private float TurboAcceleration;
-=======
+//=======
 	[SerializeField]
 	private float TurboAccelleration;
 	[SerializeField]
->>>>>>> origin/File_Organization:UnityProject-CyberDino/Assets/Scripts/Dinosaurs/Motion/MotionControl.cs
+//>>>>>>> origin/File_Organization:UnityProject-CyberDino/Assets/Scripts/Dinosaurs/Motion/MotionControl.cs
 	private float TurboTopSpeed;
 
 	public float acceleration = 10.0F;				// Public Stat controlling this object's rate of acceleration
@@ -46,11 +46,12 @@ public class MotionControl : MonoBehaviour {
 	private const float DEGREE_DIFF = 0.9f;
 
 	// Use this for initialization
-<<<<<<< HEAD:UnityProject-CyberDino/Assets/Racers/Scripts/MotionControl.cs
+//<<<<<<< HEAD:UnityProject-CyberDino/Assets/Racers/Scripts/MotionControl.cs
 	void Start () {
 		//controller = GetComponent<CharacterController>(); 	// Get this object's character contoller component
 		anim = GetComponent<DinoSelect>().anim; 			// Get the selected dino's mechanim controller
-=======
+		}
+//=======
 	void OnEnable () {
 		controller = GetComponent<CharacterController>(); 	// Get this object's character contoller component
 		anim = GetComponentInChildren<Animator>(); 			// Get the selected dino's mechanim controller
@@ -59,7 +60,7 @@ public class MotionControl : MonoBehaviour {
 //		{
 //			anim = obj;
 //		}
->>>>>>> origin/File_Organization:UnityProject-CyberDino/Assets/Scripts/Dinosaurs/Motion/MotionControl.cs
+//>>>>>>> origin/File_Organization:UnityProject-CyberDino/Assets/Scripts/Dinosaurs/Motion/MotionControl.cs
 
 		oldTopSpeed = topSpeed;
 		oldAcceleration = acceleration;

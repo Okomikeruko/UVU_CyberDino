@@ -9,11 +9,11 @@ public class OldProjectileMG : OldProjectileClass {
 
 	//Class Variables	
 	private RacerHealthClass theRacer; // Used to access variables on a racer.
-<<<<<<< HEAD:UnityProject-CyberDino/Assets/VFX/Weapons/Machine Gun/Scripts/Old/OldProjectileMG.cs
+//<<<<<<< HEAD:UnityProject-CyberDino/Assets/VFX/Weapons/Machine Gun/Scripts/Old/OldProjectileMG.cs
 	//private GameObject spawnedHitParticle;
-=======
+//=======
 	private GameObject spawnedHitParticle;
->>>>>>> origin/File_Organization:UnityProject-CyberDino/Assets/Scripts/Weapons/Old/OldProjectileMG.cs
+//>>>>>>> origin/File_Organization:UnityProject-CyberDino/Assets/Scripts/Weapons/Old/OldProjectileMG.cs
 	
 	// Update is called once per frame
 	void Update () {
@@ -42,20 +42,20 @@ public class OldProjectileMG : OldProjectileClass {
 			{
 				theRacer.Health -= DealDamage(theRacer.Armor);
 			}
-<<<<<<< HEAD:UnityProject-CyberDino/Assets/VFX/Weapons/Machine Gun/Scripts/Old/OldProjectileMG.cs
+//<<<<<<< HEAD:UnityProject-CyberDino/Assets/VFX/Weapons/Machine Gun/Scripts/Old/OldProjectileMG.cs
 			//spawnedHitParticle = Instantiate(HitParticle, this.transform.position, this.transform.rotation) as GameObject;
-=======
+//=======
 			spawnedHitParticle = Instantiate(HitParticle, this.transform.position, this.transform.rotation) as GameObject;
->>>>>>> origin/File_Organization:UnityProject-CyberDino/Assets/Scripts/Weapons/Old/OldProjectileMG.cs
+//>>>>>>> origin/File_Organization:UnityProject-CyberDino/Assets/Scripts/Weapons/Old/OldProjectileMG.cs
 			Destroy(gameObject);
 		}
 		else
 		{
-<<<<<<< HEAD:UnityProject-CyberDino/Assets/VFX/Weapons/Machine Gun/Scripts/Old/OldProjectileMG.cs
+//<<<<<<< HEAD:UnityProject-CyberDino/Assets/VFX/Weapons/Machine Gun/Scripts/Old/OldProjectileMG.cs
 			//spawnedHitParticle = Instantiate(HitParticle, this.transform.position, this.transform.rotation) as GameObject;
-=======
+//=======
 			spawnedHitParticle = Instantiate(HitParticle, this.transform.position, this.transform.rotation) as GameObject;
->>>>>>> origin/File_Organization:UnityProject-CyberDino/Assets/Scripts/Weapons/Old/OldProjectileMG.cs
+//>>>>>>> origin/File_Organization:UnityProject-CyberDino/Assets/Scripts/Weapons/Old/OldProjectileMG.cs
 			Destroy(gameObject);
 		}
 
