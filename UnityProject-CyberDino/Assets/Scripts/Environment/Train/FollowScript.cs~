@@ -6,6 +6,7 @@ using System.Collections;
 
 public class FollowScript : MonoBehaviour 
 {
+	//what this object should follow
 	public Transform target;
 	
 	public int moveSpeed;
@@ -16,54 +17,60 @@ public class FollowScript : MonoBehaviour
 	
 	private Vector3 boundary;
 	
+	private Vector3 dir;
+
+	private bool readyScript = false;
+	
 	// Use this for initialization
 	void Start () 
 	{	
+		//set the distance that it should stop trying to follow
 		boundary = new Vector3(15, 5, 15);
+
+
+		//if the target isn't null
+		if(target != null)
+		{
+			readyScript = true;
+		}
+		else
+		{
+			Debug.Log(this.gameObject.name + " has no target!");
+		}
 	}
 	
 	// Update is called once per frame
 	void LateUpdate () 
 	{
-		//transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion., rotateSpeed * Time.deltaTime);
-		//transform.LookAt(target.position);
-		//transform.rotation = Quaternion.LookRotation(target.position - transform.position, Vector3.up);
-		//Vector3 newDir = Vector3.RotateTowards(transform.forward, target.position, rotateSpeed * Time.deltaTime, 0.0F);
-
-		//transform.rotation = Quaternion.LookRotation(newDir);
-
-		transform.LookAt(target.position);
-
-		distance = transform.position - target.position;
-		
-		//if(distance.x > boundary.x || distance.z > boundary.z || distance.x < -boundary.x || distance.z < -boundary.z)
-		if(distance.x > boundary.x || distance.x < -boundary.x)
+		//if the script is ready
+		if(readyScript == true)
 		{
-			transform.position = Vector3.MoveTowards(transform.position, target.position, moveSpeed*Time.deltaTime);
-		}
-
-		if(distance.z > boundary.z || distance.z < -boundary.z)
-		{
-			transform.position = Vector3.MoveTowards(transform.position, target.position, moveSpeed*Time.deltaTime);
-		}
+			//get the direction to look at
+			dir = target.position - transform.position;
+			//dir = dir / dir.magnitude;
 		
-		if(distance.y > boundary.y || distance.y < -boundary.y)
-		{
-			transform.position = Vector3.MoveTowards(transform.position, target.position, moveSpeed*Time.deltaTime);
-		}
-		
-		//Debug.Log("x " + distance.x);
-		//Debug.Log("z " + distance.z);
+			if(dir != new Vector3(0,0,0))
+			{
+				//move to look at the rotation
+				transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.LookRotation(dir, new Vector3(0, 1, 0)), rotateSpeed * Time.deltaTime);
+			}
 
+			//get the distance
+			distance = transform.position - target.position;
+		
+			//if this object is outside of the boundary then follow the target
+			if(distance.x > boundary.x || distance.x < -boundary.x)
+			{
+				transform.position = Vector3.MoveTowards(transform.position, target.position, moveSpeed*Time.deltaTime);
+			}
+			if(distance.z > boundary.z || distance.z < -boundary.z)
+			{
+				transform.position = Vector3.MoveTowards(transform.position, target.position, moveSpeed*Time.deltaTime);
+			}
+			if(distance.y > boundary.y || distance.y < -boundary.y)
+			{
+				transform.position = Vector3.MoveTowards(transform.position, target.position, moveSpeed*Time.deltaTime);
+			}
+		}
 	}
 }
-
-
-/* 
-//rotate to look at the player
-myTransform.rotation = Quaternion.Slerp(myTransform.rotation,
-Quaternion.LookRotation(target.position - myTransform.position), rotationSpeed*Time.deltaTime);
- 
-//move towards the player
-myTransform.position += myTransform.forward * moveSpeed * Time.deltaTime;
-*/
