@@ -495,7 +495,8 @@ public class MenuControl : MonoBehaviour
 				{
 					if(GUI.Button(new Rect(menuOrigin[2].x + lobbyMenuBtnRect[5].x, menuOrigin[2].y + lobbyMenuBtnRect[5].y, lobbyMenuBtnRect[5].width, lobbyMenuBtnRect[5].height), lobbyMenuBtnTxtr[2]))
 					{
-						menuSelect = Menu.goToLevel;
+						//menuSelect = Menu.goToLevel;
+						networkHandler.ChangeMenuSelect();
 						networkHandler.ChangeLevel();
 					}
 				}
@@ -765,4 +766,13 @@ public class MenuControl : MonoBehaviour
 		dinoSelected = (GameObject)Instantiate(dinoModels[dinoIndex], new Vector3(Screen.width, Screen.height, 0), Quaternion.identity);
 		dinoSelected.transform.Rotate(new Vector3(0, 180, 0));
 	}
+<<<<<<< HEAD
 }
+=======
+
+	public void GoToLevel() {
+		menuSelect = Menu.goToLevel;
+	}
+}
+
+>>>>>>> 34c9b1f5911d3ba5ce413cc4e27a31fb73ab3637

@@ -25,6 +25,7 @@ public class MotionControl : MonoBehaviour {
 	private Vector3 velocityDifference = Vector3.zero;
 
 	public Animator anim;
+	private NetworkAnimations netanim;
 
 	private float oldAcceleration;
 	private float oldTopSpeed;
@@ -44,6 +45,7 @@ public class MotionControl : MonoBehaviour {
 	// Use this for initialization
 	void OnEnable () {
 		anim = GetComponentInChildren<Animator>(); 			// Get the selected dino's mechanim controller
+		netanim = GetComponentInChildren<NetworkAnimations>();
 
 //		foreach(Animator obj in transform)
 //		{
@@ -79,8 +81,14 @@ public class MotionControl : MonoBehaviour {
 			}
 
 			fallingSpeed = 0.0f; // Stop this object from falling
+<<<<<<< HEAD
 			anim.SetBool ("Jump", false);
 			if (velocity < topSpeed && isRunning) // Test if this object is traveling at top speed
+=======
+			//anim.SetBool ("Jump", false);
+			netanim.AnimSetJump("Jump", false);
+			if(velocity < topSpeed && isRunning) // Test if this object is traveling at top speed
+>>>>>>> 34c9b1f5911d3ba5ce413cc4e27a31fb73ab3637
 			{
 				velocity += acceleration * Time.deltaTime; // Accelerate this object
 			}
@@ -88,9 +96,15 @@ public class MotionControl : MonoBehaviour {
 			// The Jump Function
 			if (Input.GetButton ("Jump") && anim.GetBool("Jump") == false ) // Test if Jump is pressed while on the ground
 			{
+<<<<<<< HEAD
 				fallingSpeed = jump * velocity/topSpeed; // Apply jump acceleration to this object.
 				anim.SetBool ("Jump", true);
 				isFalling = true;
+=======
+				fallingSpeed = jump * velocity/topSpeed; // Apply jump accelleration to this object.
+				//anim.SetBool ("Jump", true);
+				netanim.AnimSetJump("Jump", true);
+>>>>>>> 34c9b1f5911d3ba5ce413cc4e27a31fb73ab3637
 			}
 
 			// Apply rotation
@@ -131,6 +145,7 @@ public class MotionControl : MonoBehaviour {
 		rigidbody.AddForce(velocityDifference, ForceMode.VelocityChange);
 
 		// Control Dino Locomotion State
+<<<<<<< HEAD
 		anim.SetFloat("Speed", velocity/topSpeed);
 		anim.SetFloat("Direction", horizontalTurning);
 	}
@@ -145,6 +160,12 @@ public class MotionControl : MonoBehaviour {
 				collisionAngle = Vector3.Dot(contact.normal, Vector3.up);
 			}
 		}		
+=======
+		//anim.SetFloat("Speed", velocity/topSpeed);
+		netanim.AnimSetSpeed("Speed", velocity, topSpeed);
+		//anim.SetFloat("Direction", h);
+		netanim.AnimSetDirection("Direction", h);
+>>>>>>> 34c9b1f5911d3ba5ce413cc4e27a31fb73ab3637
 	}
 
 	// Call this function whenever the collider is hit
