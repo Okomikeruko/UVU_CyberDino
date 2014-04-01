@@ -11,15 +11,18 @@ public class MotionControl : MonoBehaviour {
 	private float horizontalTurning; 				// A range between -1 and 1
 	private float velocity = 0.0F;					// The speed at which this object is currently traveling
 	private float fallingSpeed = 0.0F;				// The speed at which this object is currently falling
-	private float gravity = 98.0F; 					// The rate that objects fall in meters/second 
+	private float gravity = 100.0F; 					// The rate that objects fall in meters/second 
 	private float drag = 2.0F;						// The rate which an object slows without breaking or accelerating
 	private float slope = 0.85f;					// The angle of the ground beneath this object
 	private float drift = 0.0F;						// The angle of drift in degrees
 	private float maxDrift = 70.0F; 				// The maximum angle of drift in degrees
 	private float driftRad = 0.0f;					// The angle of drift in radians
 	private float traction = 1.0f;					// The rate at which drift is reduced
+	private float collisionAngle = 0.0f;
 
 	private Vector3 moveDirection = Vector3.zero;	// The vector3 called to move this object
+	private Vector3 velocityCurrent = Vector3.zero;
+	private Vector3 velocityDifference = Vector3.zero;
 
 	private Animator anim;
 
@@ -33,6 +36,8 @@ public class MotionControl : MonoBehaviour {
 
 	public float handling = 1.0F;					// Public Stat controlling this object's turning radius
 	public float jump = 10.0F;						// Public controller being the initial velocity of the jump function
+	
+	private const float DEGREE_DIFF = 0.9f;
 
 	// Use this for initialization
 	void Start () {
@@ -49,7 +54,7 @@ public class MotionControl : MonoBehaviour {
 	void FixedUpdate () 
 	{
 		// Apply acceleration and drift or fall depending on grounded state
-		if (!isFalling)
+		if (!isFalling && collisionAngle > slope)
 		{
 			// Update traction, drift, and driftRad every frame.
 			traction = handling * (1 - velocity/topSpeed); 				// Set traction based on speed
@@ -110,9 +115,15 @@ public class MotionControl : MonoBehaviour {
 		moveDirection.y = fallingSpeed; 							// Apply falling speed to local y
 		moveDirection.z = velocity * Mathf.Cos (driftRad); 			// Apply velocity by drift ratio to local z
 		moveDirection = transform.TransformDirection(moveDirection);// Convert local vectors to world vectors
+		
+		//moveDirection *= velocity;
+		velocityCurrent = rigidbody.velocity;
+		velocityDifference = moveDirection - velocityCurrent;
+		velocityDifference.y = 0.0f;		
 
 		// Apply movement
-		rigidbody.AddForce(moveDirection * velocity * Time.deltaTime);
+		//rigidbody.AddForce(moveDirection * velocity * Time.deltaTime);
+		rigidbody.AddForce(velocityDifference, ForceMode.VelocityChange);
 
 		// Control Dino Locomotion State
 		anim.SetFloat("Speed", velocity/topSpeed);
@@ -121,7 +132,14 @@ public class MotionControl : MonoBehaviour {
 	
 	void OnCollisionStay(Collision collisionInfo) 
 	{
-		isFalling = false;
+		foreach (ContactPoint contact in collisionInfo.contacts)
+		{
+			if (contact.point.y < (transform.position.y - DEGREE_DIFF))
+			{
+				isFalling = false;
+				collisionAngle = Vector3.Dot(contact.normal, Vector3.up);
+			}
+		}		
 	}
 
 	// Call this function whenever the collider is hit
@@ -217,10 +235,10 @@ public class MotionControl : MonoBehaviour {
 	// Temporary - for testing
 	void OnGUI() 
 	{		
-		GUI.Label(new Rect(2, 0, 100, 20), "IsFalling: " + isFalling.ToString());		
-		GUI.Label(new Rect(2, 20, 100, 20), "Velocity: " + velocity.ToString());
-		GUI.Label(new Rect(2, 40, 100, 20), "Acceleration: " + acceleration.ToString());		
-		GUI.Label(new Rect(2, 60, 100, 20), "Slope: " + slope.ToString());				
-				
+		GUI.Label(new Rect(2, 0, 100, 20), "collisionAngle: " + collisionAngle.ToString());
+		//GUI.Label(new Rect(2, 0, 100, 20), "IsFalling: " + isFalling.ToString());		
+		//GUI.Label(new Rect(2, 20, 100, 20), "Velocity: " + velocity.ToString());
+		//GUI.Label(new Rect(2, 40, 100, 20), "Acceleration: " + acceleration.ToString());		
+		//GUI.Label(new Rect(2, 60, 100, 20), "Slope: " + slope.ToString());			
 	}
 }
