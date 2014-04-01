@@ -28,13 +28,9 @@ public class MotionControl : MonoBehaviour {
 
 	private float oldAcceleration;
 	private float oldTopSpeed;
-<<<<<<< HEAD:UnityProject-CyberDino/Assets/Racers/Scripts/MotionControl.cs
+	[SerializeField]
 	private float TurboAcceleration;
-=======
 	[SerializeField]
-	private float TurboAccelleration;
-	[SerializeField]
->>>>>>> origin/File_Organization:UnityProject-CyberDino/Assets/Scripts/Dinosaurs/Motion/MotionControl.cs
 	private float TurboTopSpeed;
 
 	public float acceleration = 10.0F;				// Public Stat controlling this object's rate of acceleration
@@ -46,21 +42,13 @@ public class MotionControl : MonoBehaviour {
 	private const float DEGREE_DIFF = 0.9f;
 
 	// Use this for initialization
-<<<<<<< HEAD:UnityProject-CyberDino/Assets/Racers/Scripts/MotionControl.cs
-	void Start () {
-		//controller = GetComponent<CharacterController>(); 	// Get this object's character contoller component
-		anim = GetComponent<DinoSelect>().anim; 			// Get the selected dino's mechanim controller
-=======
 	void OnEnable () {
-		controller = GetComponent<CharacterController>(); 	// Get this object's character contoller component
 		anim = GetComponentInChildren<Animator>(); 			// Get the selected dino's mechanim controller
 
 //		foreach(Animator obj in transform)
 //		{
 //			anim = obj;
 //		}
->>>>>>> origin/File_Organization:UnityProject-CyberDino/Assets/Scripts/Dinosaurs/Motion/MotionControl.cs
-
 		oldTopSpeed = topSpeed;
 		oldAcceleration = acceleration;
 		TurboTopSpeed = topSpeed * 1.5F;
