@@ -140,7 +140,7 @@ public class MotionControl : MonoBehaviour {
 				}
 				else if (contact.otherCollider.gameObject.tag == "Player")
 				{
-					float thisPlayersMass = this.rigidbody.mass;
+					float thisPlayersMass = rigidbody.mass;
 					float otherPlayersMass = contact.otherCollider.rigidbody.mass;
 					Vector3 thisPlayersVector = moveDirection;
 					Vector3 otherPlayersVector = contact.otherCollider.gameObject.GetComponent<MotionControl>().GetMoveDirection();
