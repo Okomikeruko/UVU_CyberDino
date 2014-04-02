@@ -9,11 +9,16 @@ public class MotionControl : MonoBehaviour {
 	//private CharacterController controller;			// This object's CharacterController reference
 
 	private float horizontalTurning; 				// A range between -1 and 1
-	private float velocity = 0.0F;					// The speed at which this object is currently traveling
+	private float speed = 0.0F;						// The speed at which this object is currently traveling
 	private float fallingSpeed = 0.0F;				// The speed at which this object is currently falling
-	private float gravity = 98.0F; 					// The rate that objects fall in meters/second 
+	
+	private float walkSpeed = 2.0f;
+	private float jumpHeight = 10.0f;
+	private float gravity = 10.0F; 					// The rate that objects fall in meters/second 
+	private float slopeAngle = 0.85f;
+	
 	private float drag = 2.0F;						// The rate which an object slows without breaking or accelerating
-	private float slope = 0.85f;					// The angle of the ground beneath this object
+	private float slope = 0.0f;						// The angle of the ground beneath this object
 	private float drift = 0.0F;						// The angle of drift in degrees
 	private float maxDrift = 70.0F; 				// The maximum angle of drift in degrees
 	private float driftRad = 0.0f;					// The angle of drift in radians
@@ -33,7 +38,6 @@ public class MotionControl : MonoBehaviour {
 
 	public float acceleration = 10.0F;				// Public Stat controlling this object's rate of acceleration
 	public float topSpeed = 80.0F;					// Public Stat controlling this object's top speed
-
 	public float handling = 1.0F;					// Public Stat controlling this object's turning radius
 	public float jump = 10.0F;						// Public controller being the initial velocity of the jump function
 	
@@ -57,8 +61,8 @@ public class MotionControl : MonoBehaviour {
 		if (!isFalling && collisionAngle > slope)
 		{
 			// Update traction, drift, and driftRad every frame.
-			traction = handling * (1 - velocity/topSpeed); 				// Set traction based on speed
-			if (velocity / topSpeed > 0.8f) 
+			traction = handling * (1 - speed/topSpeed); 				// Set traction based on speed
+			if (speed / topSpeed > 0.8f) 
 			{
 				drift -= (handling * horizontalTurning); 
 				drift = (Mathf.Abs (drift) > 0.1F) ? drift + (drift * traction * 10) : 0 ; 	// Modify drift based on traction
@@ -75,15 +79,15 @@ public class MotionControl : MonoBehaviour {
 
 			fallingSpeed = 0.0f; // Stop this object from falling
 			anim.SetBool ("Jump", false);
-			if (velocity < topSpeed && isRunning) // Test if this object is traveling at top speed
+			if (speed < topSpeed && isRunning) // Test if this object is traveling at top speed
 			{
-				velocity += acceleration * Time.deltaTime; // Accelerate this object
+				speed += acceleration * Time.deltaTime; // Accelerate this object
 			}
 
 			// The Jump Function
 			if (Input.GetButton ("Jump") && anim.GetBool("Jump") == false ) // Test if Jump is pressed while on the ground
 			{
-				fallingSpeed = jump * velocity/topSpeed; // Apply jump acceleration to this object.
+				fallingSpeed = jump * speed/topSpeed; // Apply jump acceleration to this object.
 				anim.SetBool ("Jump", true);
 				isFalling = true;
 			}
@@ -111,13 +115,13 @@ public class MotionControl : MonoBehaviour {
 
 
 		// Update velocity
-		velocity -= (drag + slope) * Mathf.Sign (velocity) * Time.deltaTime; // Reduce velocity by drag and slope
+		speed -= (drag + slope) * Mathf.Sign (speed) * Time.deltaTime; // Reduce velocity by drag and slope
 
 		// Update moveDirection
 		driftRad = (Mathf.PI/180) * drift;							// Convert drift degrees in to drift radians
-		moveDirection.x = velocity * Mathf.Sin (driftRad); 			// Apply velocity by drift ratio to local x
+		moveDirection.x = speed * Mathf.Sin (driftRad); 			// Apply velocity by drift ratio to local x
 		moveDirection.y = fallingSpeed; 							// Apply falling speed to local y
-		moveDirection.z = velocity * Mathf.Cos (driftRad); 			// Apply velocity by drift ratio to local z
+		moveDirection.z = speed * Mathf.Cos (driftRad); 			// Apply velocity by drift ratio to local z
 		moveDirection = transform.TransformDirection(moveDirection);// Convert local vectors to world vectors
 		
 		//moveDirection *= velocity;
@@ -130,7 +134,7 @@ public class MotionControl : MonoBehaviour {
 		rigidbody.AddForce(velocityDifference, ForceMode.VelocityChange);
 
 		// Control Dino Locomotion State
-		anim.SetFloat("Speed", velocity/topSpeed);
+		anim.SetFloat("Speed", speed/topSpeed);
 		anim.SetFloat("Direction", horizontalTurning);
 	}
 	
@@ -170,7 +174,7 @@ public class MotionControl : MonoBehaviour {
 
 		if (hit.gameObject.tag == "Wall") 
 		{
-			velocity = 0;
+			speed = 0;
 		}
 	}
 
@@ -191,12 +195,12 @@ public class MotionControl : MonoBehaviour {
 
 	public float GetVelocity()
 	{
-		return velocity;
+		return speed;
 	}
 
 	public void SetRunning(bool Running)
 	{
-		velocity = 0.0f;
+		speed = 0.0f;
 		isRunning = Running;
 	}
 
