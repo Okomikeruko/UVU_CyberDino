@@ -132,7 +132,7 @@ public class MotionControl : MonoBehaviour {
 		Debug.Log("FallingSpeed: " + fallingSpeed);
 		velocityCurrent = rigidbody.velocity;
 		velocityDifference = moveDirection - velocityCurrent;
-		velocityDifference.y = 0.0f;		
+		velocityDifference.y = fallingSpeed;		
 
 		// Apply movement
 		//rigidbody.AddForce(moveDirection * velocity * Time.deltaTime);
@@ -153,6 +153,11 @@ public class MotionControl : MonoBehaviour {
 				collisionAngle = Vector3.Dot(contact.normal, Vector3.up);
 			}
 		}		
+	}
+	
+	void OnCollisionExit(Collision collision)
+	{
+		onGround = false;
 	}
 
 	// Call this function whenever the collider is hit
