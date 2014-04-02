@@ -766,13 +766,10 @@ public class MenuControl : MonoBehaviour
 		dinoSelected = (GameObject)Instantiate(dinoModels[dinoIndex], new Vector3(Screen.width, Screen.height, 0), Quaternion.identity);
 		dinoSelected.transform.Rotate(new Vector3(0, 180, 0));
 	}
-<<<<<<< HEAD
-}
-=======
 
 	public void GoToLevel() {
 		menuSelect = Menu.goToLevel;
 	}
 }
 
->>>>>>> 34c9b1f5911d3ba5ce413cc4e27a31fb73ab3637
+
