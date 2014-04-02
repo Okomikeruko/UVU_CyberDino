@@ -11,7 +11,7 @@ public class MotionControl : MonoBehaviour {
 	private float horizontalTurning; 				// A range between -1 and 1
 	private float velocity = 0.0F;					// The speed at which this object is currently traveling
 	private float fallingSpeed = 0.0F;				// The speed at which this object is currently falling
-	private float gravity = 100.0F; 					// The rate that objects fall in meters/second 
+	private float gravity = 98.0F; 					// The rate that objects fall in meters/second 
 	private float drag = 2.0F;						// The rate which an object slows without breaking or accelerating
 	private float slope = 0.85f;					// The angle of the ground beneath this object
 	private float drift = 0.0F;						// The angle of drift in degrees
@@ -86,6 +86,10 @@ public class MotionControl : MonoBehaviour {
 				fallingSpeed = jump * velocity/topSpeed; // Apply jump acceleration to this object.
 				anim.SetBool ("Jump", true);
 				isFalling = true;
+			}
+			else
+			{
+				rigidbody.AddForce(new Vector3(0.0f, -gravity * rigidbody.mass, 0.0f));
 			}
 
 			// Apply rotation
