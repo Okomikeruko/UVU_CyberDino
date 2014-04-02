@@ -110,28 +110,15 @@ public class MotionControl : MonoBehaviour {
 			// The Jump Function
 			if (Input.GetButton("Jump") && anim.GetBool("Jump") == false ) // Test if Jump is pressed while on the ground
 			{
-				//fallingSpeed = jump * speed/topSpeed; // Apply jump acceleration to this object.  JNU!!!CO
 				velocityCurrent = rigidbody.velocity;
 				rigidbody.velocity = new Vector3(velocityCurrent.x, velocityJump, velocityCurrent.z);
 				anim.SetBool("Jump", true);
-				//onGround = false;
 			}
 		}
 		else
 		{
-			//fallingSpeed -= gravity * Time.deltaTime; // Increase rate of fall if not grounded
-			fallingSpeed += -gravity * rigidbody.mass;
-			if (fallingSpeed > 1)
-			{
-				drift = 0.0F;
-			}
 			rigidbody.AddForce(new Vector3(0.0f, -gravity * rigidbody.mass, 0.0f));
-		}
-
-		if (Input.GetButtonUp("Jump") && fallingSpeed > 0)
-		{
-			fallingSpeed = 0;
-		}		
+		}	
 
 		// Control Dino Locomotion State
 		anim.SetFloat("Speed", speed/topSpeed);
@@ -146,6 +133,7 @@ public class MotionControl : MonoBehaviour {
 			{
 				onGround = true;
 				collisionAngle = Vector3.Dot(contact.normal, Vector3.up);
+				Debug.Log("CollisionAngle: " + collisionAngle);
 			}
 		}		
 	}
