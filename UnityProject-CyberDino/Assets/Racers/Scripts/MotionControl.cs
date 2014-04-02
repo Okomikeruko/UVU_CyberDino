@@ -104,7 +104,8 @@ public class MotionControl : MonoBehaviour {
 		}
 		else
 		{
-			fallingSpeed -= gravity * Time.deltaTime; // Increase rate of fall if not grounded
+			//fallingSpeed -= gravity * Time.deltaTime; // Increase rate of fall if not grounded
+			fallingSpeed += -gravity * rigidbody.mass;
 			if (fallingSpeed > 1)
 			{
 				drift = 0.0F;
