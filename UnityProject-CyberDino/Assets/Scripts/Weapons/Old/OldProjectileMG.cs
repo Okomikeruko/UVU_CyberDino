@@ -9,17 +9,7 @@ public class OldProjectileMG : OldProjectileClass {
 
 	//Class Variables	
 	private RacerHealthClass theRacer; // Used to access variables on a racer.
-<<<<<<< HEAD
-//<<<<<<< HEAD:UnityProject-CyberDino/Assets/VFX/Weapons/Machine Gun/Scripts/Old/OldProjectileMG.cs
-	//private GameObject spawnedHitParticle;
-//=======
 	private GameObject spawnedHitParticle;
-//>>>>>>> origin/File_Organization:UnityProject-CyberDino/Assets/Scripts/Weapons/Old/OldProjectileMG.cs
-	
-=======
-	private GameObject spawnedHitParticle;
-
->>>>>>> 581dd1b2708f7e9a478ef3d3b89584c68cf2fe66
 	// Update is called once per frame
 	void Update () {
 	
@@ -47,28 +37,12 @@ public class OldProjectileMG : OldProjectileClass {
 			{
 				theRacer.Health -= DealDamage(theRacer.Armor);
 			}
-<<<<<<< HEAD
-//<<<<<<< HEAD:UnityProject-CyberDino/Assets/VFX/Weapons/Machine Gun/Scripts/Old/OldProjectileMG.cs
-			//spawnedHitParticle = Instantiate(HitParticle, this.transform.position, this.transform.rotation) as GameObject;
-//=======
 			spawnedHitParticle = Instantiate(HitParticle, this.transform.position, this.transform.rotation) as GameObject;
-//>>>>>>> origin/File_Organization:UnityProject-CyberDino/Assets/Scripts/Weapons/Old/OldProjectileMG.cs
-=======
-			spawnedHitParticle = Instantiate(HitParticle, this.transform.position, this.transform.rotation) as GameObject;
->>>>>>> 581dd1b2708f7e9a478ef3d3b89584c68cf2fe66
 			Destroy(gameObject);
 		}
 		else
 		{
-<<<<<<< HEAD
-//<<<<<<< HEAD:UnityProject-CyberDino/Assets/VFX/Weapons/Machine Gun/Scripts/Old/OldProjectileMG.cs
-			//spawnedHitParticle = Instantiate(HitParticle, this.transform.position, this.transform.rotation) as GameObject;
-//=======
 			spawnedHitParticle = Instantiate(HitParticle, this.transform.position, this.transform.rotation) as GameObject;
-//>>>>>>> origin/File_Organization:UnityProject-CyberDino/Assets/Scripts/Weapons/Old/OldProjectileMG.cs
-=======
-			spawnedHitParticle = Instantiate(HitParticle, this.transform.position, this.transform.rotation) as GameObject;
->>>>>>> 581dd1b2708f7e9a478ef3d3b89584c68cf2fe66
 			Destroy(gameObject);
 		}
 

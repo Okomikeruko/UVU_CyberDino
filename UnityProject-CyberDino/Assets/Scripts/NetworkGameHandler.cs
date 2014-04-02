@@ -238,6 +238,6 @@ public class NetworkGameHandler : MonoBehaviour {
 	void MenuSelect(string goToLevel) {
 		GameObject menuControlObject = GameObject.FindGameObjectWithTag("Menu");
 		MenuControl menuControl = menuControlObject.GetComponent("MenuControl") as MenuControl;
-		menuControl.GoToLevel();
+//		menuControl.GoToLevel();
 	}
 }
