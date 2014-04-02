@@ -5,7 +5,7 @@ using System.Collections;
 public class MotionControl : MonoBehaviour {
 
 	private bool isRunning = true;					// accelerates while true. stops running while false.
-	private bool onGround = false;					// Tracks the grounded state vs. jumping state
+	private bool onGround = false;
 
 	//private CharacterController controller;			// This object's CharacterController reference
 
@@ -52,7 +52,7 @@ public class MotionControl : MonoBehaviour {
 		oldAcceleration = acceleration;
 		TurboTopSpeed = topSpeed * 1.5F;
 		TurboAcceleration = acceleration * 2.0F;
-		velocityJump = Mathf.Sqrt(2.0f * jump * gravity);
+		velocityJump = 70; //Mathf.Sqrt(2.0f * jump * gravity);
 	}
 	
 	// Update is called once per frame
@@ -61,6 +61,8 @@ public class MotionControl : MonoBehaviour {
 		// Apply acceleration and drift or fall depending on grounded state
 		if (onGround && collisionAngle > slopeAngle)
 		{
+			anim.SetBool("Jump", false);
+			
 			// Update traction, drift, and driftRad every frame.
 			traction = handling * (1 - speed/topSpeed); 				// Set traction based on speed
 			if (speed / topSpeed > 0.8f) 
@@ -79,12 +81,32 @@ public class MotionControl : MonoBehaviour {
 			}
 
 			fallingSpeed = 0.0f; // Stop this object from falling
-			anim.SetBool("Jump", false);
 			if (speed < topSpeed && isRunning) // Test if this object is traveling at top speed
 			{
 				speed += acceleration * Time.deltaTime; // Accelerate this object
 			}
 
+			// Apply rotation
+			transform.Rotate(new Vector3(0, handling * horizontalTurning, 0)); // Rotate character controller
+			
+			// Update velocity
+			speed -= (drag + slope) * Mathf.Sign (speed) * Time.deltaTime; // Reduce velocity by drag and slope
+			
+			// Update moveDirection
+			driftRad = (Mathf.PI/180) * drift;							// Convert drift degrees in to drift radians
+			moveDirection.x = speed * Mathf.Sin (driftRad); 			// Apply velocity by drift ratio to local x
+			moveDirection.y = fallingSpeed; 							// Apply falling speed to local y
+			moveDirection.z = speed * Mathf.Cos (driftRad); 			// Apply velocity by drift ratio to local z
+			moveDirection = transform.TransformDirection(moveDirection);// Convert local vectors to world vectors
+			
+			//moveDirection *= velocity;
+			velocityCurrent = rigidbody.velocity;
+			velocityDifference = moveDirection - velocityCurrent;
+			velocityDifference.y = 0.0f;		
+			
+			// Apply movement
+			rigidbody.AddForce(velocityDifference, ForceMode.VelocityChange);			
+			
 			// The Jump Function
 			if (Input.GetButton("Jump") && anim.GetBool("Jump") == false ) // Test if Jump is pressed while on the ground
 			{
@@ -92,15 +114,8 @@ public class MotionControl : MonoBehaviour {
 				velocityCurrent = rigidbody.velocity;
 				rigidbody.velocity = new Vector3(velocityCurrent.x, velocityJump, velocityCurrent.z);
 				anim.SetBool("Jump", true);
-				onGround = false;
+				//onGround = false;
 			}
-			else
-			{
-				rigidbody.AddForce(new Vector3(0.0f, -gravity * rigidbody.mass, 0.0f));
-			}
-
-			// Apply rotation
-			transform.Rotate(new Vector3(0, handling * horizontalTurning, 0)); // Rotate character controller
 		}
 		else
 		{
@@ -110,33 +125,13 @@ public class MotionControl : MonoBehaviour {
 			{
 				drift = 0.0F;
 			}
+			rigidbody.AddForce(new Vector3(0.0f, -gravity * rigidbody.mass, 0.0f));
 		}
 
 		if (Input.GetButtonUp("Jump") && fallingSpeed > 0)
 		{
 			fallingSpeed = 0;
-		}
-
-
-		// Update velocity
-		speed -= (drag + slope) * Mathf.Sign (speed) * Time.deltaTime; // Reduce velocity by drag and slope
-
-		// Update moveDirection
-		driftRad = (Mathf.PI/180) * drift;							// Convert drift degrees in to drift radians
-		moveDirection.x = speed * Mathf.Sin (driftRad); 			// Apply velocity by drift ratio to local x
-		moveDirection.y = fallingSpeed; 							// Apply falling speed to local y
-		moveDirection.z = speed * Mathf.Cos (driftRad); 			// Apply velocity by drift ratio to local z
-		moveDirection = transform.TransformDirection(moveDirection);// Convert local vectors to world vectors
-		
-		//moveDirection *= velocity;
-		Debug.Log("FallingSpeed: " + fallingSpeed);
-		velocityCurrent = rigidbody.velocity;
-		velocityDifference = moveDirection - velocityCurrent;
-		velocityDifference.y = fallingSpeed;		
-
-		// Apply movement
-		//rigidbody.AddForce(moveDirection * velocity * Time.deltaTime);
-		rigidbody.AddForce(velocityDifference, ForceMode.VelocityChange);
+		}		
 
 		// Control Dino Locomotion State
 		anim.SetFloat("Speed", speed/topSpeed);
