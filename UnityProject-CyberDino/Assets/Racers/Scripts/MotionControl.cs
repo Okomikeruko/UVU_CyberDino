@@ -13,9 +13,7 @@ public class MotionControl : MonoBehaviour {
 	private float speed = 0.0F;						// The speed at which this object is currently traveling
 	private float fallingSpeed = 0.0F;				// The speed at which this object is currently falling
 	
-	//private float walkSpeed = 2.0f;
 	private float gravity = 10.0F; 					// The rate that objects fall in meters/second 
-	private float slopeAngle = 0.85f;
 	
 	private float drag = 2.0F;						// The rate which an object slows without breaking or accelerating
 	private float slope = 0.0f;						// The angle of the ground beneath this object
@@ -40,9 +38,10 @@ public class MotionControl : MonoBehaviour {
 	public float acceleration = 10.0F;				// Public Stat controlling this object's rate of acceleration
 	public float topSpeed = 80.0F;					// Public Stat controlling this object's top speed
 	public float handling = 1.0F;					// Public Stat controlling this object's turning radius
-	public float jump = 10.0F;						// Public controller being the initial velocity of the jump function
+	public float jump = 80.0F;						// Public controller being the initial velocity of the jump function
 	
 	private const float DEGREE_DIFF = 0.9f;
+	private const float SLOPE_ANGLE = 0.85f;
 
 	// Use this for initialization
 	void Start () {
@@ -52,14 +51,14 @@ public class MotionControl : MonoBehaviour {
 		oldAcceleration = acceleration;
 		TurboTopSpeed = topSpeed * 1.5F;
 		TurboAcceleration = acceleration * 2.0F;
-		velocityJump = 70; //Mathf.Sqrt(2.0f * jump * gravity);
+		velocityJump = Mathf.Sqrt(2.0f * jump * gravity);
 	}
 	
 	// Update is called once per frame
 	void FixedUpdate () 
 	{
 		// Apply acceleration and drift or fall depending on grounded state
-		if (onGround && collisionAngle > slopeAngle)
+		if (onGround && collisionAngle > SLOPE_ANGLE)
 		{
 			anim.SetBool("Jump", false);
 			
@@ -83,6 +82,7 @@ public class MotionControl : MonoBehaviour {
 			fallingSpeed = 0.0f; // Stop this object from falling
 			if (speed < topSpeed && isRunning) // Test if this object is traveling at top speed
 			{
+				//Debug.Log(">>> Acceleration <<<");
 				speed += acceleration * Time.deltaTime; // Accelerate this object
 			}
 
@@ -128,7 +128,7 @@ public class MotionControl : MonoBehaviour {
 	void OnCollisionStay(Collision collisionInfo) 
 	{
 		foreach (ContactPoint contact in collisionInfo.contacts)
-		{
+		{			
 			if (contact.point.y < (transform.position.y - DEGREE_DIFF))
 			{
 				onGround = true;
@@ -136,7 +136,7 @@ public class MotionControl : MonoBehaviour {
 				if (contact.otherCollider.gameObject.tag == "Track")
 				{
 					slope = 1 - contact.normal.y;
-					Debug.Log("SLOPE: " + slope);
+					//Debug.Log("SLOPE: " + slope);
 				}
 				else if (contact.otherCollider.gameObject.tag == "Player")
 				{
@@ -159,34 +159,6 @@ public class MotionControl : MonoBehaviour {
 	{
 		onGround = false;
 	}
-
-//	// Call this function whenever the collider is hit
-//	void OnControllerColliderHit(ControllerColliderHit hit)
-//	{
-//		if (hit.gameObject.tag == "Track")
-//		{
-//			slope = 1 - hit.normal.y;
-//		}
-//
-//		if (hit.gameObject.tag == "Player")
-//		{
-//			float m1 = this.rigidbody.mass;
-//			float m2 = hit.rigidbody.mass;
-//			Vector3 v1 = moveDirection;
-//			Vector3 v2 = hit.gameObject.GetComponent<MotionControl>().GetMoveDirection();
-//
-//			float mag = moveDirection.magnitude;
-//
-//			moveDirection = (v1*(m1-m2)+(2*v2*m2))/(m1+m2);
-//
-//			transform.Rotate (moveDirection.normalized * mag);
-//		}
-//
-//		if (hit.gameObject.tag == "Wall") 
-//		{
-//			speed = 0;
-//		}
-//	}
 
 	public Vector3 GetMoveDirection()
 	{
@@ -254,9 +226,8 @@ public class MotionControl : MonoBehaviour {
 	void OnGUI() 
 	{		
 		GUI.Label(new Rect(2, 0, 100, 20), "collisionAngle: " + collisionAngle.ToString());
-		//GUI.Label(new Rect(2, 0, 100, 20), "IsFalling: " + isFalling.ToString());		
-		//GUI.Label(new Rect(2, 20, 100, 20), "Velocity: " + velocity.ToString());
-		//GUI.Label(new Rect(2, 40, 100, 20), "Acceleration: " + acceleration.ToString());		
+		//GUI.Label(new Rect(2, 40, 100, 20), "Acceleration: " + acceleration.ToString());	
+		//GUI.Label(new Rect(2, 20, 100, 20), "Speed: " + speed.ToString());	
 		//GUI.Label(new Rect(2, 60, 100, 20), "Slope: " + slope.ToString());			
 	}
 }
