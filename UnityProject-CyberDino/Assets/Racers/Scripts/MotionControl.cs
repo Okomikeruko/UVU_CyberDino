@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+[RequireComponent(typeof(Rigidbody), typeof(CapsuleCollider))]
 public class MotionControl : MonoBehaviour {
 
 	private bool isRunning = true;					// accelerates while true. stops running while false.
