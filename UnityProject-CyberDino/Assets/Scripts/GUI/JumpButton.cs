@@ -21,9 +21,12 @@ public class JumpButton : MonoBehaviour
 		//MoveScript = player.GetComponent<DinoMoveScript>() as DinoMoveScript;
 		players = GameObject.FindGameObjectsWithTag("Dino");
 
+<<<<<<< HEAD
 
 		//anim = player.GetComponent<DinoSelect>().anim; 
 
+=======
+>>>>>>> 581dd1b2708f7e9a478ef3d3b89584c68cf2fe66
 		foreach (var unit in players){
 			if(unit.networkView.isMine){
 				player = unit;
@@ -32,7 +35,10 @@ public class JumpButton : MonoBehaviour
 		}
 
 		//anim = player.GetComponentInChildren<Animator>(); 
+<<<<<<< HEAD
 
+=======
+>>>>>>> 581dd1b2708f7e9a478ef3d3b89584c68cf2fe66
 
 		transform.position = Vector3.zero;
 		transform.localScale = Vector3.zero;

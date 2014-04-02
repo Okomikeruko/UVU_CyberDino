@@ -25,16 +25,23 @@ public class MotionControl : MonoBehaviour {
 	private Vector3 velocityDifference = Vector3.zero;
 
 	public Animator anim;
+	private NetworkAnimations netanim;
 
 	private float oldAcceleration;
 	private float oldTopSpeed;
+<<<<<<< HEAD
 //<<<<<<< HEAD:UnityProject-CyberDino/Assets/Racers/Scripts/MotionControl.cs
 	private float TurboAcceleration;
 //=======
+=======
+>>>>>>> 581dd1b2708f7e9a478ef3d3b89584c68cf2fe66
 	[SerializeField]
-	private float TurboAccelleration;
+	private float TurboAcceleration;
 	[SerializeField]
+<<<<<<< HEAD
 //>>>>>>> origin/File_Organization:UnityProject-CyberDino/Assets/Scripts/Dinosaurs/Motion/MotionControl.cs
+=======
+>>>>>>> 581dd1b2708f7e9a478ef3d3b89584c68cf2fe66
 	private float TurboTopSpeed;
 
 	public float acceleration = 10.0F;				// Public Stat controlling this object's rate of acceleration
@@ -46,22 +53,28 @@ public class MotionControl : MonoBehaviour {
 	private const float DEGREE_DIFF = 0.9f;
 
 	// Use this for initialization
+<<<<<<< HEAD
 //<<<<<<< HEAD:UnityProject-CyberDino/Assets/Racers/Scripts/MotionControl.cs
 	void Start () {
 		//controller = GetComponent<CharacterController>(); 	// Get this object's character contoller component
 		anim = GetComponent<DinoSelect>().anim; 			// Get the selected dino's mechanim controller
 		}
 //=======
+=======
+>>>>>>> 581dd1b2708f7e9a478ef3d3b89584c68cf2fe66
 	void OnEnable () {
-		controller = GetComponent<CharacterController>(); 	// Get this object's character contoller component
 		anim = GetComponentInChildren<Animator>(); 			// Get the selected dino's mechanim controller
+		netanim = GetComponentInChildren<NetworkAnimations>();
 
 //		foreach(Animator obj in transform)
 //		{
 //			anim = obj;
 //		}
+<<<<<<< HEAD
 //>>>>>>> origin/File_Organization:UnityProject-CyberDino/Assets/Scripts/Dinosaurs/Motion/MotionControl.cs
 
+=======
+>>>>>>> 581dd1b2708f7e9a478ef3d3b89584c68cf2fe66
 		oldTopSpeed = topSpeed;
 		oldAcceleration = acceleration;
 		TurboTopSpeed = topSpeed * 1.5F;
@@ -92,8 +105,10 @@ public class MotionControl : MonoBehaviour {
 			}
 
 			fallingSpeed = 0.0f; // Stop this object from falling
-			anim.SetBool ("Jump", false);
-			if (velocity < topSpeed && isRunning) // Test if this object is traveling at top speed
+
+			//anim.SetBool ("Jump", false);
+			netanim.AnimSetJump("Jump", false);
+			if(velocity < topSpeed && isRunning) // Test if this object is traveling at top speed
 			{
 				velocity += acceleration * Time.deltaTime; // Accelerate this object
 			}
@@ -101,9 +116,10 @@ public class MotionControl : MonoBehaviour {
 			// The Jump Function
 			if (Input.GetButton ("Jump") && anim.GetBool("Jump") == false ) // Test if Jump is pressed while on the ground
 			{
-				fallingSpeed = jump * velocity/topSpeed; // Apply jump acceleration to this object.
-				anim.SetBool ("Jump", true);
-				isFalling = true;
+
+				fallingSpeed = jump * velocity/topSpeed; // Apply jump accelleration to this object.
+				//anim.SetBool ("Jump", true);
+				netanim.AnimSetJump("Jump", true);
 			}
 
 			// Apply rotation
@@ -143,9 +159,10 @@ public class MotionControl : MonoBehaviour {
 		//rigidbody.AddForce(moveDirection * velocity * Time.deltaTime);
 		rigidbody.AddForce(velocityDifference, ForceMode.VelocityChange);
 
-		// Control Dino Locomotion State
-		anim.SetFloat("Speed", velocity/topSpeed);
-		anim.SetFloat("Direction", horizontalTurning);
+		//anim.SetFloat("Speed", velocity/topSpeed);
+		netanim.AnimSetSpeed("Speed", velocity, topSpeed);
+		//anim.SetFloat("Direction", h);
+		netanim.AnimSetDirection("Direction", horizontalTurning);
 	}
 	
 	void OnCollisionStay(Collision collisionInfo) 
@@ -158,6 +175,9 @@ public class MotionControl : MonoBehaviour {
 				collisionAngle = Vector3.Dot(contact.normal, Vector3.up);
 			}
 		}		
+
+
+
 	}
 
 	// Call this function whenever the collider is hit
