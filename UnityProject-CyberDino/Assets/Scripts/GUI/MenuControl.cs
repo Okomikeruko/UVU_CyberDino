@@ -109,8 +109,10 @@ public class MenuControl : MonoBehaviour
 	private Rect lvlGraphicPos;
 
 	private Texture mMenuBkgdTxtr;
-	private GUITexture mMenuBkgd;
+	private GameObject mMenuBkgd;
 	private Rect mMenuBkgdPos;
+	
+
 	
 	
 	// Use this for initialization
@@ -230,13 +232,22 @@ public class MenuControl : MonoBehaviour
 		//set this skin as the active one
 		GUI.skin = mySkin;
 		
+		if(menuSelect != Menu.mainMenu)
+		{
+			if(mMenuBkgd != null)
+			{
+				Destroy(mMenuBkgd);
+			}
+		}
+		
 		//if menuSelet is the main menu
 		if(menuSelect == Menu.mainMenu)
 		{
-			mMenuBkgd = new GUITexture();
-			mMenuBkgd.transform.position = new Vector3(0, 0, -5);
-			mMenuBkgd.pixelInset = mMenuBkgdPos;
-			mMenuBkgd.texture = mMenuBkgdTxtr;
+			if(mMenuBkgd == null)
+			{
+				mMenuBkgd = CreateGUITxtr(mMenuBkgd, "main menu background", new Vector3(0, 0, 0), mMenuBkgdTxtr, mMenuBkgdPos);
+			}
+			mMenuBkgd.guiTexture.pixelInset = new Rect(menuOrigin[0].x + mMenuBkgdPos.x, menuOrigin[0].y + mMenuBkgdPos.y, mMenuBkgdPos.width, mMenuBkgdPos.height);
 
 			//single player button
 			if(GUI.Button(new Rect(menuOrigin[0].x + mainMenuBtnRect[0].x, menuOrigin[0].y + mainMenuBtnRect[0].y, mainMenuBtnRect[0].width, mainMenuBtnRect[0].height), mainMenuBtnTxtr[0]))
@@ -267,6 +278,7 @@ public class MenuControl : MonoBehaviour
 				lvlGraphic.guiTexture.pixelInset = new Rect(menuOrigin[2].x + lvlGraphicPos.x, menuOrigin[2].y + lvlGraphicPos.y, lvlGraphicPos.width, lvlGraphicPos.height);
 				
 				lvlGraphic.guiTexture.texture = lvlSelectTxtr[levelIndex];
+				
 				
 			}
 			//multiplayer button
@@ -779,5 +791,17 @@ public class MenuControl : MonoBehaviour
 		}
 		
 		lvlGraphic.guiTexture.texture = lvlSelectTxtr[levelIndex];
+	}
+	
+	GameObject CreateGUITxtr(GameObject _obj, string _name, Vector3 _dist, Texture _txtr, Rect _pos)
+	{
+		_obj = new GameObject(_name);
+		_obj.transform.position = _dist;
+		_obj.transform.localScale = new Vector3(0, 0, 0);
+		_obj.AddComponent("GUITexture");
+		_obj.guiTexture.pixelInset = _pos;
+		_obj.guiTexture.texture = _txtr;
+		
+		return _obj;
 	}
 }
