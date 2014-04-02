@@ -133,7 +133,6 @@ public class MotionControl : MonoBehaviour {
 			{
 				onGround = true;
 				collisionAngle = Vector3.Dot(contact.normal, Vector3.up);
-				Debug.Log("CollisionAngle: " + collisionAngle);
 			}
 		}		
 	}
