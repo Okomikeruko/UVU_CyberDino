@@ -133,6 +133,24 @@ public class MotionControl : MonoBehaviour {
 			{
 				onGround = true;
 				collisionAngle = Vector3.Dot(contact.normal, Vector3.up);
+				if (contact.otherCollider.gameObject.tag == "Track")
+				{
+					slope = 1 - contact.normal.y;
+					Debug.Log("SLOPE: " + slope);
+				}
+				else if (contact.otherCollider.gameObject.tag == "Player")
+				{
+					float thisPlayersMass = this.rigidbody.mass;
+					float otherPlayersMass = contact.otherCollider.rigidbody.mass;
+					Vector3 thisPlayersVector = moveDirection;
+					Vector3 otherPlayersVector = contact.otherCollider.gameObject.GetComponent<MotionControl>().GetMoveDirection();
+					
+					float mag = moveDirection.magnitude; // save current
+					moveDirection = (thisPlayersVector*(thisPlayersMass-otherPlayersMass)+
+									(2*otherPlayersVector*otherPlayersMass))/
+									(thisPlayersMass+otherPlayersMass);					
+					transform.Rotate(moveDirection.normalized * mag);
+				}
 			}
 		}		
 	}
@@ -142,33 +160,33 @@ public class MotionControl : MonoBehaviour {
 		onGround = false;
 	}
 
-	// Call this function whenever the collider is hit
-	void OnControllerColliderHit(ControllerColliderHit hit)
-	{
-		if (hit.gameObject.tag == "Track")
-		{
-			slope = 1 - hit.normal.y;
-		}
-
-		if (hit.gameObject.tag == "Player")
-		{
-			float m1 = this.rigidbody.mass;
-			float m2 = hit.rigidbody.mass;
-			Vector3 v1 = moveDirection;
-			Vector3 v2 = hit.gameObject.GetComponent<MotionControl>().GetMoveDirection();
-
-			float mag = moveDirection.magnitude;
-
-			moveDirection = (v1*(m1-m2)+(2*v2*m2))/(m1+m2);
-
-			transform.Rotate (moveDirection.normalized * mag);
-		}
-
-		if (hit.gameObject.tag == "Wall") 
-		{
-			speed = 0;
-		}
-	}
+//	// Call this function whenever the collider is hit
+//	void OnControllerColliderHit(ControllerColliderHit hit)
+//	{
+//		if (hit.gameObject.tag == "Track")
+//		{
+//			slope = 1 - hit.normal.y;
+//		}
+//
+//		if (hit.gameObject.tag == "Player")
+//		{
+//			float m1 = this.rigidbody.mass;
+//			float m2 = hit.rigidbody.mass;
+//			Vector3 v1 = moveDirection;
+//			Vector3 v2 = hit.gameObject.GetComponent<MotionControl>().GetMoveDirection();
+//
+//			float mag = moveDirection.magnitude;
+//
+//			moveDirection = (v1*(m1-m2)+(2*v2*m2))/(m1+m2);
+//
+//			transform.Rotate (moveDirection.normalized * mag);
+//		}
+//
+//		if (hit.gameObject.tag == "Wall") 
+//		{
+//			speed = 0;
+//		}
+//	}
 
 	public Vector3 GetMoveDirection()
 	{
