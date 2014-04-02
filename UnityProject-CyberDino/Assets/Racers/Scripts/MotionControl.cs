@@ -5,7 +5,7 @@ using System.Collections;
 public class MotionControl : MonoBehaviour {
 
 	private bool isRunning = true;					// accelerates while true. stops running while false.
-	private bool isFalling = false;					// Tracks the grounded state vs. jumping state
+	private bool onGround = false;					// Tracks the grounded state vs. jumping state
 
 	//private CharacterController controller;			// This object's CharacterController reference
 
@@ -13,8 +13,7 @@ public class MotionControl : MonoBehaviour {
 	private float speed = 0.0F;						// The speed at which this object is currently traveling
 	private float fallingSpeed = 0.0F;				// The speed at which this object is currently falling
 	
-	private float walkSpeed = 2.0f;
-	private float jumpHeight = 10.0f;
+	//private float walkSpeed = 2.0f;
 	private float gravity = 10.0F; 					// The rate that objects fall in meters/second 
 	private float slopeAngle = 0.85f;
 	
@@ -29,6 +28,7 @@ public class MotionControl : MonoBehaviour {
 	private Vector3 moveDirection = Vector3.zero;	// The vector3 called to move this object
 	private Vector3 velocityCurrent = Vector3.zero;
 	private Vector3 velocityDifference = Vector3.zero;
+	private float velocityJump;
 
 	private Animator anim;
 
@@ -46,20 +46,20 @@ public class MotionControl : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		//controller = GetComponent<CharacterController>(); 	// Get this object's character contoller component
 		anim = GetComponent<DinoSelect>().anim; 			// Get the selected dino's mechanim controller
 
 		oldTopSpeed = topSpeed;
 		oldAcceleration = acceleration;
 		TurboTopSpeed = topSpeed * 1.5F;
 		TurboAcceleration = acceleration * 2.0F;
+		velocityJump = Mathf.Sqrt(2.0f * jump * gravity);
 	}
 	
 	// Update is called once per frame
 	void FixedUpdate () 
 	{
 		// Apply acceleration and drift or fall depending on grounded state
-		if (!isFalling && collisionAngle > slope)
+		if (onGround && collisionAngle > slopeAngle)
 		{
 			// Update traction, drift, and driftRad every frame.
 			traction = handling * (1 - speed/topSpeed); 				// Set traction based on speed
@@ -79,18 +79,20 @@ public class MotionControl : MonoBehaviour {
 			}
 
 			fallingSpeed = 0.0f; // Stop this object from falling
-			anim.SetBool ("Jump", false);
+			anim.SetBool("Jump", false);
 			if (speed < topSpeed && isRunning) // Test if this object is traveling at top speed
 			{
 				speed += acceleration * Time.deltaTime; // Accelerate this object
 			}
 
 			// The Jump Function
-			if (Input.GetButton ("Jump") && anim.GetBool("Jump") == false ) // Test if Jump is pressed while on the ground
+			if (Input.GetButton("Jump") && anim.GetBool("Jump") == false ) // Test if Jump is pressed while on the ground
 			{
-				fallingSpeed = jump * speed/topSpeed; // Apply jump acceleration to this object.
-				anim.SetBool ("Jump", true);
-				isFalling = true;
+				//fallingSpeed = jump * speed/topSpeed; // Apply jump acceleration to this object.  JNU!!!CO
+				velocityCurrent = rigidbody.velocity;
+				rigidbody.velocity = new Vector3(velocityCurrent.x, velocityJump, velocityCurrent.z);
+				anim.SetBool("Jump", true);
+				onGround = false;
 			}
 			else
 			{
@@ -109,7 +111,7 @@ public class MotionControl : MonoBehaviour {
 			}
 		}
 
-		if (Input.GetButtonUp ("Jump") && fallingSpeed > 0)
+		if (Input.GetButtonUp("Jump") && fallingSpeed > 0)
 		{
 			fallingSpeed = 0;
 		}
@@ -126,6 +128,7 @@ public class MotionControl : MonoBehaviour {
 		moveDirection = transform.TransformDirection(moveDirection);// Convert local vectors to world vectors
 		
 		//moveDirection *= velocity;
+		Debug.Log("FallingSpeed: " + fallingSpeed);
 		velocityCurrent = rigidbody.velocity;
 		velocityDifference = moveDirection - velocityCurrent;
 		velocityDifference.y = 0.0f;		
@@ -145,7 +148,7 @@ public class MotionControl : MonoBehaviour {
 		{
 			if (contact.point.y < (transform.position.y - DEGREE_DIFF))
 			{
-				isFalling = false;
+				onGround = true;
 				collisionAngle = Vector3.Dot(contact.normal, Vector3.up);
 			}
 		}		
