@@ -67,8 +67,4 @@ public class PickUpManagerClass : MonoBehaviour
 		}
 	}
 
-	void Update () 
-	{
-	
-	}
 }
