@@ -9,7 +9,7 @@ public class UserControl : MonoBehaviour {
 	[SerializeField]
 	private WeaponControlClass weapons;
 	[SerializeField]
-	private VFXControlClass vfx;
+	private PlayerPickUpClass pickUp;
 	[SerializeField]
 	private RacerHealthClass racerHealth;
 	[SerializeField]
@@ -35,23 +35,23 @@ public class UserControl : MonoBehaviour {
 			weapons = value;
 		}
 	}
-	private VFXControlClass Vfx
+	private PlayerPickUpClass PickUp
 	{
 		get
 		{
-			if(vfx == null)
+			if(pickUp == null)
 			{
-				vfx = GetComponentInChildren<VFXControlClass>();
-				if(vfx == null)
+				pickUp = GetComponentInChildren<PlayerPickUpClass>();
+				if(pickUp == null)
 				{
-					vfx = gameObject.AddComponent("VFXControlClass") as VFXControlClass;
+					pickUp = gameObject.AddComponent("PlayerPickUpClass") as PlayerPickUpClass;
 				}
 			}
-			return vfx;
+			return pickUp;
 		}
 		set
 		{
-			vfx = value;
+			pickUp = value;
 		}
 	}
 	private RacerHealthClass RacerHealth
@@ -101,12 +101,12 @@ public class UserControl : MonoBehaviour {
 
 		// Added by Sam
 		Weapons = GetComponentInChildren<WeaponControlClass>();
-		Vfx = GetComponentInChildren<VFXControlClass>();
-		Vfx.Move = move;
+		PickUp = GetComponentInChildren<PlayerPickUpClass>();
+		PickUp.Move = move;
 		RacerHealth = GetComponentInChildren<RacerHealthClass>();
 		RacerHealth.TheRagdoll = this.GetComponent<DinoRagdoll>();
 		RacerHealth.Move = move;
-		Dust = GetComponentInChildren<DustEffectClass>();
+//		Dust = GetComponentInChildren<DustEffectClass>();
 
 		FireButton.shoot += this.shoot;
 	}
@@ -135,7 +135,7 @@ public class UserControl : MonoBehaviour {
 //		}
 
 		// Added by Sam
-		Dust.RunDust(move.GetAcceleration());
+//		Dust.RunDust(move.GetAcceleration());
 		
 		if(Input.GetKeyUp(KeyCode.F))
 		{
@@ -151,10 +151,10 @@ public class UserControl : MonoBehaviour {
 			}
 		}
 		
-		if(Input.GetKeyUp(KeyCode.T))
-		{
-			vfx.UseTurbo();
-		}
+//		if(Input.GetKeyUp(KeyCode.T))
+//		{
+//			PickUp.UseTurbo();
+//		}
 		if(Input.GetKeyUp(KeyCode.Alpha1))
 		{
 			weapons.Switch();

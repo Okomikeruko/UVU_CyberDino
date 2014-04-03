@@ -46,7 +46,7 @@ public class PickUpClass : MonoBehaviour
 
 	void OnTriggerEnter(Collider other) 
 	{
-		if(other.gameObject.tag == "Player")
+		if(other.gameObject.tag == "Racer")
 		{
 			PickUpHit(MyType, other.transform);
 			UseRefresh();
