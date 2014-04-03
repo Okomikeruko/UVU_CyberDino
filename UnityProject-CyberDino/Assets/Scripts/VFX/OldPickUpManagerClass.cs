@@ -5,7 +5,7 @@
 using UnityEngine;
 using System.Collections;
 
-public class PickUpManagerClass : MonoBehaviour {
+public class OldPickUpManagerClass : MonoBehaviour {
 
 	#region Fields
 	[SerializeField]
