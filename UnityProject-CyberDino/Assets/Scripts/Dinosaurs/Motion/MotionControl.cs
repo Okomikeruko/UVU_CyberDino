@@ -42,7 +42,8 @@ public class MotionControl : MonoBehaviour {
 	public float topSpeed = 80.0F;					// Public Stat controlling this object's top speed
 	public float handling = 1.0F;					// Public Stat controlling this object's turning radius
 	public float jump = 80.0F;						// Public controller being the initial velocity of the jump function
-	
+	public float velocity;
+
 	private const float DEGREE_DIFF = 0.9f;
 	private const float SLOPE_ANGLE = 0.85f;
 
@@ -65,6 +66,8 @@ public class MotionControl : MonoBehaviour {
 	// Update is called once per frame
 	void FixedUpdate () 
 	{
+		velocity = rigidbody.velocity.magnitude;
+
 		// Apply acceleration and drift or fall depending on grounded state
 		if (onGround && collisionAngle > SLOPE_ANGLE)
 		{
