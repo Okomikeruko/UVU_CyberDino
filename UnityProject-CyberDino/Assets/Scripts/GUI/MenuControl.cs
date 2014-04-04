@@ -14,7 +14,7 @@ public class MenuControl : MonoBehaviour
 	public Menu menuSelect;
 	
 	//the different dinos to choose
-	//private string[] dinos = new string[]{"Diloph", "Hesp", "Diloph", "Troodon", "TRex", "Raptor"};
+	private string[] dinos = new string[]{"Diloph", "Hesp", "Raptor", "Diloph", "TRex", "Troodon"};
 	
 	//the different level to choose
 	//private string[] levels = new string[]{"CityTrack"};
@@ -549,6 +549,12 @@ public class MenuControl : MonoBehaviour
 				{
 					if(GUI.Button(new Rect(menuOrigin[2].x + lobbyMenuBtnRect[5].x, menuOrigin[2].y + lobbyMenuBtnRect[5].y, lobbyMenuBtnRect[5].width, lobbyMenuBtnRect[5].height), lobbyMenuBtnTxtr[2]))
 					{
+						var myInfo = networkHandler.GetMyInfo();
+						
+						myInfo.dinoName = dinos[dinoIndex];
+						
+						networkHandler.UpdatePlayerInformation(myInfo);
+
 						menuSelect = Menu.goToLevel;
 						networkHandler.ChangeLevel();
 					}

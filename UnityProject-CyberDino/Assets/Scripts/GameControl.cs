@@ -30,7 +30,6 @@ public class GameControl : MonoBehaviour {
 
 	private void InitializeGame(){
 		//load players into map
-		Debug.Log (networkHandler.tag);
 		var playerInfo = networkHandler.GetMyInfo();
 		int playerID = int.Parse(Network.player.ToString());
 		GameObject PlayerDino = (GameObject)Network.Instantiate((GameObject)Resources.Load(playerInfo.dinoName), spawnPoint[playerID].transform.position, Quaternion.LookRotation(spawnPoint[playerID].transform.forward), playerID);
