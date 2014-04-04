@@ -14,10 +14,10 @@ public class MenuControl : MonoBehaviour
 	public Menu menuSelect;
 	
 	//the different dinos to choose
-	private string[] dinos = new string[]{"Diloph", "Hesp", "Diloph", "Troodon", "TRex", "Raptor"};
+	//private string[] dinos = new string[]{"Diloph", "Hesp", "Diloph", "Troodon", "TRex", "Raptor"};
 	
 	//the different level to choose
-	private string[] levels = new string[]{"CityTrack"};
+	//private string[] levels = new string[]{"CityTrack"};
 	
 	public Texture[] levelTextures;
 	
@@ -28,7 +28,7 @@ public class MenuControl : MonoBehaviour
 	private Rect[] lobbyMenuRect;
 	private Rect[] lobbyMenuBtnRect;
 	public Rect[] resultsMenuRect;
-	public Rect[] connectingRect;
+	private Rect[] connectingRect;
 	
 	private Rect startDinoPos;
 	private Vector3 dinoPos;
@@ -108,10 +108,13 @@ public class MenuControl : MonoBehaviour
 	private GameObject lvlGraphic;
 	private Rect lvlGraphicPos;
 
-	private Texture mMenuBkgdTxtr;
-	private GameObject mMenuBkgd;
-	private Rect mMenuBkgdPos;
+	private Texture mainMenuBkgdTxtr;
+	private GameObject mainMenuBkgd;
+	private Rect mainMenuBkgdPos;
 	
+	private GameObject menuBkgd;
+	private Rect menuBkgdPos;
+	private Vector3 menuBkgdV3Pos;
 
 	
 	
@@ -133,13 +136,11 @@ public class MenuControl : MonoBehaviour
 		
 		backBtnTxtr = (Texture)Resources.Load("GUI/Materials/BackButton");
 		
-		lvlSelectTxtr = new Texture[4];
-		lvlSelectTxtr[0] = (Texture)Resources.Load("GUI/Materials/countDown1");
-		lvlSelectTxtr[1] = (Texture)Resources.Load("GUI/Materials/countDown2");
-		lvlSelectTxtr[2] = (Texture)Resources.Load("GUI/Materials/countDown3");
-		lvlSelectTxtr[3] = (Texture)Resources.Load("GUI/Materials/countDown2");
+		lvlSelectTxtr = new Texture[2];
+		lvlSelectTxtr[0] = (Texture)Resources.Load("GUI/Materials/CityTrackGFX");
+		lvlSelectTxtr[1] = (Texture)Resources.Load("GUI/Materials/CityTrackGFXv2");
 
-		mMenuBkgdTxtr = (Texture)Resources.Load("GUI/Materials/uvuGraphic");;
+		mainMenuBkgdTxtr = (Texture)Resources.Load("GUI/Materials/Cyberdino temp title");
 		
 		
 		//graphics ----------------------------------------
@@ -160,21 +161,32 @@ public class MenuControl : MonoBehaviour
 		
 		lobbyMenuRect = new Rect[4];
 		lobbyMenuRect[0] = ResizeRect(new Rect(70, 1, 30, 10));
-		lobbyMenuRect[1] = ResizeRect(new Rect(20, 1, 30, 10));
-		lobbyMenuRect[2] = ResizeRect(new Rect(40, 1, 30, 10));
-		lobbyMenuRect[3] = ResizeRect(new Rect(60, 1, 30, 10));
+		lobbyMenuRect[1] = ResizeRect(new Rect(20, 1, 35, 15));
+		lobbyMenuRect[2] = ResizeRect(new Rect(35, 1, 35, 15));
+		lobbyMenuRect[3] = ResizeRect(new Rect(50, 1, 35, 15));
 		
 		lobbyMenuBtnRect = new Rect[6];
 		lobbyMenuBtnRect[0] = ResizeRect(new Rect(1, 40, 10, 10));
 		lobbyMenuBtnRect[1] = ResizeRect(new Rect(40, 40, 10, 10));
 		lobbyMenuBtnRect[2] = ResizeRect(new Rect(50, 40, 10, 10));
 		lobbyMenuBtnRect[3] = ResizeRect(new Rect(90, 40, 10, 10));
-		lobbyMenuBtnRect[4] = ResizeRect(new Rect(0, 70, 25, 20));
-		lobbyMenuBtnRect[5] = ResizeRect(new Rect(75, 70, 35, 30));
+		lobbyMenuBtnRect[4] = ResizeRect(new Rect(0, 80, 25, 20));
+		lobbyMenuBtnRect[5] = ResizeRect(new Rect(73, 70, 35, 30));
 		
-		lvlGraphicPos = ResizeRect(new Rect(10, 0, 50, 100));
+		connectingRect = new Rect[4];
+		connectingRect[0] = ResizeRect(new Rect(30, 20, 40, 40));
+		connectingRect[1] = ResizeRect(new Rect(40, 40, 25, 20));
+		connectingRect[2] = ResizeRect(new Rect(50, 50, 40, 40));
+		connectingRect[3] = ResizeRect(new Rect(0, 80, 25, 20));
+		
+		lvlGraphicPos = ResizeRect(new Rect(0, 0, 50, 100));
 
-		mMenuBkgdPos  = ResizeRect(new Rect(0, 0, 100, 100));
+		mainMenuBkgdPos  = ResizeRect(new Rect(0, 0, 100, 100));
+		menuBkgdPos  = ResizeRect(new Rect(50, 50, 100, 100));
+		
+		Debug.Log(Screen.width);
+		Debug.Log(Screen.height);
+		Debug.Log(Camera.main.fieldOfView);
 		
 		startDinoPos = ResizeRect(new Rect(75, 40, 0, 0));
 		
@@ -190,10 +202,9 @@ public class MenuControl : MonoBehaviour
 		//inicialize the array of the menu origins
 		menuOrigin = new Rect[10];
 		
-		//dinoPos = Camera.main.ScreenToWorldPoint(new Vector3(startDinoPos.x, startDinoPos.y, 0));
 		dinoPos = Camera.main.ScreenToWorldPoint(new Vector3(menuOrigin[2].x + startDinoPos.x, menuOrigin[2].y + startDinoPos.y, 130));
 
-
+		//menuBkgdV3Pos = 
 
 	}
 	
@@ -234,20 +245,20 @@ public class MenuControl : MonoBehaviour
 		
 		if(menuSelect != Menu.mainMenu)
 		{
-			if(mMenuBkgd != null)
+			if(mainMenuBkgd != null)
 			{
-				Destroy(mMenuBkgd);
+				Destroy(mainMenuBkgd);
 			}
 		}
 		
 		//if menuSelet is the main menu
 		if(menuSelect == Menu.mainMenu)
 		{
-			if(mMenuBkgd == null)
+			if(mainMenuBkgd == null)
 			{
-				mMenuBkgd = CreateGUITxtr(mMenuBkgd, "main menu background", new Vector3(0, 0, 0), mMenuBkgdTxtr, mMenuBkgdPos);
+				mainMenuBkgd = CreateGUITxtr(mainMenuBkgd, "main menu background", new Vector3(0, 0, 0), mainMenuBkgdTxtr, mainMenuBkgdPos);
 			}
-			mMenuBkgd.guiTexture.pixelInset = new Rect(menuOrigin[0].x + mMenuBkgdPos.x, menuOrigin[0].y + mMenuBkgdPos.y, mMenuBkgdPos.width, mMenuBkgdPos.height);
+			mainMenuBkgd.guiTexture.pixelInset = new Rect(menuOrigin[0].x + mainMenuBkgdPos.x, menuOrigin[0].y + mainMenuBkgdPos.y, mainMenuBkgdPos.width, mainMenuBkgdPos.height);
 
 			//single player button
 			if(GUI.Button(new Rect(menuOrigin[0].x + mainMenuBtnRect[0].x, menuOrigin[0].y + mainMenuBtnRect[0].y, mainMenuBtnRect[0].width, mainMenuBtnRect[0].height), mainMenuBtnTxtr[0]))
@@ -297,6 +308,21 @@ public class MenuControl : MonoBehaviour
 		//if menuSelet is the join menu
 		else if(menuSelect == Menu.multiPMenu)
 		{
+		
+			if(menuBkgd == null)
+			{
+				menuBkgd = (GameObject)Instantiate(Resources.Load("GUI/MenuBackground"), new Vector3(menuBkgdPos.x, menuBkgdPos.y, 250), Quaternion.identity);
+				menuBkgd.transform.Rotate(new Vector3(90, 180, 0));
+			}
+			else
+			{
+				int menuToInt = (int)menuSelect;
+				Vector3 pointInWorld = Camera.main.ScreenToWorldPoint(new Vector3(Screen.width, Screen.height, Camera.main.transform.position.z));
+				menuBkgd.transform.position = Camera.main.ScreenToWorldPoint(new Vector3(menuOrigin[menuToInt].x + menuBkgdPos.x, menuOrigin[menuToInt].y + menuBkgdPos.y, 250));
+				menuBkgd.transform.localScale = new Vector3(pointInWorld.x / 5, 1, pointInWorld.y / 5);
+			}
+			
+			
 			//a label for the server name
 			GUI.Label(new Rect(menuOrigin[1].x + multiPMenuRect[0].x, menuOrigin[1].y + multiPMenuRect[0].y, multiPMenuRect[0].width, multiPMenuRect[0].height), "Server Name:");
 			
@@ -370,6 +396,27 @@ public class MenuControl : MonoBehaviour
 				dinoSelected.transform.RotateAround(new Vector3(0, 1, 0), Vector3.up, rotateSpeed * Time.deltaTime);
 			}
 			
+			if(menuBkgd == null)
+			{
+				menuBkgd = (GameObject)Instantiate(Resources.Load("GUI/MenuBackground"), new Vector3(menuBkgdPos.x, menuBkgdPos.y, 250), Quaternion.identity);
+				menuBkgd.transform.Rotate(new Vector3(90, 180, 0));
+			}
+			else
+			{
+				int menuToInt = (int)menuSelect;
+				Vector3 pointInWorld = Camera.main.ScreenToWorldPoint(new Vector3(Screen.width, Screen.height, Camera.main.transform.position.z));
+				menuBkgd.transform.position = Camera.main.ScreenToWorldPoint(new Vector3(menuOrigin[menuToInt].x + menuBkgdPos.x, menuOrigin[menuToInt].y + menuBkgdPos.y, 250));
+				menuBkgd.transform.localScale = new Vector3(pointInWorld.x / 5, 1, pointInWorld.y / 5);
+			}
+			
+			
+			/*if(lobbyBkgd == null)
+			{
+				lobbyBkgd = CreateGUITxtr(lobbyBkgd, "lobby background", new Vector3(0, 0, 0), lobbyBkgdTxtr, lobbyBkgdPos);
+			}
+			lobbyBkgd.guiTexture.pixelInset = new Rect(menuOrigin[2].x + lobbyBkgdPos.x, menuOrigin[2].y + lobbyBkgdPos.y, lobbyBkgdPos.width, lobbyBkgdPos.height);*/
+			
+			
 			if (inLobby == true)
 			{
 				var me = networkHandler.GetMyInfo();
@@ -395,7 +442,7 @@ public class MenuControl : MonoBehaviour
 					}
 					
 					for(;i<NetworkGameHandler.MAX_PLAYERS; i++){
-						GUI.Box(new Rect(menuOrigin[2].x + lobbyMenuRect[i].x, menuOrigin[2].y + lobbyMenuRect[i].y, lobbyMenuRect[i].width, lobbyMenuRect[i].height), "Empty Player Slot");
+						GUI.Box(new Rect(menuOrigin[2].x + lobbyMenuRect[i].x, menuOrigin[2].y + lobbyMenuRect[i].y, lobbyMenuRect[i].width, lobbyMenuRect[i].height), (Texture)Resources.Load("GUI/Materials/IconEmpty"));
 					}
 				}
 				
@@ -511,11 +558,25 @@ public class MenuControl : MonoBehaviour
 		//if menuSelet is the connecting scene
 		else if(menuSelect == Menu.connecting)
 		{
-			GUI.Box(new Rect(menuOrigin[3].x + connectingRect[0].x, menuOrigin[3].y + connectingRect[0].y, connectingRect[0].width, connectingRect[0].height), "Finding Game");
+			if(menuBkgd == null)
+			{
+				menuBkgd = (GameObject)Instantiate(Resources.Load("GUI/MenuBackground"), new Vector3(menuBkgdPos.x, menuBkgdPos.y, 250), Quaternion.identity);
+				menuBkgd.transform.Rotate(new Vector3(90, 180, 0));
+			}
+			else
+			{
+				int menuToInt = (int)menuSelect;
+				Vector3 pointInWorld = Camera.main.ScreenToWorldPoint(new Vector3(Screen.width, Screen.height, Camera.main.transform.position.z));
+				menuBkgd.transform.position = Camera.main.ScreenToWorldPoint(new Vector3(menuOrigin[menuToInt].x + menuBkgdPos.x, menuOrigin[menuToInt].y + menuBkgdPos.y, 250));
+				menuBkgd.transform.localScale = new Vector3(pointInWorld.x / 5, 1, pointInWorld.y / 5);
+			}
+			
+			
+			GUI.Box(new Rect(menuOrigin[3].x + connectingRect[0].x, menuOrigin[3].y + connectingRect[0].y, connectingRect[0].width, connectingRect[0].height), (Texture)Resources.Load("GUI/Materials/Icon"));
 			
 			GUI.Label(new Rect(menuOrigin[3].x + connectingRect[1].x, menuOrigin[3].y + connectingRect[1].y, connectingRect[1].width, connectingRect[1].height), GetConnectionState());
 			
-			if (GUI.Button (new Rect(menuOrigin[3].x + connectingRect[2].x, menuOrigin[3].y + connectingRect[2].y, connectingRect[2].width, connectingRect[2].height), backBtnTxtr)) 
+			if (GUI.Button (new Rect(menuOrigin[3].x + connectingRect[3].x, menuOrigin[3].y + connectingRect[3].y, connectingRect[3].width, connectingRect[3].height), backBtnTxtr)) 
 			{
 				networkHandler.LeaveGame();
 				isMovingRight = true;
