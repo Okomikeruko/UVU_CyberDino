@@ -40,6 +40,11 @@ public class LaserClass : WeaponClass
 		Line.enabled = false;
 	}
 
+	public void FireFunc()
+	{
+		FireLaser ();
+	}
+
 	public void FireLaser ()
 	{
 //		StopCoroutine("Laser");
