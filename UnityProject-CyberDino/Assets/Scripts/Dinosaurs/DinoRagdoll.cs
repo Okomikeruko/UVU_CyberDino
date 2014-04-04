@@ -6,8 +6,8 @@ public class DinoRagdoll : MonoBehaviour {
 	public GameObject ragdoll;
 
 	//Added by Sam
-	public GameObject newRagdoll;
-	public GameObject[] Ragdolls;
+	public Animator dinoAnimator;
+	public Rigidbody[] ragdollBones;
 
 	private MotionControl move;
 
@@ -16,30 +16,30 @@ public class DinoRagdoll : MonoBehaviour {
 	void OnEnable()
 	{
 
-		dinoSelection = GetComponent<DinoSelect>();
+//		dinoSelection = GetComponent<DinoSelect>();
 		move = GetComponent<MotionControl>();
-
-		switch(dinoSelection.dinosaurs[dinoSelection.Index].name)
-		{
-		case "Diloph":
-			ragdoll = Ragdolls[0];
-			break;
-		case "Hesp":
-			ragdoll = Ragdolls[1];
-			break;
-		case "Raptor":
-			ragdoll = Ragdolls[2];
-			break;
-		case "TRex":
-			ragdoll = Ragdolls[3];
-			break;
-		case "Troodon":
-			ragdoll = Ragdolls[4];
-			break;
-		default:
-			ragdoll = new GameObject();
-			break;
-		}
+//
+//		switch(dinoSelection.dinosaurs[dinoSelection.Index].name)
+//		{
+//		case "Diloph":
+//			ragdoll = Ragdolls[0];
+//			break;
+//		case "Hesp":
+//			ragdoll = Ragdolls[1];
+//			break;
+//		case "Raptor":
+//			ragdoll = Ragdolls[2];
+//			break;
+//		case "TRex":
+//			ragdoll = Ragdolls[3];
+//			break;
+//		case "Troodon":
+//			ragdoll = Ragdolls[4];
+//			break;
+//		default:
+//			ragdoll = new GameObject();
+//			break;
+//		}
 	}
 
 	public void GoRagdoll() {
@@ -47,17 +47,23 @@ public class DinoRagdoll : MonoBehaviour {
 
 			// Modified by Sam
 			move.SetRunning(false);
-			rigidbody.constraints = RigidbodyConstraints.FreezeAll;
+
+			foreach(Rigidbody ragdoll in ragdollBones)
+				ragdoll.isKinematic = false;
+
+			dinoAnimator.enabled = false;
+
+//			rigidbody.constraints = RigidbodyConstraints.FreezeAll;
 //			transform.collider.enabled = false;
-			SkinnedMeshRenderer theMesh = transform.gameObject.GetComponentInChildren<SkinnedMeshRenderer>();
-			theMesh.enabled = false;
+//			SkinnedMeshRenderer theMesh = transform.gameObject.GetComponentInChildren<SkinnedMeshRenderer>();
+//			theMesh.enabled = false;
 
 			// Instantiate ragdoll
-			newRagdoll = Instantiate(ragdoll, transform.position, transform.rotation) as GameObject;
-			newRagdoll.layer = gameObject.layer;
+//			newRagdoll = Instantiate(ragdoll, transform.position, transform.rotation) as GameObject;
+//			newRagdoll.layer = gameObject.layer;
 			
 			// Copy bone transforms to ragdoll
-			CopyTransforms(transform, newRagdoll.transform);
+//			CopyTransforms(transform, newRagdoll.transform);
 
 		}
 	}
@@ -65,14 +71,18 @@ public class DinoRagdoll : MonoBehaviour {
 	// Added by Sam
 	public void ResetRacer()
 	{
-		rigidbody.constraints = RigidbodyConstraints.FreezePositionX | RigidbodyConstraints.FreezePositionZ | RigidbodyConstraints.FreezeRotation;
-//		transform.collider.enabled = true;
-		SkinnedMeshRenderer theMesh = transform.gameObject.GetComponentInChildren<SkinnedMeshRenderer>();
-		theMesh.enabled = true;
+		foreach(Rigidbody ragdoll in ragdollBones)
+			ragdoll.isKinematic = true;
+		
+		dinoAnimator.enabled = true;
+//		rigidbody.constraints = RigidbodyConstraints.FreezePositionX | RigidbodyConstraints.FreezePositionZ | RigidbodyConstraints.FreezeRotation;
+////		transform.collider.enabled = true;
+//		SkinnedMeshRenderer theMesh = transform.gameObject.GetComponentInChildren<SkinnedMeshRenderer>();
+//		theMesh.enabled = true;
 		ColorLerpClass theLerp = transform.gameObject.GetComponent<ColorLerpClass>();
 		theLerp.lerping = false;
 		move.SetRunning(true);
-		Destroy(newRagdoll);
+//		Destroy(newRagdoll);
 	}
 
 	void CopyTransforms(Transform src, Transform dst) {
