@@ -13,7 +13,7 @@ public class MotionControl : MonoBehaviour {
 	private float speed = 0.0F;						// The speed at which this object is currently traveling
 	private float fallingSpeed = 0.0F;				// The speed at which this object is currently falling
 	
-	private float gravity = 10.0F; 					// The rate that objects fall in meters/second 
+	private float gravity = 98.0F; 					// The rate that objects fall in meters/second 
 	
 	private float drag = 2.0F;						// The rate which an object slows without breaking or accelerating
 	private float slope = 0.0f;						// The angle of the ground beneath this object
@@ -61,18 +61,15 @@ public class MotionControl : MonoBehaviour {
 		TurboTopSpeed = topSpeed * 1.5F;
 		TurboAcceleration = acceleration * 2.0F;
 		velocityJump = Mathf.Sqrt(2.0f * jump * gravity);
+		velocity = rigidbody.velocity.magnitude;
 	}
 	
 	// Update is called once per frame
 	void FixedUpdate () 
 	{
-		velocity = rigidbody.velocity.magnitude;
-
 		// Apply acceleration and drift or fall depending on grounded state
-		if (onGround && collisionAngle > SLOPE_ANGLE)
-		{
-			anim.SetBool("Jump", false);
-			
+		if (onGround/* && collisionAngle > SLOPE_ANGLE*/)
+		{			
 			// Update traction, drift, and driftRad every frame.
 			traction = handling * (1 - speed/topSpeed); 				// Set traction based on speed
 			if (speed / topSpeed > 0.8f) 
@@ -92,49 +89,39 @@ public class MotionControl : MonoBehaviour {
 
 			fallingSpeed = 0.0f; // Stop this object from falling
 
-			//anim.SetBool ("Jump", false);
 			netanim.AnimSetJump("Jump", false);
 			if(velocity < topSpeed && isRunning) // Test if this object is traveling at top speed
 			{
 				velocity += acceleration * Time.deltaTime; // Accelerate this object
 			}
 
-			// The Jump Function
-			if (Input.GetButton ("Jump") && anim.GetBool("Jump") == false ) // Test if Jump is pressed while on the ground
-			{
-
-				fallingSpeed = jump * velocity/topSpeed; // Apply jump accelleration to this object.
-				//anim.SetBool ("Jump", true);
-				netanim.AnimSetJump("Jump", true);
-			}
-
 			// Apply rotation
 			transform.Rotate(new Vector3(0, handling * horizontalTurning, 0)); // Rotate character controller
 			
 			// Update velocity
-			speed -= (drag + slope) * Mathf.Sign (speed) * Time.deltaTime; // Reduce velocity by drag and slope
+			velocity -= (drag + slope) * Mathf.Sign (speed) * Time.deltaTime; // Reduce velocity by drag and slope
 			
 			// Update moveDirection
 			driftRad = (Mathf.PI/180) * drift;							// Convert drift degrees in to drift radians
-			moveDirection.x = speed * Mathf.Sin (driftRad); 			// Apply velocity by drift ratio to local x
+			moveDirection.x = velocity * Mathf.Sin (driftRad); 			// Apply velocity by drift ratio to local x
 			moveDirection.y = fallingSpeed; 							// Apply falling speed to local y
-			moveDirection.z = speed * Mathf.Cos (driftRad); 			// Apply velocity by drift ratio to local z
+			moveDirection.z = velocity * Mathf.Cos (driftRad); 			// Apply velocity by drift ratio to local z
 			moveDirection = transform.TransformDirection(moveDirection);// Convert local vectors to world vectors
 			
-			//moveDirection *= velocity;
+//			moveDirection *= velocity;
 			velocityCurrent = rigidbody.velocity;
 			velocityDifference = moveDirection - velocityCurrent;
-			velocityDifference.y = 0.0f;		
+//			velocityDifference.y = 0.0f;		
 			
 			// Apply movement
 			rigidbody.AddForce(velocityDifference, ForceMode.VelocityChange);			
 			
 			// The Jump Function
-			if (Input.GetButton("Jump") && anim.GetBool("Jump") == false ) // Test if Jump is pressed while on the ground
+			if (Input.GetButton("Jump") && netanim.anim.GetBool("Jump") == false ) // Test if Jump is pressed while on the ground
 			{
 				velocityCurrent = rigidbody.velocity;
 				rigidbody.velocity = new Vector3(velocityCurrent.x, velocityJump, velocityCurrent.z);
-				anim.SetBool("Jump", true);
+				netanim.AnimSetJump("Jump", true);
 			}
 		}
 		else
@@ -142,9 +129,7 @@ public class MotionControl : MonoBehaviour {
 			rigidbody.AddForce(new Vector3(0.0f, -gravity * rigidbody.mass, 0.0f));
 		}	
 
-		//anim.SetFloat("Speed", velocity/topSpeed);
 		netanim.AnimSetSpeed("Speed", velocity, topSpeed);
-		//anim.SetFloat("Direction", h);
 		netanim.AnimSetDirection("Direction", horizontalTurning);
 	}
 	
