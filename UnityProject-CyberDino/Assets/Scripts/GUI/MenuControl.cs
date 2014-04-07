@@ -249,16 +249,38 @@ public class MenuControl : MonoBehaviour
 			{
 				Destroy(mainMenuBkgd);
 			}
+			
+			if(menuBkgd == null)
+			{
+				Vector3 backgroundPos = Camera.main.ScreenToWorldPoint(new Vector3(menuBkgdPos.x, menuBkgdPos.y, 250));
+				menuBkgd = (GameObject)Instantiate(Resources.Load("GUI/MenuBackground"), backgroundPos, Quaternion.identity);
+				menuBkgd.transform.Rotate(new Vector3(90, 180, 0));
+				Vector3 pointInWorld = Camera.main.ScreenToWorldPoint(new Vector3(Screen.width, Screen.height, Camera.main.transform.position.z));
+				menuBkgd.transform.localScale = new Vector3(pointInWorld.x / 5, 1, pointInWorld.y / 5);
+			}
+		}
+		else
+		{
+			if(menuBkgd != null)
+			{
+				Destroy(menuBkgd);
+			}
+			
+			if(mainMenuBkgd == null)
+			{
+				mainMenuBkgd = CreateGUITxtr(mainMenuBkgd, "main menu background", new Vector3(0, 0, 0), mainMenuBkgdTxtr, mainMenuBkgdPos);
+			}
+			else
+			{
+				mainMenuBkgd.guiTexture.pixelInset = new Rect(menuOrigin[0].x + mainMenuBkgdPos.x, menuOrigin[0].y + mainMenuBkgdPos.y, mainMenuBkgdPos.width, mainMenuBkgdPos.height);
+			}
 		}
 		
 		//if menuSelet is the main menu
 		if(menuSelect == Menu.mainMenu)
 		{
-			if(mainMenuBkgd == null)
-			{
-				mainMenuBkgd = CreateGUITxtr(mainMenuBkgd, "main menu background", new Vector3(0, 0, 0), mainMenuBkgdTxtr, mainMenuBkgdPos);
-			}
-			mainMenuBkgd.guiTexture.pixelInset = new Rect(menuOrigin[0].x + mainMenuBkgdPos.x, menuOrigin[0].y + mainMenuBkgdPos.y, mainMenuBkgdPos.width, mainMenuBkgdPos.height);
+			
+			//mainMenuBkgd.guiTexture.pixelInset = new Rect(menuOrigin[0].x + mainMenuBkgdPos.x, menuOrigin[0].y + mainMenuBkgdPos.y, mainMenuBkgdPos.width, mainMenuBkgdPos.height);
 
 			//single player button
 			if(GUI.Button(new Rect(menuOrigin[0].x + mainMenuBtnRect[0].x, menuOrigin[0].y + mainMenuBtnRect[0].y, mainMenuBtnRect[0].width, mainMenuBtnRect[0].height), mainMenuBtnTxtr[0]))
@@ -279,18 +301,6 @@ public class MenuControl : MonoBehaviour
 				
 				//change menu to single player
 				menuChange = Menu.lobbyMenu;
-				
-				dinoSelected = (GameObject)Instantiate(dinoModels[dinoIndex], new Vector3(Screen.width, Screen.height, 0), Quaternion.identity);
-				dinoSelected.transform.localScale = new Vector3(10, 10, 10);
-				
-				lvlGraphic = new GameObject();
-				lvlGraphic.transform.localScale = new Vector3(0,0,0);
-				lvlGraphic.AddComponent("GUITexture");
-				lvlGraphic.guiTexture.pixelInset = new Rect(menuOrigin[2].x + lvlGraphicPos.x, menuOrigin[2].y + lvlGraphicPos.y, lvlGraphicPos.width, lvlGraphicPos.height);
-				
-				lvlGraphic.guiTexture.texture = lvlSelectTxtr[levelIndex];
-				
-				
 			}
 			//multiplayer button
 			if(GUI.Button(new Rect(menuOrigin[0].x + mainMenuBtnRect[1].x, menuOrigin[0].y + mainMenuBtnRect[1].y, mainMenuBtnRect[1].width, mainMenuBtnRect[1].height), mainMenuBtnTxtr[1]))
@@ -308,21 +318,6 @@ public class MenuControl : MonoBehaviour
 		//if menuSelet is the join menu
 		else if(menuSelect == Menu.multiPMenu)
 		{
-		
-			if(menuBkgd == null)
-			{
-				menuBkgd = (GameObject)Instantiate(Resources.Load("GUI/MenuBackground"), new Vector3(menuBkgdPos.x, menuBkgdPos.y, 250), Quaternion.identity);
-				menuBkgd.transform.Rotate(new Vector3(90, 180, 0));
-			}
-			else
-			{
-				int menuToInt = (int)menuSelect;
-				Vector3 pointInWorld = Camera.main.ScreenToWorldPoint(new Vector3(Screen.width, Screen.height, Camera.main.transform.position.z));
-				menuBkgd.transform.position = Camera.main.ScreenToWorldPoint(new Vector3(menuOrigin[menuToInt].x + menuBkgdPos.x, menuOrigin[menuToInt].y + menuBkgdPos.y, 250));
-				menuBkgd.transform.localScale = new Vector3(pointInWorld.x / 5, 1, pointInWorld.y / 5);
-			}
-			
-			
 			//a label for the server name
 			GUI.Label(new Rect(menuOrigin[1].x + multiPMenuRect[0].x, menuOrigin[1].y + multiPMenuRect[0].y, multiPMenuRect[0].width, multiPMenuRect[0].height), "Server Name:");
 			
@@ -342,15 +337,6 @@ public class MenuControl : MonoBehaviour
 				{
 					inLobby = true;
 					networkHandler.HostGame(serverName, playerName);
-					
-					dinoSelected = (GameObject)Instantiate(dinoModels[dinoIndex], new Vector3(Screen.width, Screen.height, 0), Quaternion.identity);
-					dinoSelected.transform.localScale = new Vector3(10, 10, 10);
-					
-					lvlGraphic = new GameObject();
-					lvlGraphic.transform.localScale = new Vector3(0,0,0);
-					lvlGraphic.AddComponent("GUITexture");
-					lvlGraphic.guiTexture.pixelInset = new Rect(menuOrigin[2].x + lvlGraphicPos.x, menuOrigin[2].y + lvlGraphicPos.y, lvlGraphicPos.width, lvlGraphicPos.height);
-					lvlGraphic.guiTexture.texture = lvlSelectTxtr[levelIndex];
 					
 					isMovingLeft = true;
 					
@@ -390,50 +376,34 @@ public class MenuControl : MonoBehaviour
 		//if menuSelet is the lobby menu
 		else if(menuSelect == Menu.lobbyMenu)
 		{
-			if(dinoSelected != null)
+			if(menuChange == Menu.lobbyMenu && dinoSelected != null)
 			{
 				dinoSelected.transform.position = Camera.main.ScreenToWorldPoint(new Vector3(menuOrigin[2].x + startDinoPos.x, menuOrigin[2].y + startDinoPos.y, 150));
 				dinoSelected.transform.RotateAround(new Vector3(0, 1, 0), Vector3.up, rotateSpeed * Time.deltaTime);
 			}
-			
-			if(menuBkgd == null)
+			else if(menuChange == Menu.lobbyMenu && dinoSelected == null)
 			{
-				menuBkgd = (GameObject)Instantiate(Resources.Load("GUI/MenuBackground"), new Vector3(menuBkgdPos.x, menuBkgdPos.y, 250), Quaternion.identity);
-				menuBkgd.transform.Rotate(new Vector3(90, 180, 0));
-			}
-			else
-			{
-				int menuToInt = (int)menuSelect;
-				Vector3 pointInWorld = Camera.main.ScreenToWorldPoint(new Vector3(Screen.width, Screen.height, Camera.main.transform.position.z));
-				menuBkgd.transform.position = Camera.main.ScreenToWorldPoint(new Vector3(menuOrigin[menuToInt].x + menuBkgdPos.x, menuOrigin[menuToInt].y + menuBkgdPos.y, 250));
-				menuBkgd.transform.localScale = new Vector3(pointInWorld.x / 5, 1, pointInWorld.y / 5);
+				dinoSelected = (GameObject)Instantiate(dinoModels[dinoIndex], new Vector3(Screen.width, Screen.height, 0), Quaternion.identity);
+				dinoSelected.transform.localScale = new Vector3(10, 10, 10);
 			}
 			
-			
-			/*if(lobbyBkgd == null)
+			if(menuChange == Menu.lobbyMenu && lvlGraphic == null)
 			{
-				lobbyBkgd = CreateGUITxtr(lobbyBkgd, "lobby background", new Vector3(0, 0, 0), lobbyBkgdTxtr, lobbyBkgdPos);
+				lvlGraphic = CreateGUITxtr(lvlGraphic, "lvlGraphic", new Vector3(0, 0, 100), lvlSelectTxtr[levelIndex], lvlGraphicPos);
 			}
-			lobbyBkgd.guiTexture.pixelInset = new Rect(menuOrigin[2].x + lobbyBkgdPos.x, menuOrigin[2].y + lobbyBkgdPos.y, lobbyBkgdPos.width, lobbyBkgdPos.height);*/
-			
-			
+			else if(menuChange == Menu.lobbyMenu && lvlGraphic != null)
+			{
+				lvlGraphic.guiTexture.pixelInset = new Rect(menuOrigin[2].x + lvlGraphicPos.x, menuOrigin[2].y + lvlGraphicPos.y, lvlGraphicPos.width, lvlGraphicPos.height);
+			}
+	
 			if (inLobby == true)
 			{
 				var me = networkHandler.GetMyInfo();
 				
 				if(singlePlayer != true)
 				{
-					/*if(GUI.Button (new Rect(menuOrigin[2].x + lobbyMenuRect[0].x, menuOrigin[2].y + lobbyMenuRect[0].y, lobbyMenuRect[0].width, lobbyMenuRect[0].height), me.playerName + " - " + me.dinoName))
-					{
-						isMovingLeft = true;
-					
-						moveIndex1 = 5;
-						moveIndex2 = 2;
-						menuChange = Menu.dinoMenu;
-					
-					}*/
-					
 					int i = 1;
+					
 					foreach(var player in networkHandler.playerInformation){
 						if(player.Key != Network.player.ToString()){
 							GUI.Label(new Rect(menuOrigin[2].x + lobbyMenuRect[i].x, menuOrigin[2].y + lobbyMenuRect[i].y, lobbyMenuRect[i].width, lobbyMenuRect[i].height), player.Value.playerName + " - " + player.Value.dinoName);
@@ -448,17 +418,6 @@ public class MenuControl : MonoBehaviour
 				
 				if(Network.isServer)
 				{
-					/*if(GUI.Button(new Rect(menuOrigin[2].x + lobbyMenuRect[6].x, menuOrigin[2].y + lobbyMenuRect[6].y, lobbyMenuRect[6].width, lobbyMenuRect[6].height), levelTextures[levelIndex]))
-					{
-						isMovingLeft = true;
-						
-						moveIndex1 = 5;
-						moveIndex2 = 3;
-						menuChange = Menu.levelMenu;
-					}*/
-					
-					lvlGraphic.guiTexture.pixelInset = new Rect(menuOrigin[2].x + lvlGraphicPos.x, menuOrigin[2].y + lvlGraphicPos.y, lvlGraphicPos.width, lvlGraphicPos.height);
-					
 					//left button for level select
 					if(GUI.Button(new Rect(menuOrigin[2].x + lobbyMenuBtnRect[0].x, menuOrigin[2].y + lobbyMenuBtnRect[0].y, lobbyMenuBtnRect[0].width, lobbyMenuBtnRect[0].height), lobbyMenuBtnTxtr[0]))
 					{
@@ -470,11 +429,6 @@ public class MenuControl : MonoBehaviour
 						LevelSelectionIncrement();
 					}
 					
-				}
-				else
-				{
-					//Debug.Log(sPlayerMenuTexture[2]);
-					GUI.Box (new Rect(menuOrigin[2].x + lobbyMenuRect[6].x, menuOrigin[2].y + lobbyMenuRect[6].y, lobbyMenuRect[6].width, lobbyMenuRect[6].height), lvlSelectTxtr[levelIndex]);
 				}
 				
 				//left arrow for dino select
@@ -488,34 +442,6 @@ public class MenuControl : MonoBehaviour
 				{
 					DinoSelectionIncrement();
 				}
-				
-				//right button for level select
-				
-				/*	if(Input.GetKeyDown(KeyCode.RightArrow))
-				{
-					if(dinoIndex >= levels.Length - 1)
-					{
-						dinoIndex = 0;
-					}
-					else
-					{
-						dinoIndex++;
-					}
-				}
-				
-				if(Input.GetKeyDown(KeyCode.LeftArrow))
-				{
-					if(dinoIndex <= 0)
-					{
-						dinoIndex = levels.Length - 1;
-					}
-					else
-					{
-						levelIndex--;
-					}
-				}*/
-				
-				
 				
 				//Back Button
 				if(GUI.Button(new Rect(menuOrigin[2].x + lobbyMenuBtnRect[4].x, menuOrigin[2].y + lobbyMenuBtnRect[4].y, lobbyMenuBtnRect[4].width, lobbyMenuBtnRect[4].height), backBtnTxtr))
@@ -542,6 +468,8 @@ public class MenuControl : MonoBehaviour
 						menuChange = Menu.multiPMenu;
 					}
 					
+					Destroy(lvlGraphic);
+					
 				}
 				
 				//start level button
@@ -564,20 +492,6 @@ public class MenuControl : MonoBehaviour
 		//if menuSelet is the connecting scene
 		else if(menuSelect == Menu.connecting)
 		{
-			if(menuBkgd == null)
-			{
-				menuBkgd = (GameObject)Instantiate(Resources.Load("GUI/MenuBackground"), new Vector3(menuBkgdPos.x, menuBkgdPos.y, 250), Quaternion.identity);
-				menuBkgd.transform.Rotate(new Vector3(90, 180, 0));
-			}
-			else
-			{
-				int menuToInt = (int)menuSelect;
-				Vector3 pointInWorld = Camera.main.ScreenToWorldPoint(new Vector3(Screen.width, Screen.height, Camera.main.transform.position.z));
-				menuBkgd.transform.position = Camera.main.ScreenToWorldPoint(new Vector3(menuOrigin[menuToInt].x + menuBkgdPos.x, menuOrigin[menuToInt].y + menuBkgdPos.y, 250));
-				menuBkgd.transform.localScale = new Vector3(pointInWorld.x / 5, 1, pointInWorld.y / 5);
-			}
-			
-			
 			GUI.Box(new Rect(menuOrigin[3].x + connectingRect[0].x, menuOrigin[3].y + connectingRect[0].y, connectingRect[0].width, connectingRect[0].height), (Texture)Resources.Load("GUI/Materials/Icon"));
 			
 			GUI.Label(new Rect(menuOrigin[3].x + connectingRect[1].x, menuOrigin[3].y + connectingRect[1].y, connectingRect[1].width, connectingRect[1].height), GetConnectionState());
