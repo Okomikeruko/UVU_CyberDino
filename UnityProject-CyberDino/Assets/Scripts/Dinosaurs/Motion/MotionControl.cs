@@ -18,7 +18,7 @@ public class MotionControl : MonoBehaviour {
 	private float drag = 2.0F;						// The rate which an object slows without breaking or accelerating
 	private float slope = 0.0f;						// The angle of the ground beneath this object
 	private float drift = 0.0F;						// The angle of drift in degrees
-	private float maxDrift = 70.0F; 				// The maximum angle of drift in degrees
+	private float maxDrift = 7.0F; 				// The maximum angle of drift in degrees
 	private float driftRad = 0.0f;					// The angle of drift in radians
 	private float traction = 1.0f;					// The rate at which drift is reduced
 	private float collisionAngle = 0.0f;
