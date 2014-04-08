@@ -30,6 +30,7 @@ public class MenuControl : MonoBehaviour
 	public Rect[] resultsMenuRect;
 	private Rect[] connectingRect;
 	
+	//the position of the dino models
 	private Rect startDinoPos;
 	private Vector3 dinoPos;
 	
@@ -58,6 +59,7 @@ public class MenuControl : MonoBehaviour
 	
 	//hold the textures of the main menu textures
 	private Texture[] mainMenuBtnTxtr;
+	
 	//hold the textures of the multiplayer menu textures
 	private Texture[] mPlayerMenuBtnTxtr;
 	private Texture[] lobbyMenuBtnTxtr;
@@ -65,6 +67,8 @@ public class MenuControl : MonoBehaviour
 	//hold the textures of the back button texture
 	private Texture backBtnTxtr;
 	
+	//array to hold the mini dino portrait
+	private Texture[] dinoPortrait;
 	
 	
 	//menu sliding variables
@@ -72,46 +76,32 @@ public class MenuControl : MonoBehaviour
 	//an array of rects to hold the origin of the button positions
 	private Rect[] menuOrigin;
 	
-	//a bool for when the menu is moving left
-	private bool isMovingLeft = false;
-	
-	//a bool for when the menu is moving right
-	private bool isMovingRight = false;
+	//a bool for when the menu is moving 
+	private bool menuMoving = false;
 	
 	//an int for the speed of the menu sliding
 	public int buttonMoveSpeed;
 	
-	//int selected button index
-	private int selectedIndex = 0;
-	
-	// the index of the first menu to be moved
-	private int moveIndex1;
-	
-	//the index of the second menu to be moved
-	private int moveIndex2;
-	
-	//a Menu enum for what the menu will switch to
-	private Menu menuChange;
-	
-	//textures for the customization of the dinos
+	//an array of the dino prefabs
 	public GameObject[] dinoModels;
 	
+	//the game object that shows the dino
 	private GameObject dinoSelected;
 	
+	//rotation speed of the dino
 	public float rotateSpeed;
 	
-	public float dinoModelSize;
-	public float tRexModelSize;
-	
-	
+	//the level selection graphic
 	private Texture[] lvlSelectTxtr;
 	private GameObject lvlGraphic;
 	private Rect lvlGraphicPos;
 
+	//the main menu background
 	private Texture mainMenuBkgdTxtr;
 	private GameObject mainMenuBkgd;
 	private Rect mainMenuBkgdPos;
 	
+	//the menu background
 	private GameObject menuBkgd;
 	private Rect menuBkgdPos;
 	private Vector3 menuBkgdV3Pos;
@@ -142,6 +132,13 @@ public class MenuControl : MonoBehaviour
 
 		mainMenuBkgdTxtr = (Texture)Resources.Load("GUI/Materials/Cyberdino temp title");
 		
+		dinoPortrait = new Texture[6];
+		dinoPortrait[0] = (Texture)Resources.Load("GUI/Materials/CityTrackGFX");
+		dinoPortrait[1] = (Texture)Resources.Load("GUI/Materials/CityTrackGFX");
+		dinoPortrait[2] = (Texture)Resources.Load("GUI/Materials/CityTrackGFX");
+		dinoPortrait[3] = (Texture)Resources.Load("GUI/Materials/CityTrackGFX");
+		dinoPortrait[4] = (Texture)Resources.Load("GUI/Materials/CityTrackGFX");
+		dinoPortrait[5] = (Texture)Resources.Load("GUI/Materials/CityTrackGFX");
 		
 		//graphics ----------------------------------------
 		mainMenuBtnRect = new Rect[2];
@@ -184,10 +181,6 @@ public class MenuControl : MonoBehaviour
 		mainMenuBkgdPos  = ResizeRect(new Rect(0, 0, 100, 100));
 		menuBkgdPos  = ResizeRect(new Rect(50, 50, 100, 100));
 		
-		Debug.Log(Screen.width);
-		Debug.Log(Screen.height);
-		Debug.Log(Camera.main.fieldOfView);
-		
 		startDinoPos = ResizeRect(new Rect(75, 40, 0, 0));
 		
 		
@@ -203,8 +196,6 @@ public class MenuControl : MonoBehaviour
 		menuOrigin = new Rect[10];
 		
 		dinoPos = Camera.main.ScreenToWorldPoint(new Vector3(menuOrigin[2].x + startDinoPos.x, menuOrigin[2].y + startDinoPos.y, 130));
-
-		//menuBkgdV3Pos = 
 
 	}
 	
@@ -287,31 +278,17 @@ public class MenuControl : MonoBehaviour
 			{
 				singlePlayer = true;
 				
-				//make moving left to be true
-				isMovingLeft = true;
-				
-				//set the menu index to move off screen
-				moveIndex1 = 0;
-				
-				//set the menu index to move on screen
-				moveIndex2 = 2;
-				
 				inLobby = true;
 				networkHandler.HostGame("SinglePlayer", "player");
 				
-				//change menu to single player
-				menuChange = Menu.lobbyMenu;
+				StartCoroutine(MoveLeftOff(0, 2, Menu.lobbyMenu));
 			}
 			//multiplayer button
 			if(GUI.Button(new Rect(menuOrigin[0].x + mainMenuBtnRect[1].x, menuOrigin[0].y + mainMenuBtnRect[1].y, mainMenuBtnRect[1].width, mainMenuBtnRect[1].height), mainMenuBtnTxtr[1]))
 			{
-				isMovingLeft = true;
-				
 				singlePlayer = false;
 				
-				moveIndex1 = 0;
-				moveIndex2 = 1;
-				menuChange = Menu.multiPMenu;
+				StartCoroutine(MoveLeftOff(0, 1, Menu.multiPMenu));
 			}
 			
 		}
@@ -338,11 +315,7 @@ public class MenuControl : MonoBehaviour
 					inLobby = true;
 					networkHandler.HostGame(serverName, playerName);
 					
-					isMovingLeft = true;
-					
-					moveIndex1 = 1;
-					moveIndex2 = 2;
-					menuChange = Menu.lobbyMenu;
+					StartCoroutine(MoveLeftOff(1, 2, Menu.lobbyMenu));
 				}
 			}
 			
@@ -353,45 +326,36 @@ public class MenuControl : MonoBehaviour
 				{
 					networkHandler.JoinGame(serverName, playerName);
 					
-					isMovingLeft = true;
-					
-					moveIndex1 = 1;
-					moveIndex2 = 3;
-					menuChange = Menu.connecting;
-					//Debug.Log ("trying to change menu");
+					StartCoroutine(MoveLeftOff(1, 3, Menu.connecting));
 				}
 			}
 			
 			//back button
 			if(GUI.Button(new Rect(menuOrigin[1].x + multiPMenuRect[4].x, menuOrigin[1].y + multiPMenuRect[4].y, multiPMenuRect[4].width, multiPMenuRect[4].height), backBtnTxtr))
 			{
-				isMovingRight = true;
-				
-				moveIndex1 = 1;
-				moveIndex2 = 0;
-				menuChange = Menu.mainMenu;
+				StartCoroutine(MoveRightOff(1, 0, Menu.mainMenu));
 			}
 			
 		}
 		//if menuSelet is the lobby menu
 		else if(menuSelect == Menu.lobbyMenu)
 		{
-			if(menuChange == Menu.lobbyMenu && dinoSelected != null)
+			if(dinoSelected != null)
 			{
 				dinoSelected.transform.position = Camera.main.ScreenToWorldPoint(new Vector3(menuOrigin[2].x + startDinoPos.x, menuOrigin[2].y + startDinoPos.y, 150));
 				dinoSelected.transform.RotateAround(new Vector3(0, 1, 0), Vector3.up, rotateSpeed * Time.deltaTime);
 			}
-			else if(menuChange == Menu.lobbyMenu && dinoSelected == null)
+			else if(dinoSelected == null)
 			{
 				dinoSelected = (GameObject)Instantiate(dinoModels[dinoIndex], new Vector3(Screen.width, Screen.height, 0), Quaternion.identity);
 				dinoSelected.transform.localScale = new Vector3(10, 10, 10);
 			}
 			
-			if(menuChange == Menu.lobbyMenu && lvlGraphic == null)
+			if(lvlGraphic == null)
 			{
 				lvlGraphic = CreateGUITxtr(lvlGraphic, "lvlGraphic", new Vector3(0, 0, 100), lvlSelectTxtr[levelIndex], lvlGraphicPos);
 			}
-			else if(menuChange == Menu.lobbyMenu && lvlGraphic != null)
+			else if(lvlGraphic != null)
 			{
 				lvlGraphic.guiTexture.pixelInset = new Rect(menuOrigin[2].x + lvlGraphicPos.x, menuOrigin[2].y + lvlGraphicPos.y, lvlGraphicPos.width, lvlGraphicPos.height);
 			}
@@ -451,21 +415,13 @@ public class MenuControl : MonoBehaviour
 					inLobby = false;
 					networkHandler.LeaveGame();
 					
-					isMovingRight = true;
-					
 					if(singlePlayer == true)
 					{
-						moveIndex1 = 2;
-						moveIndex2 = 0;
-						
-						menuChange = Menu.mainMenu;
+						StartCoroutine(MoveRightOff(2, 0, Menu.mainMenu));
 					}
 					else
 					{
-						moveIndex1 = 2;
-						moveIndex2 = 1;
-						
-						menuChange = Menu.multiPMenu;
+						StartCoroutine(MoveRightOff(2, 1, Menu.multiPMenu));
 					}
 					
 					Destroy(lvlGraphic);
@@ -499,27 +455,17 @@ public class MenuControl : MonoBehaviour
 			if (GUI.Button (new Rect(menuOrigin[3].x + connectingRect[3].x, menuOrigin[3].y + connectingRect[3].y, connectingRect[3].width, connectingRect[3].height), backBtnTxtr)) 
 			{
 				networkHandler.LeaveGame();
-				isMovingRight = true;
-				
-				moveIndex1 = 3;
-				moveIndex2 = 1;
-				
-				menuChange = Menu.multiPMenu;
-				
+	
+				StartCoroutine(MoveRightOff(3, 1, Menu.multiPMenu));
 			}
 			
-			if(isMovingLeft == false && isMovingRight == false){
+			if(menuMoving == false)
+			{
 				if(networkHandler.GetConnectionStatus() == NetworkGameHandler.ConnectionState.InLobby) 
 				{
-					dinoSelected = (GameObject)Instantiate(dinoModels[dinoIndex], new Vector3(Screen.width, Screen.height, 0), Quaternion.identity);
-					dinoSelected.transform.localScale = new Vector3(10, 10, 10);
-					
 					inLobby = true;
-					isMovingLeft = true;
 					
-					moveIndex1 = 3;
-					moveIndex2 = 1;
-					menuChange = Menu.lobbyMenu;
+					StartCoroutine(MoveLeftOff(3, 2, Menu.lobbyMenu));
 				}
 			}
 		}
@@ -566,22 +512,7 @@ public class MenuControl : MonoBehaviour
 		{
 			
 		}
-		
-		
-		//if isMovingLeft is true
-		if(isMovingLeft == true)
-		{
-			//call the move left function using the selected index
-			MoveLeftOff(moveIndex1, moveIndex2, menuChange);
-			
-		}
-		
-		if(isMovingRight == true)
-		{
-			//call the move left function using the selected index
-			MoveRightOff(moveIndex1, moveIndex2, menuChange);
-			
-		}
+
 	}
 	
 	
@@ -625,72 +556,86 @@ public class MenuControl : MonoBehaviour
 	}
 	
 	
-	void MoveRightOff(int _index1, int _index2, Menu _menu)
+	IEnumerator MoveRightOff(int _index1, int _index2, Menu _menu)
 	{
+		menuMoving = true;
 		
-		//if the first menu is left of the screen size
-		if(menuOrigin[_index1].x < Screen.width)
+		while(true)
 		{
-			//move the first menu to the right
-			menuOrigin[_index1].x = menuOrigin[_index1].x + buttonMoveSpeed * Time.deltaTime;
-		}
-		//if the first menu is off of the screen to the right
-		else if(menuSelect != _menu)
-		{
-			//change which menu to show
-			menuSelect = _menu;
+			//if the first menu is left of the screen size
+			if(menuOrigin[_index1].x < Screen.width)
+			{
+				//move the first menu to the right
+				menuOrigin[_index1].x = menuOrigin[_index1].x + buttonMoveSpeed * Time.deltaTime;
+			}
+			//if the first menu is off of the screen to the right
+			else if(menuSelect != _menu)
+			{
+				//change which menu to show
+				menuSelect = _menu;
 			
-			//have the second menu appear off screen to the left
-			menuOrigin[_index2].x = -Screen.width;
+				//have the second menu appear off screen to the left
+				menuOrigin[_index2].x = -Screen.width;
 			
-		}
-		//if the second menu appears and it's less than 0
-		if(menuSelect == _menu && menuOrigin[_index2].x < 0)
-		{
-			//move the second menu to the right
-			menuOrigin[_index2].x = menuOrigin[_index2].x + buttonMoveSpeed * Time.deltaTime;
-		}
+			}
+			//if the second menu appears and it's less than 0
+			if(menuSelect == _menu && menuOrigin[_index2].x < 0)
+			{
+				//move the second menu to the right
+				menuOrigin[_index2].x = menuOrigin[_index2].x + buttonMoveSpeed * Time.deltaTime;
+			}
 		
 		
-		//if the rect position is the same as the end position
-		if(menuOrigin[_index2].x > 0)
-		{
-			menuOrigin[_index2].x = 0;
+			//if the rect position is the same as the end position
+			if(menuOrigin[_index2].x > 0)
+			{
+				menuOrigin[_index2].x = 0;
+				
+				menuMoving = false;
+				
+				yield break;
+			}
 			
-			//ismoving is false
-			isMovingRight = false;
+			yield return null;
 		}
-		
 	}
 	
-	void MoveLeftOff(int _index1, int _index2, Menu _menu)
+	IEnumerator MoveLeftOff(int _index1, int _index2, Menu _menu)
 	{
-		if(menuOrigin[_index1].x > -Screen.width)
+	
+		menuMoving = true;
+		
+		while(true)
 		{
-			menuOrigin[_index1].x = menuOrigin[_index1].x - buttonMoveSpeed * Time.deltaTime;
-		}
-		else if(menuSelect != _menu)
-		{
-			menuSelect = _menu;
+			if(menuOrigin[_index1].x > -Screen.width)
+			{
+				menuOrigin[_index1].x = menuOrigin[_index1].x - buttonMoveSpeed * Time.deltaTime;
+			}
+			else if(menuSelect != _menu)
+			{
+				menuSelect = _menu;
 			
-			menuOrigin[_index2].x = Screen.width;
+				menuOrigin[_index2].x = Screen.width;
 			
-		}
+			}
 		
-		if(menuSelect == _menu && menuOrigin[_index2].x > 0)
-		{
-			menuOrigin[_index2].x = menuOrigin[_index2].x - buttonMoveSpeed * Time.deltaTime;
-		}
+			if(menuSelect == _menu && menuOrigin[_index2].x > 0)
+			{
+				menuOrigin[_index2].x = menuOrigin[_index2].x - buttonMoveSpeed * Time.deltaTime;
+			}
 		
 		
-		if(menuOrigin[_index2].x < 0)
-		{
-			menuOrigin[_index2].x = 0;
+			if(menuOrigin[_index2].x < 0)
+			{
+				menuOrigin[_index2].x = 0;
+				
+				menuMoving = false;
 			
-			//ismoving is false
-			isMovingLeft = false;
+				yield break;
+			}
+			
+			yield return null;
 		}
-		
 	}
 	
 	void SwitchDino(int _index)
