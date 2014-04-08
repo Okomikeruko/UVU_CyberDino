@@ -484,6 +484,7 @@ public class MenuControl : MonoBehaviour
 						networkHandler.UpdatePlayerInformation(myInfo);
 
 						menuSelect = Menu.goToLevel;
+						networkHandler.ChangeMenuSelect();
 						networkHandler.ChangeLevel();
 					}
 				}
@@ -784,5 +785,9 @@ public class MenuControl : MonoBehaviour
 		_obj.guiTexture.texture = _txtr;
 		
 		return _obj;
+	}
+
+	public void GoToLevel() {
+		menuSelect = Menu.goToLevel;
 	}
 }
