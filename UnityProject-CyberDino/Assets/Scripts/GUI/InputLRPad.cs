@@ -9,7 +9,6 @@ public class InputLRPad : MonoBehaviour
 	//variables that help with resizing and position
 	private float xMulti;
 	private float yMulti;
-	public float sizeSetter = 3.0f;
 	
 	//variables that hold the original width and length of the GUITexture
 	private float textureX;
@@ -28,9 +27,9 @@ public class InputLRPad : MonoBehaviour
 	public Rect rightArrowPos;
 	
 	//variables to hold the player and the motion script
-	public GameObject[] players;
 	public GameObject player;
 	public MotionControl motionConScript;
+	private GameObject[] players;
 	
 	private float currentTurn = 0;
 	public float velocityRight = 0.5f;
@@ -46,6 +45,7 @@ public class InputLRPad : MonoBehaviour
 	// Use this for initialization
 	void Start () 
 	{
+		
 		leftArrow.transform.position = Vector3.zero;
 		leftArrow.transform.localScale = Vector3.zero;
 		

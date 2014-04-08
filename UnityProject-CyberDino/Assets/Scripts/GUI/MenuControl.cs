@@ -234,13 +234,16 @@ public class MenuControl : MonoBehaviour
 		//set this skin as the active one
 		GUI.skin = mySkin;
 		
+		//if the menu selected isn't the main menu
 		if(menuSelect != Menu.mainMenu)
 		{
+			//destroy the main menu background if it is there
 			if(mainMenuBkgd != null)
 			{
 				Destroy(mainMenuBkgd);
 			}
 			
+			//if the menu background isn't there then create it
 			if(menuBkgd == null)
 			{
 				Vector3 backgroundPos = Camera.main.ScreenToWorldPoint(new Vector3(menuBkgdPos.x, menuBkgdPos.y, 250));
@@ -252,11 +255,13 @@ public class MenuControl : MonoBehaviour
 		}
 		else
 		{
+			//if the menu background is there then destroy it
 			if(menuBkgd != null)
 			{
 				Destroy(menuBkgd);
 			}
 			
+			//if the main menu background isn't there then create it.
 			if(mainMenuBkgd == null)
 			{
 				mainMenuBkgd = CreateGUITxtr(mainMenuBkgd, "main menu background", new Vector3(0, 0, 0), mainMenuBkgdTxtr, mainMenuBkgdPos);
@@ -410,11 +415,10 @@ public class MenuControl : MonoBehaviour
 				//Back Button
 				if(GUI.Button(new Rect(menuOrigin[2].x + lobbyMenuBtnRect[4].x, menuOrigin[2].y + lobbyMenuBtnRect[4].y, lobbyMenuBtnRect[4].width, lobbyMenuBtnRect[4].height), backBtnTxtr))
 				{
-					
 					//menuOrigin[6] = new Rect();
 					inLobby = false;
 					networkHandler.LeaveGame();
-					
+				
 					if(singlePlayer == true)
 					{
 						StartCoroutine(MoveRightOff(2, 0, Menu.mainMenu));
@@ -423,7 +427,7 @@ public class MenuControl : MonoBehaviour
 					{
 						StartCoroutine(MoveRightOff(2, 1, Menu.multiPMenu));
 					}
-					
+
 					Destroy(lvlGraphic);
 					
 				}

@@ -1,26 +1,30 @@
 ﻿// Name: Robert Reed
 // Project: Cyber-Dino Racing
-// Date: 12/011/2013
+// Date: 04/07/2014
 
 using UnityEngine;
 using System.Collections;
 
-public class FireButton : MonoBehaviour
+public class ItemButton : MonoBehaviour 
 {
-	public delegate void WeaponShoot();
-	public static event WeaponShoot shoot;
+	private PlayerPickUpClass itemClass;
 	
 	public Rect buttonPos;
-
+	
 	// Use this for initialization
 	void Start () 
 	{
-		//RWStart();
-		
 		transform.position = Vector3.zero;
 		transform.localScale = Vector3.zero;
 		
-		Resize(this.gameObject.guiTexture, buttonPos);
+		if(this.gameObject.guiTexture != null)
+		{
+			Resize(this.gameObject.guiTexture, buttonPos);
+		}
+		else
+		{
+			Debug.Log("There is no gui texture on the item button");
+		}
 	}
 	
 	// Update is called once per frame
@@ -37,10 +41,7 @@ public class FireButton : MonoBehaviour
 					//if it is hit
 					if(Input.GetTouch(i).phase == TouchPhase.Began)
 					{
-						if(shoot != null)
-						{
-							shoot();
-						}
+						//PlayerPickUpClass.use.Invoke("i dont know", player);
 					}
 				}
 			}
@@ -60,5 +61,3 @@ public class FireButton : MonoBehaviour
 		_button.guiTexture.pixelInset = new Rect(_pos.x * xMulti, _pos.y * yMulti, _pos.width * xMulti, _pos.height * yMulti);
 	}
 }
-
-
