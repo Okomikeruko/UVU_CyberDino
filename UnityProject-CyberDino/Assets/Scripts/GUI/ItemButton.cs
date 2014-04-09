@@ -7,7 +7,8 @@ using System.Collections;
 
 public class ItemButton : MonoBehaviour 
 {
-	private PlayerPickUpClass itemClass;
+	public delegate void ShootGun();
+	public static event ShootGun shoot;
 	
 	public Rect buttonPos;
 	
@@ -41,7 +42,7 @@ public class ItemButton : MonoBehaviour
 					//if it is hit
 					if(Input.GetTouch(i).phase == TouchPhase.Began)
 					{
-						//PlayerPickUpClass.use.Invoke("i dont know", player);
+						shoot();
 					}
 				}
 			}
