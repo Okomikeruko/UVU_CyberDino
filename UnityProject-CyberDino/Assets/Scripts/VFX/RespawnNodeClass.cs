@@ -16,6 +16,10 @@ public class RespawnNodeClass : MonoBehaviour {
 	private bool isEndNode = false;
 	[SerializeField]
 	private bool isEdgeNode = false;
+
+	public enum NodeType {StartNode, EndNode, NormalNode, EdgeNode, JumpNode};
+	public NodeType theNodeType;
+
 	private int nodeNumber;
 	private int nextNodeNumber;
 	private int previousNodeNumber;
@@ -140,28 +144,56 @@ public class RespawnNodeClass : MonoBehaviour {
 		string next = "RespawnPoint_" + NextNodeNumber.ToString().PadLeft(3, '0');
 		string prev = "RespawnPoint_" + PreviousNodeNumber.ToString().PadLeft(3, '0');
 
-
-		if(IsEndNode == false && IsStartNode == false)
+		switch(theNodeType)
 		{
+		case NodeType.StartNode:
+			PreviousNode = gameObject;
+			NextNode = GameObject.Find(next);
+			transform.LookAt(NextNode.transform);
+			break;
+		case NodeType.EndNode:
+			PreviousNode = GameObject.Find(prev);
+			NextNode = gameObject;
+			transform.LookAt(2 * transform.position - PreviousNode.transform.position);
+			break;
+		case NodeType.NormalNode:
 			PreviousNode = GameObject.Find(prev);
 			NextNode = GameObject.Find(next);
 			if(IsEdgeNode == false)
 			{
 				transform.LookAt(NextNode.transform);
 			}
+			break;
+		case NodeType.EdgeNode:
+			break;
+		case NodeType.JumpNode:
+			break;
+		default:
+			break;
 		}
-		else if(IsStartNode == true)
-		{
-			PreviousNode = gameObject;
-			NextNode = GameObject.Find(next);
-			transform.LookAt(NextNode.transform);
-		}
-		else
-		{
-			PreviousNode = GameObject.Find(prev);
-			NextNode = gameObject;
-			transform.LookAt(2 * transform.position - PreviousNode.transform.position);
-		}
+
+
+//		if(IsEndNode == false && IsStartNode == false)
+//		{
+//			PreviousNode = GameObject.Find(prev);
+//			NextNode = GameObject.Find(next);
+//			if(IsEdgeNode == false)
+//			{
+//				transform.LookAt(NextNode.transform);
+//			}
+//		}
+//		else if(IsStartNode == true)
+//		{
+//			PreviousNode = gameObject;
+//			NextNode = GameObject.Find(next);
+//			transform.LookAt(NextNode.transform);
+//		}
+//		else
+//		{
+//			PreviousNode = GameObject.Find(prev);
+//			NextNode = gameObject;
+//			transform.LookAt(2 * transform.position - PreviousNode.transform.position);
+//		}
 
 		//transform.localScale = new Vector3(InfluenceSphere, InfluenceSphere, InfluenceSphere);
 
