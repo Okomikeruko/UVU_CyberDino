@@ -10,12 +10,6 @@ public class RespawnNodeClass : MonoBehaviour {
 	private GameObject nextNode;
 	[SerializeField]
 	private float influenceSphere;
-	[SerializeField]
-	private bool isStartNode = false;
-	[SerializeField]
-	private bool isEndNode = false;
-	[SerializeField]
-	private bool isEdgeNode = false;
 
 	public enum NodeType {StartNode, EndNode, NormalNode, EdgeNode, JumpNode};
 	public NodeType theNodeType;
@@ -57,39 +51,6 @@ public class RespawnNodeClass : MonoBehaviour {
 		set
 		{
 			influenceSphere = value;
-		}
-	}
-	private bool IsStartNode
-	{
-		get
-		{
-			return isStartNode;
-		}
-		set
-		{
-			isStartNode = value;
-		}
-	}
-	public bool IsEndNode
-	{
-		get
-		{
-			return isEndNode;
-		}
-		set
-		{
-			isEndNode = value;
-		}
-	}
-	public bool IsEdgeNode
-	{
-		get
-		{
-			return isEdgeNode;
-		}
-		set
-		{
-			isEdgeNode = value;
 		}
 	}
 	public int NodeNumber
@@ -159,12 +120,11 @@ public class RespawnNodeClass : MonoBehaviour {
 		case NodeType.NormalNode:
 			PreviousNode = GameObject.Find(prev);
 			NextNode = GameObject.Find(next);
-			if(IsEdgeNode == false)
-			{
-				transform.LookAt(NextNode.transform);
-			}
+			transform.LookAt(NextNode.transform);
 			break;
 		case NodeType.EdgeNode:
+			PreviousNode = GameObject.Find(prev);
+			NextNode = GameObject.Find(next);
 			break;
 		case NodeType.JumpNode:
 			break;
