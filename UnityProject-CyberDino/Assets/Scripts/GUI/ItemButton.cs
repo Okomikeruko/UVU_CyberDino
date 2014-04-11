@@ -7,8 +7,8 @@ using System.Collections;
 
 public class ItemButton : MonoBehaviour 
 {
-	public delegate void ShootGun();
-	public static event ShootGun shoot;
+	public delegate void UseItem();
+	public static event UseItem item;
 	
 	public Rect buttonPos;
 	
@@ -42,7 +42,14 @@ public class ItemButton : MonoBehaviour
 					//if it is hit
 					if(Input.GetTouch(i).phase == TouchPhase.Began)
 					{
-						shoot();
+						if(item != null)
+						{
+							item();
+						}
+						else
+						{
+							Debug.Log("item isn't subscribed to anything!");
+						}
 					}
 				}
 			}
