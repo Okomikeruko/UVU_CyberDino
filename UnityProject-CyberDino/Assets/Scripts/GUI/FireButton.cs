@@ -53,12 +53,6 @@ public class FireButton : MonoBehaviour
 		float xMulti = Screen.width / 100;
 		float yMulti = Screen.height / 100;
 		
-		//textureY = _button.guiTexture.pixelInset.height;	
-		//textureX = _button.guiTexture.pixelInset.width;
-		
-		//newSizeY = textureY * Mathf.Sqrt(yMulti / sizeSetter);
-		//newSizeX = textureX * Mathf.Sqrt(xMulti / sizeSetter);
-		
 		//start off the resizing from zero
 		_button.transform.localScale = new Vector3(0, 0, 0);
 		
