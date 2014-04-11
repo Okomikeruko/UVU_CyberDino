@@ -404,12 +404,20 @@ public class MenuControl : MonoBehaviour
 				if(GUI.Button(new Rect(menuOrigin[2].x + lobbyMenuBtnRect[2].x, menuOrigin[2].y + lobbyMenuBtnRect[2].y, lobbyMenuBtnRect[2].width, lobbyMenuBtnRect[2].height), lobbyMenuBtnTxtr[0]))
 				{
 					DinoSelectionDecrement();
+
+					var myInfo = networkHandler.GetMyInfo();
+					myInfo.dinoName = dinos[dinoIndex];
+					networkHandler.UpdatePlayerInformation(myInfo);
 				}
 				
 				//right arrow for dino select
 				if(GUI.Button(new Rect(menuOrigin[2].x + lobbyMenuBtnRect[3].x, menuOrigin[2].y + lobbyMenuBtnRect[3].y, lobbyMenuBtnRect[3].width, lobbyMenuBtnRect[3].height), lobbyMenuBtnTxtr[1]))
 				{
 					DinoSelectionIncrement();
+
+					var myInfo = networkHandler.GetMyInfo();
+					myInfo.dinoName = dinos[dinoIndex];
+					networkHandler.UpdatePlayerInformation(myInfo);
 				}
 				
 				//Back Button
@@ -437,12 +445,6 @@ public class MenuControl : MonoBehaviour
 				{
 					if(GUI.Button(new Rect(menuOrigin[2].x + lobbyMenuBtnRect[5].x, menuOrigin[2].y + lobbyMenuBtnRect[5].y, lobbyMenuBtnRect[5].width, lobbyMenuBtnRect[5].height), lobbyMenuBtnTxtr[2]))
 					{
-						var myInfo = networkHandler.GetMyInfo();
-						
-						myInfo.dinoName = dinos[dinoIndex];
-						
-						networkHandler.UpdatePlayerInformation(myInfo);
-
 						menuSelect = Menu.goToLevel;
 						networkHandler.ChangeMenuSelect();
 						networkHandler.ChangeLevel();
