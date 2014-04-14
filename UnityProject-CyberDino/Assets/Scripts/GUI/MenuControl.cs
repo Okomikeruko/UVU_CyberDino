@@ -366,9 +366,7 @@ public class MenuControl : MonoBehaviour
 			}
 	
 			if (inLobby == true)
-			{
-				var me = networkHandler.GetMyInfo();
-				
+			{				
 				if(singlePlayer != true)
 				{
 					int i = 1;
