@@ -13,7 +13,7 @@ public class ProjectileMissileLauncherClass : ProjectileClass {
 	private Transform target = null;
 	private bool haveTarget = false; // Used to check whether this projectile has a target or not.
 	[SerializeField]
-	private ParticleSystem trail;
+	//private ParticleSystem trail; // never assigned a varl
 	#endregion Fields
 	
 	#region Properties
@@ -29,20 +29,20 @@ public class ProjectileMissileLauncherClass : ProjectileClass {
 			haveTarget = value;
 		}
 	}
-	public ParticleSystem Trail
-	{
-		get
-		{
-			return trail;
-		}
-	}
+//	public ParticleSystem Trail
+//	{
+//		get
+//		{
+//			return trail; // returns null - trail never has a value to return
+//		}
+//	}
 	#endregion Properties
 	
 	// Methods
 
 	
 	void Start(){
-		Trail.Play();
+		//Trail.Play();
 	}
 	
 	// Update is called once per frame

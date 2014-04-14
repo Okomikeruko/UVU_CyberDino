@@ -7,7 +7,8 @@ using System.Collections;
 
 public class ItemButton : MonoBehaviour 
 {
-	private PlayerPickUpClass itemClass;
+	public delegate void UseItem();
+	public static event UseItem item;
 	
 	public Rect buttonPos;
 	
@@ -41,7 +42,14 @@ public class ItemButton : MonoBehaviour
 					//if it is hit
 					if(Input.GetTouch(i).phase == TouchPhase.Began)
 					{
-						//PlayerPickUpClass.use.Invoke("i dont know", player);
+						if(item != null)
+						{
+							item();
+						}
+						else
+						{
+							Debug.Log("item isn't subscribed to anything!");
+						}
 					}
 				}
 			}
