@@ -17,7 +17,7 @@ public class MenuControl : MonoBehaviour
 	private string[] dinos = new string[]{"Diloph", "Hesp", "Raptor", "Diloph", "TRex", "Troodon"};
 	
 	//the different level to choose
-	//private string[] levels = new string[]{"CityTrack"};
+	private string[] levels = new string[]{"CityTrack", "CityTrackv2","John's track", "Lee's track"};
 	
 	public Texture[] levelTextures;
 	
@@ -126,7 +126,7 @@ public class MenuControl : MonoBehaviour
 		
 		backBtnTxtr = (Texture)Resources.Load("GUI/Materials/BackButton");
 		
-		lvlSelectTxtr = new Texture[2];
+		lvlSelectTxtr = new Texture[4];
 		lvlSelectTxtr[0] = (Texture)Resources.Load("GUI/Materials/CityTrackGFX");
 		lvlSelectTxtr[1] = (Texture)Resources.Load("GUI/Materials/CityTrackGFXv2");
 
@@ -182,7 +182,6 @@ public class MenuControl : MonoBehaviour
 		menuBkgdPos  = ResizeRect(new Rect(50, 50, 100, 100));
 		
 		startDinoPos = ResizeRect(new Rect(75, 40, 0, 0));
-		
 		
 		//the names of the players in the order that they past the finished line
 		placesNames = new string[6];
@@ -364,6 +363,8 @@ public class MenuControl : MonoBehaviour
 			{
 				lvlGraphic.guiTexture.pixelInset = new Rect(menuOrigin[2].x + lvlGraphicPos.x, menuOrigin[2].y + lvlGraphicPos.y, lvlGraphicPos.width, lvlGraphicPos.height);
 			}
+			
+			GUI.Label(new Rect(menuOrigin[2].x + lvlGraphicPos.x, menuOrigin[2].y + lvlGraphicPos.y, lvlGraphicPos.width, lvlGraphicPos.height), levels[levelIndex]);
 	
 			if (inLobby == true)
 			{				
