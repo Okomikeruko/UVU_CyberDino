@@ -233,6 +233,8 @@ public class MenuControl : MonoBehaviour
 	{
 		//set this skin as the active one
 		GUI.skin = mySkin;
+		Debug.Log("  dinoSelected: " + dinoSelected);
+		Debug.Log("  >>> dinoIndex: " + dinoIndex);
 		
 		//if the menu selected isn't the main menu
 		if(menuSelect != Menu.mainMenu)
@@ -367,7 +369,7 @@ public class MenuControl : MonoBehaviour
 	
 			if (inLobby == true)
 			{
-				var me = networkHandler.GetMyInfo();
+				//var me = networkHandler.GetMyInfo(); // javascript?
 				
 				if(singlePlayer != true)
 				{

@@ -30,7 +30,7 @@ public class DinoSelect : MonoBehaviour {
 //				dino.SetActive (false);
 //			}
 //		}
-
+		Debug.Log(" >>> INDEX: " + Index);
 		selectedDino = Instantiate(dinosaurs[Index], transform.position, transform.rotation) as GameObject;
 		anim = selectedDino.GetComponentInChildren<Animator>();
 		MotionControl dinoMotion = selectedDino.GetComponent<MotionControl>();

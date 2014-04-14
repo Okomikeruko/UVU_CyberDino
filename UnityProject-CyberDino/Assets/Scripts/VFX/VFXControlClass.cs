@@ -12,10 +12,10 @@ public class VFXControlClass : MonoBehaviour {
 	bool turboActive;
 	[SerializeField]
 	private float turboDuration = 0.0F; // How long the racer's turbo will last.
-	[SerializeField]
-	private ParticleSystem initialBurstVFX;
-	[SerializeField]
-	private ParticleSystem boostVFX;
+//	[SerializeField]
+//	private ParticleSystem initialBurstVFX;
+//	[SerializeField]
+//	private ParticleSystem boostVFX;
 
 	private MotionControl move;
 
@@ -38,20 +38,20 @@ public class VFXControlClass : MonoBehaviour {
 			return turboDuration;
 		}
 	}
-	private ParticleSystem InitialBurstVFX
-	{
-		get
-		{
-			return initialBurstVFX;
-		}
-	}
-	private ParticleSystem BoostVFX
-	{
-		get
-		{
-			return boostVFX;
-		}
-	}
+//	private ParticleSystem InitialBurstVFX
+//	{
+//		get
+//		{
+//			return initialBurstVFX;
+//		}
+//	}
+//	private ParticleSystem BoostVFX
+//	{
+//		get
+//		{
+//			return boostVFX;
+//		}
+//	}
 	public MotionControl Move
 	{
 		get
@@ -67,8 +67,8 @@ public class VFXControlClass : MonoBehaviour {
 
 	// Use this for initialization
 	void OnEnable () {
-		InitialBurstVFX.Stop();
-		BoostVFX.Stop();
+//		InitialBurstVFX.Stop();
+//		BoostVFX.Stop();
 	}
 
 	//UseTurbo
@@ -100,16 +100,16 @@ public class VFXControlClass : MonoBehaviour {
 		TurboActive = true;
 		Move.Turbo(true);
 		//Debug.Log(turboActive);
-		InitialBurstVFX.Play();
+		//InitialBurstVFX.Play();
 		yield return new WaitForSeconds(0.3F);
-		BoostVFX.Play();
+		//BoostVFX.Play();
 //		while(CurrentSpeed < TurboSpeed)
 //		{
 //			CurrentSpeed += Acceleration;
 //			yield return null;
 //		}
 		yield return new WaitForSeconds(TurboDuration);
-		BoostVFX.Stop();
+		//BoostVFX.Stop();
 		TurboActive = false;
 		Move.Turbo(false);
 		yield return null;

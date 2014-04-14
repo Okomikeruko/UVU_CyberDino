@@ -47,7 +47,7 @@ public class TurretControl : MonoBehaviour {
 	GameObject FindBestTarget(List<GameObject> targetsInRange)
 	{
 		float closestTarget = float.MaxValue;
-		float bestAngle = 180f;
+		//float bestAngle = 180f; // not used anywhere
 		GameObject bestTarget = null;
 		for (int i = 0; i < targetsInRange.Count; i++)
 		{

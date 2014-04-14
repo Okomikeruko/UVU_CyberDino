@@ -7,7 +7,7 @@ public class DinoSelectClass : MonoBehaviour
 	public GUITexture[] tabs;
 
 	//current index
-	private int currentTabIndex = 0;
+	//private int currentTabIndex = 0; // never used
 
 	//move index
 	private int moveTabIndex = 0;
