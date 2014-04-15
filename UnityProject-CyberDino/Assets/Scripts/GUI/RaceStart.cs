@@ -25,7 +25,7 @@ public class RaceStart : MonoBehaviour {
 	{
 
 		//get the player dino and store in player
-		players = GameObject.FindGameObjectsWithTag("Dino");
+		players = GameObject.FindGameObjectsWithTag("Player");
 
 		foreach (var unit in players){
 			if (unit.networkView.isMine){

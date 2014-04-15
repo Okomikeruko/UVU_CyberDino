@@ -17,7 +17,7 @@ public class MenuControl : MonoBehaviour
     private string[] dinos = new string[] { "Diloph", "Hesp", "Raptor", "Diloph", "TRex", "Troodon" };
 
     //the different level to choose
-    private string[] levels = new string[] { "CityTrack", "CityTrackv2", "John's track", "Lee's track" };
+	private string[] levels = new string[] { "CityTrack", "CityTrack2.0", "John_CityTrack2.0_TestScene", "Lee_CityTrack2.0_TestScene" };
 
     public Texture[] levelTextures;
 
@@ -207,22 +207,38 @@ public class MenuControl : MonoBehaviour
             if (Input.GetKeyDown(KeyCode.LeftArrow))
             {
                 DinoSelectionDecrement();
+
+				var myInfo = networkHandler.GetMyInfo();
+				myInfo.dinoName = dinos[dinoIndex];
+				networkHandler.UpdatePlayerInformation(myInfo);
             }
 
             //right arrow for dino select
             if (Input.GetKeyDown(KeyCode.RightArrow))
             {
                 DinoSelectionIncrement();
+
+				var myInfo = networkHandler.GetMyInfo();
+				myInfo.dinoName = dinos[dinoIndex];
+				networkHandler.UpdatePlayerInformation(myInfo);
             }
 
             if (Input.GetKeyDown(KeyCode.UpArrow))
             {
                 LevelSelectionIncrement();
+
+				var gameMap = levels[levelIndex];
+				networkHandler.gameMap = gameMap;
+				networkHandler.UpdateMapInformation(gameMap);
             }
 
             if (Input.GetKeyDown(KeyCode.DownArrow))
             {
                 LevelSelectionDecrement();
+
+				var gameMap = levels[levelIndex];
+				networkHandler.gameMap = gameMap;
+				networkHandler.UpdateMapInformation(gameMap);
             }
         }
 
@@ -393,11 +409,19 @@ public class MenuControl : MonoBehaviour
                     if (GUI.Button(new Rect(menuOrigin[2].x + lobbyMenuBtnRect[0].x, menuOrigin[2].y + lobbyMenuBtnRect[0].y, lobbyMenuBtnRect[0].width, lobbyMenuBtnRect[0].height), lobbyMenuBtnTxtr[0]))
                     {
                         LevelSelectionDecrement();
+
+						var gameMap = levels[levelIndex];
+						networkHandler.gameMap = gameMap;
+						networkHandler.UpdateMapInformation(gameMap);
                     }
 
                     if (GUI.Button(new Rect(menuOrigin[2].x + lobbyMenuBtnRect[1].x, menuOrigin[2].y + lobbyMenuBtnRect[1].y, lobbyMenuBtnRect[1].width, lobbyMenuBtnRect[1].height), lobbyMenuBtnTxtr[1]))
                     {
                         LevelSelectionIncrement();
+
+						var gameMap = levels[levelIndex];
+						networkHandler.gameMap = gameMap;
+						networkHandler.UpdateMapInformation(gameMap);
                     }
 
                 }
