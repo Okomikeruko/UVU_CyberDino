@@ -14,7 +14,7 @@ public class MenuControl : MonoBehaviour
     public Menu menuSelect;
 
     //the different dinos to choose
-    private string[] dinos = new string[] { "Diloph", "Hesp", "Raptor", "Diloph", "TRex", "Troodon" };
+    public string[] dinos = new string[] { "Diloph", "Hesp", "Raptor", "Diloph", "TRex", "Troodon" };
 
     //the different level to choose
 	private string[] levels = new string[] { "CityTrack", "CityTrack2.0", "John_CityTrack2.0_TestScene", "Lee_CityTrack2.0_TestScene" };

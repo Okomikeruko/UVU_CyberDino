@@ -9,10 +9,12 @@ public class RaceStart : MonoBehaviour {
 	
 	//the player
 	public GameObject[] players;
+	public GameObject[] ai;
 	public GameObject player;
 	
 	//the motion scripts
 	private MotionControl playerMotion;
+
 	
 	//hold the children of this object
 	public GameObject[] childTex = new GameObject[4];
@@ -26,6 +28,7 @@ public class RaceStart : MonoBehaviour {
 
 		//get the player dino and store in player
 		players = GameObject.FindGameObjectsWithTag("Player");
+		ai = GameObject.FindGameObjectsWithTag("Ai");
 
 		foreach (var unit in players){
 			if (unit.networkView.isMine){
@@ -33,12 +36,19 @@ public class RaceStart : MonoBehaviour {
 				break;
 			}
 		}
+
+		foreach (var unit in ai){
+			if(unit != null){
+				var aiMotion = unit.GetComponent<MotionControl>();
+				aiMotion.enabled = false;
+			}
+		}
+
 		//get the MotionControllers from the player and the cpu
 		playerMotion = player.GetComponent<MotionControl>();
 
 		//turn off the motion scripts for the player and the cpu
 		playerMotion.enabled = false;
-
 
 		//invoke the CountDown method
 		InvokeRepeating ("CountDown", 1.0f, 1.0f);
@@ -59,6 +69,11 @@ public class RaceStart : MonoBehaviour {
 
 			//reenable the motion scripts
 			playerMotion.enabled = true;
+
+			foreach (var unit in ai){
+				var aiMotion = unit.GetComponent<MotionControl>();
+				aiMotion.enabled = true;
+			}
 
 			//stop the repeating
 			CancelInvoke("CountDown");
