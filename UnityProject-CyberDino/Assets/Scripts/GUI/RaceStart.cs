@@ -28,7 +28,7 @@ public class RaceStart : MonoBehaviour {
 		players = GameObject.FindGameObjectsWithTag("Dino");
 
 		foreach (var unit in players){
-			if (unit.networkView.isMine){
+			if (unit.networkView.isMine && unit.tag == "Player"){
 				player = unit;
 				break;
 			}

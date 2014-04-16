@@ -35,6 +35,29 @@ public class GameControl : MonoBehaviour {
 		GameObject PlayerDino = (GameObject)Network.Instantiate((GameObject)Resources.Load(playerInfo.dinoName), spawnPoint[playerID].transform.position, Quaternion.LookRotation(spawnPoint[playerID].transform.forward), playerID);
 		MainCameraFollow.target = PlayerDino.transform;
 
+<<<<<<< HEAD
+=======
+		int i = 0;
+		
+		foreach (var player in networkHandler.playerInformation)
+		{
+			i++;
+		}
+		
+		for (; i < NetworkGameHandler.MAX_PLAYERS; i++)
+		{
+			//GameObject AiDino = (GameObject)Network.Instantiate((GameObject)Resources.Load(menuControl.dinos[Random.Range(1,6)]+"AI"), spawnPoint[i].transform.position, Quaternion.LookRotation(spawnPoint[i].transform.forward), playerID);
+			GameObject AiDino = (GameObject)Network.Instantiate((GameObject)Resources.Load(menuControl.dinos[4]), spawnPoint[i].transform.position, Quaternion.LookRotation(spawnPoint[i].transform.forward), playerID);
+			AiDino.tag = "Ai";
+			var PlayerControl = AiDino.GetComponent<UserControl>();
+			PlayerControl.enabled = false;
+			var AIControl = AiDino.GetComponent<AIControl>();
+			AIControl.enabled = true;
+		}
+
+		GameObject CountDown = (GameObject)Network.Instantiate ((GameObject)Resources.Load("CountDown"), spawnPoint[playerID].transform.position, Quaternion.LookRotation(spawnPoint[playerID].transform.forward), playerID);
+
+>>>>>>> 20b828994e193416dcf12b31efe48b047258f7d7
 		//load Countdown
 
 	}
