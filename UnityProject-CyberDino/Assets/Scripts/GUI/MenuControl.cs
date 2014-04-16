@@ -288,6 +288,7 @@ public class MenuControl : MonoBehaviour
 				
 				StartCoroutine(MoveLeftOff(0, 2, Menu.lobbyMenu));
 			}
+			GUI.Label(new Rect(menuOrigin[0].x + mainMenuBtnRect[0].x, menuOrigin[0].y + mainMenuBtnRect[0].y, mainMenuBtnRect[0].width, mainMenuBtnRect[0].height), "Single Player");
 			//multiplayer button
 			if(GUI.Button(new Rect(menuOrigin[0].x + mainMenuBtnRect[1].x, menuOrigin[0].y + mainMenuBtnRect[1].y, mainMenuBtnRect[1].width, mainMenuBtnRect[1].height), mainMenuBtnTxtr[1]))
 			{
