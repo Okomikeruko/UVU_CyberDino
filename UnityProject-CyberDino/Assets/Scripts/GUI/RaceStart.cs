@@ -31,7 +31,7 @@ public class RaceStart : MonoBehaviour {
 		ai = GameObject.FindGameObjectsWithTag("Ai");
 
 		foreach (var unit in players){
-			if (unit.networkView.isMine){
+			if (unit.networkView.isMine && unit.tag == "Player"){
 				player = unit;
 				break;
 			}
