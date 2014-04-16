@@ -22,10 +22,10 @@ public class PlayerPickUpClass : MonoBehaviour
 	[SerializeField]
 	private GameObject theForcefield;
 	
-	[SerializeField]
-	private ParticleSystem initialBurstVFX;
-	[SerializeField]
-	private ParticleSystem boostVFX;
+//	[SerializeField]
+//	private ParticleSystem initialBurstVFX; // not used...yet
+//	[SerializeField]
+	//	private ParticleSystem boostVFX; // not used...yet
 
 	private MotionControl move;
 
@@ -33,8 +33,8 @@ public class PlayerPickUpClass : MonoBehaviour
 	
 	public GameObject TheForcefield { get{ return theForcefield; } set{ theForcefield = value; } }
 
-	private ParticleSystem InitialBurstVFX { get{ return initialBurstVFX; } }
-	private ParticleSystem BoostVFX { get{ return boostVFX; } }
+	//private ParticleSystem InitialBurstVFX { get{ return initialBurstVFX; } }
+	//private ParticleSystem BoostVFX { get{ return boostVFX; } }
 
 	public MotionControl Move { get{ return move; } set{ move = value; } }
 	
@@ -104,11 +104,11 @@ public class PlayerPickUpClass : MonoBehaviour
 	IEnumerator Turbo(int TurboDuration)
 	{
 		Move.Turbo(true);
-		InitialBurstVFX.Play();
+		//InitialBurstVFX.Play();
 		yield return new WaitForSeconds(0.3F);
-		BoostVFX.Play();
+		//BoostVFX.Play();
 		yield return new WaitForSeconds(TurboDuration);
-		BoostVFX.Stop();
+		//BoostVFX.Stop();
 		Move.Turbo(false);
 		yield return null;
 	}

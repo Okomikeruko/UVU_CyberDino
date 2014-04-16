@@ -10,12 +10,10 @@ public class RespawnNodeClass : MonoBehaviour {
 	private GameObject nextNode;
 	[SerializeField]
 	private float influenceSphere;
-	[SerializeField]
-	private bool isStartNode = false;
-	[SerializeField]
-	private bool isEndNode = false;
-	[SerializeField]
-	private bool isEdgeNode = false;
+
+	public enum NodeType {StartNode, EndNode, NormalNode, EdgeNode, JumpNode};
+	public NodeType theNodeType;
+
 	private int nodeNumber;
 	private int nextNodeNumber;
 	private int previousNodeNumber;
@@ -53,39 +51,6 @@ public class RespawnNodeClass : MonoBehaviour {
 		set
 		{
 			influenceSphere = value;
-		}
-	}
-	private bool IsStartNode
-	{
-		get
-		{
-			return isStartNode;
-		}
-		set
-		{
-			isStartNode = value;
-		}
-	}
-	public bool IsEndNode
-	{
-		get
-		{
-			return isEndNode;
-		}
-		set
-		{
-			isEndNode = value;
-		}
-	}
-	public bool IsEdgeNode
-	{
-		get
-		{
-			return isEdgeNode;
-		}
-		set
-		{
-			isEdgeNode = value;
 		}
 	}
 	public int NodeNumber
@@ -140,28 +105,55 @@ public class RespawnNodeClass : MonoBehaviour {
 		string next = "RespawnPoint_" + NextNodeNumber.ToString().PadLeft(3, '0');
 		string prev = "RespawnPoint_" + PreviousNodeNumber.ToString().PadLeft(3, '0');
 
-
-		if(IsEndNode == false && IsStartNode == false)
+		switch(theNodeType)
 		{
-			PreviousNode = GameObject.Find(prev);
-			NextNode = GameObject.Find(next);
-			if(IsEdgeNode == false)
-			{
-				transform.LookAt(NextNode.transform);
-			}
-		}
-		else if(IsStartNode == true)
-		{
+		case NodeType.StartNode:
 			PreviousNode = gameObject;
 			NextNode = GameObject.Find(next);
 			transform.LookAt(NextNode.transform);
-		}
-		else
-		{
+			break;
+		case NodeType.EndNode:
 			PreviousNode = GameObject.Find(prev);
 			NextNode = gameObject;
 			transform.LookAt(2 * transform.position - PreviousNode.transform.position);
+			break;
+		case NodeType.NormalNode:
+			PreviousNode = GameObject.Find(prev);
+			NextNode = GameObject.Find(next);
+			transform.LookAt(NextNode.transform);
+			break;
+		case NodeType.EdgeNode:
+			PreviousNode = GameObject.Find(prev);
+			NextNode = GameObject.Find(next);
+			break;
+		case NodeType.JumpNode:
+			break;
+		default:
+			break;
 		}
+
+
+//		if(IsEndNode == false && IsStartNode == false)
+//		{
+//			PreviousNode = GameObject.Find(prev);
+//			NextNode = GameObject.Find(next);
+//			if(IsEdgeNode == false)
+//			{
+//				transform.LookAt(NextNode.transform);
+//			}
+//		}
+//		else if(IsStartNode == true)
+//		{
+//			PreviousNode = gameObject;
+//			NextNode = GameObject.Find(next);
+//			transform.LookAt(NextNode.transform);
+//		}
+//		else
+//		{
+//			PreviousNode = GameObject.Find(prev);
+//			NextNode = gameObject;
+//			transform.LookAt(2 * transform.position - PreviousNode.transform.position);
+//		}
 
 		//transform.localScale = new Vector3(InfluenceSphere, InfluenceSphere, InfluenceSphere);
 

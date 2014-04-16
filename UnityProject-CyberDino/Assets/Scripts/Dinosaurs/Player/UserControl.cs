@@ -118,8 +118,11 @@ public class UserControl : MonoBehaviour {
 
 	// Update is called once per frame
 	void FixedUpdate () {
-		move.SetTurn( Input.GetAxis("Horizontal") );				
-
+					
+		if(Input.touches.Length == 0)
+		{
+			move.SetTurn( Input.GetAxis("Horizontal") );
+		}
 //		if(Input.GetButton("Jump"))
 //		{
 //			move.jumper = true;
