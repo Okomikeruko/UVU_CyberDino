@@ -48,7 +48,7 @@ public class GameControl : MonoBehaviour {
 		
 		for (; i < NetworkGameHandler.MAX_PLAYERS; i++)
 		{
-			//GameObject AiDino = (GameObject)Network.Instantiate((GameObject)Resources.Load(menuControl.dinos[Random.Range(1,6)]+"AI"), spawnPoint[i].transform.position, Quaternion.LookRotation(spawnPoint[i].transform.forward), playerID);
+			//GameObject AiDino = (GameObject)Network.Instantiate((GameObject)Resources.Load(menuControl.dinos[Random.Range(1,6)]), spawnPoint[i].transform.position, Quaternion.LookRotation(spawnPoint[i].transform.forward), playerID);
 			GameObject AiDino = (GameObject)Network.Instantiate((GameObject)Resources.Load(menuControl.dinos[4]), spawnPoint[i].transform.position, Quaternion.LookRotation(spawnPoint[i].transform.forward), playerID);
 			AiDino.tag = "Ai";
 			var PlayerControl = AiDino.GetComponent<UserControl>();
@@ -57,9 +57,6 @@ public class GameControl : MonoBehaviour {
 			AIControl.enabled = true;
 		}
 
-		GameObject CountDown = (GameObject)Network.Instantiate ((GameObject)Resources.Load("CountDown"), spawnPoint[playerID].transform.position, Quaternion.LookRotation(spawnPoint[playerID].transform.forward), playerID);
-
-		//load Countdown
-
+		GameObject CountDown = (GameObject)Network.Instantiate ((GameObject)Resources.Load("CountDown"), /*spawnPoint[playerID].transform.position*/ new Vector3(0,0,0), /*Quaternion.LookRotation(spawnPoint[playerID].transform.forward)*/ Quaternion.LookRotation(transform.forward), playerID);
 	}
 }
