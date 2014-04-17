@@ -19,14 +19,21 @@ public class GlowLines : MonoBehaviour
 	// Use this for initialization
 	void OnEnable () 
 	{
-		upLine = (GameObject)Instantiate(Resources.Load("GUI/LightGenerator"), new Vector3(0, 0, 0), Quaternion.identity);
-		upLine.transform.Rotate(new Vector3(90, 0, 0));
-		Vector3 pointInWorld = Camera.main.ScreenToWorldPoint(new Vector3(Screen.width, Screen.height, Camera.main.transform.position.z));
-		upLine.transform.localScale = new Vector3(pointInWorld.x / 5, 1, pointInWorld.y / 5);
+		if(upLine == null)
+		{
+			upLine = (GameObject)Instantiate(Resources.Load("GUI/LightGenerator"), new Vector3(0,0, 0), Quaternion.identity);
+			upLine.transform.Rotate(new Vector3(90, 0, 0));
+			//Vector3 pointInWorld = Camera.main.ScreenToWorldPoint(new Vector3(Screen.width, Screen.height, Camera.main.transform.position.z));
+			upLine.transform.localScale = new Vector3(1, 1, 1);
+			
+			upLine.transform.position = Camera.main.ScreenToWorldPoint(SetStartPosition(upLine));
+		}
 
 		//set the screen multipier
 		xMulti = Screen.width / 100;
 		yMulti = Screen.height / 100;
+		
+		Debug.Log (upLine);
 		
 		//call the coroutines for each line
 		StartCoroutine(MoveLine(upLine));
@@ -48,8 +55,8 @@ public class GlowLines : MonoBehaviour
 		//randomize the end position
 		Vector3 endPos = Camera.main.ScreenToWorldPoint(SetNextPosition(_obj));
 		
+		
 		//current direction
-
 		float lerpPos = 0.0f;
 
 		//while
@@ -59,16 +66,22 @@ public class GlowLines : MonoBehaviour
 			{
 				_obj = (GameObject)Instantiate(Resources.Load("GUI/LightGenerator"), new Vector3(0,0, 0), Quaternion.identity);
 				_obj.transform.Rotate(new Vector3(90, 0, 0));
-				Vector3 pointInWorld = Camera.main.ScreenToWorldPoint(new Vector3(Screen.width, Screen.height, Camera.main.transform.position.z));
-				_obj.transform.localScale = new Vector3(pointInWorld.x / 5, 1, pointInWorld.y / 5);
+				//Vector3 pointInWorld = Camera.main.ScreenToWorldPoint(new Vector3(Screen.width, Screen.height, Camera.main.transform.position.z));
+				_obj.transform.localScale = new Vector3(1, 1, 1);
+				
+				_obj.transform.position = Camera.main.ScreenToWorldPoint(SetStartPosition(_obj));
+				startPos = _obj.transform.position;
+				endPos = Camera.main.ScreenToWorldPoint(SetNextPosition(_obj));
 			}
 
-
-			//lerpPos += 1;
-			Debug.Log(lerpPos);
+			lerpPos += 1 * Time.deltaTime;
+			//Debug.Log(lerpPos);
+			
+			//Debug.Log(startPos);
+			//Debug.Log("second " + endPos);
 
 			//lerp between the two points
-			_obj.transform.position = Vector3.Lerp(startPos, endPos, Time.deltaTime);
+			_obj.transform.position = Vector3.Lerp(startPos, endPos, lerpPos);
 
 			//if the current position is the same as the end point
 			if(_obj.transform.position == endPos)
@@ -125,14 +138,45 @@ public class GlowLines : MonoBehaviour
 				goodDirection = true;
 			}
 		}
+		
+		Debug.Log("direction " + dir);
 				
 		//if line type is up
-		if(_obj == upLine)
+		if(dir == Direction.up)
 		{
 			//randomized the distance and times it by the screen multiplier
 			float dist = Random.Range(0.0f, 10.0f) * yMulti;
+			
+			Debug.Log(new Vector3(_obj.transform.position.x, _obj.transform.position.y + dist, 0));
 			//return new vector3 (current pos, current pos + randomized distance, 0)
 			return new Vector3(_obj.transform.position.x, _obj.transform.position.y + dist, 0);
+		}
+		else if(dir == Direction.up)
+		{
+			//randomized the distance and times it by the screen multiplier
+			float dist = Random.Range(0.0f, 10.0f) * yMulti;
+			
+			Debug.Log(new Vector3(_obj.transform.position.x, _obj.transform.position.y - dist, 0));
+			//return new vector3 (current pos, current pos + randomized distance, 0)
+			return new Vector3(_obj.transform.position.x, _obj.transform.position.y - dist, 0);
+		}
+		else if(dir == Direction.left)
+		{
+			//randomized the distance and times it by the screen multiplier
+			float dist = Random.Range(0.0f, 10.0f) * yMulti;
+			
+			Debug.Log(new Vector3(_obj.transform.position.x - dist, _obj.transform.position.y, 0));
+			//return new vector3 (current pos, current pos + randomized distance, 0)
+			return new Vector3(_obj.transform.position.x - dist, _obj.transform.position.y, 0);
+		}
+		else if(dir == Direction.right)
+		{
+			//randomized the distance and times it by the screen multiplier
+			float dist = Random.Range(0.0f, 10.0f) * yMulti;
+			
+			Debug.Log(new Vector3(_obj.transform.position.x + dist, _obj.transform.position.y, 0));
+			//return new vector3 (current pos, current pos + randomized distance, 0)
+			return new Vector3(_obj.transform.position.x + dist, _obj.transform.position.y, 0);
 		}
 		else
 		{
@@ -174,7 +218,8 @@ public class GlowLines : MonoBehaviour
 				//subract the randomized number with the remainder
 				rem -= xMulti /2;
 			}
-
+			
+			Debug.Log("start pos" + new Vector3(pos, 0, 0));
 			//set the vector3 using the randomized number and the type of 
 			return startPos = new Vector3(pos, 0, 0);
 		}
@@ -183,5 +228,4 @@ public class GlowLines : MonoBehaviour
 			return startPos = new Vector3(0, 0, 0);
 		}
 	}
-			
 }
