@@ -17,7 +17,7 @@ public class MenuControl : MonoBehaviour
 	public string[] dinos = new string[]{"Diloph", "Hesp", "Raptor", "Diloph", "TRex", "Troodon"};
 	
 	//the different level to choose
-	private string[] levels = new string[]{"CityTrack", "CityTrackv2","John's track", "Lee's track"};
+	private string[] levels = new string[]{"CityTrack", "CityTrackv2","John's Track", "Lee's Track"};
 	
 	public Texture[] levelTextures;
 	
@@ -207,22 +207,60 @@ public class MenuControl : MonoBehaviour
 			if(Input.GetKeyDown(KeyCode.LeftArrow))
 			{
 				DinoSelectionDecrement();
+
+				var myInfo = networkHandler.GetMyInfo();
+				myInfo.dinoName = dinos[dinoIndex];
+				networkHandler.UpdatePlayerInformation(myInfo);
 			}
 			
 			//right arrow for dino select
 			if(Input.GetKeyDown(KeyCode.RightArrow))
 			{
 				DinoSelectionIncrement();
+
+				var myInfo = networkHandler.GetMyInfo();
+				myInfo.dinoName = dinos[dinoIndex];
+				networkHandler.UpdatePlayerInformation(myInfo);
 			}
 			
 			if(Input.GetKeyDown(KeyCode.UpArrow))
 			{
 				LevelSelectionIncrement();
+
+				var gameMap = networkHandler.gameMap;
+				if(levels[levelIndex] == "CityTrack"){
+					gameMap = "CityTrack";
+				}
+				if(levels[levelIndex] == "CityTrackV2"){
+					gameMap = "CityTrack2.0";
+				}
+				if(levels[levelIndex] == "John's Track"){
+					gameMap = "John_CityTrack2.0_TestScene";
+				}
+				if(levels[levelIndex] == "Lee's Track"){
+					gameMap = "Lee_CityTrack2.0_TestScene";
+				}
+				networkHandler.UpdateMapInformation(gameMap);
 			}
 			
 			if(Input.GetKeyDown(KeyCode.DownArrow))
 			{
 				LevelSelectionDecrement();
+
+				var gameMap = networkHandler.gameMap;
+				if(levels[levelIndex] == "CityTrack"){
+					gameMap = "CityTrack";
+				}
+				if(levels[levelIndex] == "CityTrackV2"){
+					gameMap = "CityTrack2.0";
+				}
+				if(levels[levelIndex] == "John's Track"){
+					gameMap = "John_CityTrack2.0_TestScene";
+				}
+				if(levels[levelIndex] == "Lee's Track"){
+					gameMap = "Lee_CityTrack2.0_TestScene";
+				}
+				networkHandler.UpdateMapInformation(gameMap);
 			}
 		}
 		
@@ -391,11 +429,41 @@ public class MenuControl : MonoBehaviour
 					if(GUI.Button(new Rect(menuOrigin[2].x + lobbyMenuBtnRect[0].x, menuOrigin[2].y + lobbyMenuBtnRect[0].y, lobbyMenuBtnRect[0].width, lobbyMenuBtnRect[0].height), lobbyMenuBtnTxtr[0]))
 					{
 						LevelSelectionDecrement();
+
+						var gameMap = networkHandler.gameMap;
+						if(levels[levelIndex] == "CityTrack"){
+							gameMap = "CityTrack";
+						}
+						if(levels[levelIndex] == "CityTrackV2"){
+							gameMap = "CityTrack2.0";
+						}
+						if(levels[levelIndex] == "John's Track"){
+							gameMap = "John_CityTrack2.0_TestScene";
+						}
+						if(levels[levelIndex] == "Lee's Track"){
+							gameMap = "Lee_CityTrack2.0_TestScene";
+						}
+						networkHandler.UpdateMapInformation(gameMap);
 					}
 					
 					if(GUI.Button(new Rect(menuOrigin[2].x + lobbyMenuBtnRect[1].x, menuOrigin[2].y + lobbyMenuBtnRect[1].y, lobbyMenuBtnRect[1].width, lobbyMenuBtnRect[1].height), lobbyMenuBtnTxtr[1]))
 					{
 						LevelSelectionIncrement();
+
+						var gameMap = networkHandler.gameMap;
+						if(levels[levelIndex] == "CityTrack"){
+							gameMap = "CityTrack";
+						}
+						if(levels[levelIndex] == "CityTrackV2"){
+							gameMap = "CityTrack2.0";
+						}
+						if(levels[levelIndex] == "John's Track"){
+							gameMap = "John_CityTrack2.0_TestScene";
+						}
+						if(levels[levelIndex] == "Lee's Track"){
+							gameMap = "Lee_CityTrack2.0_TestScene";
+						}
+						networkHandler.UpdateMapInformation(gameMap);
 					}
 					
 				}

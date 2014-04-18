@@ -10,6 +10,8 @@ public class RaceStart : MonoBehaviour {
 	//the player
 	public GameObject[] players;
 	public GameObject player;
+
+	public GameObject[] ai;
 	
 	//the motion scripts
 	private MotionControl playerMotion;
@@ -26,13 +28,22 @@ public class RaceStart : MonoBehaviour {
 
 		//get the player dino and store in player
 		players = GameObject.FindGameObjectsWithTag("Dino");
+		ai = GameObject.FindGameObjectsWithTag ("Ai");
 
 		foreach (var unit in players){
-			if (unit.networkView.isMine && unit.tag == "Player"){
+			if (unit.networkView.isMine && unit.tag == "Dino"){
 				player = unit;
 				break;
 			}
 		}
+
+		foreach (var unit in ai) {
+			if (unit != null) {
+				var aiMotion = unit.GetComponent<MotionControl>();
+				aiMotion.enabled = false;
+			}
+		}
+
 		//get the MotionControllers from the player and the cpu
 		playerMotion = player.GetComponent<MotionControl>();
 
@@ -59,6 +70,11 @@ public class RaceStart : MonoBehaviour {
 
 			//reenable the motion scripts
 			playerMotion.enabled = true;
+
+			foreach (var unit in ai){
+				var aiMotion = unit.GetComponent<MotionControl>();
+				aiMotion.enabled = true;
+			}
 
 			//stop the repeating
 			CancelInvoke("CountDown");
