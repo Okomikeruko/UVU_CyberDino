@@ -142,46 +142,16 @@ public class MenuControl : MonoBehaviour
 		
 		//graphics ----------------------------------------
 		mainMenuBtnRect = new Rect[2];
-		mainMenuBtnRect[0] = ResizeRect(new Rect(75, 10, 35, 30));
-		mainMenuBtnRect[1] = ResizeRect(new Rect(75, 50, 35, 30));
 		
 		multiPMenuRect = new Rect[5];
-		multiPMenuRect[0] = ResizeRect(new Rect(10, 20, 35, 10));
-		multiPMenuRect[1] = ResizeRect(new Rect(30, 20, 35, 10));
-		multiPMenuRect[2] = ResizeRect(new Rect(10, 60, 35, 10));
-		multiPMenuRect[3] = ResizeRect(new Rect(30, 60, 35, 10));
-		multiPMenuRect[4] = ResizeRect(new Rect(1, 90, 15, 15));
 		
 		multiPMenuBtnRect = new Rect[2];
-		multiPMenuBtnRect[0] = ResizeRect(new Rect(75, 10, 35, 30));
-		multiPMenuBtnRect[1] = ResizeRect(new Rect(75, 50, 35, 30));
 		
 		lobbyMenuRect = new Rect[4];
-		lobbyMenuRect[0] = ResizeRect(new Rect(70, 1, 30, 10));
-		lobbyMenuRect[1] = ResizeRect(new Rect(20, 1, 35, 15));
-		lobbyMenuRect[2] = ResizeRect(new Rect(35, 1, 35, 15));
-		lobbyMenuRect[3] = ResizeRect(new Rect(50, 1, 35, 15));
 		
 		lobbyMenuBtnRect = new Rect[6];
-		lobbyMenuBtnRect[0] = ResizeRect(new Rect(1, 40, 10, 10));
-		lobbyMenuBtnRect[1] = ResizeRect(new Rect(40, 40, 10, 10));
-		lobbyMenuBtnRect[2] = ResizeRect(new Rect(50, 40, 10, 10));
-		lobbyMenuBtnRect[3] = ResizeRect(new Rect(90, 40, 10, 10));
-		lobbyMenuBtnRect[4] = ResizeRect(new Rect(0, 80, 25, 20));
-		lobbyMenuBtnRect[5] = ResizeRect(new Rect(73, 70, 35, 30));
 		
 		connectingRect = new Rect[4];
-		connectingRect[0] = ResizeRect(new Rect(30, 20, 40, 40));
-		connectingRect[1] = ResizeRect(new Rect(40, 40, 25, 20));
-		connectingRect[2] = ResizeRect(new Rect(50, 50, 40, 40));
-		connectingRect[3] = ResizeRect(new Rect(0, 80, 25, 20));
-		
-		lvlGraphicPos = ResizeRect(new Rect(0, 0, 50, 100));
-
-		mainMenuBkgdPos  = ResizeRect(new Rect(0, 0, 100, 100));
-		menuBkgdPos  = ResizeRect(new Rect(50, 50, 100, 100));
-		
-		startDinoPos = ResizeRect(new Rect(75, 40, 0, 0));
 		
 		//the names of the players in the order that they past the finished line
 		placesNames = new string[6];
@@ -200,6 +170,8 @@ public class MenuControl : MonoBehaviour
 	
 	void Update()
 	{
+		SetButtonsSize();
+		
 		if(menuSelect == Menu.lobbyMenu)
 		{
 
@@ -806,5 +778,45 @@ public class MenuControl : MonoBehaviour
 
 	public void GoToLevel() {
 		menuSelect = Menu.goToLevel;
+	}
+	
+	void SetButtonsSize()
+	{
+	
+		mainMenuBtnRect[0] = ResizeRect(new Rect(75, 10, 35, 30));
+		mainMenuBtnRect[1] = ResizeRect(new Rect(75, 50, 35, 30));
+		
+		multiPMenuRect[0] = ResizeRect(new Rect(10, 20, 35, 10));
+		multiPMenuRect[1] = ResizeRect(new Rect(30, 20, 35, 10));
+		multiPMenuRect[2] = ResizeRect(new Rect(10, 60, 35, 10));
+		multiPMenuRect[3] = ResizeRect(new Rect(30, 60, 35, 10));
+		multiPMenuRect[4] = ResizeRect(new Rect(1, 90, 15, 15));
+		
+		multiPMenuBtnRect[0] = ResizeRect(new Rect(75, 10, 35, 30));
+		multiPMenuBtnRect[1] = ResizeRect(new Rect(75, 50, 35, 30));
+		
+		lobbyMenuRect[0] = ResizeRect(new Rect(70, 1, 30, 10));
+		lobbyMenuRect[1] = ResizeRect(new Rect(20, 1, 35, 15));
+		lobbyMenuRect[2] = ResizeRect(new Rect(35, 1, 35, 15));
+		lobbyMenuRect[3] = ResizeRect(new Rect(50, 1, 35, 15));
+		
+		lobbyMenuBtnRect[0] = ResizeRect(new Rect(1, 40, 10, 10));
+		lobbyMenuBtnRect[1] = ResizeRect(new Rect(40, 40, 10, 10));
+		lobbyMenuBtnRect[2] = ResizeRect(new Rect(50, 40, 10, 10));
+		lobbyMenuBtnRect[3] = ResizeRect(new Rect(90, 40, 10, 10));
+		lobbyMenuBtnRect[4] = ResizeRect(new Rect(0, 80, 25, 20));
+		lobbyMenuBtnRect[5] = ResizeRect(new Rect(73, 70, 35, 30));
+		
+		connectingRect[0] = ResizeRect(new Rect(30, 20, 40, 40));
+		connectingRect[1] = ResizeRect(new Rect(40, 40, 25, 20));
+		connectingRect[2] = ResizeRect(new Rect(50, 50, 40, 40));
+		connectingRect[3] = ResizeRect(new Rect(0, 80, 25, 20));
+		
+		lvlGraphicPos = ResizeRect(new Rect(0, 0, 50, 100));
+		
+		mainMenuBkgdPos  = ResizeRect(new Rect(0, 0, 100, 100));
+		menuBkgdPos  = ResizeRect(new Rect(50, 50, 100, 100));
+		
+		startDinoPos = ResizeRect(new Rect(75, 40, 0, 0));
 	}
 }
