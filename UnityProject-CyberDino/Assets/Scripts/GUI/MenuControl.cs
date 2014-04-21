@@ -116,21 +116,21 @@ public class MenuControl : MonoBehaviour
 		mainMenuBtnTxtr[1] = (Texture)Resources.Load("GUI/Materials/MultiPlayerButton");
 		
 		mPlayerMenuBtnTxtr = new Texture[2];
-		mPlayerMenuBtnTxtr[0] = (Texture)Resources.Load("GUI/Materials/HostGameButton");
-		mPlayerMenuBtnTxtr[1] = (Texture)Resources.Load("GUI/Materials/JoinGameButton");
+		mPlayerMenuBtnTxtr[0] = (Texture)Resources.Load("GUI/Materials/HostButton");
+		mPlayerMenuBtnTxtr[1] = (Texture)Resources.Load("GUI/Materials/JoinButton");
 		
 		lobbyMenuBtnTxtr = new Texture[3];
-		lobbyMenuBtnTxtr[0] = (Texture)Resources.Load("GUI/Materials/arrowLeft");
-		lobbyMenuBtnTxtr[1] = (Texture)Resources.Load("GUI/Materials/arrowRight");
+		lobbyMenuBtnTxtr[0] = (Texture)Resources.Load("GUI/Materials/LeftArrow");
+		lobbyMenuBtnTxtr[1] = (Texture)Resources.Load("GUI/Materials/RightArrow");
 		lobbyMenuBtnTxtr[2] = (Texture)Resources.Load("GUI/Materials/PlayButton");
 		
 		backBtnTxtr = (Texture)Resources.Load("GUI/Materials/BackButton");
 		
 		lvlSelectTxtr = new Texture[4];
 		lvlSelectTxtr[0] = (Texture)Resources.Load("GUI/Materials/CityTrackGFX");
-		lvlSelectTxtr[1] = (Texture)Resources.Load("GUI/Materials/CityTrackGFXv2");
+		lvlSelectTxtr[1] = (Texture)Resources.Load("GUI/Materials/CityTrackGraphic");
 
-		mainMenuBkgdTxtr = (Texture)Resources.Load("GUI/Materials/Cyberdino temp title");
+		mainMenuBkgdTxtr = (Texture)Resources.Load("GUI/Materials/BackgroundMain");
 		
 		dinoPortrait = new Texture[6];
 		dinoPortrait[0] = (Texture)Resources.Load("GUI/Materials/CityTrackGFX");
@@ -312,12 +312,11 @@ public class MenuControl : MonoBehaviour
 		//if menuSelet is the main menu
 		if(menuSelect == Menu.mainMenu)
 		{
-			
-			//mainMenuBkgd.guiTexture.pixelInset = new Rect(menuOrigin[0].x + mainMenuBkgdPos.x, menuOrigin[0].y + mainMenuBkgdPos.y, mainMenuBkgdPos.width, mainMenuBkgdPos.height);
 
 			//single player button
 			if(GUI.Button(new Rect(menuOrigin[0].x + mainMenuBtnRect[0].x, menuOrigin[0].y + mainMenuBtnRect[0].y, mainMenuBtnRect[0].width, mainMenuBtnRect[0].height), mainMenuBtnTxtr[0]))
 			{
+
 				singlePlayer = true;
 				
 				inLobby = true;
@@ -325,7 +324,6 @@ public class MenuControl : MonoBehaviour
 				
 				StartCoroutine(MoveLeftOff(0, 2, Menu.lobbyMenu));
 			}
-			GUI.Label(new Rect(menuOrigin[0].x + mainMenuBtnRect[0].x, menuOrigin[0].y + mainMenuBtnRect[0].y, mainMenuBtnRect[0].width, mainMenuBtnRect[0].height), "Single Player");
 			//multiplayer button
 			if(GUI.Button(new Rect(menuOrigin[0].x + mainMenuBtnRect[1].x, menuOrigin[0].y + mainMenuBtnRect[1].y, mainMenuBtnRect[1].width, mainMenuBtnRect[1].height), mainMenuBtnTxtr[1]))
 			{
