@@ -111,9 +111,10 @@ public class MenuControl : MonoBehaviour
 	// Use this for initialization
 	void Start () 
 	{
-		mainMenuBtnTxtr = new Texture[2];
+		mainMenuBtnTxtr = new Texture[3];
 		mainMenuBtnTxtr[0] = (Texture)Resources.Load("GUI/Materials/SinglePlayerButton");
 		mainMenuBtnTxtr[1] = (Texture)Resources.Load("GUI/Materials/MultiPlayerButton");
+		mainMenuBtnTxtr[2] = (Texture)Resources.Load("GUI/Materials/CyberDinoLogo");
 		
 		mPlayerMenuBtnTxtr = new Texture[2];
 		mPlayerMenuBtnTxtr[0] = (Texture)Resources.Load("GUI/Materials/HostButton");
@@ -141,7 +142,7 @@ public class MenuControl : MonoBehaviour
 		dinoPortrait[5] = (Texture)Resources.Load("GUI/Materials/CityTrackGFX");
 		
 		//graphics ----------------------------------------
-		mainMenuBtnRect = new Rect[2];
+		mainMenuBtnRect = new Rect[3];
 		
 		multiPMenuRect = new Rect[5];
 		
@@ -284,9 +285,13 @@ public class MenuControl : MonoBehaviour
 		//if menuSelet is the main menu
 		if(menuSelect == Menu.mainMenu)
 		{
-
+			//Debug.Log(mainMenuBtnRect[0].width);
+			
+			//Debug.Log(Screen.height);
+			
 			//single player button
 			if(GUI.Button(new Rect(menuOrigin[0].x + mainMenuBtnRect[0].x, menuOrigin[0].y + mainMenuBtnRect[0].y, mainMenuBtnRect[0].width, mainMenuBtnRect[0].height), mainMenuBtnTxtr[0]))
+			//if(GUI.Button(new Rect(menuOrigin[0].x + mainMenuBtnRect[0].x, menuOrigin[0].y + mainMenuBtnRect[0].y, mainMenuBtnRect[0].width, mainMenuBtnRect[0].height), "mainMenuBtnTxtr[0]"))
 			{
 
 				singlePlayer = true;
@@ -303,6 +308,8 @@ public class MenuControl : MonoBehaviour
 				
 				StartCoroutine(MoveLeftOff(0, 1, Menu.multiPMenu));
 			}
+			
+			GUI.DrawTexture(new Rect(menuOrigin[0].x + mainMenuBtnRect[2].x, menuOrigin[0].y + mainMenuBtnRect[2].y, mainMenuBtnRect[2].width, mainMenuBtnRect[2].height), mainMenuBtnTxtr[2]);
 			
 		}
 		//if menuSelet is the join menu
@@ -582,9 +589,56 @@ public class MenuControl : MonoBehaviour
 		float xMulti = Screen.width / 100.0f;
 		float yMulti = Screen.height / 100.0f;
 		
+		//Debug.Log("xMulti " + xMulti);
+		//Debug.Log("yMulti " + yMulti);
+		
+		//Debug.Log(new Rect(_pos.x * xMulti, _pos.y * yMulti, _pos.width * xMulti, _pos.height * yMulti));
+		
 		//set the rect position and size
 		return new Rect(_pos.x * xMulti, _pos.y * yMulti, _pos.width * xMulti, _pos.height * yMulti);
 		
+	}
+	
+	void SetButtonsSize()
+	{
+		
+		mainMenuBtnRect[0] = ResizeRect(new Rect(70, 20, 25, 20));
+		
+		mainMenuBtnRect[1] = ResizeRect(new Rect(70, 50, 25, 25));
+		mainMenuBtnRect[2] = ResizeRect(new Rect(20, 30, 30, 20));
+		
+		multiPMenuRect[0] = ResizeRect(new Rect(10, 20, 35, 10));
+		multiPMenuRect[1] = ResizeRect(new Rect(30, 20, 35, 10));
+		multiPMenuRect[2] = ResizeRect(new Rect(10, 60, 35, 10));
+		multiPMenuRect[3] = ResizeRect(new Rect(30, 60, 35, 10));
+		multiPMenuRect[4] = ResizeRect(new Rect(1, 90, 15, 15));
+		
+		multiPMenuBtnRect[0] = ResizeRect(new Rect(75, 10, 35, 30));
+		multiPMenuBtnRect[1] = ResizeRect(new Rect(75, 50, 35, 30));
+		
+		lobbyMenuRect[0] = ResizeRect(new Rect(70, 1, 30, 10));
+		lobbyMenuRect[1] = ResizeRect(new Rect(20, 1, 35, 15));
+		lobbyMenuRect[2] = ResizeRect(new Rect(35, 1, 35, 15));
+		lobbyMenuRect[3] = ResizeRect(new Rect(50, 1, 35, 15));
+		
+		lobbyMenuBtnRect[0] = ResizeRect(new Rect(1, 40, 10, 10));
+		lobbyMenuBtnRect[1] = ResizeRect(new Rect(40, 40, 10, 10));
+		lobbyMenuBtnRect[2] = ResizeRect(new Rect(50, 40, 10, 10));
+		lobbyMenuBtnRect[3] = ResizeRect(new Rect(90, 40, 10, 10));
+		lobbyMenuBtnRect[4] = ResizeRect(new Rect(0, 80, 25, 20));
+		lobbyMenuBtnRect[5] = ResizeRect(new Rect(73, 70, 35, 30));
+		
+		connectingRect[0] = ResizeRect(new Rect(30, 20, 40, 40));
+		connectingRect[1] = ResizeRect(new Rect(40, 40, 25, 20));
+		connectingRect[2] = ResizeRect(new Rect(50, 50, 40, 40));
+		connectingRect[3] = ResizeRect(new Rect(0, 80, 25, 20));
+		
+		lvlGraphicPos = ResizeRect(new Rect(0, 0, 50, 100));
+		
+		mainMenuBkgdPos  = ResizeRect(new Rect(0, 0, 100, 100));
+		menuBkgdPos  = ResizeRect(new Rect(50, 50, 100, 100));
+		
+		startDinoPos = ResizeRect(new Rect(75, 40, 0, 0));
 	}
 	
 	string GetConnectionState() 
@@ -780,43 +834,5 @@ public class MenuControl : MonoBehaviour
 		menuSelect = Menu.goToLevel;
 	}
 	
-	void SetButtonsSize()
-	{
 	
-		mainMenuBtnRect[0] = ResizeRect(new Rect(75, 10, 35, 30));
-		mainMenuBtnRect[1] = ResizeRect(new Rect(75, 50, 35, 30));
-		
-		multiPMenuRect[0] = ResizeRect(new Rect(10, 20, 35, 10));
-		multiPMenuRect[1] = ResizeRect(new Rect(30, 20, 35, 10));
-		multiPMenuRect[2] = ResizeRect(new Rect(10, 60, 35, 10));
-		multiPMenuRect[3] = ResizeRect(new Rect(30, 60, 35, 10));
-		multiPMenuRect[4] = ResizeRect(new Rect(1, 90, 15, 15));
-		
-		multiPMenuBtnRect[0] = ResizeRect(new Rect(75, 10, 35, 30));
-		multiPMenuBtnRect[1] = ResizeRect(new Rect(75, 50, 35, 30));
-		
-		lobbyMenuRect[0] = ResizeRect(new Rect(70, 1, 30, 10));
-		lobbyMenuRect[1] = ResizeRect(new Rect(20, 1, 35, 15));
-		lobbyMenuRect[2] = ResizeRect(new Rect(35, 1, 35, 15));
-		lobbyMenuRect[3] = ResizeRect(new Rect(50, 1, 35, 15));
-		
-		lobbyMenuBtnRect[0] = ResizeRect(new Rect(1, 40, 10, 10));
-		lobbyMenuBtnRect[1] = ResizeRect(new Rect(40, 40, 10, 10));
-		lobbyMenuBtnRect[2] = ResizeRect(new Rect(50, 40, 10, 10));
-		lobbyMenuBtnRect[3] = ResizeRect(new Rect(90, 40, 10, 10));
-		lobbyMenuBtnRect[4] = ResizeRect(new Rect(0, 80, 25, 20));
-		lobbyMenuBtnRect[5] = ResizeRect(new Rect(73, 70, 35, 30));
-		
-		connectingRect[0] = ResizeRect(new Rect(30, 20, 40, 40));
-		connectingRect[1] = ResizeRect(new Rect(40, 40, 25, 20));
-		connectingRect[2] = ResizeRect(new Rect(50, 50, 40, 40));
-		connectingRect[3] = ResizeRect(new Rect(0, 80, 25, 20));
-		
-		lvlGraphicPos = ResizeRect(new Rect(0, 0, 50, 100));
-		
-		mainMenuBkgdPos  = ResizeRect(new Rect(0, 0, 100, 100));
-		menuBkgdPos  = ResizeRect(new Rect(50, 50, 100, 100));
-		
-		startDinoPos = ResizeRect(new Rect(75, 40, 0, 0));
-	}
 }
