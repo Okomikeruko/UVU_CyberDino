@@ -46,11 +46,17 @@ public class MotionControl : MonoBehaviour {
 
 	private const float DEGREE_DIFF = 0.9f;
 	private const float SLOPE_ANGLE = 0.85f;
+	
+	private float adjustRation = 0.1F;
+	private Quaternion YY = Quaternion.FromToRotation(Vector3.forward, Vector3.up);
+	private Vector3 myNormal;
 
 	// Use this for initialization
 	void OnEnable () {
 		anim = GetComponentInChildren<Animator>(); 			// Get the selected dino's mechanim controller
 		netanim = GetComponentInChildren<NetworkAnimations>();
+
+		myNormal = Vector3.up;
 
 //		foreach(Animator obj in transform)
 //		{
@@ -95,9 +101,7 @@ public class MotionControl : MonoBehaviour {
 				velocity += acceleration * Time.deltaTime; // Accelerate this object
 			}
 
-			// Apply rotation
-			transform.Rotate(new Vector3(0, handling * horizontalTurning, 0)); // Rotate character controller
-			
+
 			// Update velocity
 			velocity -= (drag + slope) * Mathf.Sign (speed) * Time.deltaTime; // Reduce velocity by drag and slope
 			
@@ -129,6 +133,23 @@ public class MotionControl : MonoBehaviour {
 			rigidbody.AddForce(new Vector3(0.0f, -gravity * rigidbody.mass, 0.0f));
 		}	
 
+
+		RaycastHit hit;
+
+		if(Physics.Raycast(transform.position, -Vector3.up, out hit))
+		{
+			if(hit.transform.tag != "Track" && hit.normal != transform.up && hit.distance > 0.9F) 
+			{
+				myNormal = Vector3.Lerp (myNormal, hit.normal, adjustRation);
+				Vector3 myForward = Vector3.Cross(transform.right, myNormal);
+				Quaternion to = Quaternion.LookRotation (myForward, myNormal);
+				transform.rotation = Quaternion.Slerp (transform.rotation, to, adjustRation);
+			}
+		}
+
+		// Apply rotation
+		transform.Rotate(new Vector3(0, handling * horizontalTurning, 0)); // Rotate character controller
+		
 		netanim.AnimSetSpeed("Speed", velocity, topSpeed);
 		netanim.AnimSetDirection("Direction", horizontalTurning);
 	}
