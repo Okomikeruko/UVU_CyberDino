@@ -253,7 +253,7 @@ public class MenuControl : MonoBehaviour
 		GUI.skin = mySkin;
 		
 		//if the menu selected isn't the main menu
-		if(menuSelect != Menu.mainMenu)
+		if(menuSelect != Menu.mainMenu && menuSelect != Menu.goToLevel)
 		{
 			//destroy the main menu background if it is there
 			if(mainMenuBkgd != null)
@@ -276,7 +276,7 @@ public class MenuControl : MonoBehaviour
 				menuBkgd.transform.localScale = Camera.main.ScreenToWorldPoint(new Vector3(pointInWorld.x / 5, 1, pointInWorld.y / 5));
 			}
 		}
-		else
+		else if(menuSelect != Menu.goToLevel)
 		{
 			//if the menu background is there then destroy it
 			if(menuBkgd != null)
@@ -594,7 +594,25 @@ public class MenuControl : MonoBehaviour
 		//if menuSelet is in a level
 		else if(menuSelect == Menu.goToLevel)
 		{
+			if(mainMenuBkgd != null)
+			{
+				Destroy(mainMenuBkgd);
+			}
 			
+			if(menuBkgd != null)
+			{
+				Destroy(menuBkgd);
+			}
+			
+			if(lvlGraphic != null)
+			{
+				Destroy(lvlGraphic);
+			}
+			
+			if(dinoSelected != null)
+			{
+				Destroy(dinoSelected);
+			}
 		}
 
 	}
