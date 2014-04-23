@@ -17,6 +17,9 @@ public class Flamethrower : MonoBehaviour
 	[SerializeField]
 	private int numberOfUses;
 
+	[SerializeField]
+	private ParticleSystem flame;
+
 	private bool onCoolDown = false;
 	[SerializeField]
 	private float coolDownDuration;
@@ -27,11 +30,14 @@ public class Flamethrower : MonoBehaviour
 	public int MaxNumberOfUses{get{return maxNumberOfUses;} set{maxNumberOfUses = value;}}
 	public int NumberOfUses{get{return numberOfUses;} set{numberOfUses = value;}}
 
+	public ParticleSystem Flame{get{return flame;} set{flame = value;}}
+
 	public bool OnCoolDown{get{return onCoolDown;} set{onCoolDown = value;}}
 	public float CoolDownDuration{get{return coolDownDuration;} set{coolDownDuration = value;}}
 
 	void OnEnable() 
 	{
+		Flame.Stop();
 		GUIControl.attacking += UseAttack;
 		NumberOfUses = MaxNumberOfUses;
 	}
@@ -58,6 +64,7 @@ public class Flamethrower : MonoBehaviour
 
 	IEnumerator Attack()
 	{
+		Flame.Play ();
 		sphereHits = Physics.SphereCastAll(new Vector3(transform.position.x, transform.position.y, transform.position.z),TheRadius, transform.forward, TheRange);
 
 		Vector3 forward = transform.TransformDirection(Vector3.forward) * TheRange;
@@ -74,7 +81,7 @@ public class Flamethrower : MonoBehaviour
 		NumberOfUses--;
 		StartCoroutine(Cooldown());
 		yield return new WaitForSeconds(TheDuration);
-
+		Flame.Stop();
 	}
 
 	IEnumerator Cooldown()

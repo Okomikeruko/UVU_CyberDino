@@ -23,6 +23,7 @@ public class RespawnManager : MonoBehaviour
 	private float offTrackTimer = 2;
 	private float offTrackRespawnTime;
 
+	//Racer health variables
 	[SerializeField]
 	private float heavyHealth = 125.0f;
 	[SerializeField]
@@ -46,7 +47,7 @@ public class RespawnManager : MonoBehaviour
 	private float OffTrackTimer { get{return offTrackTimer;} set{offTrackTimer = value;}}
 	private float OffTrackRespawnTime { get{return offTrackRespawnTime;} set{offTrackRespawnTime = value;}}
 
-
+	//Racer health variables
 	public float HeavyHealth{get{return heavyHealth;} set{heavyHealth = value;}}
 	public float StandardHealth{get{return standardHealth;} set{standardHealth = value;}}
 	public float LightHealth{get{return lightHealth;} set{lightHealth = value;}}
@@ -56,9 +57,11 @@ public class RespawnManager : MonoBehaviour
 	void OnEnable() 
 	{
 		RacerRespawnStats.spawned += RacerStart;
-		RacerInteractionManager.stayingOnSomething += OnTrack;
-		RacerInteractionManager.notStayingOnSomething += OffTrack;
+		RacerInteractionManager.stayingOnSomething += StayingOnTrack;
+//		RacerInteractionManager.notStayingOnSomething += OffTrack;
 		RacerInteractionManager.hitSomething += RespawnNodeSwitch;
+		RacerInteractionManager.hitSomething += HitKillPlane;
+		RacerInteractionManager.hitSomething += OnTrack;
 
 		RacerRespawnStats.spawned += RacerStart;
 		RacerHealth.died += DeadRacer;
@@ -66,33 +69,35 @@ public class RespawnManager : MonoBehaviour
 	
 	void OnDisable() 
 	{
-		RacerInteractionManager.stayingOnSomething -= OnTrack;
-		RacerInteractionManager.notStayingOnSomething -= OffTrack;
+		RacerInteractionManager.stayingOnSomething -= StayingOnTrack;
+//		RacerInteractionManager.notStayingOnSomething -= OffTrack;
 		RacerInteractionManager.hitSomething -= RespawnNodeSwitch;
+		RacerInteractionManager.hitSomething -= HitKillPlane;
+		RacerInteractionManager.hitSomething -= OnTrack;
 
 		RacerRespawnStats.spawned -= RacerStart;
 
 		RacerHealth.died -= DeadRacer;
 	}
 
-	void OnTrack(Transform other)
+	public void StayingOnTrack(Transform player, Transform other)
 	{
 		if(other.gameObject.tag == "Track")
 		{
-
+//			StopCoroutine("OffTrack");
+//			StopCoroutine("Respawn");
+			Debug.Log ("Staying on " + other.gameObject.tag);
 		}
 	}
 
-	void OffTrack(Transform other)
-	{
-		if(other.gameObject.tag == "Track")
-		{
-
-		}
-	}
-
-
-	// Methods
+//	public void OffTrack(Transform player, Transform other)
+//	{
+//		if(other.gameObject.tag == "Track")
+//		{
+//			Debug.Log ("Off Track");
+//			StartCoroutine(OffTrack(player));
+//		}
+//	}
 
 	public void RacerStart(Transform player)
 	{
@@ -129,13 +134,28 @@ public class RespawnManager : MonoBehaviour
 	public void DeadRacer(Transform player)
 	{
 		RacerHealth = player.gameObject.GetComponent<RacerHealth>();
-		RacerRespawn = player.gameObject.GetComponent<RacerRespawnStats>();
 
 		RacerHealth.CurrentHealth = RacerHealth.TotalHealth;
 
-		UseRespawn(player, RacerRespawn);
+		UseRespawn(player);
 	}
 
+	IEnumerator OffTrack(Transform player)
+	{
+		yield return new WaitForSeconds(OffTrackTimer);
+
+		UseRespawn(player);
+
+	}
+
+	public void OnTrack(Transform player, Transform other)
+	{
+		if(other.gameObject.tag == "Track")
+		{
+			StopCoroutine("OffTrack");
+			StopCoroutine("Respawn");
+		}
+	}
 	
 //	public float RespawnNodeAngle()
 //	{
@@ -160,15 +180,23 @@ public class RespawnManager : MonoBehaviour
 
 		}
 	}
-	
-	public void UseRespawn(Transform racer, RacerRespawnStats respawn)
+
+	public void HitKillPlane(Transform player, Transform other)
 	{
-		StartCoroutine(Respawn(racer, respawn));
+		if(other.gameObject.tag == "KillPlane")
+		{
+			UseRespawn(player);
+		}
 	}
 	
-	IEnumerator Respawn(Transform player, RacerRespawnStats respawn)
+	public void UseRespawn(Transform racer)
 	{
-
+		StartCoroutine(Respawn(racer));
+	}
+	
+	IEnumerator Respawn(Transform player)
+	{
+		RacerRespawn = player.gameObject.GetComponent<RacerRespawnStats>();
 		Debug.Log("Respawning. Please wait....");
 //		IsRespawning = true;
 //		Move.SetRunning(false);
@@ -184,8 +212,8 @@ public class RespawnManager : MonoBehaviour
 		yield return new WaitForSeconds(1);
 		Debug.Log("Respawning. Please wait....");
 
-		player.position = respawn.PreviousNode.position;
-		player.rotation = respawn.PreviousNode.rotation;
+		player.parent.position = RacerRespawn.CurrentNode.position;
+		player.parent.rotation = Quaternion.Euler(0, 0, RacerRespawn.CurrentNode.rotation.z);
 		
 //		RespawnEffect.Play();
 		yield return new WaitForSeconds(1);

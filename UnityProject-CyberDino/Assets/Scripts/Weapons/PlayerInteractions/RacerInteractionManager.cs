@@ -9,8 +9,8 @@ public class RacerInteractionManager : MonoBehaviour
 {
 
 	public static Action<Transform, Transform> hitSomething;
-	public static Action<Transform> stayingOnSomething;
-	public static Action<Transform> notStayingOnSomething;
+	public static Action<Transform, Transform> stayingOnSomething;
+	public static Action<Transform, Transform> notStayingOnSomething;
 	
 	void OnEnable() 
 	{
@@ -35,7 +35,7 @@ public class RacerInteractionManager : MonoBehaviour
 	{
 		if(stayingOnSomething != null)
 		{
-			stayingOnSomething(other.transform);
+			stayingOnSomething(transform, other.transform);
 		}
 	}
 
@@ -43,7 +43,7 @@ public class RacerInteractionManager : MonoBehaviour
 	{
 		if(notStayingOnSomething != null)
 		{
-			notStayingOnSomething(other.transform);
+			notStayingOnSomething(transform, other.transform);
 		}
 	}
 	

@@ -16,6 +16,9 @@ public class SonicScream : MonoBehaviour
 	private int maxNumberOfUses;
 	[SerializeField]
 	private int numberOfUses;
+
+	[SerializeField]
+	private ParticleEmitter scream;
 	
 	private bool onCoolDown = false;
 	[SerializeField]
@@ -26,12 +29,15 @@ public class SonicScream : MonoBehaviour
 	public float TheDuration{get{return theDuration;} set{theDuration = value;}}
 	public int MaxNumberOfUses{get{return maxNumberOfUses;} set{maxNumberOfUses = value;}}
 	public int NumberOfUses{get{return numberOfUses;} set{numberOfUses = value;}}
+
+	public ParticleEmitter Scream{get{return scream;} set{scream = value;}}
 	
 	public bool OnCoolDown{get{return onCoolDown;} set{onCoolDown = value;}}
 	public float CoolDownDuration{get{return coolDownDuration;} set{coolDownDuration = value;}}
 	
 	void OnEnable() 
 	{
+		Scream.enabled = false;
 		GUIControl.attacking += UseAttack;
 		NumberOfUses = MaxNumberOfUses;
 	}
@@ -58,6 +64,7 @@ public class SonicScream : MonoBehaviour
 	
 	IEnumerator Attack()
 	{
+		Scream.enabled = true;
 		sphereHits = Physics.SphereCastAll(new Vector3(transform.position.x, transform.position.y, transform.position.z),TheRadius, transform.forward, TheRange);
 		
 		Vector3 forward = transform.TransformDirection(Vector3.forward) * TheRange;
@@ -74,6 +81,7 @@ public class SonicScream : MonoBehaviour
 		NumberOfUses--;
 		StartCoroutine(Cooldown());
 		yield return new WaitForSeconds(TheDuration);
+		Scream.enabled = false;
 		
 	}
 	

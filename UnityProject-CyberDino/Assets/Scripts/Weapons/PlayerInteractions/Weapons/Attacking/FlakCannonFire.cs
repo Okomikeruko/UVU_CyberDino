@@ -21,13 +21,21 @@ public class FlakCannonFire : MonoBehaviour
 	[SerializeField]
 	private int numberOfUses;
 
+	[SerializeField]
+	private ParticleSystem cannonFire;
+	//This will also need to play an animation
+
 	public bool OnCoolDown{get{return onCoolDown;} set{onCoolDown = value;}}
 	public float CoolDownDuration{get{return coolDownDuration;} set{coolDownDuration = value;}}
 	public int MaxNumberOfUses{get{return maxNumberOfUses;} set{maxNumberOfUses = value;}}
 	public int NumberOfUses{get{return numberOfUses;} set{numberOfUses = value;}}
+
+	public ParticleSystem CannonFire{get{return cannonFire;}set{cannonFire = value;}}
+	//This will also need to play an animation
 	
 	void OnEnable() 
 	{
+		CannonFire.Stop();
 		shooting += GunFire;
 		stopping += StopFire;
 		NumberOfUses = MaxNumberOfUses;
@@ -83,6 +91,7 @@ public class FlakCannonFire : MonoBehaviour
 	IEnumerator FireWeapon() 
 	{
 		firing = true;
+		CannonFire.Play();
 		Transform obj = FlakCannonPooling.current.GetPooledObject();
 		
 		if(obj == null) yield return null;
@@ -91,6 +100,7 @@ public class FlakCannonFire : MonoBehaviour
 		obj.gameObject.SetActive(true);
 		NumberOfUses--;
 		yield return new WaitForSeconds(fireTime);
+		CannonFire.Stop();
 		firing = false;
 
 	}

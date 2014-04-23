@@ -11,7 +11,10 @@ public class Roll : MonoBehaviour
 	private int maxNumberOfUses;
 	[SerializeField]
 	private int numberOfUses;
-	
+
+	[SerializeField]
+	private GameObject theRoll;
+
 	private bool onCoolDown = false;
 	[SerializeField]
 	private float coolDownDuration;
@@ -19,12 +22,15 @@ public class Roll : MonoBehaviour
 	public float TheDuration{get{return theDuration;} set{theDuration = value;}}
 	public int MaxNumberOfUses{get{return maxNumberOfUses;} set{maxNumberOfUses = value;}}
 	public int NumberOfUses{get{return numberOfUses;} set{numberOfUses = value;}}
-	
+
+	public GameObject TheRoll{get{return theRoll;} set{theRoll = value;}}
+
 	public bool OnCoolDown{get{return onCoolDown;} set{onCoolDown = value;}}
 	public float CoolDownDuration{get{return coolDownDuration;} set{coolDownDuration = value;}}
 	
 	void OnEnable() 
 	{
+		TheRoll.SetActive(false);
 		GUIControl.attacking += UseAttack;
 		NumberOfUses = MaxNumberOfUses;
 		gameObject.collider.enabled = false;
@@ -61,10 +67,12 @@ public class Roll : MonoBehaviour
 	IEnumerator Attack()
 	{
 		gameObject.collider.enabled = true;
+		TheRoll.SetActive(true);
 		NumberOfUses--;
 		StartCoroutine(Cooldown());
 		yield return new WaitForSeconds(TheDuration);
 		gameObject.collider.enabled = false;
+		TheRoll.SetActive(false);
 	}
 
 	IEnumerator Cooldown()
