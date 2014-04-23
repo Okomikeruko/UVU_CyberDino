@@ -50,10 +50,10 @@ public class MenuControl : MonoBehaviour
 	public string serverName = "";
 	
 	//the index of the dino selected
-	public int dinoIndex;
+	public int dinoIndex = 0;
 	
-	//the inde3x of the level selected
-	public int levelIndex;
+	//the index of the level selected
+	public int levelIndex = 0;
 	
 	//hold the names of the places
 	public string[] placesNames;
@@ -215,16 +215,16 @@ public class MenuControl : MonoBehaviour
 				LevelSelectionIncrement();
 
 				var gameMap = networkHandler.gameMap;
-				if(levels[levelIndex] == "CityTrack"){
+				if(levelIndex == 0){
 					gameMap = "CityTrack";
 				}
-				if(levels[levelIndex] == "CityTrackV2"){
-					gameMap = "CityTrack2.0";
+				if(levelIndex == 1){
+					gameMap = "CityTrack2.1";
 				}
-				if(levels[levelIndex] == "John's Track"){
+				if(levelIndex == 2){
 					gameMap = "John_CityTrack2.0_TestScene";
 				}
-				if(levels[levelIndex] == "Lee's Track"){
+				if(levelIndex == 3){
 					gameMap = "Lee_CityTrack2.0_TestScene";
 				}
 				networkHandler.UpdateMapInformation(gameMap);
@@ -235,16 +235,16 @@ public class MenuControl : MonoBehaviour
 				LevelSelectionDecrement();
 
 				var gameMap = networkHandler.gameMap;
-				if(levels[levelIndex] == "CityTrack"){
+				if(levelIndex == 0){
 					gameMap = "CityTrack";
 				}
-				if(levels[levelIndex] == "CityTrackV2"){
-					gameMap = "CityTrack2.0";
+				if(levelIndex == 1){
+					gameMap = "CityTrack2.1";
 				}
-				if(levels[levelIndex] == "John's Track"){
+				if(levelIndex == 2){
 					gameMap = "John_CityTrack2.0_TestScene";
 				}
-				if(levels[levelIndex] == "Lee's Track"){
+				if(levelIndex == 3){
 					gameMap = "Lee_CityTrack2.0_TestScene";
 				}
 				networkHandler.UpdateMapInformation(gameMap);
@@ -450,16 +450,16 @@ public class MenuControl : MonoBehaviour
 						LevelSelectionDecrement();
 
 						var gameMap = networkHandler.gameMap;
-						if(levels[levelIndex] == "CityTrack"){
+						if(levelIndex == 0){
 							gameMap = "CityTrack";
 						}
-						if(levels[levelIndex] == "CityTrackV2"){
-							gameMap = "CityTrack2.0";
+						if(levelIndex == 1){
+							gameMap = "CityTrack2.1";
 						}
-						if(levels[levelIndex] == "John's Track"){
+						if(levelIndex == 2){
 							gameMap = "John_CityTrack2.0_TestScene";
 						}
-						if(levels[levelIndex] == "Lee's Track"){
+						if(levelIndex == 3){
 							gameMap = "Lee_CityTrack2.0_TestScene";
 						}
 						networkHandler.UpdateMapInformation(gameMap);
@@ -472,16 +472,16 @@ public class MenuControl : MonoBehaviour
 						LevelSelectionIncrement();
 
 						var gameMap = networkHandler.gameMap;
-						if(levels[levelIndex] == "CityTrack"){
+						if(levelIndex == 0){
 							gameMap = "CityTrack";
 						}
-						if(levels[levelIndex] == "CityTrackV2"){
-							gameMap = "CityTrack2.0";
+						if(levelIndex == 1){
+							gameMap = "CityTrack2.1";
 						}
-						if(levels[levelIndex] == "John's Track"){
+						if(levelIndex == 2){
 							gameMap = "John_CityTrack2.0_TestScene";
 						}
-						if(levels[levelIndex] == "Lee's Track"){
+						if(levelIndex == 3){
 							gameMap = "Lee_CityTrack2.0_TestScene";
 						}
 						networkHandler.UpdateMapInformation(gameMap);
