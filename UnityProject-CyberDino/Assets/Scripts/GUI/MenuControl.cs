@@ -899,6 +899,5 @@ public class MenuControl : MonoBehaviour
 	public void GoToLevel() {
 		menuSelect = Menu.goToLevel;
 	}
-	
-	
+
 }
