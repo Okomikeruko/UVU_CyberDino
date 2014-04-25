@@ -153,7 +153,26 @@ public class MotionControl : MonoBehaviour {
 		netanim.AnimSetSpeed("Speed", velocity, topSpeed);
 		netanim.AnimSetDirection("Direction", horizontalTurning);
 	}
-	
+
+	void OnCollisionEnter(Collision collision)
+	{
+		if(collision.gameObject.tag == "Dino" || collision.gameObject.tag == "Ai")
+		{
+			Rigidbody hit = collision.gameObject.rigidbody;
+
+			rigidbody.AddForce(hit.velocity * hit.mass * 50);
+
+//			float thisPlayersMass = rigidbody.mass;
+//			float otherPlayersMass = collision.gameObject.rigidbody.mass;
+//			Vector3 thisPlayersVector = moveDirection;
+//			Vector3 otherPlayersVector = collision.gameObject.GetComponent<MotionControl>().GetMoveDirection();
+//			
+//			float mag = moveDirection.magnitude; // save current
+//			moveDirection = (thisPlayersVector*(thisPlayersMass-otherPlayersMass)+(2*otherPlayersVector*otherPlayersMass))/(thisPlayersMass+otherPlayersMass);					
+//			transform.Rotate(moveDirection.normalized * mag);
+		}
+	}
+
 	void OnCollisionStay(Collision collisionInfo) 
 	{
 		foreach (ContactPoint contact in collisionInfo.contacts)
@@ -167,18 +186,9 @@ public class MotionControl : MonoBehaviour {
 					slope = 1 - contact.normal.y;
 					//Debug.Log("SLOPE: " + slope);
 				}
-				else if (contact.otherCollider.gameObject.tag == "Player")
+				else if (contact.otherCollider.gameObject.tag == "Dino")
 				{
-					float thisPlayersMass = rigidbody.mass;
-					float otherPlayersMass = contact.otherCollider.rigidbody.mass;
-					Vector3 thisPlayersVector = moveDirection;
-					Vector3 otherPlayersVector = contact.otherCollider.gameObject.GetComponent<MotionControl>().GetMoveDirection();
-					
-					float mag = moveDirection.magnitude; // save current
-					moveDirection = (thisPlayersVector*(thisPlayersMass-otherPlayersMass)+
-									(2*otherPlayersVector*otherPlayersMass))/
-									(thisPlayersMass+otherPlayersMass);					
-					transform.Rotate(moveDirection.normalized * mag);
+
 				}
 			}
 		}		
