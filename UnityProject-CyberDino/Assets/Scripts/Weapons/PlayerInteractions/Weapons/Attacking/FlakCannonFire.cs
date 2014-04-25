@@ -36,16 +36,14 @@ public class FlakCannonFire : MonoBehaviour
 	void OnEnable() 
 	{
 		CannonFire.Stop();
-		shooting += GunFire;
-		stopping += StopFire;
+		FireButton.range += GunFire;
 		NumberOfUses = MaxNumberOfUses;
 		
 	}
 	
 	void OnDisable() 
 	{
-		shooting -= GunFire;
-		stopping += StopFire;
+		FireButton.range -= GunFire;
 	}
 	void Update()
 	{

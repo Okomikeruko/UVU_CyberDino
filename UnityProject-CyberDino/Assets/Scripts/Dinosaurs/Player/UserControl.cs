@@ -108,12 +108,12 @@ public class UserControl : MonoBehaviour {
 //		RacerHealth.Move = move;
 //		Dust = GetComponentInChildren<DustEffectClass>();
 
-		FireButton.shoot += this.shoot;
+//		FireButton.shoot += this.shoot;
 	}
 
 	void OnDisable()
 	{
-		FireButton.shoot -= this.shoot;
+//		FireButton.shoot -= this.shoot;
 	}
 
 	// Update is called once per frame

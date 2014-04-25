@@ -38,13 +38,13 @@ public class TeleportSlam : MonoBehaviour
 	void OnEnable() 
 	{
 		Slam.Stop();
-		GUIControl.attacking += UseAttack;
+		FireButton.melee += UseAttack;
 		NumberOfUses = MaxNumberOfUses;
 	}
 	
 	void OnDisable() 
 	{
-		GUIControl.attacking -= UseAttack;
+		FireButton.melee -= UseAttack;
 	}
 	
 	public void UseAttack()

@@ -31,14 +31,14 @@ public class Roll : MonoBehaviour
 	void OnEnable() 
 	{
 		TheRoll.SetActive(false);
-		GUIControl.attacking += UseAttack;
+		FireButton.melee += UseAttack;
 		NumberOfUses = MaxNumberOfUses;
 		gameObject.collider.enabled = false;
 	}
 	
 	void OnDisable() 
 	{
-		GUIControl.attacking -= UseAttack;
+		FireButton.melee -= UseAttack;
 	}
 	
 	public void UseAttack()

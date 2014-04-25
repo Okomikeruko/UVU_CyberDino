@@ -38,13 +38,13 @@ public class SonicScream : MonoBehaviour
 	void OnEnable() 
 	{
 		Scream.enabled = false;
-		GUIControl.attacking += UseAttack;
+		FireButton.melee += UseAttack;
 		NumberOfUses = MaxNumberOfUses;
 	}
 	
 	void OnDisable() 
 	{
-		GUIControl.attacking -= UseAttack;
+		FireButton.melee -= UseAttack;
 	}
 	
 	public void UseAttack()

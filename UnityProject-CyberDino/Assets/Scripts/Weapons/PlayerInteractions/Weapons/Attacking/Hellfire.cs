@@ -26,14 +26,14 @@ public class Hellfire : MonoBehaviour
 	
 	void OnEnable() 
 	{
-		GUIControl.attacking += UseAttack;
+		FireButton.range += UseAttack;
 		NumberOfUses = MaxNumberOfUses;
 		gameObject.collider.enabled = false;
 	}
 	
 	void OnDisable() 
 	{
-		GUIControl.attacking -= UseAttack;
+		FireButton.range -= UseAttack;
 	}
 	
 	public void UseAttack()

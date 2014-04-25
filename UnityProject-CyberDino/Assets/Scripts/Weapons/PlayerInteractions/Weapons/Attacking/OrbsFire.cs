@@ -8,8 +8,6 @@ public class OrbsFire : MonoBehaviour
 {
 	
 	//This script needs to know when the fire button is being continuously pressed and when it has stopped being pressed.
-	public static Action shooting;	
-	public static Action stopping;
 	
 	public float fireTime = .5f;
 	private bool firing = false;
@@ -28,34 +26,14 @@ public class OrbsFire : MonoBehaviour
 	
 	void OnEnable() 
 	{
-		shooting += GunFire;
-		stopping += StopFire;
+		FireButton.range += GunFire;
 		NumberOfUses = MaxNumberOfUses;
 		
 	}
 	
 	void OnDisable() 
 	{
-		shooting -= GunFire;
-		stopping += StopFire;
-	}
-	void Update()
-	{
-		if(Input.GetMouseButtonDown(0))
-		{
-			if(shooting != null)
-			{
-				shooting();
-			}
-		}
-		
-		if(Input.GetMouseButtonUp(0))
-		{
-			if(stopping != null)
-			{
-				stopping();
-			}
-		}
+		FireButton.range -= GunFire;
 	}
 	
 	public void GunFire()

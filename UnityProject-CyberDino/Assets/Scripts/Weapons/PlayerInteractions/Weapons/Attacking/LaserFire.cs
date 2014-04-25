@@ -7,8 +7,6 @@ using System.Collections;
 public class LaserFire : MonoBehaviour 
 {
 	//This script needs to know when the fire button is being continuously pressed and when it has stopped being pressed.
-	public static Action shooting;	
-	public static Action stopping;
 	
 	public float fireTime = .5f;
 	public bool firing = false;
@@ -32,37 +30,16 @@ public class LaserFire : MonoBehaviour
 	
 	void OnEnable() 
 	{
-		shooting += GunFire;
-		stopping += StopFire;
+		FireButton.range += GunFire;
 		NumberOfUses = MaxNumberOfUses;
 		
 	}
 	
 	void OnDisable() 
 	{
-		shooting -= GunFire;
-		stopping += StopFire;
+		FireButton.range -= GunFire;
 	}
-	void Update()
-	{
-		if(Input.GetMouseButtonDown(0))
-		{
-			
-			//GunFire();
-			if(shooting != null)
-			{
-				shooting();
-			}
-		}
-		
-		if(Input.GetMouseButtonUp(0))
-		{
-			if(stopping != null)
-			{
-				stopping();
-			}
-		}
-	}
+
 	
 	public void GunFire()
 	{

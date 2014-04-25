@@ -73,67 +73,68 @@ public class WeaponDamageManager : MonoBehaviour
 	{
 		if(other.gameObject.tag == "Weapon")
 		{
-			Weapon = other.gameObject.GetComponent<WeaponStats>();
-			Racer = player.gameObject.GetComponent<RacerHealth>();
-			switch(weapon.theName.ToString())
+			if(player != other.parent)
 			{
-			case "Flamethrower":
-				Damage = FlameThrowerDamage;
-				Racer.CurrentHealth -= Damage;
-				break;
-			case "FlakCannon":
-				Damage = FlakCannonDamage;
-				Racer.CurrentHealth -= Damage;
-				break;
-			case "Hellfire":
-				Damage = HellfireDamage;
-				Racer.CurrentHealth -= Damage;
-				break;
-			case "Roll":
-				Damage = RollDamage;
-				Racer.CurrentHealth -= Damage;
-				break;
-			case "LaserBeam":
-				Damage = LaserBeamDamage;
-				Racer.CurrentHealth -= Damage;
-				break;
-			case "EMP":
-				Damage = EmpDamage;
-				Racer.CurrentHealth -= Damage;
-				break;
-			case "SonicScream":
-				Damage = SonicScreamDamage;
-				Racer.CurrentHealth -= Damage;
-				break;
-			case "EggDrop":
-				Damage = EggDropDamage;
-				Racer.CurrentHealth -= Damage;
-				break;
-			case "EggMine":
-				Damage = EggMineDamage;
-				Racer.CurrentHealth -= Damage;
-				break;
-			case "TeleportSlam":
-				Damage = TeleportSlamDamage;
-				Racer.CurrentHealth -= Damage;
-				break;
-			case "AcidSpit":
-				Damage = AcidSpitDamage;
-				Racer.CurrentHealth -= Damage;
-				break;
-			case "Smite":
-				Damage = SmiteDamage;
-				Racer.CurrentHealth -= Damage;
-				break;
-			case "Orbs":
-				Damage = OrbsDamage;
-				Racer.CurrentHealth -= Damage;
-				break;
-			default:
-				break;
+				Weapon = other.gameObject.GetComponent<WeaponStats>();
+				Racer = player.gameObject.GetComponent<RacerHealth>();
+				switch(weapon.theName.ToString())
+				{
+				case "Flamethrower":
+					Damage = FlameThrowerDamage;
+					Racer.CurrentHealth -= Damage;
+					break;
+				case "FlakCannon":
+					Damage = FlakCannonDamage;
+					Racer.CurrentHealth -= Damage;
+					break;
+				case "Hellfire":
+					Damage = HellfireDamage;
+					Racer.CurrentHealth -= Damage;
+					break;
+				case "Roll":
+					Damage = RollDamage;
+					Racer.CurrentHealth -= Damage;
+					break;
+				case "LaserBeam":
+					Damage = LaserBeamDamage;
+					Racer.CurrentHealth -= Damage;
+					break;
+				case "EMP":
+					Damage = EmpDamage;
+					Racer.CurrentHealth -= Damage;
+					break;
+				case "SonicScream":
+					Damage = SonicScreamDamage;
+					Racer.CurrentHealth -= Damage;
+					break;
+				case "EggDrop":
+					Damage = EggDropDamage;
+					Racer.CurrentHealth -= Damage;
+					break;
+				case "EggMine":
+					Damage = EggMineDamage;
+					Racer.CurrentHealth -= Damage;
+					break;
+				case "TeleportSlam":
+					Damage = TeleportSlamDamage;
+					Racer.CurrentHealth -= Damage;
+					break;
+				case "AcidSpit":
+					Damage = AcidSpitDamage;
+					Racer.CurrentHealth -= Damage;
+					break;
+				case "Smite":
+					Damage = SmiteDamage;
+					Racer.CurrentHealth -= Damage;
+					break;
+				case "Orbs":
+					Damage = OrbsDamage;
+					Racer.CurrentHealth -= Damage;
+					break;
+				default:
+					break;
+				}
 			}
-
-
 		}
 	}
 	
