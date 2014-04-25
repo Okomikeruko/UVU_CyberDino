@@ -34,7 +34,11 @@ public class MenuControl : MonoBehaviour
 	private Rect startDinoPos;
 	private Rect dinoSize;
 	private Vector3 dinoPos;
-	
+
+	//Ready state booleans
+	public bool readyMe = false;
+	public bool readyAll = true;
+
 	public GameObject networkHandlerObject;
 	private NetworkGameHandler networkHandler;
 	
@@ -42,7 +46,7 @@ public class MenuControl : MonoBehaviour
 	public bool singlePlayer = false;
 	public bool playAgain = false;
 	private bool inLobby = false;
-	
+
 	//Player name
 	public string playerName = "";
 	
@@ -129,10 +133,11 @@ public class MenuControl : MonoBehaviour
 		mPlayerMenuBtnTxtr[0] = (Texture)Resources.Load("GUI/Materials/HostButton");
 		mPlayerMenuBtnTxtr[1] = (Texture)Resources.Load("GUI/Materials/JoinButton");
 		
-		lobbyMenuBtnTxtr = new Texture[3];
+		lobbyMenuBtnTxtr = new Texture[4];
 		lobbyMenuBtnTxtr[0] = (Texture)Resources.Load("GUI/Materials/LeftArrow");
 		lobbyMenuBtnTxtr[1] = (Texture)Resources.Load("GUI/Materials/RightArrow");
 		lobbyMenuBtnTxtr[2] = (Texture)Resources.Load("GUI/Materials/PlayButton");
+		lobbyMenuBtnTxtr[3] = (Texture)Resources.Load("GUI/Materials/PlayButtonReady");
 		
 		backBtnTxtr = (Texture)Resources.Load("GUI/Materials/BackButton");
 		
@@ -197,6 +202,9 @@ public class MenuControl : MonoBehaviour
 
 				var myInfo = networkHandler.GetMyInfo();
 				myInfo.dinoName = dinos[dinoIndex];
+				if (Network.isClient){
+					myInfo.readyState = "NotReady";
+				}
 				networkHandler.UpdatePlayerInformation(myInfo);
 			}
 			
@@ -207,6 +215,9 @@ public class MenuControl : MonoBehaviour
 
 				var myInfo = networkHandler.GetMyInfo();
 				myInfo.dinoName = dinos[dinoIndex];
+				if (Network.isClient){
+					myInfo.readyState = "NotReady";
+				}
 				networkHandler.UpdatePlayerInformation(myInfo);
 			}
 			
@@ -332,6 +343,10 @@ public class MenuControl : MonoBehaviour
 				
 				inLobby = true;
 				networkHandler.HostGame("SinglePlayer", "player");
+
+				var myInfo = networkHandler.GetMyInfo();
+				myInfo.readyState = "LobbyReady";
+				networkHandler.UpdatePlayerInformation(myInfo);
 				
 				StartCoroutine(MoveLeftOff(0, 2, Menu.lobbyMenu));
 			}
@@ -373,6 +388,10 @@ public class MenuControl : MonoBehaviour
 				{
 					inLobby = true;
 					networkHandler.HostGame(serverName, playerName);
+
+					var myInfo = networkHandler.GetMyInfo();
+					myInfo.readyState = "LobbyReady";
+					networkHandler.UpdatePlayerInformation(myInfo);
 					
 					StartCoroutine(MoveLeftOff(1, 2, Menu.lobbyMenu));
 				}
@@ -398,7 +417,7 @@ public class MenuControl : MonoBehaviour
 		}
 		//if menuSelet is the lobby menu
 		else if(menuSelect == Menu.lobbyMenu)
-		{
+		{	
 			if(dinoSelected != null)
 			{
 				dinoSelected.transform.position = Camera.main.ScreenToWorldPoint(new Vector3(menuOrigin[2].x + startDinoPos.x, menuOrigin[2].y + startDinoPos.y, 200));
@@ -498,6 +517,9 @@ public class MenuControl : MonoBehaviour
 
 					var myInfo = networkHandler.GetMyInfo();
 					myInfo.dinoName = dinos[dinoIndex];
+					if (Network.isClient){
+						myInfo.readyState = "NotReady";
+					}
 					networkHandler.UpdatePlayerInformation(myInfo);
 				}
 
@@ -510,6 +532,9 @@ public class MenuControl : MonoBehaviour
 
 					var myInfo = networkHandler.GetMyInfo();
 					myInfo.dinoName = dinos[dinoIndex];
+					if (Network.isClient){
+						myInfo.readyState = "NotReady";
+					}
 					networkHandler.UpdatePlayerInformation(myInfo);
 				}
 
@@ -538,13 +563,46 @@ public class MenuControl : MonoBehaviour
 				//start level button
 				if (Network.isServer)
 				{
-					GUI.DrawTexture(new Rect(menuOrigin[2].x + lobbyMenuBtnRect[5].x, menuOrigin[2].y + lobbyMenuBtnRect[5].y, lobbyMenuBtnRect[5].width, lobbyMenuBtnRect[5].height), lobbyMenuBtnTxtr[2]);
+					if (readyAll == false){
+						GUI.DrawTexture(new Rect(menuOrigin[2].x + lobbyMenuBtnRect[5].x, menuOrigin[2].y + lobbyMenuBtnRect[5].y, lobbyMenuBtnRect[5].width, lobbyMenuBtnRect[5].height), lobbyMenuBtnTxtr[2]);
+					}
 
-					if(GUI.Button(new Rect(menuOrigin[2].x + lobbyMenuBtnRect[5].x, menuOrigin[2].y + lobbyMenuBtnRect[5].y, lobbyMenuBtnRect[5].width, lobbyMenuBtnRect[5].height), ""))
-					{
-						menuSelect = Menu.goToLevel;
-						networkHandler.ChangeMenuSelect();
-						networkHandler.ChangeLevel();
+					if (readyAll == true){
+						GUI.DrawTexture(new Rect(menuOrigin[2].x + lobbyMenuBtnRect[5].x, menuOrigin[2].y + lobbyMenuBtnRect[5].y, lobbyMenuBtnRect[5].width, lobbyMenuBtnRect[5].height), lobbyMenuBtnTxtr[3]);
+
+						if(GUI.Button(new Rect(menuOrigin[2].x + lobbyMenuBtnRect[5].x, menuOrigin[2].y + lobbyMenuBtnRect[5].y, lobbyMenuBtnRect[5].width, lobbyMenuBtnRect[5].height), ""))
+						{
+							menuSelect = Menu.goToLevel;
+							networkHandler.ChangeMenuSelect();
+							networkHandler.ChangeLevel();
+						}
+					}
+				}
+
+				//ready check button
+				if (Network.isClient)
+				{
+					if (readyMe == false) {
+						GUI.DrawTexture(new Rect(menuOrigin[2].x + lobbyMenuBtnRect[5].x, menuOrigin[2].y + lobbyMenuBtnRect[5].y, lobbyMenuBtnRect[5].width, lobbyMenuBtnRect[5].height), lobbyMenuBtnTxtr[2]);
+						
+						if(GUI.Button(new Rect(menuOrigin[2].x + lobbyMenuBtnRect[5].x, menuOrigin[2].y + lobbyMenuBtnRect[5].y, lobbyMenuBtnRect[5].width, lobbyMenuBtnRect[5].height), ""))
+						{
+							var myInfo = networkHandler.GetMyInfo();
+							myInfo.readyState = "LobbyReady";
+							readyMe = true;
+							networkHandler.UpdatePlayerInformation(myInfo);
+						}
+					}
+					if (readyMe == true) {
+						GUI.DrawTexture(new Rect(menuOrigin[2].x + lobbyMenuBtnRect[5].x, menuOrigin[2].y + lobbyMenuBtnRect[5].y, lobbyMenuBtnRect[5].width, lobbyMenuBtnRect[5].height), lobbyMenuBtnTxtr[3]);
+						
+						if(GUI.Button(new Rect(menuOrigin[2].x + lobbyMenuBtnRect[5].x, menuOrigin[2].y + lobbyMenuBtnRect[5].y, lobbyMenuBtnRect[5].width, lobbyMenuBtnRect[5].height), ""))
+						{
+							var myInfo = networkHandler.GetMyInfo();
+							myInfo.readyState = "NotReady";
+							readyMe = false;
+							networkHandler.UpdatePlayerInformation(myInfo);
+						}
 					}
 				}
 			}
@@ -900,4 +958,15 @@ public class MenuControl : MonoBehaviour
 		menuSelect = Menu.goToLevel;
 	}
 
+	public void ReadyStateCheck() {
+		foreach (var player in networkHandler.playerInformation) {
+			if(player.Value.readyState != "LobbyReady"){
+				readyAll = false;
+				break;
+			}
+			else {
+				readyAll = true;
+			}
+		}
+	}
 }

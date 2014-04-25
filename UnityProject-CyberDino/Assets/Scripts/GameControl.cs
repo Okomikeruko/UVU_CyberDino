@@ -14,7 +14,6 @@ public class GameControl : MonoBehaviour {
 	public GameObject[] spawnPoint;
 	private GameObject[] turretSpawnPoints;
 
-
 	// Use this for initialization
 	void Start () {
 		networkHandlerObject = GameObject.FindGameObjectWithTag("NetworkHandler");
@@ -69,6 +68,24 @@ public class GameControl : MonoBehaviour {
 			}
 		}
 
-		GameObject CountDown = (GameObject)Network.Instantiate ((GameObject)Resources.Load("CountDown"), new Vector3(0,0,0), Quaternion.LookRotation(transform.forward), playerID);
+		var myInfo = networkHandler.GetMyInfo();
+		myInfo.readyState = "GameReady";
+		networkHandler.UpdatePlayerInformation(myInfo);
+
+	}
+
+	public void ReadyStateCheck() {
+		bool readyAll = true;
+		foreach (var player in networkHandler.playerInformation) {
+			if(player.Value.readyState != "GameReady"){
+				readyAll = false;
+				break;
+			}
+		}
+
+		if (readyAll == true) {
+			int playerID = int.Parse(Network.player.ToString());
+			GameObject CountDown = (GameObject)Instantiate ((GameObject)Resources.Load("CountDown"), new Vector3(0,0,0), Quaternion.LookRotation(transform.forward));
+		}
 	}
 }

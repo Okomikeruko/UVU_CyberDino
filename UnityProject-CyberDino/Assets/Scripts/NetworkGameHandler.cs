@@ -6,8 +6,7 @@ public class PlayerInformation {
 
 	public string playerName = "";
 	public string dinoName = "Diloph";
-	public string equipmentSlotOne = "Gun 1";
-	public string equipmentSlotTwo = "Armour 1";
+	public string readyState = "NotReady";
 
 	public PlayerInformation () {
 	}
@@ -16,12 +15,11 @@ public class PlayerInformation {
 		var datas = data.Split("^"[0]);
 		playerName = datas[0];
 		dinoName = datas[1];
-		equipmentSlotOne = datas[2];
-		equipmentSlotTwo = datas[3];
+		readyState = datas[2];
 	}
 
 	public override string ToString () {
-		string data = playerName + "^" + dinoName + "^" + equipmentSlotOne + "^" + equipmentSlotTwo;
+		string data = playerName + "^" + dinoName + "^" + readyState;
 		return data;
 	}
 }
@@ -195,6 +193,15 @@ public class NetworkGameHandler : MonoBehaviour {
 	void ReceivePlayerData(string playerID, string datas) {
 		PlayerInformation otherPlayer = new PlayerInformation(datas);
 		playerInformation[playerID] = otherPlayer;
+		var MenuControl = GameObject.FindGameObjectWithTag ("Menu").GetComponent<MenuControl> ();
+
+		if (MenuControl.menuSelect == MenuControl.Menu.goToLevel) {
+			var GameControl = GameObject.Find ("GameControl").GetComponent<GameControl>();
+			GameControl.ReadyStateCheck();
+		} 
+		else {
+			MenuControl.ReadyStateCheck();
+		}
 	}
 
 	[RPC]
