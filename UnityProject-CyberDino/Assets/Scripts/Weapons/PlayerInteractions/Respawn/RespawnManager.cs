@@ -86,7 +86,6 @@ public class RespawnManager : MonoBehaviour
 		{
 //			StopCoroutine("OffTrack");
 //			StopCoroutine("Respawn");
-			Debug.Log ("Staying on " + other.gameObject.tag);
 		}
 	}
 
@@ -101,7 +100,7 @@ public class RespawnManager : MonoBehaviour
 
 	public void RacerStart(Transform player)
 	{
-		RacerRespawn = player.gameObject.GetComponent<RacerRespawnStats>();
+		RacerRespawn = player.gameObject.GetComponent<RacerInteractionManager>().playerRespawn;
 		RacerHealth = player.gameObject.GetComponent<RacerHealth>();
 
 		RacerRespawn.ThresholdAngle = ThresholdAngle;
@@ -169,7 +168,7 @@ public class RespawnManager : MonoBehaviour
 	{
 		if(other.gameObject.tag == "RespawnPoint")
 		{
-			RacerRespawn = player.gameObject.GetComponent<RacerRespawnStats>();
+			RacerRespawn = player.gameObject.GetComponent<RacerInteractionManager>().playerRespawn;
 			RacerRespawn.RespawnCheckpoint = other;
 
 			TheRespawnNode = RacerRespawn.RespawnCheckpoint.gameObject.GetComponent<RespawnNode>();
@@ -196,7 +195,7 @@ public class RespawnManager : MonoBehaviour
 	
 	IEnumerator Respawn(Transform player)
 	{
-		RacerRespawn = player.gameObject.GetComponent<RacerRespawnStats>();
+		RacerRespawn = player.gameObject.GetComponent<RacerInteractionManager>().playerRespawn;
 		Debug.Log("Respawning. Please wait....");
 //		IsRespawning = true;
 //		Move.SetRunning(false);

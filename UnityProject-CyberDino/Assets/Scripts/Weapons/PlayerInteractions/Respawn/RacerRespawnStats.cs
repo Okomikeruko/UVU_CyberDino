@@ -3,10 +3,11 @@
 using UnityEngine;
 using System;
 using System.Collections;
-
-public class RacerRespawnStats : MonoBehaviour 
+[Serializable]
+public class RacerRespawnStats 
 {
-	
+
+	public Transform theName;
 	public static Action<Transform> spawned;
 
 	[SerializeField]
@@ -46,9 +47,9 @@ public class RacerRespawnStats : MonoBehaviour
 	public float ThresholdAngle{get{return thresholdAngle;} set{thresholdAngle = value;}}
 
 
-	void OnEnable() 
+	public void OnEnable() 
 	{
-		StartCoroutine(Spawning());
+		//StartCoroutine(Spawning());
 	}
 	
 	void OnDisable() 
@@ -62,19 +63,19 @@ public class RacerRespawnStats : MonoBehaviour
 	
 	}
 
-	IEnumerator Spawning()
+	public IEnumerator Spawning()
 	{
 		yield return new WaitForSeconds(.05f);
 		if(spawned != null)
 		{
-			spawned(transform);
+			spawned(theName);
 		}
 	}
 
 	public float RespawnNodeAngle()
 	{
-		Vector3 targetDir = CurrentNode.transform.position - transform.position;
-		Vector3 forward = transform.forward;
+		Vector3 targetDir = CurrentNode.transform.position - theName.position;
+		Vector3 forward = theName.forward;
 		return Vector3.Angle(targetDir, forward);
 	}
 

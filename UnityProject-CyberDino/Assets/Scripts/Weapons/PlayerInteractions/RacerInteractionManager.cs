@@ -11,10 +11,14 @@ public class RacerInteractionManager : MonoBehaviour
 	public static Action<Transform, Transform> hitSomething;
 	public static Action<Transform, Transform> stayingOnSomething;
 	public static Action<Transform, Transform> notStayingOnSomething;
-	
+	[SerializeField]
+	public RacerRespawnStats playerRespawn = new RacerRespawnStats();
+
 	void OnEnable() 
 	{
-	
+		playerRespawn.OnEnable();
+		playerRespawn.theName = this.transform;
+		StartCoroutine(playerRespawn.Spawning());
 	}
 	
 	void OnDisable() 

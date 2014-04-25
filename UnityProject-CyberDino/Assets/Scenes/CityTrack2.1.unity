@@ -5434,6 +5434,77 @@ Transform:
   - {fileID: 1865229890}
   - {fileID: 1584238551}
   m_Father: {fileID: 121395740}
+--- !u!1 &563902193
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 563902194}
+  - 135: {fileID: 563902196}
+  - 54: {fileID: 563902195}
+  - 114: {fileID: 563902197}
+  m_Layer: 0
+  m_Name: HellfireDamage
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &563902194
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 563902193}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 20, y: 20, z: 20}
+  m_Children: []
+  m_Father: {fileID: 953009228}
+--- !u!54 &563902195
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 563902193}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: .0500000007
+  m_UseGravity: 0
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 126
+  m_CollisionDetection: 0
+--- !u!135 &563902196
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 563902193}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: .5
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &563902197
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 563902193}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4af467fb61e9741faabc38c76c96e963, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  theDuration: 5
+  maxNumberOfUses: 3
+  numberOfUses: 0
+  coolDownDuration: 12
 --- !u!1 &564613104
 GameObject:
   m_ObjectHideFlags: 0
@@ -8722,6 +8793,34 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!1 &953009227
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 953009228}
+  m_Layer: 0
+  m_Name: Hellfire
+  m_TagString: Weapon
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &953009228
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 953009227}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0, y: 0, z: 5.13205385}
+  m_LocalScale: {x: .209837556, y: .209837556, z: .209837556}
+  m_Children:
+  - {fileID: 563902194}
+  - {fileID: 1946478547}
+  m_Father: {fileID: 1130353771}
 --- !u!1 &955090766
 GameObject:
   m_ObjectHideFlags: 0
@@ -10748,7 +10847,7 @@ Transform:
   m_PrefabInternal: {fileID: 1342865157}
   m_GameObject: {fileID: 1130353770}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: -.03692073}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 650122616}
@@ -10761,6 +10860,7 @@ Transform:
   - {fileID: 463703120}
   - {fileID: 1389594494}
   - {fileID: 117918516}
+  - {fileID: 953009228}
   m_Father: {fileID: 1414736579}
 --- !u!136 &1130353772
 CapsuleCollider:
@@ -10813,6 +10913,7 @@ MonoBehaviour:
   currentNode: {fileID: 0}
   previousNode: {fileID: 0}
   nextNode: {fileID: 0}
+  thresholdAngle: 90
 --- !u!114 &1130353775
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10841,6 +10942,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 06385bdad5fe14051a99556d0946b136, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerRespawn:
+    theName: {fileID: 0}
+    isRespawning: 0
+    respawnEffect: {fileID: 0}
+    inTurnArea: 0
+    respawnCheckpoint: {fileID: 0}
+    currentNode: {fileID: 0}
+    previousNode: {fileID: 0}
+    nextNode: {fileID: 0}
 --- !u!54 &1130353777
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -12883,6 +12993,10 @@ Prefab:
     - target: {fileID: 400002, guid: 9d4133d5d30b644bd87802a347eaccbe, type: 2}
       propertyPath: m_LocalRotation.w
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 400026, guid: 9d4133d5d30b644bd87802a347eaccbe, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: -.03692073
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 9d4133d5d30b644bd87802a347eaccbe, type: 2}
@@ -18586,6 +18700,91 @@ Transform:
   - {fileID: 1100824851}
   - {fileID: 2115947459}
   m_Father: {fileID: 121395740}
+--- !u!1 &1946478546
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 1946478547}
+  - 33: {fileID: 1946478551}
+  - 135: {fileID: 1946478550}
+  - 23: {fileID: 1946478549}
+  - 54: {fileID: 1946478548}
+  m_Layer: 0
+  m_Name: HellfireTarget
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1946478547
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1946478546}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 20, y: .0500000007, z: 20}
+  m_Children: []
+  m_Father: {fileID: 953009228}
+--- !u!54 &1946478548
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1946478546}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: .0500000007
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 122
+  m_CollisionDetection: 0
+--- !u!23 &1946478549
+Renderer:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1946478546}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_LightmapIndex: 255
+  m_LightmapTilingOffset: {x: 1, y: 1, z: 0, w: 0}
+  m_Materials:
+  - {fileID: 10302, guid: 0000000000000000f000000000000000, type: 0}
+  m_SubsetIndices: 
+  m_StaticBatchRoot: {fileID: 0}
+  m_UseLightProbes: 0
+  m_LightProbeAnchor: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_SortingLayerID: 0
+--- !u!135 &1946478550
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1946478546}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: .100000001
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!33 &1946478551
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1946478546}
+  m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!1 &1946903694
 GameObject:
   m_ObjectHideFlags: 0
