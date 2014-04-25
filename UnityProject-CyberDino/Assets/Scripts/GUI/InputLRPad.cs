@@ -66,10 +66,17 @@ public class InputLRPad : MonoBehaviour
 			}
 		}
 		
-		//assign the motion script to the variable
-		if(player.GetComponent<MotionControl>())
+		if(player != null)
 		{
-			motionConScript = player.GetComponent<MotionControl>();
+			//assign the motion script to the variable
+			if(player.GetComponent<MotionControl>())
+			{
+				motionConScript = player.GetComponent<MotionControl>();
+			}
+		}
+		else
+		{
+			Debug.Log("couldn't find the player's dino");
 		}
 
 	}
@@ -77,91 +84,80 @@ public class InputLRPad : MonoBehaviour
 	// Update is called once per frame
 	void FixedUpdate () 
 	{
-		if(Input.touches.Length > 0)
+		if(player != null)
 		{
-			//loop through the touches 
-			for(int i = 0; i < Input.touchCount; i++)
+			if(Input.touches.Length > 0)
 			{
-				//do this for the current touch on the screen
-				if(leftArrow.HitTest(Input.GetTouch(i).position))
+				//loop through the touches 
+				for(int i = 0; i < Input.touchCount; i++)
 				{
-					//if it is hit
-					if(Input.GetTouch(i).phase == TouchPhase.Stationary)
+					//do this for the current touch on the screen
+					if(leftArrow.HitTest(Input.GetTouch(i).position))
 					{
-						currentTurn = Mathf.SmoothDamp(currentTurn, -1, ref velocityLeft, smoothTimeLeft);
-
+						//if it is hit
+						if(Input.GetTouch(i).phase == TouchPhase.Stationary)
+						{
+							currentTurn = Mathf.SmoothDamp(currentTurn, -1, ref velocityLeft, smoothTimeLeft);
+	
+							//turn to the left
+							motionConScript.SetTurn(currentTurn);
+							
+							Debug.Log(currentTurn);
+						}
+						else if(Input.GetTouch(i).phase == TouchPhase.Ended)
+						{
+							currentTurn = Mathf.SmoothDamp(currentTurn, 0, ref velocityLeft, smoothTimeLeft);
+							
+							//turn to the left
+							motionConScript.SetTurn(currentTurn);
+							
+						}
+	
+					}
+					else if(rightArrow.HitTest(Input.GetTouch(i).position))
+					{
+						//if it is hit
+						if(Input.GetTouch(i).phase == TouchPhase.Moved || Input.GetTouch(i).phase == TouchPhase.Stationary)
+						{
+							currentTurn = Mathf.SmoothDamp(currentTurn, 1, ref velocityRight, smoothTimeRight);
+							
+							//turn to the left
+							motionConScript.SetTurn(currentTurn);
+	
+						}
+						else if(Input.GetTouch(i).phase == TouchPhase.Ended)
+						{
+							currentTurn = Mathf.SmoothDamp(currentTurn, 0, ref velocityRight, smoothTimeRight);
+							
+							//turn to the left
+							motionConScript.SetTurn(currentTurn);
+							
+						}
+					}
+					else
+					{
+						currentTurn = Mathf.SmoothDamp(currentTurn, 0, ref velBack, smoothTimeBack);
+							
 						//turn to the left
 						motionConScript.SetTurn(currentTurn);
-						
-						Debug.Log(currentTurn);
 					}
-					else if(Input.GetTouch(i).phase == TouchPhase.Ended)
-					{
-						currentTurn = Mathf.SmoothDamp(currentTurn, 0, ref velocityLeft, smoothTimeLeft);
-						
-						//turn to the left
-						motionConScript.SetTurn(currentTurn);
-						
-					}
-
-				}
-				else if(rightArrow.HitTest(Input.GetTouch(i).position))
-				{
-					//if it is hit
-					if(Input.GetTouch(i).phase == TouchPhase.Moved || Input.GetTouch(i).phase == TouchPhase.Stationary)
-					{
-						currentTurn = Mathf.SmoothDamp(currentTurn, 1, ref velocityRight, smoothTimeRight);
-						
-						//turn to the left
-						motionConScript.SetTurn(currentTurn);
-
-					}
-					else if(Input.GetTouch(i).phase == TouchPhase.Ended)
-					{
-						currentTurn = Mathf.SmoothDamp(currentTurn, 0, ref velocityRight, smoothTimeRight);
-						
-						//turn to the left
-						motionConScript.SetTurn(currentTurn);
-						
-					}
-				}
-				else
-				{
-					currentTurn = Mathf.SmoothDamp(currentTurn, 0, ref velBack, smoothTimeBack);
-						
-					//turn to the left
-					motionConScript.SetTurn(currentTurn);
 				}
 			}
+			else
+			{
+				currentTurn = Mathf.SmoothDamp(currentTurn, 0, ref velBack, smoothTimeBack);
+				
+				//turn to the left
+				motionConScript.SetTurn(currentTurn);
+			}
 		}
-		else
-		{
-			currentTurn = Mathf.SmoothDamp(currentTurn, 0, ref velBack, smoothTimeBack);
-			
-			//turn to the left
-			motionConScript.SetTurn(currentTurn);
-		}
-
-		/*if(Input.GetButton("Jump"))
-		{
-			motionConScript.jumper = true;
-		}
-		else
-		{
-			motionConScript.jumper = false;
-		}*/
-		
-		/*if(Input.GetKeyDown(KeyCode.F))
-		{
-			player.GetComponent<DinoRagdoll>().GoRagdoll();
-		}*/
 	}
 	
 	void Resize(GUITexture _button, Rect _pos)
 	{
 		//have the screen width and height and divide them by 100
-		xMulti = Screen.width / 100;
-		yMulti = Screen.height / 100;
+		xMulti = Screen.width / 100.0f;
+		yMulti = Screen.height / 100.0f;
 			
 		//start off the resizing from zero
 		_button.transform.localScale = new Vector3(0, 0, 0);

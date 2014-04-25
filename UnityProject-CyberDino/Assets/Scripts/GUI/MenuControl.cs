@@ -295,9 +295,6 @@ public class MenuControl : MonoBehaviour
 
 			if(dinoBoxLg == null)
 			{
-				//Debug.Log(dinoBoxLgPos);
-				//Debug.Log(Camera.main.ScreenToWorldPoint(new Vector3(menuOrigin[2].x + dinoBoxLgPos.x, menuOrigin[2].x + dinoBoxLgPos.y, 300)));
-				//Vector3 dinoBoxLgPos = Camera.main.ScreenToWorldPoint(new Vector3(menuOrigin[2].x + dinoBoxLgPos.x, menuOrigin[2].x + dinoBoxLgPos.y, 300));
 				dinoBoxLg = (GameObject)Instantiate(Resources.Load("GUI/DinoSelectBackground"), Camera.main.ScreenToWorldPoint(new Vector3(menuOrigin[2].x + dinoBoxLgPos.x, menuOrigin[2].x + dinoBoxLgPos.y, 300)), Quaternion.identity);
 				dinoBoxLg.transform.Rotate(new Vector3(270, 0, 0));
 			}

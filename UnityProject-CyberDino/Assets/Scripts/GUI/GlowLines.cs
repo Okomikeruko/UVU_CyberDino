@@ -15,10 +15,9 @@ public class GlowLines : MonoBehaviour
 	
 	//an emun setting the different directions
 	private enum Direction{left, right, up, down};
-
 	
 	// Use this for initialization
-	void OnEnable () 
+	void OnStart () 
 	{
 		if(upLine == null)
 		{
@@ -26,26 +25,26 @@ public class GlowLines : MonoBehaviour
 			upLine = (GameObject)Instantiate(Resources.Load("GUI/GlowLight"), new Vector3(0, 0, 0), Quaternion.identity);
 		}
 
-		/*if(downLine == null)
+		if(downLine == null)
 		{
-			downLine = CreateObj(downLine, "downLine");
+			downLine = (GameObject)Instantiate(Resources.Load("GUI/GlowLight"), new Vector3(0, 0, 0), Quaternion.identity);
 		}
 
 		if(leftLine == null)
 		{
-			leftLine = CreateObj(leftLine, "leftLine");
+			leftLine = (GameObject)Instantiate(Resources.Load("GUI/GlowLight"), new Vector3(0, 0, 0), Quaternion.identity);
 		}
 
 		if(rightLine == null)
 		{
-			rightLine = CreateObj(rightLine, "rightLine");
-		}*/
+			rightLine = (GameObject)Instantiate(Resources.Load("GUI/GlowLight"), new Vector3(0, 0, 0), Quaternion.identity);
+		}
 		
 		//call the coroutines for each line
 		StartCoroutine(MoveLine(upLine));
-		//StartCoroutine(MoveLine(downLine));
-		//StartCoroutine(MoveLine(leftLine));
-		//StartCoroutine(MoveLine(rightLine));
+		StartCoroutine(MoveLine(downLine));
+		StartCoroutine(MoveLine(leftLine));
+		StartCoroutine(MoveLine(rightLine));
 	}
 
 	//a coroutine funtion for moving from one point to another
@@ -246,15 +245,15 @@ public class GlowLines : MonoBehaviour
 		}
 		else if(_obj == downLine)
 		{
-			return Camera.main.ScreenToWorldPoint(new Vector3(pos, Screen.height - _obj.guiTexture.pixelInset.height, _obj.transform.position.z));
+			return Camera.main.ScreenToWorldPoint(new Vector3(pos, Screen.height - Camera.main.WorldToScreenPoint(_obj.transform.localScale).y, Camera.main.transform.position.z + 400));
 		}
 		else if(_obj == rightLine)
 		{
-			return Camera.main.ScreenToWorldPoint(new Vector3(0, pos, _obj.transform.position.z));
+			return Camera.main.ScreenToWorldPoint(new Vector3(0, pos, Camera.main.transform.position.z + 400));
 		}
 		else if(_obj == leftLine)
 		{
-			return Camera.main.ScreenToWorldPoint(new Vector3(Screen.width - _obj.guiTexture.pixelInset.width, pos, _obj.transform.position.z));
+			return Camera.main.ScreenToWorldPoint(new Vector3(Screen.width - Camera.main.WorldToScreenPoint(_obj.transform.localScale).y, pos, Camera.main.transform.position.z + 400));
 		}
 		else
 		{
@@ -297,17 +296,6 @@ public class GlowLines : MonoBehaviour
 		}
 	}
 
-	GameObject CreateObj(GameObject _obj, string _name)
-	{
-		_obj = (GameObject)Instantiate(Resources.Load("GUI/GlowLight"), new Vector3(0, 0, 0), Quaternion.identity);
-		/*_obj.transform.position = new Vector3(0, 0, 0);
-		_obj.transform.localScale = new Vector3(0, 0, 0);
-		_obj.AddComponent("GUITexture");
-		_obj.guiTexture.pixelInset = ResizeRect(new Rect(0, 0, 15, 15));
-		_obj.guiTexture.texture = (Texture)Resources.Load("GUI/Materials/LightBall");*/
-
-		return _obj;
-	}
-
 	//create coroutine that makes an array of game objects appear at where the lead thing is then have them slowly dissapear
+	//IEnumerator LightFollow
 }
