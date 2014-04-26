@@ -158,18 +158,9 @@ public class MotionControl : MonoBehaviour {
 	{
 		if(collision.gameObject.tag == "Dino" || collision.gameObject.tag == "Ai")
 		{
+			StartSpin();
 			Rigidbody hit = collision.gameObject.rigidbody;
-
 			rigidbody.AddForce(hit.velocity * hit.mass * 50);
-
-//			float thisPlayersMass = rigidbody.mass;
-//			float otherPlayersMass = collision.gameObject.rigidbody.mass;
-//			Vector3 thisPlayersVector = moveDirection;
-//			Vector3 otherPlayersVector = collision.gameObject.GetComponent<MotionControl>().GetMoveDirection();
-//			
-//			float mag = moveDirection.magnitude; // save current
-//			moveDirection = (thisPlayersVector*(thisPlayersMass-otherPlayersMass)+(2*otherPlayersVector*otherPlayersMass))/(thisPlayersMass+otherPlayersMass);					
-//			transform.Rotate(moveDirection.normalized * mag);
 		}
 	}
 
@@ -184,22 +175,16 @@ public class MotionControl : MonoBehaviour {
 				if (contact.otherCollider.gameObject.tag == "Track")
 				{
 					slope = 1 - contact.normal.y;
-					//Debug.Log("SLOPE: " + slope);
-				}
-				else if (contact.otherCollider.gameObject.tag == "Dino")
-				{
-
 				}
 			}
 		}		
-
-
-
 	}
 	
 	void OnCollisionExit(Collision collision)
 	{
 		onGround = false;
+
+		if(collision.gameObject.tag == "Dino" || collision.gameObject.tag == "Ai"){ StopSpin(); } 
 	}
 
 	public Vector3 GetMoveDirection()
@@ -262,6 +247,16 @@ public class MotionControl : MonoBehaviour {
 	{
 		return jump;
 	}	
+
+	private void StartSpin()
+	{
+		rigidbody.constraints = RigidbodyConstraints.None;
+	}
+
+	private void StopSpin()
+	{
+		rigidbody.constraints = RigidbodyConstraints.FreezeRotation;
+	}
 	
 	
 	// Temporary - for testing
