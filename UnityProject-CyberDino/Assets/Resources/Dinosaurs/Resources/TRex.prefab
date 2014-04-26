@@ -846,7 +846,7 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100014}
-  m_LocalRotation: {x: -.00103199598, y: .157807738, z: -.730231762, w: .664723396}
+  m_LocalRotation: {x: -.0010319961, y: .157807752, z: -.730231822, w: .664723456}
   m_LocalPosition: {x: -.702756941, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -1518,6 +1518,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 62cde66bda41d45c4b00ecd0c2c9583a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isRespawning: 0
+  respawnEffect: {fileID: 0}
+  inTurnArea: 0
+  respawnCheckpoint: {fileID: 0}
+  currentNode: {fileID: 0}
+  previousNode: {fileID: 0}
+  nextNode: {fileID: 0}
 --- !u!114 &11400018
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1544,15 +1551,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 06385bdad5fe14051a99556d0946b136, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerRespawn:
-    theName: {fileID: 0}
-    isRespawning: 0
-    respawnEffect: {fileID: 0}
-    inTurnArea: 0
-    respawnCheckpoint: {fileID: 0}
-    currentNode: {fileID: 0}
-    previousNode: {fileID: 0}
-    nextNode: {fileID: 0}
 --- !u!114 &11400022
 MonoBehaviour:
   m_ObjectHideFlags: 1

@@ -236,7 +236,7 @@ public class MenuControl : MonoBehaviour
 					gameMap = "John_CityTrack2.0_TestScene";
 				}
 				if(levelIndex == 3){
-					gameMap = "Lee_CityTrack2.0_TestScene";
+					gameMap = "Lee_CityTrack2.1";
 				}
 				networkHandler.UpdateMapInformation(gameMap);
 			}
