@@ -14,7 +14,7 @@ public class MenuControl : MonoBehaviour
 	public Menu menuSelect;
 	
 	//the different dinos to choose
-	public string[] dinos = new string[]{"Diloph", "Hesp", "Raptor", "Diloph", "TRex", "Troodon"};
+	public string[] dinos = new string[]{"Diloph", "Hesp", "Raptor", "Spino", "TRex", "Troodon"};
 	
 	//the different level to choose
 	private string[] levels = new string[]{"CityTrack", "CityTrackv2","John's Track", "Lee's Track"};
@@ -105,7 +105,6 @@ public class MenuControl : MonoBehaviour
 	private Rect lvlGraphicPos;
 
 	//the main menu background
-	private Texture mainMenuBkgdTxtr;
 	private GameObject mainMenuBkgd;
 	private Rect mainMenuBkgdPos;
 	
@@ -145,8 +144,6 @@ public class MenuControl : MonoBehaviour
 		lvlSelectTxtr[0] = (Texture)Resources.Load("GUI/Materials/CityTrackGFX");
 		lvlSelectTxtr[1] = (Texture)Resources.Load("GUI/Materials/CityTrackGraphic");
 
-		mainMenuBkgdTxtr = (Texture)Resources.Load("GUI/Materials/BackgroundMain");
-		
 		dinoPortrait = new Texture[6];
 		dinoPortrait[0] = (Texture)Resources.Load("GUI/Materials/CityTrackGFX");
 		dinoPortrait[1] = (Texture)Resources.Load("GUI/Materials/CityTrackGFX");
@@ -304,24 +301,31 @@ public class MenuControl : MonoBehaviour
 				dinoBoxLg.transform.localScale = new Vector3(pointInWorld.x, 1, pointInWorld.y);
 			}
 		}
-		else if(menuSelect != Menu.goToLevel)
+		else if(menuSelect == Menu.mainMenu)
 		{
-			//if the menu background is there then destroy it
 			if(menuBkgd != null)
 			{
 				Destroy(menuBkgd);
 			}
 			
-			//if the main menu background isn't there then create it.
+			if(dinoBoxLg != null)
+			{
+				Destroy(dinoBoxLg);
+			}
+			
 			if(mainMenuBkgd == null)
 			{
-				mainMenuBkgd = CreateGUITxtr(mainMenuBkgd, "main menu background", mainMenuBkgdTxtr, mainMenuBkgdPos);
+				Vector3 backgroundPos = Camera.main.ScreenToWorldPoint(new Vector3(menuBkgdPos.x, menuBkgdPos.y, 500));
+				mainMenuBkgd = (GameObject)Instantiate(Resources.Load("GUI/MainMenuBackground"), backgroundPos, Quaternion.identity);
+				mainMenuBkgd.transform.Rotate(new Vector3(90, 180, 0));
 			}
 			else
 			{
-				mainMenuBkgd.guiTexture.pixelInset = new Rect(menuOrigin[0].x + mainMenuBkgdPos.x, menuOrigin[0].y + mainMenuBkgdPos.y, mainMenuBkgdPos.width, mainMenuBkgdPos.height);
+				Vector3 pointInWorld = Camera.main.ScreenToWorldPoint(new Vector3(Screen.width, Screen.height, Camera.main.transform.position.z + 100));
+				mainMenuBkgd.transform.localScale = new Vector3(pointInWorld.x / 5, 1, pointInWorld.y / 5);
 			}
 		}
+		
 		
 		//if menuSelet is the main menu
 		if(menuSelect == Menu.mainMenu)

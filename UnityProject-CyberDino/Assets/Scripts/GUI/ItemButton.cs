@@ -29,8 +29,22 @@ public class ItemButton : MonoBehaviour
 	}
 	
 	// Update is called once per frame
-	void Update () 
+	void FixedUpdate () 
 	{
+		Resize(gameObject.guiTexture, buttonPos);
+		
+		if(Input.GetMouseButtonDown(0) && guiTexture.HitTest(Input.mousePosition))
+		{
+			if(item != null)
+			{
+				item();
+			}
+			else
+			{
+				Debug.Log("item isn't subscribed to anything!");
+			}
+		}
+		
 		if(Input.touches.Length > 0)
 		{
 			//loop through the touches 
@@ -59,12 +73,9 @@ public class ItemButton : MonoBehaviour
 	void Resize(GUITexture _button, Rect _pos)
 	{
 		//have the screen width and height and divide them by 100
-		float xMulti = Screen.width / 100;
-		float yMulti = Screen.height / 100;
-		
-		//start off the resizing from zero
-		_button.transform.localScale = new Vector3(0, 0, 0);
-		
+		float xMulti = Screen.width / 100.0f;
+		float yMulti = Screen.height / 100.0f;
+
 		//set the rect position and size
 		_button.guiTexture.pixelInset = new Rect(_pos.x * xMulti, _pos.y * yMulti, _pos.width * xMulti, _pos.height * yMulti);
 	}

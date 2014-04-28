@@ -28,13 +28,14 @@ public class FireButton : MonoBehaviour
 		
 		transform.position = Vector3.zero;
 		transform.localScale = Vector3.zero;
-		
-		Resize(this.gameObject.guiTexture, buttonPos);
+
 	}
 	
 	// Update is called once per frame
-	void Update () 
+	void FixedUpdate () 
 	{
+		Resize(this.gameObject.guiTexture, buttonPos);
+		
 		if(Input.GetMouseButtonDown(0) && guiTexture.HitTest(Input.mousePosition))
 		{
 			endCount = false;

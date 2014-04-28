@@ -84,8 +84,13 @@ public class InputLRPad : MonoBehaviour
 	// Update is called once per frame
 	void FixedUpdate () 
 	{
+		//call the resize function for both arrows
+		Resize(leftArrow, leftArrowPos);
+		Resize(rightArrow, rightArrowPos);
+		
 		if(player != null)
 		{
+			
 			if(Input.touches.Length > 0)
 			{
 				//loop through the touches 

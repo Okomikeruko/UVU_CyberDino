@@ -19,11 +19,11 @@ public class BulletControler : MonoBehaviour {
 						Explode ();
 	}
 
-	void TargetHit(GameObject obj)
+	void OnCollisionEnter(Collision collision)
 	{
-		if (obj.tag == "Player")
+		if (collision.gameObject.tag == "Player")
 		{
-			obj.SendMessage("ApplyDamage", -_bulletDamage);
+			collision.gameObject.SendMessage("ApplyDamage", -_bulletDamage);
 			Explode();
 		}
 		_lifeTime /= 4;

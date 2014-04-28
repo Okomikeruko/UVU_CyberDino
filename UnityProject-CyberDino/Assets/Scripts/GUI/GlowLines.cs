@@ -17,7 +17,7 @@ public class GlowLines : MonoBehaviour
 	private enum Direction{left, right, up, down};
 	
 	// Use this for initialization
-	void OnStart () 
+	void OnEnable () 
 	{
 		if(upLine == null)
 		{
@@ -79,14 +79,7 @@ public class GlowLines : MonoBehaviour
 
 			lerpPos += (100 / dist) * Time.deltaTime;
 
-			//tempPos.x = Mathf.Lerp(startPos.x, endPos.x, lerpPos);
-			//tempPos.y = Mathf.Lerp(startPos.y, endPos.y, lerpPos);
-	
 			_obj.transform.position = Vector3.Lerp(startPos, endPos, lerpPos);
-
-			//lerp between the two points
-			//_obj.guiTexture.pixelInset = tempPos;
-
 
 			//if the current position is the same as the end point
 			if(_obj.transform.position.x == endPos.x && _obj.transform.position.y == endPos.y)
@@ -245,7 +238,7 @@ public class GlowLines : MonoBehaviour
 		}
 		else if(_obj == downLine)
 		{
-			return Camera.main.ScreenToWorldPoint(new Vector3(pos, Screen.height - Camera.main.WorldToScreenPoint(_obj.transform.localScale).y, Camera.main.transform.position.z + 400));
+			return Camera.main.ScreenToWorldPoint(new Vector3(pos, Screen.height, Camera.main.transform.position.z + 400));
 		}
 		else if(_obj == rightLine)
 		{
@@ -253,7 +246,7 @@ public class GlowLines : MonoBehaviour
 		}
 		else if(_obj == leftLine)
 		{
-			return Camera.main.ScreenToWorldPoint(new Vector3(Screen.width - Camera.main.WorldToScreenPoint(_obj.transform.localScale).y, pos, Camera.main.transform.position.z + 400));
+			return Camera.main.ScreenToWorldPoint(new Vector3(Screen.width, pos, Camera.main.transform.position.z + 400));
 		}
 		else
 		{
