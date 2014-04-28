@@ -110,15 +110,15 @@ public class MotionControl : MonoBehaviour {
 			moveDirection.x = velocity * Mathf.Sin (driftRad); 			// Apply velocity by drift ratio to local x
 			moveDirection.y = fallingSpeed; 							// Apply falling speed to local y
 			moveDirection.z = velocity * Mathf.Cos (driftRad); 			// Apply velocity by drift ratio to local z
+
 			moveDirection = transform.TransformDirection(moveDirection);// Convert local vectors to world vectors
-			
-//			moveDirection *= velocity;
+
 			velocityCurrent = rigidbody.velocity;
-			velocityDifference = moveDirection - velocityCurrent;
-//			velocityDifference.y = 0.0f;		
+			velocityDifference = moveDirection - velocityCurrent;		
 			
 			// Apply movement
-			rigidbody.AddForce(velocityDifference, ForceMode.VelocityChange);			
+			rigidbody.AddForce(velocityDifference, ForceMode.VelocityChange);
+
 			
 			// The Jump Function
 			if (Input.GetButton("Jump") && netanim.anim.GetBool("Jump") == false ) // Test if Jump is pressed while on the ground
