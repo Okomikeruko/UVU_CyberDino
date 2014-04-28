@@ -16844,7 +16844,6 @@ GameObject:
   - 33: {fileID: 1158458074}
   - 135: {fileID: 1158458073}
   - 23: {fileID: 1158458072}
-  - 114: {fileID: 1158458071}
   m_Layer: 0
   m_Name: bulletPosition
   m_TagString: Untagged
@@ -16863,20 +16862,6 @@ Transform:
   m_LocalScale: {x: .122167729, y: .122167729, z: .122167729}
   m_Children: []
   m_Father: {fileID: 377497693}
---- !u!114 &1158458071
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 11400070, guid: 048b74e9f00ba44a3a229d01702f4464,
-    type: 2}
-  m_PrefabInternal: {fileID: 2086634607}
-  m_GameObject: {fileID: 1158458069}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bdb9f4f4435bc40f19986e855b529a78, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _lifeTime: 20
-  _bulletDamage: 5
 --- !u!23 &1158458072
 Renderer:
   m_ObjectHideFlags: 0
@@ -20364,7 +20349,6 @@ GameObject:
   - 33: {fileID: 1376617949}
   - 135: {fileID: 1376617948}
   - 23: {fileID: 1376617947}
-  - 114: {fileID: 1376617946}
   m_Layer: 0
   m_Name: bulletPosition
   m_TagString: Untagged
@@ -20383,20 +20367,6 @@ Transform:
   m_LocalScale: {x: .122167729, y: .122167729, z: .122167729}
   m_Children: []
   m_Father: {fileID: 108805234}
---- !u!114 &1376617946
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 11400080, guid: 048b74e9f00ba44a3a229d01702f4464,
-    type: 2}
-  m_PrefabInternal: {fileID: 2086634607}
-  m_GameObject: {fileID: 1376617944}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bdb9f4f4435bc40f19986e855b529a78, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _lifeTime: 20
-  _bulletDamage: 5
 --- !u!23 &1376617947
 Renderer:
   m_ObjectHideFlags: 0
@@ -20728,7 +20698,7 @@ GameObject:
   - 114: {fileID: 1414736580}
   m_Layer: 0
   m_Name: First Person Controller
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -28016,7 +27986,6 @@ GameObject:
   - 33: {fileID: 1917058914}
   - 135: {fileID: 1917058913}
   - 23: {fileID: 1917058912}
-  - 114: {fileID: 1917058911}
   m_Layer: 0
   m_Name: bulletPosition
   m_TagString: Untagged
@@ -28035,20 +28004,6 @@ Transform:
   m_LocalScale: {x: .122167729, y: .122167729, z: .122167729}
   m_Children: []
   m_Father: {fileID: 626347062}
---- !u!114 &1917058911
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 11400078, guid: 048b74e9f00ba44a3a229d01702f4464,
-    type: 2}
-  m_PrefabInternal: {fileID: 2086634607}
-  m_GameObject: {fileID: 1917058909}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bdb9f4f4435bc40f19986e855b529a78, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _lifeTime: 20
-  _bulletDamage: 5
 --- !u!23 &1917058912
 Renderer:
   m_ObjectHideFlags: 0
@@ -30470,7 +30425,6 @@ GameObject:
   - 33: {fileID: 2031573096}
   - 135: {fileID: 2031573095}
   - 23: {fileID: 2031573094}
-  - 114: {fileID: 2031573093}
   m_Layer: 0
   m_Name: bulletPosition
   m_TagString: Untagged
@@ -30489,20 +30443,6 @@ Transform:
   m_LocalScale: {x: .122167729, y: .122167729, z: .122167729}
   m_Children: []
   m_Father: {fileID: 598239501}
---- !u!114 &2031573093
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 11400072, guid: 048b74e9f00ba44a3a229d01702f4464,
-    type: 2}
-  m_PrefabInternal: {fileID: 2086634607}
-  m_GameObject: {fileID: 2031573091}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bdb9f4f4435bc40f19986e855b529a78, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _lifeTime: 20
-  _bulletDamage: 5
 --- !u!23 &2031573094
 Renderer:
   m_ObjectHideFlags: 0
@@ -31005,7 +30945,12 @@ Prefab:
       propertyPath: pooledObject
       value: 
       objectReference: {fileID: 400000, guid: 363eb28169dba40b0929e06775a524dd, type: 2}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 11400072, guid: 048b74e9f00ba44a3a229d01702f4464, type: 2}
+    - {fileID: 11400066, guid: 048b74e9f00ba44a3a229d01702f4464, type: 2}
+    - {fileID: 11400080, guid: 048b74e9f00ba44a3a229d01702f4464, type: 2}
+    - {fileID: 11400070, guid: 048b74e9f00ba44a3a229d01702f4464, type: 2}
+    - {fileID: 11400078, guid: 048b74e9f00ba44a3a229d01702f4464, type: 2}
   m_ParentPrefab: {fileID: 100100000, guid: 048b74e9f00ba44a3a229d01702f4464, type: 2}
   m_RootGameObject: {fileID: 1167249828}
   m_IsPrefabParent: 0
@@ -31137,7 +31082,6 @@ GameObject:
   - 33: {fileID: 2108824243}
   - 135: {fileID: 2108824242}
   - 23: {fileID: 2108824241}
-  - 114: {fileID: 2108824240}
   m_Layer: 0
   m_Name: bulletPosition
   m_TagString: Untagged
@@ -31156,20 +31100,6 @@ Transform:
   m_LocalScale: {x: .122167729, y: .122167729, z: .122167729}
   m_Children: []
   m_Father: {fileID: 533600707}
---- !u!114 &2108824240
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 11400066, guid: 048b74e9f00ba44a3a229d01702f4464,
-    type: 2}
-  m_PrefabInternal: {fileID: 2086634607}
-  m_GameObject: {fileID: 2108824238}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bdb9f4f4435bc40f19986e855b529a78, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _lifeTime: 20
-  _bulletDamage: 5
 --- !u!23 &2108824241
 Renderer:
   m_ObjectHideFlags: 0

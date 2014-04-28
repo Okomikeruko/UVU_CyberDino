@@ -85,7 +85,7 @@ public class TurretControl : MonoBehaviour {
 		float distance = Vector3.Distance(_rotationControl.transform.position, targetPosition);
 		float angle = (float)( Math.Asin((Physics.gravity.magnitude * distance) / (_bulletVelocity * _bulletVelocity)) / 2  );
 		Vector3 targetPitchPosition = new Vector3(targetPosition.x, ((float)Math.Tan(angle) * distance) + targetPosition.y, targetPosition.z);
-		_pitchControl.transform.rotation = Quaternion.Slerp (_pitchControl.transform.rotation, Quaternion.LookRotation (targetPitchPosition - _pitchControl.transform.position - (new Vector3(0,20,0))), Time.deltaTime * _targetingSpeed);
+		_pitchControl.transform.rotation = Quaternion.Slerp (_pitchControl.transform.rotation, Quaternion.LookRotation (targetPitchPosition - _pitchControl.transform.position - (new Vector3(0,15,0))), Time.deltaTime * _targetingSpeed);
 
 		return (Math.Abs(Quaternion.LookRotation (targetRotationPosition - _rotationControl.transform.position).eulerAngles.y - _rotationControl.transform.rotation.eulerAngles.y) < _targetLockAcuracy);
 	}
