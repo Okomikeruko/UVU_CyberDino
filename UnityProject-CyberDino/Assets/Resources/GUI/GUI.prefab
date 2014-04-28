@@ -114,6 +114,23 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 0
+--- !u!1 &100014
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 400014}
+  - 131: {fileID: 13100012}
+  - 114: {fileID: 11400006}
+  m_Layer: 0
+  m_Name: ItemButton
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
 --- !u!4 &400000
 Transform:
   m_ObjectHideFlags: 1
@@ -150,6 +167,7 @@ Transform:
   - {fileID: 400006}
   - {fileID: 400000}
   - {fileID: 400002}
+  - {fileID: 400014}
   m_Father: {fileID: 0}
 --- !u!4 &400006
 Transform:
@@ -197,6 +215,17 @@ Transform:
   m_LocalScale: {x: 0, y: 0, z: 0}
   m_Children: []
   m_Father: {fileID: 400006}
+--- !u!4 &400014
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100014}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: .800006986, y: .200005993, z: 2.30000005e-05}
+  m_LocalScale: {x: 0, y: 0, z: 1.01507103}
+  m_Children: []
+  m_Father: {fileID: 400004}
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -210,12 +239,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   buttonPos:
     serializedVersion: 2
-    x: 85
-    y: 10
-    width: 15
-    height: 25
+    x: 75
+    y: 5
+    width: 10
+    height: 20
   isHolding: 0
   endCount: 0
+  waitTime: .300000012
 --- !u!114 &11400002
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -232,15 +262,15 @@ MonoBehaviour:
   leftArrowPos:
     serializedVersion: 2
     x: 1
-    y: 10
-    width: 15
-    height: 25
+    y: 20
+    width: 10
+    height: 20
   rightArrowPos:
     serializedVersion: 2
-    x: 20
+    x: 15
     y: 10
-    width: 15
-    height: 25
+    width: 10
+    height: 20
   player: {fileID: 0}
   motionConScript: {fileID: 0}
   velocityRight: .100000001
@@ -264,11 +294,6 @@ MonoBehaviour:
   exitRace: {fileID: 13100008}
   buttons:
   - serializedVersion: 2
-    x: 1
-    y: 95
-    width: 10
-    height: 20
-  - serializedVersion: 2
     x: 35
     y: 80
     width: 40
@@ -278,8 +303,31 @@ MonoBehaviour:
     y: 30
     width: 40
     height: 30
+  mainButtonPos:
+    serializedVersion: 2
+    x: 5
+    y: 80
+    width: 10
+    height: 15
   mControl: {fileID: 0}
   mControlScript: {fileID: 0}
+--- !u!114 &11400006
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100014}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b0761ed3ff65c7c4fbfe50a930a6d182, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  buttonPos:
+    serializedVersion: 2
+    x: 85
+    y: 30
+    width: 10
+    height: 20
 --- !u!131 &13100000
 GUITexture:
   m_ObjectHideFlags: 1
@@ -310,10 +358,10 @@ GUITexture:
   m_Color: {r: .5, g: .5, b: .5, a: .5}
   m_PixelInset:
     serializedVersion: 2
-    x: 0
-    y: 0
-    width: 80
-    height: 80
+    x: -59.7000008
+    y: -44.8300018
+    width: 70
+    height: 70
   m_LeftBorder: 0
   m_RightBorder: 0
   m_TopBorder: 0
@@ -390,6 +438,25 @@ GUITexture:
     y: 13.8000002
     width: 128
     height: 58
+  m_LeftBorder: 0
+  m_RightBorder: 0
+  m_TopBorder: 0
+  m_BottomBorder: 0
+--- !u!131 &13100012
+GUITexture:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100014}
+  m_Enabled: 1
+  m_Texture: {fileID: 2800000, guid: a3484441a38fff148bbf88a8a4d72673, type: 3}
+  m_Color: {r: .5, g: .5, b: .5, a: .5}
+  m_PixelInset:
+    serializedVersion: 2
+    x: 19
+    y: -20.3299999
+    width: 70
+    height: 70
   m_LeftBorder: 0
   m_RightBorder: 0
   m_TopBorder: 0

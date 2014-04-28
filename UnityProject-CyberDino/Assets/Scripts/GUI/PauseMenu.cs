@@ -7,6 +7,8 @@ public class PauseMenu : MonoBehaviour
 	public GUITexture exitRace;
 	
 	public Rect[] buttons;
+	
+	public Rect mainButtonPos;
 
 	public GameObject mControl;
 	public MenuControl mControlScript;
@@ -14,6 +16,9 @@ public class PauseMenu : MonoBehaviour
 	// Use this for initialization
 	void Start () 
 	{
+		transform.position = Vector3.zero;
+		transform.localScale = Vector3.zero;
+		
 		Time.timeScale = 1;
 
 		mControl = GameObject.FindGameObjectWithTag("Menu");
@@ -22,25 +27,25 @@ public class PauseMenu : MonoBehaviour
 		{
 			mControlScript = mControl.GetComponent<MenuControl>() as MenuControl;
 			
-			ResizeButtons(buttons);
-			
-			transform.position = Vector3.zero;
-			transform.localScale = Vector3.zero;
-			guiTexture.pixelInset = buttons[0];
+			guiTexture.pixelInset = mainButtonPos;
 			
 			continueRace.transform.position = Vector3.zero;
 			continueRace.transform.localScale = Vector3.zero;
-			continueRace.guiTexture.pixelInset = buttons[1];
+			//continueRace.guiTexture.pixelInset = buttons[0];
 			
 			exitRace.transform.position = Vector3.zero;
 			exitRace.transform.localScale = Vector3.zero;
-			exitRace.guiTexture.pixelInset = buttons[2];
+			//exitRace.guiTexture.pixelInset = buttons[1];
 		}
 	}
 	
 	// Update is called once per frame
-	void Update () 
+	void FixedUpdate () 
 	{
+		ResizeButton(continueRace, buttons[0]);
+		ResizeButton(exitRace, buttons[1]);
+		ResizeButton(gameObject.guiTexture, mainButtonPos);
+		
 		if(mControl != null)
 		{
 			if(Input.GetMouseButtonDown(0))
@@ -102,7 +107,7 @@ public class PauseMenu : MonoBehaviour
 		}
 	}
 	
-	void ResizeButtons(Rect[] _pos)
+	/*void ResizeButtons(GUITexture _button, Rect[] _pos)
 	{
 		
 		//variables used to move the buttons
@@ -115,5 +120,16 @@ public class PauseMenu : MonoBehaviour
 			//set the rect position and size
 			_pos[i] = new Rect(_pos[i].x * xMulti, _pos[i].y * yMulti, _pos[i].width * xMulti, _pos[i].height * yMulti);
 		}
+	}*/
+	
+	void ResizeButton(GUITexture _button, Rect _pos)
+	{
+		
+		//variables used to move the buttons
+		float xMulti = Screen.width / 100.0f;
+		float yMulti = Screen.height / 100.0f;
+		
+		//set the rect position and size
+		_button.guiTexture.pixelInset = new Rect(_pos.x * xMulti, _pos.y * yMulti, _pos.width * xMulti, _pos.height * yMulti);
 	}
 }

@@ -11,6 +11,7 @@ GameObject:
   - 33: {fileID: 3300000}
   - 64: {fileID: 6400000}
   - 23: {fileID: 2300000}
+  - 96: {fileID: 9600000}
   m_Layer: 0
   m_Name: GlowLight
   m_TagString: Untagged
@@ -70,6 +71,48 @@ MeshCollider:
   m_SmoothSphereCollisions: 0
   m_Convex: 0
   m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!96 &9600000
+TrailRenderer:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100000}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_LightmapIndex: 255
+  m_LightmapTilingOffset: {x: 1, y: 1, z: 0, w: 0}
+  m_Materials:
+  - {fileID: 2100000, guid: 84c2daa44a30ecc4384926dff5d65e55, type: 2}
+  m_SubsetIndices: 
+  m_StaticBatchRoot: {fileID: 0}
+  m_UseLightProbes: 0
+  m_LightProbeAnchor: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_SortingLayerID: 0
+  m_Time: .5
+  m_StartWidth: 10
+  m_EndWidth: 10
+  m_Colors:
+    m_Color[0]:
+      serializedVersion: 2
+      rgba: 4291740274
+    m_Color[1]:
+      serializedVersion: 2
+      rgba: 2027737481
+    m_Color[2]:
+      serializedVersion: 2
+      rgba: 1020709245
+    m_Color[3]:
+      serializedVersion: 2
+      rgba: 517392765
+    m_Color[4]:
+      serializedVersion: 2
+      rgba: 13287020
+  m_MinVertexDistance: .100000001
+  m_Autodestruct: 0
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1
