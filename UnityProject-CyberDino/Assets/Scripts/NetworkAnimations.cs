@@ -4,6 +4,8 @@ using System.Collections;
 public class NetworkAnimations : MonoBehaviour {
 
 	int jumping = 0;
+	int attacking = 0;
+	int shooting = 0;
 
 	public Animator anim;
 	private NetworkView netView;
@@ -33,6 +35,19 @@ public class NetworkAnimations : MonoBehaviour {
 		}
 	}
 
+	// added by Lee
+
+	public void AnimSetMelee(string melee, bool isAttacking){
+		if (isAttacking == true) {
+			attacking = 1;
+			netView.RPC ("AnimatorMelee", RPCMode.All, melee, attacking);
+		}
+
+		else{
+			attacking = 0;
+			netView.RPC ("AnimatorMelee", RPCMode.All, melee, attacking);
+		}
+	}
 
 	[RPC]
 	void AnimatorSpeed (string speed, float velocity, float topSpeed) {
@@ -54,4 +69,14 @@ public class NetworkAnimations : MonoBehaviour {
 		}
 	}
 
+	// Added by Lee
+	[RPC]
+	void AnimatorMelee (string melee, int isAttacking) {
+		if(isAttacking == 1) {
+			anim.SetBool (melee, true);
+		}
+		else{
+			anim.SetBool (melee, false);
+		}
+	}
 }

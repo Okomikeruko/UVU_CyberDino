@@ -248,6 +248,11 @@ public class MotionControl : MonoBehaviour {
 		return jump;
 	}	
 
+	public void SetMelee(bool isAttacking)
+	{
+		netanim.AnimSetMelee("Melee", isAttacking);
+	}
+
 	private void StartSpin()
 	{
 		rigidbody.constraints = RigidbodyConstraints.None;
