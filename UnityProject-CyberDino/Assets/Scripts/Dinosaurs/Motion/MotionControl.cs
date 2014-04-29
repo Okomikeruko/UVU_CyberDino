@@ -134,6 +134,8 @@ public class MotionControl : MonoBehaviour {
 		}	
 
 
+
+
 		RaycastHit hit;
 
 		if(Physics.Raycast(transform.position, -Vector3.up, out hit))

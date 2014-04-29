@@ -1082,7 +1082,7 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100078}
-  m_LocalRotation: {x: 0, y: .707106829, z: 0, w: .707106829}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: -7.48895264, z: 0}
   m_LocalScale: {x: 3, y: 3, z: 3}
   m_Children:
@@ -1099,7 +1099,7 @@ Rigidbody:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100000}
   serializedVersion: 2
-  m_Mass: 1
+  m_Mass: 550
   m_Drag: 0
   m_AngularDrag: .0500000007
   m_UseGravity: 1
@@ -1146,9 +1146,9 @@ MonoBehaviour:
   anim: {fileID: 0}
   TurboAcceleration: 0
   TurboTopSpeed: 0
-  acceleration: 10
-  topSpeed: 80
-  handling: 1
+  acceleration: 180
+  topSpeed: 90
+  handling: 2
   jump: 80
   velocity: 0
 --- !u!114 &11400004
@@ -1218,8 +1218,8 @@ CapsuleCollider:
   m_Enabled: 1
   m_Radius: 3.30999994
   m_Height: 48.2200012
-  m_Direction: 0
-  m_Center: {x: -2.25999999, y: 2.68000007, z: 0}
+  m_Direction: 2
+  m_Center: {x: 0, y: 2.68000007, z: 0}
 --- !u!136 &13600002
 CapsuleCollider:
   m_ObjectHideFlags: 1
