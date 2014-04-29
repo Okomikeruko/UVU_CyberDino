@@ -90,6 +90,7 @@ ModelImporter:
     7400010: Jump up
     7400012: Air
     7400014: Into Spin
+    7400016: Jump Up
     9500000: //RootNode
     13700000: spinosaursModel
   materials:
@@ -100,7 +101,7 @@ ModelImporter:
     legacyGenerateAnimations: 4
     bakeSimulation: 1
     optimizeGameObjects: 0
-    animationCompression: 1
+    animationCompression: 0
     animationRotationError: .5
     animationPositionError: .5
     animationScaleError: .5
@@ -628,10 +629,10 @@ ModelImporter:
       maskType: 0
       maskSource: {instanceID: 0}
     - serializedVersion: 16
-      name: Jump up
+      name: Into Spin
       takeName: Take 001
-      firstFrame: 139
-      lastFrame: 151.910004
+      firstFrame: 108
+      lastFrame: 118
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
@@ -643,6 +644,110 @@ ModelImporter:
       loopBlendPositionY: 0
       loopBlendPositionXZ: 0
       keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: ikHandle1
+        weight: 1
+      - path: ikHandle11
+        weight: 1
+      - path: spinosaursModel
+        weight: 1
+      - path: t
+        weight: 1
+      - path: zeroTransformations
+        weight: 1
+      - path: zeroTransformations/base_jnt
+        weight: 1
+      - path: zeroTransformations/base_jnt/hip_l_jnt
+        weight: 1
+      - path: zeroTransformations/base_jnt/hip_l_jnt/knee_l_jnt
+        weight: 1
+      - path: zeroTransformations/base_jnt/hip_l_jnt/knee_l_jnt/ankle_l_jnt
+        weight: 1
+      - path: zeroTransformations/base_jnt/hip_l_jnt/knee_l_jnt/ankle_l_jnt/ball_l_jnt
+        weight: 1
+      - path: zeroTransformations/base_jnt/hip_l_jnt/knee_l_jnt/ankle_l_jnt/ball_l_jnt/toes_l_jnt
+        weight: 1
+      - path: zeroTransformations/base_jnt/hip_l_jnt/knee_l_jnt/ankle_l_jnt/ball_l_jnt/toes_l_jnt/toeTip_l_jnt
+        weight: 1
+      - path: zeroTransformations/base_jnt/hip_r_jnt
+        weight: 1
+      - path: zeroTransformations/base_jnt/hip_r_jnt/knee_r_jnt
+        weight: 1
+      - path: zeroTransformations/base_jnt/hip_r_jnt/knee_r_jnt/ankle_r_jnt
+        weight: 1
+      - path: zeroTransformations/base_jnt/hip_r_jnt/knee_r_jnt/ankle_r_jnt/ball_r_jnt
+        weight: 1
+      - path: zeroTransformations/base_jnt/hip_r_jnt/knee_r_jnt/ankle_r_jnt/ball_r_jnt/toes_r_jnt
+        weight: 1
+      - path: zeroTransformations/base_jnt/hip_r_jnt/knee_r_jnt/ankle_r_jnt/ball_r_jnt/toes_r_jnt/toeTip_r_jnt
+        weight: 1
+      - path: zeroTransformations/base_jnt/spineBase_jnt
+        weight: 1
+      - path: zeroTransformations/base_jnt/spineBase_jnt/spine0_jnt
+        weight: 1
+      - path: zeroTransformations/base_jnt/spineBase_jnt/spine0_jnt/spine1_jnt
+        weight: 1
+      - path: zeroTransformations/base_jnt/spineBase_jnt/spine0_jnt/spine1_jnt/collar_l_jnt
+        weight: 1
+      - path: zeroTransformations/base_jnt/spineBase_jnt/spine0_jnt/spine1_jnt/collar_l_jnt/shoulder_l_jnt
+        weight: 1
+      - path: zeroTransformations/base_jnt/spineBase_jnt/spine0_jnt/spine1_jnt/collar_l_jnt/shoulder_l_jnt/elbow_l_jnt
+        weight: 1
+      - path: zeroTransformations/base_jnt/spineBase_jnt/spine0_jnt/spine1_jnt/collar_l_jnt/shoulder_l_jnt/elbow_l_jnt/wrist_l_jnt
+        weight: 1
+      - path: zeroTransformations/base_jnt/spineBase_jnt/spine0_jnt/spine1_jnt/collar_l_jnt/shoulder_l_jnt/elbow_l_jnt/wrist_l_jnt/fingerTip_l_jnt
+        weight: 1
+      - path: zeroTransformations/base_jnt/spineBase_jnt/spine0_jnt/spine1_jnt/collar_r_jnt
+        weight: 1
+      - path: zeroTransformations/base_jnt/spineBase_jnt/spine0_jnt/spine1_jnt/collar_r_jnt/shoulder_r_jnt
+        weight: 1
+      - path: zeroTransformations/base_jnt/spineBase_jnt/spine0_jnt/spine1_jnt/collar_r_jnt/shoulder_r_jnt/elbow_r_jnt
+        weight: 1
+      - path: zeroTransformations/base_jnt/spineBase_jnt/spine0_jnt/spine1_jnt/collar_r_jnt/shoulder_r_jnt/elbow_r_jnt/wrist_r_jnt
+        weight: 1
+      - path: zeroTransformations/base_jnt/spineBase_jnt/spine0_jnt/spine1_jnt/collar_r_jnt/shoulder_r_jnt/elbow_r_jnt/wrist_r_jnt/fingerTip_r_jnt
+        weight: 1
+      - path: zeroTransformations/base_jnt/spineBase_jnt/spine0_jnt/spine1_jnt/neck0_jnt
+        weight: 1
+      - path: zeroTransformations/base_jnt/spineBase_jnt/spine0_jnt/spine1_jnt/neck0_jnt/neck1_jnt
+        weight: 1
+      - path: zeroTransformations/base_jnt/spineBase_jnt/spine0_jnt/spine1_jnt/neck0_jnt/neck1_jnt/noseTip_jnt
+        weight: 1
+      - path: zeroTransformations/base_jnt/tail0_jnt
+        weight: 1
+      - path: zeroTransformations/base_jnt/tail0_jnt/tail1_jnt
+        weight: 1
+      - path: zeroTransformations/base_jnt/tail0_jnt/tail1_jnt/tail2_jnt
+        weight: 1
+      - path: zeroTransformations/base_jnt/tail0_jnt/tail1_jnt/tail2_jnt/tailTip_jnt
+        weight: 1
+      maskType: 0
+      maskSource: {instanceID: 0}
+    - serializedVersion: 16
+      name: Jump Up
+      takeName: Take 001
+      firstFrame: 139
+      lastFrame: 151
+      wrapMode: 0
+      orientationOffsetY: 12
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 1
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 1
       keepOriginalPositionY: 1
       keepOriginalPositionXZ: 0
       heightFromFeet: 0
@@ -835,110 +940,6 @@ ModelImporter:
         weight: 1
       maskType: 0
       maskSource: {instanceID: 0}
-    - serializedVersion: 16
-      name: Into Spin
-      takeName: Take 001
-      firstFrame: 108
-      lastFrame: 118
-      wrapMode: 0
-      orientationOffsetY: 0
-      level: 0
-      cycleOffset: 0
-      loop: 0
-      loopTime: 0
-      loopBlend: 0
-      loopBlendOrientation: 0
-      loopBlendPositionY: 0
-      loopBlendPositionXZ: 0
-      keepOriginalOrientation: 0
-      keepOriginalPositionY: 1
-      keepOriginalPositionXZ: 0
-      heightFromFeet: 0
-      mirror: 0
-      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
-      curves: []
-      events: []
-      transformMask:
-      - path: 
-        weight: 1
-      - path: ikHandle1
-        weight: 1
-      - path: ikHandle11
-        weight: 1
-      - path: spinosaursModel
-        weight: 1
-      - path: t
-        weight: 1
-      - path: zeroTransformations
-        weight: 1
-      - path: zeroTransformations/base_jnt
-        weight: 1
-      - path: zeroTransformations/base_jnt/hip_l_jnt
-        weight: 1
-      - path: zeroTransformations/base_jnt/hip_l_jnt/knee_l_jnt
-        weight: 1
-      - path: zeroTransformations/base_jnt/hip_l_jnt/knee_l_jnt/ankle_l_jnt
-        weight: 1
-      - path: zeroTransformations/base_jnt/hip_l_jnt/knee_l_jnt/ankle_l_jnt/ball_l_jnt
-        weight: 1
-      - path: zeroTransformations/base_jnt/hip_l_jnt/knee_l_jnt/ankle_l_jnt/ball_l_jnt/toes_l_jnt
-        weight: 1
-      - path: zeroTransformations/base_jnt/hip_l_jnt/knee_l_jnt/ankle_l_jnt/ball_l_jnt/toes_l_jnt/toeTip_l_jnt
-        weight: 1
-      - path: zeroTransformations/base_jnt/hip_r_jnt
-        weight: 1
-      - path: zeroTransformations/base_jnt/hip_r_jnt/knee_r_jnt
-        weight: 1
-      - path: zeroTransformations/base_jnt/hip_r_jnt/knee_r_jnt/ankle_r_jnt
-        weight: 1
-      - path: zeroTransformations/base_jnt/hip_r_jnt/knee_r_jnt/ankle_r_jnt/ball_r_jnt
-        weight: 1
-      - path: zeroTransformations/base_jnt/hip_r_jnt/knee_r_jnt/ankle_r_jnt/ball_r_jnt/toes_r_jnt
-        weight: 1
-      - path: zeroTransformations/base_jnt/hip_r_jnt/knee_r_jnt/ankle_r_jnt/ball_r_jnt/toes_r_jnt/toeTip_r_jnt
-        weight: 1
-      - path: zeroTransformations/base_jnt/spineBase_jnt
-        weight: 1
-      - path: zeroTransformations/base_jnt/spineBase_jnt/spine0_jnt
-        weight: 1
-      - path: zeroTransformations/base_jnt/spineBase_jnt/spine0_jnt/spine1_jnt
-        weight: 1
-      - path: zeroTransformations/base_jnt/spineBase_jnt/spine0_jnt/spine1_jnt/collar_l_jnt
-        weight: 1
-      - path: zeroTransformations/base_jnt/spineBase_jnt/spine0_jnt/spine1_jnt/collar_l_jnt/shoulder_l_jnt
-        weight: 1
-      - path: zeroTransformations/base_jnt/spineBase_jnt/spine0_jnt/spine1_jnt/collar_l_jnt/shoulder_l_jnt/elbow_l_jnt
-        weight: 1
-      - path: zeroTransformations/base_jnt/spineBase_jnt/spine0_jnt/spine1_jnt/collar_l_jnt/shoulder_l_jnt/elbow_l_jnt/wrist_l_jnt
-        weight: 1
-      - path: zeroTransformations/base_jnt/spineBase_jnt/spine0_jnt/spine1_jnt/collar_l_jnt/shoulder_l_jnt/elbow_l_jnt/wrist_l_jnt/fingerTip_l_jnt
-        weight: 1
-      - path: zeroTransformations/base_jnt/spineBase_jnt/spine0_jnt/spine1_jnt/collar_r_jnt
-        weight: 1
-      - path: zeroTransformations/base_jnt/spineBase_jnt/spine0_jnt/spine1_jnt/collar_r_jnt/shoulder_r_jnt
-        weight: 1
-      - path: zeroTransformations/base_jnt/spineBase_jnt/spine0_jnt/spine1_jnt/collar_r_jnt/shoulder_r_jnt/elbow_r_jnt
-        weight: 1
-      - path: zeroTransformations/base_jnt/spineBase_jnt/spine0_jnt/spine1_jnt/collar_r_jnt/shoulder_r_jnt/elbow_r_jnt/wrist_r_jnt
-        weight: 1
-      - path: zeroTransformations/base_jnt/spineBase_jnt/spine0_jnt/spine1_jnt/collar_r_jnt/shoulder_r_jnt/elbow_r_jnt/wrist_r_jnt/fingerTip_r_jnt
-        weight: 1
-      - path: zeroTransformations/base_jnt/spineBase_jnt/spine0_jnt/spine1_jnt/neck0_jnt
-        weight: 1
-      - path: zeroTransformations/base_jnt/spineBase_jnt/spine0_jnt/spine1_jnt/neck0_jnt/neck1_jnt
-        weight: 1
-      - path: zeroTransformations/base_jnt/spineBase_jnt/spine0_jnt/spine1_jnt/neck0_jnt/neck1_jnt/noseTip_jnt
-        weight: 1
-      - path: zeroTransformations/base_jnt/tail0_jnt
-        weight: 1
-      - path: zeroTransformations/base_jnt/tail0_jnt/tail1_jnt
-        weight: 1
-      - path: zeroTransformations/base_jnt/tail0_jnt/tail1_jnt/tail2_jnt
-        weight: 1
-      - path: zeroTransformations/base_jnt/tail0_jnt/tail1_jnt/tail2_jnt/tailTip_jnt
-        weight: 1
-      maskType: 0
-      maskSource: {instanceID: 0}
     isReadable: 1
   meshes:
     lODScreenPercentages: []
@@ -972,7 +973,7 @@ ModelImporter:
     armStretch: .0500000007
     legStretch: .0500000007
     feetSpacing: 0
-    rootMotionBoneName: 
+    rootMotionBoneName: t
   lastHumanDescriptionAvatarSource: {instanceID: 0}
   animationType: 2
   userData: 
