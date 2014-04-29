@@ -171,7 +171,7 @@ public class MenuControl : MonoBehaviour
 		
 		multiPMenuBtnRect = new Rect[2];
 		
-		lobbyMenuRect = new Rect[6];
+		lobbyMenuRect = new Rect[9];
 		
 		lobbyMenuBtnRect = new Rect[6];
 		
@@ -493,10 +493,12 @@ public class MenuControl : MonoBehaviour
 					
 					foreach(var player in networkHandler.playerInformation){
 						if(player.Key != Network.player.ToString()){
-							//Debug.Log("asdfasdfasdfasdf");
+
+							string textureFileName = "GUI/Materials/Banner" + player.Value.dinoName + "Small";
+
 							GUI.DrawTexture(new Rect(menuOrigin[2].x + lobbyMenuRect[i].x, menuOrigin[2].y + lobbyMenuRect[i].y, lobbyMenuRect[i].width, lobbyMenuRect[i].height), smallBoxGFX);
-							GUI.DrawTexture(new Rect(menuOrigin[2].x + lobbyMenuRect[i].x, menuOrigin[2].y + lobbyMenuRect[i].y, lobbyMenuRect[i].width, lobbyMenuRect[i].height), (Texture)Resources.Load("Banner" + player.Value.dinoName + "Small"));
-							GUI.Label(new Rect(menuOrigin[2].x + lobbyMenuRect[i].x, menuOrigin[2].y + lobbyMenuRect[i].y, lobbyMenuRect[i].width, lobbyMenuRect[i].height), player.Value.playerName + " - " + player.Value.dinoName);
+							GUI.DrawTexture(new Rect(menuOrigin[2].x + lobbyMenuRect[i + 5].x, menuOrigin[2].y + lobbyMenuRect[i + 5].y, lobbyMenuRect[i + 5].width, lobbyMenuRect[i + 5].height), (Texture)Resources.Load(textureFileName));
+							GUI.Label(new Rect(menuOrigin[2].x + lobbyMenuRect[i].x, menuOrigin[2].y + lobbyMenuRect[i].y - 15, lobbyMenuRect[i].width, lobbyMenuRect[i].height), player.Value.playerName);
 							i++;
 						}
 					}
@@ -795,6 +797,9 @@ public class MenuControl : MonoBehaviour
 		lobbyMenuRect[3] = ResizeRect(new Rect(80, 7, 13, 15));
 		lobbyMenuRect[4] = ResizeRect(new Rect(15, 10, 20, 10));
 		lobbyMenuRect[5] = ResizeRect(new Rect(55, 10, 30, 10));
+		lobbyMenuRect[6] = ResizeRect(new Rect(52, 14, 13, 7));
+		lobbyMenuRect[7] = ResizeRect(new Rect(66, 14, 13, 7));
+		lobbyMenuRect[8] = ResizeRect(new Rect(80, 14, 13, 7));
 		
 		lobbyMenuBtnRect[0] = ResizeRect(new Rect(4, 46, 3, 8));
 		lobbyMenuBtnRect[1] = ResizeRect(new Rect(45, 46, 3, 8));
