@@ -949,7 +949,7 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100054}
-  m_LocalRotation: {x: -.294324756, y: .523250222, z: -.512444675, w: .613989234}
+  m_LocalRotation: {x: -.294324726, y: .523250163, z: -.512444615, w: .613989174}
   m_LocalPosition: {x: -.806367636, y: 1.11823503e-16, z: -4.80551067e-16}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -1099,7 +1099,7 @@ Rigidbody:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100070}
   serializedVersion: 2
-  m_Mass: 150
+  m_Mass: 300
   m_Drag: 0
   m_AngularDrag: .0500000007
   m_UseGravity: 1
@@ -1158,10 +1158,10 @@ MonoBehaviour:
   anim: {fileID: 0}
   TurboAcceleration: 0
   TurboTopSpeed: 0
-  acceleration: 120
-  topSpeed: 120
-  handling: 2
-  jump: 50
+  acceleration: 180
+  topSpeed: 85
+  handling: 2.5
+  jump: 75
   velocity: 0
 --- !u!114 &11400024
 MonoBehaviour:
