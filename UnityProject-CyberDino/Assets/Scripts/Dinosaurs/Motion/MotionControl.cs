@@ -6,6 +6,7 @@ public class MotionControl : MonoBehaviour {
 
 	private bool isRunning = true;					// accelerates while true. stops running while false.
 	private bool onGround = false;
+	private bool isJumping = false;
 
 	private CharacterController controller;			// This object's CharacterController reference
 
@@ -121,11 +122,12 @@ public class MotionControl : MonoBehaviour {
 
 			
 			// The Jump Function
-			if (Input.GetButton("Jump") && netanim.anim.GetBool("Jump") == false ) // Test if Jump is pressed while on the ground
+			if ((Input.GetButton("Jump") || isJumping) && netanim.anim.GetBool("Jump") == false ) // Test if Jump is pressed while on the ground
 			{
 				velocityCurrent = rigidbody.velocity;
 				rigidbody.velocity = new Vector3(velocityCurrent.x, velocityJump, velocityCurrent.z);
 				netanim.AnimSetJump("Jump", true);
+				isJumping = false;
 			}
 		}
 		else
@@ -213,6 +215,11 @@ public class MotionControl : MonoBehaviour {
 	{
 		speed = 0.0f;
 		isRunning = Running;
+	}
+
+	public void Jump()
+	{
+		isJumping = true;
 	}
 
 	public void Turbo(bool t)
