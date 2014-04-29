@@ -131,6 +131,23 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!1 &100016
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 400016}
+  - 131: {fileID: 13100014}
+  - 114: {fileID: 11400008}
+  m_Layer: 0
+  m_Name: JumpButton
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
 --- !u!4 &400000
 Transform:
   m_ObjectHideFlags: 1
@@ -149,7 +166,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100002}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: .800006866, y: .200006485, z: 2.28881836e-05}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0, y: 0, z: 1.01507056}
   m_Children: []
   m_Father: {fileID: 400004}
@@ -168,6 +185,7 @@ Transform:
   - {fileID: 400000}
   - {fileID: 400002}
   - {fileID: 400014}
+  - {fileID: 400016}
   m_Father: {fileID: 0}
 --- !u!4 &400006
 Transform:
@@ -176,7 +194,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100006}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: .500005722, y: .500005722, z: 2.28881836e-05}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0, y: 0, z: 1.01507056}
   m_Children:
   - {fileID: 400012}
@@ -222,7 +240,18 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100014}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: .800006986, y: .200005993, z: 2.30000005e-05}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 0, y: 0, z: 1.01507103}
+  m_Children: []
+  m_Father: {fileID: 400004}
+--- !u!4 &400016
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100016}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0, y: 0, z: 1.01507103}
   m_Children: []
   m_Father: {fileID: 400004}
@@ -308,7 +337,7 @@ MonoBehaviour:
     x: 5
     y: 80
     width: 10
-    height: 15
+    height: 20
   mControl: {fileID: 0}
   mControlScript: {fileID: 0}
 --- !u!114 &11400006
@@ -325,9 +354,32 @@ MonoBehaviour:
   buttonPos:
     serializedVersion: 2
     x: 85
-    y: 30
+    y: 17
     width: 10
     height: 20
+--- !u!114 &11400008
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100016}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 34a6f57793ef84e40bd0f5b59d755aeb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  buttonPos:
+    serializedVersion: 2
+    x: 85
+    y: 40
+    width: 10
+    height: 20
+  players:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  player: {fileID: 0}
 --- !u!131 &13100000
 GUITexture:
   m_ObjectHideFlags: 1
@@ -358,8 +410,8 @@ GUITexture:
   m_Color: {r: .5, g: .5, b: .5, a: .5}
   m_PixelInset:
     serializedVersion: 2
-    x: -59.7000008
-    y: -44.8300018
+    x: 448.730011
+    y: 13.6000004
     width: 70
     height: 70
   m_LeftBorder: 0
@@ -377,8 +429,8 @@ GUITexture:
   m_Color: {r: .5, g: .5, b: .5, a: .5}
   m_PixelInset:
     serializedVersion: 2
-    x: -229.300003
-    y: 86.4000015
+    x: 23.6000004
+    y: 216.800003
     width: 53.5999985
     height: 48.2999992
   m_LeftBorder: 0
@@ -453,8 +505,27 @@ GUITexture:
   m_Color: {r: .5, g: .5, b: .5, a: .5}
   m_PixelInset:
     serializedVersion: 2
-    x: 19
-    y: -20.3299999
+    x: 533.599976
+    y: 123.5
+    width: 70
+    height: 70
+  m_LeftBorder: 0
+  m_RightBorder: 0
+  m_TopBorder: 0
+  m_BottomBorder: 0
+--- !u!131 &13100014
+GUITexture:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100016}
+  m_Enabled: 1
+  m_Texture: {fileID: 2800000, guid: a3484441a38fff148bbf88a8a4d72673, type: 3}
+  m_Color: {r: .5, g: .5, b: .5, a: .5}
+  m_PixelInset:
+    serializedVersion: 2
+    x: 533.400024
+    y: 39.7999992
     width: 70
     height: 70
   m_LeftBorder: 0

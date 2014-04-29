@@ -60,6 +60,7 @@ public class PauseMenu : MonoBehaviour
 				
 				if(continueRace.guiTexture.HitTest(Input.mousePosition))
 				{
+				
 					continueRace.gameObject.SetActive(false);
 					exitRace.gameObject.SetActive(false);
 					

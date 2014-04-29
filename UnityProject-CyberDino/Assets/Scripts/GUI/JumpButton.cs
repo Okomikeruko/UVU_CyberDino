@@ -10,10 +10,11 @@ public class JumpButton : MonoBehaviour
 	public GameObject player;
 	private DinoSelect dinoSelectScript;
 
-	//private Animator anim;
 
-	public GameObject dMove;
-	public DinoMoveScript dMoveScript;
+	//public GameObject dMove;
+	//public DinoMoveScript dMoveScript;
+	
+	private MotionControl mControl;
 	
 	// Use this for initialization
 	void Start () 
@@ -21,35 +22,47 @@ public class JumpButton : MonoBehaviour
 		//MoveScript = player.GetComponent<DinoMoveScript>() as DinoMoveScript;
 		players = GameObject.FindGameObjectsWithTag("Dino");
 
-//<<<<<<< HEAD
-
-		//anim = player.GetComponent<DinoSelect>().anim; 
-
-//=======
-//>>>>>>> 581dd1b2708f7e9a478ef3d3b89584c68cf2fe66
-		foreach (var unit in players){
-			if(unit.networkView.isMine){
+		foreach (var unit in players)
+		{
+			if(unit.networkView.isMine)
+			{
 				player = unit;
 				break;
 			}
 		}
-
-		//anim = player.GetComponentInChildren<Animator>(); 
-//<<<<<<< HEAD
-
-//=======
-//>>>>>>> 581dd1b2708f7e9a478ef3d3b89584c68cf2fe66
-
+		
+		//mControl = player.GetComponent<MotionControl>() as MotionControl;
+		
 		transform.position = Vector3.zero;
 		transform.localScale = Vector3.zero;
-		
-		Resize(this.gameObject.guiTexture, buttonPos);
 		
 	}
 	
 	// Update is called once per frame
 	void Update () 
 	{
+		Resize(this.gameObject.guiTexture, buttonPos);
+		
+		if(player == null)
+		{
+			players = GameObject.FindGameObjectsWithTag("Dino");
+			
+			foreach (var unit in players)
+			{
+				if (unit.networkView.isMine)
+				{
+					player = unit;
+					break;
+				}
+			}
+			
+			//assign the motion script to the variable
+			if(player.GetComponent<MotionControl>())
+			{
+				mControl = player.GetComponent<MotionControl>();
+			}
+		}
+		
 		if(Input.touches.Length > 0)
 		{
 			//loop through the touches 
@@ -61,28 +74,22 @@ public class JumpButton : MonoBehaviour
 					//if it is hit
 					if(Input.GetTouch(i).phase == TouchPhase.Began)
 					{
-						//dMoveScript.jumper = true;
-
-/*						if (anim.GetBool("Jump") == false ) // Test if Jump is pressed while on the ground
-						{
-							fallingSpeed = jump * velocity/topSpeed; // Apply jump accelleration to this object.
-							anim.SetBool ("Jump", true);
-						}*/
-					}
-					else
-					{
-						//dMoveScript.jumper = false;
+						mControl.Jump();
 					}
 				}
 			}
+		}
+		else if(Input.GetMouseButtonDown(0) && guiTexture.HitTest(Input.mousePosition))
+		{
+			mControl.Jump();
 		}
 	}
 	
 	void Resize(GUITexture _button, Rect _pos)
 	{
 		//have the screen width and height and divide them by 100
-		float xMulti = Screen.width / 100;
-		float yMulti = Screen.height / 100;
+		float xMulti = Screen.width / 100.0f;
+		float yMulti = Screen.height / 100.0f;
 		
 		//start off the resizing from zero
 		_button.transform.localScale = new Vector3(0, 0, 0);

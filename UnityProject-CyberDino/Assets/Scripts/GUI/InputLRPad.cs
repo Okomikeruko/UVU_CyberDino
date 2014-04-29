@@ -29,7 +29,7 @@ public class InputLRPad : MonoBehaviour
 	//variables to hold the player and the motion script
 	public GameObject player;
 	public MotionControl motionConScript;
-	private GameObject[] players;
+	private GameObject[] players = new GameObject[4];
 	
 	private float currentTurn = 0;
 	public float velocityRight = 0.5f;
@@ -55,16 +55,6 @@ public class InputLRPad : MonoBehaviour
 		//call the resize function for both arrows
 		Resize(leftArrow, leftArrowPos);
 		Resize(rightArrow, rightArrowPos);
-
-		//get the player dino and store in player
-		players = GameObject.FindGameObjectsWithTag("Dino");
-		
-		foreach (var unit in players){
-			if (unit.networkView.isMine){
-				player = unit;
-				break;
-			}
-		}
 		
 		if(player != null)
 		{
@@ -73,10 +63,6 @@ public class InputLRPad : MonoBehaviour
 			{
 				motionConScript = player.GetComponent<MotionControl>();
 			}
-		}
-		else
-		{
-			Debug.Log("couldn't find the player's dino");
 		}
 
 	}
@@ -88,9 +74,29 @@ public class InputLRPad : MonoBehaviour
 		Resize(leftArrow, leftArrowPos);
 		Resize(rightArrow, rightArrowPos);
 		
+		if(player == null)
+		{
+			players = GameObject.FindGameObjectsWithTag("Dino");
+			
+			foreach (var unit in players)
+			{
+				if (unit.networkView.isMine)
+				{
+					player = unit;
+					break;
+				}
+			}
+
+			//assign the motion script to the variable
+			if(player.GetComponent<MotionControl>())
+			{
+				motionConScript = player.GetComponent<MotionControl>();
+			}
+		}
+		
 		if(player != null)
 		{
-			
+
 			if(Input.touches.Length > 0)
 			{
 				//loop through the touches 
@@ -147,6 +153,26 @@ public class InputLRPad : MonoBehaviour
 						motionConScript.SetTurn(currentTurn);
 					}
 				}
+			}
+			else if(Input.GetMouseButton(0) && leftArrow.HitTest(Input.mousePosition))
+			{
+				currentTurn = Mathf.SmoothDamp(currentTurn, -1, ref velocityLeft, smoothTimeLeft);
+					
+				//turn to the left
+				motionConScript.SetTurn(currentTurn);
+					
+				Debug.Log(currentTurn);
+
+			}
+			else if(Input.GetMouseButton(0) && rightArrow.HitTest(Input.mousePosition))
+			{
+				currentTurn = Mathf.SmoothDamp(currentTurn, 1, ref velocityRight, smoothTimeRight);
+				
+				//turn to the left
+				motionConScript.SetTurn(currentTurn);
+				
+				Debug.Log(currentTurn);
+				
 			}
 			else
 			{
