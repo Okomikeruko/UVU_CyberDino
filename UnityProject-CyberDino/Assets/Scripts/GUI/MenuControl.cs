@@ -104,6 +104,8 @@ public class MenuControl : MonoBehaviour
 	private Texture[] lvlSelectTxtr;
 	private Rect lvlGraphicPos;
 
+	private Texture lvlNameGFX;
+
 	//the main menu background
 	private GameObject mainMenuBkgd;
 	private Rect mainMenuBkgdPos;
@@ -116,8 +118,9 @@ public class MenuControl : MonoBehaviour
 	private GameObject dinoBoxLg;
 	private Rect dinoBoxLgPos;
 	private Texture dinoBoxLgTxtr;
-	private Rect dinoBoxLgSize;
 	//private Vector3 dinoBoxLgV3Pos;
+
+	private Texture smallBoxGFX;
 	
 	
 	// Use this for initialization
@@ -144,6 +147,8 @@ public class MenuControl : MonoBehaviour
 		lvlSelectTxtr[0] = (Texture)Resources.Load("GUI/Materials/CityTrackGFX");
 		lvlSelectTxtr[1] = (Texture)Resources.Load("GUI/Materials/CityTrackGraphic");
 
+		lvlNameGFX = (Texture)Resources.Load("GUI/Materials/CityTrackWord");
+
 		dinoPortrait = new Texture[6];
 		dinoPortrait[0] = (Texture)Resources.Load("GUI/Materials/CityTrackGFX");
 		dinoPortrait[1] = (Texture)Resources.Load("GUI/Materials/CityTrackGFX");
@@ -156,6 +161,8 @@ public class MenuControl : MonoBehaviour
 		playerNameGFX = (Texture)Resources.Load("GUI/Materials/PlayerName");
 
 		dinoBoxLgTxtr = (Texture)Resources.Load("GUI/Materials/DinoSelectBackground");
+
+		smallBoxGFX = (Texture)Resources.Load("GUI/Materials/OtherPlayerSelection");
 		
 		//graphics ----------------------------------------
 		mainMenuBtnRect = new Rect[3];
@@ -164,7 +171,7 @@ public class MenuControl : MonoBehaviour
 		
 		multiPMenuBtnRect = new Rect[2];
 		
-		lobbyMenuRect = new Rect[4];
+		lobbyMenuRect = new Rect[6];
 		
 		lobbyMenuBtnRect = new Rect[6];
 		
@@ -268,8 +275,8 @@ public class MenuControl : MonoBehaviour
 		//set this skin as the active one
 		GUI.skin = mySkin;
 		
-		//if the menu selected isn't the main menu
-		if(menuSelect != Menu.mainMenu && menuSelect != Menu.goToLevel)
+		//if statements to control when gameobjects appear in the background
+		if(menuSelect == Menu.lobbyMenu)
 		{
 			//destroy the main menu background if it is there
 			if(mainMenuBkgd != null)
@@ -292,13 +299,14 @@ public class MenuControl : MonoBehaviour
 
 			if(dinoBoxLg == null)
 			{
-				dinoBoxLg = (GameObject)Instantiate(Resources.Load("GUI/DinoSelectBackground"), Camera.main.ScreenToWorldPoint(new Vector3(menuOrigin[2].x + dinoBoxLgPos.x, menuOrigin[2].x + dinoBoxLgPos.y, 300)), Quaternion.identity);
-				dinoBoxLg.transform.Rotate(new Vector3(270, 0, 0));
+				dinoBoxLg = (GameObject)Instantiate(Resources.Load("GUI/DinoSelectBackground"), Camera.main.ScreenToWorldPoint(new Vector3(0, 0, 0)), Quaternion.identity);
+				dinoBoxLg.transform.Rotate(new Vector3(90, 180, 0));
 			}
 			else
 			{
-				Vector3 pointInWorld = Camera.main.ScreenToWorldPoint(new Vector3(dinoBoxLgSize.x, dinoBoxLgSize.y, Camera.main.transform.position.z + 300));
-				dinoBoxLg.transform.localScale = new Vector3(pointInWorld.x, 1, pointInWorld.y);
+				dinoBoxLg.transform.position = Camera.main.ScreenToWorldPoint(new Vector3(menuOrigin[2].x + dinoBoxLgPos.x, menuOrigin[2].y + dinoBoxLgPos.y, Camera.main.transform.position.z + 350));
+				Vector3 pointInWorld = Camera.main.ScreenToWorldPoint(new Vector3(Screen.width, Screen.height, Camera.main.transform.position.z + 50));
+				dinoBoxLg.transform.localScale = new Vector3(pointInWorld.x / 15, 1, pointInWorld.y / 11);
 			}
 		}
 		else if(menuSelect == Menu.mainMenu)
@@ -325,8 +333,38 @@ public class MenuControl : MonoBehaviour
 				mainMenuBkgd.transform.localScale = new Vector3(pointInWorld.x / 5, 1, pointInWorld.y / 5);
 			}
 		}
+		else if(menuSelect == Menu.connecting || menuSelect == Menu.multiPMenu)
+		{
+			if(dinoBoxLg != null)
+			{
+				Destroy(dinoBoxLg);
+			}
+
+			//destroy the main menu background if it is there
+			if(mainMenuBkgd != null)
+			{
+				Destroy(mainMenuBkgd);
+			}
+			
+			//if the menu background isn't there then create it
+			if(menuBkgd == null)
+			{
+				Vector3 backgroundPos = Camera.main.ScreenToWorldPoint(new Vector3(menuBkgdPos.x, menuBkgdPos.y, 500));
+				menuBkgd = (GameObject)Instantiate(Resources.Load("GUI/MenuBackground"), backgroundPos, Quaternion.identity);
+				menuBkgd.transform.Rotate(new Vector3(90, 180, 0));
+			}
+			else
+			{
+				Vector3 pointInWorld = Camera.main.ScreenToWorldPoint(new Vector3(Screen.width, Screen.height, Camera.main.transform.position.z + 100));
+				menuBkgd.transform.localScale = new Vector3(pointInWorld.x / 5, 1, pointInWorld.y / 5);
+			}
+		}
 		
-		
+
+		/****************************************************************************************************************/
+		/****************************************************************************************************************/
+		/****************************************************************************************************************/
+
 		//if menuSelet is the main menu
 		if(menuSelect == Menu.mainMenu)
 		{
@@ -419,11 +457,12 @@ public class MenuControl : MonoBehaviour
 		//if menuSelet is the lobby menu
 		else if(menuSelect == Menu.lobbyMenu)
 		{	
+			//instantiate dino model
 			if(dinoSelected != null)
 			{
 				dinoSelected.transform.position = Camera.main.ScreenToWorldPoint(new Vector3(menuOrigin[2].x + startDinoPos.x, menuOrigin[2].y + startDinoPos.y, 200));
 				Vector3 pointInWorld = Camera.main.ScreenToWorldPoint(new Vector3(Screen.width, Screen.height, Camera.main.transform.position.z + 50));
-				dinoSelected.transform.localScale = new Vector3(pointInWorld.x / 20, pointInWorld.y / 10, pointInWorld.x / 20);
+				dinoSelected.transform.localScale = new Vector3(pointInWorld.x / 26, pointInWorld.y / 12, pointInWorld.x / 26);
 				dinoSelected.transform.RotateAround(new Vector3(0, 1, 0), Vector3.up, rotateSpeed * Time.deltaTime);
 			}
 			else if(dinoSelected == null)
@@ -432,7 +471,10 @@ public class MenuControl : MonoBehaviour
 				dinoSelected.transform.localScale = new Vector3(10, 10, 10);
 			}
 
+			//level name graphic
+			GUI.DrawTexture(new Rect(menuOrigin[2].x + lobbyMenuRect[4].x, menuOrigin[2].y + lobbyMenuRect[4].y, lobbyMenuRect[4].width, lobbyMenuRect[4].height), lvlNameGFX);
 
+			//level graphic
 			if(lvlSelectTxtr[levelIndex] != null)
 			{
 				GUI.DrawTexture(new Rect(menuOrigin[2].x + lvlGraphicPos.x, menuOrigin[2].y + lvlGraphicPos.y, lvlGraphicPos.width, lvlGraphicPos.height), lvlSelectTxtr[levelIndex]);
@@ -443,28 +485,37 @@ public class MenuControl : MonoBehaviour
 			}
 	
 			if (inLobby == true)
-			{				
-				if(singlePlayer != true)
+			{		
+				//display the names of the other players and the dinos that they have chosen
+				if(singlePlayer == false)
 				{
 					int i = 1;
 					
 					foreach(var player in networkHandler.playerInformation){
 						if(player.Key != Network.player.ToString()){
+							//Debug.Log("asdfasdfasdfasdf");
+							GUI.DrawTexture(new Rect(menuOrigin[2].x + lobbyMenuRect[i].x, menuOrigin[2].y + lobbyMenuRect[i].y, lobbyMenuRect[i].width, lobbyMenuRect[i].height), smallBoxGFX);
+							GUI.DrawTexture(new Rect(menuOrigin[2].x + lobbyMenuRect[i].x, menuOrigin[2].y + lobbyMenuRect[i].y, lobbyMenuRect[i].width, lobbyMenuRect[i].height), (Texture)Resources.Load("Banner" + player.Value.dinoName + "Small"));
 							GUI.Label(new Rect(menuOrigin[2].x + lobbyMenuRect[i].x, menuOrigin[2].y + lobbyMenuRect[i].y, lobbyMenuRect[i].width, lobbyMenuRect[i].height), player.Value.playerName + " - " + player.Value.dinoName);
 							i++;
 						}
 					}
 					
 					for(;i<NetworkGameHandler.MAX_PLAYERS; i++){
-						GUI.Box(new Rect(menuOrigin[2].x + lobbyMenuRect[i].x, menuOrigin[2].y + lobbyMenuRect[i].y, lobbyMenuRect[i].width, lobbyMenuRect[i].height), (Texture)Resources.Load("GUI/Materials/IconEmpty"));
+						GUI.DrawTexture(new Rect(menuOrigin[2].x + lobbyMenuRect[i].x, menuOrigin[2].y + lobbyMenuRect[i].y, lobbyMenuRect[i].width, lobbyMenuRect[i].height), smallBoxGFX);
 					}
+				}
+				//display the word "single player"
+				else
+				{
+					GUI.DrawTexture(new Rect(menuOrigin[2].x + lobbyMenuRect[5].x, menuOrigin[2].y + lobbyMenuRect[5].y, lobbyMenuRect[5].width, lobbyMenuRect[5].height), mainMenuBtnTxtr[0]);
+
 				}
 				
 				if(Network.isServer)
 				{
-					GUI.DrawTexture(new Rect(menuOrigin[2].x + lobbyMenuBtnRect[0].x, menuOrigin[2].y + lobbyMenuBtnRect[0].y, lobbyMenuBtnRect[0].width, lobbyMenuBtnRect[0].height), lobbyMenuBtnTxtr[0]);
-
 					//left button for level select
+					GUI.DrawTexture(new Rect(menuOrigin[2].x + lobbyMenuBtnRect[0].x, menuOrigin[2].y + lobbyMenuBtnRect[0].y, lobbyMenuBtnRect[0].width, lobbyMenuBtnRect[0].height), lobbyMenuBtnTxtr[0]);
 					if(GUI.Button(new Rect(menuOrigin[2].x + lobbyMenuBtnRect[0].x, menuOrigin[2].y + lobbyMenuBtnRect[0].y, lobbyMenuBtnRect[0].width, lobbyMenuBtnRect[0].height), ""))
 					{
 						LevelSelectionDecrement();
@@ -485,8 +536,8 @@ public class MenuControl : MonoBehaviour
 						networkHandler.UpdateMapInformation(gameMap);
 					}
 
+					//right arrow for the level select
 					GUI.DrawTexture(new Rect(menuOrigin[2].x + lobbyMenuBtnRect[1].x, menuOrigin[2].y + lobbyMenuBtnRect[1].y, lobbyMenuBtnRect[1].width, lobbyMenuBtnRect[1].height), lobbyMenuBtnTxtr[1]);
-					
 					if(GUI.Button(new Rect(menuOrigin[2].x + lobbyMenuBtnRect[1].x, menuOrigin[2].y + lobbyMenuBtnRect[1].y, lobbyMenuBtnRect[1].width, lobbyMenuBtnRect[1].height), ""))
 					{
 						LevelSelectionIncrement();
@@ -509,9 +560,8 @@ public class MenuControl : MonoBehaviour
 					
 				}
 
-				GUI.DrawTexture(new Rect(menuOrigin[2].x + lobbyMenuBtnRect[2].x, menuOrigin[2].y + lobbyMenuBtnRect[2].y, lobbyMenuBtnRect[2].width, lobbyMenuBtnRect[2].height), lobbyMenuBtnTxtr[0]);
-
 				//left arrow for dino select
+				GUI.DrawTexture(new Rect(menuOrigin[2].x + lobbyMenuBtnRect[2].x, menuOrigin[2].y + lobbyMenuBtnRect[2].y, lobbyMenuBtnRect[2].width, lobbyMenuBtnRect[2].height), lobbyMenuBtnTxtr[0]);
 				if(GUI.Button(new Rect(menuOrigin[2].x + lobbyMenuBtnRect[2].x, menuOrigin[2].y + lobbyMenuBtnRect[2].y, lobbyMenuBtnRect[2].width, lobbyMenuBtnRect[2].height), ""))
 				{
 					DinoSelectionDecrement();
@@ -524,9 +574,8 @@ public class MenuControl : MonoBehaviour
 					networkHandler.UpdatePlayerInformation(myInfo);
 				}
 
-				GUI.DrawTexture(new Rect(menuOrigin[2].x + lobbyMenuBtnRect[3].x, menuOrigin[2].y + lobbyMenuBtnRect[3].y, lobbyMenuBtnRect[3].width, lobbyMenuBtnRect[3].height), lobbyMenuBtnTxtr[1]);
-
 				//right arrow for dino select
+				GUI.DrawTexture(new Rect(menuOrigin[2].x + lobbyMenuBtnRect[3].x, menuOrigin[2].y + lobbyMenuBtnRect[3].y, lobbyMenuBtnRect[3].width, lobbyMenuBtnRect[3].height), lobbyMenuBtnTxtr[1]);
 				if(GUI.Button(new Rect(menuOrigin[2].x + lobbyMenuBtnRect[3].x, menuOrigin[2].y + lobbyMenuBtnRect[3].y, lobbyMenuBtnRect[3].width, lobbyMenuBtnRect[3].height), ""))
 				{
 					DinoSelectionIncrement();
@@ -556,8 +605,6 @@ public class MenuControl : MonoBehaviour
 					{
 						StartCoroutine(MoveRightOff(2, 1, Menu.multiPMenu));
 					}
-
-					//Destroy(lvlGraphic);
 					
 				}
 				
@@ -696,7 +743,10 @@ public class MenuControl : MonoBehaviour
 
 	}
 	
-	
+	/*******************************************************************************************************************/
+	/****************************************************************************************************************/
+	/****************************************************************************************************************/
+
 	void ResizeButtons(Rect[] _pos)
 	{
 		
@@ -740,9 +790,11 @@ public class MenuControl : MonoBehaviour
 		multiPMenuBtnRect[1] = ResizeRect(new Rect(68, 50, 25, 10));
 		
 		lobbyMenuRect[0] = ResizeRect(new Rect(70, 1, 30, 10));
-		lobbyMenuRect[1] = ResizeRect(new Rect(20, 1, 35, 15));
-		lobbyMenuRect[2] = ResizeRect(new Rect(35, 1, 35, 15));
-		lobbyMenuRect[3] = ResizeRect(new Rect(50, 1, 35, 15));
+		lobbyMenuRect[1] = ResizeRect(new Rect(52, 7, 13, 15));
+		lobbyMenuRect[2] = ResizeRect(new Rect(66, 7, 13, 15));
+		lobbyMenuRect[3] = ResizeRect(new Rect(80, 7, 13, 15));
+		lobbyMenuRect[4] = ResizeRect(new Rect(15, 10, 20, 10));
+		lobbyMenuRect[5] = ResizeRect(new Rect(55, 10, 30, 10));
 		
 		lobbyMenuBtnRect[0] = ResizeRect(new Rect(4, 46, 3, 8));
 		lobbyMenuBtnRect[1] = ResizeRect(new Rect(45, 46, 3, 8));
@@ -756,16 +808,15 @@ public class MenuControl : MonoBehaviour
 		connectingRect[2] = ResizeRect(new Rect(50, 50, 40, 40));
 		connectingRect[3] = ResizeRect(new Rect(0, 80, 25, 20));
 		
-		lvlGraphicPos = ResizeRect(new Rect(10, 25, 30, 45));
+		lvlGraphicPos = ResizeRect(new Rect(10, 25, 33, 45));
 		
 		mainMenuBkgdPos  = ResizeRect(new Rect(0, 0, 100, 100));
 		menuBkgdPos  = ResizeRect(new Rect(50, 50, 100, 100));
 		
-		startDinoPos = ResizeRect(new Rect(70, 40, 0, 0));
+		startDinoPos = ResizeRect(new Rect(72, 35, 0, 0));
 		dinoSize = ResizeRect(new Rect(50, 55, 0, 0));
 
-		dinoBoxLgPos = ResizeRect(new Rect(50, 55, 0, 0));
-		dinoBoxLgSize = ResizeRect(new Rect(50, 55, 0, 0));
+		dinoBoxLgPos = ResizeRect(new Rect(72, 52, 100, 100));
 	}
 	
 	string GetConnectionState() 
