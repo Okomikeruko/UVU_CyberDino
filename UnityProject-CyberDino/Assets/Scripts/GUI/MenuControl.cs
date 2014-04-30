@@ -146,11 +146,13 @@ public class MenuControl : MonoBehaviour
 		mPlayerMenuBtnTxtr[0] = (Texture)Resources.Load("GUI/Materials/HostButton");
 		mPlayerMenuBtnTxtr[1] = (Texture)Resources.Load("GUI/Materials/JoinButton");
 		
-		lobbyMenuBtnTxtr = new Texture[4];
+		lobbyMenuBtnTxtr = new Texture[6];
 		lobbyMenuBtnTxtr[0] = (Texture)Resources.Load("GUI/Materials/LeftArrow");
 		lobbyMenuBtnTxtr[1] = (Texture)Resources.Load("GUI/Materials/RightArrow");
-		lobbyMenuBtnTxtr[2] = (Texture)Resources.Load("GUI/Materials/PlayButton");
+		lobbyMenuBtnTxtr[2] = (Texture)Resources.Load("GUI/Materials/PlayButtonNotReady");
 		lobbyMenuBtnTxtr[3] = (Texture)Resources.Load("GUI/Materials/PlayButtonReady");
+		lobbyMenuBtnTxtr[4] = (Texture)Resources.Load("GUI/Materials/ReadyButtonNotReady");
+		lobbyMenuBtnTxtr[5] = (Texture)Resources.Load("GUI/Materials/ReadyButtonReady");
 		
 		backBtnTxtr = (Texture)Resources.Load("GUI/Materials/BackButton");
 		
@@ -746,7 +748,7 @@ public class MenuControl : MonoBehaviour
 				if (Network.isClient)
 				{
 					if (readyMe == false) {
-						GUI.DrawTexture(new Rect(menuOrigin[2].x + lobbyMenuBtnRect[5].x, menuOrigin[2].y + lobbyMenuBtnRect[5].y, lobbyMenuBtnRect[5].width, lobbyMenuBtnRect[5].height), lobbyMenuBtnTxtr[2]);
+						GUI.DrawTexture(new Rect(menuOrigin[2].x + lobbyMenuBtnRect[5].x, menuOrigin[2].y + lobbyMenuBtnRect[5].y, lobbyMenuBtnRect[5].width, lobbyMenuBtnRect[5].height), lobbyMenuBtnTxtr[4]);
 						
 						if(GUI.Button(new Rect(menuOrigin[2].x + lobbyMenuBtnRect[5].x, menuOrigin[2].y + lobbyMenuBtnRect[5].y, lobbyMenuBtnRect[5].width, lobbyMenuBtnRect[5].height), ""))
 						{
@@ -757,7 +759,7 @@ public class MenuControl : MonoBehaviour
 						}
 					}
 					if (readyMe == true) {
-						GUI.DrawTexture(new Rect(menuOrigin[2].x + lobbyMenuBtnRect[5].x, menuOrigin[2].y + lobbyMenuBtnRect[5].y, lobbyMenuBtnRect[5].width, lobbyMenuBtnRect[5].height), lobbyMenuBtnTxtr[3]);
+						GUI.DrawTexture(new Rect(menuOrigin[2].x + lobbyMenuBtnRect[5].x, menuOrigin[2].y + lobbyMenuBtnRect[5].y, lobbyMenuBtnRect[5].width, lobbyMenuBtnRect[5].height), lobbyMenuBtnTxtr[5]);
 						
 						if(GUI.Button(new Rect(menuOrigin[2].x + lobbyMenuBtnRect[5].x, menuOrigin[2].y + lobbyMenuBtnRect[5].y, lobbyMenuBtnRect[5].width, lobbyMenuBtnRect[5].height), ""))
 						{
