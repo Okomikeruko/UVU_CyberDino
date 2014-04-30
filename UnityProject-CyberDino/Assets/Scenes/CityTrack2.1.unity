@@ -13314,6 +13314,10 @@ Prefab:
       propertyPath: m_ViewID.m_Type
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 100564, guid: 048b74e9f00ba44a3a229d01702f4464, type: 2}
+      propertyPath: m_TagString
+      value: Track
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 048b74e9f00ba44a3a229d01702f4464, type: 2}
   m_RootGameObject: {fileID: 1167249828}
@@ -17526,7 +17530,7 @@ GameObject:
   - 64: {fileID: 1126937880}
   m_Layer: 0
   m_Name: Track
-  m_TagString: Untagged
+  m_TagString: Track
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -24036,7 +24040,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1414736579
 Transform:
   m_ObjectHideFlags: 0
