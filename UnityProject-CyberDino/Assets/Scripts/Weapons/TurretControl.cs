@@ -47,7 +47,13 @@ public class TurretControl : MonoBehaviour {
 
 	List<GameObject> GetTargetsInRange()
 	{
-		GameObject[] targets = GameObject.FindGameObjectsWithTag ("Dino");
+		GameObject[] targetsPlayers = GameObject.FindGameObjectsWithTag ("Dino");
+		GameObject[] targetsAi = GameObject.FindGameObjectsWithTag ("Ai");
+
+		GameObject[] targets = new GameObject[targetsPlayers.Length + targetsAi.Length];
+		System.Array.Copy (targetsPlayers, targets, targetsPlayers.Length);
+		System.Array.Copy (targetsAi, 0, targets, targetsPlayers.Length, targetsAi.Length);
+
 		List<GameObject> targetsInRange = new List<GameObject>();
 		for (int i = 0; i < targets.Length; i++) {
 			if (Vector3.Distance(targets[i].transform.position, _rotationControl.transform.position) <= _targetingRange)
