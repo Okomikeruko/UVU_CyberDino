@@ -108,7 +108,7 @@ public class GlowLines : MonoBehaviour
 
 			yield return null;
 		}
-		yield return null;
+
 	}
 			
 	//a funtion to randomize the next direction

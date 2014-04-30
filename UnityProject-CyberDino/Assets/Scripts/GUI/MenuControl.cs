@@ -121,7 +121,18 @@ public class MenuControl : MonoBehaviour
 	//private Vector3 dinoBoxLgV3Pos;
 
 	private Texture smallBoxGFX;
-	
+
+	private Texture largeDinoBanner;
+
+	//have an array of gui textures for the glow lights
+	private GameObject[] glowDashes;
+	private GameObject currentDash;
+	private int dashIndex;
+	private bool isDashGlowing = false;
+
+
+	private Rect connectPos;
+	private Texture connectTxtr;
 	
 	// Use this for initialization
 	void Start () 
@@ -163,6 +174,10 @@ public class MenuControl : MonoBehaviour
 		dinoBoxLgTxtr = (Texture)Resources.Load("GUI/Materials/DinoSelectBackground");
 
 		smallBoxGFX = (Texture)Resources.Load("GUI/Materials/OtherPlayerSelection");
+
+		largeDinoBanner = (Texture)Resources.Load("GUI/Materials/BannerDilophLarge");
+
+		connectTxtr = (Texture)Resources.Load("GUI/Materials/LookingGraphic");
 		
 		//graphics ----------------------------------------
 		mainMenuBtnRect = new Rect[3];
@@ -171,11 +186,11 @@ public class MenuControl : MonoBehaviour
 		
 		multiPMenuBtnRect = new Rect[2];
 		
-		lobbyMenuRect = new Rect[9];
+		lobbyMenuRect = new Rect[10];
 		
 		lobbyMenuBtnRect = new Rect[6];
 		
-		connectingRect = new Rect[4];
+		connectingRect = new Rect[9];
 		
 		//the names of the players in the order that they past the finished line
 		placesNames = new string[6];
@@ -186,15 +201,16 @@ public class MenuControl : MonoBehaviour
 		networkHandler = networkHandlerObject.GetComponent("NetworkGameHandler") as NetworkGameHandler;
 		
 		//inicialize the array of the menu origins
-		menuOrigin = new Rect[10];
+		menuOrigin = new Rect[6];
 		
 		dinoPos = Camera.main.ScreenToWorldPoint(new Vector3(menuOrigin[2].x + startDinoPos.x, menuOrigin[2].y + startDinoPos.y, 130));
 
+		glowDashes = new GameObject[12];
+		
 	}
 	
 	void Update()
 	{
-		//SetButtonsSize();
 		
 		if(menuSelect == Menu.lobbyMenu)
 		{
@@ -265,11 +281,16 @@ public class MenuControl : MonoBehaviour
 				networkHandler.UpdateMapInformation(gameMap);
 			}
 		}
+		else if(menuSelect == Menu.connecting && isDashGlowing == true)
+		{
+			//ChangeDashOpacity();
+		}
 		
 	}
 	
 	void OnGUI()
 	{
+
 		SetButtonsSize();
 
 		//set this skin as the active one
@@ -308,6 +329,14 @@ public class MenuControl : MonoBehaviour
 				Vector3 pointInWorld = Camera.main.ScreenToWorldPoint(new Vector3(Screen.width, Screen.height, Camera.main.transform.position.z + 50));
 				dinoBoxLg.transform.localScale = new Vector3(pointInWorld.x / 15, 1, pointInWorld.y / 11);
 			}
+
+			if(glowDashes[0] != null)
+			{
+				for(int i = 0; i < glowDashes.Length; i++)
+				{
+					Destroy(glowDashes[i]);
+				}
+			}
 		}
 		else if(menuSelect == Menu.mainMenu)
 		{
@@ -332,8 +361,50 @@ public class MenuControl : MonoBehaviour
 				Vector3 pointInWorld = Camera.main.ScreenToWorldPoint(new Vector3(Screen.width, Screen.height, Camera.main.transform.position.z + 100));
 				mainMenuBkgd.transform.localScale = new Vector3(pointInWorld.x / 5, 1, pointInWorld.y / 5);
 			}
+
+			if(glowDashes[0] != null)
+			{
+				for(int i = 0; i < glowDashes.Length; i++)
+				{
+					Destroy(glowDashes[i]);
+				}
+			}
 		}
-		else if(menuSelect == Menu.connecting || menuSelect == Menu.multiPMenu)
+		else if(menuSelect == Menu.multiPMenu)
+		{
+			if(dinoBoxLg != null)
+			{
+				Destroy(dinoBoxLg);
+			}
+			
+			//destroy the main menu background if it is there
+			if(mainMenuBkgd != null)
+			{
+				Destroy(mainMenuBkgd);
+			}
+			
+			//if the menu background isn't there then create it
+			if(menuBkgd == null)
+			{
+				Vector3 backgroundPos = Camera.main.ScreenToWorldPoint(new Vector3(menuBkgdPos.x, menuBkgdPos.y, 500));
+				menuBkgd = (GameObject)Instantiate(Resources.Load("GUI/MenuBackground"), backgroundPos, Quaternion.identity);
+				menuBkgd.transform.Rotate(new Vector3(90, 180, 0));
+			}
+			else
+			{
+				Vector3 pointInWorld = Camera.main.ScreenToWorldPoint(new Vector3(Screen.width, Screen.height, Camera.main.transform.position.z + 100));
+				menuBkgd.transform.localScale = new Vector3(pointInWorld.x / 5, 1, pointInWorld.y / 5);
+			}
+			
+			if(glowDashes[0] != null)
+			{
+				for(int i = 0; i < glowDashes.Length; i++)
+				{
+					Destroy(glowDashes[i]);
+				}
+			}
+		}
+		else if(menuSelect == Menu.connecting)
 		{
 			if(dinoBoxLg != null)
 			{
@@ -357,6 +428,45 @@ public class MenuControl : MonoBehaviour
 			{
 				Vector3 pointInWorld = Camera.main.ScreenToWorldPoint(new Vector3(Screen.width, Screen.height, Camera.main.transform.position.z + 100));
 				menuBkgd.transform.localScale = new Vector3(pointInWorld.x / 5, 1, pointInWorld.y / 5);
+			}
+
+			if(glowDashes[0] == null)
+			{
+				for(int i = 0; i < 3; i++)
+				{
+					glowDashes[i] = CreateGUITxtr(glowDashes[i], "glowDashes" + i, (Texture)Resources.Load("GUI/Materials/ForwardSlash"), new Rect(0, 0, 0, 0));
+
+					Color tempColor = glowDashes[i].guiTexture.color;
+					tempColor.a = 0;
+					glowDashes[i].guiTexture.color = tempColor;
+				}
+				
+				for(int i = 3; i < 6; i++)
+				{
+					glowDashes[i] = CreateGUITxtr(glowDashes[i], "glowDashes" + i, (Texture)Resources.Load("GUI/Materials/BackwardSlash"), new Rect(0, 0, 0, 0));
+
+					Color tempColor = glowDashes[i].guiTexture.color;
+					tempColor.a = 0;
+					glowDashes[i].guiTexture.color = tempColor;
+				}
+				
+				for(int i = 6; i < 9; i++)
+				{
+					glowDashes[i] = CreateGUITxtr(glowDashes[i], "glowDashes" + i, (Texture)Resources.Load("GUI/Materials/ForwardSlash"), new Rect(0, 0, 0, 0));
+
+					Color tempColor = glowDashes[i].guiTexture.color;
+					tempColor.a = 0;
+					glowDashes[i].guiTexture.color = tempColor;
+				}
+				
+				for(int i = 9; i < 12; i++)
+				{
+					glowDashes[i] = CreateGUITxtr(glowDashes[i], "glowDashes" + i, (Texture)Resources.Load("GUI/Materials/BackwardSlash"), new Rect(0, 0, 0, 0));
+
+					Color tempColor = glowDashes[i].guiTexture.color;
+					tempColor.a = 0;
+					glowDashes[i].guiTexture.color = tempColor;
+				}
 			}
 		}
 		
@@ -562,6 +672,9 @@ public class MenuControl : MonoBehaviour
 					
 				}
 
+				//the banner for the dino selection
+				GUI.DrawTexture(new Rect(menuOrigin[2].x + lobbyMenuRect[9].x, menuOrigin[2].y + lobbyMenuRect[9].y, lobbyMenuRect[9].width, lobbyMenuRect[9].height), largeDinoBanner);
+
 				//left arrow for dino select
 				GUI.DrawTexture(new Rect(menuOrigin[2].x + lobbyMenuBtnRect[2].x, menuOrigin[2].y + lobbyMenuBtnRect[2].y, lobbyMenuBtnRect[2].width, lobbyMenuBtnRect[2].height), lobbyMenuBtnTxtr[0]);
 				if(GUI.Button(new Rect(menuOrigin[2].x + lobbyMenuBtnRect[2].x, menuOrigin[2].y + lobbyMenuBtnRect[2].y, lobbyMenuBtnRect[2].width, lobbyMenuBtnRect[2].height), ""))
@@ -660,10 +773,24 @@ public class MenuControl : MonoBehaviour
 		//if menuSelet is the connecting scene
 		else if(menuSelect == Menu.connecting)
 		{
+			if(isDashGlowing == false)
+			{
+				StartCoroutine(StartGlowDashes());
+				Debug.Log("start the coroutine");
+			}
+
 			GUI.Box(new Rect(menuOrigin[3].x + connectingRect[0].x, menuOrigin[3].y + connectingRect[0].y, connectingRect[0].width, connectingRect[0].height), (Texture)Resources.Load("GUI/Materials/Icon"));
 			
 			GUI.Label(new Rect(menuOrigin[3].x + connectingRect[1].x, menuOrigin[3].y + connectingRect[1].y, connectingRect[1].width, connectingRect[1].height), GetConnectionState());
-			
+
+			//the connecting graphic
+			GUI.DrawTexture(new Rect(menuOrigin[3].x + connectPos.x, menuOrigin[3].y + connectPos.y, connectPos.width, connectPos.height), connectTxtr);
+
+			GUI.DrawTexture(new Rect(menuOrigin[3].x + connectingRect[4].x, menuOrigin[3].y + connectingRect[4].y, connectingRect[4].width, connectingRect[4].height), (Texture)Resources.Load("GUI/Materials/BackwardSlash"));
+			GUI.DrawTexture(new Rect(menuOrigin[3].x + connectingRect[5].x, menuOrigin[3].y + connectingRect[5].y, connectingRect[5].width, connectingRect[5].height), (Texture)Resources.Load("GUI/Materials/ForwardSlash"));
+			GUI.DrawTexture(new Rect(menuOrigin[3].x + connectingRect[6].x, menuOrigin[3].y + connectingRect[6].y, connectingRect[6].width, connectingRect[6].height), (Texture)Resources.Load("GUI/Materials/ForwardSlash"));
+			GUI.DrawTexture(new Rect(menuOrigin[3].x + connectingRect[7].x, menuOrigin[3].y + connectingRect[7].y, connectingRect[7].width, connectingRect[7].height), (Texture)Resources.Load("GUI/Materials/BackwardSlash"));
+
 			if (GUI.Button (new Rect(menuOrigin[3].x + connectingRect[3].x, menuOrigin[3].y + connectingRect[3].y, connectingRect[3].width, connectingRect[3].height), backBtnTxtr)) 
 			{
 				networkHandler.LeaveGame();
@@ -800,6 +927,7 @@ public class MenuControl : MonoBehaviour
 		lobbyMenuRect[6] = ResizeRect(new Rect(52, 14, 13, 7));
 		lobbyMenuRect[7] = ResizeRect(new Rect(66, 14, 13, 7));
 		lobbyMenuRect[8] = ResizeRect(new Rect(80, 14, 13, 7));
+		lobbyMenuRect[9] = ResizeRect(new Rect(55, 55, 34, 15));
 		
 		lobbyMenuBtnRect[0] = ResizeRect(new Rect(4, 46, 3, 8));
 		lobbyMenuBtnRect[1] = ResizeRect(new Rect(45, 46, 3, 8));
@@ -809,19 +937,41 @@ public class MenuControl : MonoBehaviour
 		lobbyMenuBtnRect[5] = ResizeRect(new Rect(55, 80, 30, 10));
 		
 		connectingRect[0] = ResizeRect(new Rect(30, 20, 40, 40));
-		connectingRect[1] = ResizeRect(new Rect(40, 40, 25, 20));
-		connectingRect[2] = ResizeRect(new Rect(50, 50, 40, 40));
-		connectingRect[3] = ResizeRect(new Rect(0, 80, 25, 20));
+		connectingRect[1] = ResizeRect(new Rect(55, 15, 25, 20));
+		connectingRect[2] = ResizeRect(new Rect(70, 30, 40, 40));
+		connectingRect[3] = ResizeRect(new Rect(5, 75, 25, 20));
+		connectingRect[4] = ResizeRect(new Rect(45, 45, 5, 10));
+		connectingRect[5] = ResizeRect(new Rect(50, 45, 5, 10));
+		connectingRect[6] = ResizeRect(new Rect(45, 35, 5, 10));
+		connectingRect[7] = ResizeRect(new Rect(50, 35, 5, 10));
 		
 		lvlGraphicPos = ResizeRect(new Rect(10, 25, 33, 45));
 		
 		mainMenuBkgdPos  = ResizeRect(new Rect(0, 0, 100, 100));
 		menuBkgdPos  = ResizeRect(new Rect(50, 50, 100, 100));
 		
-		startDinoPos = ResizeRect(new Rect(72, 35, 0, 0));
+		startDinoPos = ResizeRect(new Rect(72, 40, 0, 0));
 		dinoSize = ResizeRect(new Rect(50, 55, 0, 0));
 
 		dinoBoxLgPos = ResizeRect(new Rect(72, 52, 100, 100));
+
+		if(glowDashes[0] != null )
+		{
+			glowDashes[0].guiTexture.pixelInset = ResizeRect(new Rect(35, 55, 5, 10));
+			glowDashes[1].guiTexture.pixelInset = ResizeRect(new Rect(40, 65, 5, 10));
+			glowDashes[2].guiTexture.pixelInset = ResizeRect(new Rect(45, 75, 5, 10));
+			glowDashes[3].guiTexture.pixelInset = ResizeRect(new Rect(50, 75, 5, 10));
+			glowDashes[4].guiTexture.pixelInset = ResizeRect(new Rect(55, 65, 5, 10));
+			glowDashes[5].guiTexture.pixelInset = ResizeRect(new Rect(60, 55, 5, 10));
+			glowDashes[6].guiTexture.pixelInset = ResizeRect(new Rect(60, 45, 5, 10));
+			glowDashes[7].guiTexture.pixelInset = ResizeRect(new Rect(55, 35, 5, 10));
+			glowDashes[8].guiTexture.pixelInset = ResizeRect(new Rect(50, 25, 5, 10));
+			glowDashes[9].guiTexture.pixelInset = ResizeRect(new Rect(45, 25, 5, 10));
+			glowDashes[10].guiTexture.pixelInset = ResizeRect(new Rect(40, 35, 5, 10));
+			glowDashes[11].guiTexture.pixelInset = ResizeRect(new Rect(35, 45, 5, 10));
+		}
+
+		connectPos = ResizeRect(new Rect(31.5f, 7, 39, 75));
 	}
 	
 	string GetConnectionState() 
@@ -947,14 +1097,17 @@ public class MenuControl : MonoBehaviour
 		{
 			Destroy(dinoSelected);
 		}
-		
+
+		string bannerName = "GUI/Materials/Banner" + dinos[dinoIndex] + "Large";
+		largeDinoBanner = (Texture)Resources.Load(bannerName);
+
 		dinoSelected = (GameObject)Instantiate(dinoModels[dinoIndex], new Vector3(Screen.width, Screen.height, 0), Quaternion.identity);
 		dinoSelected.transform.Rotate(new Vector3(0, 180, 0));
 	}
 	
 	void DinoSelectionIncrement()
 	{
-		Debug.Log(dinoIndex);
+
 		if(dinoIndex >= dinoModels.Length - 1)
 		{
 			dinoIndex = 0;
@@ -968,7 +1121,10 @@ public class MenuControl : MonoBehaviour
 		{
 			Destroy(dinoSelected);
 		}
-		
+
+		string bannerName = "GUI/Materials/Banner" + dinos[dinoIndex] + "Large";
+		largeDinoBanner = (Texture)Resources.Load(bannerName);
+
 		dinoSelected = (GameObject)Instantiate(dinoModels[dinoIndex], new Vector3(Screen.width, Screen.height, 0), Quaternion.identity);
 		dinoSelected.transform.Rotate(new Vector3(0, 180, 0));
 	}
@@ -1024,6 +1180,98 @@ public class MenuControl : MonoBehaviour
 			else {
 				readyAll = true;
 			}
+		}
+	}
+
+	//in a coroutine
+	IEnumerator StartGlowDashes()
+	{
+		//declare an int for the index
+		int index = 0;
+
+		isDashGlowing = true;
+
+		//while the game is looking for a game
+		while(menuSelect == Menu.connecting)
+		{
+			//start a coroutine to make the next glow thing glow
+			StartCoroutine(ChangeDashOpacity(glowDashes[index].guiTexture));
+
+			//yield for a half second
+			yield return new WaitForSeconds(0.3f);
+
+			//increment the index
+			if(index >= glowDashes.Length - 1)
+			{
+				index = 0;
+			}
+			else
+			{
+				index++;
+			}
+			//if it's not the connecting menu stop the coroutine
+
+			if(menuSelect != Menu.connecting)
+			{
+				isDashGlowing = false;
+			}
+		}
+	}
+
+	//in another coroutine
+	IEnumerator ChangeDashOpacity(GUITexture _texture)
+	{
+		//a bool to know when it has reached full opacity
+		bool fullOpa = false;
+
+		Color tempColor = _texture.guiTexture.color;
+
+		float transNum = 0;
+
+		//while
+		while(menuSelect == Menu.connecting)
+		{
+			//Debug.Log(tempColor.a);
+			if(fullOpa == false)
+			{
+				if(tempColor.a >= 1)
+				{
+					fullOpa = true;
+
+					transNum = 0;
+				}
+				else
+				{
+					//use mathf.lerp to set the transparency of the temp Color
+					tempColor.a = Mathf.Lerp(0, 1, transNum);
+					
+					//set the guiTexture's color to the temp Color
+					_texture.guiTexture.color = tempColor;
+					
+					transNum +=  .8f * Time.deltaTime ;
+				}
+			}
+			else
+			{
+
+				if(tempColor.a <= 0)
+				{
+					yield break;
+				}
+				else
+				{
+					//use mathf.lerp to set the transparency of the temp Color
+					tempColor.a = Mathf.Lerp(1, 0, transNum);
+
+					//set the guiTexture's color to the temp Color
+					_texture.guiTexture.color = tempColor;
+					
+
+					transNum += .5f * Time.deltaTime  ;
+				}
+			}
+
+			yield return null;
 		}
 	}
 }
