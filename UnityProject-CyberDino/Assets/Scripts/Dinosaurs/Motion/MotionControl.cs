@@ -122,7 +122,7 @@ public class MotionControl : MonoBehaviour {
 
 			
 			// The Jump Function
-			if ((Input.GetButton("Jump") || isJumping) && netanim.anim.GetBool("Jump") == false ) // Test if Jump is pressed while on the ground
+			if (/*Input.GetButton("Jump") ||*/ isJumping && netanim.anim.GetBool("Jump") == false ) // Test if Jump is pressed while on the ground
 			{
 				velocityCurrent = rigidbody.velocity;
 				rigidbody.velocity = new Vector3(velocityCurrent.x, velocityJump, velocityCurrent.z);

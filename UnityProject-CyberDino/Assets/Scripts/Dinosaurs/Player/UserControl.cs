@@ -123,10 +123,10 @@ public class UserControl : MonoBehaviour {
 		{
 			move.SetTurn( Input.GetAxis("Horizontal") );
 		}
-//		if(Input.GetButton("Jump"))
-//		{
-//			move.jumper = true;
-//		}
+		if(Input.GetButton("Jump"))
+		{
+			move.Jump ();
+		}
 //		else
 //		{
 //			move.jumper = false;

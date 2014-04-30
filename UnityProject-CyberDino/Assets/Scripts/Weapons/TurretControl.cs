@@ -35,19 +35,19 @@ public class TurretControl : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		GameObject bestTarget = FindBestTarget(GetTargetsInRange ());
-		if (bestTarget != null)
-		{
-			if (CalculateTrajectory(bestTarget.transform.position))
-			{
-				Fire();
+		if (networkView.isMine) {
+			GameObject bestTarget = FindBestTarget (GetTargetsInRange ());
+			if (bestTarget != null) {
+				if (CalculateTrajectory (bestTarget.transform.position)) {
+						Fire ();
+				}
 			}
 		}
 	}
 
 	List<GameObject> GetTargetsInRange()
 	{
-		GameObject[] targets = GameObject.FindGameObjectsWithTag ("Player");
+		GameObject[] targets = GameObject.FindGameObjectsWithTag ("Dino");
 		List<GameObject> targetsInRange = new List<GameObject>();
 		for (int i = 0; i < targets.Length; i++) {
 			if (Vector3.Distance(targets[i].transform.position, _rotationControl.transform.position) <= _targetingRange)
@@ -95,7 +95,7 @@ public class TurretControl : MonoBehaviour {
 		float shootTime = Time.time;
 		if (shootTime >= _lastShotTime + _reloadTime)
 		{
-			GameObject bullet = (GameObject)Instantiate(_bullet, _bulletSpawnLocation.transform.position, _bulletSpawnLocation.transform.rotation);
+			GameObject bullet = (GameObject)Network.Instantiate(_bullet, _bulletSpawnLocation.transform.position, _bulletSpawnLocation.transform.rotation, 1);
 			bullet.rigidbody.AddForce(_bulletSpawnLocation.transform.forward * _bulletImpulseMax, ForceMode.Impulse);
 			_lastShotTime = shootTime;
 		}
