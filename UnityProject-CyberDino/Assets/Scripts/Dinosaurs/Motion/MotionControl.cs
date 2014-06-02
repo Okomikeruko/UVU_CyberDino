@@ -11,6 +11,7 @@ public class MotionControl : MonoBehaviour {
 	private CharacterController controller;			// This object's CharacterController reference
 
 	private float horizontalTurning; 				// A range between -1 and 1
+	private float verticalVelocity;					// A range between -1 and 1
 	private float speed = 0.0F;						// The speed at which this object is currently traveling
 	private float fallingSpeed = 0.0F;				// The speed at which this object is currently falling
 	
@@ -105,7 +106,8 @@ public class MotionControl : MonoBehaviour {
 
 			// Update velocity
 			velocity -= (drag + slope) * Mathf.Sign (speed) * Time.deltaTime; // Reduce velocity by drag and slope
-			
+			velocity *= verticalVelocity;
+
 			// Update moveDirection
 			driftRad = (Mathf.PI/180) * drift;							// Convert drift degrees in to drift radians
 			moveDirection.x = velocity * Mathf.Sin (driftRad); 			// Apply velocity by drift ratio to local x
@@ -204,6 +206,16 @@ public class MotionControl : MonoBehaviour {
 	public float GetTurn()
 	{
 		return horizontalTurning;
+	}
+
+	public void SetRun(float run)
+	{
+		verticalVelocity = (Mathf.Abs (run) > 1) ? Mathf.Sign (run) : run; // Set v to a value between -1 and 1
+	}
+
+	public float GetRun()
+	{
+		return verticalVelocity;
 	}
 
 	public float GetVelocity()
