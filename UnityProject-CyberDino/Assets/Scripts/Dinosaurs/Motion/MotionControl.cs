@@ -293,4 +293,16 @@ public class MotionControl : MonoBehaviour {
 		//GUI.Label(new Rect(2, 20, 100, 20), "Speed: " + speed.ToString());	
 		//GUI.Label(new Rect(2, 60, 100, 20), "Slope: " + slope.ToString());			
 	}
+
+	public void TopSpeedMod(float percent, float duration)
+	{
+		StartCoroutine(ChangeMySpeed(percent, duration));
+	}
+
+	IEnumerator ChangeMySpeed(float percent, float duration)
+	{
+		topSpeed *= percent;
+		yield return new WaitForSeconds(duration);
+		topSpeed = oldTopSpeed;
+	}
 }
