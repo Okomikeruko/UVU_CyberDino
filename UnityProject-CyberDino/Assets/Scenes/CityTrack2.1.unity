@@ -212,7 +212,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &10966856
 Transform:
   m_ObjectHideFlags: 0
@@ -1908,6 +1908,7 @@ GameObject:
   - 135: {fileID: 160262403}
   - 23: {fileID: 160262402}
   - 114: {fileID: 160262401}
+  - 114: {fileID: 160262405}
   m_Layer: 10
   m_Name: RespawnPoint_010
   m_TagString: RespawnPoint
@@ -1985,6 +1986,23 @@ MeshFilter:
   m_PrefabInternal: {fileID: 837253360}
   m_GameObject: {fileID: 160262399}
   m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &160262405
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 160262399}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b988f855d16a0834185acc60151ed8b5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  NextNodes:
+  - {fileID: 1448432940}
+  previousNodes:
+  - {fileID: 975748361}
+  isShortCut: 0
+  nodeNum: 0
 --- !u!1 &161717695
 GameObject:
   m_ObjectHideFlags: 0
@@ -2007,7 +2025,7 @@ Transform:
   m_PrefabParentObject: {fileID: 400182, guid: 048b74e9f00ba44a3a229d01702f4464, type: 2}
   m_PrefabInternal: {fileID: 837253360}
   m_GameObject: {fileID: 161717695}
-  m_LocalRotation: {x: .0521899685, y: -.718304634, z: -.0420379825, w: .692493618}
+  m_LocalRotation: {x: .0521899723, y: -.718304694, z: -.0420379862, w: .692493677}
   m_LocalPosition: {x: -1609.48059, y: -526.12561, z: 945.030884}
   m_LocalScale: {x: 165.443695, y: .538693011, z: 104.884987}
   m_Children: []
@@ -2504,6 +2522,7 @@ GameObject:
   - 135: {fileID: 242833522}
   - 23: {fileID: 242833521}
   - 114: {fileID: 242833520}
+  - 114: {fileID: 242833524}
   m_Layer: 10
   m_Name: RespawnPoint_006
   m_TagString: RespawnPoint
@@ -2581,6 +2600,23 @@ MeshFilter:
   m_PrefabInternal: {fileID: 837253360}
   m_GameObject: {fileID: 242833518}
   m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &242833524
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 242833518}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b988f855d16a0834185acc60151ed8b5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  NextNodes:
+  - {fileID: 1360028092}
+  previousNodes:
+  - {fileID: 388786097}
+  isShortCut: 0
+  nodeNum: 0
 --- !u!1 &246876148
 GameObject:
   m_ObjectHideFlags: 0
@@ -2888,6 +2924,7 @@ GameObject:
   - 135: {fileID: 260878199}
   - 23: {fileID: 260878198}
   - 114: {fileID: 260878197}
+  - 114: {fileID: 260878201}
   m_Layer: 10
   m_Name: RespawnPoint_021
   m_TagString: RespawnPoint
@@ -2965,6 +3002,23 @@ MeshFilter:
   m_PrefabInternal: {fileID: 837253360}
   m_GameObject: {fileID: 260878195}
   m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &260878201
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 260878195}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b988f855d16a0834185acc60151ed8b5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  NextNodes:
+  - {fileID: 1002991051}
+  previousNodes:
+  - {fileID: 1952208804}
+  isShortCut: 0
+  nodeNum: 0
 --- !u!1 &261302628
 GameObject:
   m_ObjectHideFlags: 0
@@ -4437,6 +4491,7 @@ GameObject:
   - 135: {fileID: 388786101}
   - 23: {fileID: 388786100}
   - 114: {fileID: 388786099}
+  - 114: {fileID: 388786103}
   m_Layer: 10
   m_Name: RespawnPoint_005
   m_TagString: RespawnPoint
@@ -4514,6 +4569,23 @@ MeshFilter:
   m_PrefabInternal: {fileID: 837253360}
   m_GameObject: {fileID: 388786097}
   m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &388786103
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 388786097}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b988f855d16a0834185acc60151ed8b5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  NextNodes:
+  - {fileID: 242833518}
+  previousNodes:
+  - {fileID: 428246192}
+  isShortCut: 0
+  nodeNum: 0
 --- !u!1 &393236127
 GameObject:
   m_ObjectHideFlags: 0
@@ -5799,6 +5871,7 @@ GameObject:
   - 135: {fileID: 428246196}
   - 23: {fileID: 428246195}
   - 114: {fileID: 428246194}
+  - 114: {fileID: 428246198}
   m_Layer: 10
   m_Name: RespawnPoint_004
   m_TagString: RespawnPoint
@@ -5876,6 +5949,23 @@ MeshFilter:
   m_PrefabInternal: {fileID: 837253360}
   m_GameObject: {fileID: 428246192}
   m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &428246198
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 428246192}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b988f855d16a0834185acc60151ed8b5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  NextNodes:
+  - {fileID: 388786097}
+  previousNodes:
+  - {fileID: 1873343912}
+  isShortCut: 0
+  nodeNum: 4
 --- !u!1 &431811331
 GameObject:
   m_ObjectHideFlags: 0
@@ -6426,6 +6516,7 @@ GameObject:
   - 135: {fileID: 507846341}
   - 23: {fileID: 507846340}
   - 114: {fileID: 507846339}
+  - 114: {fileID: 507846343}
   m_Layer: 10
   m_Name: RespawnPoint_001
   m_TagString: RespawnPoint
@@ -6503,6 +6594,23 @@ MeshFilter:
   m_PrefabInternal: {fileID: 837253360}
   m_GameObject: {fileID: 507846337}
   m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &507846343
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 507846337}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b988f855d16a0834185acc60151ed8b5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  NextNodes:
+  - {fileID: 1964130806}
+  previousNodes:
+  - {fileID: 1949912013}
+  isShortCut: 0
+  nodeNum: 1
 --- !u!1 &508773674
 GameObject:
   m_ObjectHideFlags: 0
@@ -8610,6 +8718,8 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 610530595}
+  - 114: {fileID: 610530596}
+  - 54: {fileID: 610530597}
   m_Layer: 10
   m_Name: CityTrack2_RespawnCheckpoints
   m_TagString: Untagged
@@ -8657,6 +8767,33 @@ Transform:
   - {fileID: 1452860578}
   - {fileID: 1389741639}
   m_Father: {fileID: 1167249829}
+--- !u!114 &610530596
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 610530594}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bd7b2877081e5574ca71719447e1faa7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  startNode: {fileID: 507846337}
+--- !u!54 &610530597
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 610530594}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: .0500000007
+  m_UseGravity: 0
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!1 &615223641
 GameObject:
   m_ObjectHideFlags: 0
@@ -8933,6 +9070,7 @@ GameObject:
   - 135: {fileID: 638010532}
   - 23: {fileID: 638010531}
   - 114: {fileID: 638010530}
+  - 114: {fileID: 638010534}
   m_Layer: 10
   m_Name: RespawnPoint_016
   m_TagString: RespawnPoint
@@ -9010,6 +9148,23 @@ MeshFilter:
   m_PrefabInternal: {fileID: 837253360}
   m_GameObject: {fileID: 638010528}
   m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &638010534
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 638010528}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b988f855d16a0834185acc60151ed8b5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  NextNodes:
+  - {fileID: 1969520609}
+  previousNodes:
+  - {fileID: 1029469123}
+  isShortCut: 0
+  nodeNum: 0
 --- !u!1 &641519649
 GameObject:
   m_ObjectHideFlags: 0
@@ -12160,7 +12315,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &712187039
 Transform:
   m_ObjectHideFlags: 0
@@ -13317,6 +13472,54 @@ Prefab:
     - target: {fileID: 100564, guid: 048b74e9f00ba44a3a229d01702f4464, type: 2}
       propertyPath: m_TagString
       value: Track
+      objectReference: {fileID: 0}
+    - target: {fileID: 100192, guid: 048b74e9f00ba44a3a229d01702f4464, type: 2}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 400014, guid: 048b74e9f00ba44a3a229d01702f4464, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: -257.429321
+      objectReference: {fileID: 0}
+    - target: {fileID: 400014, guid: 048b74e9f00ba44a3a229d01702f4464, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: -1252.42078
+      objectReference: {fileID: 0}
+    - target: {fileID: 100416, guid: 048b74e9f00ba44a3a229d01702f4464, type: 2}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 100336, guid: 048b74e9f00ba44a3a229d01702f4464, type: 2}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 100014, guid: 048b74e9f00ba44a3a229d01702f4464, type: 2}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 100252, guid: 048b74e9f00ba44a3a229d01702f4464, type: 2}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 400288, guid: 048b74e9f00ba44a3a229d01702f4464, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: -226.604477
+      objectReference: {fileID: 0}
+    - target: {fileID: 400288, guid: 048b74e9f00ba44a3a229d01702f4464, type: 2}
+      propertyPath: m_LocalScale.x
+      value: 136.507233
+      objectReference: {fileID: 0}
+    - target: {fileID: 400288, guid: 048b74e9f00ba44a3a229d01702f4464, type: 2}
+      propertyPath: m_LocalScale.y
+      value: 136.507233
+      objectReference: {fileID: 0}
+    - target: {fileID: 400288, guid: 048b74e9f00ba44a3a229d01702f4464, type: 2}
+      propertyPath: m_LocalScale.z
+      value: 136.507233
+      objectReference: {fileID: 0}
+    - target: {fileID: 400288, guid: 048b74e9f00ba44a3a229d01702f4464, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: 521.179688
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 048b74e9f00ba44a3a229d01702f4464, type: 2}
@@ -14644,6 +14847,7 @@ GameObject:
   - 135: {fileID: 968113989}
   - 23: {fileID: 968113988}
   - 114: {fileID: 968113987}
+  - 114: {fileID: 968113991}
   m_Layer: 10
   m_Name: RespawnPoint_019
   m_TagString: RespawnPoint
@@ -14721,6 +14925,23 @@ MeshFilter:
   m_PrefabInternal: {fileID: 837253360}
   m_GameObject: {fileID: 968113985}
   m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &968113991
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 968113985}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b988f855d16a0834185acc60151ed8b5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  NextNodes:
+  - {fileID: 1952208804}
+  previousNodes:
+  - {fileID: 1896817227}
+  isShortCut: 0
+  nodeNum: 0
 --- !u!1 &969267579
 GameObject:
   m_ObjectHideFlags: 0
@@ -14804,6 +15025,7 @@ GameObject:
   - 135: {fileID: 975748365}
   - 23: {fileID: 975748364}
   - 114: {fileID: 975748363}
+  - 114: {fileID: 975748367}
   m_Layer: 10
   m_Name: RespawnPoint_009
   m_TagString: RespawnPoint
@@ -14881,6 +15103,23 @@ MeshFilter:
   m_PrefabInternal: {fileID: 837253360}
   m_GameObject: {fileID: 975748361}
   m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &975748367
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 975748361}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b988f855d16a0834185acc60151ed8b5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  NextNodes:
+  - {fileID: 160262399}
+  previousNodes:
+  - {fileID: 1146367829}
+  isShortCut: 0
+  nodeNum: 0
 --- !u!1 &983166431
 GameObject:
   m_ObjectHideFlags: 0
@@ -16227,6 +16466,7 @@ GameObject:
   - 135: {fileID: 1002991055}
   - 23: {fileID: 1002991054}
   - 114: {fileID: 1002991053}
+  - 114: {fileID: 1002991057}
   m_Layer: 10
   m_Name: RespawnPoint_022
   m_TagString: RespawnPoint
@@ -16304,6 +16544,23 @@ MeshFilter:
   m_PrefabInternal: {fileID: 837253360}
   m_GameObject: {fileID: 1002991051}
   m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &1002991057
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1002991051}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b988f855d16a0834185acc60151ed8b5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  NextNodes:
+  - {fileID: 1949912013}
+  previousNodes:
+  - {fileID: 260878195}
+  isShortCut: 0
+  nodeNum: 0
 --- !u!1 &1008079953
 GameObject:
   m_ObjectHideFlags: 0
@@ -16597,6 +16854,7 @@ GameObject:
   - 135: {fileID: 1029469127}
   - 23: {fileID: 1029469126}
   - 114: {fileID: 1029469125}
+  - 114: {fileID: 1029469129}
   m_Layer: 10
   m_Name: RespawnPoint_015
   m_TagString: RespawnPoint
@@ -16674,6 +16932,23 @@ MeshFilter:
   m_PrefabInternal: {fileID: 837253360}
   m_GameObject: {fileID: 1029469123}
   m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &1029469129
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1029469123}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b988f855d16a0834185acc60151ed8b5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  NextNodes:
+  - {fileID: 638010528}
+  previousNodes:
+  - {fileID: 1190736525}
+  isShortCut: 0
+  nodeNum: 0
 --- !u!1 &1040541671
 GameObject:
   m_ObjectHideFlags: 0
@@ -17440,13 +17715,14 @@ GameObject:
   - 135: {fileID: 1118951630}
   - 23: {fileID: 1118951629}
   - 114: {fileID: 1118951628}
+  - 114: {fileID: 1118951632}
   m_Layer: 10
   m_Name: RespawnPoint_014
   m_TagString: RespawnPoint
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1118951627
 Transform:
   m_ObjectHideFlags: 0
@@ -17454,7 +17730,7 @@ Transform:
   m_PrefabInternal: {fileID: 837253360}
   m_GameObject: {fileID: 1118951626}
   m_LocalRotation: {x: 0, y: -.707106888, z: 0, w: .707106769}
-  m_LocalPosition: {x: -1210.6543, y: -361.833984, z: 502.901642}
+  m_LocalPosition: {x: -1252.42078, y: -257.429321, z: 502.901642}
   m_LocalScale: {x: 177.02243, y: 177.02243, z: 177.02243}
   m_Children: []
   m_Father: {fileID: 610530595}
@@ -17517,6 +17793,21 @@ MeshFilter:
   m_PrefabInternal: {fileID: 837253360}
   m_GameObject: {fileID: 1118951626}
   m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &1118951632
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1118951626}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b988f855d16a0834185acc60151ed8b5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  NextNodes: []
+  previousNodes: []
+  isShortCut: 0
+  nodeNum: 0
 --- !u!1 &1126937876
 GameObject:
   m_ObjectHideFlags: 0
@@ -18826,6 +19117,7 @@ GameObject:
   - 135: {fileID: 1146367833}
   - 23: {fileID: 1146367832}
   - 114: {fileID: 1146367831}
+  - 114: {fileID: 1146367835}
   m_Layer: 10
   m_Name: RespawnPoint_008
   m_TagString: RespawnPoint
@@ -18903,6 +19195,23 @@ MeshFilter:
   m_PrefabInternal: {fileID: 837253360}
   m_GameObject: {fileID: 1146367829}
   m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &1146367835
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1146367829}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b988f855d16a0834185acc60151ed8b5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  NextNodes:
+  - {fileID: 975748361}
+  previousNodes:
+  - {fileID: 1360028092}
+  isShortCut: 0
+  nodeNum: 0
 --- !u!1 &1148063258
 GameObject:
   m_ObjectHideFlags: 0
@@ -20396,6 +20705,7 @@ GameObject:
   - 135: {fileID: 1190736529}
   - 23: {fileID: 1190736528}
   - 114: {fileID: 1190736527}
+  - 114: {fileID: 1190736531}
   m_Layer: 10
   m_Name: RespawnPoint_014
   m_TagString: RespawnPoint
@@ -20473,6 +20783,23 @@ MeshFilter:
   m_PrefabInternal: {fileID: 837253360}
   m_GameObject: {fileID: 1190736525}
   m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &1190736531
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1190736525}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b988f855d16a0834185acc60151ed8b5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  NextNodes:
+  - {fileID: 1029469123}
+  previousNodes:
+  - {fileID: 1389741638}
+  isShortCut: 0
+  nodeNum: 0
 --- !u!1 &1193324188
 GameObject:
   m_ObjectHideFlags: 0
@@ -22363,6 +22690,7 @@ GameObject:
   - 135: {fileID: 1360028096}
   - 23: {fileID: 1360028095}
   - 114: {fileID: 1360028094}
+  - 114: {fileID: 1360028098}
   m_Layer: 10
   m_Name: RespawnPoint_007
   m_TagString: RespawnPoint
@@ -22440,6 +22768,23 @@ MeshFilter:
   m_PrefabInternal: {fileID: 837253360}
   m_GameObject: {fileID: 1360028092}
   m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &1360028098
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1360028092}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b988f855d16a0834185acc60151ed8b5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  NextNodes:
+  - {fileID: 1146367829}
+  previousNodes:
+  - {fileID: 242833518}
+  isShortCut: 0
+  nodeNum: 0
 --- !u!1 &1374940483
 GameObject:
   m_ObjectHideFlags: 0
@@ -23864,7 +24209,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1389741639
 Transform:
   m_ObjectHideFlags: 0
@@ -24704,6 +25049,7 @@ GameObject:
   - 135: {fileID: 1448432944}
   - 23: {fileID: 1448432943}
   - 114: {fileID: 1448432942}
+  - 114: {fileID: 1448432946}
   m_Layer: 10
   m_Name: RespawnPoint_011
   m_TagString: RespawnPoint
@@ -24781,6 +25127,24 @@ MeshFilter:
   m_PrefabInternal: {fileID: 837253360}
   m_GameObject: {fileID: 1448432940}
   m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &1448432946
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1448432940}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b988f855d16a0834185acc60151ed8b5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  NextNodes:
+  - {fileID: 1745079908}
+  - {fileID: 1925353021}
+  previousNodes:
+  - {fileID: 160262399}
+  isShortCut: 0
+  nodeNum: 0
 --- !u!1 &1452860577
 GameObject:
   m_ObjectHideFlags: 0
@@ -24799,7 +25163,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1452860578
 Transform:
   m_ObjectHideFlags: 0
@@ -27430,6 +27794,7 @@ GameObject:
   - 135: {fileID: 1745079912}
   - 23: {fileID: 1745079911}
   - 114: {fileID: 1745079910}
+  - 114: {fileID: 1745079914}
   m_Layer: 10
   m_Name: RespawnPoint_012
   m_TagString: RespawnPoint
@@ -27507,6 +27872,23 @@ MeshFilter:
   m_PrefabInternal: {fileID: 837253360}
   m_GameObject: {fileID: 1745079908}
   m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &1745079914
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1745079908}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b988f855d16a0834185acc60151ed8b5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  NextNodes:
+  - {fileID: 2075865125}
+  previousNodes:
+  - {fileID: 1448432940}
+  isShortCut: 0
+  nodeNum: 0
 --- !u!1 &1748928516
 GameObject:
   m_ObjectHideFlags: 0
@@ -28005,7 +28387,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1792061364
 Transform:
   m_ObjectHideFlags: 0
@@ -32293,6 +32675,7 @@ GameObject:
   - 135: {fileID: 1873343916}
   - 23: {fileID: 1873343915}
   - 114: {fileID: 1873343914}
+  - 114: {fileID: 1873343918}
   m_Layer: 10
   m_Name: RespawnPoint_003
   m_TagString: RespawnPoint
@@ -32370,6 +32753,23 @@ MeshFilter:
   m_PrefabInternal: {fileID: 837253360}
   m_GameObject: {fileID: 1873343912}
   m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &1873343918
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1873343912}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b988f855d16a0834185acc60151ed8b5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  NextNodes:
+  - {fileID: 428246192}
+  previousNodes:
+  - {fileID: 1964130806}
+  isShortCut: 0
+  nodeNum: 3
 --- !u!1001 &1877390058
 Prefab:
   m_ObjectHideFlags: 0
@@ -32404,6 +32804,10 @@ Prefab:
     - target: {fileID: 400004, guid: 9135a83743028c04ea608e01006ceb71, type: 2}
       propertyPath: m_LocalRotation.w
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 100006, guid: 9135a83743028c04ea608e01006ceb71, type: 2}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 9135a83743028c04ea608e01006ceb71, type: 2}
@@ -32619,6 +33023,7 @@ GameObject:
   - 135: {fileID: 1896817231}
   - 23: {fileID: 1896817230}
   - 114: {fileID: 1896817229}
+  - 114: {fileID: 1896817233}
   m_Layer: 10
   m_Name: RespawnPoint_018
   m_TagString: RespawnPoint
@@ -32696,6 +33101,23 @@ MeshFilter:
   m_PrefabInternal: {fileID: 837253360}
   m_GameObject: {fileID: 1896817227}
   m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &1896817233
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1896817227}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b988f855d16a0834185acc60151ed8b5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  NextNodes:
+  - {fileID: 968113985}
+  previousNodes:
+  - {fileID: 1969520609}
+  isShortCut: 0
+  nodeNum: 0
 --- !u!1 &1898847837
 GameObject:
   m_ObjectHideFlags: 0
@@ -32963,6 +33385,7 @@ GameObject:
   - 135: {fileID: 1925353025}
   - 23: {fileID: 1925353024}
   - 114: {fileID: 1925353023}
+  - 114: {fileID: 1925353027}
   m_Layer: 10
   m_Name: RespawnPoint_012
   m_TagString: RespawnPoint
@@ -32977,8 +33400,8 @@ Transform:
   m_PrefabInternal: {fileID: 837253360}
   m_GameObject: {fileID: 1925353021}
   m_LocalRotation: {x: 0, y: -.707106888, z: 0, w: .707106769}
-  m_LocalPosition: {x: -1018.02148, y: -235.609726, z: 440.246124}
-  m_LocalScale: {x: 280.514557, y: 280.514557, z: 280.514557}
+  m_LocalPosition: {x: -1018.02148, y: -226.604477, z: 521.179688}
+  m_LocalScale: {x: 136.507233, y: 136.507233, z: 136.507233}
   m_Children: []
   m_Father: {fileID: 610530595}
 --- !u!114 &1925353023
@@ -33040,6 +33463,22 @@ MeshFilter:
   m_PrefabInternal: {fileID: 837253360}
   m_GameObject: {fileID: 1925353021}
   m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &1925353027
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1925353021}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b988f855d16a0834185acc60151ed8b5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  NextNodes: []
+  previousNodes:
+  - {fileID: 1448432940}
+  isShortCut: 1
+  nodeNum: 0
 --- !u!1 &1931220157
 GameObject:
   m_ObjectHideFlags: 0
@@ -34291,6 +34730,7 @@ GameObject:
   - 135: {fileID: 1949912017}
   - 23: {fileID: 1949912016}
   - 114: {fileID: 1949912015}
+  - 114: {fileID: 1949912019}
   m_Layer: 10
   m_Name: RespawnPoint_023
   m_TagString: RespawnPoint
@@ -34368,6 +34808,23 @@ MeshFilter:
   m_PrefabInternal: {fileID: 837253360}
   m_GameObject: {fileID: 1949912013}
   m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &1949912019
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1949912013}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b988f855d16a0834185acc60151ed8b5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  NextNodes:
+  - {fileID: 1949912013}
+  previousNodes:
+  - {fileID: 1002991051}
+  isShortCut: 0
+  nodeNum: 0
 --- !u!1 &1952048252
 GameObject:
   m_ObjectHideFlags: 0
@@ -34420,6 +34877,7 @@ GameObject:
   - 135: {fileID: 1952208808}
   - 23: {fileID: 1952208807}
   - 114: {fileID: 1952208806}
+  - 114: {fileID: 1952208810}
   m_Layer: 10
   m_Name: RespawnPoint_020
   m_TagString: RespawnPoint
@@ -34497,6 +34955,23 @@ MeshFilter:
   m_PrefabInternal: {fileID: 837253360}
   m_GameObject: {fileID: 1952208804}
   m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &1952208810
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1952208804}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b988f855d16a0834185acc60151ed8b5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  NextNodes:
+  - {fileID: 260878195}
+  previousNodes:
+  - {fileID: 968113985}
+  isShortCut: 0
+  nodeNum: 0
 --- !u!1 &1952423045
 GameObject:
   m_ObjectHideFlags: 0
@@ -35781,6 +36256,7 @@ GameObject:
   - 135: {fileID: 1964130810}
   - 23: {fileID: 1964130809}
   - 114: {fileID: 1964130808}
+  - 114: {fileID: 1964130812}
   m_Layer: 10
   m_Name: RespawnPoint_002
   m_TagString: RespawnPoint
@@ -35858,6 +36334,23 @@ MeshFilter:
   m_PrefabInternal: {fileID: 837253360}
   m_GameObject: {fileID: 1964130806}
   m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &1964130812
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1964130806}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b988f855d16a0834185acc60151ed8b5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  NextNodes:
+  - {fileID: 1873343912}
+  previousNodes:
+  - {fileID: 507846337}
+  isShortCut: 0
+  nodeNum: 2
 --- !u!1 &1966951834
 GameObject:
   m_ObjectHideFlags: 0
@@ -35900,6 +36393,7 @@ GameObject:
   - 135: {fileID: 1969520613}
   - 23: {fileID: 1969520612}
   - 114: {fileID: 1969520611}
+  - 114: {fileID: 1969520615}
   m_Layer: 10
   m_Name: RespawnPoint_017
   m_TagString: RespawnPoint
@@ -35977,6 +36471,24 @@ MeshFilter:
   m_PrefabInternal: {fileID: 837253360}
   m_GameObject: {fileID: 1969520609}
   m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &1969520615
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1969520609}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b988f855d16a0834185acc60151ed8b5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  NextNodes:
+  - {fileID: 1896817227}
+  previousNodes:
+  - {fileID: 10966855}
+  - {fileID: 638010528}
+  isShortCut: 0
+  nodeNum: 0
 --- !u!1 &1972795082
 GameObject:
   m_ObjectHideFlags: 0
@@ -36815,6 +37327,7 @@ GameObject:
   - 135: {fileID: 2075865129}
   - 23: {fileID: 2075865128}
   - 114: {fileID: 2075865127}
+  - 114: {fileID: 2075865131}
   m_Layer: 10
   m_Name: RespawnPoint_013
   m_TagString: RespawnPoint
@@ -36892,6 +37405,23 @@ MeshFilter:
   m_PrefabInternal: {fileID: 837253360}
   m_GameObject: {fileID: 2075865125}
   m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &2075865131
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2075865125}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b988f855d16a0834185acc60151ed8b5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  NextNodes:
+  - {fileID: 1190736525}
+  previousNodes:
+  - {fileID: 1745079908}
+  isShortCut: 0
+  nodeNum: 0
 --- !u!1 &2080709713
 GameObject:
   m_ObjectHideFlags: 0

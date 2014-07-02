@@ -1,0 +1,29 @@
+﻿//Robert Reed
+
+using UnityEngine;
+using System.Collections;
+
+public class DinoTracking : MonoBehaviour 
+{
+	//variables to hold all four dinos
+
+	//scripts to access the dino scripts
+
+	// Use this for initialization
+	void Start () 
+	{
+	
+	}
+	
+	// Update is called once per frame
+	void Update () 
+	{
+	
+	}
+	
+	//update positions
+	public void UpdatePositions(GameObject _node, GameObject _dino)
+	{
+		Debug.Log(_node.name + " " + _dino.name);
+	}
+}
