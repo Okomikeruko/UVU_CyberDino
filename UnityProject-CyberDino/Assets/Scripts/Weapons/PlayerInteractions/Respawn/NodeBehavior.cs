@@ -30,6 +30,7 @@ public class NodeBehavior : MonoBehaviour
 
 	void OnTriggerEnter(Collider hit)
 	{
+
 		if(hit.tag == "Dino" || hit.tag == "Ai")
 		{
 			dTrack.UpdatePositions(this.gameObject, hit.gameObject);
