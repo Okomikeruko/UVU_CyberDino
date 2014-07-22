@@ -17,6 +17,8 @@ GameObject:
   - 148: {fileID: 14800000}
   - 136: {fileID: 13600000}
   - 114: {fileID: 11400000}
+  - 114: {fileID: 11400032}
+  - 114: {fileID: 11400030}
   m_Layer: 8
   m_Name: Spino
   m_TagString: Dino
@@ -777,15 +779,15 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &400000
 Transform:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100000}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 21.9695587, y: 62.65308, z: -40.6195679}
+  m_LocalRotation: {x: 0, y: -.704902232, z: 0, w: .709304571}
+  m_LocalPosition: {x: 21.0337715, y: 24.8701878, z: 12.9182186}
   m_LocalScale: {x: 1.25, y: 1.25, z: 1.25}
   m_Children:
   - {fileID: 400096}
@@ -1840,6 +1842,34 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 06385bdad5fe14051a99556d0946b136, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &11400030
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100000}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6c14465c491ef444489d44a57cc6e464, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  meleeWeapon: 2
+  bombWeapon: 3
+  curHealth: 100
+  maxHealth: 100
+  canBomb: 1
+  shielded: 0
+--- !u!114 &11400032
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100000}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cbc3184e690fbdd41b8692b7083d01e8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!135 &13500000
