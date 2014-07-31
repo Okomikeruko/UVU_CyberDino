@@ -28,7 +28,6 @@ public struct WeaponEngineValues
 		public  const int ACIDSPIT_TOUCH_DAMAGE = 3;
 		public const float ACIDSPIT_SLOW_PERCENTAGE = .3f;
 		public const float  ACIDSPIT_SLOW_TIME = 3;
-		
 		public  const float TELEPORT_SLAM_RADIUS = 2;
 		public  const float TELEPORT_SLAM_RANGE = 50;
 		public  const int TELEPORT_SLAM_DAMAGE = 3;
@@ -46,7 +45,6 @@ public struct WeaponEngineValues
 		public	const float ROLL_RANGE = 100;
 		public	const int ROLL_DAMAGE = 10;
 		public  const float ROLL_COOLDOWN_DURATION = 3;
-		
 		public const int STICKYBOMB_BOMB_DAMAGE = 20;
 		public const float STICKYBOMB_EXPLOSIVE_TIMER = 50;
 		public const float STICKYBOMB_LAUNCH_FORCE = 125;
@@ -61,15 +59,14 @@ public struct WeaponEngineValues
 		public	const float SMITE_RANGE = 50;
 		public	const int SMITE_DAMAGE = 10;
 		public  const float SMITE_COOLDOWN_DURATION = 1;
-		
 		public const int FORWARDBOMB_DAMAGE = 20;
 		public const int FORWARDBOMB_BOMB_COUNT = 3;
 		public const float FORWARDBOMB_LAUNCH_FORCE = 125;
 		// higher y= higher arc
 		public const float FORWARDBOMB_LAUNCH_Y = .5f;
-	public const float FORWARDBOMB_PRIME_TIME = .5f;
-	// sets the spacing between the launches
-	public const float FORWARDBOMB_DELAY_TIME = .5f;
+		public const float FORWARDBOMB_PRIME_TIME = .5f;
+		// sets the spacing between the launches
+		public const float FORWARDBOMB_DELAY_TIME = .5f;
 		
 
 	
@@ -79,7 +76,6 @@ public struct WeaponEngineValues
 		public  const float LANDMINE_PRIME_TIME = 1f;
 		public  const float LANDMINE_MAX_EXPLOSION_DAMAGE = 100;
 		public  const int LANDMINE_SPLASH_RADIUS = 20;
-		
 		public	const float FLAMETHROWER_RADIUS = 4;
 		public	const float FLAMETHROWER_RANGE = 60;
 		public	const float FLAMETHROWER_COOLDOWN_DURATION = 5;
@@ -91,15 +87,11 @@ public struct WeaponEngineValues
 		public const int FLAMETHROWER_INFLAME_DMG_FREQUENCY = 5;
 		// how many times will afterburn damage be applied in the AfterBurn timeframe
 		public const int FLAMETHROWER_AFTERBURN_DMG_FREQUENCY = 5;
-		
-		
-		
 		public	const int SHOCKWAVE_DAMAGE = 5;
 		public	const float SHOCKWAVE_RADIUS = 15;
 		// Force applied is based on a linear falloff similar to the Splash Damage bombs
 		public	const float SHOCKWAVE_PUSH_MAX_FORCE = 6000;
 		public  const float SHOCKWAVE_COOLDOWN_DURATION = 3;
-		
 		public	const int EMPBLAST_DAMAGE = 2;
 		public	const float EMPBLAST_RADIUS = 15;
 		public	const float EMPBLAST_DISABLE_WEAPON_DURATION = 10;
@@ -108,6 +100,9 @@ public struct WeaponEngineValues
 
 public class WeaponEngine : MonoBehaviour
 {
+		private DinoTracking dinoTracker;
+		private int myTrackerIndex;
+		
 		enum WeaponName
 		{
 				Flamethrower,
@@ -190,12 +185,47 @@ public class WeaponEngine : MonoBehaviour
 		private void Respawn ()
 		{
 				curHealth = maxHealth;
+				ReorientPlayer ();
 		}
 
+		void ReorientPlayer ()
+		{
+				if (dinoTracker == null)
+						return;
+			
+				NodeBehavior _curNode;
+				GameObject[] _nextNodes;
+				NodeBehavior _nextNode;
+			
+				_curNode = dinoTracker.GetCurrentNodeArray () [myTrackerIndex];
+				_nextNodes = _curNode.NextNodes != null ? _curNode.NextNodes : null;
+				
+				if (_curNode.isShortCut) {
+						_curNode = _curNode.previousNodes [0].gameObject.GetComponent<NodeBehavior> ();
+						_nextNode = _curNode.NextNodes [0].gameObject.GetComponent<NodeBehavior> ();
+				}
+				
+				
+				transform.position = _curNode.transform.position;
+				transform.rotation = _curNode.transform.rotation;
+		
+			
+			
+			
+			
+		}
+
+		void Awake ()
+		{
+				dinoTracker = GameObject.Find ("Checkpoints").GetComponent<DinoTracking> ();	
+		}
+	
 		void Start ()
 		{
 				Initialize ();
 		}
+		
+
 
 
 		// Initialize
@@ -207,6 +237,17 @@ public class WeaponEngine : MonoBehaviour
 				AttachWeaponComponent (meleeWeapon, WeaponSlot.Melee);
 				AttachWeaponComponent (bombWeapon, WeaponSlot.Bomb);
 				EnableWeapons ();
+				
+				if (dinoTracker != null) {
+						GameObject[] dinos = dinoTracker.GetDinoArray ();
+						if (dinos.Length != 0) {
+								for (int i = 0; i < dinos.Length; i++) {
+										if (dinos [i] == gameObject)
+												myTrackerIndex = i;
+								}
+						}
+				}
+				
 		}
 
 		public MotionControl getMotor ()
