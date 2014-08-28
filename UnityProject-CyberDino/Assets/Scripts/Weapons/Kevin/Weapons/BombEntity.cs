@@ -1,9 +1,16 @@
-﻿// (C) Kevin Webb 2014
-// Base class for all Bomb Entity components
+﻿/*
+Scripted By Kevin Webb 2014
+BombEntity.CS
+
+** ALL NON INHERITED FUNCTIONALITY WILL BE DOCUMENTED IN THE CHILD CLASS**
+*/
 
 using UnityEngine;
 using System.Collections;
 
+
+// BombEntity
+// Base Class for all active bomb entities
 public class BombEntity : MonoBehaviour
 {
 		protected const int RAYCAST_Y_MODIFIER = 50;
@@ -13,6 +20,8 @@ public class BombEntity : MonoBehaviour
 
 
 #region Technical Scripting
+	// Detonate
+	// method called that will  normally discarge/activate the bomb, this method is usually overridden
 	protected virtual void Detonate ()
 	{
 	}
@@ -24,29 +33,39 @@ public class BombEntity : MonoBehaviour
 		return primed;
 	}
 	
+	// setPrimed
+	// will set the primed state of the bomb
 	public void setPrimed (bool value)
 	{
 		primed = value;
 	}
 	
+	// Enable
+	// Base methods which will enable the bomb to be activated/triggered, this is usually overridden
 	public virtual void Enable ()
 	{
 		collider.enabled = true;
 		renderer.enabled = true;
 	}
 	
+	// Disable
+	// Base methods which will disable the bomb from beng activated/triggered, this is usually overridden
 	public virtual void Disable ()
 	{
 		collider.enabled = false;
 		renderer.enabled = false;	
 	}
 	
+	// FalseDetonate
+	// Will play all FX of the bomb detonating, however, it will not cause damage, normally called if a player sets a bomb when one is already active
 	public virtual void FalseDetonate ()
 	{
 		PlayVFX();
 		DestroyMe();
 	}
 	
+	// Destroy me
+	// removes the gameobject from scene
 	public virtual void DestroyMe()
 	{
 		Destroy(gameObject);
@@ -111,6 +130,8 @@ public class BombEntity : MonoBehaviour
 
 #region Graphic Scripting
 
+	// PlayVFX
+	// base method for all needed VFX when the bomb explodes.
 	protected virtual void PlayVFX ()
 	{
 	}

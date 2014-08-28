@@ -1,3 +1,10 @@
+/*
+Scripted By Kevin Webb 2014
+AcidSpitEntity.cs
+
+** ALL NON INHERITED FUNCTIONALITY WILL BE DOCUMENTED IN THE CHILD CLASS**
+*/
+
 using UnityEngine;
 using System.Collections;
 
@@ -43,12 +50,16 @@ public class AcidSpitEntity : BombEntity
 		
 		}
 	
+		//ClearGameObject
+		//Will allow the avatar specified in parameter e of the targets array to become slowed again by the same spit puddle
 		IEnumerator ClearGameObject (int e)
 		{
 				yield return new WaitForSeconds (WeaponEngineValues.ACIDSPIT_SLOW_TIME);
 				targets [e] = null;
 		}
-	
+		
+		//SlowTargets
+		//Will apply a slowing effect + damage to the specified target (parameter e) and will remove the effect after a certain time has passed.
 		void SlowTarget (GameObject e)
 		{
 				bool assigned = false;
@@ -74,7 +85,8 @@ public class AcidSpitEntity : BombEntity
 			
 				}
 		}
-	
+		// On Trigger Stay
+		// will call slowTarget as long as avatar stays on puddle
 		private void OnTriggerStay (Collider col)
 		{
 				//print(col.name);

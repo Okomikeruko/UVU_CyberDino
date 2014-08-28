@@ -1,6 +1,15 @@
-﻿using UnityEngine;
+﻿/*
+Scripted By Kevin Webb 2014
+EMPBlastStatusEffect.cs
+
+** ALL NON INHERITED FUNCTIONALITY WILL BE DOCUMENTED IN THE CHILD CLASS**
+*/
+
+using UnityEngine;
 using System.Collections;
 
+//EMPBlastStatusEffect
+//Will temporarily disable weapons for the afflicted avatar when called
 public class EMPBlastStatusEffect : StatusEffect
 {
 
@@ -19,7 +28,7 @@ public class EMPBlastStatusEffect : StatusEffect
 				coRoutineRate = 1 / WeaponEngineValues.EMPBLAST_DISABLE_WEAPON_DURATION;
 				myEngine = gameObject.GetComponent<WeaponEngine> ();
 				StartCoroutine ("Run");
-		StartCoroutine ("RunVFX");
+			StartCoroutine ("RunVFX");
 		}
 	
 		protected override IEnumerator Run ()

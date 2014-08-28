@@ -1,4 +1,11 @@
-﻿using UnityEngine;
+﻿/*
+Scripted By Kevin Webb 2014
+Shocklwave.cs
+
+** ALL NON INHERITED FUNCTIONALITY WILL BE DOCUMENTED IN THE CHILD CLASS**
+*/
+
+using UnityEngine;
 using System.Collections;
 
 public class Shockwave : Melee
@@ -50,7 +57,8 @@ public class Shockwave : Melee
 		StartCooldown();
 		
 	}
-	
+	// ApplyPush
+	// Will apply force to the specified paramatered target
 	private void ApplyPush (Transform target)
 	{
 		float percentageApplied = (1 - Mathf.Clamp01 (Vector3.Distance (transform.position, target.position) / WeaponEngineValues.SHOCKWAVE_RADIUS));
@@ -61,6 +69,8 @@ public class Shockwave : Melee
 		target.rigidbody.AddForce (dir,ForceMode.VelocityChange);		
 	}
 	
+	// FindNeihbors
+	// will spherecast to find all adjacent neigbhors to push
 	private bool FindNeighbors (ref GameObject[] neighbors)
 	{
 			bool hitTarget = false;

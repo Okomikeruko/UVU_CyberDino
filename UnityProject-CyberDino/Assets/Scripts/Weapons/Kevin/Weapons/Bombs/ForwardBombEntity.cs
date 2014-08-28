@@ -17,6 +17,9 @@ public class ForwardBombEntity : BombEntity
 				rigidbody.isKinematic = true;
 		}
 	
+	
+		// Explode
+		// Similar in functionaility to Detonate
 		protected void Explode (GameObject target)
 		{
 

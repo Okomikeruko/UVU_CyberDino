@@ -1,3 +1,10 @@
+/*
+Scripted By Kevin Webb 2014
+AcidSpit.cs
+
+** ALL NON INHERITED FUNCTIONALITY WILL BE DOCUMENTED IN THE CHILD CLASS**
+*/
+
 using UnityEngine;
 using System.Collections;
 

@@ -1,11 +1,15 @@
-﻿// (C) Kevin Webb 2014
-// Base Class for all status effect components
+﻿/*
+Scripted By Kevin Webb 2014
+StatusEffect.CS
 
-
+** ALL NON INHERITED FUNCTIONALITY WILL BE DOCUMENTED IN THE CHILD CLASS**
+*/
 
 using UnityEngine;
 using System.Collections;
 
+//StatusEffect
+//Base class called for any status effects that will be temporarilly called on player.
 public class StatusEffect : MonoBehaviour
 {
 		protected WeaponEngine myEngine;

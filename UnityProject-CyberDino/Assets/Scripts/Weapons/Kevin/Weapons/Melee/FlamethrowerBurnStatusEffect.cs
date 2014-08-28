@@ -1,4 +1,11 @@
-﻿using UnityEngine;
+﻿/*
+Scripted By Kevin Webb 2014
+FlamethrowerBurnStatusEffect.cs
+
+** ALL NON INHERITED FUNCTIONALITY WILL BE DOCUMENTED IN THE CHILD CLASS**
+*/
+
+using UnityEngine;
 using System.Collections;
 
 public class FlamethrowerBurnStatusEffect : StatusEffect
@@ -6,11 +13,15 @@ public class FlamethrowerBurnStatusEffect : StatusEffect
 		private float coRoutineBurnNextHit = 0;
 		public float timeLeft;
 	#region Graphic Scripting
+	
+	// activate burnFX
 	void StartFX()
 	{
 	
 	}
 	
+	
+	// deactivates burn FX
 	void EndFX()
 	{
 	
@@ -62,6 +73,8 @@ public class FlamethrowerBurnStatusEffect : StatusEffect
 				StartCoroutine ("Run");
 		}
 	
+	
+	// will apply damage to the character and remove FX if player is killed
 		void ApplyDamage ()
 		{
 				if (myEngine.CurHealth - WeaponEngineValues.FLAMETHROWER_AFTERBURN_DAMAGE <= 0) {

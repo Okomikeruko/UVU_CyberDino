@@ -1,4 +1,11 @@
-﻿using UnityEngine;
+﻿/*
+Scripted By Kevin Webb 2014
+Stickybomb.cs
+
+** ALL NON INHERITED FUNCTIONALITY WILL BE DOCUMENTED IN THE CHILD CLASS**
+*/
+
+using UnityEngine;
 using System.Collections;
 
 public class StickyBomb : Bomb
@@ -23,6 +30,7 @@ public class StickyBomb : Bomb
 		myBombs = new BombEntity[1];
 		}
 		
+		// I
 		void InstantiateNew ()
 		{			
 				GameObject obj = ((GameObject)(GameObject.Instantiate (Resources.Load ("Weapons/Bombs/StickyBomb"))));

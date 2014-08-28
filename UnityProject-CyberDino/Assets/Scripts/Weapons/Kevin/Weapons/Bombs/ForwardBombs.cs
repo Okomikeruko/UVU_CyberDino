@@ -40,6 +40,10 @@ public class ForwardBombs : Bomb
 				}
 		}
 					
+					
+		// PropelBombs
+		// Will apply force to bomb entities pushing them forward when launched
+		// x and y can be dfeined the the WeaponEngineValues class in WeaponEngine.cs
 		private IEnumerator PropelBombs (int index, float time)
 		{
 				yield return new WaitForSeconds (time);

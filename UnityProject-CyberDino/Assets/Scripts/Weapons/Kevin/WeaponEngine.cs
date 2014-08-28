@@ -1,6 +1,31 @@
-// KW
-// WeaponEngine.CS
-// Parent class which manages weapon events and Event Subscriptions
+/*
+Scripted By Kevin Webb 2014
+WeaponEngine.CS
+
+** ALL NON INHERITED FUNCTIONALITY WILL BE DOCUMENTED IN THE CHILD CLASS**
+*/
+
+
+#region WEAPON ENGINE SUMMARY
+/*
+	Each avatar should have one WeaponEngine component on its main controller/collider, this will be the main handler for Health, Damage, Respawns, and Pickups
+	In the inspector you may set the primary and secondary weapons which are called, and the specific values of the weapons can be modified in the WeaponEngineValues class in this file
+	
+	When the script is loaded, it will pull the respective weapons specified in the inspector and will add the respective components to the controller.
+	
+	Player input right now is handled in this script, with the left and right click this should be changed when a player controller script is created.
+	
+	There are 2 types of Weapons, Bombs and Melees, specific funtionalitys are specified in the game design document on the google docs. 
+	
+	Melee weapons are normally cooldown based attacks that rely on spherecasts to find adjacent targets to deal immediate attacks
+	Bomb weapons normally rely on spawned entities that will deliver damage and status fx on contact.
+	
+	Pickups are based on tag colision objects,  and thus no extra scripted on the the object itself is needed with the exception of any graphical stuff.
+	
+	any questions, feel free to ask kevinwbb@gmail.com
+
+*/
+#endregion
 using UnityEngine;
 using System.Collections;
 
@@ -11,6 +36,9 @@ public enum PickupType
 		Bomb
 }
 ;
+
+// WeaponEngineValues
+// Weapon values specified through scripting
 
 public struct WeaponEngineValues
 {
@@ -28,6 +56,7 @@ public struct WeaponEngineValues
 		public  const int ACIDSPIT_TOUCH_DAMAGE = 3;
 		public const float ACIDSPIT_SLOW_PERCENTAGE = .3f;
 		public const float  ACIDSPIT_SLOW_TIME = 3;
+		
 		public  const float TELEPORT_SLAM_RADIUS = 2;
 		public  const float TELEPORT_SLAM_RANGE = 50;
 		public  const int TELEPORT_SLAM_DAMAGE = 3;
@@ -45,6 +74,7 @@ public struct WeaponEngineValues
 		public	const float ROLL_RANGE = 100;
 		public	const int ROLL_DAMAGE = 10;
 		public  const float ROLL_COOLDOWN_DURATION = 3;
+		
 		public const int STICKYBOMB_BOMB_DAMAGE = 20;
 		public const float STICKYBOMB_EXPLOSIVE_TIMER = 50;
 		public const float STICKYBOMB_LAUNCH_FORCE = 125;
@@ -59,6 +89,7 @@ public struct WeaponEngineValues
 		public	const float SMITE_RANGE = 50;
 		public	const int SMITE_DAMAGE = 10;
 		public  const float SMITE_COOLDOWN_DURATION = 1;
+		
 		public const int FORWARDBOMB_DAMAGE = 20;
 		public const int FORWARDBOMB_BOMB_COUNT = 3;
 		public const float FORWARDBOMB_LAUNCH_FORCE = 125;
@@ -76,6 +107,7 @@ public struct WeaponEngineValues
 		public  const float LANDMINE_PRIME_TIME = 1f;
 		public  const float LANDMINE_MAX_EXPLOSION_DAMAGE = 100;
 		public  const int LANDMINE_SPLASH_RADIUS = 20;
+		
 		public	const float FLAMETHROWER_RADIUS = 4;
 		public	const float FLAMETHROWER_RANGE = 60;
 		public	const float FLAMETHROWER_COOLDOWN_DURATION = 5;
@@ -87,22 +119,25 @@ public struct WeaponEngineValues
 		public const int FLAMETHROWER_INFLAME_DMG_FREQUENCY = 5;
 		// how many times will afterburn damage be applied in the AfterBurn timeframe
 		public const int FLAMETHROWER_AFTERBURN_DMG_FREQUENCY = 5;
+		
+		
+		
 		public	const int SHOCKWAVE_DAMAGE = 5;
 		public	const float SHOCKWAVE_RADIUS = 15;
 		// Force applied is based on a linear falloff similar to the Splash Damage bombs
 		public	const float SHOCKWAVE_PUSH_MAX_FORCE = 6000;
 		public  const float SHOCKWAVE_COOLDOWN_DURATION = 3;
+		
 		public	const int EMPBLAST_DAMAGE = 2;
 		public	const float EMPBLAST_RADIUS = 15;
 		public	const float EMPBLAST_DISABLE_WEAPON_DURATION = 10;
 	
 }
 
+// WeaponEngine
+// Main Script for all Weapon, Damage, and Respawn systems.
 public class WeaponEngine : MonoBehaviour
 {
-		private DinoTracking dinoTracker;
-		private int myTrackerIndex;
-		
 		enum WeaponName
 		{
 				Flamethrower,
@@ -144,8 +179,8 @@ public class WeaponEngine : MonoBehaviour
 		public int CurHealth { get { return curHealth; } }
 
 
+		// Delegates for primary and secondary weapons (assigned through inspector)
 		private delegate void FireWeapon ();
-
 		private FireWeapon melee;
 		private FireWeapon bomb;
 
@@ -185,51 +220,16 @@ public class WeaponEngine : MonoBehaviour
 		private void Respawn ()
 		{
 				curHealth = maxHealth;
-				ReorientPlayer ();
 		}
 
-		void ReorientPlayer ()
-		{
-				if (dinoTracker == null)
-						return;
-			
-				NodeBehavior _curNode;
-				GameObject[] _nextNodes;
-				NodeBehavior _nextNode;
-			
-				_curNode = dinoTracker.GetCurrentNodeArray () [myTrackerIndex];
-				_nextNodes = _curNode.NextNodes != null ? _curNode.NextNodes : null;
-				
-				if (_curNode.isShortCut) {
-						_curNode = _curNode.previousNodes [0].gameObject.GetComponent<NodeBehavior> ();
-						_nextNode = _curNode.NextNodes [0].gameObject.GetComponent<NodeBehavior> ();
-				}
-				
-				
-				transform.position = _curNode.transform.position;
-				transform.rotation = _curNode.transform.rotation;
-		
-			
-			
-			
-			
-		}
-
-		void Awake ()
-		{
-				dinoTracker = GameObject.Find ("Checkpoints").GetComponent<DinoTracking> ();	
-		}
-	
 		void Start ()
 		{
 				Initialize ();
 		}
-		
-
 
 
 		// Initialize
-		// Will take weapon information from inspector and assign proper components for each, will also 
+		// Will take weapon information from inspector and assign proper components for each,. Will assign starting health and save pointers for frequently used components for simpler referencing.
 		void Initialize ()
 		{
 				curHealth = maxHealth;
@@ -237,19 +237,9 @@ public class WeaponEngine : MonoBehaviour
 				AttachWeaponComponent (meleeWeapon, WeaponSlot.Melee);
 				AttachWeaponComponent (bombWeapon, WeaponSlot.Bomb);
 				EnableWeapons ();
-				
-				if (dinoTracker != null) {
-						GameObject[] dinos = dinoTracker.GetDinoArray ();
-						if (dinos.Length != 0) {
-								for (int i = 0; i < dinos.Length; i++) {
-										if (dinos [i] == gameObject)
-												myTrackerIndex = i;
-								}
-						}
-				}
-				
 		}
 
+		
 		public MotionControl getMotor ()
 		{
 				if (myMotor != null)
@@ -313,7 +303,6 @@ public class WeaponEngine : MonoBehaviour
 								bomb = newComponent.Fire;
 								break;
 						}
-//						print (newComponent.GetName ());
 				}
 		}
 
@@ -336,6 +325,8 @@ public class WeaponEngine : MonoBehaviour
 		// Update is called once per frame
 		void Update ()
 		{
+		
+		// These Events are for testing purposes, logically the UsedMelee and UsedBumb methods should be assigned to a event handle in the PlayerController script.
 				if (Input.GetMouseButtonDown (0) && UsedMelee != null) {
 						UsedMelee ();
 				}
@@ -353,7 +344,7 @@ public class WeaponEngine : MonoBehaviour
 
 
 		// GiveItem
-		// will call correct function when player pickups object
+		// will call correct function when player pickups object 
 		// par:  the type of item picked up
 		void GiveItem (PickupType type)
 		{
@@ -373,6 +364,7 @@ public class WeaponEngine : MonoBehaviour
 				}
 		}
 
+		
 		// IEnumerator
 		// will activate and de-activate the shield after shield duration has passed
 		IEnumerator ActivateShield ()
@@ -382,8 +374,12 @@ public class WeaponEngine : MonoBehaviour
 				shielded = false;
 		}
 
+		
+		
 		void OnTriggerEnter (Collider col)
 		{
+		// Pickups are based on collisions and tags,.
+		#region Pick-Ups
 				if (col.gameObject.tag == "Health")
 						GiveItem (PickupType.Health);
 
@@ -392,5 +388,6 @@ public class WeaponEngine : MonoBehaviour
 
 				if (col.gameObject.tag == "Bomb")
 						GiveItem (PickupType.Bomb);
+						#endregion
 		}
 }

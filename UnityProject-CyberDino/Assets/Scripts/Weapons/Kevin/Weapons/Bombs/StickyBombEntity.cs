@@ -25,7 +25,7 @@ public class StickyBombEntity : BombEntity
 		}
 	
 	
-	
+		// ReleaseTarget
 		// if the carrier dies while the bomb is active, it will release it, adjust following code if you want to modify how the bomb will release
 		public void ReleaseTarget ()
 		{

@@ -1,4 +1,11 @@
-﻿// (C) Kevin Webb 2014
+﻿/*
+Scripted By Kevin Webb 2014
+EggDrop.cs
+
+** ALL NON INHERITED FUNCTIONALITY WILL BE DOCUMENTED IN THE CHILD CLASS**
+*/
+
+// TO BE IMPLEMENTED 
 
 
 using UnityEngine;

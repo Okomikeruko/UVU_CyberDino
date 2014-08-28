@@ -1,4 +1,11 @@
-﻿using UnityEngine;
+﻿/*
+Scripted By Kevin Webb 2014
+SonicScream.cs
+
+** ALL NON INHERITED FUNCTIONALITY WILL BE DOCUMENTED IN THE CHILD CLASS**
+*/
+
+using UnityEngine;
 using System.Collections;
 
 public class SonicScream : Melee

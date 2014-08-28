@@ -1,10 +1,15 @@
-﻿// (C) Kevin Webb 2014
-// Base Class for all Melee Weapon Types
+﻿/*
+Scripted By Kevin Webb 2014
+Melee.cs
+
+** ALL NON INHERITED FUNCTIONALITY WILL BE DOCUMENTED IN THE CHILD CLASS**
+*/
 
 using UnityEngine;
 using System.Collections;
 
-
+// Melee
+// Inherits from Weapon.cs
 public class Melee : Weapon
 {
 		protected float coolDownDuration;
@@ -15,11 +20,14 @@ public class Melee : Weapon
 	
 
 	#region TECHNICAL SCRIPTING
+	// Fire
+	// Overrides base function with wrapper for Attack().
 	public override void Fire ()
 	{
 		if (!onCooldown)
 			Attack ();
 	}
+	
 	
 	protected virtual void Start ()
 	{
@@ -30,6 +38,10 @@ public class Melee : Weapon
 		onCooldown = false;
 	}
 	
+	
+	// Attack
+	// Base class for Attacking functionality
+	// Will normally find forward targets, apply damage, and play related visual effects.
 	protected virtual void Attack ()
 	{
 		//				print ("hit");
@@ -41,10 +53,10 @@ public class Melee : Weapon
 		StartCoroutine ("StartCooldown");
 	}
 	
-	public virtual void PlayVFX ()
-	{
-	}
+
 	
+	// StartCooldown
+	// will starts the cooldown timer preventing attacks from being launched during cooldown duration
 	public virtual IEnumerator StartCooldown ()
 	{
 		
@@ -53,6 +65,10 @@ public class Melee : Weapon
 		onCooldown = false;
 	}
 	
+	// FindForwardTargets
+	// Will spherecast to find forward targets
+	// Parameters: empty GO array, method will fill array with viable targets if any are in range.
+	// Will return false if no hits.
 	public virtual bool FindForwardTargets (ref GameObject[] array)
 	{
 		bool validTargets = false;
@@ -84,6 +100,8 @@ public class Melee : Weapon
 		return validTargets;
 	}
 	
+	// ApplyDamage
+	// Will apply weapon damage to the respective target specified in the parameters GO array.
 	public virtual void ApplyDamage (ref GameObject[] targets)
 	{
 		for (int i = 0; i<targets.Length; i++) {
@@ -97,6 +115,9 @@ public class Melee : Weapon
 	#endregion	
 	
 	#region GRAPHICAL SCRIPTING
+		public virtual void PlayVFX ()
+	{
+	}
 	#endregion
 	
 }

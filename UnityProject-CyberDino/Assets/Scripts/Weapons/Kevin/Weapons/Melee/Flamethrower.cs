@@ -1,4 +1,11 @@
-﻿using UnityEngine;
+﻿/*
+Scripted By Kevin Webb 2014
+FlameThrower.cs
+
+** ALL NON INHERITED FUNCTIONALITY WILL BE DOCUMENTED IN THE CHILD CLASS**
+*/
+
+using UnityEngine;
 using System.Collections;
 
 public class Flamethrower : Melee
@@ -6,10 +13,12 @@ public class Flamethrower : Melee
 		bool inFlame = false;
 	
 	#region Graphic Scripting
+	// activate fx when flamethrower is active
 		void StartFX ()
 		{
 		}
 	
+	// disable flamethrower fx
 		void EndFX ()
 		{
 		}
@@ -37,6 +46,11 @@ public class Flamethrower : Melee
 						StartCoroutine ("FireFlame");
 		}
 	
+	
+	//FireFlame
+	// will find all forward targets,  if a target is found, will apply immediate burn damage and apply afterburn effect.
+	// if afterburn effect already is active on target, will reset the afterburn timer
+	// fire is hot, and bad for dinosaurs
 		private IEnumerator FireFlame ()
 		{
 				inFlame = true;
