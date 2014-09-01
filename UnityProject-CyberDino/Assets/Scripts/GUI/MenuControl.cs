@@ -20,7 +20,7 @@ public class MenuControl : MonoBehaviour
 	public string[] dinos = new string[]{"Diloph", "Hesp", "Raptor", "Spino", "TRex", "Troodon"};
 	
 	//the different level to choose
-	private string[] levels = new string[]{"CityTrack", "CityTrackv2","John's Track", "Lee's Track", "CityTrackv2.2"};
+	private string[] levels = new string[]{"Dumbell Track", "CityTrackv2","John's Track", "Lee's Track", "Robert's Track"};
 	
 	public Texture[] levelTextures;
 	
@@ -63,7 +63,8 @@ public class MenuControl : MonoBehaviour
 	public int levelIndex = 0;
 	
 	//hold the names of the places
-	public string[] playerNames;
+	private string[] playerNames;
+	private string[] resultsFName;
 	
 	//hold the textures of the main menu textures
 	private Texture[] mainMenuBtnTxtr;
@@ -80,7 +81,7 @@ public class MenuControl : MonoBehaviour
 	private Texture playerNameGFX;
 	
 	//array to hold the mini dino portrait
-	private Texture[] dinoPortrait;
+	/*private Texture[] dinoPortrait;*/
 	
 	
 	//menu sliding variables
@@ -136,6 +137,12 @@ public class MenuControl : MonoBehaviour
 	
 	private Rect connectPos;
 	private Texture connectTxtr;
+
+	private NetworkView netView;
+	private GameObject[] raceDinos;
+	private int[] racePositions;
+
+	private int waitForPlayers;
 	
 	// Use this for initialization
 	void Start () 
@@ -160,18 +167,18 @@ public class MenuControl : MonoBehaviour
 		backBtnTxtr = (Texture)Resources.Load("GUI/Materials/BackButton");
 		
 		lvlSelectTxtr = new Texture[5];
-		lvlSelectTxtr[0] = (Texture)Resources.Load("GUI/Materials/CityTrackGFX");
+		//lvlSelectTxtr[0] = (Texture)Resources.Load("GUI/Materials/CityTrackGFX");
 		lvlSelectTxtr[1] = (Texture)Resources.Load("GUI/Materials/CityTrackGraphic");
 		
 		lvlNameGFX = (Texture)Resources.Load("GUI/Materials/CityTrackWord");
 		
-		dinoPortrait = new Texture[6];
+		/*dinoPortrait = new Texture[6];
 		dinoPortrait[0] = (Texture)Resources.Load("GUI/Materials/CityTrackGFX");
 		dinoPortrait[1] = (Texture)Resources.Load("GUI/Materials/CityTrackGFX");
 		dinoPortrait[2] = (Texture)Resources.Load("GUI/Materials/CityTrackGFX");
 		dinoPortrait[3] = (Texture)Resources.Load("GUI/Materials/CityTrackGFX");
 		dinoPortrait[4] = (Texture)Resources.Load("GUI/Materials/CityTrackGFX");
-		dinoPortrait[5] = (Texture)Resources.Load("GUI/Materials/CityTrackGFX");
+		dinoPortrait[5] = (Texture)Resources.Load("GUI/Materials/CityTrackGFX");*/
 		
 		serverNameGFX = (Texture)Resources.Load("GUI/Materials/ServerName");
 		playerNameGFX = (Texture)Resources.Load("GUI/Materials/PlayerName");
@@ -199,11 +206,6 @@ public class MenuControl : MonoBehaviour
 		
 		resultsMenuRect = new Rect[4];
 		
-		//the names of the players in the order that they past the finished line
-		resultsMenuRect = new Rect[13];
-		
-		playerNames = new string[4];
-		
 		//don't destroy this object
 		DontDestroyOnLoad(this);
 		networkHandlerObject = GameObject.FindGameObjectWithTag("NetworkHandler");
@@ -213,7 +215,10 @@ public class MenuControl : MonoBehaviour
 		menuOrigin = new Rect[6];
 		
 		glowDashes = new GameObject[12];
+
+		netView = GetComponent<NetworkView>();
 		
+
 	}
 	
 	void OnLevelWasLoaded()
@@ -235,27 +240,23 @@ public class MenuControl : MonoBehaviour
 			Vector3 pointInWorld = Camera.main.ScreenToWorldPoint(new Vector3(Screen.width, Screen.height, Camera.main.transform.position.z + 50));
 			dinoSelected.transform.localScale = new Vector3(pointInWorld.x / 26, pointInWorld.y / 12, pointInWorld.x / 26);
 		}
+
+		//the names of the players in the order that they past the finished line
+		resultsMenuRect = new Rect[14];
+		
+		playerNames = new string[4];
+		
+		resultsFName = new string[4];
+
+		raceDinos = new GameObject[4];
+		racePositions = new int[4];
+
+		waitForPlayers = 0;
 		
 	}
 	
 	void Update()
 	{
-		
-		if(menuSelect != Menu.mainMenu && mainMenuBkgd != null)
-		{
-			Vector3 pointInWorld = Camera.main.ScreenToWorldPoint(new Vector3(Screen.width, Screen.height, Camera.main.transform.position.z + 100));
-			mainMenuBkgd.transform.localScale = new Vector3(pointInWorld.x / 5, 1, pointInWorld.y / 5);
-			mainMenuBkgd.transform.position = Camera.main.ScreenToWorldPoint(new Vector3(menuOrigin[0].x + mainMenuBkgdPos.x, menuOrigin[0].y + mainMenuBkgdPos.y, 500));
-			
-		}
-		else if(menuBkgd != null)
-		{
-			Vector3 pointInWorld = Camera.main.ScreenToWorldPoint(new Vector3(Screen.width, Screen.height, Camera.main.transform.position.z + 100));
-			menuBkgd.transform.localScale = new Vector3(pointInWorld.x / 5, 1, pointInWorld.y / 5);
-			menuBkgd.transform.position = Camera.main.ScreenToWorldPoint(new Vector3(menuOrigin[1].x + menuBkgdPos.x, menuOrigin[1].y + menuBkgdPos.y, 500));
-			
-		}
-		
 		if(menuSelect == Menu.lobbyMenu)
 		{
 			
@@ -291,7 +292,7 @@ public class MenuControl : MonoBehaviour
 				
 				var gameMap = networkHandler.gameMap;
 				if(levelIndex == 0){
-					gameMap = "CityTrack";
+					gameMap = "DumbellTrack";
 				}
 				if(levelIndex == 1){
 					gameMap = "CityTrack2.1";
@@ -303,7 +304,7 @@ public class MenuControl : MonoBehaviour
 					gameMap = "Lee_CityTrack2.1";
 				}
 				if(levelIndex == 4){
-					gameMap = "CityTrack2.2_Test";
+					gameMap = "Robert_Reed_CityTrack2.1";
 				}
 				networkHandler.UpdateMapInformation(gameMap);
 			}
@@ -314,7 +315,7 @@ public class MenuControl : MonoBehaviour
 				
 				var gameMap = networkHandler.gameMap;
 				if(levelIndex == 0){
-					gameMap = "CityTrack";
+					gameMap = "DumbellTrack";
 				}
 				if(levelIndex == 1){
 					gameMap = "CityTrack2.1";
@@ -326,7 +327,7 @@ public class MenuControl : MonoBehaviour
 					gameMap = "Lee_CityTrack2.0_TestScene";
 				}
 				if(levelIndex == 4){
-					gameMap = "CityTrack2.2_Test";
+					gameMap = "Robert_Reed_CityTrack2.1";
 				}
 				networkHandler.UpdateMapInformation(gameMap);
 			}
@@ -474,15 +475,21 @@ public class MenuControl : MonoBehaviour
 			
 			//startDinoPos = ResizeRect(new Rect(72, 40, 0, 0));
 			//dinoSize = ResizeRect(new Rect(50, 55, 0, 0));
-			
-			Vector3 pointInWorld = Camera.main.ScreenToWorldPoint(new Vector3(Screen.width, Screen.height, Camera.main.transform.position.z + 100));
-			menuBkgd.transform.localScale = new Vector3(pointInWorld.x / 5, 1, pointInWorld.y / 5);
-			menuBkgd.transform.position = Camera.main.ScreenToWorldPoint(new Vector3(menuOrigin[2].x + menuBkgdPos.x, menuOrigin[2].y + menuBkgdPos.y, 500));
-			
-			//dinoSelected = (GameObject)Instantiate(dinoModels[dinoIndex], new Vector3(Screen.width, Screen.height, 0), Quaternion.identity);
-			dinoSelected.transform.localScale = new Vector3(10, 10, 10);
-			dinoSelected.transform.position = Camera.main.ScreenToWorldPoint(new Vector3(menuOrigin[2].x + startDinoPos.x, menuOrigin[2].y + startDinoPos.y, 130));
-			dinoSelected.transform.RotateAround(new Vector3(0, 1, 0), Vector3.up, rotateSpeed * Time.deltaTime);
+
+			if(menuBkgd != null)
+			{
+				Vector3 pointInWorld = Camera.main.ScreenToWorldPoint(new Vector3(Screen.width, Screen.height, Camera.main.transform.position.z + 100));
+				menuBkgd.transform.localScale = new Vector3(pointInWorld.x / 5, 1, pointInWorld.y / 5);
+				menuBkgd.transform.position = Camera.main.ScreenToWorldPoint(new Vector3(menuOrigin[2].x + menuBkgdPos.x, menuOrigin[2].y + menuBkgdPos.y, 500));
+			}
+
+			if(dinoSelected != null)
+			{
+				//dinoSelected = (GameObject)Instantiate(dinoModels[dinoIndex], new Vector3(Screen.width, Screen.height, 0), Quaternion.identity);
+				dinoSelected.transform.localScale = new Vector3(10, 10, 10);
+				dinoSelected.transform.position = Camera.main.ScreenToWorldPoint(new Vector3(menuOrigin[2].x + startDinoPos.x, menuOrigin[2].y + startDinoPos.y, 130));
+				dinoSelected.transform.RotateAround(new Vector3(0, 1, 0), Vector3.up, rotateSpeed * Time.deltaTime);
+			}
 			
 			//level name graphic
 			GUI.DrawTexture(new Rect(menuOrigin[2].x + lobbyMenuRect[4].x, menuOrigin[2].y + lobbyMenuRect[4].y, lobbyMenuRect[4].width, lobbyMenuRect[4].height), lvlNameGFX);
@@ -537,7 +544,7 @@ public class MenuControl : MonoBehaviour
 					
 					var gameMap = networkHandler.gameMap;
 					if(levelIndex == 0){
-						gameMap = "CityTrack";
+						gameMap = "DumbellTrack";
 					}
 					if(levelIndex == 1){
 						gameMap = "CityTrack2.1";
@@ -549,7 +556,7 @@ public class MenuControl : MonoBehaviour
 						gameMap = "Lee_CityTrack2.0_TestScene";
 					}
 					if(levelIndex == 4){
-						gameMap = "CityTrack2.2_Test";
+						gameMap = "Robert_Reed_CityTrack2.1";
 					}
 					networkHandler.UpdateMapInformation(gameMap);
 				}
@@ -562,7 +569,7 @@ public class MenuControl : MonoBehaviour
 					
 					var gameMap = networkHandler.gameMap;
 					if(levelIndex == 0){
-						gameMap = "CityTrack";
+						gameMap = "DumbellTrack";
 					}
 					if(levelIndex == 1){
 						gameMap = "CityTrack2.1";
@@ -574,7 +581,7 @@ public class MenuControl : MonoBehaviour
 						gameMap = "Lee_CityTrack2.0_TestScene";
 					}
 					if(levelIndex == 4){
-						gameMap = "CityTrack2.2_Test";
+						gameMap = "Robert_Reed_CityTrack2.1";
 					}
 					networkHandler.UpdateMapInformation(gameMap);
 				}
@@ -822,63 +829,104 @@ public class MenuControl : MonoBehaviour
 			//or			
 			
 			//size and positions for the numbers
-			resultsMenuRect[0] = ResizeRect(new Rect(10, 20, 40, 40));
-			resultsMenuRect[1] = ResizeRect(new Rect(10, 40, 40, 40));
-			resultsMenuRect[2] = ResizeRect(new Rect(10, 60, 40, 40));
-			resultsMenuRect[3] = ResizeRect(new Rect(10, 80, 40, 40));
+			resultsMenuRect[0] = ResizeRect(new Rect(20, 17, 40, 40));
+			resultsMenuRect[1] = ResizeRect(new Rect(20, 37, 40, 40));
+			resultsMenuRect[2] = ResizeRect(new Rect(20, 57, 40, 40));
+			resultsMenuRect[3] = ResizeRect(new Rect(20, 77, 40, 40));
 			
 			//size and positions for the names
-			resultsMenuRect[4] = ResizeRect(new Rect(30, 20, 40, 40));
-			resultsMenuRect[5] = ResizeRect(new Rect(30, 40, 40, 40));
-			resultsMenuRect[6] = ResizeRect(new Rect(30, 60, 40, 40));
-			resultsMenuRect[7] = ResizeRect(new Rect(30, 80, 40, 40));
+			resultsMenuRect[4] = ResizeRect(new Rect(30, 17, 40, 40));
+			resultsMenuRect[5] = ResizeRect(new Rect(30, 37, 40, 40));
+			resultsMenuRect[6] = ResizeRect(new Rect(30, 57, 40, 40));
+			resultsMenuRect[7] = ResizeRect(new Rect(30, 77, 40, 40));
 			
 			//size and positions for the dino banners
-			resultsMenuRect[8] = ResizeRect(new Rect(50, 20, 40, 40));
-			resultsMenuRect[9] = ResizeRect(new Rect(50, 40, 40, 40));
-			resultsMenuRect[10] = ResizeRect(new Rect(50, 60, 40, 40));
-			resultsMenuRect[11] = ResizeRect(new Rect(50, 80, 40, 40));
+			resultsMenuRect[8] = ResizeRect(new Rect(40, 15, 20, 10));
+			resultsMenuRect[9] = ResizeRect(new Rect(40, 35, 20, 10));
+			resultsMenuRect[10] = ResizeRect(new Rect(40, 55, 20, 10));
+			resultsMenuRect[11] = ResizeRect(new Rect(40, 75, 20, 10));
 			
 			//size and positions for the next button
-			resultsMenuRect[11] = ResizeRect(new Rect(80, 80, 40, 40));
-			
+			resultsMenuRect[12] = ResizeRect(new Rect(60, 70, 20, 15));
+
+			//size and position for the window texture
+			resultsMenuRect[13] = ResizeRect(new Rect(10, 10, 80, 80));
+
+			//window size and position
+
+			GUI.DrawTexture(new Rect(menuOrigin[4].x + resultsMenuRect[13].x, menuOrigin[4].y + resultsMenuRect[13].y, resultsMenuRect[13].width, resultsMenuRect[13].height), (Texture)Resources.Load("GUI/Materials/BackgroundLobby"));
 			
 			//4 place numbers
-			GUI.TextArea(new Rect(menuOrigin[4].x + resultsMenuRect[0].x, menuOrigin[4].y + resultsMenuRect[0].y, resultsMenuRect[0].width, resultsMenuRect[0].height), "1");
-			GUI.TextArea(new Rect(menuOrigin[4].x + resultsMenuRect[1].x, menuOrigin[4].y + resultsMenuRect[1].y, resultsMenuRect[1].width, resultsMenuRect[1].height), "2");
-			GUI.TextArea(new Rect(menuOrigin[4].x + resultsMenuRect[2].x, menuOrigin[4].y + resultsMenuRect[2].y, resultsMenuRect[2].width, resultsMenuRect[2].height), "3");
-			GUI.TextArea(new Rect(menuOrigin[4].x + resultsMenuRect[3].x, menuOrigin[4].y + resultsMenuRect[3].y, resultsMenuRect[3].width, resultsMenuRect[3].height), "4");
+			GUI.TextField(new Rect(menuOrigin[4].x + resultsMenuRect[0].x, menuOrigin[4].y + resultsMenuRect[0].y, resultsMenuRect[0].width, resultsMenuRect[0].height), "1");
+			GUI.TextField(new Rect(menuOrigin[4].x + resultsMenuRect[1].x, menuOrigin[4].y + resultsMenuRect[1].y, resultsMenuRect[1].width, resultsMenuRect[1].height), "2");
+			GUI.TextField(new Rect(menuOrigin[4].x + resultsMenuRect[2].x, menuOrigin[4].y + resultsMenuRect[2].y, resultsMenuRect[2].width, resultsMenuRect[2].height), "3");
+			GUI.TextField(new Rect(menuOrigin[4].x + resultsMenuRect[3].x, menuOrigin[4].y + resultsMenuRect[3].y, resultsMenuRect[3].width, resultsMenuRect[3].height), "4");
 			
 			
 			//get the tracking script 
-			dinoTracking = GameObject.Find("CheckPoints");
-			if(dinoTrackingScript == dinoTracking.GetComponent<DinoTracking>())
-			{
+/*			dinoTracking = GameObject.Find("Checkpoints");
+
+
+			dinoTrackingScript = dinoTracking.GetComponent<DinoTracking>();
+
 				GameObject[] raceDinos = dinoTrackingScript.GetDinoArray();
 				int[] racePositions = dinoTrackingScript.GetCurrentPositions();
+
+				int index = 0;
 				
-				//loop through the current positions multiple times and look for the places
-				for(int i = 0; i < raceDinos.Length; i++)
-				{
-					GUI.TextArea(new Rect(menuOrigin[4].x + resultsMenuRect[0].x, menuOrigin[4].y + resultsMenuRect[0].y, resultsMenuRect[0].width, resultsMenuRect[0].height), "1");
-				}
+			Debug.Log(networkHandler.playerInformation.Count);
 				
 				foreach(var player in networkHandler.playerInformation)
 				{
-					//name
+					Debug.Log("player");
+
+					GUI.TextField(new Rect(menuOrigin[4].x + resultsMenuRect[racePositions[index] + 4].x, menuOrigin[4].y + resultsMenuRect[racePositions[index] + 4].y, resultsMenuRect[racePositions[index] + 4].width, resultsMenuRect[racePositions[index] + 4].height), player.Value.playerName);
+
+					string textureFileName = "GUI/Materials/Banner" + player.Value.dinoName + "Small";
+
+					GUI.DrawTexture(new Rect(menuOrigin[4].x + lobbyMenuRect[racePositions[index] + 8].x, menuOrigin[4].y + lobbyMenuRect[racePositions[index] + 8].y, lobbyMenuRect[racePositions[index] + 8].width, lobbyMenuRect[racePositions[index] + 8].height), (Texture)Resources.Load(textureFileName));
+
+					index++;
 				}
-				
+
+				if(index < Network.connections.Length)
+				{
+					while(index < 4)
+					{
+						GUI.TextField(new Rect(menuOrigin[4].x + resultsMenuRect[racePositions[index] + 4].x, menuOrigin[4].y + resultsMenuRect[racePositions[index] + 4].y, resultsMenuRect[racePositions[index] + 4].width, resultsMenuRect[racePositions[index] + 4].height), "CPU");
+
+						string textureFileName = "GUI/Materials/Banner" + raceDinos[index].ToString() + "Small";
+						
+						GUI.DrawTexture(new Rect(menuOrigin[4].x + lobbyMenuRect[racePositions[index] + 8].x, menuOrigin[4].y + lobbyMenuRect[racePositions[index] + 8].y, lobbyMenuRect[racePositions[index] + 8].width, lobbyMenuRect[racePositions[index] + 8].height), (Texture)Resources.Load(textureFileName));
+
+						index++;
+					}
+				}*/
+
 				//if the current positions index equals to the loop index
 				//use the current positions index to get the names	
 				//also get the dinos array and place the banner name next to the name of the player	
 				//Tell the player if they have won or not
 				//have an ok button
+
+			GUI.TextField(new Rect(menuOrigin[4].x + resultsMenuRect[4].x, menuOrigin[4].y + resultsMenuRect[4].y, resultsMenuRect[4].width, resultsMenuRect[4].height), playerNames[0]);
+			GUI.TextField(new Rect(menuOrigin[4].x + resultsMenuRect[5].x, menuOrigin[4].y + resultsMenuRect[5].y, resultsMenuRect[5].width, resultsMenuRect[5].height), playerNames[1]);
+			GUI.TextField(new Rect(menuOrigin[4].x + resultsMenuRect[6].x, menuOrigin[4].y + resultsMenuRect[6].y, resultsMenuRect[6].width, resultsMenuRect[6].height), playerNames[2]);
+			GUI.TextField(new Rect(menuOrigin[4].x + resultsMenuRect[7].x, menuOrigin[4].y + resultsMenuRect[7].y, resultsMenuRect[7].width, resultsMenuRect[7].height), playerNames[3]);
+
+			GUI.DrawTexture(new Rect(menuOrigin[4].x + resultsMenuRect[8].x, menuOrigin[4].y + resultsMenuRect[8].y, resultsMenuRect[8].width, resultsMenuRect[8].height), (Texture)Resources.Load(resultsFName[0]));
+			GUI.DrawTexture(new Rect(menuOrigin[4].x + resultsMenuRect[9].x, menuOrigin[4].y + resultsMenuRect[9].y, resultsMenuRect[9].width, resultsMenuRect[9].height), (Texture)Resources.Load(resultsFName[1]));
+			GUI.DrawTexture(new Rect(menuOrigin[4].x + resultsMenuRect[10].x, menuOrigin[4].y + resultsMenuRect[10].y, resultsMenuRect[10].width, resultsMenuRect[10].height), (Texture)Resources.Load(resultsFName[2]));
+			GUI.DrawTexture(new Rect(menuOrigin[4].x + resultsMenuRect[11].x, menuOrigin[4].y + resultsMenuRect[11].y, resultsMenuRect[11].width, resultsMenuRect[11].height), (Texture)Resources.Load(resultsFName[3]));
+
+			if(GUI.Button(new Rect(menuOrigin[4].x + resultsMenuRect[12].x, menuOrigin[4].y + resultsMenuRect[12].y, resultsMenuRect[12].width, resultsMenuRect[12].height), (Texture)Resources.Load("GUI/Materials/OkButton")))
+			{
+				Debug.Log("change to lobby");
+				Application.LoadLevel("Menu");
+				menuSelect = Menu.lobbyMenu;
+				//networkHandler.ChangeMenuSelect();
+				//networkHandler.ChangeLevel();
 			}
-			
-			GUI.TextArea(new Rect(menuOrigin[4].x + resultsMenuRect[4].x, menuOrigin[4].y + resultsMenuRect[4].y, resultsMenuRect[4].width, resultsMenuRect[4].height), "1");
-			GUI.TextArea(new Rect(menuOrigin[4].x + resultsMenuRect[5].x, menuOrigin[4].y + resultsMenuRect[5].y, resultsMenuRect[5].width, resultsMenuRect[5].height), "2");
-			GUI.TextArea(new Rect(menuOrigin[4].x + resultsMenuRect[6].x, menuOrigin[4].y + resultsMenuRect[6].y, resultsMenuRect[6].width, resultsMenuRect[6].height), "3");
-			GUI.TextArea(new Rect(menuOrigin[4].x + resultsMenuRect[7].x, menuOrigin[4].y + resultsMenuRect[7].y, resultsMenuRect[7].width, resultsMenuRect[7].height), "4");
 		}
 		
 		//if menuSelet is in a level
@@ -951,7 +999,7 @@ public class MenuControl : MonoBehaviour
 	}
 	
 	
-	IEnumerator MoveRightOff(int _index1, int _index2, Menu _menu)
+	public IEnumerator MoveRightOff(int _index1, int _index2, Menu _menu)
 	{
 		menuMoving = true;
 		
@@ -995,13 +1043,15 @@ public class MenuControl : MonoBehaviour
 		}
 	}
 	
-	IEnumerator MoveLeftOff(int _index1, int _index2, Menu _menu)
+	public IEnumerator MoveLeftOff(int _index1, int _index2, Menu _menu)
 	{
-		
+		Debug.Log("moving " + _menu.ToString());
 		menuMoving = true;
 		
 		while(true)
 		{
+			//Debug.Log("moveing " + _menu.ToString());
+			//Debug.Log(menuOrigin[_index2].x);
 			if(menuOrigin[_index1].x > -Screen.width)
 			{
 				menuOrigin[_index1].x = menuOrigin[_index1].x - buttonMoveSpeed * Time.deltaTime;
@@ -1234,5 +1284,146 @@ public class MenuControl : MonoBehaviour
 			
 			yield return null;
 		}
+	}
+
+	public void SetResults()
+	{
+		/*dinoTracking = GameObject.Find("Checkpoints");
+
+		dinoTrackingScript = dinoTracking.GetComponent<DinoTracking>();
+
+		PlayerInformation[] infoArr = new PlayerInformation[4];
+
+		networkHandler.playerInformation.Values.CopyTo(infoArr, 0);
+		
+		raceDinos = dinoTrackingScript.GetDinoArray();
+		racePositions = dinoTrackingScript.GetCurrentPositions();
+		
+		int index = 0;
+
+		//Debug.Log(networkHandler.playerInformation.Count);
+
+		int playerNum = 0;
+
+		int.TryParse(Network.player.ToString(), out playerNum);
+
+		netView.RPC("SetPlayerNames", RPCMode.AllBuffered, infoArr[0].playerName, playerNum, raceDinos[playerNum].name);
+
+
+
+		while(index < 4)
+		{
+				//Debug.Log("set cpu name");
+			//Debug.Log("index " + index);
+				if(playerNames[racePositions[index] - 1] == null)
+				{
+					//GUI.TextField(new Rect(menuOrigin[4].x + resultsMenuRect[racePositions[index] + 4].x, menuOrigin[4].y + resultsMenuRect[racePositions[index] + 4].y, resultsMenuRect[racePositions[index] + 4].width, resultsMenuRect[racePositions[index] + 4].height), "CPU");
+				playerNames[racePositions[index] - 1] = "CPU";
+
+					//string textureFileName = "GUI/Materials/Banner" + raceDinos[index].ToString() + "Small";
+					
+					//GUI.DrawTexture(new Rect(menuOrigin[4].x + lobbyMenuRect[racePositions[index] + 8].x, menuOrigin[4].y + lobbyMenuRect[racePositions[index] + 8].y, lobbyMenuRect[racePositions[index] + 8].width, lobbyMenuRect[racePositions[index] + 8].height), (Texture)Resources.Load(textureFileName));
+				resultsFName[racePositions[index] - 1] = "GUI/Materials/Banner" + GetNameFromClone(raceDinos[index].ToString()) + "Small";
+				}
+
+			//Debug.Log(raceDinos[index].ToString());
+
+				index++;
+		}*/
+
+		StartCoroutine("SettingResults");
+
+	}
+
+	private IEnumerator SettingResults()
+	{
+		dinoTracking = GameObject.Find("Checkpoints");
+		
+		dinoTrackingScript = dinoTracking.GetComponent<DinoTracking>();
+		
+		PlayerInformation[] infoArr = new PlayerInformation[4];
+		
+		networkHandler.playerInformation.Values.CopyTo(infoArr, 0);
+		
+		raceDinos = dinoTrackingScript.GetDinoArray();
+		racePositions = dinoTrackingScript.GetCurrentPositions();
+		
+		int index = 0;
+		
+		//Debug.Log(networkHandler.playerInformation.Count);
+		
+		int playerNum = 0;
+		
+		int.TryParse(Network.player.ToString(), out playerNum);
+		
+		netView.RPC("SetPlayerNames", RPCMode.AllBuffered, infoArr[0].playerName, playerNum, raceDinos[playerNum].name, racePositions[playerNum]);
+
+		/*for(int i = 0; i < racePositions.Length; i++)
+			Debug.Log("player " + i + " in position " + racePositions[i]);*/
+		
+		while(true)
+		{
+			Debug.Log("waiting for players to set stuff");
+
+			if(waitForPlayers >= Network.connections.Length + 1)
+			{
+				Debug.Log("all players ready");
+
+				break;
+			}
+
+			yield return null;
+		}
+		
+		while(index < 4)
+		{
+			//Debug.Log("set cpu name");
+			//Debug.Log("index " + index);
+			if(playerNames[racePositions[index] - 1] == null)
+			{
+				//GUI.TextField(new Rect(menuOrigin[4].x + resultsMenuRect[racePositions[index] + 4].x, menuOrigin[4].y + resultsMenuRect[racePositions[index] + 4].y, resultsMenuRect[racePositions[index] + 4].width, resultsMenuRect[racePositions[index] + 4].height), "CPU");
+				playerNames[racePositions[index] - 1] = "CPU";
+				
+				//string textureFileName = "GUI/Materials/Banner" + raceDinos[index].ToString() + "Small";
+				
+				//GUI.DrawTexture(new Rect(menuOrigin[4].x + lobbyMenuRect[racePositions[index] + 8].x, menuOrigin[4].y + lobbyMenuRect[racePositions[index] + 8].y, lobbyMenuRect[racePositions[index] + 8].width, lobbyMenuRect[racePositions[index] + 8].height), (Texture)Resources.Load(textureFileName));
+				resultsFName[racePositions[index] - 1] = "GUI/Materials/Banner" + GetNameFromClone(raceDinos[index].ToString()) + "Small";
+			}
+			
+			//Debug.Log(raceDinos[index].ToString());
+			
+			index++;
+
+			yield return null;
+		}
+	}
+
+	public void ShowResults()
+	{
+		Debug.Log("showing results");
+		StartCoroutine(MoveLeftOff(5, 4, Menu.resultsMenu));
+	}
+
+	private string GetNameFromClone(string _name)
+	{
+		string _tempArr = _name.Substring(0, _name.IndexOf('('));
+		return _tempArr;
+
+	}
+
+	[RPC]
+	private void SetPlayerNames(string _name, int _playerNum, string _dinoName, int _place)
+	{
+		Debug.Log("setting " + _name + "that is player " + _playerNum + "using dino name " + _dinoName + " to " + _place);
+
+		waitForPlayers++;
+
+		/*Debug.Log("race positions " + racePositions[_playerNum]);
+		Debug.Log("playernames " + playerNames[racePositions[_playerNum] - 1]);*/
+
+		playerNames[_place - 1] = _name;
+		resultsFName[_place - 1] = "GUI/Materials/Banner" + GetNameFromClone(_dinoName) + "Small";
+
+		Debug.Log("banner name " + resultsFName[_place - 1]);
 	}
 }

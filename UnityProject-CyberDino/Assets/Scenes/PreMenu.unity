@@ -121,6 +121,10 @@ Prefab:
       propertyPath: m_Name
       value: GameHandler
       objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: e6f376646afe95a4ab3370abc3a29b99, type: 2}
+      propertyPath: m_RootOrder
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: e6f376646afe95a4ab3370abc3a29b99, type: 2}
   m_RootGameObject: {fileID: 1197003957}
@@ -136,6 +140,7 @@ GameObject:
   - 4: {fileID: 614642520}
   - 114: {fileID: 614642522}
   - 114: {fileID: 614642521}
+  - 148: {fileID: 614642523}
   m_Layer: 0
   m_Name: MasterMenu
   m_TagString: Menu
@@ -154,6 +159,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
+  m_RootOrder: 3
 --- !u!114 &614642521
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -190,32 +196,6 @@ MonoBehaviour:
   - Troodon
   levelTextures:
   - {fileID: 2800000, guid: c43eafb4df2b8b24e8a981c7852db787, type: 3}
-  resultsMenuRect:
-  - serializedVersion: 2
-    x: 10
-    y: 10
-    width: 20
-    height: 10
-  - serializedVersion: 2
-    x: 20
-    y: 10
-    width: 20
-    height: 10
-  - serializedVersion: 2
-    x: 10
-    y: 30
-    width: 20
-    height: 10
-  - serializedVersion: 2
-    x: 20
-    y: 30
-    width: 20
-    height: 10
-  - serializedVersion: 2
-    x: 80
-    y: 80
-    width: 20
-    height: 20
   readyMe: 0
   readyAll: 1
   networkHandlerObject: {fileID: 100000, guid: e6f376646afe95a4ab3370abc3a29b99, type: 2}
@@ -225,13 +205,6 @@ MonoBehaviour:
   serverName: 
   dinoIndex: 0
   levelIndex: 0
-  placesNames:
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
   buttonMoveSpeed: 2000
   dinoModels:
   - {fileID: 100070, guid: d4fdffedf7bfbda4eb5e0f887429c5f7, type: 2}
@@ -241,6 +214,18 @@ MonoBehaviour:
   - {fileID: 100040, guid: 0e1355ee5f8b712408677eddfec3a8a8, type: 2}
   - {fileID: 100200, guid: 51fc98c3e31122f4688b68581b428d76, type: 2}
   rotateSpeed: 10
+--- !u!148 &614642523
+NetworkView:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 614642519}
+  m_Enabled: 1
+  m_StateSynchronization: 1
+  m_Observed: {fileID: 614642520}
+  m_ViewID:
+    m_ID: 2
+    m_Type: 1
 --- !u!1 &1197003957
 GameObject:
   m_ObjectHideFlags: 0
@@ -272,7 +257,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   masterServerGameType: CyberDinoRacingv0.1
   mainMenuScene: Menu
-  gameMap: CityTrack
+  gameMap: DumbellTrack
 --- !u!148 &1197003959
 NetworkView:
   m_ObjectHideFlags: 0
@@ -297,6 +282,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
+  m_RootOrder: 1
 --- !u!1 &1221684662
 GameObject:
   m_ObjectHideFlags: 0
@@ -359,6 +345,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
+  m_RootOrder: 0
 --- !u!1 &1999964434
 GameObject:
   m_ObjectHideFlags: 0
@@ -426,8 +413,11 @@ Camera:
     m_Bits: 4294967295
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 0}
+  m_TargetDisplay: 0
   m_HDR: 0
   m_OcclusionCulling: 1
+  m_StereoConvergence: 10
+  m_StereoSeparation: .0219999999
 --- !u!4 &1999964439
 Transform:
   m_ObjectHideFlags: 0
@@ -439,3 +429,4 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
+  m_RootOrder: 2
