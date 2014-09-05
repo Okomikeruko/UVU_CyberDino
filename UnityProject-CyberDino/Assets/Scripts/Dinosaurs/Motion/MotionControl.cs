@@ -17,7 +17,7 @@ public class MotionControl : MonoBehaviour {
 	
 	private float gravity = 98.0F; 					// The rate that objects fall in meters/second 
 	
-	private float drag = 2.0F;						// The rate which an object slows without breaking or accelerating
+	private float drag = 10.0F;						// The rate which an object slows without breaking or accelerating
 	private float slope = 0.0f;						// The angle of the ground beneath this object
 	private float drift = 0.0F;						// The angle of drift in degrees
 	private float maxDrift = 7.0F; 				// The maximum angle of drift in degrees
@@ -44,6 +44,8 @@ public class MotionControl : MonoBehaviour {
 	public float topSpeed = 80.0F;					// Public Stat controlling this object's top speed
 	public float handling = 1.0F;					// Public Stat controlling this object's turning radius
 	public float jump = 80.0F;						// Public controller being the initial velocity of the jump function
+	public float medianSpeed = 60.0F;				// Public Stat controlling this object's median speed.
+	public float speedRatio = 0.5F;					// Multiplier affecting accelleration after median speed is reached.
 	public float velocity;
 	
 	private const float DEGREE_DIFF = 0.9f;
@@ -76,11 +78,11 @@ public class MotionControl : MonoBehaviour {
 	void FixedUpdate () 
 	{
 		// Apply acceleration and drift or fall depending on grounded state
-		if (onGround/* && collisionAngle > SLOPE_ANGLE*/)
+		if (onGround)
 		{			
 			// Update traction, drift, and driftRad every frame.
 			traction = handling * (1 - speed/topSpeed); 				// Set traction based on speed
-			if (speed / topSpeed > 0.8f) 
+			if (speed > medianSpeed) 
 			{
 				drift -= (handling * horizontalTurning); 
 				drift = (Mathf.Abs (drift) > 0.1F) ? drift + (drift * traction * 10) : 0 ; 	// Modify drift based on traction
@@ -98,15 +100,20 @@ public class MotionControl : MonoBehaviour {
 			fallingSpeed = 0.0f; // Stop this object from falling
 			
 			netanim.AnimSetJump("Jump", false);
-			if(velocity < topSpeed && isRunning) // Test if this object is traveling at top speed
+			if(velocity < topSpeed && velocity > -topSpeed/10 && isRunning) // Test if this object is traveling at top speed
 			{
-				velocity += acceleration * Time.deltaTime; // Accelerate this object
+				if(velocity < medianSpeed) // Test if this object is traveling at median speed
+				{
+					velocity += verticalVelocity * acceleration * Time.deltaTime; // Accelerate this object
+				}
+				else if(horizontalTurning >= -0.1F && 0.1F >= horizontalTurning) // test if turning
+				{
+					velocity += verticalVelocity * acceleration * speedRatio * Time.deltaTime; // accelerate this object at a reduced ratio
+				}
 			}
 			
-			
 			// Update velocity
-			velocity -= (drag + slope) * Mathf.Sign (speed) * Time.deltaTime; // Reduce velocity by drag and slope
-			velocity *= verticalVelocity;
+			velocity += (drag + slope) * -Mathf.Sign (velocity) * Time.deltaTime; // Reduce velocity by drag and slope
 			
 			// Update moveDirection
 			driftRad = (Mathf.PI/180) * drift;							// Convert drift degrees in to drift radians
@@ -121,6 +128,7 @@ public class MotionControl : MonoBehaviour {
 			
 			// Apply movement
 			rigidbody.AddForce(velocityDifference, ForceMode.VelocityChange);
+			
 			
 			
 			// The Jump Function
@@ -154,8 +162,15 @@ public class MotionControl : MonoBehaviour {
 		}
 		
 		// Apply rotation
-		transform.Rotate(new Vector3(0, handling * horizontalTurning, 0)); // Rotate character controller
-		
+		//transform.Rotate(new Vector3(0, handling * horizontalTurning, 0)); // Rotate character controller
+/*		rigidbody.AddRelativeTorque(0, 10000 * handling * horizontalTurning, 0); // Rotate character controller
+		rigidbody.
+		if (horizontalTurning >= -0.1F && 0.1F >= horizontalTurning) {
+			rigidbody.angularVelocity = Vector3.zero;
+		}*/
+		rigidbody.angularVelocity = (new Vector3(0, handling * horizontalTurning, 0)); // Rotate character controller
+
+
 		netanim.AnimSetSpeed("Speed", velocity, topSpeed);
 		netanim.AnimSetDirection("Direction", horizontalTurning);
 	}
@@ -281,7 +296,8 @@ public class MotionControl : MonoBehaviour {
 	
 	private void StopSpin()
 	{
-		rigidbody.constraints = RigidbodyConstraints.FreezeRotation;
+		rigidbody.constraints = RigidbodyConstraints.FreezeRotationX;
+		rigidbody.constraints = RigidbodyConstraints.FreezeRotationZ;
 	}
 	
 	
