@@ -312,6 +312,7 @@ GameObject:
   - 95: {fileID: 9500000}
   - 114: {fileID: 11400000}
   - 148: {fileID: 14800000}
+  - 114: {fileID: 11400024}
   m_Layer: 0
   m_Name: dilophosaurus
   m_TagString: Untagged
@@ -1309,14 +1310,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   anim: {fileID: 0}
-  TurboAcceleration: 0
-  TurboTopSpeed: 0
   acceleration: 180
   topSpeed: 85
   handling: 2.5
   jump: 75
-  medianSpeed: 30
-  speedRatio: .0500000007
+  medianSpeed: 50
+  speedRatio: .100000001
   velocity: 0
 --- !u!114 &11400016
 MonoBehaviour:
@@ -1379,6 +1378,17 @@ MonoBehaviour:
   maxHealth: 100
   canBomb: 1
   shielded: 0
+--- !u!114 &11400024
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100040}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4a015fc9f260e5c49adb1ac04ee5d0bf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!136 &13600002
 CapsuleCollider:
   m_ObjectHideFlags: 1

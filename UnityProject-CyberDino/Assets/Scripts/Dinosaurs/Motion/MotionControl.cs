@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 
 [RequireComponent(typeof(Rigidbody), typeof(CapsuleCollider))]
@@ -20,7 +20,7 @@ public class MotionControl : MonoBehaviour {
 	private float drag = 10.0F;						// The rate which an object slows without breaking or accelerating
 	private float slope = 0.0f;						// The angle of the ground beneath this object
 	private float drift = 0.0F;						// The angle of drift in degrees
-	private float maxDrift = 7.0F; 				// The maximum angle of drift in degrees
+	private float maxDrift = 7.0F; 					// The maximum angle of drift in degrees
 	private float driftRad = 0.0f;					// The angle of drift in radians
 	private float traction = 1.0f;					// The rate at which drift is reduced
 	private float collisionAngle = 0.0f;
@@ -35,9 +35,7 @@ public class MotionControl : MonoBehaviour {
 	
 	private float oldAcceleration;
 	private float oldTopSpeed;
-	[SerializeField]
 	private float TurboAcceleration;
-	[SerializeField]
 	private float TurboTopSpeed;
 	
 	public float acceleration = 10.0F;				// Public Stat controlling this object's rate of acceleration
@@ -171,7 +169,8 @@ public class MotionControl : MonoBehaviour {
 		rigidbody.angularVelocity = (new Vector3(0, handling * horizontalTurning, 0)); // Rotate character controller
 
 
-		netanim.AnimSetSpeed("Speed", velocity, topSpeed);
+		// netanim.AnimSetSpeed("Speed", velocity, topSpeed);
+		netanim.AnimSetSpeed ("Speed", rigidbody.velocity.magnitude, topSpeed);
 		netanim.AnimSetDirection("Direction", horizontalTurning);
 	}
 	
