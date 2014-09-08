@@ -11,7 +11,6 @@ public class RespawnManager : MonoBehaviour
 	#region Fields
 	// Respawn Variables
 	private RacerRespawnStats racerRespawn;
-	private RacerHealth racerHealth;
 	private RespawnNode theRespawnNode;
 
 	[SerializeField]
@@ -23,20 +22,11 @@ public class RespawnManager : MonoBehaviour
 	private float offTrackTimer = 2;
 	private float offTrackRespawnTime;
 
-	//Racer health variables
-	[SerializeField]
-	private float heavyHealth = 125.0f;
-	[SerializeField]
-	private float standardHealth = 100.0f;
-	[SerializeField]
-	private float lightHealth = 75.0f;
-	
 	#endregion Fields
 	
 	#region Properties
 	// Respawn Variables
 	private RacerRespawnStats RacerRespawn{get{return racerRespawn;}set{racerRespawn = value;}}
-	private RacerHealth RacerHealth{get{return racerHealth;}set{racerHealth = value;}}
 
 	// Directional Respawn Variables
 	private RespawnNode TheRespawnNode{get{return theRespawnNode;}set{theRespawnNode = value;}}
@@ -47,11 +37,6 @@ public class RespawnManager : MonoBehaviour
 	private float OffTrackTimer { get{return offTrackTimer;} set{offTrackTimer = value;}}
 	private float OffTrackRespawnTime { get{return offTrackRespawnTime;} set{offTrackRespawnTime = value;}}
 
-	//Racer health variables
-	public float HeavyHealth{get{return heavyHealth;} set{heavyHealth = value;}}
-	public float StandardHealth{get{return standardHealth;} set{standardHealth = value;}}
-	public float LightHealth{get{return lightHealth;} set{lightHealth = value;}}
-	
 	#endregion Properties
 
 	void OnEnable() 
@@ -64,7 +49,6 @@ public class RespawnManager : MonoBehaviour
 		RacerInteractionManager.hitSomething += OnTrack;
 
 		RacerRespawnStats.spawned += RacerStart;
-		RacerHealth.died += DeadRacer;
 	}
 	
 	void OnDisable() 
@@ -76,8 +60,6 @@ public class RespawnManager : MonoBehaviour
 		RacerInteractionManager.hitSomething -= OnTrack;
 
 		RacerRespawnStats.spawned -= RacerStart;
-
-		RacerHealth.died -= DeadRacer;
 	}
 
 	public void StayingOnTrack(Transform player, Transform other)
@@ -102,7 +84,6 @@ public class RespawnManager : MonoBehaviour
 	{
 		Debug.Log("Spawning player");
 		RacerRespawn = player.gameObject.GetComponent<RacerRespawnStats>();
-		RacerHealth = player.gameObject.GetComponent<RacerHealth>();
 
 		RacerRespawn.ThresholdAngle = ThresholdAngle;
 
@@ -111,34 +92,6 @@ public class RespawnManager : MonoBehaviour
 		RacerRespawn.CurrentNode = RacerRespawn.RespawnCheckpoint;
 		RacerRespawn.PreviousNode = TheRespawnNode.PreviousNode;
 		RacerRespawn.NextNode = TheRespawnNode.NextNode;
-
-		switch(RacerHealth.theSize)
-		{
-		case RacerHealth.DinoSize.Heavy:
-			RacerHealth.TotalHealth = HeavyHealth;
-			break;
-		case RacerHealth.DinoSize.Standard:
-			RacerHealth.TotalHealth = StandardHealth;
-			break;
-		case RacerHealth.DinoSize.Light:
-			RacerHealth.TotalHealth = LightHealth;
-			break;
-		default:
-			RacerHealth.TotalHealth = StandardHealth;
-			break;
-		}
-		RacerHealth.CurrentHealth = RacerHealth.TotalHealth;
-		
-	}
-
-	public void DeadRacer(Transform player)
-	{
-		Debug.Log("Player is dead");
-		RacerHealth = player.gameObject.GetComponent<RacerHealth>();
-
-		RacerHealth.CurrentHealth = RacerHealth.TotalHealth;
-
-		UseRespawn(player);
 	}
 
 	IEnumerator OffTrack(Transform player)
