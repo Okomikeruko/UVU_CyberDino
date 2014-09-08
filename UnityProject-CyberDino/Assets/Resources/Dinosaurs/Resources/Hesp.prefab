@@ -2083,6 +2083,7 @@ GameObject:
   - 95: {fileID: 9500000}
   - 114: {fileID: 11400028}
   - 148: {fileID: 14800002}
+  - 114: {fileID: 11400032}
   m_Layer: 8
   m_Name: Hesp_Mesh
   m_TagString: Mesh
@@ -10077,14 +10078,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   anim: {fileID: 0}
-  TurboAcceleration: 0
-  TurboTopSpeed: 0
   acceleration: 180
   topSpeed: 90
   handling: 2
   jump: 50
   medianSpeed: 60
-  speedRatio: .5
+  speedRatio: .100000001
   velocity: 0
 --- !u!114 &11400022
 MonoBehaviour:
@@ -10162,6 +10161,18 @@ MonoBehaviour:
   overhealDecayPerSecond: 1
   overhealDecayDelay: 5
   overhealDecayCapPercent: 1
+--- !u!114 &11400032
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100266}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4a015fc9f260e5c49adb1ac04ee5d0bf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  DinoSound: 1
 --- !u!120 &12000000
 LineRenderer:
   m_ObjectHideFlags: 1
