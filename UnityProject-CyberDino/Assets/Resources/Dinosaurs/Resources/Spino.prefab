@@ -19,6 +19,7 @@ GameObject:
   - 114: {fileID: 11400000}
   - 114: {fileID: 11400032}
   - 114: {fileID: 11400030}
+  - 114: {fileID: 11400034}
   m_Layer: 8
   m_Name: Spino
   m_TagString: Dino
@@ -1920,6 +1921,26 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cbc3184e690fbdd41b8692b7083d01e8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &11400034
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100000}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eb7c9d0cb6b29b941bc8887d774c81f9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHealth: 100
+  canRegenerate: 1
+  healthPerSecond: 1
+  damageRegenDelay: 5
+  regenerationCapPercent: 1
+  canOverheal: 0
+  overhealDecayPerSecond: 1
+  overhealDecayDelay: 5
+  overhealDecayCapPercent: 1
 --- !u!135 &13500000
 SphereCollider:
   m_ObjectHideFlags: 1
