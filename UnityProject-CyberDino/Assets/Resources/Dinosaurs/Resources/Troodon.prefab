@@ -597,6 +597,7 @@ GameObject:
   - 95: {fileID: 9500000}
   - 114: {fileID: 11400002}
   - 148: {fileID: 14800002}
+  - 114: {fileID: 11400030}
   m_Layer: 0
   m_Name: troodonAnimations
   m_TagString: Untagged
@@ -1494,14 +1495,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   anim: {fileID: 0}
-  TurboAcceleration: 0
-  TurboTopSpeed: 0
   acceleration: 180
   topSpeed: 90
   handling: 2
   jump: 50
   medianSpeed: 60
-  speedRatio: .5
+  speedRatio: .100000001
   velocity: 0
 --- !u!114 &11400024
 MonoBehaviour:
@@ -1547,6 +1546,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0bac9640c6d520848ae73eb80cc1f326, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &11400030
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100078}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4a015fc9f260e5c49adb1ac04ee5d0bf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  DinoSound: 5
 --- !u!135 &13500000
 SphereCollider:
   m_ObjectHideFlags: 1

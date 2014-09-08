@@ -98,7 +98,7 @@ public class MotionControl : MonoBehaviour {
 			fallingSpeed = 0.0f; // Stop this object from falling
 			
 			netanim.AnimSetJump("Jump", false);
-			if(velocity < topSpeed && velocity > -topSpeed/10 && isRunning) // Test if this object is traveling at top speed
+			if(velocity < topSpeed && velocity > -topSpeed*0.4 && isRunning) // Test if this object is traveling at top speed
 			{
 				if(velocity < medianSpeed) // Test if this object is traveling at median speed
 				{
@@ -111,7 +111,7 @@ public class MotionControl : MonoBehaviour {
 			}
 			
 			// Update velocity
-			velocity += (drag + slope) * -Mathf.Sign (velocity) * Time.deltaTime; // Reduce velocity by drag and slope
+			velocity += (drag + slope + (topSpeed/2)) * (1 - Mathf.Abs (verticalVelocity)) * -Mathf.Sign (velocity) * Time.deltaTime; // Reduce velocity by drag and slope
 			
 			// Update moveDirection
 			driftRad = (Mathf.PI/180) * drift;							// Convert drift degrees in to drift radians
@@ -143,9 +143,6 @@ public class MotionControl : MonoBehaviour {
 			rigidbody.AddForce(new Vector3(0.0f, -gravity * rigidbody.mass, 0.0f));
 		}	
 		
-		
-		
-		
 		RaycastHit hit;
 		
 		if(Physics.Raycast(transform.position, -Vector3.up, out hit))
@@ -158,18 +155,9 @@ public class MotionControl : MonoBehaviour {
 				transform.rotation = Quaternion.Slerp (transform.rotation, to, adjustRation);
 			}
 		}
-		
-		// Apply rotation
-		//transform.Rotate(new Vector3(0, handling * horizontalTurning, 0)); // Rotate character controller
-/*		rigidbody.AddRelativeTorque(0, 10000 * handling * horizontalTurning, 0); // Rotate character controller
-		rigidbody.
-		if (horizontalTurning >= -0.1F && 0.1F >= horizontalTurning) {
-			rigidbody.angularVelocity = Vector3.zero;
-		}*/
+
 		rigidbody.angularVelocity = (new Vector3(0, handling * horizontalTurning, 0)); // Rotate character controller
 
-
-		// netanim.AnimSetSpeed("Speed", velocity, topSpeed);
 		netanim.AnimSetSpeed ("Speed", rigidbody.velocity.magnitude, topSpeed);
 		netanim.AnimSetDirection("Direction", horizontalTurning);
 	}
@@ -297,16 +285,6 @@ public class MotionControl : MonoBehaviour {
 	{
 		rigidbody.constraints = RigidbodyConstraints.FreezeRotationX;
 		rigidbody.constraints = RigidbodyConstraints.FreezeRotationZ;
-	}
-	
-	
-	// Temporary - for testing
-	void OnGUI() 
-	{		
-		GUI.Label(new Rect(2, 0, 100, 20), "collisionAngle: " + collisionAngle.ToString());
-		//GUI.Label(new Rect(2, 40, 100, 20), "Acceleration: " + acceleration.ToString());	
-		//GUI.Label(new Rect(2, 20, 100, 20), "Speed: " + speed.ToString());	
-		//GUI.Label(new Rect(2, 60, 100, 20), "Slope: " + slope.ToString());			
 	}
 	
 	public void TopSpeedMod(float percent, float duration)

@@ -820,6 +820,7 @@ GameObject:
   - 95: {fileID: 9500002}
   - 114: {fileID: 11400026}
   - 148: {fileID: 14800004}
+  - 114: {fileID: 11400030}
   m_Layer: 0
   m_Name: rexAnim3
   m_TagString: Untagged
@@ -1583,14 +1584,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   anim: {fileID: 0}
-  TurboAcceleration: 0
-  TurboTopSpeed: 0
   acceleration: 60
   topSpeed: 90
   handling: .75
   jump: 50
   medianSpeed: 60
-  speedRatio: .109999999
+  speedRatio: .100000001
   velocity: 0
 --- !u!114 &11400004
 MonoBehaviour:
@@ -1792,6 +1791,18 @@ MonoBehaviour:
   overhealDecayPerSecond: 1
   overhealDecayDelay: 5
   overhealDecayCapPercent: 1
+--- !u!114 &11400030
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100186}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4a015fc9f260e5c49adb1ac04ee5d0bf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  DinoSound: 4
 --- !u!136 &13600000
 CapsuleCollider:
   m_ObjectHideFlags: 1
