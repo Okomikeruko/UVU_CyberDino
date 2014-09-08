@@ -11,7 +11,7 @@ GameObject:
   - 198: {fileID: 19800000}
   - 199: {fileID: 19900000}
   m_Layer: 0
-  m_Name: EggDrop
+  m_Name: TroodonTail
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -23,9 +23,9 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100000}
-  m_LocalRotation: {x: -.707106829, y: 0, z: 0, w: .707106829}
-  m_LocalPosition: {x: -8.40782356, y: .235049218, z: -1.14747334}
-  m_LocalScale: {x: 8.3992281, y: 8.3992281, z: 8.3992281}
+  m_LocalRotation: {x: -.578887522, y: -.406065553, z: -.578887582, w: .406065464}
+  m_LocalPosition: {x: 1.38254964, y: 3.61775184, z: -3.42295861}
+  m_LocalScale: {x: .476190507, y: .476190567, z: .476190567}
   m_Children: []
   m_Father: {fileID: 0}
 --- !u!198 &19800000
@@ -34,7 +34,7 @@ ParticleSystem:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100000}
-  lengthInSec: 1
+  lengthInSec: 2
   startDelay: 0
   speed: 1
   randomSeed: 0
@@ -45,7 +45,7 @@ ParticleSystem:
   InitialModule:
     enabled: 1
     startLifetime:
-      scalar: 5
+      scalar: 2
       maxCurve:
         serializedVersion: 2
         m_Curve:
@@ -205,7 +205,7 @@ ParticleSystem:
         rgba: 4294967295
       minMaxState: 0
     startSize:
-      scalar: 10
+      scalar: 8
       maxCurve:
         serializedVersion: 2
         m_Curve:
@@ -275,10 +275,10 @@ ParticleSystem:
     maxNumParticles: 1
   ShapeModule:
     serializedVersion: 2
-    enabled: 1
+    enabled: 0
     type: 4
-    radius: .00999999978
-    angle: 0
+    radius: 1
+    angle: 25
     length: 5
     boxX: 1
     boxY: 1
@@ -507,11 +507,11 @@ ParticleSystem:
         - time: 0
           value: 0
           inSlope: 0
-          outSlope: 0
+          outSlope: 1
           tangentMode: 0
         - time: 1
           value: 1
-          inSlope: 0
+          inSlope: 1
           outSlope: 0
           tangentMode: 0
         m_PreInfinity: 2
@@ -536,7 +536,7 @@ ParticleSystem:
     tilesY: 2
     animationType: 0
     rowIndex: 0
-    cycles: 3
+    cycles: 1
     randomRow: 1
   VelocityModule:
     enabled: 0
@@ -1092,7 +1092,7 @@ ParticleSystemRenderer:
   m_LightmapIndex: 255
   m_LightmapTilingOffset: {x: 1, y: 1, z: 0, w: 0}
   m_Materials:
-  - {fileID: 2100000, guid: 0a8930a3e33f04026b601ce2cd19ae25, type: 2}
+  - {fileID: 2100000, guid: d36660bcee3fe4547ae3a3b6cece1d53, type: 2}
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
   m_UseLightProbes: 0
@@ -1101,7 +1101,7 @@ ParticleSystemRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_SortingLayerID: 0
-  m_RenderMode: 3
+  m_RenderMode: 0
   m_MaxParticleSize: .5
   m_CameraVelocityScale: 0
   m_VelocityScale: 0
@@ -1109,7 +1109,7 @@ ParticleSystemRenderer:
   m_SortingFudge: 0
   m_NormalDirection: 1
   m_SortMode: 0
-  m_Mesh: {fileID: 0}
+  m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
   m_Mesh1: {fileID: 0}
   m_Mesh2: {fileID: 0}
   m_Mesh3: {fileID: 0}
