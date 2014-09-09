@@ -47,7 +47,7 @@ public class DinoTracking : MonoBehaviour
 
 	private GameObject finishObj;
 
-	private int playerNum;
+	public int playerNum;
 
 	public float moveSpeed = 25.0f;
 	
@@ -147,25 +147,28 @@ public class DinoTracking : MonoBehaviour
 		int index = Network.connections.Length + 1;
 
         Debug.Log("cpu length " + cpuDinos.Length);
-		
-		//add to dinos array
-		foreach(GameObject d in cpuDinos)
-		{
-			dinoId = d.networkView.viewID;
-			
-			netView.RPC("SetPlayerDino", RPCMode.AllBuffered, dinoId, index);
-			
-			//dinos[index] = d;
-			index++;
-		}
+
+        if (Network.isServer)
+        {
+
+            //add to dinos array
+            foreach (GameObject d in cpuDinos)
+            {
+                dinoId = d.networkView.viewID;
+
+                netView.RPC("SetPlayerDino", RPCMode.AllBuffered, dinoId, index);
+
+                //dinos[index] = d;
+                index++;
+            }
+        }
 
 		for(int i = 0; i < currentNodes.Length; i++)
 		{
 			currentNodes[i] = startNode.GetComponent<NodeBehavior>();
 			nextNodes[i] = currentNodes[i].NextNodes[0].GetComponent<NodeBehavior>();
 
-			//finishDist[i] = AddUpDistance(currentNodes[i].NextNodes[0].GetComponent<NodeBehavior>(), i, 0);
-			//totalDist[i] = Vector3.Distance(currentNodes[i].NextNodes[0].transform.position, dinos[i].transform.position) + finishDist[i];
+            finishDist[i] = AddUpDistance(currentNodes[i].GetComponent<NodeBehavior>(), nextNodes[i].GetComponent<NodeBehavior>(), 0);
 		}
 		
 		
@@ -197,8 +200,8 @@ public class DinoTracking : MonoBehaviour
 			}
 		}
 
-		posText.guiText.text = "Dino1: " + currentPositions[0] + " Dino2: " + currentPositions[1] + " Dino3: " + currentPositions[2] + " Dino4: " + currentPositions[3];
-		lapText.guiText.text = "Dino1 lap: " + lapCount[0] + " Dino2 lap: " + lapCount[1] + " Dino3 lap: " + lapCount[2] + " Dino4 lap: " + lapCount[3];
+		//posText.guiText.text = "Dino1: " + currentPositions[0] + " Dino2: " + currentPositions[1] + " Dino3: " + currentPositions[2] + " Dino4: " + currentPositions[3];
+		//lapText.guiText.text = "Dino1 lap: " + lapCount[0] + " Dino2 lap: " + lapCount[1] + " Dino3 lap: " + lapCount[2] + " Dino4 lap: " + lapCount[3];
 		
 		//add each dinos current distance from the next nodes
 		for(int i = 0; i < finishDist.Length; i++)
@@ -279,122 +282,102 @@ public class DinoTracking : MonoBehaviour
 		//recursevly add up all of the distances between each node until the end
 		
 	}
-	
-	//update a specific dino
-	private void UpdateSpecificDino(GameObject _node, int _index)
-	{
-		NodeBehavior nodeScript = _node.GetComponent<NodeBehavior>();
 
-		if(currentNodes[_index] != null)
-		{
-			//if the player runs into a shortcut node
-			/*if(currentNodes[_index].isShortCut == true)
-			{
-				//Debug.Log("short cut end " + _node.name);
-				currentNodes[_index] = _node.GetComponent<NodeBehavior>();
-			}*/
+    private void UpdateSpecificDino(GameObject _node, int _index)
+    {
+        NodeBehavior nodeScript = _node.GetComponent<NodeBehavior>();
 
+        if (currentNodes[_index] != null)
+        {
 
-			//if the player runs into the start node while currently on the last node
-			if( nodeScript.isFinishLine == true && currentNodes[_index] == lastNode.GetComponent<NodeBehavior>()  )
-			{
+            //if the player runs into the start node while currently on the last node
+            if (nodeScript.isFinishLine == true && currentNodes[_index] == lastNode.GetComponent<NodeBehavior>())
+            {
 
-				int lapTest = 0;
-				
-				//increase the lap count
-				lapCount[_index]++;
-				
-				//set the current node to the start node
-				currentNodes[_index] = startNode.GetComponent<NodeBehavior>();
-				
-				//test to see how many player dinos have completed all of the laps
-				for(int i = 0; i < dinos.Length; i++)
-				{
-					if(dinos[i].tag == "Dino" && lapCount[i] >= maxLap)
-					{
-						lapTest++;
-					}
-				}
-				
-				//Debug.Log("player count " + playerCount + " lap comp " + lapTest);
-				
-				//if all player dinos have completed all of the laps end the race
-				if(lapTest >= playerCount - 1)
-				{
-					netView.RPC("EndRace", RPCMode.All);
-				}
+                int lapTest = 0;
 
-				if(lapCount[playerNum] >= maxLap && finishObj == null)
-				{
-					finishObj = new GameObject("finishGUI");
-					finishObj.AddComponent<GUITexture>();
-					finishObj.guiTexture.texture = (Texture)Resources.Load("GUI/Materials/Finish");
-					finishObj.transform.localScale = new Vector3(0, 0, 0);
-					finishObj.guiTexture.pixelInset = ResizeRect(new Rect(100, 45, 25, 15));
+                //increase the lap count
+                lapCount[_index]++;
 
-					StartCoroutine("MoveIn", finishObj);
-				}
-				
-				//Debug.Log("player " + _index + " current node " + currentNodes[_index]);
-			}
-			//if the player runs into a normal node
-			else
-			{
-				/*Debug.Log("-------------------------");
-				Debug.Log("you hit " + _node.name);
-				Debug.Log("the next node is " + nextNodes[_index]);
-				Debug.Log("the current node is " + currentNodes[_index]);*/
-				//Debug.Log(nodeScript == nextNodes[_index]);
+                //set the current node to the start node
+                currentNodes[_index] = startNode.GetComponent<NodeBehavior>();
+                nextNodes[_index] = currentNodes[_index].NextNodes[0].GetComponent<NodeBehavior>();
 
-				int i = 0;
+                //test to see how many player dinos have completed all of the laps
+                for (int i = 0; i < dinos.Length; i++)
+                {
+                    if (lapCount[i] >= maxLap)
+                    {
+                        lapTest++;
+                    }
+                }
 
-				if(nodeScript == nextNodes[_index])
-				{
-					//Debug.Log(_node.name + " is the right node");
+                /*Debug.Log("laptest " + lapTest);
+                Debug.Log("playercount " + playerCount);*/
+                //Debug.Log("player count " + playerCount + " lap comp " + lapTest);
 
-					foreach(GameObject n in nodeScript.previousNodes)
-					{
+                //if all player dinos have completed all of the laps end the race
+                if (lapTest > playerCount)
+                {
+                    netView.RPC("EndRace", RPCMode.All);
+                }
 
-						if(n.GetComponent<NodeBehavior>() == currentNodes[_index])
-						{
-							Debug.Log(nodeScript.NextNodes[i].name + " is the new next node");
-							nextNodes[_index] = nodeScript.NextNodes[i].GetComponent<NodeBehavior>();
-							currentNodes[_index] = _node.GetComponent<NodeBehavior>();
-						}
+                if (lapCount[playerNum] >= maxLap && finishObj == null)
+                {
+                    finishObj = new GameObject("finishGUI");
+                    finishObj.AddComponent<GUITexture>();
+                    finishObj.guiTexture.texture = (Texture)Resources.Load("GUI/Materials/Finish");
+                    finishObj.transform.localScale = new Vector3(0, 0, 0);
+                    finishObj.guiTexture.pixelInset = ResizeRect(new Rect(100, 45, 25, 15));
 
-						i++;
-					}
-				}
+                    StartCoroutine("MoveIn", finishObj);
+                }
 
-				/*//set the current node to the one that was ran into
-				foreach(GameObject n in currentNodes[_index].NextNodes)
-				{
-					if(n == _node)
-					{
-						Debug.Log("move to " + n.name);
-						currentNodes[_index] = n.GetComponent<NodeBehavior>();
-					}
-				}
-				
-				//also test to see if the player is going in reverse
-				foreach(GameObject n in currentNodes[_index].previousNodes)
-				{
-					if(n == _node)
-					{
-						Debug.Log("You are going in reverse " + n.name);
-						//currentNodes[0] = n.GetComponent
-						currentNodes[_index] = n.GetComponent<NodeBehavior>();;
-					}
-				}*/
-				
-				//calculate the distance to the finish line
-				if(currentNodes[_index].NextNodes.Length != 0 /*&& currentNodes[_index].NextNodes[0] != null*/)
-				{
-					//finishDist[_index] = AddUpDistance(currentNodes[_index].NextNodes[0].GetComponent<NodeBehavior>(), _index, 0);
-				}
-			}
-		}
-	}
+                //Debug.Log("player " + _index + " current node " + currentNodes[_index]);
+            }
+            //if the player runs into a normal node
+            else
+            {
+                /*Debug.Log("-------------------------");
+                Debug.Log("you hit " + _node.name);
+                Debug.Log("the next node is " + nextNodes[_index]);
+                Debug.Log("the current node is " + currentNodes[_index]);
+                Debug.Log(nodeScript == nextNodes[_index]);*/
+
+                int j = 0;
+
+                if (nodeScript == nextNodes[_index])
+                {
+                    //Debug.Log(_node.name + " is the right node");
+
+                    foreach (GameObject n in nodeScript.previousNodes)
+                    {
+                        //Debug.Log("previous node " + n);
+                        //Debug.Log("current node " + currentNodes[_index]);
+
+                        if (n.GetComponent<NodeBehavior>() == currentNodes[_index])
+                        {
+                            //Debug.Log(nodeScript.NextNodes[j].name + " is the new next node");
+                            nextNodes[_index] = nodeScript.NextNodes[j].GetComponent<NodeBehavior>();
+                            //currentNodes[_index] = _node.GetComponent<NodeBehavior>();
+                            currentNodes[_index] = nodeScript;
+                        }
+
+                        j++;
+                    }
+                }
+
+                //calculate the distance to the finish line
+                if (currentNodes[_index].NextNodes.Length != 0)
+                {
+                    /*Debug.Log(nextNodes[_index] + " is the new next node");
+                    Debug.Log(currentNodes[_index] + " is the new current node");*/
+
+                    finishDist[_index] = AddUpDistance(currentNodes[_index].GetComponent<NodeBehavior>(), nextNodes[_index].GetComponent<NodeBehavior>()/*, i*/, 0);
+                }
+            }
+        }
+    }
 	
 	public void CreateSingleton()
 	{
@@ -409,39 +392,48 @@ public class DinoTracking : MonoBehaviour
 			
 		}
 	}
-	
-	//a function that will recursivly add up the distance that the dino has until getting to the finish line
-	private float AddUpDistance(NodeBehavior _previousNode, NodeBehavior _nextNode,int _index, float _dist)
-	{
-		/*if(_node.nodeNum == 0 || _node.NextNodes == null)
-		{
-			return _dist;
-		}
-		
-		float tempNum = _dist + Vector3.Distance(_node.NextNodes[0].gameObject.transform.position, _node.gameObject.transform.position);
-		
-		return AddUpDistance(_node.NextNodes[0].GetComponent<NodeBehavior>(), _index, tempNum);*/
 
-		/*if(nodeScript == nextNodes[_index])
-		{
-			//Debug.Log(_node.name + " is the right node");
-			
-			foreach(GameObject n in nodeScript.previousNodes)
-			{
-				
-				if(n.GetComponent<NodeBehavior>() == currentNodes[_index])
-				{
-					Debug.Log(nodeScript.NextNodes[i].name + " is the new next node");
-					nextNodes[_index] = nodeScript.NextNodes[i].GetComponent<NodeBehavior>();
-					currentNodes[_index] = _node.GetComponent<NodeBehavior>();
-				}
-				
-				i++;
-			}
-		}*/
+    //a function that will recursivly add up the distance that the dino has until getting to the finish line
+    private float AddUpDistance(NodeBehavior _previousNode, NodeBehavior _nextNode/*,int _index*/, float _dist)
+    {
 
-		return 0.0f;
-	}
+
+        NodeBehavior prevNodeScript = _previousNode.GetComponent<NodeBehavior>();
+        NodeBehavior nextNodeScript = _nextNode.GetComponent<NodeBehavior>();
+
+        /*Debug.Log("previous node " + _previousNode);
+        Debug.Log("next node " + _nextNode);*/
+
+        float tempNum = _dist + Vector3.Distance(_nextNode.gameObject.transform.position, _previousNode.gameObject.transform.position);
+
+        if (nextNodeScript.isFinishLine == true && prevNodeScript == lastNode.GetComponent<NodeBehavior>())
+        {
+            return _dist + tempNum;
+        }
+
+        int i = 0;
+
+        foreach (GameObject n in _nextNode.previousNodes)
+        {
+            //Debug.Log("looking for next node");
+
+            if (n.GetComponent<NodeBehavior>() == _previousNode)
+            {
+                //Debug.Log(n + " matches with " + _previousNode);
+
+                //Debug.Log(nodeScript.NextNodes[i].name + " is the new next node");
+
+                //Debug.Log("tempNum " + tempNum);
+
+                return AddUpDistance(_nextNode, _nextNode.NextNodes[i].GetComponent<NodeBehavior>()/*, _index*/, tempNum);
+            }
+
+            i++;
+        }
+
+        return _dist;
+
+    }
 	
 	//rpc function that increments the connected players variable
 	[RPC]
@@ -498,6 +490,11 @@ public class DinoTracking : MonoBehaviour
 	{
 		return currentPositions;
 	}
+
+    public int[] GetCurrentLaps()
+    {
+        return lapCount;
+    }
 
 	Rect ResizeRect(Rect _pos)
 	{

@@ -1,0 +1,134 @@
+﻿using UnityEngine;
+using System.Collections;
+
+public class HUDScript : MonoBehaviour 
+{
+
+	public GUITexture[] healthBorders;
+	public GUITexture[] healthBars;
+	public GUITexture[] positions;
+	public GUIText[] playerNames;
+	public GUITexture[] lapInfo;
+	public GUITexture[] weaponInfo;
+
+	private Rect[] hudRect;
+
+	public int[] health;
+
+	private int[] racePositions;
+
+	private int[] currentLaps;
+
+	// Use this for initialization
+	void OnLevelWasLoaded () 
+	{
+		hudRect = new Rect[22];
+
+		racePositions = new int[4];
+		
+		currentLaps = new int[4];
+
+	}
+	
+	// Update is called once per frame
+	void Update () 
+	{
+		/*//transform.localPosition = new Vector3(-transform.parent.transform.position.x, -transform.parent.transform.position.y, 0);
+
+		Vector3 norm = transform.parent.transform.forward;
+
+		Vector3 yNorm = transform.parent.transform.up;
+
+		float p1 = transform.parent.transform.eulerAngles.x / 1.5f;
+		float p2 = p1 / yNorm.y;
+		float p3 = (p2 / 100.0f) + 1.0f;
+		float p4 = p3 * transform.parent.transform.position.y;
+		//Debug.Log(transform.parent.transform.eulerAngles.x);
+		Debug.Log(p1);
+		Debug.Log(p2);
+		Debug.Log(p3);
+		Debug.Log(p4);
+
+		transform.localPosition = new Vector3(-norm.z * transform.parent.transform.position.x, -1, -norm.x * transform.parent.transform.position.x);
+
+		Debug.Log(transform.parent.transform.up);
+
+		positions[0].guiTexture.pixelInset = ResizeRect(new Rect(18, 15, 5, 5));
+		positions[1].guiTexture.pixelInset = ResizeRect(new Rect(41, 15, 5, 5));
+		positions[2].guiTexture.pixelInset = ResizeRect(new Rect(65, 15, 5, 5));
+		positions[3].guiTexture.pixelInset = ResizeRect(new Rect(88, 15, 5, 5));
+		
+		lapInfo[0].guiTexture.pixelInset = ResizeRect(new Rect(80, 85, 5, 5));
+		lapInfo[1].guiTexture.pixelInset = ResizeRect(new Rect(86, 86, 1, 3));
+		lapInfo[2].guiTexture.pixelInset = ResizeRect(new Rect(88, 86, 1, 3));
+		lapInfo[3].guiTexture.pixelInset = ResizeRect(new Rect(90, 86, 1, 3));
+		
+		healthBars[0].guiTexture.pixelInset = ResizeRect(new Rect(5, 5, 18, 8));
+		healthBorders[0].guiTexture.pixelInset = GetHealth(new Rect(5, 5, 18, 8), 0);
+		healthBars[1].guiTexture.pixelInset = ResizeRect(new Rect(28, 5, 18, 8));
+		healthBorders[1].guiTexture.pixelInset = GetHealth(new Rect(28, 5, 18, 8), 1);
+		healthBars[2].guiTexture.pixelInset = ResizeRect(new Rect(52, 5, 18, 8));
+		healthBorders[2].guiTexture.pixelInset = GetHealth(new Rect(52, 5, 18, 8), 2);
+		healthBars[3].guiTexture.pixelInset = ResizeRect(new Rect(75, 5, 18, 8));
+		healthBorders[3].guiTexture.pixelInset = GetHealth(new Rect(75, 5, 18, 8), 3);
+		
+		weaponInfo[0].guiTexture.pixelInset = ResizeRect(new Rect(5, 85, 8, 15));
+		weaponInfo[1].guiTexture.pixelInset = ResizeRect(new Rect(5, 85, 8, 15));
+		
+		playerNames[0].guiText.pixelOffset = ResizeVec2(new Vector2(5, 20));
+		playerNames[1].guiText.pixelOffset = ResizeVec2(new Vector2(28, 20));
+		playerNames[2].guiText.pixelOffset = ResizeVec2(new Vector2(52, 20));
+		playerNames[3].guiText.pixelOffset = ResizeVec2(new Vector2(75, 20));*/
+
+	}
+
+	private Rect ResizeRect(Rect _pos)
+	{
+		//variables used to move the buttons
+		float xMulti = Screen.width / 100.0f;
+		float yMulti = Screen.height / 100.0f;
+		
+		//set the rect position and size
+		return new Rect(_pos.x * xMulti, _pos.y * yMulti, _pos.width * xMulti, _pos.height * yMulti);
+		
+	}
+
+	private Vector2 ResizeVec2(Vector2 _pos)
+	{
+		//variables used to move the buttons
+		float xMulti = Screen.width / 100.0f;
+		float yMulti = Screen.height / 100.0f;
+		
+		//set the rect position and size
+		return new Vector2(_pos.x * xMulti, _pos.y * yMulti);
+		
+	}
+
+	private Rect GetHealth(Rect _pos, int _index)
+	{
+		float maxHealth = 150;
+		
+		if(health[_index] <= maxHealth && health[_index] >= 0)
+		{
+			float percent = health[_index] / (maxHealth / 100.0f);
+			
+			float percentResults = (_pos.width * percent) / 100.0f;
+			
+			return ResizeRect(new Rect(_pos.x, _pos.y, percentResults, _pos.height));
+		}
+		else if(health[_index] > maxHealth)
+			return ResizeRect(_pos);
+		else
+			return ResizeRect(new Rect(_pos.x, _pos.y, 0, _pos.height));
+	}
+
+	public void SetCurrentPositions(int[] _positions)
+	{
+
+	}
+
+	public void SetCurrentLaps(int[] _laps)
+	{
+
+	}
+}
