@@ -202,6 +202,10 @@ public class MotionControl : MonoBehaviour {
 	
 	public void SetTurn(float turnControl)
 	{
+		// To turn left, set turnControl to -1.0F
+		// To turn right, set turnControl to 1.0F
+		// To go straight, set turnControl to 0.0F
+
 		horizontalTurning = (Mathf.Abs(turnControl) > 1) ?  Mathf.Sign(turnControl) : turnControl; // Set h to a value between -1.0 and 1.0
 	}
 	
@@ -212,6 +216,9 @@ public class MotionControl : MonoBehaviour {
 	
 	public void SetRun(float run)
 	{
+		// To move forward, set run to 1.0F
+		// To move backward, set run to -1.0F
+		// To stop running, set run to 0.0F
 		verticalVelocity = (Mathf.Abs (run) > 1) ? Mathf.Sign (run) : run; // Set v to a value between -1 and 1
 	}
 	
