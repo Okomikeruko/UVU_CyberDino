@@ -112,7 +112,7 @@ public class DinoTracking : MonoBehaviour
 		}
 		
 		//find the dinos tagged dinos
-		playerDinos = GameObject.FindGameObjectsWithTag("Dino");
+		playerDinos = GameObject.FindGameObjectsWithTag("Dino"); //maybe use delegates or something?
 
 		//maybe set this while loop before so that it doesn't do this over and over again?
 		while(true)
