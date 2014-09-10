@@ -174,13 +174,6 @@ public abstract class Health : MonoBehaviour
 		currentHealth = maxHealth = originalMaxHealth;
 	}
 
-
-
-	void OnGUI() {
-		GUI.Label(new Rect(10, 60 + 20 * int.Parse(netview.owner.ToString()), 100, 20), "Health: " + (int)Current + "/" + (int)Total + " " + Percent * 100.0f + "%");		
-	}
-
-
 	abstract public void OnDeath();
 	abstract public void OnHeal();
 	abstract public void OnDamage();

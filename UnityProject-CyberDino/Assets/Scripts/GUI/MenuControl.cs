@@ -155,8 +155,6 @@ public class MenuControl : MonoBehaviour
 	
 	private Texture healthBorderGfx;
 	
-	public int[] health;
-	
 	private Texture[] weaponsGfx;
 	
 	private Texture[] miniMapGfx;
@@ -1581,20 +1579,9 @@ public class MenuControl : MonoBehaviour
 	
 	private Rect GetHealth(Rect _pos, int _index)
 	{
-		float maxHealth = 150;
-		
-		if(health[_index] <= maxHealth && health[_index] >= 0)
-		{
-			float percent = health[_index] / (maxHealth / 100.0f);
-			
-			float percentResults = (_pos.width * percent) / 100.0f;
-			
-			return ResizeRect(new Rect(_pos.x, _pos.y, percentResults, _pos.height));
-		}
-		else if(health[_index] > maxHealth)
-			return ResizeRect(_pos);
-		else
-			return ResizeRect(new Rect(_pos.x, _pos.y, 0, _pos.height));
+		var health = raceDinos [_index].GetComponent<Health> ();
+		float percentResults = (_pos.width * ((health == null) ? 1.0f : health.Percent)) ;
+		return ResizeRect(new Rect(_pos.x, _pos.y, percentResults, _pos.height));
 	}
 	
 	private Texture GetWeapon()
