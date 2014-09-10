@@ -145,7 +145,7 @@ public class MenuControl : MonoBehaviour
 	private int[] currentLaps;
 	private int playerNum;
 	
-	private int waitForPlayers;
+	//private int waitForPlayers;
 	
 	private Texture[] numGfx;
 	
@@ -158,6 +158,8 @@ public class MenuControl : MonoBehaviour
 	public int[] health;
 	
 	private Texture[] weaponsGfx;
+	
+	private Texture[] miniMapGfx;
 	
 	// Use this for initialization
 	void Start () 
@@ -250,7 +252,7 @@ public class MenuControl : MonoBehaviour
 		
 		resultsMenuRect = new Rect[4];
 		
-		hudRect = new Rect[22];
+		hudRect = new Rect[27];
 		
 		//don't destroy this object
 		DontDestroyOnLoad(this);
@@ -284,6 +286,12 @@ public class MenuControl : MonoBehaviour
 			dinoSelected = (GameObject)Instantiate(dinoModels[dinoIndex], new Vector3(Screen.width, Screen.height, 0), Quaternion.identity);
 			Vector3 pointInWorld = Camera.main.ScreenToWorldPoint(new Vector3(Screen.width, Screen.height, Camera.main.transform.position.z + 50));
 			dinoSelected.transform.localScale = new Vector3(pointInWorld.x / 26, pointInWorld.y / 12, pointInWorld.x / 26);
+			
+			dinoBoxLgPos = ResizeRect(new Rect(80, 40, 0, 0));
+			dinoBoxLg = (GameObject)Instantiate(Resources.Load("GUI/DinoSelectBackground"), new Vector3(Screen.width, Screen.height, 0), Quaternion.identity);
+			pointInWorld = Camera.main.ScreenToWorldPoint(new Vector3(Screen.width, Screen.height, Camera.main.transform.position.z + 50));
+			dinoBoxLg.transform.localScale = new Vector3(pointInWorld.x / 20, pointInWorld.y / 15, pointInWorld.x / 20);
+			dinoBoxLg.transform.Rotate(270, 0, 0);
 		}
 		
 		//the names of the players in the order that they past the finished line
@@ -296,7 +304,7 @@ public class MenuControl : MonoBehaviour
 		raceDinos = new GameObject[4];
 		racePositions = new int[4];
 		
-		waitForPlayers = 0;
+		//waitForPlayers = 0;
 		
 		dinoTracking = GameObject.Find("Checkpoints");
 		
@@ -566,6 +574,14 @@ public class MenuControl : MonoBehaviour
 				dinoSelected.transform.position = Camera.main.ScreenToWorldPoint(new Vector3(menuOrigin[2].x + startDinoPos.x, menuOrigin[2].y + startDinoPos.y, 130));
 				dinoSelected.transform.RotateAround(new Vector3(0, 1, 0), Vector3.up, rotateSpeed * Time.deltaTime);
 				startDinoPos = ResizeRect(new Rect(72, 40, 0, 0));
+			}
+			
+			if(dinoBoxLg != null)
+			{
+				Vector3 pointInWorld = Camera.main.ScreenToWorldPoint(new Vector3(Screen.width, Screen.height, Camera.main.transform.position.z + 100));
+				dinoBoxLg.transform.localScale = new Vector3(pointInWorld.x / 15, pointInWorld.y / 20, pointInWorld.x / 23);
+				dinoBoxLg.transform.position = Camera.main.ScreenToWorldPoint(new Vector3(menuOrigin[2].x + dinoBoxLgPos.x, menuOrigin[2].y + dinoBoxLgPos.y, 400));
+				dinoBoxLgPos = ResizeRect(new Rect(72, 53, 0, 0));
 			}
 			
 			//level name graphic
@@ -1057,6 +1073,12 @@ public class MenuControl : MonoBehaviour
 			hudRect[19] = ResizeRect(new Rect(28, 75, 8, 15));
 			hudRect[20] = ResizeRect(new Rect(52, 75, 8, 15));
 			hudRect[21] = ResizeRect(new Rect(75, 75, 8, 15));
+			
+			hudRect[22] = ResizeRect(new Rect(75, 75, 8, 15));
+			hudRect[23] = ResizeRect(new Rect(75, 75, 8, 15));
+			hudRect[24] = ResizeRect(new Rect(75, 75, 8, 15));
+			hudRect[25] = ResizeRect(new Rect(75, 75, 8, 15));
+			hudRect[26] = ResizeRect(new Rect(75, 75, 8, 15));
 			
 			racePositions = dinoTrackingScript.GetCurrentPositions();
 			currentLaps = dinoTrackingScript.GetCurrentLaps();
