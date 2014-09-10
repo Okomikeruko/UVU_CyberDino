@@ -161,6 +161,10 @@ public class MenuControl : MonoBehaviour
 	
 	private Texture[] miniMapGfx;
 	
+	private Texture miniMapPoint;
+	
+	private GameObject mapRelativePoint;
+	
 	// Use this for initialization
 	void Start () 
 	{
@@ -236,6 +240,11 @@ public class MenuControl : MonoBehaviour
 		healthBarGfx = (Texture)Resources.Load("GUI/Materials/HealthBar");
 		
 		healthBorderGfx = (Texture)Resources.Load("GUI/Materials/HealthBarBorder");
+		
+		miniMapGfx = new Texture[1];
+		miniMapGfx[0] = (Texture)Resources.Load("GUI/Materials/DumbBellMap");
+		
+		miniMapPoint = (Texture)Resources.Load("GUI/Materials/MapPointPosition");
 		
 		//graphics ----------------------------------------
 		mainMenuBtnRect = new Rect[3];
@@ -321,10 +330,17 @@ public class MenuControl : MonoBehaviour
 		int.TryParse(Network.player.ToString(), out playerNum);
 		
 		SetNames();
+		
+		raceDinos = dinoTrackingScript.GetDinoArray();
+		
+		mapRelativePoint = GameObject.Find("MiniMapRefPoint");
 	}
 	
 	void Update()
 	{
+		//if(mapRelativePoint == null)
+			//mapRelativePoint = GameObject.Find("MiniMapRefPoint");
+			
 		if(menuSelect == Menu.lobbyMenu)
 		{
 			
@@ -1074,11 +1090,11 @@ public class MenuControl : MonoBehaviour
 			hudRect[20] = ResizeRect(new Rect(52, 75, 8, 15));
 			hudRect[21] = ResizeRect(new Rect(75, 75, 8, 15));
 			
-			hudRect[22] = ResizeRect(new Rect(75, 75, 8, 15));
-			hudRect[23] = ResizeRect(new Rect(75, 75, 8, 15));
-			hudRect[24] = ResizeRect(new Rect(75, 75, 8, 15));
-			hudRect[25] = ResizeRect(new Rect(75, 75, 8, 15));
-			hudRect[26] = ResizeRect(new Rect(75, 75, 8, 15));
+			hudRect[22] = ResizeRect(new Rect(80, 15, 15, 55));
+			hudRect[23] = SetMapPosition(new Rect(87, 43, 1, 1), raceDinos[0]);
+			/*hudRect[24] = SetMapPosition(new Rect(5, 5, 3, 3));
+			hudRect[25] = SetMapPosition(new Rect(5, 5, 3, 3));
+			hudRect[26] = SetMapPosition(new Rect(5, 5, 3, 3));*/
 			
 			racePositions = dinoTrackingScript.GetCurrentPositions();
 			currentLaps = dinoTrackingScript.GetCurrentLaps();
@@ -1112,6 +1128,12 @@ public class MenuControl : MonoBehaviour
 			GUI.TextField(new Rect(menuOrigin[5].x + hudRect[20].x, menuOrigin[5].y + hudRect[20].y, hudRect[20].width, hudRect[20].height), playerNames[2]); // the player name
 			GUI.TextField(new Rect(menuOrigin[5].x + hudRect[21].x, menuOrigin[5].y + hudRect[21].y, hudRect[21].width, hudRect[21].height), playerNames[3]); // the player name
 
+			GUI.DrawTexture(new Rect(menuOrigin[5].x + hudRect[22].x, menuOrigin[5].y + hudRect[22].y, hudRect[22].width, hudRect[22].height), miniMapGfx[0]); // the minimap
+			GUI.DrawTexture(new Rect(menuOrigin[5].x + hudRect[23].x, menuOrigin[5].y + hudRect[23].y, hudRect[23].width, hudRect[23].height), miniMapPoint);
+			GUI.DrawTexture(new Rect(menuOrigin[5].x + hudRect[24].x, menuOrigin[5].y + hudRect[24].y, hudRect[24].width, hudRect[24].height), miniMapPoint);
+			GUI.DrawTexture(new Rect(menuOrigin[5].x + hudRect[25].x, menuOrigin[5].y + hudRect[25].y, hudRect[25].width, hudRect[25].height), miniMapPoint);
+			GUI.DrawTexture(new Rect(menuOrigin[5].x + hudRect[26].x, menuOrigin[5].y + hudRect[26].y, hudRect[26].width, hudRect[26].height), miniMapPoint);
+			
 		}
 		
 	}
@@ -1460,7 +1482,7 @@ public class MenuControl : MonoBehaviour
 		{
 			playerNames = new string[4];
 
-			raceDinos = dinoTrackingScript.GetDinoArray();
+			//raceDinos = dinoTrackingScript.GetDinoArray();
 			racePositions = dinoTrackingScript.GetCurrentPositions();
 			
 			PlayerInformation[] infoArr = new PlayerInformation[4];
@@ -1616,5 +1638,16 @@ public class MenuControl : MonoBehaviour
 	private void AddName(string _name, int _index)
 	{
 		playerNames[_index] = _name;
+	}
+	
+	private Rect SetMapPosition(Rect _pos, GameObject _dino)
+	{
+		//get the distance between the point and the dinos
+		Rect distance = new Rect((mapRelativePoint.transform.position.x - _dino.transform.position.x) / 60.0f, (mapRelativePoint.transform.position.z - _dino.transform.position.z) / 60.0f, _pos.width, _pos.height);
+		
+		//Debug.Log(distance);
+		//downsize the distance
+		//return a rect of the new distance
+		return ResizeRect(new Rect(_pos.x + distance.y, _pos.y + distance.x, _pos.width, _pos.height));
 	}
 }
