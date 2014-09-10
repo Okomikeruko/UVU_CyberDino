@@ -14,7 +14,7 @@ public class UserControl : MonoBehaviour {
 //	private RacerHealthClass racerHealth;
 //	[SerializeField]
 //	private DustEffectClass dust;
-
+	private RacerInteractionManager racerInteractionManager;
 	#region Properties
 //	private WeaponControlClass Weapons
 //	{
@@ -98,6 +98,7 @@ public class UserControl : MonoBehaviour {
 	void OnEnable()
 	{
 		move = this.GetComponent<MotionControl>();
+		racerInteractionManager = GetComponentInChildren<RacerInteractionManager>();
 
 		// Added by Sam
 //		Weapons = GetComponentInChildren<WeaponControlClass>();
@@ -198,7 +199,9 @@ public class UserControl : MonoBehaviour {
 	void OnTriggerEnter(Collider other){
 		
 		string theTag = other.gameObject.tag.ToString();
-		
+		if (racerInteractionManager != null){
+			racerInteractionManager.ChildOnTriggerEnterEventHandler(other);
+		}
 		switch(theTag)
 		{
 		case "Weapon":
