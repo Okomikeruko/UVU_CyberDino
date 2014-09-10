@@ -10,7 +10,7 @@ public class destroyTimer : MonoBehaviour {
 	void Start () {
 		timer = deathTime;
 		this.particleSystem.Play ();
-		Debug.Log (this.particleSystem.isPlaying);
+		//Debug.Log (this.particleSystem.isPlaying);
 	}
 	
 	// Update is called once per frame
