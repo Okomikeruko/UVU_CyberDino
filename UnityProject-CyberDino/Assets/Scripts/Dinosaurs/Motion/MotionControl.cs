@@ -1,6 +1,8 @@
 using UnityEngine;
 using System.Collections;
 
+// Make a comment here
+
 [RequireComponent(typeof(Rigidbody), typeof(CapsuleCollider))]
 public class MotionControl : MonoBehaviour {
 	
