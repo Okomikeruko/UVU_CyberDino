@@ -4,7 +4,7 @@ using System.Collections;
 public class UserControl : MonoBehaviour {
 
 	private MotionControl move;
-
+	private DinoRagdoll ragdoll;
 	// Added by Sam
 //	[SerializeField]
 //	private WeaponControlClass weapons;
@@ -98,6 +98,7 @@ public class UserControl : MonoBehaviour {
 	void OnEnable()
 	{
 		move = this.GetComponent<MotionControl>();
+		ragdoll = this.GetComponent<DinoRagdoll> ();
 		racerInteractionManager = GetComponentInChildren<RacerInteractionManager>();
 
 		// Added by Sam
@@ -129,6 +130,18 @@ public class UserControl : MonoBehaviour {
 		{
 			move.Jump ();
 		}
+
+		if (Input.GetKeyDown (KeyCode.R)) 
+		{
+			ragdoll.GoRagdoll();
+		}
+		if (Input.GetKeyDown (KeyCode.T)) 
+		{
+			ragdoll.ResetRacer();
+		}
+
+
+
 //		else
 //		{
 //			move.jumper = false;

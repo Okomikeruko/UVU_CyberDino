@@ -12,77 +12,46 @@ public class DinoRagdoll : MonoBehaviour {
 	private MotionControl move;
 
 	private DinoSelect dinoSelection;
+	private Collider[] ragdollColliders;
+	private Collider[] playColliders;
 
 	void OnEnable()
 	{
-
-//		dinoSelection = GetComponent<DinoSelect>();
 		move = GetComponent<MotionControl>();
-//
-//		switch(dinoSelection.dinosaurs[dinoSelection.Index].name)
-//		{
-//		case "Diloph":
-//			ragdoll = Ragdolls[0];
-//			break;
-//		case "Hesp":
-//			ragdoll = Ragdolls[1];
-//			break;
-//		case "Raptor":
-//			ragdoll = Ragdolls[2];
-//			break;
-//		case "TRex":
-//			ragdoll = Ragdolls[3];
-//			break;
-//		case "Troodon":
-//			ragdoll = Ragdolls[4];
-//			break;
-//		default:
-//			ragdoll = new GameObject();
-//			break;
-//		}
+		ragdollColliders = ragdoll.GetComponentsInChildren<Collider> ();
+		playColliders = this.GetComponents<Collider> ();
+		ResetRacer ();
 	}
 
 	public void GoRagdoll() {
 		if(true) {
-
 			// Modified by Sam
 			move.SetRunning(false);
-
+			this.rigidbody.isKinematic = true;
+			foreach(Collider collider in playColliders)
+				collider.enabled = false;
 			foreach(Rigidbody ragdoll in ragdollBones)
 				ragdoll.isKinematic = false;
-
+			foreach(Collider collider in ragdollColliders)
+				collider.enabled = true;
 			dinoAnimator.enabled = false;
-
-//			rigidbody.constraints = RigidbodyConstraints.FreezeAll;
-//			transform.collider.enabled = false;
-//			SkinnedMeshRenderer theMesh = transform.gameObject.GetComponentInChildren<SkinnedMeshRenderer>();
-//			theMesh.enabled = false;
-
-			// Instantiate ragdoll
-//			newRagdoll = Instantiate(ragdoll, transform.position, transform.rotation) as GameObject;
-//			newRagdoll.layer = gameObject.layer;
-			
-			// Copy bone transforms to ragdoll
-//			CopyTransforms(transform, newRagdoll.transform);
-
 		}
 	}
 
 	// Added by Sam
 	public void ResetRacer()
 	{
+		this.rigidbody.isKinematic = false;		
+		foreach(Collider collider in playColliders)
+			collider.enabled = true;
 		foreach(Rigidbody ragdoll in ragdollBones)
 			ragdoll.isKinematic = true;
-		
+		foreach(Collider collider in ragdollColliders)
+			collider.enabled = false;
 		dinoAnimator.enabled = true;
-//		rigidbody.constraints = RigidbodyConstraints.FreezePositionX | RigidbodyConstraints.FreezePositionZ | RigidbodyConstraints.FreezeRotation;
-////		transform.collider.enabled = true;
-//		SkinnedMeshRenderer theMesh = transform.gameObject.GetComponentInChildren<SkinnedMeshRenderer>();
-//		theMesh.enabled = true;
 		ColorLerpClass theLerp = transform.gameObject.GetComponent<ColorLerpClass>();
 		theLerp.lerping = false;
 		move.SetRunning(true);
-//		Destroy(newRagdoll);
 	}
 
 	void CopyTransforms(Transform src, Transform dst) {
