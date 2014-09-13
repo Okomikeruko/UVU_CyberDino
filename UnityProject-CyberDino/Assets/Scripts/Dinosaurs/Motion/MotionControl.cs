@@ -149,7 +149,7 @@ public class MotionControl : MonoBehaviour {
 		
 		if(Physics.Raycast(transform.position, -Vector3.up, out hit))
 		{
-			if(hit.transform.tag == "Track" && hit.normal != transform.up && hit.distance > 0.9F) 
+			if(/*hit.transform.tag == "Track" && */ hit.normal != transform.up && hit.distance > 0.9F) 
 			{
 				myNormal = Vector3.Lerp (myNormal, hit.normal, adjustRation);
 				Vector3 myForward = Vector3.Cross(transform.right, myNormal);
