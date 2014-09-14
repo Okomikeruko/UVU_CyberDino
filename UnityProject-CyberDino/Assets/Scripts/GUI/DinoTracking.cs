@@ -1,14 +1,18 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 
 public class DinoTracking : MonoBehaviour 
 {
+	public delegate void DinoAddition(GameObject _dino);
+	public static DinoAddition AddDino;
 
 	private GameObject[] dinos;
 
-	private GameObject[] playerDinos;
+	/*private GameObject[] playerDinos;
 
-	private GameObject[] cpuDinos;
+	private GameObject[] cpuDinos;*/
+	private GameObject[] tempDinos;
+	//private int tempDinoIndex;
 	
 	private NodeBehavior[] currentNodes;
 
@@ -57,6 +61,8 @@ public class DinoTracking : MonoBehaviour
 		netView = GetComponent<NetworkView>();
 		
 		CreateSingleton();
+
+		AddDino += DinoToAdd;
 		
 		posText = new GameObject();
 		posText.AddComponent<GUIText>();
@@ -74,9 +80,9 @@ public class DinoTracking : MonoBehaviour
 		
 		dinos = new GameObject[4];
 
-		playerDinos = new GameObject[4];
+		/*playerDinos = new GameObject[4];
 		
-		cpuDinos = new GameObject[4];
+		cpuDinos = new GameObject[4];*/
 		
 		currentNodes = new NodeBehavior[4];
 
@@ -88,80 +94,75 @@ public class DinoTracking : MonoBehaviour
 
 		menuScript = menu.GetComponent<MenuControl>();
 
+		tempDinos = new GameObject[4];
+		//private int tempDinoIndex;
+
 	}
 	
 	public IEnumerator OnLevelWasLoaded()
 	{
-		
+
+
 		NetworkViewID dinoId = default(NetworkViewID);
 		
 		//rpc increment the connectedPlayers variable
 		netView.RPC("IncrementConnnected", RPCMode.AllBuffered);
-
-		//wait while not everyone has connected yet minus this player's number
+		
+		bool gotAllDinos = true;
 		while(true)
 		{
-			Debug.Log("waiting for players");
+			//Debug.Log("waiting for players");
+			Debug.Log(tempDinos[3]);
 			
-			if(connectedPlayers >= Network.connections.Length)
-			{
-				Debug.Log("all players have loaded");
+			for(int i = 0; i < tempDinos.Length; i++)
+				if(tempDinos[i] == null)
+				{
+					gotAllDinos = false;
+				}
+
+			if(gotAllDinos == true)
 				break;
-			}
+
+			gotAllDinos = true;
+
 			yield return null;
 		}
-		
-		//find the dinos tagged dinos
-		playerDinos = GameObject.FindGameObjectsWithTag("Dino"); //maybe use delegates or something?
 
-		//maybe set this while loop before so that it doesn't do this over and over again?
-		while(true)
+		//loop through them and find the one that this player owns
+		foreach(GameObject _dino in tempDinos)
 		{
-			//loop through them and find the one that this player owns
-			foreach(GameObject _dino in playerDinos)
-			{
 				//set the network view and this players number
-				if(_dino.networkView.isMine)
-				{
-					dinoId = _dino.networkView.viewID;
-					int.TryParse(Network.player.ToString(), out playerNum);
-				}
-			}
-
-			if(playerDinos.Length > Network.connections.Length)
+			if(_dino.tag == "Dino" && _dino.networkView.isMine)
 			{
-				break;
+				dinoId = _dino.networkView.viewID;
+				int.TryParse(Network.player.ToString(), out playerNum);
 			}
-			
-			playerDinos = GameObject.FindGameObjectsWithTag("Dino");
-			
-			yield return null;
 		}
 		
 		//call rpc function to send the dino network id as well as the player number
 		netView.RPC("SetPlayerDino", RPCMode.AllBuffered, dinoId, playerNum);
 		
-		//find all of the dinos with the ai tags
-		cpuDinos = GameObject.FindGameObjectsWithTag("Ai");
-		
 		int index = Network.connections.Length + 1;
+		
+		if (Network.isServer)
+		{
 
-        Debug.Log("cpu length " + cpuDinos.Length);
+			//add to dinos array
+			foreach (GameObject d in tempDinos)
+			{
+				if(d.tag == "Ai")
+				{
+					Debug.Log("the cpu number " + index + " for " + d);
 
-        if (Network.isServer)
-        {
-
-            //add to dinos array
-            foreach (GameObject d in cpuDinos)
-            {
-                dinoId = d.networkView.viewID;
-
-                netView.RPC("SetPlayerDino", RPCMode.AllBuffered, dinoId, index);
-
-                //dinos[index] = d;
-                index++;
-            }
-        }
+					dinoId = d.networkView.viewID;
+				
+					netView.RPC("SetPlayerDino", RPCMode.AllBuffered, dinoId, index);
+				
+				//dinos[index] = d;
+					index++;
+				}
+			}
+		}
 
 		for(int i = 0; i < currentNodes.Length; i++)
 		{
@@ -182,6 +183,7 @@ public class DinoTracking : MonoBehaviour
 
 	void FixedUpdate () 
 	{
+
 		if(Input.GetKey(KeyCode.E))
 		{
 			if(finishObj == null)
@@ -450,12 +452,12 @@ public class DinoTracking : MonoBehaviour
 		//GameObject[] tempDinos = GameObject.FindGameObjectsWithTag("Dino");
 		
 		//loop through the temp array
-		foreach(GameObject _dino in playerDinos)
+		foreach(GameObject _dino in tempDinos)
 		{
 			//if the current element's network id is the same as the one passed in
 			if(_dino.networkView.viewID == _id)
 			{
-				Debug.Log("set " + _playerNum + "'s dino");
+				Debug.Log("set " + _playerNum + "'s dino to " + _dino);
 				//set this dino into the dinos array using the player number as the index
 				dinos[_playerNum] = _dino;
 			}
@@ -463,7 +465,7 @@ public class DinoTracking : MonoBehaviour
 		
 		//cpDinos = GameObject.FindGameObjectsWithTag("Ai");
 		
-		//loop through the temp array
+		/*//loop through the temp array
 		foreach(GameObject _dino in cpuDinos)
 		{
 			//if the current element's network id is the same as the one passed in
@@ -473,7 +475,7 @@ public class DinoTracking : MonoBehaviour
 				//set this dino into the dinos array using the player number as the index
 				dinos[_playerNum] = _dino;
 			}
-		}
+		}*/
 	}
 
 	public GameObject[] GetDinoArray()
@@ -591,5 +593,32 @@ public class DinoTracking : MonoBehaviour
 		yield return null;
 	}
 
+	/*[RPC]
+	private void DinoToAdd(GameObject _dino, int _playerNum)
+	{
+		Debug.Log("adding player dino " + _dino.name);
 
+		if(_playerNum >= 0)
+			dinos[_playerNum] = _dino;
+		else
+			for(int i = 0; i < dinos.Length; i++)
+				if(dinos[i] == null)
+				{
+					dinos[i] = _dino;
+					break;
+				}
+	}*/
+
+
+	private void DinoToAdd(GameObject _dino)
+	{
+		//Debug.Log("adding player dino " + _dino.name);
+
+		for(int i = 0; i < tempDinos.Length; i++)
+			if(tempDinos[i] == null)
+			{
+				tempDinos[i] = _dino;
+				break;
+			}
+	}
 }

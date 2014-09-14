@@ -141,6 +141,7 @@ GameObject:
   - 136: {fileID: 13600002}
   - 114: {fileID: 11400024}
   - 114: {fileID: 11400028}
+  - 114: {fileID: 11400032}
   m_Layer: 8
   m_Name: TRex
   m_TagString: Dino
@@ -1709,13 +1710,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 62cde66bda41d45c4b00ecd0c2c9583a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isRespawning: 0
-  respawnEffect: {fileID: 0}
-  inTurnArea: 0
-  respawnCheckpoint: {fileID: 0}
-  currentNode: {fileID: 0}
-  previousNode: {fileID: 0}
-  nextNode: {fileID: 0}
+  respawnParticalSystem: {fileID: 0}
 --- !u!114 &11400020
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1803,6 +1798,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   DinoSound: 4
+--- !u!114 &11400032
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100040}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dccedda4b686c6b4e825816d127744e4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!136 &13600000
 CapsuleCollider:
   m_ObjectHideFlags: 1

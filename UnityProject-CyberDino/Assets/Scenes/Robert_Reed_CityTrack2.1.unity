@@ -5688,7 +5688,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 2
 --- !u!1 &490981332
 GameObject:
   m_ObjectHideFlags: 0
@@ -8549,13 +8549,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 62cde66bda41d45c4b00ecd0c2c9583a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isRespawning: 0
-  respawnEffect: {fileID: 0}
-  inTurnArea: 0
-  respawnCheckpoint: {fileID: 0}
-  currentNode: {fileID: 0}
-  previousNode: {fileID: 0}
-  nextNode: {fileID: 0}
+  respawnParticalSystem: {fileID: 0}
 --- !u!114 &648314405
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -13520,6 +13514,7 @@ GameObject:
   - 124: {fileID: 965863696}
   - 81: {fileID: 965863695}
   - 114: {fileID: 965863700}
+  - 114: {fileID: 965863701}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -13591,7 +13586,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 4
 --- !u!114 &965863700
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -13609,6 +13604,17 @@ MonoBehaviour:
   damping: 5
   smoothRotation: 1
   rotationDamping: 10
+--- !u!114 &965863701
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 965863694}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e5d8a4cffbfb36d4c8ca30f1aa45d6b4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &967411921
 GameObject:
   m_ObjectHideFlags: 0
@@ -13768,10 +13774,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 33e8504d3b2c44dd7848afe78a5fd2b7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  previousNode: {fileID: 0}
-  nextNode: {fileID: 968113985}
-  influenceSphere: 20
-  theNodeType: 2
+  nextNode: {fileID: 0}
+  Rotation: {x: 0, y: 0, z: 0}
 --- !u!23 &968113988
 Renderer:
   m_ObjectHideFlags: 0
@@ -20362,57 +20366,6 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: .5
   m_Center: {x: 0, y: 0, z: 0}
---- !u!1 &1328764561
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  serializedVersion: 4
-  m_Component:
-  - 4: {fileID: 1328764563}
-  - 132: {fileID: 1328764562}
-  m_Layer: 0
-  m_Name: DinoPosText
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!132 &1328764562
-GUIText:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1328764561}
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Text: Gui Text
-  m_Anchor: 0
-  m_Alignment: 0
-  m_PixelOffset: {x: 181.699997, y: 207.410004}
-  m_LineSpacing: 1
-  m_TabSize: 4
-  m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
-  m_Material: {fileID: 0}
-  m_FontSize: 0
-  m_FontStyle: 0
-  m_Color:
-    serializedVersion: 2
-    rgba: 4294967295
-  m_PixelCorrect: 1
-  m_RichText: 1
---- !u!4 &1328764563
-Transform:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1328764561}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: .5, y: .5, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 1
 --- !u!1 &1329808594
 GameObject:
   m_ObjectHideFlags: 0
@@ -22463,7 +22416,7 @@ Transform:
   - {fileID: 465014185}
   - {fileID: 648314400}
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 1
 --- !u!114 &1414736580
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -30453,10 +30406,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 33e8504d3b2c44dd7848afe78a5fd2b7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  previousNode: {fileID: 0}
-  nextNode: {fileID: 1896817227}
-  influenceSphere: 20
-  theNodeType: 2
+  nextNode: {fileID: 0}
+  Rotation: {x: 0, y: 0, z: 0}
 --- !u!23 &1896817230
 Renderer:
   m_ObjectHideFlags: 0
@@ -33363,7 +33314,7 @@ Transform:
   - {fileID: 1836236519}
   - {fileID: 1653233575}
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 5
 --- !u!1 &1969520609
 GameObject:
   m_ObjectHideFlags: 0
@@ -33408,10 +33359,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 33e8504d3b2c44dd7848afe78a5fd2b7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  previousNode: {fileID: 0}
-  nextNode: {fileID: 1969520609}
-  influenceSphere: 20
-  theNodeType: 2
+  nextNode: {fileID: 0}
+  Rotation: {x: 0, y: 0, z: 0}
 --- !u!23 &1969520612
 Renderer:
   m_ObjectHideFlags: 0

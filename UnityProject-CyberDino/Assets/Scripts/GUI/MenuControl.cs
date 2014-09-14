@@ -32,7 +32,6 @@ public class MenuControl : MonoBehaviour
 	private Rect[] lobbyMenuBtnRect;
 	private Rect[] resultsMenuRect;
 	private Rect[] connectingRect;
-	private Rect[] hudRect;
 	
 	//the position of the dino models
 	private Rect startDinoPos;
@@ -144,24 +143,7 @@ public class MenuControl : MonoBehaviour
 	private int[] racePositions;
 	private int[] currentLaps;
 	private int playerNum;
-	
-	//private int waitForPlayers;
-	
-	private Texture[] numGfx;
-	
-	private Texture[] hudGfx;
-	
-	private Texture healthBarGfx;
-	
-	private Texture healthBorderGfx;
-	
-	private Texture[] weaponsGfx;
-	
-	private Texture[] miniMapGfx;
-	
-	private Texture miniMapPoint;
-	
-	private GameObject mapRelativePoint;
+
 	
 	// Use this for initialization
 	void Start () 
@@ -184,31 +166,6 @@ public class MenuControl : MonoBehaviour
 		lobbyMenuBtnTxtr[5] = (Texture)Resources.Load("GUI/Materials/ReadyButtonReady");
 		
 		backBtnTxtr = (Texture)Resources.Load("GUI/Materials/BackButton");
-		
-		numGfx = new Texture[10];
-		numGfx[0] = (Texture)Resources.Load("GUI/Materials/num0Graphic");
-		numGfx[1] = (Texture)Resources.Load("GUI/Materials/num1Graphic");
-		numGfx[2] = (Texture)Resources.Load("GUI/Materials/num2Graphic");
-		numGfx[3] = (Texture)Resources.Load("GUI/Materials/num3Graphic");
-		numGfx[4] = (Texture)Resources.Load("GUI/Materials/num4Graphic");
-		numGfx[5] = (Texture)Resources.Load("GUI/Materials/num5Graphic");
-		numGfx[6] = (Texture)Resources.Load("GUI/Materials/num6Graphic");
-		numGfx[7] = (Texture)Resources.Load("GUI/Materials/num7Graphic");
-		numGfx[8] = (Texture)Resources.Load("GUI/Materials/num8Graphic");
-		numGfx[9] = (Texture)Resources.Load("GUI/Materials/num9Graphic");
-		
-		hudGfx = new Texture[6];
-		hudGfx[0] = (Texture)Resources.Load("GUI/Materials/1stPlaceGraphic");
-		hudGfx[1] = (Texture)Resources.Load("GUI/Materials/2ndPlaceGraphic");
-		hudGfx[2] = (Texture)Resources.Load("GUI/Materials/3rdPlaceGraphic");
-		hudGfx[3] = (Texture)Resources.Load("GUI/Materials/4thPlaceGraphic");
-		hudGfx[4] = (Texture)Resources.Load("GUI/Materials/lapGraphic");
-		hudGfx[5] = (Texture)Resources.Load("GUI/Materials/slashGraphic");
-		
-		weaponsGfx = new Texture[3];
-		weaponsGfx[0] = (Texture)Resources.Load("GUI/Materials/weapon1Gfx");
-		weaponsGfx[1] = (Texture)Resources.Load("GUI/Materials/weapon2Gfx");
-		weaponsGfx[2] = (Texture)Resources.Load("GUI/Materials/weapon3Gfx");
 		
 		lvlSelectTxtr = new Texture[5];
 		//lvlSelectTxtr[0] = (Texture)Resources.Load("GUI/Materials/CityTrackGFX");
@@ -235,15 +192,6 @@ public class MenuControl : MonoBehaviour
 		
 		connectTxtr = (Texture)Resources.Load("GUI/Materials/LookingGraphic");
 		
-		healthBarGfx = (Texture)Resources.Load("GUI/Materials/HealthBar");
-		
-		healthBorderGfx = (Texture)Resources.Load("GUI/Materials/HealthBarBorder");
-		
-		miniMapGfx = new Texture[1];
-		miniMapGfx[0] = (Texture)Resources.Load("GUI/Materials/DumbBellMap");
-		
-		miniMapPoint = (Texture)Resources.Load("GUI/Materials/MapPointPosition");
-		
 		//graphics ----------------------------------------
 		mainMenuBtnRect = new Rect[3];
 		
@@ -258,8 +206,6 @@ public class MenuControl : MonoBehaviour
 		connectingRect = new Rect[9];
 		
 		resultsMenuRect = new Rect[4];
-		
-		hudRect = new Rect[27];
 		
 		//don't destroy this object
 		DontDestroyOnLoad(this);
@@ -329,19 +275,16 @@ public class MenuControl : MonoBehaviour
 		
 		SetNames();
 		
-		raceDinos = dinoTrackingScript.GetDinoArray();
+		//raceDinos = dinoTrackingScript.GetDinoArray();
 		
-		mapRelativePoint = GameObject.Find("MiniMapRefPoint");
+		//mapRelativePoint = GameObject.Find("MiniMapRefPoint");
 	}
 	
 	void Update()
 	{
-		//if(mapRelativePoint == null)
-			//mapRelativePoint = GameObject.Find("MiniMapRefPoint");
 			
 		if(menuSelect == Menu.lobbyMenu)
 		{
-			
 			//left arrow for dino select
 			if(Input.GetKeyDown(KeyCode.LeftArrow))
 			{
@@ -1060,77 +1003,7 @@ public class MenuControl : MonoBehaviour
 			{
 				Destroy(dinoBoxLg);
 			}
-			
-			hudRect[0] = ResizeRect(new Rect(15, 75, 5, 5));
-			hudRect[1] = ResizeRect(new Rect(38, 75, 5, 5));
-			hudRect[2] = ResizeRect(new Rect(60, 75, 5, 5));
-			hudRect[3] = ResizeRect(new Rect(85, 75, 5, 5));
-			
-			hudRect[4] = ResizeRect(new Rect(80, 5, 5, 5));
-			hudRect[5] = ResizeRect(new Rect(86, 6, 1, 3));
-			hudRect[6] = ResizeRect(new Rect(88, 6, 1, 3));
-			hudRect[7] = ResizeRect(new Rect(90, 6, 1, 3));
-			
-			hudRect[8] = ResizeRect(new Rect(5, 85, 18, 8));
-			hudRect[9] = GetHealth(new Rect(5, 85, 18, 8), 0);
-			hudRect[10] = ResizeRect(new Rect(28, 85, 18, 8));
-			hudRect[11] = GetHealth(new Rect(28, 85, 18, 8), 1);
-			hudRect[12] = ResizeRect(new Rect(52, 85, 18, 8));
-			hudRect[13] = GetHealth(new Rect(52, 85, 18, 8), 2);
-			hudRect[14] = ResizeRect(new Rect(75, 85, 18, 8));
-			hudRect[15] = GetHealth(new Rect(75, 85, 18, 8), 3);
-			
-			hudRect[16] = ResizeRect(new Rect(5, 6, 8, 15));
-			hudRect[17] = ResizeRect(new Rect(5, 6, 8, 15));
-			
-			hudRect[18] = ResizeRect(new Rect(5, 75, 8, 15));
-			hudRect[19] = ResizeRect(new Rect(28, 75, 8, 15));
-			hudRect[20] = ResizeRect(new Rect(52, 75, 8, 15));
-			hudRect[21] = ResizeRect(new Rect(75, 75, 8, 15));
-			
-			hudRect[22] = ResizeRect(new Rect(80, 15, 15, 55));
-			hudRect[23] = SetMapPosition(new Rect(87, 43, 1, 1), raceDinos[0]);
-			/*hudRect[24] = SetMapPosition(new Rect(5, 5, 3, 3));
-			hudRect[25] = SetMapPosition(new Rect(5, 5, 3, 3));
-			hudRect[26] = SetMapPosition(new Rect(5, 5, 3, 3));*/
-			
-			racePositions = dinoTrackingScript.GetCurrentPositions();
-			currentLaps = dinoTrackingScript.GetCurrentLaps();
-			
-			
-			//Debug.Log("the player num is " + playerNum);
-			GUI.DrawTexture(new Rect(menuOrigin[5].x + hudRect[0].x, menuOrigin[5].y + hudRect[0].y, hudRect[0].width, hudRect[0].height), hudGfx[racePositions[0] - 1]); //position graphic
-			GUI.DrawTexture(new Rect(menuOrigin[5].x + hudRect[1].x, menuOrigin[5].y + hudRect[1].y, hudRect[1].width, hudRect[1].height), hudGfx[racePositions[1] - 1]); //position graphic
-			GUI.DrawTexture(new Rect(menuOrigin[5].x + hudRect[2].x, menuOrigin[5].y + hudRect[2].y, hudRect[2].width, hudRect[2].height), hudGfx[racePositions[2] - 1]); //position graphic
-			GUI.DrawTexture(new Rect(menuOrigin[5].x + hudRect[3].x, menuOrigin[5].y + hudRect[3].y, hudRect[3].width, hudRect[3].height), hudGfx[racePositions[3] - 1]); //position graphic
-			
-			GUI.DrawTexture(new Rect(menuOrigin[5].x + hudRect[4].x, menuOrigin[5].y + hudRect[4].y, hudRect[4].width, hudRect[4].height), hudGfx[4]); // lap graphic
-			GUI.DrawTexture(new Rect(menuOrigin[5].x + hudRect[5].x, menuOrigin[5].y + hudRect[5].y, hudRect[5].width, hudRect[5].height), numGfx[currentLaps[playerNum]]); // current lap
-			GUI.DrawTexture(new Rect(menuOrigin[5].x + hudRect[6].x, menuOrigin[5].y + hudRect[6].y, hudRect[6].width, hudRect[6].height), hudGfx[5]); // slash graphic
-			GUI.DrawTexture(new Rect(menuOrigin[5].x + hudRect[7].x, menuOrigin[5].y + hudRect[7].y, hudRect[7].width, hudRect[7].height), numGfx[dinoTrackingScript.maxLap]); // max lap
-			
-			GUI.DrawTexture(new Rect(menuOrigin[5].x + hudRect[9].x, menuOrigin[5].y + hudRect[9].y, hudRect[9].width, hudRect[9].height), healthBarGfx); // health bar
-			GUI.DrawTexture(new Rect(menuOrigin[5].x + hudRect[8].x, menuOrigin[5].y + hudRect[8].y, hudRect[8].width, hudRect[8].height), healthBorderGfx); // health border
-			GUI.DrawTexture(new Rect(menuOrigin[5].x + hudRect[11].x, menuOrigin[5].y + hudRect[11].y, hudRect[11].width, hudRect[11].height), healthBarGfx); // health bar
-			GUI.DrawTexture(new Rect(menuOrigin[5].x + hudRect[10].x, menuOrigin[5].y + hudRect[10].y, hudRect[10].width, hudRect[10].height), healthBorderGfx); // health border
-			GUI.DrawTexture(new Rect(menuOrigin[5].x + hudRect[13].x, menuOrigin[5].y + hudRect[13].y, hudRect[13].width, hudRect[13].height), healthBarGfx); // health bar
-			GUI.DrawTexture(new Rect(menuOrigin[5].x + hudRect[12].x, menuOrigin[5].y + hudRect[12].y, hudRect[12].width, hudRect[12].height), healthBorderGfx); // health border
-			GUI.DrawTexture(new Rect(menuOrigin[5].x + hudRect[15].x, menuOrigin[5].y + hudRect[15].y, hudRect[15].width, hudRect[15].height), healthBarGfx); // health bar
-			GUI.DrawTexture(new Rect(menuOrigin[5].x + hudRect[14].x, menuOrigin[5].y + hudRect[14].y, hudRect[14].width, hudRect[14].height), healthBorderGfx); // health border
-			
-			GUI.DrawTexture(new Rect(menuOrigin[5].x + hudRect[16].x, menuOrigin[5].y + hudRect[16].y, hudRect[16].width, hudRect[16].height), healthBorderGfx); // the weapon border
-			GUI.DrawTexture(new Rect(menuOrigin[5].x + hudRect[17].x, menuOrigin[5].y + hudRect[17].y, hudRect[17].width, hudRect[17].height), GetWeapon()); // the weapon graphic
-			
-			GUI.TextField(new Rect(menuOrigin[5].x + hudRect[18].x, menuOrigin[5].y + hudRect[18].y, hudRect[18].width, hudRect[18].height), playerNames[0]); // the player name
-			GUI.TextField(new Rect(menuOrigin[5].x + hudRect[19].x, menuOrigin[5].y + hudRect[19].y, hudRect[19].width, hudRect[19].height), playerNames[1]); // the player name
-			GUI.TextField(new Rect(menuOrigin[5].x + hudRect[20].x, menuOrigin[5].y + hudRect[20].y, hudRect[20].width, hudRect[20].height), playerNames[2]); // the player name
-			GUI.TextField(new Rect(menuOrigin[5].x + hudRect[21].x, menuOrigin[5].y + hudRect[21].y, hudRect[21].width, hudRect[21].height), playerNames[3]); // the player name
 
-			GUI.DrawTexture(new Rect(menuOrigin[5].x + hudRect[22].x, menuOrigin[5].y + hudRect[22].y, hudRect[22].width, hudRect[22].height), miniMapGfx[0]); // the minimap
-			GUI.DrawTexture(new Rect(menuOrigin[5].x + hudRect[23].x, menuOrigin[5].y + hudRect[23].y, hudRect[23].width, hudRect[23].height), miniMapPoint);
-			GUI.DrawTexture(new Rect(menuOrigin[5].x + hudRect[24].x, menuOrigin[5].y + hudRect[24].y, hudRect[24].width, hudRect[24].height), miniMapPoint);
-			GUI.DrawTexture(new Rect(menuOrigin[5].x + hudRect[25].x, menuOrigin[5].y + hudRect[25].y, hudRect[25].width, hudRect[25].height), miniMapPoint);
-			GUI.DrawTexture(new Rect(menuOrigin[5].x + hudRect[26].x, menuOrigin[5].y + hudRect[26].y, hudRect[26].width, hudRect[26].height), miniMapPoint);
 			
 		}
 		
@@ -1577,18 +1450,6 @@ public class MenuControl : MonoBehaviour
 		//Debug.Log("banner name " + resultsFName[_place - 1]);
 	}
 	
-	private Rect GetHealth(Rect _pos, int _index)
-	{
-		var health = raceDinos [_index].GetComponent<Health> ();
-		float percentResults = (_pos.width * ((health == null) ? 1.0f : health.Percent)) ;
-		return ResizeRect(new Rect(_pos.x, _pos.y, percentResults, _pos.height));
-	}
-	
-	private Texture GetWeapon()
-	{
-		return weaponsGfx [0];
-	}
-	
 	private void SetNames()
 	{
 		int index = 0;
@@ -1626,15 +1487,5 @@ public class MenuControl : MonoBehaviour
 	{
 		playerNames[_index] = _name;
 	}
-	
-	private Rect SetMapPosition(Rect _pos, GameObject _dino)
-	{
-		//get the distance between the point and the dinos
-		Rect distance = new Rect((mapRelativePoint.transform.position.x - _dino.transform.position.x) / 60.0f, (mapRelativePoint.transform.position.z - _dino.transform.position.z) / 60.0f, _pos.width, _pos.height);
-		
-		//Debug.Log(distance);
-		//downsize the distance
-		//return a rect of the new distance
-		return ResizeRect(new Rect(_pos.x + distance.y, _pos.y + distance.x, _pos.width, _pos.height));
-	}
+
 }
