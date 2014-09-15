@@ -26,15 +26,20 @@ public class DinoRagdoll : MonoBehaviour {
 	public void GoRagdoll() {
 		if(true) {
 			// Modified by Sam
+			Vector3 force = move.getForce();
 			move.SetRunning(false);
 			this.rigidbody.isKinematic = true;
 			foreach(Collider collider in playColliders)
 				collider.enabled = false;
 			foreach(Rigidbody ragdoll in ragdollBones)
+			{
 				ragdoll.isKinematic = false;
+				ragdoll.rigidbody.velocity = force;
+			}
 			foreach(Collider collider in ragdollColliders)
 				collider.enabled = true;
 			dinoAnimator.enabled = false;
+
 		}
 	}
 

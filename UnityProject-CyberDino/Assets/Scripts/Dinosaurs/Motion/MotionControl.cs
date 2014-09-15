@@ -78,7 +78,7 @@ public class MotionControl : MonoBehaviour {
 	void FixedUpdate () 
 	{
 		// Apply acceleration and drift or fall depending on grounded state
-		if (onGround)
+		if (onGround && isRunning)
 		{			
 			// Update traction, drift, and driftRad every frame.
 			traction = handling * (1 - speed/topSpeed); 				// Set traction based on speed
@@ -306,5 +306,9 @@ public class MotionControl : MonoBehaviour {
 		topSpeed *= percent;
 		yield return new WaitForSeconds(duration);
 		topSpeed = oldTopSpeed;
+	}
+	public Vector3 getForce()
+	{
+		return rigidbody.velocity;
 	}
 }
