@@ -3,16 +3,14 @@ using System.Collections;
 
 public class DinoTracking : MonoBehaviour 
 {
+	//delegates to recieve the dinos
 	public delegate void DinoAddition(GameObject _dino);
 	public static DinoAddition AddDino;
 
+	//the dinos ordered by player number
 	private GameObject[] dinos;
 
-	/*private GameObject[] playerDinos;
-
-	private GameObject[] cpuDinos;*/
 	private GameObject[] tempDinos;
-	//private int tempDinoIndex;
 	
 	private NodeBehavior[] currentNodes;
 
@@ -45,15 +43,17 @@ public class DinoTracking : MonoBehaviour
 	
 	private NetworkView netView;
 
-	private GameObject menu;
+	/*private GameObject menu;
 
-	private MenuControl menuScript;
+	private MenuControl menuScript;*/
 
-	private GameObject finishObj;
+	//private GameObject finishObj;
 
 	public int playerNum;
+	
+	public HUDScript hudScript;
 
-	public float moveSpeed = 25.0f;
+	//public float moveSpeed = 25.0f;
 	
 	// Use this for initialization
 	void Awake () 
@@ -90,9 +90,9 @@ public class DinoTracking : MonoBehaviour
 		
 		currentPositions = new int[4];
 
-		menu = GameObject.FindGameObjectWithTag("Menu");
+		//menu = GameObject.FindGameObjectWithTag("Menu");
 
-		menuScript = menu.GetComponent<MenuControl>();
+		//menuScript = menu.GetComponent<MenuControl>();
 
 		tempDinos = new GameObject[4];
 		//private int tempDinoIndex;
@@ -152,7 +152,7 @@ public class DinoTracking : MonoBehaviour
 			{
 				if(d.tag == "Ai")
 				{
-					Debug.Log("the cpu number " + index + " for " + d);
+					//Debug.Log("the cpu number " + index + " for " + d);
 
 					dinoId = d.networkView.viewID;
 				
@@ -184,22 +184,13 @@ public class DinoTracking : MonoBehaviour
 	void FixedUpdate () 
 	{
 
-		if(Input.GetKey(KeyCode.E))
+		if(Input.GetKeyDown(KeyCode.E))
 		{
-			if(finishObj == null)
-			{
-				finishObj = new GameObject("finishGUI");
-				finishObj.AddComponent<GUITexture>();
-				finishObj.guiTexture.texture = (Texture)Resources.Load("GUI/Materials/Finish");
-				finishObj.transform.localScale = new Vector3(0, 0, 0);
-				finishObj.transform.position = new Vector3(0, 0, 0);
-				finishObj.guiTexture.pixelInset = ResizeRect(new Rect(100, 45, 50, 40));
-				Debug.Log("created finish object");
 				
-				StartCoroutine("MoveIn", finishObj);
+			hudScript.ShowFinish();
 
-				netView.RPC("EndRace", RPCMode.All);
-			}
+			hudScript.EndRace();
+			//netView.RPC("EndRace", RPCMode.All);
 		}
 
 		//posText.guiText.text = "Dino1: " + currentPositions[0] + " Dino2: " + currentPositions[1] + " Dino3: " + currentPositions[2] + " Dino4: " + currentPositions[3];
@@ -321,18 +312,14 @@ public class DinoTracking : MonoBehaviour
                 //if all player dinos have completed all of the laps end the race
                 if (lapTest > playerCount)
                 {
-                    netView.RPC("EndRace", RPCMode.All);
+					hudScript.ShowFinish();
+					
+					hudScript.EndRace();
                 }
 
-                if (lapCount[playerNum] >= maxLap && finishObj == null)
+                if (lapCount[playerNum] >= maxLap)
                 {
-                    finishObj = new GameObject("finishGUI");
-                    finishObj.AddComponent<GUITexture>();
-                    finishObj.guiTexture.texture = (Texture)Resources.Load("GUI/Materials/Finish");
-                    finishObj.transform.localScale = new Vector3(0, 0, 0);
-                    finishObj.guiTexture.pixelInset = ResizeRect(new Rect(100, 45, 25, 15));
-
-                    StartCoroutine("MoveIn", finishObj);
+					hudScript.ShowFinish();
                 }
 
                 //Debug.Log("player " + _index + " current node " + currentNodes[_index]);
@@ -448,9 +435,6 @@ public class DinoTracking : MonoBehaviour
 	[RPC]
 	private void SetPlayerDino(NetworkViewID _id, int _playerNum)
 	{
-		//temp array that gets all of the player dinos
-		//GameObject[] tempDinos = GameObject.FindGameObjectsWithTag("Dino");
-		
 		//loop through the temp array
 		foreach(GameObject _dino in tempDinos)
 		{
@@ -462,20 +446,7 @@ public class DinoTracking : MonoBehaviour
 				dinos[_playerNum] = _dino;
 			}
 		}
-		
-		//cpDinos = GameObject.FindGameObjectsWithTag("Ai");
-		
-		/*//loop through the temp array
-		foreach(GameObject _dino in cpuDinos)
-		{
-			//if the current element's network id is the same as the one passed in
-			if(_dino.networkView.viewID == _id)
-			{
-				Debug.Log("set " + _playerNum + "'s dino");
-				//set this dino into the dinos array using the player number as the index
-				dinos[_playerNum] = _dino;
-			}
-		}*/
+
 	}
 
 	public GameObject[] GetDinoArray()
@@ -497,118 +468,6 @@ public class DinoTracking : MonoBehaviour
     {
         return lapCount;
     }
-
-	Rect ResizeRect(Rect _pos)
-	{
-		//variables used to move the buttons
-		float xMulti = Screen.width / 100.0f;
-		float yMulti = Screen.height / 100.0f;
-		
-		//set the rect position and size
-		return new Rect(_pos.x * xMulti, _pos.y * yMulti, _pos.width * xMulti, _pos.height * yMulti);
-		
-	}
-
-	private IEnumerator MoveIn(GameObject _obj)
-	{
-		Rect tempPos = _obj.guiTexture.pixelInset;
-		float transNum = tempPos.x;
-		float middleOfScreen =  (Screen.width / 2) - (tempPos.width / 2);
-
-		while(true)
-		{
-
-			//while the the transparency variable is less than 1
-			if(transNum >= middleOfScreen)
-			{
-				//use mathf.lerp to set the transparency of the temp Color
-				//tempPos.x = Mathf.Lerp(tempPos.x, middleOfScreen, transNum);
-				
-				//set the guiTexture's color to the temp Color
-				_obj.guiTexture.pixelInset = new Rect(transNum, tempPos.y, tempPos.width, tempPos.height);
-				
-				//decrament the transparency variable
-				transNum -= moveSpeed;
-				
-			}
-			else
-			{
-
-				_obj.guiTexture.pixelInset = new Rect(middleOfScreen, tempPos.y, tempPos.width, tempPos.height);
-
-
-				yield break;
-			}
-
-			yield return new WaitForSeconds(0.01f);
-		}
-	}
-
-
-
-	[RPC]
-	private void EndRace()
-	{
-		StartCoroutine("ShowFinish");
-	}
-
-	private IEnumerator ShowFinish()
-	{
-
-		yield return new WaitForSeconds(3.0f);
-		
-		if(finishObj != null)
-		{
-			Rect tempPos = finishObj.guiTexture.pixelInset;
-			float transNum = tempPos.x;
-			
-			while(true)
-			{
-				//while the the transparency variable is less than 1
-				if(transNum >= -tempPos.width)
-				{
-					
-					finishObj.guiTexture.pixelInset = new Rect(transNum, tempPos.y, tempPos.width, tempPos.height);
-					
-					//decrament the transparency variable
-					transNum -= moveSpeed;
-					
-				}
-				else
-				{
-					finishObj.guiTexture.pixelInset = new Rect(-tempPos.width, tempPos.y, tempPos.width, tempPos.height);
-					
-					break;
-				}
-				
-				yield return new WaitForSeconds(0.01f);
-			}
-		}
-
-		menuScript.SetResults();
-		menuScript.ShowResults();
-
-		//menuScript.menuSelect = MenuControl.Menu.resultsMenu;
-		
-		yield return null;
-	}
-
-	/*[RPC]
-	private void DinoToAdd(GameObject _dino, int _playerNum)
-	{
-		Debug.Log("adding player dino " + _dino.name);
-
-		if(_playerNum >= 0)
-			dinos[_playerNum] = _dino;
-		else
-			for(int i = 0; i < dinos.Length; i++)
-				if(dinos[i] == null)
-				{
-					dinos[i] = _dino;
-					break;
-				}
-	}*/
-
 
 	private void DinoToAdd(GameObject _dino)
 	{

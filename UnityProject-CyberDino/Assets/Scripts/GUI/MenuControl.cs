@@ -80,9 +80,6 @@ public class MenuControl : MonoBehaviour
 	
 	private Texture playerNameGFX;
 	
-	//array to hold the mini dino portrait
-	/*private Texture[] dinoPortrait;*/
-	
 	
 	//menu sliding variables
 	
@@ -140,9 +137,11 @@ public class MenuControl : MonoBehaviour
 	
 	private NetworkView netView;
 	private GameObject[] raceDinos;
-	private int[] racePositions;
+	//private int[] racePositions;
 	private int[] currentLaps;
 	private int playerNum;
+	
+	private int[] racePositions;
 
 	
 	// Use this for initialization
@@ -173,14 +172,6 @@ public class MenuControl : MonoBehaviour
 		
 		lvlNameGFX = (Texture)Resources.Load("GUI/Materials/CityTrackWord");
 		
-		/*dinoPortrait = new Texture[6];
-		dinoPortrait[0] = (Texture)Resources.Load("GUI/Materials/CityTrackGFX");
-		dinoPortrait[1] = (Texture)Resources.Load("GUI/Materials/CityTrackGFX");
-		dinoPortrait[2] = (Texture)Resources.Load("GUI/Materials/CityTrackGFX");
-		dinoPortrait[3] = (Texture)Resources.Load("GUI/Materials/CityTrackGFX");
-		dinoPortrait[4] = (Texture)Resources.Load("GUI/Materials/CityTrackGFX");
-		dinoPortrait[5] = (Texture)Resources.Load("GUI/Materials/CityTrackGFX");*/
-		
 		serverNameGFX = (Texture)Resources.Load("GUI/Materials/ServerName");
 		playerNameGFX = (Texture)Resources.Load("GUI/Materials/PlayerName");
 		
@@ -206,6 +197,8 @@ public class MenuControl : MonoBehaviour
 		connectingRect = new Rect[9];
 		
 		resultsMenuRect = new Rect[4];
+		
+		racePositions = new int[4];
 		
 		//don't destroy this object
 		DontDestroyOnLoad(this);
@@ -250,14 +243,11 @@ public class MenuControl : MonoBehaviour
 		//the names of the players in the order that they past the finished line
 		resultsMenuRect = new Rect[14];
 		
-		playerNames = new string[4];
-		
 		resultsFName = new string[4];
 		
 		raceDinos = new GameObject[4];
-		racePositions = new int[4];
 		
-		//waitForPlayers = 0;
+		playerNames = new string[4];
 		
 		dinoTracking = GameObject.Find("Checkpoints");
 		
@@ -272,17 +262,15 @@ public class MenuControl : MonoBehaviour
 		}
 		
 		int.TryParse(Network.player.ToString(), out playerNum);
+
+		//playerNames = SetNames();
 		
-		SetNames();
-		
-		//raceDinos = dinoTrackingScript.GetDinoArray();
-		
-		//mapRelativePoint = GameObject.Find("MiniMapRefPoint");
+		//Debug.Log("the names " + playerNames[0]);
 	}
 	
 	void Update()
 	{
-			
+		//Debug.Log("the names " + playerNames[0]);
 		if(menuSelect == Menu.lobbyMenu)
 		{
 			//left arrow for dino select
@@ -961,10 +949,10 @@ public class MenuControl : MonoBehaviour
 			//Tell the player if they have won or not
 			//have an ok button
 			
-			GUI.TextField(new Rect(menuOrigin[4].x + resultsMenuRect[4].x, menuOrigin[4].y + resultsMenuRect[4].y, resultsMenuRect[4].width, resultsMenuRect[4].height), playerNames[0]);
-			GUI.TextField(new Rect(menuOrigin[4].x + resultsMenuRect[5].x, menuOrigin[4].y + resultsMenuRect[5].y, resultsMenuRect[5].width, resultsMenuRect[5].height), playerNames[1]);
-			GUI.TextField(new Rect(menuOrigin[4].x + resultsMenuRect[6].x, menuOrigin[4].y + resultsMenuRect[6].y, resultsMenuRect[6].width, resultsMenuRect[6].height), playerNames[2]);
-			GUI.TextField(new Rect(menuOrigin[4].x + resultsMenuRect[7].x, menuOrigin[4].y + resultsMenuRect[7].y, resultsMenuRect[7].width, resultsMenuRect[7].height), playerNames[3]);
+			GUI.TextField(new Rect(menuOrigin[4].x + resultsMenuRect[4].x, menuOrigin[4].y + resultsMenuRect[4].y, resultsMenuRect[4].width, resultsMenuRect[4].height), playerNames[racePositions[0] - 1]);
+			GUI.TextField(new Rect(menuOrigin[4].x + resultsMenuRect[5].x, menuOrigin[4].y + resultsMenuRect[5].y, resultsMenuRect[5].width, resultsMenuRect[5].height), playerNames[racePositions[1] - 1]);
+			GUI.TextField(new Rect(menuOrigin[4].x + resultsMenuRect[6].x, menuOrigin[4].y + resultsMenuRect[6].y, resultsMenuRect[6].width, resultsMenuRect[6].height), playerNames[racePositions[2] - 1]);
+			GUI.TextField(new Rect(menuOrigin[4].x + resultsMenuRect[7].x, menuOrigin[4].y + resultsMenuRect[7].y, resultsMenuRect[7].width, resultsMenuRect[7].height), playerNames[racePositions[3] - 1]);
 			
 			GUI.DrawTexture(new Rect(menuOrigin[4].x + resultsMenuRect[8].x, menuOrigin[4].y + resultsMenuRect[8].y, resultsMenuRect[8].width, resultsMenuRect[8].height), (Texture)Resources.Load(resultsFName[0]));
 			GUI.DrawTexture(new Rect(menuOrigin[4].x + resultsMenuRect[9].x, menuOrigin[4].y + resultsMenuRect[9].y, resultsMenuRect[9].width, resultsMenuRect[9].height), (Texture)Resources.Load(resultsFName[1]));
@@ -1351,9 +1339,9 @@ public class MenuControl : MonoBehaviour
 		
 		if(Network.isServer)
 		{
-			playerNames = new string[4];
+			//playerNames = new string[4];
 
-			//raceDinos = dinoTrackingScript.GetDinoArray();
+			raceDinos = dinoTrackingScript.GetDinoArray();
 			racePositions = dinoTrackingScript.GetCurrentPositions();
 			
 			PlayerInformation[] infoArr = new PlayerInformation[4];
@@ -1362,11 +1350,6 @@ public class MenuControl : MonoBehaviour
 			
 			for(int i = 0; i < infoArr.Length; i++)
 			{
-				/*Debug.Log("the index number " + i);
-				Debug.Log("the length of info array " + infoArr.Length);
-				Debug.Log ("name " + infoArr[i].playerName);
-				Debug.Log(" player number " + racePositions[i]);
-				Debug.Log(" _dinoName " + raceDinos[i].name);*/
 				if(infoArr[i] != null)
 					netView.RPC("SetResultsInfo", RPCMode.AllBuffered, infoArr[i].playerName, raceDinos[i].name, racePositions[i]);
 				
@@ -1375,48 +1358,19 @@ public class MenuControl : MonoBehaviour
 		
 		int index = 0;
 		
-		//Debug.Log(networkHandler.playerInformation.Count);
-		
 		int playerNum = 0;
 		
 		int.TryParse(Network.player.ToString(), out playerNum);
 		
-		//netView.RPC("SetPlayerNames", RPCMode.AllBuffered, infoArr[0].playerName, playerNum, raceDinos[playerNum].name, racePositions[playerNum]);
-		
-		/*for(int i = 0; i < racePositions.Length; i++)
-			Debug.Log("player " + i + " in position " + racePositions[i]);*/
-		
-		/*while(true)
-		{
-			Debug.Log("waiting for players to set stuff");
-
-			if(waitForPlayers >= Network.connections.Length + 1)
-			{
-				Debug.Log("all players ready");
-
-				break;
-			}
-
-			yield return null;
-		}*/
-		
 		while(index < 4)
 		{
-			//Debug.Log("set cpu name");
-			//Debug.Log("index " + index);
-			if(playerNames[racePositions[index] - 1] == null)
-			{
-				//GUI.TextField(new Rect(menuOrigin[4].x + resultsMenuRect[racePositions[index] + 4].x, menuOrigin[4].y + resultsMenuRect[racePositions[index] + 4].y, resultsMenuRect[racePositions[index] + 4].width, resultsMenuRect[racePositions[index] + 4].height), "CPU");
-				playerNames[racePositions[index] - 1] = "CPU";
-				
-				//string textureFileName = "GUI/Materials/Banner" + raceDinos[index].ToString() + "Small";
-				
-				//GUI.DrawTexture(new Rect(menuOrigin[4].x + lobbyMenuRect[racePositions[index] + 8].x, menuOrigin[4].y + lobbyMenuRect[racePositions[index] + 8].y, lobbyMenuRect[racePositions[index] + 8].width, lobbyMenuRect[racePositions[index] + 8].height), (Texture)Resources.Load(textureFileName));
-				/*Debug.Log("index " + index);
-				Debug.Log(resultsFName[racePositions[index] - 1]);
-				Debug.Log(raceDinos[index].ToString());*/
-				resultsFName[racePositions[index] - 1] = "GUI/Materials/Banner" + GetNameFromClone(raceDinos[index].ToString()) + "Small";
-			}
+
+			//if(playerNames[_racePos[index] - 1] == null)
+			//{
+				//playerNames[_racePos[index] - 1] = "CPU";
+
+			resultsFName[racePositions[index] - 1] = "GUI/Materials/Banner" + GetNameFromClone(raceDinos[index].ToString()) + "Small";
+			//}
 			
 			//Debug.Log(raceDinos[index].ToString());
 			
@@ -1424,6 +1378,8 @@ public class MenuControl : MonoBehaviour
 			
 			yield return null;
 		}
+		
+		
 	}
 	
 	public void ShowResults()
@@ -1442,25 +1398,21 @@ public class MenuControl : MonoBehaviour
 	[RPC]
 	private void SetResultsInfo(string _name, string _dinoName, int _playerNum)
 	{
-		Debug.Log ("name " + _name + " player number " + _playerNum + " _dinoName " + _dinoName);
-		
-		playerNames[_playerNum - 1] = _name;
+		//playerNames[_playerNum - 1] = _name;
 		resultsFName[_playerNum - 1] = "GUI/Materials/Banner" + GetNameFromClone(_dinoName) + "Small";
-		
-		//Debug.Log("banner name " + resultsFName[_place - 1]);
+
 	}
 	
-	private void SetNames()
+	public string[] SetNames()
 	{
 		int index = 0;
 		
-		int playerNum = 0;
+		int playerNum = dinoTrackingScript.playerNum;
 		
-		int.TryParse(Network.player.ToString(), out playerNum);
 		
 		while(index < 4)
 		{
-			playerNames[index] = "CPU";
+			playerNames[index] = "CPU " + index;
 			
 			index++;
 		}
@@ -1480,6 +1432,7 @@ public class MenuControl : MonoBehaviour
 			}
 		}
 		
+		return playerNames;
 	}
 	
 	[RPC]
@@ -1487,5 +1440,6 @@ public class MenuControl : MonoBehaviour
 	{
 		playerNames[_index] = _name;
 	}
+	
 
 }

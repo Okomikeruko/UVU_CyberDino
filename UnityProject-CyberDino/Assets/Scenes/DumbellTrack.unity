@@ -3822,6 +3822,7 @@ GameObject:
   - 81: {fileID: 322136274}
   - 114: {fileID: 322136279}
   - 114: {fileID: 322136280}
+  - 148: {fileID: 322136281}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -3924,6 +3925,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dinoTrackingScript: {fileID: 2059703707}
   mapRelativePoint: {fileID: 57520496}
+--- !u!148 &322136281
+NetworkView:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 322136273}
+  m_Enabled: 1
+  m_StateSynchronization: 1
+  m_Observed: {fileID: 322136278}
+  m_ViewID:
+    m_ID: 3
+    m_Type: 1
 --- !u!1 &322272712
 GameObject:
   m_ObjectHideFlags: 0
@@ -24004,7 +24017,7 @@ MonoBehaviour:
   lastNode: {fileID: 2015498997}
   maxLap: 1
   playerNum: 0
-  moveSpeed: 25
+  hudScript: {fileID: 322136280}
 --- !u!4 &2059703708
 Transform:
   m_ObjectHideFlags: 0
