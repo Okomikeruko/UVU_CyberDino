@@ -33,7 +33,6 @@ public class DinoSelect : MonoBehaviour {
 		selectedDino = Instantiate(dinosaurs[Index], transform.position, transform.rotation) as GameObject;
 		anim = selectedDino.GetComponentInChildren<Animator>();
 		MotionControl dinoMotion = selectedDino.GetComponent<MotionControl>();
-		dinoMotion.anim = anim;
 		cameraScript.target = selectedDino.transform;
 
 	}
