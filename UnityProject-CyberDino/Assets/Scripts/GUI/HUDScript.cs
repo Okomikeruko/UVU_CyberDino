@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 
 public class HUDScript : MonoBehaviour 
@@ -17,6 +17,10 @@ public class HUDScript : MonoBehaviour
 	private GameObject mapObj;
 	private GameObject[] mapPosObjs;
 	private MapGUIInfo mapInfo;
+
+	private GameObject healthMask;
+	private GameObject healthMaskChild;
+	private Rect healthPos;
 
 	//textures for the hud
 	private Texture[] hudGfx;
@@ -177,6 +181,22 @@ public class HUDScript : MonoBehaviour
 
 		raceDinos = dinoTrackingScript.GetDinoArray();
 
+		healthMask = (GameObject)Instantiate(Resources.Load("GUI/HealthMaskObj"), Camera.main.transform.position, Quaternion.identity);
+		//healthMask.name = "HealthBar";
+		healthMask.transform.Rotate(new Vector3(0, 90, 0));
+
+		Debug.Log("the mask " + healthMask);
+
+		foreach(Transform child in healthMask.transform)
+		{
+			Debug.Log("the mask " + healthMask);
+			if(child.name == "HealthBar")
+			{
+				healthMaskChild = child.gameObject;
+
+			}
+		}
+
 	}
 	
 	// Update is called once per frame
@@ -218,8 +238,18 @@ public class HUDScript : MonoBehaviour
 		lapObjs[1].guiTexture.texture = numGfx[currentLaps[dinoTrackingScript.playerNum]];
 		lapObjs[3].guiTexture.texture = numGfx[dinoTrackingScript.maxLap];
 
-		healthBorderObjs[dinoTrackingScript.playerNum].guiTexture.pixelInset = ResizeRect(new Rect(15, 90, 18, 8));
-		healthBarObjs[dinoTrackingScript.playerNum].guiTexture.pixelInset = ResizeRect(GetHealth(new Rect(15, 90, 18, 8), 0));
+		/*healthBorderObjs[dinoTrackingScript.playerNum].guiTexture.pixelInset = ResizeRect(new Rect(15, 90, 18, 8));
+		healthBarObjs[dinoTrackingScript.playerNum].guiTexture.pixelInset = ResizeRect(GetHealth(new Rect(15, 90, 18, 8), 0));*/
+		//Vector3 pointInWorld = Camera.main.ScreenToWorldPoint(new Vector3(Screen.width, Screen.height, 10));
+		//healthMask.transform.localScale = new Vector3(pointInWorld.x, pointInWorld.y, 1);
+		//healthPos  = ResizeRect(new Rect(20, 80, 100, 100));
+		healthPos  = ResizeRect(new Rect(20, 80, 100, 100));
+		healthMask.transform.position = Camera.main.ScreenToWorldPoint(new Vector3(healthPos.x, healthPos.y, 10));
+		healthMask.transform.localRotation = Camera.main.transform.rotation;
+		//Vector3 newPos = Camera.main.transform.position;
+		//healthMask.transform.position = new Vector3(newPos.x, newPos.y, newPos.z) + Camera.main.transform.forward;
+
+		//healthMaskChild
 
 		if(dinoTrackingScript.playerNum != 0)
 			AttachHealth(0);
