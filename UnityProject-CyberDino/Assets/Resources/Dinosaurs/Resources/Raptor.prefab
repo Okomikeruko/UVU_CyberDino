@@ -3196,12 +3196,12 @@ CharacterJoint:
   m_ConnectedAnchor: {x: -1.86026728, y: -.0682919919, z: 2.86670286e-07}
   m_SwingAxis: {x: 1, y: 0, z: 0}
   m_LowTwistLimit:
-    limit: -10
+    limit: -90
     bounciness: 0
     spring: 0
     damper: 0
   m_HighTwistLimit:
-    limit: 15
+    limit: 60
     bounciness: 0
     spring: 0
     damper: 0
@@ -3761,7 +3761,7 @@ CharacterJoint:
     spring: 0
     damper: 0
   m_HighTwistLimit:
-    limit: 15
+    limit: 55
     bounciness: 0
     spring: 0
     damper: 0
