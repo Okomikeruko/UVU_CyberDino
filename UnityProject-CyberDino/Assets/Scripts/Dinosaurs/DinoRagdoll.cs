@@ -36,6 +36,8 @@ public class DinoRagdoll : MonoBehaviour {
 				ragdoll.isKinematic = false;
 				ragdoll.rigidbody.velocity = force;
 			}
+			ragdollBones[0].rigidbody.velocity += Vector3.up * force.magnitude;
+			ragdollBones[9].rigidbody.velocity += Vector3.down * force.magnitude;
 			foreach(Collider collider in ragdollColliders)
 				collider.enabled = true;
 			dinoAnimator.enabled = false;
