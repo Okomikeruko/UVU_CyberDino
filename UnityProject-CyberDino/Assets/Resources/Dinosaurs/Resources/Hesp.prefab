@@ -2083,6 +2083,7 @@ GameObject:
   - 95: {fileID: 9500000}
   - 114: {fileID: 11400028}
   - 148: {fileID: 14800002}
+  - 114: {fileID: 11400032}
   m_Layer: 8
   m_Name: Hesp_Mesh
   m_TagString: Mesh
@@ -3063,6 +3064,8 @@ GameObject:
   - 114: {fileID: 11400020}
   - 148: {fileID: 14800000}
   - 136: {fileID: 13600036}
+  - 114: {fileID: 11400030}
+  - 114: {fileID: 11400034}
   m_Layer: 8
   m_Name: Hesp
   m_TagString: Dino
@@ -10076,14 +10079,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   anim: {fileID: 0}
-  TurboAcceleration: 0
-  TurboTopSpeed: 0
   acceleration: 180
   topSpeed: 90
   handling: 2
   jump: 50
   medianSpeed: 60
-  speedRatio: .5
+  speedRatio: .100000001
   velocity: 0
 --- !u!114 &11400022
 MonoBehaviour:
@@ -10141,6 +10142,49 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   anim: {fileID: 0}
+--- !u!114 &11400030
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100390}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eb7c9d0cb6b29b941bc8887d774c81f9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHealth: 100
+  canRegenerate: 1
+  healthPerSecond: 1
+  damageRegenDelay: 5
+  regenerationCapPercent: 1
+  canOverheal: 0
+  overhealDecayPerSecond: 1
+  overhealDecayDelay: 5
+  overhealDecayCapPercent: 1
+--- !u!114 &11400032
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100266}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4a015fc9f260e5c49adb1ac04ee5d0bf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  DinoSound: 1
+--- !u!114 &11400034
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100390}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dccedda4b686c6b4e825816d127744e4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!120 &12000000
 LineRenderer:
   m_ObjectHideFlags: 1

@@ -4,7 +4,7 @@ using System.Collections;
 public class UserControl : MonoBehaviour {
 
 	private MotionControl move;
-
+	private DinoRagdoll ragdoll;
 	// Added by Sam
 //	[SerializeField]
 //	private WeaponControlClass weapons;
@@ -14,7 +14,7 @@ public class UserControl : MonoBehaviour {
 //	private RacerHealthClass racerHealth;
 //	[SerializeField]
 //	private DustEffectClass dust;
-
+	private RacerInteractionManager racerInteractionManager;
 	#region Properties
 //	private WeaponControlClass Weapons
 //	{
@@ -98,6 +98,8 @@ public class UserControl : MonoBehaviour {
 	void OnEnable()
 	{
 		move = this.GetComponent<MotionControl>();
+		ragdoll = this.GetComponent<DinoRagdoll> ();
+		racerInteractionManager = GetComponentInChildren<RacerInteractionManager>();
 
 		// Added by Sam
 //		Weapons = GetComponentInChildren<WeaponControlClass>();
@@ -128,6 +130,18 @@ public class UserControl : MonoBehaviour {
 		{
 			move.Jump ();
 		}
+
+		if (Input.GetKeyDown (KeyCode.R)) 
+		{
+			ragdoll.GoRagdoll();
+		}
+		if (Input.GetKeyDown (KeyCode.T)) 
+		{
+			ragdoll.ResetRacer();
+		}
+
+
+
 //		else
 //		{
 //			move.jumper = false;
@@ -198,7 +212,9 @@ public class UserControl : MonoBehaviour {
 	void OnTriggerEnter(Collider other){
 		
 		string theTag = other.gameObject.tag.ToString();
-		
+		if (racerInteractionManager != null){
+			racerInteractionManager.ChildOnTriggerEnterEventHandler(other);
+		}
 		switch(theTag)
 		{
 		case "Weapon":

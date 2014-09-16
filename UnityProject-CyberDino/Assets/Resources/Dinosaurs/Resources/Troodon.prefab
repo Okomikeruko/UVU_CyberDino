@@ -597,6 +597,7 @@ GameObject:
   - 95: {fileID: 9500000}
   - 114: {fileID: 11400002}
   - 148: {fileID: 14800002}
+  - 114: {fileID: 11400030}
   m_Layer: 0
   m_Name: troodonAnimations
   m_TagString: Untagged
@@ -678,6 +679,8 @@ GameObject:
   - 136: {fileID: 13600002}
   - 136: {fileID: 13600000}
   - 114: {fileID: 11400018}
+  - 114: {fileID: 11400020}
+  - 114: {fileID: 11400032}
   m_Layer: 8
   m_Name: Troodon
   m_TagString: Dino
@@ -1420,13 +1423,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 62cde66bda41d45c4b00ecd0c2c9583a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isRespawning: 0
-  respawnEffect: {fileID: 0}
-  inTurnArea: 0
-  respawnCheckpoint: {fileID: 0}
-  currentNode: {fileID: 0}
-  previousNode: {fileID: 0}
-  nextNode: {fileID: 0}
+  respawnParticalSystem: {fileID: 0}
 --- !u!114 &11400016
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1461,6 +1458,26 @@ MonoBehaviour:
   maxHealth: 100
   canBomb: 1
   shielded: 0
+--- !u!114 &11400020
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100124}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eb7c9d0cb6b29b941bc8887d774c81f9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHealth: 100
+  canRegenerate: 1
+  healthPerSecond: 1
+  damageRegenDelay: 5
+  regenerationCapPercent: 1
+  canOverheal: 0
+  overhealDecayPerSecond: 1
+  overhealDecayDelay: 5
+  overhealDecayCapPercent: 1
 --- !u!114 &11400022
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1473,14 +1490,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   anim: {fileID: 0}
-  TurboAcceleration: 0
-  TurboTopSpeed: 0
   acceleration: 180
   topSpeed: 90
   handling: 2
   jump: 50
   medianSpeed: 60
-  speedRatio: .5
+  speedRatio: .100000001
   velocity: 0
 --- !u!114 &11400024
 MonoBehaviour:
@@ -1524,6 +1539,29 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0bac9640c6d520848ae73eb80cc1f326, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &11400030
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100078}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4a015fc9f260e5c49adb1ac04ee5d0bf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  DinoSound: 5
+--- !u!114 &11400032
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100124}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dccedda4b686c6b4e825816d127744e4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!135 &13500000

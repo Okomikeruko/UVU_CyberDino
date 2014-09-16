@@ -11,29 +11,16 @@ public class RacerInteractionManager : MonoBehaviour
 	public static Action<Transform, Transform> hitSomething;
 	public static Action<Transform, Transform> stayingOnSomething;
 	public static Action<Transform, Transform> notStayingOnSomething;
-//	[SerializeField]
-//	public RacerRespawnStats playerRespawn = new RacerRespawnStats();
 
-	void OnEnable() 
+	public void ChildOnTriggerEnterEventHandler(Collider other)
 	{
-
-	}
-	
-	void OnDisable() 
-	{
-	
-	}
-
-	void OnTriggerEnter(Collider other)
-	{
-		//Debug.Log (other);
 		if(hitSomething != null)
 		{
 			hitSomething(transform, other.transform);
 		}
 	}
 
-	void OnTriggerStay(Collider other)
+	public void ChildOnTriggerStayEventHandler(Collider other)
 	{
 		if(stayingOnSomething != null)
 		{
@@ -41,7 +28,7 @@ public class RacerInteractionManager : MonoBehaviour
 		}
 	}
 
-	void OnTriggerExit(Collider other)
+	public void ChildOnTriggerExitEventHandler(Collider other)
 	{
 		if(notStayingOnSomething != null)
 		{

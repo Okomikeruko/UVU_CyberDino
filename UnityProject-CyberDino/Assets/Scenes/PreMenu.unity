@@ -139,7 +139,6 @@ GameObject:
   m_Component:
   - 4: {fileID: 614642520}
   - 114: {fileID: 614642522}
-  - 114: {fileID: 614642521}
   - 148: {fileID: 614642523}
   m_Layer: 0
   m_Name: MasterMenu
@@ -160,19 +159,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 3
---- !u!114 &614642521
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 11400000, guid: 0a4699168cf361b44a4d8dc13300ad76,
-    type: 2}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 614642519}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e7c090aebe7b1bd469317c87548cab80, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  swipeDirection: 0
 --- !u!114 &614642522
 MonoBehaviour:
   m_ObjectHideFlags: 0

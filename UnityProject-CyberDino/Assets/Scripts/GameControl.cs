@@ -58,7 +58,7 @@ public class GameControl : MonoBehaviour {
 			}
 
 			for (; i < NetworkGameHandler.MAX_PLAYERS; i++) {
-					//GameObject AiDino = (GameObject)Network.Instantiate((GameObject)Resources.Load(menuControl.dinos[Random.Range(1,6)]), spawnPoint[i].transform.position, Quaternion.LookRotation(spawnPoint[i].transform.forward), playerID);
+					//GameObject AiDino = (GameObject)Network.Instantiate((GameObject)Resources.Load(menuControl.dinos[Random.Range(0,5)]), spawnPoint[i].transform.position, Quaternion.LookRotation(spawnPoint[i].transform.forward), playerID);
 					GameObject AiDino = (GameObject)Network.Instantiate ((GameObject)Resources.Load (menuControl.dinos [4]), spawnPoint [i].transform.position, Quaternion.LookRotation (spawnPoint [i].transform.forward), playerID);
 					AiDino.tag = "Ai";
 					var PlayerControl = AiDino.GetComponent<UserControl> ();

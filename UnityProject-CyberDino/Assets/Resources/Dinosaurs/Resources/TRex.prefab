@@ -140,6 +140,8 @@ GameObject:
   - 114: {fileID: 11400000}
   - 136: {fileID: 13600002}
   - 114: {fileID: 11400024}
+  - 114: {fileID: 11400028}
+  - 114: {fileID: 11400032}
   m_Layer: 8
   m_Name: TRex
   m_TagString: Dino
@@ -819,6 +821,7 @@ GameObject:
   - 95: {fileID: 9500002}
   - 114: {fileID: 11400026}
   - 148: {fileID: 14800004}
+  - 114: {fileID: 11400030}
   m_Layer: 0
   m_Name: rexAnim3
   m_TagString: Untagged
@@ -1582,14 +1585,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   anim: {fileID: 0}
-  TurboAcceleration: 0
-  TurboTopSpeed: 0
   acceleration: 60
   topSpeed: 90
   handling: .75
   jump: 50
   medianSpeed: 60
-  speedRatio: .109999999
+  speedRatio: .100000001
   velocity: 0
 --- !u!114 &11400004
 MonoBehaviour:
@@ -1709,13 +1710,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 62cde66bda41d45c4b00ecd0c2c9583a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isRespawning: 0
-  respawnEffect: {fileID: 0}
-  inTurnArea: 0
-  respawnCheckpoint: {fileID: 0}
-  currentNode: {fileID: 0}
-  previousNode: {fileID: 0}
-  nextNode: {fileID: 0}
+  respawnParticalSystem: {fileID: 0}
 --- !u!114 &11400020
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1771,6 +1766,49 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   anim: {fileID: 0}
+--- !u!114 &11400028
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100040}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eb7c9d0cb6b29b941bc8887d774c81f9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHealth: 100
+  canRegenerate: 1
+  healthPerSecond: 1
+  damageRegenDelay: 5
+  regenerationCapPercent: 1
+  canOverheal: 0
+  overhealDecayPerSecond: 1
+  overhealDecayDelay: 5
+  overhealDecayCapPercent: 1
+--- !u!114 &11400030
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100186}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4a015fc9f260e5c49adb1ac04ee5d0bf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  DinoSound: 4
+--- !u!114 &11400032
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100040}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dccedda4b686c6b4e825816d127744e4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!136 &13600000
 CapsuleCollider:
   m_ObjectHideFlags: 1
