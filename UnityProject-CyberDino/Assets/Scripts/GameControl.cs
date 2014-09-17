@@ -48,7 +48,7 @@ public class GameControl : MonoBehaviour {
 
 			GameObject[] pickupSpawnPoints = GameObject.FindGameObjectsWithTag ("PickUpSpawn");
 			foreach (var unit in pickupSpawnPoints) {
-					GameObject PickUp = (GameObject)Network.Instantiate ((GameObject)Resources.Load ("PickUp"), unit.transform.position, Quaternion.LookRotation (unit.transform.forward), playerID);
+					GameObject PickUp = (GameObject)Network.Instantiate ((GameObject)Resources.Load ("PickUpItem"), unit.transform.position, Quaternion.LookRotation (unit.transform.forward), playerID);
 			}
 
 			int i = 0;
