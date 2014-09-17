@@ -44,10 +44,10 @@ public class TurretFire : MonoBehaviour {
 	{
 		
 	}
-	
-	void OnCollisionEnter(Collision other)
-	{
 
+	void OnTriggerEnter(Collider other)
+	{
+		Debug.Log (other);
 		if (other.gameObject.tag == "Dino")
 		{
 			targets.Add(other.transform);
@@ -62,7 +62,7 @@ public class TurretFire : MonoBehaviour {
 		
 	}
 	
-	void OnCollisionExit(Collision other)
+	void OnTriggerExit(Collider other)
 	{
 		if (other.gameObject.tag == "Dino")
 		{

@@ -3,7 +3,6 @@ using System.Collections;
 
 public class dusttrail : MonoBehaviour {
 
-	public GameObject networkHandlerObject;
 	private NetworkGameHandler networkHandler;
 	private int playerID;
 
