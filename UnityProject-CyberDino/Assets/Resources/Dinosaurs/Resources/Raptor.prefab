@@ -581,7 +581,6 @@ GameObject:
   - 114: {fileID: 11400020}
   - 114: {fileID: 11400018}
   - 114: {fileID: 11400016}
-  - 114: {fileID: 11400014}
   - 148: {fileID: 14800000}
   - 136: {fileID: 13600002}
   - 136: {fileID: 13600000}
@@ -589,6 +588,8 @@ GameObject:
   - 114: {fileID: 11400026}
   - 114: {fileID: 11400028}
   - 114: {fileID: 11400032}
+  - 114: {fileID: 11400014}
+  - 114: {fileID: 11400034}
   m_Layer: 8
   m_Name: Raptor
   m_TagString: Dino
@@ -2245,19 +2246,18 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100064}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 90c18ebbb58b043838fbdeb8fbdf88ef, type: 3}
+  m_Script: {fileID: 11500000, guid: cfe4a63865d356e45ac1e57f29dc6377, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  anim: {fileID: 0}
-  acceleration: 190
-  topSpeed: 80
-  handling: 2.29999995
-  jump: 75
-  medianSpeed: 60
-  speedRatio: .100000001
-  velocity: 0
+  MaxSpeed: 100
+  MaxSpeedBack: 10
+  MaxDeltaVelocity: 2.5
+  MaxSurfaceAngle: .899999976
+  TurnSpeed: 1.5
+  JumpHeight: 25
+  AirControl: .25
 --- !u!114 &11400016
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2407,6 +2407,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dccedda4b686c6b4e825816d127744e4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &11400034
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100064}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 97b04239729357c488cd02586f2b9f4f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CollisionDamageVelocityThreshold: 50
+  CollisionDamage: 10
+  EnvironmentCollisionDamage: 5
+  ControlLockTime: .25
 --- !u!135 &13500000
 SphereCollider:
   m_ObjectHideFlags: 1
