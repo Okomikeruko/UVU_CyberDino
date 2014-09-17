@@ -35,6 +35,9 @@ public class MotionControl : MonoBehaviour {
 	// Update is called once per frame
 	void FixedUpdate () 
 	{
+		if (!networkView.isMine) {
+			return;
+		}
 		// Forward / Backwack Velocity
 		if(Mathf.Abs(inputMovementAxis) > InputDeadzone)
 		{			
@@ -88,6 +91,10 @@ public class MotionControl : MonoBehaviour {
 
 	void OnCollisionStay(Collision collisionInfo) 
 	{
+		if (!networkView.isMine) {
+			return;
+		}
+
 		foreach (var col in collisionInfo.contacts) {
 			float cosAngle = Vector3.Dot(col.normal, Vector3.Normalize(-Physics.gravity));
 			if(cosAngle > MaxSurfaceAngle)

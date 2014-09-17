@@ -145,6 +145,10 @@ public class UserControl : MonoBehaviour {
 
 	// Update is called once per frame
 	void FixedUpdate () {
+		if (!networkView.isMine) {
+			return;
+		}
+
 		move.SetRun ( Input.GetAxis ("Vertical") );			
 		if(Input.touches.Length == 0)
 		{
