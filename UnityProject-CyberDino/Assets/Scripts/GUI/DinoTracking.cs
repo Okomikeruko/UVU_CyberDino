@@ -24,7 +24,7 @@ public class DinoTracking : MonoBehaviour
 	
 	private static GameObject trackingInst;
 	
-	private static DinoTracking trackingScript;
+	public static DinoTracking trackingScript;
 	
 	private GameObject posText;
 	private GameObject lapText;

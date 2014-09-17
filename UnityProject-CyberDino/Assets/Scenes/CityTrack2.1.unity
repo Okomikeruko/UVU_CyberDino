@@ -1850,10 +1850,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 33e8504d3b2c44dd7848afe78a5fd2b7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  previousNode: {fileID: 1964130806}
-  nextNode: {fileID: 160262399}
-  influenceSphere: 20
-  theNodeType: 3
+  nextNode: {fileID: 0}
+  Rotation: {x: 0, y: 0, z: 0}
 --- !u!23 &160262402
 Renderer:
   m_ObjectHideFlags: 0
@@ -1912,7 +1910,7 @@ MonoBehaviour:
   - {fileID: 1448432940}
   previousNodes:
   - {fileID: 975748361}
-  isShortCut: 0
+  isFinishLine: 0
   nodeNum: 10
 --- !u!1 &161717695
 GameObject:
@@ -1936,7 +1934,7 @@ Transform:
   m_PrefabParentObject: {fileID: 400182, guid: 048b74e9f00ba44a3a229d01702f4464, type: 2}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 161717695}
-  m_LocalRotation: {x: .0521899723, y: -.718304694, z: -.0420379862, w: .692493677}
+  m_LocalRotation: {x: .0521899648, y: -.718304634, z: -.0420379825, w: .692493618}
   m_LocalPosition: {x: -1609.48059, y: -526.12561, z: 945.030884}
   m_LocalScale: {x: 165.443695, y: .538693011, z: 104.884987}
   m_Children: []
@@ -2464,10 +2462,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 33e8504d3b2c44dd7848afe78a5fd2b7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  previousNode: {fileID: 1964130806}
-  nextNode: {fileID: 242833518}
-  influenceSphere: 20
-  theNodeType: 2
+  nextNode: {fileID: 0}
+  Rotation: {x: 0, y: 0, z: 0}
 --- !u!23 &242833521
 Renderer:
   m_ObjectHideFlags: 0
@@ -2526,7 +2522,7 @@ MonoBehaviour:
   - {fileID: 1360028092}
   previousNodes:
   - {fileID: 388786097}
-  isShortCut: 0
+  isFinishLine: 0
   nodeNum: 6
 --- !u!1 &246876148
 GameObject:
@@ -2866,10 +2862,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 33e8504d3b2c44dd7848afe78a5fd2b7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  previousNode: {fileID: 1964130806}
-  nextNode: {fileID: 260878195}
-  influenceSphere: 20
-  theNodeType: 2
+  nextNode: {fileID: 0}
+  Rotation: {x: 0, y: 0, z: 0}
 --- !u!23 &260878198
 Renderer:
   m_ObjectHideFlags: 0
@@ -2928,7 +2922,7 @@ MonoBehaviour:
   - {fileID: 1002991051}
   previousNodes:
   - {fileID: 1952208804}
-  isShortCut: 0
+  isFinishLine: 0
   nodeNum: 21
 --- !u!1 &261302628
 GameObject:
@@ -4433,10 +4427,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 33e8504d3b2c44dd7848afe78a5fd2b7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  previousNode: {fileID: 1964130806}
-  nextNode: {fileID: 388786097}
-  influenceSphere: 20
-  theNodeType: 2
+  nextNode: {fileID: 0}
+  Rotation: {x: 0, y: 0, z: 0}
 --- !u!23 &388786100
 Renderer:
   m_ObjectHideFlags: 0
@@ -4495,7 +4487,7 @@ MonoBehaviour:
   - {fileID: 242833518}
   previousNodes:
   - {fileID: 428246192}
-  isShortCut: 0
+  isFinishLine: 0
   nodeNum: 5
 --- !u!1 &393236127
 GameObject:
@@ -5813,10 +5805,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 33e8504d3b2c44dd7848afe78a5fd2b7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  previousNode: {fileID: 1964130806}
-  nextNode: {fileID: 428246192}
-  influenceSphere: 20
-  theNodeType: 2
+  nextNode: {fileID: 0}
+  Rotation: {x: 0, y: 0, z: 0}
 --- !u!23 &428246195
 Renderer:
   m_ObjectHideFlags: 0
@@ -5875,7 +5865,7 @@ MonoBehaviour:
   - {fileID: 388786097}
   previousNodes:
   - {fileID: 1873343912}
-  isShortCut: 0
+  isFinishLine: 0
   nodeNum: 4
 --- !u!1 &431811331
 GameObject:
@@ -6458,10 +6448,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 33e8504d3b2c44dd7848afe78a5fd2b7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  previousNode: {fileID: 507846337}
-  nextNode: {fileID: 507846337}
-  influenceSphere: 20
-  theNodeType: 0
+  nextNode: {fileID: 0}
+  Rotation: {x: 0, y: 0, z: 0}
 --- !u!23 &507846340
 Renderer:
   m_ObjectHideFlags: 0
@@ -6519,7 +6507,7 @@ MonoBehaviour:
   NextNodes:
   - {fileID: 1964130806}
   previousNodes: []
-  isShortCut: 0
+  isFinishLine: 0
   nodeNum: 1
 --- !u!1 &508773674
 GameObject:
@@ -8686,7 +8674,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   startNode: {fileID: 507846337}
+  lastNode: {fileID: 0}
   maxLap: 1
+  playerNum: 0
+  hudScript: {fileID: 0}
 --- !u!54 &610530597
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -9021,10 +9012,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 33e8504d3b2c44dd7848afe78a5fd2b7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  previousNode: {fileID: 1964130806}
-  nextNode: {fileID: 638010528}
-  influenceSphere: 20
-  theNodeType: 2
+  nextNode: {fileID: 0}
+  Rotation: {x: 0, y: 0, z: 0}
 --- !u!23 &638010531
 Renderer:
   m_ObjectHideFlags: 0
@@ -9083,7 +9072,7 @@ MonoBehaviour:
   - {fileID: 1969520609}
   previousNodes:
   - {fileID: 1029469123}
-  isShortCut: 0
+  isFinishLine: 0
   nodeNum: 16
 --- !u!1 &641519649
 GameObject:
@@ -9286,13 +9275,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 62cde66bda41d45c4b00ecd0c2c9583a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isRespawning: 0
-  respawnEffect: {fileID: 0}
-  inTurnArea: 0
-  respawnCheckpoint: {fileID: 0}
-  currentNode: {fileID: 0}
-  previousNode: {fileID: 0}
-  nextNode: {fileID: 0}
+  respawnParticalSystem: {fileID: 0}
 --- !u!114 &648314405
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -14609,10 +14592,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 33e8504d3b2c44dd7848afe78a5fd2b7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  previousNode: {fileID: 1964130806}
-  nextNode: {fileID: 968113985}
-  influenceSphere: 20
-  theNodeType: 2
+  nextNode: {fileID: 0}
+  Rotation: {x: 0, y: 0, z: 0}
 --- !u!23 &968113988
 Renderer:
   m_ObjectHideFlags: 0
@@ -14671,7 +14652,7 @@ MonoBehaviour:
   - {fileID: 1952208804}
   previousNodes:
   - {fileID: 1896817227}
-  isShortCut: 0
+  isFinishLine: 0
   nodeNum: 19
 --- !u!1 &969267579
 GameObject:
@@ -14787,10 +14768,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 33e8504d3b2c44dd7848afe78a5fd2b7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  previousNode: {fileID: 1964130806}
-  nextNode: {fileID: 975748361}
-  influenceSphere: 20
-  theNodeType: 2
+  nextNode: {fileID: 0}
+  Rotation: {x: 0, y: 0, z: 0}
 --- !u!23 &975748364
 Renderer:
   m_ObjectHideFlags: 0
@@ -14849,7 +14828,7 @@ MonoBehaviour:
   - {fileID: 160262399}
   previousNodes:
   - {fileID: 1146367829}
-  isShortCut: 0
+  isFinishLine: 0
   nodeNum: 9
 --- !u!1 &983166431
 GameObject:
@@ -16228,10 +16207,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 33e8504d3b2c44dd7848afe78a5fd2b7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  previousNode: {fileID: 1964130806}
-  nextNode: {fileID: 1002991051}
-  influenceSphere: 20
-  theNodeType: 2
+  nextNode: {fileID: 0}
+  Rotation: {x: 0, y: 0, z: 0}
 --- !u!23 &1002991054
 Renderer:
   m_ObjectHideFlags: 0
@@ -16290,7 +16267,7 @@ MonoBehaviour:
   - {fileID: 1949912013}
   previousNodes:
   - {fileID: 260878195}
-  isShortCut: 0
+  isFinishLine: 0
   nodeNum: 22
 --- !u!1 &1008079953
 GameObject:
@@ -16616,10 +16593,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 33e8504d3b2c44dd7848afe78a5fd2b7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  previousNode: {fileID: 1964130806}
-  nextNode: {fileID: 1029469123}
-  influenceSphere: 20
-  theNodeType: 2
+  nextNode: {fileID: 0}
+  Rotation: {x: 0, y: 0, z: 0}
 --- !u!23 &1029469126
 Renderer:
   m_ObjectHideFlags: 0
@@ -16678,7 +16653,7 @@ MonoBehaviour:
   - {fileID: 638010528}
   previousNodes:
   - {fileID: 1190736525}
-  isShortCut: 0
+  isFinishLine: 0
   nodeNum: 15
 --- !u!1 &1040541671
 GameObject:
@@ -18774,10 +18749,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 33e8504d3b2c44dd7848afe78a5fd2b7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  previousNode: {fileID: 1964130806}
-  nextNode: {fileID: 1146367829}
-  influenceSphere: 20
-  theNodeType: 2
+  nextNode: {fileID: 0}
+  Rotation: {x: 0, y: 0, z: 0}
 --- !u!23 &1146367832
 Renderer:
   m_ObjectHideFlags: 0
@@ -18836,7 +18809,7 @@ MonoBehaviour:
   - {fileID: 975748361}
   previousNodes:
   - {fileID: 1360028092}
-  isShortCut: 0
+  isFinishLine: 0
   nodeNum: 8
 --- !u!1 &1148063258
 GameObject:
@@ -20362,10 +20335,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 33e8504d3b2c44dd7848afe78a5fd2b7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  previousNode: {fileID: 1964130806}
-  nextNode: {fileID: 1190736525}
-  influenceSphere: 20
-  theNodeType: 2
+  nextNode: {fileID: 0}
+  Rotation: {x: 0, y: 0, z: 0}
 --- !u!23 &1190736528
 Renderer:
   m_ObjectHideFlags: 0
@@ -20424,7 +20395,7 @@ MonoBehaviour:
   - {fileID: 1029469123}
   previousNodes:
   - {fileID: 2075865125}
-  isShortCut: 0
+  isFinishLine: 0
   nodeNum: 14
 --- !u!1 &1193324188
 GameObject:
@@ -22397,10 +22368,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 33e8504d3b2c44dd7848afe78a5fd2b7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  previousNode: {fileID: 1964130806}
-  nextNode: {fileID: 1360028092}
-  influenceSphere: 20
-  theNodeType: 2
+  nextNode: {fileID: 0}
+  Rotation: {x: 0, y: 0, z: 0}
 --- !u!23 &1360028095
 Renderer:
   m_ObjectHideFlags: 0
@@ -22459,7 +22428,7 @@ MonoBehaviour:
   - {fileID: 1146367829}
   previousNodes:
   - {fileID: 242833518}
-  isShortCut: 0
+  isFinishLine: 0
   nodeNum: 7
 --- !u!1 &1374940483
 GameObject:
@@ -24667,10 +24636,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 33e8504d3b2c44dd7848afe78a5fd2b7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  previousNode: {fileID: 1964130806}
-  nextNode: {fileID: 1448432940}
-  influenceSphere: 20
-  theNodeType: 2
+  nextNode: {fileID: 0}
+  Rotation: {x: 0, y: 0, z: 0}
 --- !u!23 &1448432943
 Renderer:
   m_ObjectHideFlags: 0
@@ -24730,7 +24697,7 @@ MonoBehaviour:
   - {fileID: 1925353021}
   previousNodes:
   - {fileID: 160262399}
-  isShortCut: 0
+  isFinishLine: 0
   nodeNum: 11
 --- !u!1 &1459745499
 GameObject:
@@ -27323,10 +27290,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 33e8504d3b2c44dd7848afe78a5fd2b7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  previousNode: {fileID: 1964130806}
-  nextNode: {fileID: 1745079908}
-  influenceSphere: 20
-  theNodeType: 2
+  nextNode: {fileID: 0}
+  Rotation: {x: 0, y: 0, z: 0}
 --- !u!23 &1745079911
 Renderer:
   m_ObjectHideFlags: 0
@@ -27385,7 +27350,7 @@ MonoBehaviour:
   - {fileID: 2075865125}
   previousNodes:
   - {fileID: 1448432940}
-  isShortCut: 0
+  isFinishLine: 0
   nodeNum: 12
 --- !u!1 &1748928516
 GameObject:
@@ -32204,10 +32169,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 33e8504d3b2c44dd7848afe78a5fd2b7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  previousNode: {fileID: 1964130806}
-  nextNode: {fileID: 1873343912}
-  influenceSphere: 20
-  theNodeType: 2
+  nextNode: {fileID: 0}
+  Rotation: {x: 0, y: 0, z: 0}
 --- !u!23 &1873343915
 Renderer:
   m_ObjectHideFlags: 0
@@ -32266,7 +32229,7 @@ MonoBehaviour:
   - {fileID: 428246192}
   previousNodes:
   - {fileID: 1964130806}
-  isShortCut: 0
+  isFinishLine: 0
   nodeNum: 3
 --- !u!1001 &1877390058
 Prefab:
@@ -32556,10 +32519,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 33e8504d3b2c44dd7848afe78a5fd2b7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  previousNode: {fileID: 1964130806}
-  nextNode: {fileID: 1896817227}
-  influenceSphere: 20
-  theNodeType: 2
+  nextNode: {fileID: 0}
+  Rotation: {x: 0, y: 0, z: 0}
 --- !u!23 &1896817230
 Renderer:
   m_ObjectHideFlags: 0
@@ -32618,7 +32579,7 @@ MonoBehaviour:
   - {fileID: 968113985}
   previousNodes:
   - {fileID: 1969520609}
-  isShortCut: 0
+  isFinishLine: 0
   nodeNum: 18
 --- !u!1 &1898847837
 GameObject:
@@ -32918,10 +32879,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 33e8504d3b2c44dd7848afe78a5fd2b7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  previousNode: {fileID: 1448432941}
-  nextNode: {fileID: 2075865126}
-  influenceSphere: 20
-  theNodeType: 4
+  nextNode: {fileID: 0}
+  Rotation: {x: 0, y: 0, z: 0}
 --- !u!23 &1925353024
 Renderer:
   m_ObjectHideFlags: 0
@@ -32979,7 +32938,7 @@ MonoBehaviour:
   NextNodes: []
   previousNodes:
   - {fileID: 1448432940}
-  isShortCut: 1
+  isFinishLine: 0
   nodeNum: 12
 --- !u!1 &1931220157
 GameObject:
@@ -34263,10 +34222,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 33e8504d3b2c44dd7848afe78a5fd2b7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  previousNode: {fileID: 1964130806}
-  nextNode: {fileID: 1949912013}
-  influenceSphere: 20
-  theNodeType: 2
+  nextNode: {fileID: 0}
+  Rotation: {x: 0, y: 0, z: 0}
 --- !u!23 &1949912016
 Renderer:
   m_ObjectHideFlags: 0
@@ -34325,7 +34282,7 @@ MonoBehaviour:
   - {fileID: 2098181309}
   previousNodes:
   - {fileID: 1002991051}
-  isShortCut: 0
+  isFinishLine: 0
   nodeNum: 23
 --- !u!1 &1952048252
 GameObject:
@@ -34410,10 +34367,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 33e8504d3b2c44dd7848afe78a5fd2b7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  previousNode: {fileID: 1964130806}
-  nextNode: {fileID: 1952208804}
-  influenceSphere: 20
-  theNodeType: 2
+  nextNode: {fileID: 0}
+  Rotation: {x: 0, y: 0, z: 0}
 --- !u!23 &1952208807
 Renderer:
   m_ObjectHideFlags: 0
@@ -34472,7 +34427,7 @@ MonoBehaviour:
   - {fileID: 260878195}
   previousNodes:
   - {fileID: 968113985}
-  isShortCut: 0
+  isFinishLine: 0
   nodeNum: 20
 --- !u!1 &1952423045
 GameObject:
@@ -35789,10 +35744,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 33e8504d3b2c44dd7848afe78a5fd2b7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  previousNode: {fileID: 507846337}
-  nextNode: {fileID: 1964130806}
-  influenceSphere: 20
-  theNodeType: 2
+  nextNode: {fileID: 0}
+  Rotation: {x: 0, y: 0, z: 0}
 --- !u!23 &1964130809
 Renderer:
   m_ObjectHideFlags: 0
@@ -35851,7 +35804,7 @@ MonoBehaviour:
   - {fileID: 1873343912}
   previousNodes:
   - {fileID: 507846337}
-  isShortCut: 0
+  isFinishLine: 0
   nodeNum: 2
 --- !u!1 &1966951834
 GameObject:
@@ -35926,10 +35879,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 33e8504d3b2c44dd7848afe78a5fd2b7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  previousNode: {fileID: 1964130806}
-  nextNode: {fileID: 1969520609}
-  influenceSphere: 20
-  theNodeType: 2
+  nextNode: {fileID: 0}
+  Rotation: {x: 0, y: 0, z: 0}
 --- !u!23 &1969520612
 Renderer:
   m_ObjectHideFlags: 0
@@ -35988,7 +35939,7 @@ MonoBehaviour:
   - {fileID: 1896817227}
   previousNodes:
   - {fileID: 638010528}
-  isShortCut: 0
+  isFinishLine: 0
   nodeNum: 17
 --- !u!1 &1972795082
 GameObject:
@@ -36859,10 +36810,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 33e8504d3b2c44dd7848afe78a5fd2b7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  previousNode: {fileID: 1964130806}
-  nextNode: {fileID: 2075865125}
-  influenceSphere: 20
-  theNodeType: 2
+  nextNode: {fileID: 0}
+  Rotation: {x: 0, y: 0, z: 0}
 --- !u!23 &2075865128
 Renderer:
   m_ObjectHideFlags: 0
@@ -36921,7 +36870,7 @@ MonoBehaviour:
   - {fileID: 1190736525}
   previousNodes:
   - {fileID: 1745079908}
-  isShortCut: 0
+  isFinishLine: 0
   nodeNum: 13
 --- !u!1 &2080709713
 GameObject:
@@ -37065,7 +37014,7 @@ MonoBehaviour:
   NextNodes:
   - {fileID: 507846337}
   previousNodes: []
-  isShortCut: 0
+  isFinishLine: 0
   nodeNum: 0
 --- !u!114 &2098181313
 MonoBehaviour:
@@ -37079,10 +37028,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 33e8504d3b2c44dd7848afe78a5fd2b7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  previousNode: {fileID: 2098181309}
-  nextNode: {fileID: 2098181309}
-  influenceSphere: 20
-  theNodeType: 0
+  nextNode: {fileID: 0}
+  Rotation: {x: 0, y: 0, z: 0}
 --- !u!23 &2098181314
 Renderer:
   m_ObjectHideFlags: 0
