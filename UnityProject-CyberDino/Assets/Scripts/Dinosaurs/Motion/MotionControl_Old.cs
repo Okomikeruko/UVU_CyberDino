@@ -4,7 +4,7 @@ using System.Collections;
 // Make a comment here
 
 [RequireComponent(typeof(Rigidbody), typeof(CapsuleCollider))]
-public class MotionControl : MonoBehaviour {
+public class MotionControl_Old: MonoBehaviour {
 	
 	private bool isRunning = true;					// accelerates while true. stops running while false.
 	private bool onGround = false;

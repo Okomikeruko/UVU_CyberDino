@@ -41,7 +41,7 @@ public class DinoCollisions : MonoBehaviour {
 				*/
 
 				// Invert velocity... Inaccurate and can have some strange behaviour but a much more pronounced effect
-				rigidbody.velocity = -rigidbody.velocity * relativeMass;
+				rigidbody.velocity = -rigidbody.velocity * relativeMass * .5f;
 
 				var mc = GetComponent<MotionControl>();
 				mc.LockInput(0.5f);
