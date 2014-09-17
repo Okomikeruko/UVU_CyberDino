@@ -72,7 +72,7 @@ public class DinoCollisions : MonoBehaviour {
 						}
 					}
 
-					rigidbody.velocity = Vector3.Reflect(rigidbody.velocity, contactSum.normalized);
+					rigidbody.velocity = Vector3.Reflect(rigidbody.velocity, contactSum.normalized) * .5f;
 
 					mc.LockInput(0.5f);
 				}
