@@ -11,7 +11,7 @@ public class PickUpItem : MonoBehaviour
     private const int MAXIMUM_ITEM_RANGE = 5;
     void Start()
     {
-        //assignWeapon();
+        assignWeapon();
     }
 	void Update () 
     {
