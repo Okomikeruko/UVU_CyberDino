@@ -8465,7 +8465,7 @@ GameObject:
   - 114: {fileID: 382486723}
   m_Layer: 0
   m_Name: PickUpItem
-  m_TagString: Untagged
+  m_TagString: PickUp
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -12057,8 +12057,13 @@ GameObject:
   - 65: {fileID: 497222123}
   - 65: {fileID: 497222122}
   m_Layer: 0
+<<<<<<< HEAD
   m_Name: Building_5
   m_TagString: Untagged
+=======
+  m_Name: PickUpItem
+  m_TagString: PickUp
+>>>>>>> PickUps
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -12088,6 +12093,7 @@ BoxCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
+<<<<<<< HEAD
   serializedVersion: 2
   m_Size: {x: .211999997, y: .075000003, z: .0700000003}
   m_Center: {x: .057, y: -.0370000005, z: 0}
@@ -12105,6 +12111,14 @@ BoxCollider:
   m_Size: {x: .0960000008, y: .152436197, z: .100000001}
   m_Center: {x: -.0989999995, y: 0, z: 0}
 --- !u!23 &497222120
+=======
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b07fb3c12832411469169326e82da140, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  waitTime: 2
+--- !u!23 &571901168
+>>>>>>> PickUps
 Renderer:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 2300000, guid: f5f1d3be1859bc444a4a48222d3ac88c,
@@ -15322,8 +15336,13 @@ GameObject:
   - 65: {fileID: 628707099}
   - 65: {fileID: 628707102}
   m_Layer: 0
+<<<<<<< HEAD
   m_Name: Building_2
   m_TagString: Untagged
+=======
+  m_Name: PickUpItem
+  m_TagString: PickUp
+>>>>>>> PickUps
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -15349,10 +15368,19 @@ BoxCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
+<<<<<<< HEAD
   serializedVersion: 2
   m_Size: {x: .061999999, y: .123882681, z: .0909371376}
   m_Center: {x: .00449999981, y: 1.86264515e-09, z: 0}
 --- !u!23 &628707100
+=======
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b07fb3c12832411469169326e82da140, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  waitTime: 2
+--- !u!23 &793242303
+>>>>>>> PickUps
 Renderer:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 2300000, guid: c1289f17984c5ad489c43fe0c8e2a3b3,
@@ -15963,8 +15991,13 @@ GameObject:
   - 23: {fileID: 643251315}
   - 64: {fileID: 643251314}
   m_Layer: 0
+<<<<<<< HEAD
   m_Name: Building_1
   m_TagString: Untagged
+=======
+  m_Name: PickUpItem
+  m_TagString: PickUp
+>>>>>>> PickUps
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -15995,11 +16028,20 @@ MeshCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
+<<<<<<< HEAD
   serializedVersion: 2
   m_SmoothSphereCollisions: 0
   m_Convex: 0
   m_Mesh: {fileID: 4300000, guid: e362bca97c9dd4b7cb9bd59b6b870d1f, type: 3}
 --- !u!23 &643251315
+=======
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b07fb3c12832411469169326e82da140, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  waitTime: 2
+--- !u!23 &816527496
+>>>>>>> PickUps
 Renderer:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 2300000, guid: 1d2a37e32ab0d70499eff3a0b548982a,
@@ -17005,8 +17047,13 @@ GameObject:
   - 33: {fileID: 805255698}
   - 23: {fileID: 805255697}
   m_Layer: 0
+<<<<<<< HEAD
   m_Name: Building_4
   m_TagString: Untagged
+=======
+  m_Name: PickUpItem
+  m_TagString: PickUp
+>>>>>>> PickUps
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -17021,8 +17068,27 @@ Transform:
   m_LocalPosition: {x: -1470.96375, y: -198.600006, z: 191.299667}
   m_LocalScale: {x: 347.146576, y: 1851.80896, z: 347.146576}
   m_Children: []
+<<<<<<< HEAD
   m_Father: {fileID: 1568408239}
 --- !u!23 &805255697
+=======
+  m_Father: {fileID: 1222187522}
+  m_RootOrder: 6
+--- !u!114 &894924561
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 11400000, guid: 46eaf1b63c7cfd64aaf36ded9a1e66b2,
+    type: 2}
+  m_PrefabInternal: {fileID: 2099701835}
+  m_GameObject: {fileID: 894924559}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b07fb3c12832411469169326e82da140, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  waitTime: 2
+--- !u!23 &894924562
+>>>>>>> PickUps
 Renderer:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 2300216, guid: b09add3ae428e4d17a9c0920c6fa0798,
@@ -18695,8 +18761,13 @@ GameObject:
   - 65: {fileID: 737538697}
   - 65: {fileID: 737538696}
   m_Layer: 0
+<<<<<<< HEAD
   m_Name: Collider
   m_TagString: Track
+=======
+  m_Name: PickUpItem
+  m_TagString: PickUp
+>>>>>>> PickUps
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -18726,7 +18797,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   waitTime: 2
+<<<<<<< HEAD
 --- !u!23 &894924562
+=======
+--- !u!23 &1017387042
+>>>>>>> PickUps
 Renderer:
 =======
   m_Father: {fileID: 929609299}
@@ -19898,8 +19973,13 @@ GameObject:
   - 65: {fileID: 769195311}
   - 65: {fileID: 769195314}
   m_Layer: 0
+<<<<<<< HEAD
   m_Name: Building_2
   m_TagString: Untagged
+=======
+  m_Name: PickUpItem
+  m_TagString: PickUp
+>>>>>>> PickUps
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -19925,10 +20005,19 @@ BoxCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
+<<<<<<< HEAD
   serializedVersion: 2
   m_Size: {x: .061999999, y: .123882681, z: .0909371376}
   m_Center: {x: .00449999981, y: 1.86264515e-09, z: 0}
 --- !u!23 &769195312
+=======
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b07fb3c12832411469169326e82da140, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  waitTime: 2
+--- !u!23 &1100882727
+>>>>>>> PickUps
 Renderer:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 2300000, guid: c1289f17984c5ad489c43fe0c8e2a3b3,
@@ -21594,8 +21683,13 @@ GameObject:
   - 23: {fileID: 828969885}
   - 65: {fileID: 828969884}
   m_Layer: 0
+<<<<<<< HEAD
   m_Name: Building_3
   m_TagString: Untagged
+=======
+  m_Name: PickUpItem
+  m_TagString: PickUp
+>>>>>>> PickUps
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -21621,10 +21715,19 @@ BoxCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
+<<<<<<< HEAD
   serializedVersion: 2
   m_Size: {x: .0874856561, y: .102386013, z: .18561165}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!23 &828969885
+=======
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b07fb3c12832411469169326e82da140, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  waitTime: 2
+--- !u!23 &1242225338
+>>>>>>> PickUps
 Renderer:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 2300000, guid: 409ef26b6dc3ddd4c86ee07523ae6376,
@@ -22381,8 +22484,13 @@ GameObject:
   - 65: {fileID: 852194089}
   - 65: {fileID: 852194092}
   m_Layer: 0
+<<<<<<< HEAD
   m_Name: Building_4
   m_TagString: Untagged
+=======
+  m_Name: PickUpItem
+  m_TagString: PickUp
+>>>>>>> PickUps
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -22416,6 +22524,7 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
 <<<<<<< HEAD
+<<<<<<< HEAD
   m_Avatar: {fileID: 9000000, guid: 78510866f7b27f74bb2b16560c75462a, type: 3}
   m_Controller: {fileID: 0}
   m_CullingMode: 0
@@ -22429,6 +22538,14 @@ BoxCollider:
   m_Center: {x: 0, y: -.0295000002, z: 0}
 --- !u!23 &852194090
 >>>>>>> Myles
+=======
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b07fb3c12832411469169326e82da140, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  waitTime: 2
+--- !u!23 &1311947252
+>>>>>>> PickUps
 Renderer:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 2300000, guid: beaf8ebe0e5cc3449acc8021e34cd121,
@@ -22700,8 +22817,13 @@ GameObject:
   m_Component:
   - 4: {fileID: 866322245}
   m_Layer: 0
+<<<<<<< HEAD
   m_Name: Respawn_Side02_Positive05
   m_TagString: Untagged
+=======
+  m_Name: PickUpItem
+  m_TagString: PickUp
+>>>>>>> PickUps
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -22727,6 +22849,7 @@ Animator:
   m_PrefabInternal: {fileID: 111148481}
   m_GameObject: {fileID: 1171123627}
   m_Enabled: 1
+<<<<<<< HEAD
   m_Avatar: {fileID: 9000000, guid: 8fb5f8a56a64e984a8cc87afb7e2fa96, type: 3}
   m_Controller: {fileID: 0}
   m_CullingMode: 0
@@ -22734,6 +22857,14 @@ Animator:
   m_AnimatePhysics: 0
   m_HasTransformHierarchy: 1
 --- !u!23 &1171123630
+=======
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b07fb3c12832411469169326e82da140, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  waitTime: 2
+--- !u!23 &1401498796
+>>>>>>> PickUps
 Renderer:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 2300000, guid: 0bcd310e18d08ed4db70d5aef987879a,
@@ -49752,7 +49883,7 @@ GameObject:
   - 114: {fileID: 2055600749}
   m_Layer: 0
   m_Name: PickUpItem
-  m_TagString: Untagged
+  m_TagString: PickUp
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -50612,7 +50743,7 @@ GameObject:
   - 114: {fileID: 2085168364}
   m_Layer: 0
   m_Name: PickUpItem
-  m_TagString: Untagged
+  m_TagString: PickUp
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
