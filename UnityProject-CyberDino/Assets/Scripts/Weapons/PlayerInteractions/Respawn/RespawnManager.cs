@@ -65,7 +65,7 @@ public class RespawnManager : MonoBehaviour
 	{
 		racerRespawn = player.gameObject.GetComponent<RacerRespawnStats>();
 		racerRespawnParticalSystem = racerRespawn.respawnParticalSystem;
-		player.parent.GetComponent<MotionControl>().SetRunning(false);
+		player.parent.GetComponent<MotionControl>().enabled = false;
 		Debug.Log("Respawning. Please wait....");
 		player.parent.position = racerRespawn.CurrentRespawnNode.transform.position;
 		player.parent.eulerAngles = racerRespawn.CurrentRespawnNode.Rotation;
@@ -75,7 +75,7 @@ public class RespawnManager : MonoBehaviour
 			//StartCoroutine(WaitForAnimation(racerRespawnParticalSystem));
 		}
 		Debug.Log("Ready to go!");
-		player.parent.GetComponent<MotionControl>().SetRunning(true);
+		player.parent.GetComponent<MotionControl>().enabled = true;
 		yield return null;
 	}
 

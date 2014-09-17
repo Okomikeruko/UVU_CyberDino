@@ -26,18 +26,17 @@ public class DinoRagdoll : MonoBehaviour {
 	public void GoRagdoll() {
 		if(true) {
 			// Modified by Sam
-			Vector3 force = move.getForce();
-			move.SetRunning(false);
+			move.enabled = false;
 			this.rigidbody.isKinematic = true;
 			foreach(Collider collider in playColliders)
 				collider.enabled = false;
 			foreach(Rigidbody ragdoll in ragdollBones)
 			{
 				ragdoll.isKinematic = false;
-				ragdoll.rigidbody.velocity = force;
+				ragdoll.rigidbody.velocity = rigidbody.velocity;
 			}
-			ragdollBones[0].rigidbody.velocity += Vector3.up * force.magnitude;
-			ragdollBones[9].rigidbody.velocity += Vector3.down * force.magnitude;
+			ragdollBones[0].rigidbody.velocity += Vector3.up * rigidbody.velocity.magnitude;
+			ragdollBones[9].rigidbody.velocity += Vector3.down * rigidbody.velocity.magnitude;
 			foreach(Collider collider in ragdollColliders)
 				collider.enabled = true;
 			dinoAnimator.enabled = false;
@@ -58,7 +57,7 @@ public class DinoRagdoll : MonoBehaviour {
 		dinoAnimator.enabled = true;
 		ColorLerpClass theLerp = transform.gameObject.GetComponent<ColorLerpClass>();
 		theLerp.lerping = false;
-		move.SetRunning(true);
+		move.enabled = true;
 	}
 
 	void CopyTransforms(Transform src, Transform dst) {
