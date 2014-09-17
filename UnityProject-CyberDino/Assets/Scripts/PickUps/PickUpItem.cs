@@ -5,22 +5,13 @@ public class PickUpItem : MonoBehaviour
 {
     //Sets how long it takes for the pickup item to respawn
     public float waitTime = 5.0f;
-    /*
-     * Bomb = 1
-     * Turbo = 2
-     * Health = 3
-     * Melee = 4
-     */
+
     //Minimum and maximum values when generating a random number to pickup items
     private const int MINIMUM_ITEM_RANGE = 1;
     private const int MAXIMUM_ITEM_RANGE = 5;
-    private const int BOMB = 1;
-    private const int TURBO = 2;
-    private const int HEALTH = 3;
-    private const int MELEE = 4;
     void Start()
     {
-        assignWeapon();
+        //assignWeapon();
     }
 	void Update () 
     {
@@ -50,21 +41,21 @@ public class PickUpItem : MonoBehaviour
         float randomItemSelection = Random.Range(MINIMUM_ITEM_RANGE, MAXIMUM_ITEM_RANGE);
         switch ((int)randomItemSelection)
         {
-            case BOMB:
+            case 1:
                 this.renderer.material.color = Color.blue;
-                this.tag = "bomb";
+                HUDScript.AddItem("item1"); //added by Robert
                 break;
-            case TURBO:
+            case 2:
                 this.renderer.material.color = Color.green;
-                this.tag = "turbo";
+				HUDScript.AddItem("item2"); //added by Robert
                 break;
-            case HEALTH:
+            case 3:
                 this.renderer.material.color = Color.red;
-                this.tag = "health";
+				HUDScript.AddItem("item3"); //added by Robert
                 break;
-            case MELEE:
+            case 4:
                 this.renderer.material.color = Color.clear;
-                this.tag = "melee";
+				HUDScript.AddItem("item3"); //added by Robert
                 break;
             default:
                 break;

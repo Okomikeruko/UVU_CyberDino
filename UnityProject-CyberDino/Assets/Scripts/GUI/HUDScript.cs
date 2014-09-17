@@ -1,22 +1,31 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 public class HUDScript : MonoBehaviour 
 {
+	public delegate void ItemAddition(string _item);
+	public static ItemAddition AddItem;
+	
 	//an emplty object to group all of the hud together
 	private GameObject grpObj;
 
 	//guitextures for the hud
-	//private GameObject[] positionObjs;
+	private GameObject positionObjs;
 	private GameObject[] lapObjs;
 	private GameObject[] healthBarObjs;
 	private GameObject[] healthBorderObjs;
-	private GameObject weaponBorderObjs;
-	private GameObject weaponObjs;
 	private GameObject[] playerNamesObjs;
 	private GameObject mapObj;
 	private GameObject[] mapPosObjs;
 	private MapGUIInfo mapInfo;
+	private GameObject dinoIcon;
+	private GameObject healthPercent;
+
+	private GameObject healthMask;
+	private GameObject healthMaskBar;
+	private GameObject healthMaskCover;
+	private Rect healthPos;
 
 	//textures for the hud
 	private Texture[] hudGfx;
@@ -27,6 +36,7 @@ public class HUDScript : MonoBehaviour
 	private Texture[] weaponsGfx;
 	private Texture mapPosGfx;
 	private Texture finishGfx;
+	private Texture[] dinoIconsGfx;
 
 	//arrays to hold tracking information
 	private GameObject[] raceDinos;
@@ -52,9 +62,8 @@ public class HUDScript : MonoBehaviour
 	
 	//array for player names
 	private string[] playerNames;
-
-	//private bool[] inSight;
 	
+	private List<GameObject> currentItems;
 
 
 	// Use this for initialization
@@ -77,13 +86,17 @@ public class HUDScript : MonoBehaviour
 		netView = GetComponent<NetworkView>();
 		
 		playerNames = menuScript.SetNames();
+		
+		AddItem = ItemToAdd;
+		
+		currentItems = new List<GameObject>();
 
 		//textures for the hub
 		hudGfx = new Texture[6];
-		/*hudGfx[0] = (Texture)Resources.Load("GUI/Materials/1stPlaceGraphic");
+		hudGfx[0] = (Texture)Resources.Load("GUI/Materials/1stPlaceGraphic");
 		hudGfx[1] = (Texture)Resources.Load("GUI/Materials/2ndPlaceGraphic");
 		hudGfx[2] = (Texture)Resources.Load("GUI/Materials/3rdPlaceGraphic");
-		hudGfx[3] = (Texture)Resources.Load("GUI/Materials/4thPlaceGraphic");*/
+		hudGfx[3] = (Texture)Resources.Load("GUI/Materials/4thPlaceGraphic");
 		hudGfx[4] = (Texture)Resources.Load("GUI/Materials/lapGraphic");
 		hudGfx[5] = (Texture)Resources.Load("GUI/Materials/slashGraphic");
 
@@ -118,14 +131,13 @@ public class HUDScript : MonoBehaviour
 		
 		//texture for the finish object
 		finishGfx = (Texture)Resources.Load("GUI/Materials/Finish");
+		
+		dinoIconsGfx = new Texture[1];
+		dinoIconsGfx[0] = (Texture)Resources.Load("GUI/Materials/DinoIcon");
 
 		//************************************************************************
 
-		/*positionObjs = new GameObject[4];
-		positionObjs[0] = CreateGUITxtr("Position P1", hudGfx[0], new Vector3(0, 0, 0));
-		positionObjs[1] = CreateGUITxtr("Position P2", hudGfx[0], new Vector3(0, 0, 0));
-		positionObjs[2] = CreateGUITxtr("Position P3", hudGfx[0], new Vector3(0, 0, 0));
-		positionObjs[3] = CreateGUITxtr("Position P4", hudGfx[0], new Vector3(0, 0, 0));*/
+		positionObjs = CreateGUITxtr("Current Position", hudGfx[0], new Vector3(0, 0, 0));
 
 		//create guitextures for the lap info
 		lapObjs = new GameObject[4];
@@ -148,10 +160,6 @@ public class HUDScript : MonoBehaviour
 		healthBorderObjs[2] = CreateGUITxtr("Health Border p3", healthBorderGfx, new Vector3(0, 0, 0));
 		healthBorderObjs[3] = CreateGUITxtr("Health Border p4", healthBorderGfx, new Vector3(0, 0, 0));
 
-		//create guitextures for the weapons
-		weaponBorderObjs = CreateGUITxtr("Weapon Border", healthBorderGfx, new Vector3(0, 0, 0));
-		weaponObjs = CreateGUITxtr("Weapon Icon", weaponsGfx[0], new Vector3(0, 0, 0));
-
 		//create guitextures for the player names
 		playerNamesObjs = new GameObject[4];
 		playerNamesObjs[0] = CreateGUIText("Player 1 Name", playerNames[0], new Vector3(0, 0, 0));
@@ -168,22 +176,41 @@ public class HUDScript : MonoBehaviour
 		
 		finishObj = CreateGUITxtr("Finish", finishGfx, new Vector3(0, 0, 2));
 		finishObj.guiTexture.pixelInset = ResizeRect(new Rect(150, 50, 40, 20));
-
-		/*inSight = new bool[4];
-		inSight[0] = false;
-		inSight[1] = false;
-		inSight[2] = false;
-		inSight[3] = false;*/
+		
+		dinoIcon = CreateGUITxtr("Dino Icon", dinoIconsGfx[0], new Vector3(0, 0, 0));
+		
+		healthPercent = CreateGUIText("Health Percent", "100%", new Vector3(0, 0, 0));
 
 		raceDinos = dinoTrackingScript.GetDinoArray();
 
+		healthMask = (GameObject)Instantiate(Resources.Load("GUI/HealthMaskObj"), Camera.main.transform.position, Quaternion.identity);
+		//healthMask.name = "HealthBar";
+		healthMask.transform.Rotate(new Vector3(0, 90, 0));
+
+		Debug.Log("the mask " + healthMask);
+
+		foreach(Transform child in healthMask.transform)
+		{
+			//Debug.Log("the mask " + healthMask);
+			if(child.name == "HealthBar")
+			{
+				healthMaskBar = child.gameObject;
+
+			}
+			else if(child.name == "HealthMask")
+			{
+				healthMaskCover = child.gameObject;
+			}
+		}
+
+		raceDinos = dinoTrackingScript.GetDinoArray();
 	}
 	
 	// Update is called once per frame
 	void Update () 
 	{
-		raceDinos = dinoTrackingScript.GetDinoArray();
 		currentLaps = dinoTrackingScript.GetCurrentLaps();
+		racePositions = dinoTrackingScript.GetCurrentPositions();
 
 		if(Input.GetKeyDown(KeyCode.C) && mapObj != null)
 		{
@@ -204,22 +231,32 @@ public class HUDScript : MonoBehaviour
 				mapPosObjs[3].SetActive(true);
 			}
 		}
-		/*positionObjs[0].guiTexture.pixelInset = ResizeRect(new Rect(18, 18, 5, 5));
-		positionObjs[1].guiTexture.pixelInset = ResizeRect(new Rect(41, 18, 5, 5));
-		positionObjs[2].guiTexture.pixelInset = ResizeRect(new Rect(65, 18, 5, 5));
-		positionObjs[3].guiTexture.pixelInset = ResizeRect(new Rect(88, 18, 5, 5));*/
+		positionObjs.guiTexture.pixelInset = ResizeRect(new Rect(18, 75, 5, 5));
+		positionObjs.guiTexture.texture = hudGfx[racePositions[dinoTrackingScript.playerNum] - 1];
 		
-		lapObjs[0].guiTexture.pixelInset = ResizeRect(new Rect(80, 90, 5, 5));
-		lapObjs[1].guiTexture.pixelInset = ResizeRect(new Rect(86, 91, 1, 3));
-		lapObjs[2].guiTexture.pixelInset = ResizeRect(new Rect(88, 91, 1, 3));
-		lapObjs[3].guiTexture.pixelInset = ResizeRect(new Rect(90, 91, 1, 3));
+		lapObjs[0].guiTexture.pixelInset = ResizeRect(new Rect(80, 5, 5, 5));
+		lapObjs[1].guiTexture.pixelInset = ResizeRect(new Rect(86, 6, 1, 3));
+		lapObjs[2].guiTexture.pixelInset = ResizeRect(new Rect(88, 6, 1, 3));
+		lapObjs[3].guiTexture.pixelInset = ResizeRect(new Rect(90, 6, 1, 3));
 		
 		
 		lapObjs[1].guiTexture.texture = numGfx[currentLaps[dinoTrackingScript.playerNum]];
 		lapObjs[3].guiTexture.texture = numGfx[dinoTrackingScript.maxLap];
 
-		healthBorderObjs[dinoTrackingScript.playerNum].guiTexture.pixelInset = ResizeRect(new Rect(15, 90, 18, 8));
-		healthBarObjs[dinoTrackingScript.playerNum].guiTexture.pixelInset = ResizeRect(GetHealth(new Rect(15, 90, 18, 8), 0));
+		healthPos  = ResizeRect(new Rect(20, 80, 100, 100));
+		healthMask.transform.position = Camera.main.ScreenToWorldPoint(new Vector3(healthPos.x, healthPos.y, 20));
+		healthMask.transform.localRotation = Camera.main.transform.rotation;
+		
+		dinoIcon.guiTexture.pixelInset = ResizeRect(new Rect(1, 80, 10, 10));
+		
+		healthPercent.guiText.pixelOffset = ResizeVec2( new Vector2(20, 87));
+
+		
+		Rect healthSize = ResizeRect(new Rect(20, 80, .15f, .3f));
+		Rect healthWidth = GetPlayerHealth(healthSize, dinoTrackingScript.playerNum);
+		healthMaskBar.transform.localScale = new Vector3(healthWidth.width, healthWidth.height, 1);
+		//healthMaskCover.transform.localScale = Camera.main.ScreenToWorldPoint(new Vector3(healthPos.x, healthPos.y, 20));
+
 
 		if(dinoTrackingScript.playerNum != 0)
 			AttachHealth(0);
@@ -230,32 +267,24 @@ public class HUDScript : MonoBehaviour
 		if(dinoTrackingScript.playerNum != 3)
 			AttachHealth(3);
 
-		/*inSight[0] = false;
-		inSight[1] = false;
-		inSight[2] = false;
-		inSight[3] = false;*/
-		
-		weaponBorderObjs.guiTexture.pixelInset = ResizeRect(new Rect(2, 85, 8, 15));
-		weaponObjs.guiTexture.pixelInset = ResizeRect(new Rect(2, 85, 8, 15));
-
 		mapObj.guiTexture.pixelInset = ResizeRect(mapInfo.MapPos);
 
 		mapPosObjs[0].guiTexture.pixelInset = SetMapPosition(mapInfo.StartPointPos, raceDinos[0]);
 		mapPosObjs[1].guiTexture.pixelInset = SetMapPosition(mapInfo.StartPointPos, raceDinos[1]);
 		mapPosObjs[2].guiTexture.pixelInset = SetMapPosition(mapInfo.StartPointPos, raceDinos[2]);
 		mapPosObjs[3].guiTexture.pixelInset = SetMapPosition(mapInfo.StartPointPos, raceDinos[3]);
+		
+		int itemIndex = 10;
 
-
-		/*RaycastHit hit;
-		if(Physics.SphereCast(raceDinos[0].transform.position, 30.0f, raceDinos[0].transform.forward, out hit))
+		if(currentItems != null)
 		{
-			if(hit.transform.tag == "Ai" || hit.transform.tag == "Dino")
+			foreach(GameObject _item in currentItems)
 			{
-				for(int i = 0; i < raceDinos.Length; i++)
-					if(hit.transform == raceDinos[i].transform)
-						inSight[i] = true;
+				_item.guiTexture.pixelInset = ResizeRect(new Rect(itemIndex, 90, 8, 10));
+				itemIndex += 10;
 			}
-		}*/
+		}
+		
 	}
 
 	private Rect ResizeRect(Rect _pos)
@@ -312,6 +341,20 @@ public class HUDScript : MonoBehaviour
 		float percentResults = (_pos.width * ((health == null) ? 1.0f : health.Percent)) ;
 
 		healthBarObjs[_index].guiTexture.texture = (_pos.width / 3) < percentResults ? healthBarGfx : healthBarRedGfx; 
+		return new Rect(_pos.x, _pos.y, percentResults, _pos.height);
+	}
+	
+	private Rect GetPlayerHealth(Rect _pos, int _index)
+	{
+		var health = raceDinos [_index].GetComponent<Health> ();
+		float percentResults = (_pos.width * ((health == null) ? 1.0f : health.Percent)) ;
+		
+		healthMaskBar.renderer.material.mainTexture = (_pos.width / 3) < percentResults ? healthBarGfx : healthBarRedGfx;
+		
+		float percent = percentResults / _pos.width;
+		int final = (int)(percent * 100.0f);
+		healthPercent.guiText.text = final.ToString();
+		healthPercent.guiText.text +=  "%";
 		return new Rect(_pos.x, _pos.y, percentResults, _pos.height);
 	}
 
@@ -442,6 +485,28 @@ public class HUDScript : MonoBehaviour
 			}
 			
 			yield return new WaitForSeconds(0.01f);
+		}
+	}
+	
+	public void ItemToAdd(string _name)
+	{
+		if(currentItems.Count < 3)
+		{
+			switch(_name)
+			{
+			case "item1":
+				currentItems.Add(CreateGUITxtr("Test Item 1", weaponsGfx[0], new Vector3(0, 0, 0)));
+				Debug.Log("picked up item 1");
+				break;
+			case "item2":
+				currentItems.Add(CreateGUITxtr("Test Item 2", weaponsGfx[1], new Vector3(0, 0, 0)));
+				Debug.Log("picked up item 2");
+				break;
+			case "item3":
+				currentItems.Add(CreateGUITxtr("Test Item 3", weaponsGfx[2], new Vector3(0, 0, 0)));
+				Debug.Log("picked up item 3");
+				break;
+			}
 		}
 	}
 	

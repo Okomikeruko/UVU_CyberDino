@@ -112,7 +112,7 @@ public class DinoTracking : MonoBehaviour
 		while(true)
 		{
 			//Debug.Log("waiting for players");
-			Debug.Log(tempDinos[3]);
+			//Debug.Log(tempDinos[3]);
 			
 			for(int i = 0; i < tempDinos.Length; i++)
 				if(tempDinos[i] == null)
