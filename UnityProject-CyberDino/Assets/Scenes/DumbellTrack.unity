@@ -1434,7 +1434,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 7
 --- !u!1001 &60341517
 Prefab:
   m_ObjectHideFlags: 0
@@ -7337,7 +7337,7 @@ Transform:
   - {fileID: 151178363}
   - {fileID: 263376160}
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 5
 --- !u!1 &320826378
 GameObject:
   m_ObjectHideFlags: 0
@@ -7368,7 +7368,7 @@ Transform:
   - {fileID: 1130234732}
   - {fileID: 935808688}
   m_Father: {fileID: 0}
-  m_RootOrder: 8
+  m_RootOrder: 1
 --- !u!1001 &321520246
 Prefab:
   m_ObjectHideFlags: 0
@@ -7507,7 +7507,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 6
 --- !u!114 &322136279
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -14282,7 +14282,7 @@ Transform:
   - {fileID: 244428381}
   - {fileID: 1584411145}
   m_Father: {fileID: 0}
-  m_RootOrder: 1
+  m_RootOrder: 3
 --- !u!1 &628636794
 GameObject:
   m_ObjectHideFlags: 0
@@ -22830,7 +22830,7 @@ Transform:
   - {fileID: 890629949}
   - {fileID: 931429674}
   m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_RootOrder: 9
 --- !u!1 &976485220
 GameObject:
   m_ObjectHideFlags: 0
@@ -27544,7 +27544,7 @@ Transform:
   - {fileID: 1638907215}
   - {fileID: 861804370}
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 8
 --- !u!1 &1228312608
 GameObject:
   m_ObjectHideFlags: 0
@@ -35474,7 +35474,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 4
 --- !u!1 &1628429205
 GameObject:
   m_ObjectHideFlags: 0
@@ -45330,6 +45330,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 2051571067}
   - 114: {fileID: 2051571066}
+  - 114: {fileID: 2051571068}
   m_Layer: 0
   m_Name: GameControl
   m_TagString: Untagged
@@ -45368,7 +45369,22 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 9
+  m_RootOrder: 2
+--- !u!114 &2051571068
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2051571065}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a6554c541b2d4499488485747850a21d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pooledObject: {fileID: 400000, guid: 506fb0742fe21494e9ff04681e46059a, type: 2}
+  pooledAmount: 20
+  willGrow: 0
+  pooledObjects: []
 --- !u!1001 &2054049892
 Prefab:
   m_ObjectHideFlags: 0
