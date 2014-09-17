@@ -23,7 +23,8 @@ public class HUDScript : MonoBehaviour
 	private GameObject healthPercent;
 
 	private GameObject healthMask;
-	private GameObject healthMaskChild;
+	private GameObject healthMaskBar;
+	private GameObject healthMaskCover;
 	private Rect healthPos;
 
 	//textures for the hud
@@ -190,11 +191,15 @@ public class HUDScript : MonoBehaviour
 
 		foreach(Transform child in healthMask.transform)
 		{
-			Debug.Log("the mask " + healthMask);
+			//Debug.Log("the mask " + healthMask);
 			if(child.name == "HealthBar")
 			{
-				healthMaskChild = child.gameObject;
+				healthMaskBar = child.gameObject;
 
+			}
+			else if(child.name == "HealthMask")
+			{
+				healthMaskCover = child.gameObject;
 			}
 		}
 
@@ -229,10 +234,10 @@ public class HUDScript : MonoBehaviour
 		positionObjs.guiTexture.pixelInset = ResizeRect(new Rect(18, 75, 5, 5));
 		positionObjs.guiTexture.texture = hudGfx[racePositions[dinoTrackingScript.playerNum] - 1];
 		
-		lapObjs[0].guiTexture.pixelInset = ResizeRect(new Rect(80, 90, 5, 5));
-		lapObjs[1].guiTexture.pixelInset = ResizeRect(new Rect(86, 91, 1, 3));
-		lapObjs[2].guiTexture.pixelInset = ResizeRect(new Rect(88, 91, 1, 3));
-		lapObjs[3].guiTexture.pixelInset = ResizeRect(new Rect(90, 91, 1, 3));
+		lapObjs[0].guiTexture.pixelInset = ResizeRect(new Rect(80, 5, 5, 5));
+		lapObjs[1].guiTexture.pixelInset = ResizeRect(new Rect(86, 6, 1, 3));
+		lapObjs[2].guiTexture.pixelInset = ResizeRect(new Rect(88, 6, 1, 3));
+		lapObjs[3].guiTexture.pixelInset = ResizeRect(new Rect(90, 6, 1, 3));
 		
 		
 		lapObjs[1].guiTexture.texture = numGfx[currentLaps[dinoTrackingScript.playerNum]];
@@ -247,9 +252,10 @@ public class HUDScript : MonoBehaviour
 		healthPercent.guiText.pixelOffset = ResizeVec2( new Vector2(20, 87));
 
 		
-
-		Rect healthSize = GetPlayerHealth(ResizeRect(new Rect(20, 80, .15f, .3f)), dinoTrackingScript.playerNum);
-		healthMaskChild.transform.localScale = new Vector3(healthSize.width, healthSize.height, 1);
+		Rect healthSize = ResizeRect(new Rect(20, 80, .15f, .3f));
+		Rect healthWidth = GetPlayerHealth(healthSize, dinoTrackingScript.playerNum);
+		healthMaskBar.transform.localScale = new Vector3(healthWidth.width, healthWidth.height, 1);
+		//healthMaskCover.transform.localScale = Camera.main.ScreenToWorldPoint(new Vector3(healthPos.x, healthPos.y, 20));
 
 
 		if(dinoTrackingScript.playerNum != 0)
@@ -343,10 +349,11 @@ public class HUDScript : MonoBehaviour
 		var health = raceDinos [_index].GetComponent<Health> ();
 		float percentResults = (_pos.width * ((health == null) ? 1.0f : health.Percent)) ;
 		
-		healthMaskChild.renderer.material.mainTexture = (_pos.width / 3) < percentResults ? healthBarGfx : healthBarRedGfx;
-		Debug.Log(percentResults); 
-		int percentageConvert = (int)((percentResults - .06f) / 0.008f);
-		healthPercent.guiText.text = percentageConvert.ToString();
+		healthMaskBar.renderer.material.mainTexture = (_pos.width / 3) < percentResults ? healthBarGfx : healthBarRedGfx;
+		
+		float percent = percentResults / _pos.width;
+		int final = (int)(percent * 100.0f);
+		healthPercent.guiText.text = final.ToString();
 		healthPercent.guiText.text +=  "%";
 		return new Rect(_pos.x, _pos.y, percentResults, _pos.height);
 	}
