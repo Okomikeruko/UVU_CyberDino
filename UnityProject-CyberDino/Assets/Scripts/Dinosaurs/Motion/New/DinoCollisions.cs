@@ -10,6 +10,8 @@ public class DinoCollisions : MonoBehaviour {
 	private float CollisionDamage = 10.0f;
 	[SerializeField]
 	private float EnvironmentCollisionDamage = 5.0f;
+	[SerializeField]
+	private float ControlLockTime = .25f;
 
 	void OnCollisionEnter(Collision collisionInfo) {
 
@@ -44,7 +46,7 @@ public class DinoCollisions : MonoBehaviour {
 				rigidbody.velocity = -rigidbody.velocity * relativeMass * .5f;
 
 				var mc = GetComponent<MotionControl>();
-				mc.LockInput(0.5f);
+				mc.LockInput(ControlLockTime);
 			}
 
 			// Dinosaur on Anything Else
@@ -72,9 +74,9 @@ public class DinoCollisions : MonoBehaviour {
 						}
 					}
 
-					rigidbody.velocity = Vector3.Reflect(rigidbody.velocity, contactSum.normalized) * .5f;
+					rigidbody.velocity = Vector3.Reflect(rigidbody.velocity, contactSum.normalized);
 
-					mc.LockInput(0.5f);
+					mc.LockInput(ControlLockTime);
 				}
 			}
 		}
