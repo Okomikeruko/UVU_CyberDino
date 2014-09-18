@@ -35,7 +35,7 @@ public class RespawnManager : MonoBehaviour
 			RespawnNode otherRespawnNode = other.GetComponent<RespawnNode>();
 			if (racerRespawnStats.CurrentRespawnNode == null || racerRespawnStats.NextRespawnNodes.Contains(otherRespawnNode)){
 				racerRespawnStats.NextRespawnNodes = otherRespawnNode.nextNodes;
-				racerRespawnStats.CurrentRespawnNode = otherRespawnNode;\
+				racerRespawnStats.CurrentRespawnNode = otherRespawnNode;
 			}
 
 		}
