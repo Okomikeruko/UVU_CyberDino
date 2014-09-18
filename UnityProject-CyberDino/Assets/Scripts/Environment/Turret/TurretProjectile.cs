@@ -90,7 +90,7 @@ public class TurretProjectile : MonoBehaviour {
 
 	}
 
-	void OnCollisionEnter(Collision other)
+	void OnTriggerEnter(Collider other)
 	{
 
 		Health theHealth = other.gameObject.GetComponent<Health>();
