@@ -10,34 +10,47 @@ public class TurretFire : MonoBehaviour {
 	public Transform aim_pan;
 	public Transform aim_tilt;
 
-	public GameObject[] theDinos;
-	public List<GameObject> thePositions;
+	[SerializeField]
+	private GameObject[] theDinos;
+	[SerializeField]
+	private List<GameObject> thePositions;
 
 	public Transform[] muzzlePoints;
 
-	public float rotationSpeed = 0.01F;
+	public float rotationSpeed = 2.0F;
 
 	private TurretProjectile theProj;
 
 //	private Quaternion TargetRotation;
-	
+
+	public float setTime = .5F;
+
 	public float fireTime = .5f;
 	public bool firing = false;
 	
-	public float checkTime = .01f;
+	public float checkTime = .2f;
 	public bool checking = false;
-	
-	public List<Transform> targets;
-	public Transform myTarget;
+
+	[SerializeField]
+	private List<Transform> targets;
+	[SerializeField]
+	private Transform myTarget;
 	
 	// Use this for initialization
 	void OnEnable () {
 		audio.Stop();
-		theDinos = DinoTracking.trackingScript.GetDinoArray();
-		for(int i = 0; i < theDinos.Length; i++)
-		{
-			thePositions.Add(theDinos[i]);
-		}
+		StartCoroutine(SetDinos());
+//		if(theDinos.Length <= 0)
+//		{
+//			theDinos = DinoTracking.trackingScript.GetDinoArray();
+//		}
+//		if(thePositions.Count <= 0)
+//		{
+//			for(int i = 0; i < theDinos.Length; i++)
+//			{
+//				thePositions.Add(theDinos[i]);
+//			}
+//		}
 	}
 	
 	void OnDisable() 
@@ -47,7 +60,7 @@ public class TurretFire : MonoBehaviour {
 
 	void OnTriggerEnter(Collider other)
 	{
-		Debug.Log (other);
+
 		if (other.gameObject.tag == "Dino")
 		{
 			targets.Add(other.transform);
@@ -196,5 +209,21 @@ public class TurretFire : MonoBehaviour {
 		
 		yield return new WaitForSeconds(checkTime);
 		checking = false;
+	}
+
+	IEnumerator SetDinos()
+	{
+		yield return new WaitForSeconds(setTime);
+		if(theDinos.Length <= 0)
+		{
+			theDinos = DinoTracking.trackingScript.GetDinoArray();
+		}
+		if(thePositions.Count <= 0)
+		{
+			for(int i = 0; i < theDinos.Length; i++)
+			{
+				thePositions.Add(theDinos[i]);
+			}
+		}
 	}
 }
