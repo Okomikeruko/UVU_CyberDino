@@ -1,9 +1,9 @@
 ﻿using UnityEngine;
-using System.Collections;
+using System.Collections.Generic;
 
 public class RespawnNode : MonoBehaviour {
 	#region Fields
-	public RespawnNode nextNode;
+	public List<RespawnNode> nextNodes;
 	public Vector3 Rotation;
 	#endregion
 }
