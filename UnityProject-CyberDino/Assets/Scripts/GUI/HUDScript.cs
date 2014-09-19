@@ -10,6 +10,9 @@ public class HUDScript : MonoBehaviour
 	//an emplty object to group all of the hud together
 	private GameObject grpObj;
 
+	private float xMulti;
+	private float yMulti;
+
 	//guitextures for the hud
 	private GameObject positionObjs;
 	private GameObject[] lapObjs;
@@ -26,6 +29,7 @@ public class HUDScript : MonoBehaviour
 	private GameObject healthMaskBar;
 	private GameObject healthMaskCover;
 	private Rect healthPos;
+	private Vector3 healthMaskBarRotation;
 
 	//textures for the hud
 	private Texture[] hudGfx;
@@ -72,9 +76,11 @@ public class HUDScript : MonoBehaviour
 		//create the hud group
 		grpObj = new GameObject("HUD Group");
 
+		grpObj.layer = 5;
+
 		//settings for the mini map
 		if(Application.loadedLevelName == "DumbellTrack")
-			mapInfo = new MapGUIInfo(51.0f, new Rect(87.4f, 35.5f, 1, 1), new Rect(78, 5, 20, 60), (Texture)Resources.Load("GUI/Materials/DumbBellmap"));
+			mapInfo = new MapGUIInfo(105.0f, new Rect(89.5f, 24.7f, 1, 1), new Rect(85, 10, 10, 30), (Texture)Resources.Load("GUI/Materials/DumbBellmap"));
 		else
 			mapInfo = new MapGUIInfo();
 			
@@ -189,6 +195,9 @@ public class HUDScript : MonoBehaviour
 
 		Debug.Log("the mask " + healthMask);
 
+		foreach(Transform child in grpObj.transform)
+			child.gameObject.layer = 5;
+
 		foreach(Transform child in healthMask.transform)
 		{
 			//Debug.Log("the mask " + healthMask);
@@ -203,14 +212,18 @@ public class HUDScript : MonoBehaviour
 			}
 		}
 
-		raceDinos = dinoTrackingScript.GetDinoArray();
+		healthMaskBarRotation = healthMaskBar.transform.localEulerAngles;
 	}
 	
 	// Update is called once per frame
 	void Update () 
 	{
+		raceDinos = dinoTrackingScript.GetDinoArray();
 		currentLaps = dinoTrackingScript.GetCurrentLaps();
 		racePositions = dinoTrackingScript.GetCurrentPositions();
+
+		xMulti = Screen.width / 100.0f;
+		yMulti = Screen.height / 100.0f;
 
 		if(Input.GetKeyDown(KeyCode.C) && mapObj != null)
 		{
@@ -252,9 +265,10 @@ public class HUDScript : MonoBehaviour
 		healthPercent.guiText.pixelOffset = ResizeVec2( new Vector2(20, 87));
 
 		
-		Rect healthSize = ResizeRect(new Rect(20, 80, .15f, .3f));
-		Rect healthWidth = GetPlayerHealth(healthSize, dinoTrackingScript.playerNum);
-		healthMaskBar.transform.localScale = new Vector3(healthWidth.width, healthWidth.height, 1);
+		Rect healthSize = ResizeRect(new Rect(20, 85, .11f, .2f));
+		SetPlayerHealth(new Vector3( .91f, .6f, 1), dinoTrackingScript.playerNum);
+		//Rect healthWidth = GetPlayerHealth(healthSize, dinoTrackingScript.playerNum);
+		//healthMaskBar.transform.localScale = new Vector3(healthWidth.width, healthWidth.height, 1);
 		//healthMaskCover.transform.localScale = Camera.main.ScreenToWorldPoint(new Vector3(healthPos.x, healthPos.y, 20));
 
 
@@ -289,24 +303,14 @@ public class HUDScript : MonoBehaviour
 
 	private Rect ResizeRect(Rect _pos)
 	{
-		//variables used to move the buttons
-		float xMulti = Screen.width / 100.0f;
-		float yMulti = Screen.height / 100.0f;
-		
 		//set the rect position and size
 		return new Rect(_pos.x * xMulti, _pos.y * yMulti, _pos.width * xMulti, _pos.height * yMulti);
-		
 	}
 
 	private Vector2 ResizeVec2(Vector2 _pos)
 	{
-		//variables used to move the buttons
-		float xMulti = Screen.width / 100.0f;
-		float yMulti = Screen.height / 100.0f;
-		
 		//set the rect position and size
 		return new Vector2(_pos.x * xMulti, _pos.y * yMulti);
-		
 	}
 
 	private GameObject CreateGUITxtr(string _name, Texture _txtr, Vector3 _pos)
@@ -344,18 +348,32 @@ public class HUDScript : MonoBehaviour
 		return new Rect(_pos.x, _pos.y, percentResults, _pos.height);
 	}
 	
-	private Rect GetPlayerHealth(Rect _pos, int _index)
+	private void SetPlayerHealth(Vector3 _pos, int _index)
 	{
 		var health = raceDinos [_index].GetComponent<Health> ();
-		float percentResults = (_pos.width * ((health == null) ? 1.0f : health.Percent)) ;
+		float percentResults = (_pos.x * ((health == null) ? 1.0f : health.Percent)) ;
+
+		float changePoint = _pos.x * .4f;
+		healthMaskBar.renderer.material.mainTexture = changePoint < percentResults ? healthBarGfx : healthBarRedGfx;
+
+		/*Debug.Log("width " + _pos.x);
+		Debug.Log("health percent " + health.Percent);
+		Debug.Log("percent results " + percentResults);*/
 		
-		healthMaskBar.renderer.material.mainTexture = (_pos.width / 3) < percentResults ? healthBarGfx : healthBarRedGfx;
-		
-		float percent = percentResults / _pos.width;
+		float percent = percentResults / _pos.x;
 		int final = (int)(percent * 100.0f);
 		healthPercent.guiText.text = final.ToString();
 		healthPercent.guiText.text +=  "%";
-		return new Rect(_pos.x, _pos.y, percentResults, _pos.height);
+
+		if(changePoint < percentResults)
+			//return new Rect(_pos.x, _pos.y, percentResults, _pos.height);
+			healthMaskBar.transform.localScale = new Vector3( _pos.x * percentResults, _pos.y, _pos.z);
+		if(changePoint > percentResults)
+			healthMaskBar.transform.localEulerAngles = Vector3.Lerp(new Vector3(0, 180,90), healthMaskBarRotation, percentResults / changePoint);
+		else 
+			healthMaskBar.transform.localEulerAngles = healthMaskBarRotation;
+
+
 	}
 
 	private Rect SetMapPosition(Rect _pos, GameObject _dino)
