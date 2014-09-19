@@ -109,9 +109,7 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 400012}
-  - 114: {fileID: 11400022}
   - 114: {fileID: 11400020}
-  - 114: {fileID: 11400018}
   - 114: {fileID: 11400016}
   - 136: {fileID: 13600004}
   - 54: {fileID: 5400002}
@@ -143,6 +141,8 @@ GameObject:
   - 114: {fileID: 11400032}
   - 114: {fileID: 11400034}
   - 114: {fileID: 11400002}
+  - 114: {fileID: 11400036}
+  - 114: {fileID: 11400038}
   m_Layer: 8
   m_Name: TRex
   m_TagString: Dino
@@ -1699,18 +1699,6 @@ MonoBehaviour:
   turboSpeed: 60
   forcefieldOn: 0
   theForcefield: {fileID: 0}
---- !u!114 &11400018
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 100012}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 62cde66bda41d45c4b00ecd0c2c9583a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  respawnParticalSystem: {fileID: 0}
 --- !u!114 &11400020
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1726,17 +1714,6 @@ MonoBehaviour:
   theSize: 0
   totalHealth: 100
   currentHealth: 100
---- !u!114 &11400022
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 100012}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 06385bdad5fe14051a99556d0946b136, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &11400024
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1786,6 +1763,7 @@ MonoBehaviour:
   overhealDecayPerSecond: 1
   overhealDecayDelay: 5
   overhealDecayCapPercent: 1
+  RespawnDelay: 3
 --- !u!114 &11400030
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1823,6 +1801,30 @@ MonoBehaviour:
   CollisionDamageVelocityThreshold: 50
   CollisionDamage: 10
   EnvironmentCollisionDamage: 5
+  ControlLockTime: .25
+--- !u!114 &11400036
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100040}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 55f0aee65d9feaf44a3092831867b95c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  FirstRespawnNode: Respawn_Bridge_Negative05
+--- !u!114 &11400038
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100040}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 06385bdad5fe14051a99556d0946b136, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!136 &13600000
 CapsuleCollider:
   m_ObjectHideFlags: 1

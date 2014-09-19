@@ -268,6 +268,7 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 3284384}
+  - 114: {fileID: 3284385}
   m_Layer: 0
   m_Name: Respawn_Side01_Positive07
   m_TagString: Untagged
@@ -287,6 +288,19 @@ Transform:
   m_Children: []
   m_Father: {fileID: 890629949}
   m_RootOrder: 20
+--- !u!114 &3284385
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 3284383}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 33e8504d3b2c44dd7848afe78a5fd2b7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  nextNodes:
+  - {fileID: 301495455}
 --- !u!1001 &12171840
 Prefab:
   m_ObjectHideFlags: 0
@@ -1214,6 +1228,7 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 50127986}
+  - 114: {fileID: 50127987}
   m_Layer: 0
   m_Name: Respawn_Bridge_Negative04
   m_TagString: Untagged
@@ -1233,6 +1248,19 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1104573616}
   m_RootOrder: 3
+--- !u!114 &50127987
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 50127985}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 33e8504d3b2c44dd7848afe78a5fd2b7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  nextNodes:
+  - {fileID: 1288216873}
 --- !u!1 &50774764
 GameObject:
   m_ObjectHideFlags: 0
@@ -1241,6 +1269,7 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 50774765}
+  - 114: {fileID: 50774766}
   m_Layer: 0
   m_Name: Respawn_Side01_Positive03
   m_TagString: Untagged
@@ -1260,6 +1289,19 @@ Transform:
   m_Children: []
   m_Father: {fileID: 890629949}
   m_RootOrder: 16
+--- !u!114 &50774766
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 50774764}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 33e8504d3b2c44dd7848afe78a5fd2b7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  nextNodes:
+  - {fileID: 668242648}
 --- !u!1001 &53147566
 Prefab:
   m_ObjectHideFlags: 0
@@ -2986,6 +3028,7 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 117280812}
+  - 114: {fileID: 117280813}
   m_Layer: 0
   m_Name: Respawn_Side01_Negative02
   m_TagString: Untagged
@@ -3005,6 +3048,19 @@ Transform:
   m_Children: []
   m_Father: {fileID: 890629949}
   m_RootOrder: 1
+--- !u!114 &117280813
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 117280811}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 33e8504d3b2c44dd7848afe78a5fd2b7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  nextNodes:
+  - {fileID: 663263980}
 --- !u!1 &118399792
 GameObject:
   m_ObjectHideFlags: 0
@@ -3411,6 +3467,7 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 139685289}
+  - 114: {fileID: 139685290}
   m_Layer: 0
   m_Name: Respawn_Side02_Negative02
   m_TagString: Untagged
@@ -3430,6 +3487,19 @@ Transform:
   m_Children: []
   m_Father: {fileID: 931429674}
   m_RootOrder: 1
+--- !u!114 &139685290
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 139685288}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 33e8504d3b2c44dd7848afe78a5fd2b7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  nextNodes:
+  - {fileID: 1604969580}
 --- !u!1 &151178362
 GameObject:
   m_ObjectHideFlags: 0
@@ -6519,6 +6589,7 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 261077214}
+  - 114: {fileID: 261077215}
   m_Layer: 0
   m_Name: Respawn_Side01_Negative10
   m_TagString: Untagged
@@ -6538,6 +6609,19 @@ Transform:
   m_Children: []
   m_Father: {fileID: 890629949}
   m_RootOrder: 9
+--- !u!114 &261077215
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 261077213}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 33e8504d3b2c44dd7848afe78a5fd2b7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  nextNodes:
+  - {fileID: 1260790461}
 --- !u!1001 &261166520
 Prefab:
   m_ObjectHideFlags: 0
@@ -7019,6 +7103,7 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 294537680}
+  - 114: {fileID: 294537681}
   m_Layer: 0
   m_Name: Respawn_Side02_Negative10
   m_TagString: Untagged
@@ -7038,6 +7123,19 @@ Transform:
   m_Children: []
   m_Father: {fileID: 931429674}
   m_RootOrder: 9
+--- !u!114 &294537681
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 294537679}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 33e8504d3b2c44dd7848afe78a5fd2b7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  nextNodes:
+  - {fileID: 1276872362}
 --- !u!1001 &299964101
 Prefab:
   m_ObjectHideFlags: 0
@@ -7194,6 +7292,7 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 300999145}
+  - 114: {fileID: 300999146}
   m_Layer: 0
   m_Name: Respawn_Bridge_Positive09
   m_TagString: Untagged
@@ -7213,6 +7312,20 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1104573616}
   m_RootOrder: 17
+--- !u!114 &300999146
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 300999144}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 33e8504d3b2c44dd7848afe78a5fd2b7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  nextNodes:
+  - {fileID: 890107997}
+  - {fileID: 1203173666}
 --- !u!1 &301495453
 GameObject:
   m_ObjectHideFlags: 0
@@ -7221,6 +7334,7 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 301495454}
+  - 114: {fileID: 301495455}
   m_Layer: 0
   m_Name: Respawn_Side01_Positive08
   m_TagString: Untagged
@@ -7240,6 +7354,19 @@ Transform:
   m_Children: []
   m_Father: {fileID: 890629949}
   m_RootOrder: 21
+--- !u!114 &301495455
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 301495453}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 33e8504d3b2c44dd7848afe78a5fd2b7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  nextNodes:
+  - {fileID: 863852468}
 --- !u!1 &306031964
 GameObject:
   m_ObjectHideFlags: 0
@@ -9071,6 +9198,7 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 399855918}
+  - 114: {fileID: 399855919}
   m_Layer: 0
   m_Name: Respawn_Side02_Negative13
   m_TagString: Untagged
@@ -9090,6 +9218,19 @@ Transform:
   m_Children: []
   m_Father: {fileID: 931429674}
   m_RootOrder: 12
+--- !u!114 &399855919
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 399855917}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 33e8504d3b2c44dd7848afe78a5fd2b7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  nextNodes:
+  - {fileID: 428754106}
 --- !u!1 &400348516
 GameObject:
   m_ObjectHideFlags: 0
@@ -9995,6 +10136,7 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 423190760}
+  - 114: {fileID: 423190761}
   m_Layer: 0
   m_Name: Respawn_Bridge_Negative02
   m_TagString: Untagged
@@ -10014,6 +10156,19 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1104573616}
   m_RootOrder: 1
+--- !u!114 &423190761
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 423190759}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 33e8504d3b2c44dd7848afe78a5fd2b7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  nextNodes:
+  - {fileID: 1668328067}
 --- !u!1001 &423675522
 Prefab:
   m_ObjectHideFlags: 0
@@ -10137,6 +10292,7 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 425254972}
+  - 114: {fileID: 425254973}
   m_Layer: 0
   m_Name: Respawn_Bridge_Negative09
   m_TagString: Untagged
@@ -10156,6 +10312,20 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1104573616}
   m_RootOrder: 8
+--- !u!114 &425254973
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 425254971}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 33e8504d3b2c44dd7848afe78a5fd2b7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  nextNodes:
+  - {fileID: 935106580}
+  - {fileID: 838962408}
 --- !u!1001 &425865630
 Prefab:
   m_ObjectHideFlags: 0
@@ -10339,6 +10509,7 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 428754105}
+  - 114: {fileID: 428754106}
   m_Layer: 0
   m_Name: Respawn_Bridge_Negative01
   m_TagString: Untagged
@@ -10358,6 +10529,19 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1104573616}
   m_RootOrder: 0
+--- !u!114 &428754106
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 428754104}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 33e8504d3b2c44dd7848afe78a5fd2b7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  nextNodes:
+  - {fileID: 423190761}
 --- !u!1001 &440181129
 Prefab:
   m_ObjectHideFlags: 0
@@ -10734,6 +10918,7 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 447639681}
+  - 114: {fileID: 447639682}
   m_Layer: 0
   m_Name: Respawn_Side02_Negative05
   m_TagString: Untagged
@@ -10753,6 +10938,19 @@ Transform:
   m_Children: []
   m_Father: {fileID: 931429674}
   m_RootOrder: 4
+--- !u!114 &447639682
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 447639680}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 33e8504d3b2c44dd7848afe78a5fd2b7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  nextNodes:
+  - {fileID: 1532540789}
 --- !u!1001 &450358511
 Prefab:
   m_ObjectHideFlags: 0
@@ -11499,6 +11697,7 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 486622056}
+  - 114: {fileID: 486622057}
   m_Layer: 0
   m_Name: Respawn_Side01_Negative06
   m_TagString: Untagged
@@ -11518,6 +11717,19 @@ Transform:
   m_Children: []
   m_Father: {fileID: 890629949}
   m_RootOrder: 5
+--- !u!114 &486622057
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 486622055}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 33e8504d3b2c44dd7848afe78a5fd2b7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  nextNodes:
+  - {fileID: 1033512677}
 --- !u!1001 &489278471
 Prefab:
   m_ObjectHideFlags: 0
@@ -12129,33 +12341,6 @@ MeshFilter:
   m_PrefabInternal: {fileID: 1995043118}
   m_GameObject: {fileID: 512405434}
   m_Mesh: {fileID: 4300194, guid: b09add3ae428e4d17a9c0920c6fa0798, type: 3}
---- !u!1 &515519211
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  serializedVersion: 4
-  m_Component:
-  - 4: {fileID: 515519212}
-  m_Layer: 0
-  m_Name: Respawn_Bridge_Positive05
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &515519212
-Transform:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 515519211}
-  m_LocalRotation: {x: 0, y: .707106829, z: 0, w: .707106829}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 1104573616}
-  m_RootOrder: 13
 --- !u!1 &522965226
 GameObject:
   m_ObjectHideFlags: 0
@@ -12758,6 +12943,7 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 538692041}
+  - 114: {fileID: 538692042}
   m_Layer: 0
   m_Name: Respawn_Side01_Positive06
   m_TagString: Untagged
@@ -12777,6 +12963,19 @@ Transform:
   m_Children: []
   m_Father: {fileID: 890629949}
   m_RootOrder: 19
+--- !u!114 &538692042
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 538692040}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 33e8504d3b2c44dd7848afe78a5fd2b7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  nextNodes:
+  - {fileID: 3284385}
 --- !u!1 &542527624
 GameObject:
   m_ObjectHideFlags: 0
@@ -13058,6 +13257,7 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 548896646}
+  - 114: {fileID: 548896647}
   m_Layer: 0
   m_Name: Respawn_Side01_Positive12
   m_TagString: Untagged
@@ -13077,6 +13277,19 @@ Transform:
   m_Children: []
   m_Father: {fileID: 890629949}
   m_RootOrder: 25
+--- !u!114 &548896647
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 548896645}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 33e8504d3b2c44dd7848afe78a5fd2b7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  nextNodes:
+  - {fileID: 2042223195}
 --- !u!1001 &551220666
 Prefab:
   m_ObjectHideFlags: 0
@@ -13921,6 +14134,7 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 606693469}
+  - 114: {fileID: 606693470}
   m_Layer: 0
   m_Name: Respawn_Side02_Negative08
   m_TagString: Untagged
@@ -13940,6 +14154,19 @@ Transform:
   m_Children: []
   m_Father: {fileID: 931429674}
   m_RootOrder: 7
+--- !u!114 &606693470
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 606693468}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 33e8504d3b2c44dd7848afe78a5fd2b7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  nextNodes:
+  - {fileID: 1117863910}
 --- !u!1001 &614060667
 Prefab:
   m_ObjectHideFlags: 0
@@ -14731,6 +14958,7 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 642917455}
+  - 114: {fileID: 642917456}
   m_Layer: 0
   m_Name: Respawn_Side02_Positive12
   m_TagString: Untagged
@@ -14750,6 +14978,19 @@ Transform:
   m_Children: []
   m_Father: {fileID: 931429674}
   m_RootOrder: 24
+--- !u!114 &642917456
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 642917454}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 33e8504d3b2c44dd7848afe78a5fd2b7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  nextNodes:
+  - {fileID: 1945470520}
 --- !u!1 &643251312
 GameObject:
   m_ObjectHideFlags: 0
@@ -15283,6 +15524,7 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 663263979}
+  - 114: {fileID: 663263980}
   m_Layer: 0
   m_Name: Respawn_Side01_Negative03
   m_TagString: Untagged
@@ -15302,6 +15544,19 @@ Transform:
   m_Children: []
   m_Father: {fileID: 890629949}
   m_RootOrder: 2
+--- !u!114 &663263980
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 663263978}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 33e8504d3b2c44dd7848afe78a5fd2b7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  nextNodes:
+  - {fileID: 766025342}
 --- !u!1 &666006541
 GameObject:
   m_ObjectHideFlags: 0
@@ -15575,6 +15830,7 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 668242647}
+  - 114: {fileID: 668242648}
   m_Layer: 0
   m_Name: Respawn_Side01_Positive04
   m_TagString: Untagged
@@ -15594,6 +15850,19 @@ Transform:
   m_Children: []
   m_Father: {fileID: 890629949}
   m_RootOrder: 17
+--- !u!114 &668242648
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 668242646}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 33e8504d3b2c44dd7848afe78a5fd2b7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  nextNodes:
+  - {fileID: 1197545713}
 --- !u!1001 &672610039
 Prefab:
   m_ObjectHideFlags: 0
@@ -17260,6 +17529,7 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 745147551}
+  - 114: {fileID: 745147552}
   m_Layer: 0
   m_Name: Respawn_Side02_Positive03
   m_TagString: Untagged
@@ -17279,6 +17549,19 @@ Transform:
   m_Children: []
   m_Father: {fileID: 931429674}
   m_RootOrder: 15
+--- !u!114 &745147552
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 745147550}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 33e8504d3b2c44dd7848afe78a5fd2b7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  nextNodes:
+  - {fileID: 1334811289}
 --- !u!1 &746346234
 GameObject:
   m_ObjectHideFlags: 0
@@ -17287,6 +17570,7 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 746346235}
+  - 114: {fileID: 746346236}
   m_Layer: 0
   m_Name: Respawn_Bridge_Positive03
   m_TagString: Untagged
@@ -17306,6 +17590,19 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1104573616}
   m_RootOrder: 11
+--- !u!114 &746346236
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 746346234}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 33e8504d3b2c44dd7848afe78a5fd2b7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  nextNodes:
+  - {fileID: 1125422619}
 --- !u!1 &748496328
 GameObject:
   m_ObjectHideFlags: 0
@@ -17661,6 +17958,7 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 766025341}
+  - 114: {fileID: 766025342}
   m_Layer: 0
   m_Name: Respawn_Side01_Negative04
   m_TagString: Untagged
@@ -17680,6 +17978,19 @@ Transform:
   m_Children: []
   m_Father: {fileID: 890629949}
   m_RootOrder: 3
+--- !u!114 &766025342
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 766025340}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 33e8504d3b2c44dd7848afe78a5fd2b7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  nextNodes:
+  - {fileID: 1951640715}
 --- !u!1 &768221063
 GameObject:
   m_ObjectHideFlags: 0
@@ -18204,6 +18515,7 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 777163442}
+  - 114: {fileID: 777163443}
   m_Layer: 0
   m_Name: Respawn_Bridge_Negative07
   m_TagString: Untagged
@@ -18223,6 +18535,19 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1104573616}
   m_RootOrder: 6
+--- !u!114 &777163443
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 777163441}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 33e8504d3b2c44dd7848afe78a5fd2b7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  nextNodes:
+  - {fileID: 1765535720}
 --- !u!1001 &782994157
 Prefab:
   m_ObjectHideFlags: 0
@@ -18479,7 +18804,7 @@ GameObject:
   - 23: {fileID: 796929924}
   m_Layer: 0
   m_Name: Cube
-  m_TagString: Untagged
+  m_TagString: KillPlane
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -18511,7 +18836,7 @@ BoxCollider:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 796929923}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
@@ -19358,6 +19683,7 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 838962407}
+  - 114: {fileID: 838962408}
   m_Layer: 0
   m_Name: Respawn_Side01_Positive01
   m_TagString: Untagged
@@ -19377,6 +19703,19 @@ Transform:
   m_Children: []
   m_Father: {fileID: 890629949}
   m_RootOrder: 14
+--- !u!114 &838962408
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 838962406}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 33e8504d3b2c44dd7848afe78a5fd2b7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  nextNodes:
+  - {fileID: 1157071180}
 --- !u!1 &839424688
 GameObject:
   m_ObjectHideFlags: 0
@@ -19765,6 +20104,7 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 863852467}
+  - 114: {fileID: 863852468}
   m_Layer: 0
   m_Name: Respawn_Side01_Positive09
   m_TagString: Untagged
@@ -19784,6 +20124,19 @@ Transform:
   m_Children: []
   m_Father: {fileID: 890629949}
   m_RootOrder: 22
+--- !u!114 &863852468
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 863852466}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 33e8504d3b2c44dd7848afe78a5fd2b7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  nextNodes:
+  - {fileID: 1028880527}
 --- !u!1 &864839042
 GameObject:
   m_ObjectHideFlags: 0
@@ -19878,6 +20231,7 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 866322245}
+  - 114: {fileID: 866322246}
   m_Layer: 0
   m_Name: Respawn_Side02_Positive05
   m_TagString: Untagged
@@ -19897,6 +20251,19 @@ Transform:
   m_Children: []
   m_Father: {fileID: 931429674}
   m_RootOrder: 17
+--- !u!114 &866322246
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 866322244}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 33e8504d3b2c44dd7848afe78a5fd2b7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  nextNodes:
+  - {fileID: 1297798532}
 --- !u!1001 &866969007
 Prefab:
   m_ObjectHideFlags: 0
@@ -20316,6 +20683,7 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 890107996}
+  - 114: {fileID: 890107997}
   m_Layer: 0
   m_Name: Respawn_Side02_Negative01
   m_TagString: Untagged
@@ -20335,6 +20703,19 @@ Transform:
   m_Children: []
   m_Father: {fileID: 931429674}
   m_RootOrder: 0
+--- !u!114 &890107997
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 890107995}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 33e8504d3b2c44dd7848afe78a5fd2b7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  nextNodes:
+  - {fileID: 139685290}
 --- !u!1 &890204039
 GameObject:
   m_ObjectHideFlags: 0
@@ -21192,6 +21573,7 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 929725526}
+  - 114: {fileID: 929725527}
   m_Layer: 0
   m_Name: Respawn_Side02_Negative07
   m_TagString: Untagged
@@ -21211,6 +21593,19 @@ Transform:
   m_Children: []
   m_Father: {fileID: 931429674}
   m_RootOrder: 6
+--- !u!114 &929725527
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 929725525}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 33e8504d3b2c44dd7848afe78a5fd2b7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  nextNodes:
+  - {fileID: 606693470}
 --- !u!1001 &929791013
 Prefab:
   m_ObjectHideFlags: 0
@@ -21399,6 +21794,7 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 932380898}
+  - 114: {fileID: 932380899}
   m_Layer: 0
   m_Name: Respawn_Side02_Positive02
   m_TagString: Untagged
@@ -21418,6 +21814,19 @@ Transform:
   m_Children: []
   m_Father: {fileID: 931429674}
   m_RootOrder: 14
+--- !u!114 &932380899
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 932380897}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 33e8504d3b2c44dd7848afe78a5fd2b7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  nextNodes:
+  - {fileID: 745147552}
 --- !u!1 &934461320
 GameObject:
   m_ObjectHideFlags: 0
@@ -21512,6 +21921,7 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 935106579}
+  - 114: {fileID: 935106580}
   m_Layer: 0
   m_Name: Respawn_Side01_Negative01
   m_TagString: Untagged
@@ -21525,12 +21935,25 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 935106578}
-  m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
+  m_LocalRotation: {x: 0, y: -1, z: 0, w: -4.37113883e-08}
   m_LocalPosition: {x: -964.653259, y: 0, z: -52.4837341}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 890629949}
   m_RootOrder: 0
+--- !u!114 &935106580
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 935106578}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 33e8504d3b2c44dd7848afe78a5fd2b7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  nextNodes:
+  - {fileID: 117280813}
 --- !u!1 &935808687
 GameObject:
   m_ObjectHideFlags: 0
@@ -22698,6 +23121,7 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 968837180}
+  - 114: {fileID: 968837181}
   m_Layer: 0
   m_Name: Respawn_Side02_Positive07
   m_TagString: Untagged
@@ -22717,6 +23141,19 @@ Transform:
   m_Children: []
   m_Father: {fileID: 931429674}
   m_RootOrder: 19
+--- !u!114 &968837181
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 968837179}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 33e8504d3b2c44dd7848afe78a5fd2b7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  nextNodes:
+  - {fileID: 1957585121}
 --- !u!1 &970045088
 GameObject:
   m_ObjectHideFlags: 0
@@ -23407,6 +23844,7 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 1013300770}
+  - 114: {fileID: 1013300771}
   m_Layer: 0
   m_Name: Respawn_Side01_Negative14
   m_TagString: Untagged
@@ -23426,6 +23864,19 @@ Transform:
   m_Children: []
   m_Father: {fileID: 890629949}
   m_RootOrder: 13
+--- !u!114 &1013300771
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1013300769}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 33e8504d3b2c44dd7848afe78a5fd2b7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  nextNodes:
+  - {fileID: 2066043525}
 --- !u!1 &1028880525
 GameObject:
   m_ObjectHideFlags: 0
@@ -23434,6 +23885,7 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 1028880526}
+  - 114: {fileID: 1028880527}
   m_Layer: 0
   m_Name: Respawn_Side01_Positive10
   m_TagString: Untagged
@@ -23453,6 +23905,19 @@ Transform:
   m_Children: []
   m_Father: {fileID: 890629949}
   m_RootOrder: 23
+--- !u!114 &1028880527
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1028880525}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 33e8504d3b2c44dd7848afe78a5fd2b7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  nextNodes:
+  - {fileID: 1157328505}
 --- !u!1001 &1030259316
 Prefab:
   m_ObjectHideFlags: 0
@@ -23617,6 +24082,7 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 1033512676}
+  - 114: {fileID: 1033512677}
   m_Layer: 0
   m_Name: Respawn_Side01_Negative07
   m_TagString: Untagged
@@ -23636,6 +24102,19 @@ Transform:
   m_Children: []
   m_Father: {fileID: 890629949}
   m_RootOrder: 6
+--- !u!114 &1033512677
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1033512675}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 33e8504d3b2c44dd7848afe78a5fd2b7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  nextNodes:
+  - {fileID: 1415666215}
 --- !u!1001 &1033693720
 Prefab:
   m_ObjectHideFlags: 0
@@ -23953,6 +24432,7 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 1050813248}
+  - 114: {fileID: 1050813249}
   m_Layer: 0
   m_Name: Respawn_Bridge_Positive02
   m_TagString: Untagged
@@ -23972,6 +24452,19 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1104573616}
   m_RootOrder: 10
+--- !u!114 &1050813249
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1050813247}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 33e8504d3b2c44dd7848afe78a5fd2b7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  nextNodes:
+  - {fileID: 746346236}
 --- !u!1 &1055839872
 GameObject:
   m_ObjectHideFlags: 0
@@ -25063,7 +25556,7 @@ Transform:
   - {fileID: 1050813248}
   - {fileID: 746346235}
   - {fileID: 1125422618}
-  - {fileID: 515519212}
+  - {fileID: 2116061083}
   - {fileID: 2025040167}
   - {fileID: 1562291645}
   - {fileID: 1711056364}
@@ -25164,6 +25657,7 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 1117863909}
+  - 114: {fileID: 1117863910}
   m_Layer: 0
   m_Name: Respawn_Side02_Negative09
   m_TagString: Untagged
@@ -25183,6 +25677,19 @@ Transform:
   m_Children: []
   m_Father: {fileID: 931429674}
   m_RootOrder: 8
+--- !u!114 &1117863910
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1117863908}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 33e8504d3b2c44dd7848afe78a5fd2b7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  nextNodes:
+  - {fileID: 294537681}
 --- !u!1001 &1118145883
 Prefab:
   m_ObjectHideFlags: 0
@@ -25365,6 +25872,7 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 1125422618}
+  - 114: {fileID: 1125422619}
   m_Layer: 0
   m_Name: Respawn_Bridge_Positive04
   m_TagString: Untagged
@@ -25384,6 +25892,19 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1104573616}
   m_RootOrder: 12
+--- !u!114 &1125422619
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1125422617}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 33e8504d3b2c44dd7848afe78a5fd2b7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  nextNodes:
+  - {fileID: 2116061084}
 --- !u!1 &1126210878
 GameObject:
   m_ObjectHideFlags: 0
@@ -25563,6 +26084,7 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 1135380458}
+  - 114: {fileID: 1135380459}
   m_Layer: 0
   m_Name: Respawn_Side02_Negative04
   m_TagString: Untagged
@@ -25582,6 +26104,19 @@ Transform:
   m_Children: []
   m_Father: {fileID: 931429674}
   m_RootOrder: 3
+--- !u!114 &1135380459
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1135380457}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 33e8504d3b2c44dd7848afe78a5fd2b7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  nextNodes:
+  - {fileID: 447639682}
 --- !u!1 &1143441516
 GameObject:
   m_ObjectHideFlags: 0
@@ -25590,6 +26125,7 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 1143441517}
+  - 114: {fileID: 1143441518}
   m_Layer: 0
   m_Name: Respawn_Side01_Negative13
   m_TagString: Untagged
@@ -25609,6 +26145,19 @@ Transform:
   m_Children: []
   m_Father: {fileID: 890629949}
   m_RootOrder: 12
+--- !u!114 &1143441518
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1143441516}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 33e8504d3b2c44dd7848afe78a5fd2b7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  nextNodes:
+  - {fileID: 1013300771}
 --- !u!1001 &1152751190
 Prefab:
   m_ObjectHideFlags: 0
@@ -25657,6 +26206,7 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 1157071179}
+  - 114: {fileID: 1157071180}
   m_Layer: 0
   m_Name: Respawn_Side01_Positive02
   m_TagString: Untagged
@@ -25676,6 +26226,19 @@ Transform:
   m_Children: []
   m_Father: {fileID: 890629949}
   m_RootOrder: 15
+--- !u!114 &1157071180
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1157071178}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 33e8504d3b2c44dd7848afe78a5fd2b7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  nextNodes:
+  - {fileID: 50774766}
 --- !u!1 &1157328503
 GameObject:
   m_ObjectHideFlags: 0
@@ -25684,6 +26247,7 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 1157328504}
+  - 114: {fileID: 1157328505}
   m_Layer: 0
   m_Name: Respawn_Side01_Positive11
   m_TagString: Untagged
@@ -25703,6 +26267,19 @@ Transform:
   m_Children: []
   m_Father: {fileID: 890629949}
   m_RootOrder: 24
+--- !u!114 &1157328505
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1157328503}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 33e8504d3b2c44dd7848afe78a5fd2b7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  nextNodes:
+  - {fileID: 548896647}
 --- !u!1 &1157339021
 GameObject:
   m_ObjectHideFlags: 0
@@ -26710,6 +27287,7 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 1197545712}
+  - 114: {fileID: 1197545713}
   m_Layer: 0
   m_Name: Respawn_Side01_Positive05
   m_TagString: Untagged
@@ -26729,6 +27307,19 @@ Transform:
   m_Children: []
   m_Father: {fileID: 890629949}
   m_RootOrder: 18
+--- !u!114 &1197545713
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1197545711}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 33e8504d3b2c44dd7848afe78a5fd2b7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  nextNodes:
+  - {fileID: 538692042}
 --- !u!1 &1198123072
 GameObject:
   m_ObjectHideFlags: 0
@@ -26934,6 +27525,7 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 1203173665}
+  - 114: {fileID: 1203173666}
   m_Layer: 0
   m_Name: Respawn_Side02_Positive01
   m_TagString: Untagged
@@ -26953,6 +27545,19 @@ Transform:
   m_Children: []
   m_Father: {fileID: 931429674}
   m_RootOrder: 13
+--- !u!114 &1203173666
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1203173664}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 33e8504d3b2c44dd7848afe78a5fd2b7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  nextNodes:
+  - {fileID: 932380899}
 --- !u!1 &1203766634
 GameObject:
   m_ObjectHideFlags: 0
@@ -27423,6 +28028,7 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 1220679821}
+  - 114: {fileID: 1220679822}
   m_Layer: 0
   m_Name: Respawn_Side01_Negative12
   m_TagString: Untagged
@@ -27442,6 +28048,19 @@ Transform:
   m_Children: []
   m_Father: {fileID: 890629949}
   m_RootOrder: 11
+--- !u!114 &1220679822
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1220679820}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 33e8504d3b2c44dd7848afe78a5fd2b7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  nextNodes:
+  - {fileID: 1143441518}
 --- !u!1001 &1221646398
 Prefab:
   m_ObjectHideFlags: 0
@@ -28490,6 +29109,7 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 1260790460}
+  - 114: {fileID: 1260790461}
   m_Layer: 0
   m_Name: Respawn_Side01_Negative11
   m_TagString: Untagged
@@ -28509,6 +29129,19 @@ Transform:
   m_Children: []
   m_Father: {fileID: 890629949}
   m_RootOrder: 10
+--- !u!114 &1260790461
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1260790459}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 33e8504d3b2c44dd7848afe78a5fd2b7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  nextNodes:
+  - {fileID: 1220679822}
 --- !u!1001 &1265312219
 Prefab:
   m_ObjectHideFlags: 0
@@ -28983,6 +29616,7 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 1276872361}
+  - 114: {fileID: 1276872362}
   m_Layer: 0
   m_Name: Respawn_Side02_Negative11
   m_TagString: Untagged
@@ -29002,6 +29636,19 @@ Transform:
   m_Children: []
   m_Father: {fileID: 931429674}
   m_RootOrder: 10
+--- !u!114 &1276872362
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1276872360}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 33e8504d3b2c44dd7848afe78a5fd2b7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  nextNodes:
+  - {fileID: 1421172116}
 --- !u!1 &1278278494
 GameObject:
   m_ObjectHideFlags: 0
@@ -29547,6 +30194,7 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 1288216872}
+  - 114: {fileID: 1288216873}
   m_Layer: 0
   m_Name: Respawn_Bridge_Negative05
   m_TagString: Untagged
@@ -29566,6 +30214,19 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1104573616}
   m_RootOrder: 4
+--- !u!114 &1288216873
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1288216871}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 33e8504d3b2c44dd7848afe78a5fd2b7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  nextNodes:
+  - {fileID: 1808481114}
 --- !u!1001 &1288419278
 Prefab:
   m_ObjectHideFlags: 0
@@ -29812,6 +30473,7 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 1297798531}
+  - 114: {fileID: 1297798532}
   m_Layer: 0
   m_Name: Respawn_Side02_Positive06
   m_TagString: Untagged
@@ -29831,6 +30493,19 @@ Transform:
   m_Children: []
   m_Father: {fileID: 931429674}
   m_RootOrder: 18
+--- !u!114 &1297798532
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1297798530}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 33e8504d3b2c44dd7848afe78a5fd2b7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  nextNodes:
+  - {fileID: 968837181}
 --- !u!1 &1301245094
 GameObject:
   m_ObjectHideFlags: 0
@@ -30638,6 +31313,7 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 1334811288}
+  - 114: {fileID: 1334811289}
   m_Layer: 0
   m_Name: Respawn_Side02_Positive04
   m_TagString: Untagged
@@ -30657,6 +31333,19 @@ Transform:
   m_Children: []
   m_Father: {fileID: 931429674}
   m_RootOrder: 16
+--- !u!114 &1334811289
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1334811287}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 33e8504d3b2c44dd7848afe78a5fd2b7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  nextNodes:
+  - {fileID: 866322246}
 --- !u!1001 &1334853608
 Prefab:
   m_ObjectHideFlags: 0
@@ -31443,6 +32132,7 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 1415666214}
+  - 114: {fileID: 1415666215}
   m_Layer: 0
   m_Name: Respawn_Side01_Negative08
   m_TagString: Untagged
@@ -31462,6 +32152,19 @@ Transform:
   m_Children: []
   m_Father: {fileID: 890629949}
   m_RootOrder: 7
+--- !u!114 &1415666215
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1415666213}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 33e8504d3b2c44dd7848afe78a5fd2b7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  nextNodes:
+  - {fileID: 1921302683}
 --- !u!1001 &1419436274
 Prefab:
   m_ObjectHideFlags: 0
@@ -31514,6 +32217,7 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 1421172115}
+  - 114: {fileID: 1421172116}
   m_Layer: 0
   m_Name: Respawn_Side02_Negative12
   m_TagString: Untagged
@@ -31533,6 +32237,19 @@ Transform:
   m_Children: []
   m_Father: {fileID: 931429674}
   m_RootOrder: 11
+--- !u!114 &1421172116
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1421172114}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 33e8504d3b2c44dd7848afe78a5fd2b7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  nextNodes:
+  - {fileID: 399855919}
 --- !u!1001 &1422492234
 Prefab:
   m_ObjectHideFlags: 0
@@ -33192,6 +33909,7 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 1532540788}
+  - 114: {fileID: 1532540789}
   m_Layer: 0
   m_Name: Respawn_Side02_Negative06
   m_TagString: Untagged
@@ -33211,6 +33929,19 @@ Transform:
   m_Children: []
   m_Father: {fileID: 931429674}
   m_RootOrder: 5
+--- !u!114 &1532540789
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1532540787}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 33e8504d3b2c44dd7848afe78a5fd2b7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  nextNodes:
+  - {fileID: 929725527}
 --- !u!1001 &1534845400
 Prefab:
   m_ObjectHideFlags: 0
@@ -34137,6 +34868,7 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 1562291645}
+  - 114: {fileID: 1562291646}
   m_Layer: 0
   m_Name: Respawn_Bridge_Positive07
   m_TagString: Untagged
@@ -34156,6 +34888,19 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1104573616}
   m_RootOrder: 15
+--- !u!114 &1562291646
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1562291644}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 33e8504d3b2c44dd7848afe78a5fd2b7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  nextNodes:
+  - {fileID: 1711056365}
 --- !u!1001 &1563178587
 Prefab:
   m_ObjectHideFlags: 0
@@ -34891,6 +35636,7 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 1589642468}
+  - 114: {fileID: 1589642469}
   m_Layer: 0
   m_Name: Respawn_Side02_Positive09
   m_TagString: Untagged
@@ -34910,6 +35656,19 @@ Transform:
   m_Children: []
   m_Father: {fileID: 931429674}
   m_RootOrder: 21
+--- !u!114 &1589642469
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1589642467}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 33e8504d3b2c44dd7848afe78a5fd2b7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  nextNodes:
+  - {fileID: 1648743685}
 --- !u!1001 &1592653891
 Prefab:
   m_ObjectHideFlags: 0
@@ -35337,6 +36096,7 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 1604969579}
+  - 114: {fileID: 1604969580}
   m_Layer: 0
   m_Name: Respawn_Side02_Negative03
   m_TagString: Untagged
@@ -35356,6 +36116,19 @@ Transform:
   m_Children: []
   m_Father: {fileID: 931429674}
   m_RootOrder: 2
+--- !u!114 &1604969580
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1604969578}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 33e8504d3b2c44dd7848afe78a5fd2b7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  nextNodes:
+  - {fileID: 1135380459}
 --- !u!1001 &1615351487
 Prefab:
   m_ObjectHideFlags: 0
@@ -35972,6 +36745,7 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 1648743684}
+  - 114: {fileID: 1648743685}
   m_Layer: 0
   m_Name: Respawn_Side02_Positive10
   m_TagString: Untagged
@@ -35991,6 +36765,19 @@ Transform:
   m_Children: []
   m_Father: {fileID: 931429674}
   m_RootOrder: 22
+--- !u!114 &1648743685
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1648743683}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 33e8504d3b2c44dd7848afe78a5fd2b7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  nextNodes:
+  - {fileID: 1870024116}
 --- !u!1001 &1649152923
 Prefab:
   m_ObjectHideFlags: 0
@@ -36400,6 +37187,7 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 1668328066}
+  - 114: {fileID: 1668328067}
   m_Layer: 0
   m_Name: Respawn_Bridge_Negative03
   m_TagString: Untagged
@@ -36419,6 +37207,19 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1104573616}
   m_RootOrder: 2
+--- !u!114 &1668328067
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1668328065}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 33e8504d3b2c44dd7848afe78a5fd2b7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  nextNodes:
+  - {fileID: 50127987}
 --- !u!1001 &1668361257
 Prefab:
   m_ObjectHideFlags: 0
@@ -37189,6 +37990,7 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 1711056364}
+  - 114: {fileID: 1711056365}
   m_Layer: 0
   m_Name: Respawn_Bridge_Positive08
   m_TagString: Untagged
@@ -37208,6 +38010,19 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1104573616}
   m_RootOrder: 16
+--- !u!114 &1711056365
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1711056363}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 33e8504d3b2c44dd7848afe78a5fd2b7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  nextNodes:
+  - {fileID: 300999146}
 --- !u!1 &1711105076
 GameObject:
   m_ObjectHideFlags: 0
@@ -38078,6 +38893,7 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 1765535719}
+  - 114: {fileID: 1765535720}
   m_Layer: 0
   m_Name: Respawn_Bridge_Negative08
   m_TagString: Untagged
@@ -38097,6 +38913,19 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1104573616}
   m_RootOrder: 7
+--- !u!114 &1765535720
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1765535718}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 33e8504d3b2c44dd7848afe78a5fd2b7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  nextNodes:
+  - {fileID: 425254973}
 --- !u!1 &1766880696
 GameObject:
   m_ObjectHideFlags: 0
@@ -39421,6 +40250,7 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 1805789801}
+  - 114: {fileID: 1805789802}
   m_Layer: 0
   m_Name: Respawn_Side01_Positive14
   m_TagString: Untagged
@@ -39440,6 +40270,19 @@ Transform:
   m_Children: []
   m_Father: {fileID: 890629949}
   m_RootOrder: 27
+--- !u!114 &1805789802
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1805789800}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 33e8504d3b2c44dd7848afe78a5fd2b7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  nextNodes:
+  - {fileID: 2066043525}
 --- !u!1 &1808481112
 GameObject:
   m_ObjectHideFlags: 0
@@ -39448,6 +40291,7 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 1808481113}
+  - 114: {fileID: 1808481114}
   m_Layer: 0
   m_Name: Respawn_Bridge_Negative06
   m_TagString: Untagged
@@ -39467,6 +40311,19 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1104573616}
   m_RootOrder: 5
+--- !u!114 &1808481114
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1808481112}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 33e8504d3b2c44dd7848afe78a5fd2b7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  nextNodes:
+  - {fileID: 777163443}
 --- !u!1001 &1809019130
 Prefab:
   m_ObjectHideFlags: 0
@@ -40562,6 +41419,7 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 1870024115}
+  - 114: {fileID: 1870024116}
   m_Layer: 0
   m_Name: Respawn_Side02_Positive11
   m_TagString: Untagged
@@ -40581,6 +41439,19 @@ Transform:
   m_Children: []
   m_Father: {fileID: 931429674}
   m_RootOrder: 23
+--- !u!114 &1870024116
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1870024114}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 33e8504d3b2c44dd7848afe78a5fd2b7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  nextNodes:
+  - {fileID: 642917456}
 --- !u!1001 &1878148913
 Prefab:
   m_ObjectHideFlags: 0
@@ -41688,6 +42559,7 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 1921302682}
+  - 114: {fileID: 1921302683}
   m_Layer: 0
   m_Name: Respawn_Side01_Negative09
   m_TagString: Untagged
@@ -41707,6 +42579,19 @@ Transform:
   m_Children: []
   m_Father: {fileID: 890629949}
   m_RootOrder: 8
+--- !u!114 &1921302683
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1921302681}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 33e8504d3b2c44dd7848afe78a5fd2b7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  nextNodes:
+  - {fileID: 261077215}
 --- !u!1 &1921701394
 GameObject:
   m_ObjectHideFlags: 0
@@ -42308,6 +43193,7 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 1945470519}
+  - 114: {fileID: 1945470520}
   m_Layer: 0
   m_Name: Respawn_Side02_Positive13
   m_TagString: Untagged
@@ -42327,6 +43213,19 @@ Transform:
   m_Children: []
   m_Father: {fileID: 931429674}
   m_RootOrder: 25
+--- !u!114 &1945470520
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1945470518}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 33e8504d3b2c44dd7848afe78a5fd2b7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  nextNodes:
+  - {fileID: 428754106}
 --- !u!1 &1950901866
 GameObject:
   m_ObjectHideFlags: 0
@@ -42407,6 +43306,7 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 1951640714}
+  - 114: {fileID: 1951640715}
   m_Layer: 0
   m_Name: Respawn_Side01_Negative05
   m_TagString: Untagged
@@ -42426,6 +43326,19 @@ Transform:
   m_Children: []
   m_Father: {fileID: 890629949}
   m_RootOrder: 4
+--- !u!114 &1951640715
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1951640713}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 33e8504d3b2c44dd7848afe78a5fd2b7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  nextNodes:
+  - {fileID: 486622057}
 --- !u!1001 &1953894687
 Prefab:
   m_ObjectHideFlags: 0
@@ -42518,6 +43431,7 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 1957585120}
+  - 114: {fileID: 1957585121}
   m_Layer: 0
   m_Name: Respawn_Side02_Positive08
   m_TagString: Untagged
@@ -42537,6 +43451,19 @@ Transform:
   m_Children: []
   m_Father: {fileID: 931429674}
   m_RootOrder: 20
+--- !u!114 &1957585121
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1957585119}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 33e8504d3b2c44dd7848afe78a5fd2b7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  nextNodes:
+  - {fileID: 1589642469}
 --- !u!1 &1964070763
 GameObject:
   m_ObjectHideFlags: 0
@@ -44763,6 +45690,7 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 2025040167}
+  - 114: {fileID: 2025040168}
   m_Layer: 0
   m_Name: Respawn_Bridge_Positive06
   m_TagString: Untagged
@@ -44782,6 +45710,19 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1104573616}
   m_RootOrder: 14
+--- !u!114 &2025040168
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2025040166}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 33e8504d3b2c44dd7848afe78a5fd2b7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  nextNodes:
+  - {fileID: 1562291646}
 --- !u!1 &2030527570
 GameObject:
   m_ObjectHideFlags: 0
@@ -45292,6 +46233,7 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 2042223194}
+  - 114: {fileID: 2042223195}
   m_Layer: 0
   m_Name: Respawn_Side01_Positive13
   m_TagString: Untagged
@@ -45311,6 +46253,19 @@ Transform:
   m_Children: []
   m_Father: {fileID: 890629949}
   m_RootOrder: 26
+--- !u!114 &2042223195
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2042223193}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 33e8504d3b2c44dd7848afe78a5fd2b7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  nextNodes:
+  - {fileID: 1805789802}
 --- !u!1001 &2045004626
 Prefab:
   m_ObjectHideFlags: 0
@@ -46034,6 +46989,7 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 2066043524}
+  - 114: {fileID: 2066043525}
   m_Layer: 0
   m_Name: Respawn_Bridge_Positive01
   m_TagString: Untagged
@@ -46053,6 +47009,19 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1104573616}
   m_RootOrder: 9
+--- !u!114 &2066043525
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2066043523}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 33e8504d3b2c44dd7848afe78a5fd2b7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  nextNodes:
+  - {fileID: 1050813249}
 --- !u!1 &2068013144
 GameObject:
   m_ObjectHideFlags: 0
@@ -46989,6 +47958,47 @@ MeshFilter:
   m_PrefabInternal: {fileID: 2019776506}
   m_GameObject: {fileID: 2113133916}
   m_Mesh: {fileID: 4300000, guid: 78510866f7b27f74bb2b16560c75462a, type: 3}
+--- !u!1 &2116061082
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 2116061083}
+  - 114: {fileID: 2116061084}
+  m_Layer: 0
+  m_Name: Respawn_Bridge_Positive05
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2116061083
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2116061082}
+  m_LocalRotation: {x: 0, y: .707106829, z: 0, w: .707106829}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1104573616}
+  m_RootOrder: 13
+--- !u!114 &2116061084
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2116061082}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 33e8504d3b2c44dd7848afe78a5fd2b7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  nextNodes:
+  - {fileID: 2025040168}
 --- !u!1 &2117127171
 GameObject:
   m_ObjectHideFlags: 0
