@@ -8,10 +8,13 @@ public class PickUpItem : MonoBehaviour
 
     //Minimum and maximum values when generating a random number to pickup items
     private const int MINIMUM_ITEM_RANGE = 1;
-    private const int MAXIMUM_ITEM_RANGE = 5;
+    private const int MAXIMUM_ITEM_RANGE = 3;
+
+	private PickUpTypes currentType;
+
     void Start()
-    {
-        assignWeapon();
+	{
+		RandomizeType();
     }
 	void Update () 
     {
@@ -26,38 +29,38 @@ public class PickUpItem : MonoBehaviour
         {
             this.collider.enabled = false;
             this.renderer.enabled = false;
+
+			var inv = other.GetComponent<Inventory>();
+			if(inv != null)
+				inv.AddPickUp(currentType);
         }
         yield return new WaitForSeconds(waitTime);
 
-        assignWeapon();
+		RandomizeType();
 
         this.collider.enabled = true;
         this.renderer.enabled = true;
     }
 
     //Assigns weapon to pick up box that will then be given to dino that picks it up, for now it just changes the pickup color
-    void assignWeapon()
+    void RandomizeType()
     {
-        float randomItemSelection = Random.Range(MINIMUM_ITEM_RANGE, MAXIMUM_ITEM_RANGE);
-        switch ((int)randomItemSelection)
+		var randomItemSelection = Random.Range(MINIMUM_ITEM_RANGE, MAXIMUM_ITEM_RANGE + 1);
+        switch (randomItemSelection)
         {
             case 1:
                 this.renderer.material.color = Color.blue;
-                HUDScript.AddItem("item1"); //added by Robert
+				currentType = PickUpTypes.Turbo;
                 break;
             case 2:
-                this.renderer.material.color = Color.green;
-				HUDScript.AddItem("item2"); //added by Robert
-                break;
-            case 3:
-                this.renderer.material.color = Color.red;
-				HUDScript.AddItem("item3"); //added by Robert
-                break;
-            case 4:
-                this.renderer.material.color = Color.clear;
-				HUDScript.AddItem("item3"); //added by Robert
-                break;
-            default:
+				this.renderer.material.color = Color.green;
+				currentType = PickUpTypes.Health;
+	            break;
+	        case 3:
+				this.renderer.material.color = Color.red;
+				currentType = PickUpTypes.Weapon;
+	            break;
+            default:				
                 break;
         }
     }

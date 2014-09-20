@@ -18802,6 +18802,7 @@ GameObject:
   - 33: {fileID: 796929926}
   - 65: {fileID: 796929925}
   - 23: {fileID: 796929924}
+  - 114: {fileID: 796929928}
   m_Layer: 0
   m_Name: Cube
   m_TagString: KillPlane
@@ -18860,6 +18861,17 @@ Transform:
   m_Children: []
   m_Father: {fileID: 929609299}
   m_RootOrder: 8
+--- !u!114 &796929928
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 796929923}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 01296e23b56b5a94d9fdd5820321a3ba, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &797320286
 GameObject:
   m_ObjectHideFlags: 0
@@ -30772,7 +30784,6 @@ GameObject:
   - 20: {fileID: 1306247640}
   - 124: {fileID: 1306247639}
   - 92: {fileID: 1306247638}
-  - 81: {fileID: 1306247637}
   - 114: {fileID: 1306247642}
   m_Layer: 0
   m_Name: Hud Camera
@@ -30781,13 +30792,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!81 &1306247637
-AudioListener:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1306247636}
-  m_Enabled: 1
 --- !u!92 &1306247638
 Behaviour:
   m_ObjectHideFlags: 0
