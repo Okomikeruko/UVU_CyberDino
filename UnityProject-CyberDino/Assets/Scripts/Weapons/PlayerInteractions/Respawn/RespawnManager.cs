@@ -10,34 +10,41 @@ public class RespawnManager : MonoBehaviour
 	
 	#region Fields
 	// Respawn Variables
-	private RacerRespawnStats racerRespawn;
 	private ParticleSystem racerRespawnParticalSystem;
+	[SerializeField]
+	public string FirstRespawnNode;
+	private GameObject CurrentRespawnNode;
 	#endregion Fields
+
+	void Start()
+	{
+		CurrentRespawnNode = GameObject.Find (FirstRespawnNode);
+		StartCoroutine (UpdateCurrentNode ());
+	}
 
 	void OnEnable() 
 	{
-		RacerInteractionManager.hitSomething += RespawnNodeSwitch;
 		RacerInteractionManager.hitSomething += HitKillPlane;
+		racerRespawnParticalSystem = gameObject.GetComponentInChildren<ParticleSystem>();
 	}
 	
 	void OnDisable() 
 	{
-		RacerInteractionManager.hitSomething -= RespawnNodeSwitch;
 		RacerInteractionManager.hitSomething -= HitKillPlane;
 	}
 
-	void RespawnNodeSwitch(Transform player, Transform other)
+	
+	private IEnumerator UpdateCurrentNode()
 	{
-		if(other.gameObject.tag == "RespawnPoint")
+		while (true)
 		{
-			RespawnNode respawnNode = other.GetComponent<RespawnNode>();
-			racerRespawn = player.gameObject.GetComponentInChildren<RacerRespawnStats>();
-			if (racerRespawn.CurrentRespawnNode == null || racerRespawn.NextRespawnNode == respawnNode){
-				Debug.Log("Updating Respawn Point to:" + respawnNode.name);
-				player.gameObject.GetComponent<RacerRespawnStats>().NextRespawnNode = respawnNode.nextNode;
-				player.gameObject.GetComponent<RacerRespawnStats>().CurrentRespawnNode = respawnNode;
+			yield return new WaitForSeconds (1.0f);
+			var n = CurrentRespawnNode.GetComponent<RespawnNode> ();
+			foreach (var node in n.nextNodes) {
+				if (Vector3.Distance (CurrentRespawnNode.transform.position, transform.position) > Vector3.Distance (node.transform.position, transform.position)) {
+						CurrentRespawnNode = node.gameObject;
+				}
 			}
-
 		}
 	}
 
@@ -46,42 +53,32 @@ public class RespawnManager : MonoBehaviour
 		if(other.gameObject.tag == "KillPlane")
 		{
 			Debug.Log("Hit the kill plane.");
-			UseRespawn(player);
+			Health health = GetComponent<Health>();
+			health.Damage(health.Current);
 		}
 	}
 
-	void DeadRacer(Transform player)
+	public void UseRespawn()
 	{
-		Debug.Log("Player is dead");
-		UseRespawn(player);
+		StartCoroutine (Respawn ());
 	}
 	
-	void UseRespawn(Transform racer)
+	IEnumerator Respawn()
 	{
-		StartCoroutine(Respawn(racer));
-	}
-	
-	IEnumerator Respawn(Transform player)
-	{
-		racerRespawn = player.gameObject.GetComponent<RacerRespawnStats>();
-		racerRespawnParticalSystem = racerRespawn.respawnParticalSystem;
-		player.parent.GetComponent<MotionControl>().enabled = false;
 		Debug.Log("Respawning. Please wait....");
-		player.parent.position = racerRespawn.CurrentRespawnNode.transform.position;
-		player.parent.eulerAngles = racerRespawn.CurrentRespawnNode.Rotation;
+		gameObject.transform.position = CurrentRespawnNode.transform.position;
+		gameObject.transform.rotation = CurrentRespawnNode.transform.rotation;
 		if (racerRespawnParticalSystem != null){
-			//Need to play partical system
-			//racerRespawnParticalSystem.Play();
-			//StartCoroutine(WaitForAnimation(racerRespawnParticalSystem));
+			StartCoroutine(PlayParticleSystem(racerRespawnParticalSystem));
 		}
 		Debug.Log("Ready to go!");
-		player.parent.GetComponent<MotionControl>().enabled = true;
 		yield return null;
 	}
 
-	private IEnumerator WaitForAnimation(ParticleSystem animation){
-		do{
-			yield return null;
-		}while (animation.isPlaying);
+	private IEnumerator PlayParticleSystem(ParticleSystem particleSystem){
+		float particleSystemDuration = particleSystem.duration;
+		particleSystem.Play();
+		yield return new WaitForSeconds(particleSystemDuration);
+		particleSystem.Stop();
 	}
 }

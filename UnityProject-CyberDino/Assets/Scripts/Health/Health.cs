@@ -91,7 +91,9 @@ public abstract class Health : MonoBehaviour
 
 	public void Damage(float value)
 	{
-		netview.RPC("AdjustCurrentHealth", RPCMode.AllBuffered, -value);
+		if (currentHealth > 0) {
+			netview.RPC ("AdjustCurrentHealth", RPCMode.AllBuffered, -value);
+		}
 	}
 	public void Heal(float value)
 	{
