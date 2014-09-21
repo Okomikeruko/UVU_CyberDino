@@ -168,8 +168,10 @@ public class UserControl : MonoBehaviour {
 		{
 			ragdoll.ResetRacer();
 		}
-
-
+		if(Input.GetKeyDown (KeyCode.Y))
+		{
+			ragdoll.TimedRagdoll(0.5F, 0.2F);
+		}
 
 //		else
 //		{
