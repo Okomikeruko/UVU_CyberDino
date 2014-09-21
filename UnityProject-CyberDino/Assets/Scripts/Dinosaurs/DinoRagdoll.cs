@@ -2,76 +2,171 @@
 using System.Collections;
 
 public class DinoRagdoll : MonoBehaviour {
+	
+/* ---------------- Variables ---------------------------------- */
+/* ---------------- Serialized Variables ----------------------- */
+	[SerializeField]
+	private GameObject ragdoll; 			// Base Ragdoll Object
+	[SerializeField]
+	private Animator dinoAnimator;			// Mecanim Controller
+	[SerializeField]
+	private Rigidbody[] ragdollBones;		// Array of ragdoll bones.
+	[SerializeField]
+	private Rigidbody RagdollHead;			// Ragdoll Head Object
+	[SerializeField]
+	private Rigidbody RagdollTorso;			// Ragdoll Torso Object
 
-	public GameObject ragdoll;
+/* ---------------- Private Variables -------------------------- */
+	private MotionControl move;				// MotionControl script controller
+	private Collider[] ragdollColliders;	// Array of Colliders used while in ragdoll mode
+	private Collider[] playColliders;		// Array of Colliders used while in play mode
+	private float[,] playJointLimitStats;	// Array of original joint limit stats
+	private CharacterJoint[] playJoints;	// Array of joints used during ragdoll simulator
+	private float restored = 0.0F;			// A counter used to restore the ragdoll bone rotations.
+	private float recovery = 0.0F;			// The rate at which ragdoll bones recover
+	private Quaternion[] startPose;			// Rotations of each bone in ragdoll at time ragdoll is engaged
+	private Quaternion[] stopPose;			// Rotations of each bone in ragdoll at time ragdoll ends
 
-	//Added by Sam
-	public Animator dinoAnimator;
-	public Rigidbody[] ragdollBones;
 
-	private MotionControl move;
-
-	private DinoSelect dinoSelection;
-	private Collider[] ragdollColliders;
-	private Collider[] playColliders;
-	private float[,] playJointLimitStats;
-	private CharacterJoint[] playJoints;
-	private float tolerance = 0.1F;
-	private float restored = 0.0F;
-	private float recovery = 0.0F;
-	private Vector3 startPos;
-	private Vector3 stopPos;
-
-	private Quaternion[] startPose;
-	private Quaternion[] stopPose;
-
-	private delegate void RagdollUpdate();
+/* ---------------- Delegate Initialization -------------------- */
+	private delegate void RagdollUpdate();  
 	RagdollUpdate ragdollUpdate;
+	
+
+/* ---------------- Functions ---------------------------------- */
+/* ---------------- System Functions --------------------------- */
+	// Initalizes everything once.
 	void OnEnable()
 	{
 		move = GetComponent<MotionControl>();
+
+		// Initialize Arrays
 		startPose = new Quaternion[ragdollBones.Length];
 		stopPose = new Quaternion[ragdollBones.Length];
-		ragdollColliders = ragdoll.GetComponentsInChildren<Collider> ();
-		playJoints = ragdoll.GetComponentsInChildren<CharacterJoint> ();
+
+		// Collect Collider Components
 		playColliders = this.GetComponents<Collider> ();
+		ragdollColliders = ragdoll.GetComponentsInChildren<Collider> ();
+
+		// Collect Ragdoll Joint Components and Data
+		playJoints = ragdoll.GetComponentsInChildren<CharacterJoint> ();
 		playJointLimitStats = new float[playJoints.Length, 4];
-		int i = 0;
-		foreach (CharacterJoint joint in playJoints)
+		for (int i = 0; i < playJoints.Length; i++)
 		{
-			playJointLimitStats[i,0] = joint.highTwistLimit.limit;
-			playJointLimitStats[i,1] = joint.lowTwistLimit.limit;
-			playJointLimitStats[i,2] = joint.swing1Limit.limit;
-			playJointLimitStats[i,3] = joint.swing2Limit.limit;
-			i++;
+			playJointLimitStats[i,0] = playJoints[i].highTwistLimit.limit;
+			playJointLimitStats[i,1] = playJoints[i].lowTwistLimit.limit;
+			playJointLimitStats[i,2] = playJoints[i].swing1Limit.limit;
+			playJointLimitStats[i,3] = playJoints[i].swing2Limit.limit;
 		}
+		// Ensure Dino Prefab settings ready to race.
 		ResetRacer ();
 	}
 
+	// Runs every frame.
 	void Update()
 	{
 		ragdollUpdate ();
 	}
 
+/* ---------------- Public Functions --------------------------- */
 	public void GoRagdoll() {
-		if(true) {
-			// Modified by Sam
-			move.enabled = false;
-			this.rigidbody.isKinematic = true;
-			foreach(Collider collider in playColliders)
-				collider.enabled = false;
-			foreach(Rigidbody ragdoll in ragdollBones)
-			{
-				ragdoll.isKinematic = false;
-				ragdoll.rigidbody.velocity = rigidbody.velocity;
-			}
-	//		ragdollBones[0].rigidbody.velocity += Vector3.up * rigidbody.velocity.magnitude;
-	//		ragdollBones[9].rigidbody.velocity += Vector3.down * rigidbody.velocity.magnitude;
-			foreach(Collider collider in ragdollColliders)
-				collider.enabled = true;
-			dinoAnimator.enabled = false;
+		// Modified by Sam
+		move.enabled = false;
+		this.rigidbody.isKinematic = true;
+		foreach(Collider collider in playColliders)
+			collider.enabled = false;
+		foreach(Rigidbody ragdoll in ragdollBones)
+		{
+			ragdoll.isKinematic = false;
+			ragdoll.rigidbody.velocity = rigidbody.velocity;
 		}
+		foreach(Collider collider in ragdollColliders)
+			collider.enabled = true;
+		dinoAnimator.enabled = false;
 	}
+
+	public void GoRagdoll(string type) {
+		move.enabled = false;
+		this.rigidbody.isKinematic = true;
+		foreach(Collider collider in playColliders)
+			collider.enabled = false;
+		foreach(Rigidbody ragdoll in ragdollBones)
+		{
+			ragdoll.isKinematic = false;
+			ragdoll.rigidbody.velocity = rigidbody.velocity;
+		}
+		float force = rigidbody.velocity.magnitude;
+		switch (type) 
+		{
+		case "flip":
+			RagdollTorso.rigidbody.velocity += Vector3.up * force;
+			RagdollHead.rigidbody.velocity += Vector3.down * force;
+			break;
+		case "bonk-up":
+			RagdollHead.rigidbody.velocity += Vector3.up * force;
+			break;
+		case "bonk-down":
+			RagdollHead.rigidbody.velocity += Vector3.down *force;
+			break;
+		case "bonk-left":
+			RagdollHead.rigidbody.velocity += Vector3.left * force;
+			break;
+		case "bonk-right":
+			RagdollHead.rigidbody.velocity += Vector3.right * force;
+			break;
+		case "tbone-left":
+			RagdollTorso.rigidbody.velocity += Vector3.left * force;
+			break;
+		case "tbone-right":
+			RagdollTorso.rigidbody.velocity += Vector3.right * force;
+			break;
+		case "stomp-down":
+			RagdollTorso.rigidbody.velocity += Vector3.down * force;
+			break;
+		default:
+			Debug.Log (type + " is not a valid command");
+			break;
+		}
+		foreach(Collider collider in ragdollColliders)
+			collider.enabled = true;
+		dinoAnimator.enabled = false;
+	}
+
+	public void ResetRacer()
+	{
+		this.rigidbody.isKinematic = false;
+		foreach(Collider collider in playColliders)
+			collider.enabled = true;
+		foreach(Rigidbody ragdoll in ragdollBones)
+			ragdoll.isKinematic = true;
+		foreach(Collider collider in ragdollColliders)
+			collider.enabled = false;
+		dinoAnimator.enabled = true;
+		ColorLerpClass theLerp = transform.gameObject.GetComponent<ColorLerpClass>();
+		theLerp.lerping = false;
+		move.enabled = true;
+		ragdollUpdate -= ResetRacer; 
+	}
+
+	public void TimedRagdoll (float time, float percent)
+	{
+		recovery = time;
+		StartCoroutine (timedRagdoll (time, percent));
+	}
+
+/* ---------------- Private Functions -------------------------- */	
+	private IEnumerator timedRagdoll (float time, float percent)
+	{
+		for (int i = 0; i < ragdollBones.Length; i++)
+		{startPose[i] = ragdollBones[i].rotation;}
+		GoRagdollPartial(percent);
+		yield return new WaitForSeconds (time);
+		for (int i = 0; i < ragdollBones.Length; i++)
+		{stopPose[i] = ragdollBones[i].rotation;}
+		RestoreRagdoll ();
+		ragdollUpdate = RestoreRacer;
+	}
+
 	private void GoRagdollPartial (float percent)
 	{
 		percent = (percent <= 0) ? 0 : (percent >= 1) ? 1 : percent; 
@@ -97,66 +192,29 @@ public class DinoRagdoll : MonoBehaviour {
 		GoRagdoll ();
 	}
 
-	private IEnumerator timedRagdoll (float time, float percent)
-	{
-		int i = 0;
-		startPos = ragdoll.transform.position;
-		foreach (Rigidbody bone in ragdollBones)
-		{
-			startPose[i] = bone.rotation;
-			i++;
-		}
-		// Engage Ragdoll
-		GoRagdollPartial(percent);
-		// Wait for time
-		yield return new WaitForSeconds (time);
-		// Restore position and Disable Ragdoll
-		i = 0;
-		stopPos = ragdoll.transform.position;
-		foreach (Rigidbody bone in ragdollBones)
-		{
-			stopPose[i] = bone.rotation;
-			i++;
-		}
-		RestoreRagdoll ();
-		ragdollUpdate = RestoreRacer;
-	}
-
-	public void TimedRagdoll (float time, float percent)
-	{
-		recovery = time;
-		StartCoroutine (timedRagdoll (time, percent));
-	}
-
 	private void RestoreRagdoll ()
 	{
-		int i = 0;
 		SoftJointLimit oldLimit = new SoftJointLimit();
-		foreach (CharacterJoint joint in playJoints) 
+		for (int i = 0; i < playJoints.Length; i++) 
 		{
 			oldLimit.limit = playJointLimitStats [i, 0];
-			joint.highTwistLimit = oldLimit;
+			playJoints[i].highTwistLimit = oldLimit;
 
 			oldLimit.limit = playJointLimitStats [i, 1];
-			joint.lowTwistLimit = oldLimit;
+			playJoints[i].lowTwistLimit = oldLimit;
 
 			oldLimit.limit = playJointLimitStats [i, 2];
-			joint.swing1Limit = oldLimit;
+			playJoints[i].swing1Limit = oldLimit;
 
 			oldLimit.limit = playJointLimitStats [i, 3];
-			joint.swing2Limit = oldLimit;
-			i++;
+			playJoints[i].swing2Limit = oldLimit;
 		}
 	}
 
 	private void RestoreRacer ()
 	{
-		int i = 0;
-		foreach (Rigidbody bone in ragdollBones)
-		{
-			bone.transform.rotation = Quaternion.Slerp(stopPose[i], startPose[i], restored);
-			i++;
-		}
+		for (int i = 0; i < ragdollBones.Length; i++)
+			{ragdollBones[i].transform.rotation = Quaternion.Slerp(stopPose[i], startPose[i], restored);}
 		restored += Time.deltaTime * (1 / recovery);
 		if (restored >= 1.0F)
 		{
@@ -164,38 +222,6 @@ public class DinoRagdoll : MonoBehaviour {
 			Rigidbody shell = this.GetComponent<Rigidbody>();
 			shell.transform.position = ragdoll.transform.position;
 			ragdollUpdate = ResetRacer;
-		}
-	}
-
-	// Added by Sam
-	public void ResetRacer()
-	{
-		this.rigidbody.isKinematic = false;		
-		foreach(Collider collider in playColliders)
-			collider.enabled = true;
-		foreach(Rigidbody ragdoll in ragdollBones)
-			ragdoll.isKinematic = true;
-		foreach(Collider collider in ragdollColliders)
-			collider.enabled = false;
-		dinoAnimator.enabled = true;
-		ColorLerpClass theLerp = transform.gameObject.GetComponent<ColorLerpClass>();
-		theLerp.lerping = false;
-		move.enabled = true;
-		ragdollUpdate -= ResetRacer; 
-	}
-
-	void CopyTransforms(Transform src, Transform dst) {
-		dst.position = src.position;
-		dst.rotation = src.rotation;
-		dst.gameObject.SetActive(src.gameObject.activeSelf);
-		
-		foreach(Transform child in dst) {
-			
-			// match the transform with the same name
-			var curSrc = src.Find(child.name);
-			
-			if (curSrc != null) 
-				CopyTransforms(curSrc, child);
 		}
 	}
 }
