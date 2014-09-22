@@ -30,9 +30,9 @@ public class DinosaurHealth : Health {
 		//var ragdoll = GetComponent<DinoRagdoll> ();
 		//ragdoll.GoRagdoll ();
 		yield return new WaitForSeconds(duration);
-		ragdoll.ResetRacer ();
 		var rm = GetComponent<RespawnManager> ();
 		rm.UseRespawn ();
+		ragdoll.ResetRacer ();
 		mc.enabled = true;
 		Heal (Total);
 	}
