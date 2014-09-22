@@ -25,10 +25,11 @@ public class HUDScript : MonoBehaviour
 	private GameObject dinoIcon;
 	private GameObject healthPercent;
 	private GameObject[] items;
+	private GameObject[] pauseMenuObjs;
 	
-	private Vector2[] itemsPos;
-	
-	private int itemIndex;
+	private Vector3[] itemsPos;
+
+	private int itemCount;
 
 	private GameObject healthMask;
 	private GameObject healthMaskBar;
@@ -46,6 +47,7 @@ public class HUDScript : MonoBehaviour
 	private Texture mapPosGfx;
 	private Texture finishGfx;
 	private Texture[] dinoIconsGfx;
+	private Texture[] pauseMenuGfx;
 
 	//arrays to hold tracking information
 	private GameObject[] raceDinos;
@@ -106,8 +108,6 @@ public class HUDScript : MonoBehaviour
 		
 		xMulti = Screen.width / 100.0f;
 		yMulti = Screen.height / 100.0f;
-		
-		itemIndex = 0;
 
 		//textures for the hub
 		hudGfx = new Texture[6];
@@ -152,6 +152,7 @@ public class HUDScript : MonoBehaviour
 		
 		dinoIconsGfx = new Texture[1];
 		dinoIconsGfx[0] = (Texture)Resources.Load("GUI/Materials/DinoIcon");
+
 
 		//************************************************************************
 
@@ -201,30 +202,18 @@ public class HUDScript : MonoBehaviour
 		dinoIcon = CreateGUITxtr("Dino Icon", dinoIconsGfx[0], new Vector3(0, 0, 0));
 		
 		healthPercent = CreateGUIText("Health Percent", "100%", new Vector3(0, 0, 0));
-		
-		itemsPos = new Vector2[3];
-		Vector2 calcPos = ResizeVec2( new Vector2(20, 80));
-		itemsPos[0] = Camera.main.ScreenToWorldPoint( new Vector3(calcPos.x, calcPos.y, 30));
-		calcPos = ResizeVec2( new Vector2(25, 80));
-		itemsPos[1] = Camera.main.ScreenToWorldPoint( new Vector3(calcPos.x, calcPos.y, 20));
-		calcPos = ResizeVec2( new Vector2(30, 80));
-		itemsPos[2] = Camera.main.ScreenToWorldPoint( new Vector3(calcPos.x, calcPos.y, 30));
-		
-		items = new GameObject[3];
-		items[0] = (GameObject)Instantiate(Resources.Load("GUI/ItemIcon"), itemsPos[0], Quaternion.identity);
-		items[1] = (GameObject)Instantiate(Resources.Load("GUI/ItemIcon"), itemsPos[1], Quaternion.identity);
-		items[2] = (GameObject)Instantiate(Resources.Load("GUI/ItemIcon"), itemsPos[2], Quaternion.identity);
 
 		raceDinos = dinoTrackingScript.GetDinoArray();
 
 		healthMask = (GameObject)Instantiate(Resources.Load("GUI/HealthMaskObj"), Camera.main.transform.position, Quaternion.identity);
-		//healthMask.name = "HealthBar";
 		healthMask.transform.Rotate(new Vector3(0, 90, 0));
 
-		Debug.Log("the mask " + healthMask);
 
 		foreach(Transform child in grpObj.transform)
 			child.gameObject.layer = 5;
+
+		items = new GameObject[3];
+		itemsPos = new Vector3[3];
 
 		foreach(Transform child in healthMask.transform)
 		{
@@ -238,9 +227,30 @@ public class HUDScript : MonoBehaviour
 			{
 				healthMaskCover = child.gameObject;
 			}
+			else if(child.name == "ItemIcon1")
+			{
+				items[0] = child.gameObject;
+				items[0].transform.localScale = new Vector3(0.7f,0.7f,0.7f);
+				itemsPos[0] = child.localPosition;
+				//Debug.Log("pos 0 " + itemsPos[0]);
+			}
+			else if(child.name == "ItemIcon2")
+			{
+				items[1] = child.gameObject;
+				items[1].transform.localScale = new Vector3(0.7f,0.7f,0.7f);
+				itemsPos[1] = child.localPosition;
+			}
+			else if(child.name == "ItemIcon3")
+			{
+				items[2] = child.gameObject;
+				items[2].transform.localScale = new Vector3(0.7f,0.7f,0.7f);
+				itemsPos[2] = child.localPosition;
+			}
 		}
 
 		healthMaskBarRotation = healthMaskBar.transform.localEulerAngles;
+
+		itemCount = 3;
 
 	}
 	
@@ -315,13 +325,7 @@ public class HUDScript : MonoBehaviour
 		mapPosObjs[1].guiTexture.pixelInset = SetMapPosition(mapInfo.StartPointPos, raceDinos[1]);
 		mapPosObjs[2].guiTexture.pixelInset = SetMapPosition(mapInfo.StartPointPos, raceDinos[2]);
 		mapPosObjs[3].guiTexture.pixelInset = SetMapPosition(mapInfo.StartPointPos, raceDinos[3]);
-		
-		Vector2 calcPos = ResizeVec2( new Vector2(20, 80));
-		itemsPos[0] = Camera.main.ScreenToWorldPoint( new Vector3(calcPos.x, calcPos.y, 30));
-		calcPos = ResizeVec2( new Vector2(25, 80));
-		itemsPos[1] = Camera.main.ScreenToWorldPoint( new Vector3(calcPos.x, calcPos.y, 20));
-		calcPos = ResizeVec2( new Vector2(30, 80));
-		itemsPos[2] = Camera.main.ScreenToWorldPoint( new Vector3(calcPos.x, calcPos.y, 30));
+
 		
 		int itemIndex = 10;
 
@@ -333,7 +337,20 @@ public class HUDScript : MonoBehaviour
 				itemIndex += 10;
 			}
 		}
-		
+
+		//items[0].transform.localPosition
+		//itemsPos[0] = new Vector3(healthMask.transform.position.x, healthMask.transform.position.y, healthMask.transform.position.z);
+		//items[0].transform.localPosition = new Vector3(0, -5, 0);
+
+		if(Input.GetKeyDown(KeyCode.Z))
+		{
+			ChangeCurrentItem();
+		}
+
+		if(Input.GetKeyDown(KeyCode.Escape))
+		{
+
+		}
 	}
 
 	private Rect ResizeRect(Rect _pos)
@@ -463,23 +480,27 @@ public class HUDScript : MonoBehaviour
 		if(finishObj != null)
 		{
 			Rect tempPos = finishObj.guiTexture.pixelInset;
+			Rect tempPos2 = finishPlaceObj.guiTexture.pixelInset;
 			float transNum = tempPos.x;
+			float transNum2 = tempPos2.x;
 			
 			while(true)
 			{
 				//while the the transparency variable is less than 1
-				if(transNum >= -tempPos.width)
+				if(transNum2 >= -tempPos2.width)
 				{
 					
 					finishObj.guiTexture.pixelInset = new Rect(transNum, tempPos.y, tempPos.width, tempPos.height);
+					finishPlaceObj.guiTexture.pixelInset = new Rect(transNum2, tempPos2.y, tempPos2.width, tempPos2.height);
 					
 					//decrament the transparency variable
 					transNum -= moveSpeed;
-					
+					transNum2 -= moveSpeed;
 				}
 				else
 				{
 					finishObj.guiTexture.pixelInset = new Rect(-tempPos.width, tempPos.y, tempPos.width, tempPos.height);
+					finishPlaceObj.guiTexture.pixelInset = new Rect(-tempPos2.width, tempPos2.y, tempPos2.width, tempPos2.height);
 					
 					break;
 				}
@@ -552,6 +573,8 @@ public class HUDScript : MonoBehaviour
 	
 	public void UpdateItems(List<GameObject> _list)
 	{
+		itemCount = _list.Count;
+
 		/*int index = 0;
 		foreach(GameObject _item in _list)
 		{
@@ -565,7 +588,7 @@ public class HUDScript : MonoBehaviour
 		
 		index++;*/
 		
-		for(int i = 0; i < items.Length; i++)
+		/*for(int i = 0; i < items.Length; i++)
 		{
 			if(_list[i] != null)
 			{
@@ -580,31 +603,74 @@ public class HUDScript : MonoBehaviour
 			}
 			else
 				items[i].SetActive(false);
-		}
-		
-	}
-	
-	public void UpdateCurrentItem(int _index)
-	{
-		
-		StartCoroutine(UpdateCurrentItemHelper(_index));
-	}
-	
-	private IEnumerator UpdateCurrentItemHelper(int _index)
-	{
-		/*if(_index != itemIndex)
-		{
-			if(_index > itemIndex)
-			{
-				while(true)
-				{
-					items[itemIndex].transform.position = Vector3.Slerp(itemsPos[2])
-					items[1].transform.position = Vector3.Slerp(itemsPos)
-					items[2].transform.position = Vector3.Slerp(itemsPos)
-				}
-			}
-			itemIndex = _index;
 		}*/
+		
+	}
+	
+	public void ChangeCurrentItem()
+	{
+		
+		StartCoroutine(ChangeCurrentItemHelper());
+	}
+	
+	private IEnumerator ChangeCurrentItemHelper()
+	{
+
+		float move = 0.0f;
+
+		if(itemCount == 2)
+		{
+			while(true)
+			{
+				//Debug.Log(move);
+				items[0].transform.localPosition = Vector3.Lerp(itemsPos[0], itemsPos[1], move);
+				items[1].transform.localPosition = Vector3.Lerp(itemsPos[1], itemsPos[0], move);
+				
+				
+				if(move >= 1)
+				{
+					break;
+				}
+				
+				move += Time.deltaTime;
+				
+				yield return null;
+			}
+			
+			Vector3 transferPos;
+			
+			transferPos = itemsPos[0];
+			itemsPos[0] = itemsPos[1];
+			itemsPos[1] = transferPos;
+		}
+		else if(itemCount == 3)
+		{
+			while(true)
+			{
+				//Debug.Log(move);
+				items[0].transform.localPosition = Vector3.Lerp(itemsPos[0], itemsPos[1], move);
+				items[1].transform.localPosition = Vector3.Lerp(itemsPos[1], itemsPos[2], move);
+				items[2].transform.localPosition = Vector3.Lerp(itemsPos[2], itemsPos[0], move);
+
+
+				if(move >= 1)
+				{
+					break;
+				}
+
+				move += Time.deltaTime;
+
+				yield return null;
+			}
+
+			Vector3 transferPos;
+
+			transferPos = itemsPos[0];
+			itemsPos[0] = itemsPos[1];
+			itemsPos[1] = itemsPos[2];
+			itemsPos[2] = transferPos;
+		}
+
 	}
 	
 }

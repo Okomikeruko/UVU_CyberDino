@@ -43,19 +43,19 @@ public class PickUpItem : MonoBehaviour
         {
             case 1:
                 this.renderer.material.color = Color.blue;
-                HUDScript.AddItem("item1"); //added by Robert
+                //HUDScript.AddItem("item1"); //added by Robert
                 break;
             case 2:
                 this.renderer.material.color = Color.green;
-				HUDScript.AddItem("item2"); //added by Robert
+				//HUDScript.AddItem("item2"); //added by Robert
                 break;
             case 3:
                 this.renderer.material.color = Color.red;
-				HUDScript.AddItem("item3"); //added by Robert
+				//HUDScript.AddItem("item3"); //added by Robert
                 break;
             case 4:
                 this.renderer.material.color = Color.clear;
-				HUDScript.AddItem("item3"); //added by Robert
+				//HUDScript.AddItem("item3"); //added by Robert
                 break;
             default:
                 break;
