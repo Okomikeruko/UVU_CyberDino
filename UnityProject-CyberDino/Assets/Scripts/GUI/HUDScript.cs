@@ -28,6 +28,7 @@ public class HUDScript : MonoBehaviour
 	private GameObject[] pauseMenuObjs;
 	
 	private Vector3[] itemsPos;
+	private Rect[] pauseMenuPos;
 
 	private int itemCount;
 
@@ -77,6 +78,8 @@ public class HUDScript : MonoBehaviour
 	private string[] playerNames;
 	
 	private List<GameObject> currentItems;
+	
+	private bool isPaused = false;
 
 
 	// Use this for initialization
@@ -152,6 +155,9 @@ public class HUDScript : MonoBehaviour
 		
 		dinoIconsGfx = new Texture[1];
 		dinoIconsGfx[0] = (Texture)Resources.Load("GUI/Materials/DinoIcon");
+		
+		pauseMenuGfx = new Texture[5];
+		pauseMenuGfx[0] = (Texture)Resources.Load("GUI/Materials/BackgroundLobby");
 
 
 		//************************************************************************
@@ -207,7 +213,21 @@ public class HUDScript : MonoBehaviour
 
 		healthMask = (GameObject)Instantiate(Resources.Load("GUI/HealthMaskObj"), Camera.main.transform.position, Quaternion.identity);
 		healthMask.transform.Rotate(new Vector3(0, 90, 0));
+		
+		pauseMenuObjs = new GameObject[5];
+		pauseMenuObjs[0] = CreateGUITxtr("Pause Menu Background", pauseMenuGfx[0], new Vector3(0, 0, 1));
+		pauseMenuObjs[1] = CreateGUIText("Continue", "Continue", new Vector3(0, 0, 2));
+		pauseMenuObjs[2] = CreateGUIText("Restart", "Restart", new Vector3(0, 0, 2));
+		pauseMenuObjs[3] = CreateGUIText("Setting", "Setting", new Vector3(0, 0, 2));
+		pauseMenuObjs[4] = CreateGUIText("Exit", "Exit", new Vector3(0, 0, 2));
 
+		pauseMenuObjs[0].SetActive(false);
+		pauseMenuObjs[1].SetActive(false);
+		pauseMenuObjs[2].SetActive(false);
+		pauseMenuObjs[3].SetActive(false);
+		pauseMenuObjs[4].SetActive(false);
+		
+		pauseMenuPos = new Rect[5];
 
 		foreach(Transform child in grpObj.transform)
 			child.gameObject.layer = 5;
@@ -257,7 +277,6 @@ public class HUDScript : MonoBehaviour
 	// Update is called once per frame
 	void Update () 
 	{
-
 		raceDinos = dinoTrackingScript.GetDinoArray();
 		currentLaps = dinoTrackingScript.GetCurrentLaps();
 		racePositions = dinoTrackingScript.GetCurrentPositions();
@@ -297,6 +316,36 @@ public class HUDScript : MonoBehaviour
 		
 		lapObjs[1].guiTexture.texture = numGfx[currentLaps[dinoTrackingScript.playerNum]];
 		lapObjs[3].guiTexture.texture = numGfx[dinoTrackingScript.maxLap];
+		
+		pauseMenuPos[0] = ResizeRect(new Rect(0, 0, 100, 100));
+		pauseMenuPos[1] = ResizeRect( new Rect(50, 80, 10, 10));
+		pauseMenuPos[2] = ResizeRect( new Rect(50, 60, 10, 10));
+		pauseMenuPos[3] = ResizeRect( new Rect(50, 40, 10, 10));
+		pauseMenuPos[4] = ResizeRect( new Rect(50, 20, 10, 10));
+		
+		pauseMenuObjs[0].guiTexture.pixelInset = pauseMenuPos[0];
+		pauseMenuObjs[1].guiText.pixelOffset = new Vector2(pauseMenuPos[1].x, pauseMenuPos[1].y);
+		pauseMenuObjs[2].guiText.pixelOffset = new Vector2(pauseMenuPos[2].x, pauseMenuPos[2].y);
+		pauseMenuObjs[3].guiText.pixelOffset = new Vector2(pauseMenuPos[3].x, pauseMenuPos[3].y);
+		pauseMenuObjs[4].guiText.pixelOffset = new Vector2(pauseMenuPos[4].x, pauseMenuPos[4].y);
+		
+		if(Input.GetMouseButtonDown(0))
+		{
+			if(isPaused == true && pauseMenuPos[1].Contains( Input.mousePosition))
+			{
+				Time.timeScale = 1;
+				
+				TurnOnOffMenu();
+			}
+			else if(pauseMenuPos[4].Contains( Input.mousePosition))
+			{
+				Time.timeScale = 1;
+				
+				menuScript.menuSelect = MenuControl.Menu.lobbyMenu;
+				Application.LoadLevel("Menu");
+			}
+		}
+
 
 		healthPos  = ResizeRect(new Rect(20, 80, 100, 100));
 		healthMask.transform.position = Camera.main.ScreenToWorldPoint(new Vector3(healthPos.x, healthPos.y, 20));
@@ -349,7 +398,16 @@ public class HUDScript : MonoBehaviour
 
 		if(Input.GetKeyDown(KeyCode.Escape))
 		{
-
+			if(isPaused == false)
+			{
+				Time.timeScale = 0;
+			}
+			else
+			{
+				Time.timeScale = 1;
+			}
+				
+			TurnOnOffMenu();
 		}
 	}
 
@@ -405,7 +463,7 @@ public class HUDScript : MonoBehaviour
 		var health = raceDinos [_index].GetComponent<Health> ();
 		float percentResults = (_pos.x * ((health == null) ? 1.0f : health.Percent)) ;
 
-		float changePoint = _pos.x * .4f;
+		float changePoint = _pos.x * .36f;
 		healthMaskBar.renderer.material.mainTexture = changePoint < percentResults ? healthBarGfx : healthBarRedGfx;
 
 		/*Debug.Log("width " + _pos.x);
@@ -421,7 +479,7 @@ public class HUDScript : MonoBehaviour
 			//return new Rect(_pos.x, _pos.y, percentResults, _pos.height);
 			healthMaskBar.transform.localScale = new Vector3( _pos.x * percentResults, _pos.y, _pos.z);
 		if(changePoint > percentResults)
-			healthMaskBar.transform.localEulerAngles = Vector3.Lerp(new Vector3(0, 180,90), healthMaskBarRotation, percentResults / changePoint);
+			healthMaskBar.transform.localEulerAngles = Vector3.Lerp(new Vector3(0, 180,140), healthMaskBarRotation, percentResults / changePoint);
 		else 
 			healthMaskBar.transform.localEulerAngles = healthMaskBarRotation;
 
@@ -524,6 +582,8 @@ public class HUDScript : MonoBehaviour
 	
 	public void ShowFinish()
 	{
+		Debug.Log("the finish object " + finishObj.name);
+		Debug.Log("the finish place object " + finishPlaceObj.name);
 		StartCoroutine(MoveIn(finishObj, finishPlaceObj));
 	}
 	
@@ -672,6 +732,29 @@ public class HUDScript : MonoBehaviour
 		}
 
 	}
+	
+	private void TurnOnOffMenu()
+	{
+		if(isPaused == false)
+		{
+			pauseMenuObjs[0].SetActive(true);
+			pauseMenuObjs[1].SetActive(true);
+			pauseMenuObjs[2].SetActive(true);
+			pauseMenuObjs[3].SetActive(true);
+			pauseMenuObjs[4].SetActive(true);
+			isPaused = true;
+		}
+		else if(isPaused == true)
+		{
+			pauseMenuObjs[0].SetActive(false);
+			pauseMenuObjs[1].SetActive(false);
+			pauseMenuObjs[2].SetActive(false);
+			pauseMenuObjs[3].SetActive(false);
+			pauseMenuObjs[4].SetActive(false);
+			isPaused = false;
+		}
+	}
+	
 	
 }
 

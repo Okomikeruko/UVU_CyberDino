@@ -68,7 +68,7 @@ public class GlowLines : MonoBehaviour
 		Vector3 screenBoundaryDL = Camera.main.ScreenToWorldPoint(new Vector3(0, 0, Camera.main.transform.position.z + 400));
 		
 		//Vector3 tempPos = new Rect(0, 0, 0);
-
+		
 		//current direction
 		float lerpPos = 0.0f;
 

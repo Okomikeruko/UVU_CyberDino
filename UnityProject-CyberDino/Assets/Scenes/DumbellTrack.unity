@@ -30785,6 +30785,7 @@ GameObject:
   - 124: {fileID: 1306247639}
   - 92: {fileID: 1306247638}
   - 114: {fileID: 1306247642}
+  - 148: {fileID: 1306247637}
   m_Layer: 0
   m_Name: Hud Camera
   m_TagString: Untagged
@@ -30792,6 +30793,18 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!148 &1306247637
+NetworkView:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1306247636}
+  m_Enabled: 1
+  m_StateSynchronization: 1
+  m_Observed: {fileID: 1306247641}
+  m_ViewID:
+    m_ID: 49
+    m_Type: 1
 --- !u!92 &1306247638
 Behaviour:
   m_ObjectHideFlags: 0
