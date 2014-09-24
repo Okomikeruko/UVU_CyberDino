@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 2f8aa182991c5ca4cb05827876bfe7af
+guid: 2b01c3395836abc419afc542d352522d
 ModelImporter:
   serializedVersion: 16
   fileIDToRecycleName:
@@ -108,7 +108,7 @@ ModelImporter:
     7400006: Raptor R-Turn
     7400008: Raptor Melee Attack
     7400010: Raptor Jump Take-off
-    7400012: Raptor Jump hangtime
+    7400012: Raptor Jump Hangtime
     7400014: Raptor Jump Landing
     9500000: //RootNode
     13700000: Veloc:polySurface6
@@ -132,7 +132,7 @@ ModelImporter:
       name: Raptor Idle
       takeName: Take 001
       firstFrame: 1
-      lastFrame: 47
+      lastFrame: 48
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
@@ -275,14 +275,14 @@ ModelImporter:
       bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
       curves: []
       events:
-      - time: .182038784
+      - time: .184492111
         functionName: step
         data: right
         objectReferenceParameter: {instanceID: 0}
         floatParameter: 0
         intParameter: 0
         messageOptions: 0
-      - time: .684465885
+      - time: .687165737
         functionName: step
         data: left
         objectReferenceParameter: {instanceID: 0}
@@ -887,7 +887,7 @@ ModelImporter:
       maskType: 0
       maskSource: {instanceID: 0}
     - serializedVersion: 16
-      name: Raptor Jump hangtime
+      name: Raptor Jump Hangtime
       takeName: Take 001
       firstFrame: 132
       lastFrame: 144
@@ -1137,7 +1137,7 @@ ModelImporter:
     isReadable: 1
   meshes:
     lODScreenPercentages: []
-    globalScale: .00999999978
+    globalScale: 1
     meshCompression: 0
     addColliders: 0
     importBlendShapes: 1
