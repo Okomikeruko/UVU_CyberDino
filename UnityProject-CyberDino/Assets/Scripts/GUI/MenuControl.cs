@@ -887,9 +887,9 @@ public class MenuControl : MonoBehaviour
 			resultsMenuRect[11] = ResizeRect(new Rect(40, 75, 20, 10));*/
 			
 			//size and positions for the buttons
-			resultsMenuRect[12] = ResizeRect(new Rect(65, 70, 20, 40));
-			resultsMenuRect[13] = ResizeRect(new Rect(40, 70, 20, 40));
-			resultsMenuRect[14] = ResizeRect(new Rect(15, 70, 20, 40));
+			resultsMenuRect[12] = ResizeRect(new Rect(65, 85, 20, 10));
+			resultsMenuRect[13] = ResizeRect(new Rect(40, 85, 20, 10));
+			resultsMenuRect[14] = ResizeRect(new Rect(15, 85, 20, 10));
 			
 			//size and position for the window texture
 			resultsMenuRect[15] = ResizeRect(new Rect(0, 0, 100, 100));
@@ -966,7 +966,8 @@ public class MenuControl : MonoBehaviour
 			GUI.DrawTexture(new Rect(menuOrigin[4].x + resultsMenuRect[10].x, menuOrigin[4].y + resultsMenuRect[10].y, resultsMenuRect[10].width, resultsMenuRect[10].height), (Texture)Resources.Load(resultsFName[2]));
 			GUI.DrawTexture(new Rect(menuOrigin[4].x + resultsMenuRect[11].x, menuOrigin[4].y + resultsMenuRect[11].y, resultsMenuRect[11].width, resultsMenuRect[11].height), (Texture)Resources.Load(resultsFName[3]));*/
 			
-			if(GUI.Button(new Rect(menuOrigin[4].x + resultsMenuRect[12].x, menuOrigin[4].y + resultsMenuRect[12].y, resultsMenuRect[12].width, resultsMenuRect[12].height), (Texture)Resources.Load("GUI/Materials/QuitButton")))
+			GUI.DrawTexture(new Rect(menuOrigin[4].x + resultsMenuRect[12].x, menuOrigin[4].y + resultsMenuRect[12].y, resultsMenuRect[12].width, resultsMenuRect[12].height), (Texture)Resources.Load("GUI/Materials/QuitButton"));
+			if(GUI.Button(new Rect(menuOrigin[4].x + resultsMenuRect[12].x, menuOrigin[4].y + resultsMenuRect[12].y, resultsMenuRect[12].width, resultsMenuRect[12].height), ""))
 			{
 				Debug.Log("change to lobby");
 				Application.LoadLevel("Menu");
@@ -975,12 +976,14 @@ public class MenuControl : MonoBehaviour
 				//networkHandler.ChangeLevel();
 			}
 
-			if(GUI.Button(new Rect(menuOrigin[4].x + resultsMenuRect[13].x, menuOrigin[4].y + resultsMenuRect[13].y, resultsMenuRect[13].width, resultsMenuRect[13].height), (Texture)Resources.Load("GUI/Materials/ResultsSaveScore")))
+			GUI.DrawTexture(new Rect(menuOrigin[4].x + resultsMenuRect[13].x, menuOrigin[4].y + resultsMenuRect[13].y, resultsMenuRect[13].width, resultsMenuRect[13].height), (Texture)Resources.Load("GUI/Materials/ResultsSaveScore"));
+			if(GUI.Button(new Rect(menuOrigin[4].x + resultsMenuRect[13].x, menuOrigin[4].y + resultsMenuRect[13].y, resultsMenuRect[13].width, resultsMenuRect[13].height), ""))
 			{
 
 			}
 
-			if(GUI.Button(new Rect(menuOrigin[4].x + resultsMenuRect[14].x, menuOrigin[4].y + resultsMenuRect[14].y, resultsMenuRect[14].width, resultsMenuRect[14].height), (Texture)Resources.Load("GUI/Materials/PlayAgainButton")))
+			GUI.DrawTexture(new Rect(menuOrigin[4].x + resultsMenuRect[14].x, menuOrigin[4].y + resultsMenuRect[14].y, resultsMenuRect[14].width, resultsMenuRect[14].height), (Texture)Resources.Load("GUI/Materials/PlayAgainButton"));
+			if(GUI.Button(new Rect(menuOrigin[4].x + resultsMenuRect[14].x, menuOrigin[4].y + resultsMenuRect[14].y, resultsMenuRect[14].width, resultsMenuRect[14].height), ""))
 			{
 				Debug.Log("Reload");
 				Application.LoadLevel("DumbellTrack");

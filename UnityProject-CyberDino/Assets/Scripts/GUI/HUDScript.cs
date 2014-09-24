@@ -24,6 +24,7 @@ public class HUDScript : MonoBehaviour
 	private GameObject healthPercent;
 	private GameObject[] items;
 	private GameObject[] pauseMenuObjs;
+	private GameObject healthDangerObj;
 	//private GameObject[] resultsObjs;
 	
 	private Vector3[] itemsPos;
@@ -51,6 +52,7 @@ public class HUDScript : MonoBehaviour
 	private Texture[] dinoIconsGfx;
 	private Texture[] pauseMenuGfx;
 	private Texture[] finishPlaceGfx;
+	private Texture healthDangerGfx;
 	//private Texture[] resultsGfx;
 
 	//arrays to hold tracking information
@@ -174,6 +176,8 @@ public class HUDScript : MonoBehaviour
 		pauseMenuGfx[2] = (Texture)Resources.Load("GUI/Materials/PauseRestart");
 		pauseMenuGfx[3] = (Texture)Resources.Load("GUI/Materials/PauseSettings");
 		pauseMenuGfx[4] = (Texture)Resources.Load("GUI/Materials/QuitButton");
+		
+		healthDangerGfx = (Texture)Resources.Load("GUI/Materials/Dying");
 
 		//************************************************************************
 
@@ -214,16 +218,19 @@ public class HUDScript : MonoBehaviour
 
 		mapObj = CreateGUITxtr("Map", mapInfo.MapTxtr, new Vector3(0, 0, 0));
 		mapPosObjs = new GameObject[4];
-		mapPosObjs[0] = CreateGUITxtr("Position Dot p1", mapPosGfx, new Vector3(0, 0, 1));
-		mapPosObjs[1] = CreateGUITxtr("Position Dot p2", mapPosGfx, new Vector3(0, 0, 1));
-		mapPosObjs[2] = CreateGUITxtr("Position Dot p3", mapPosGfx, new Vector3(0, 0, 1));
-		mapPosObjs[3] = CreateGUITxtr("Position Dot p4", mapPosGfx, new Vector3(0, 0, 1));
+		mapPosObjs[0] = CreateGUITxtr("Position Dot p1", mapPosGfx, new Vector3(0, 0, 0.5f));
+		mapPosObjs[1] = CreateGUITxtr("Position Dot p2", mapPosGfx, new Vector3(0, 0, 0.5f));
+		mapPosObjs[2] = CreateGUITxtr("Position Dot p3", mapPosGfx, new Vector3(0, 0, 0.5f));
+		mapPosObjs[3] = CreateGUITxtr("Position Dot p4", mapPosGfx, new Vector3(0, 0, 0.5f));
 		
 		finishObj = CreateGUITxtr("Finish", finishGfx, new Vector3(0, 0, 2));
 		finishObj.guiTexture.pixelInset = ResizeRect(new Rect(150, 0, 100, 100));
 		
 		finishPlaceObj = CreateGUITxtr("Finish Place", hudGfx[0], new Vector3(0, 0, 3));
 		finishPlaceObj.guiTexture.pixelInset = ResizeRect(new Rect(-80, 20, 30, 70));
+		
+		healthDangerObj = CreateGUITxtr("Finish Place", healthDangerGfx , new Vector3(0, 0, 1));
+		healthDangerObj.SetActive(false);
 		
 		dinoIcon = CreateGUITxtr("Dino Icon", dinoIconsGfx[0], new Vector3(0, 0, 0));
 		
@@ -296,7 +303,7 @@ public class HUDScript : MonoBehaviour
 		testList = new List<PickUpTypes>();
 		testList.Add(PickUpTypes.Health);
 		testList.Add(PickUpTypes.Weapon);
-		testList.Add(PickUpTypes.Weapon);
+		//testList.Add(PickUpTypes.Weapon);
 		
 		UpdateItems(testList);
 	}
@@ -355,6 +362,8 @@ public class HUDScript : MonoBehaviour
 		
 		/*lapObjs[1].guiTexture.texture = numGfx[currentLaps[dinoTrackingScript.playerNum]];
 		lapObjs[3].guiTexture.texture = numGfx[dinoTrackingScript.maxLap];*/
+		
+		healthDangerObj.guiTexture.pixelInset = ResizeRect(new Rect(0, 0, 100, 100));
 		
 		pauseMenuPos[0] = ResizeRect(new Rect(0, 0, 100, 100));
 		pauseMenuPos[1] = ResizeRect( new Rect(32, 60, 35, 13));
@@ -516,7 +525,10 @@ public class HUDScript : MonoBehaviour
 		else 
 			healthGrpBar.transform.localEulerAngles = healthGrpBarRotation;
 
-
+		if((changePoint / 2) > percentResults)
+			healthDangerObj.SetActive(true);
+		else
+			healthDangerObj.SetActive(false);
 	}
 
 	private Rect SetMapPosition(Rect _pos, GameObject _dino)
@@ -617,8 +629,8 @@ public class HUDScript : MonoBehaviour
 	public void ShowFinish()
 	{
 		finishPlaceObj.guiTexture.texture = finishPlaceGfx[racePositions[dinoTrackingScript.playerNum] - 1];
-		Debug.Log("the finish object " + finishObj);
-		Debug.Log("the finish place object " + finishPlaceObj);
+		/*Debug.Log("the finish object " + finishObj);
+		Debug.Log("the finish place object " + finishPlaceObj);*/
 		StartCoroutine(MoveIn(finishObj, finishPlaceObj));
 	}
 	
@@ -631,15 +643,16 @@ public class HUDScript : MonoBehaviour
 		float transNum2 = tempPos2.x;
 		
 
-		float middleOfScreen =  (Screen.width / 2) - (tempPos.width / 2);
+		float middleOfScreen =  (Screen.width / 2) /*- (tempPos.width / 2)*/;
 		float thirdOfScreen = Screen.width / 5;
 		float middleOfScreen2 =  (Screen.width - thirdOfScreen) - (tempPos2.width / 2);
 		
 		while(true)
 		{
-
+			//Debug.Log(transNum);
+			
 			//while the the transparency variable is less than 1
-			if(transNum >= middleOfScreen)
+			if(transNum > 0)
 			{
 
 				//set the guiTexture's color to the temp Color
@@ -649,29 +662,22 @@ public class HUDScript : MonoBehaviour
 				transNum -= moveSpeed * Time.deltaTime;
 				
 			}
-			else
-			{
-				
-				_obj.guiTexture.pixelInset = new Rect(middleOfScreen, tempPos.y, tempPos.width, tempPos.height);
 
-			}
-
-			if(transNum2 <= middleOfScreen2)
+			if(transNum2 < middleOfScreen2)
 			{
 				_obj2.guiTexture.pixelInset = new Rect(transNum2, tempPos2.y, tempPos2.width, tempPos2.height);
 
 				transNum2 += moveSpeed * Time.deltaTime;
 				
 			}
-			else
+
+			if(transNum <= 0 && transNum2 >= middleOfScreen2)
 			{
-				
+				_obj.guiTexture.pixelInset = new Rect(0, tempPos.y, tempPos.width, tempPos.height);
 				_obj2.guiTexture.pixelInset = new Rect(middleOfScreen2, tempPos2.y, tempPos2.width, tempPos2.height);
+				break;
 				
 			}
-
-			if(transNum < middleOfScreen && transNum2 > middleOfScreen2)
-				break;
 			
 			yield return new WaitForSeconds(0.01f);
 		}
