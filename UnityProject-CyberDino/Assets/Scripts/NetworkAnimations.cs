@@ -16,11 +16,11 @@ public class NetworkAnimations : MonoBehaviour {
 	}
 
 	public void AnimSetSpeed (string speed, float velocity, float topSpeed){
-		netView.RPC ("AnimatorSpeed", RPCMode.All, speed, velocity, topSpeed);
+		if(netView != null) netView.RPC ("AnimatorSpeed", RPCMode.All, speed, velocity, topSpeed);
 	}
 
 	public void AnimSetDirection (string dir, float horizontalDir){
-		netView.RPC ("AnimatorDirection", RPCMode.All, dir, horizontalDir);
+		if(netView != null) netView.RPC ("AnimatorDirection", RPCMode.All, dir, horizontalDir);
 	}
 
 	public void AnimSetJump (string jump, bool isJumping){

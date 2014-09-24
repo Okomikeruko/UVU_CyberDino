@@ -4,14 +4,11 @@ using System.Collections;
 public class Smite : MeleeAttack {
 
 	[SerializeField]
-	private int range = 50;
+	private float range = 50;
 	[SerializeField]
-	private int damage = 25;
+	private float damage = 25;
 	[SerializeField]
 	private float arcDegree = 30.0f;
-
-
-	private GameObject target;
 
 	public override void Fire ()
 	{
@@ -19,6 +16,7 @@ public class Smite : MeleeAttack {
 
 		//Play Animation/VFX
 
+		GameObject target = null;
 		Collider[] ListOfObjects = Physics.OverlapSphere (this.transform.position, range);
 
 		//Single Target.
@@ -50,7 +48,8 @@ public class Smite : MeleeAttack {
 			float angle = Vector3.Angle(obj.gameObject.transform.position - transform.position, transform.forward);
 			if(angle < arcDegree){
 				Health health = obj.gameObject.GetComponent<Health>();
-				health.Damage(damage);
+				if (health != null)
+					health.Damage(damage);
 			}
 		}*/
 	}
