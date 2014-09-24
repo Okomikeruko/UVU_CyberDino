@@ -241,7 +241,7 @@ public class MenuControl : MonoBehaviour
 		}
 		
 		//the names of the players in the order that they past the finished line
-		resultsMenuRect = new Rect[14];
+		resultsMenuRect = new Rect[16];
 		
 		resultsFName = new string[4];
 		
@@ -869,38 +869,40 @@ public class MenuControl : MonoBehaviour
 			//or			
 			
 			//size and positions for the numbers
-			resultsMenuRect[0] = ResizeRect(new Rect(20, 17, 40, 40));
-			resultsMenuRect[1] = ResizeRect(new Rect(20, 37, 40, 40));
-			resultsMenuRect[2] = ResizeRect(new Rect(20, 57, 40, 40));
-			resultsMenuRect[3] = ResizeRect(new Rect(20, 77, 40, 40));
+			resultsMenuRect[0] = ResizeRect(new Rect(33, 35, 40, 40));
+			resultsMenuRect[1] = ResizeRect(new Rect(33, 43, 40, 40));
+			resultsMenuRect[2] = ResizeRect(new Rect(33, 51, 40, 40));
+			resultsMenuRect[3] = ResizeRect(new Rect(33, 59, 40, 40));
 			
 			//size and positions for the names
-			resultsMenuRect[4] = ResizeRect(new Rect(30, 17, 40, 40));
-			resultsMenuRect[5] = ResizeRect(new Rect(30, 37, 40, 40));
-			resultsMenuRect[6] = ResizeRect(new Rect(30, 57, 40, 40));
-			resultsMenuRect[7] = ResizeRect(new Rect(30, 77, 40, 40));
+			resultsMenuRect[4] = ResizeRect(new Rect(17, 35, 40, 40));
+			resultsMenuRect[5] = ResizeRect(new Rect(17, 43, 40, 40));
+			resultsMenuRect[6] = ResizeRect(new Rect(17, 51, 40, 40));
+			resultsMenuRect[7] = ResizeRect(new Rect(17, 59, 40, 40));
 			
 			//size and positions for the dino banners
-			resultsMenuRect[8] = ResizeRect(new Rect(40, 15, 20, 10));
+/*			resultsMenuRect[8] = ResizeRect(new Rect(40, 15, 20, 10));
 			resultsMenuRect[9] = ResizeRect(new Rect(40, 35, 20, 10));
 			resultsMenuRect[10] = ResizeRect(new Rect(40, 55, 20, 10));
-			resultsMenuRect[11] = ResizeRect(new Rect(40, 75, 20, 10));
+			resultsMenuRect[11] = ResizeRect(new Rect(40, 75, 20, 10));*/
 			
-			//size and positions for the next button
-			resultsMenuRect[12] = ResizeRect(new Rect(60, 70, 20, 15));
+			//size and positions for the buttons
+			resultsMenuRect[12] = ResizeRect(new Rect(65, 85, 20, 10));
+			resultsMenuRect[13] = ResizeRect(new Rect(40, 85, 20, 10));
+			resultsMenuRect[14] = ResizeRect(new Rect(15, 85, 20, 10));
 			
 			//size and position for the window texture
-			resultsMenuRect[13] = ResizeRect(new Rect(10, 10, 80, 80));
+			resultsMenuRect[15] = ResizeRect(new Rect(0, 0, 100, 100));
 			
 			//window size and position
 			
-			GUI.DrawTexture(new Rect(menuOrigin[4].x + resultsMenuRect[13].x, menuOrigin[4].y + resultsMenuRect[13].y, resultsMenuRect[13].width, resultsMenuRect[13].height), (Texture)Resources.Load("GUI/Materials/BackgroundLobby"));
+			GUI.DrawTexture(new Rect(menuOrigin[4].x + resultsMenuRect[15].x, menuOrigin[4].y + resultsMenuRect[15].y, resultsMenuRect[15].width, resultsMenuRect[15].height), (Texture)Resources.Load("GUI/Materials/ResultsBackground"));
 			
 			//4 place numbers
-			GUI.TextField(new Rect(menuOrigin[4].x + resultsMenuRect[0].x, menuOrigin[4].y + resultsMenuRect[0].y, resultsMenuRect[0].width, resultsMenuRect[0].height), "1");
-			GUI.TextField(new Rect(menuOrigin[4].x + resultsMenuRect[1].x, menuOrigin[4].y + resultsMenuRect[1].y, resultsMenuRect[1].width, resultsMenuRect[1].height), "2");
-			GUI.TextField(new Rect(menuOrigin[4].x + resultsMenuRect[2].x, menuOrigin[4].y + resultsMenuRect[2].y, resultsMenuRect[2].width, resultsMenuRect[2].height), "3");
-			GUI.TextField(new Rect(menuOrigin[4].x + resultsMenuRect[3].x, menuOrigin[4].y + resultsMenuRect[3].y, resultsMenuRect[3].width, resultsMenuRect[3].height), "4");
+			GUI.TextField(new Rect(menuOrigin[4].x + resultsMenuRect[0].x, menuOrigin[4].y + resultsMenuRect[0].y, resultsMenuRect[0].width, resultsMenuRect[0].height), "1st");
+			GUI.TextField(new Rect(menuOrigin[4].x + resultsMenuRect[1].x, menuOrigin[4].y + resultsMenuRect[1].y, resultsMenuRect[1].width, resultsMenuRect[1].height), "2nd");
+			GUI.TextField(new Rect(menuOrigin[4].x + resultsMenuRect[2].x, menuOrigin[4].y + resultsMenuRect[2].y, resultsMenuRect[2].width, resultsMenuRect[2].height), "3rd");
+			GUI.TextField(new Rect(menuOrigin[4].x + resultsMenuRect[3].x, menuOrigin[4].y + resultsMenuRect[3].y, resultsMenuRect[3].width, resultsMenuRect[3].height), "4th");
 			
 			
 			//get the tracking script 
@@ -949,23 +951,42 @@ public class MenuControl : MonoBehaviour
 			//Tell the player if they have won or not
 			//have an ok button
 			
-			GUI.TextField(new Rect(menuOrigin[4].x + resultsMenuRect[4].x, menuOrigin[4].y + resultsMenuRect[4].y, resultsMenuRect[4].width, resultsMenuRect[4].height), playerNames[racePositions[0] - 1]);
+			/*GUI.TextField(new Rect(menuOrigin[4].x + resultsMenuRect[4].x, menuOrigin[4].y + resultsMenuRect[4].y, resultsMenuRect[4].width, resultsMenuRect[4].height), playerNames[racePositions[0] - 1]);
 			GUI.TextField(new Rect(menuOrigin[4].x + resultsMenuRect[5].x, menuOrigin[4].y + resultsMenuRect[5].y, resultsMenuRect[5].width, resultsMenuRect[5].height), playerNames[racePositions[1] - 1]);
 			GUI.TextField(new Rect(menuOrigin[4].x + resultsMenuRect[6].x, menuOrigin[4].y + resultsMenuRect[6].y, resultsMenuRect[6].width, resultsMenuRect[6].height), playerNames[racePositions[2] - 1]);
-			GUI.TextField(new Rect(menuOrigin[4].x + resultsMenuRect[7].x, menuOrigin[4].y + resultsMenuRect[7].y, resultsMenuRect[7].width, resultsMenuRect[7].height), playerNames[racePositions[3] - 1]);
+			GUI.TextField(new Rect(menuOrigin[4].x + resultsMenuRect[7].x, menuOrigin[4].y + resultsMenuRect[7].y, resultsMenuRect[7].width, resultsMenuRect[7].height), playerNames[racePositions[3] - 1]);*/
+
+			GUI.TextField(new Rect(menuOrigin[4].x + resultsMenuRect[4 + racePositions[0] - 1].x, menuOrigin[4].y + resultsMenuRect[4 + racePositions[0] - 1].y, resultsMenuRect[4 + racePositions[0] - 1].width, resultsMenuRect[4 + racePositions[0] - 1].height), playerNames[0]);
+			GUI.TextField(new Rect(menuOrigin[4].x + resultsMenuRect[4 + racePositions[1] - 1].x, menuOrigin[4].y + resultsMenuRect[4 + racePositions[1] - 1].y, resultsMenuRect[4 + racePositions[1] - 1].width, resultsMenuRect[4 + racePositions[1] - 1].height), playerNames[1]);
+			GUI.TextField(new Rect(menuOrigin[4].x + resultsMenuRect[4 + racePositions[2] - 1].x, menuOrigin[4].y + resultsMenuRect[4 + racePositions[2] - 1].y, resultsMenuRect[4 + racePositions[2] - 1].width, resultsMenuRect[4 + racePositions[2] - 1].height), playerNames[2]);
+			GUI.TextField(new Rect(menuOrigin[4].x + resultsMenuRect[4 + racePositions[3] - 1].x, menuOrigin[4].y + resultsMenuRect[4 + racePositions[3] - 1].y, resultsMenuRect[4 + racePositions[3] - 1].width, resultsMenuRect[4 + racePositions[3] - 1].height), playerNames[3]);
 			
-			GUI.DrawTexture(new Rect(menuOrigin[4].x + resultsMenuRect[8].x, menuOrigin[4].y + resultsMenuRect[8].y, resultsMenuRect[8].width, resultsMenuRect[8].height), (Texture)Resources.Load(resultsFName[0]));
+			/*GUI.DrawTexture(new Rect(menuOrigin[4].x + resultsMenuRect[8].x, menuOrigin[4].y + resultsMenuRect[8].y, resultsMenuRect[8].width, resultsMenuRect[8].height), (Texture)Resources.Load(resultsFName[0]));
 			GUI.DrawTexture(new Rect(menuOrigin[4].x + resultsMenuRect[9].x, menuOrigin[4].y + resultsMenuRect[9].y, resultsMenuRect[9].width, resultsMenuRect[9].height), (Texture)Resources.Load(resultsFName[1]));
 			GUI.DrawTexture(new Rect(menuOrigin[4].x + resultsMenuRect[10].x, menuOrigin[4].y + resultsMenuRect[10].y, resultsMenuRect[10].width, resultsMenuRect[10].height), (Texture)Resources.Load(resultsFName[2]));
-			GUI.DrawTexture(new Rect(menuOrigin[4].x + resultsMenuRect[11].x, menuOrigin[4].y + resultsMenuRect[11].y, resultsMenuRect[11].width, resultsMenuRect[11].height), (Texture)Resources.Load(resultsFName[3]));
+			GUI.DrawTexture(new Rect(menuOrigin[4].x + resultsMenuRect[11].x, menuOrigin[4].y + resultsMenuRect[11].y, resultsMenuRect[11].width, resultsMenuRect[11].height), (Texture)Resources.Load(resultsFName[3]));*/
 			
-			if(GUI.Button(new Rect(menuOrigin[4].x + resultsMenuRect[12].x, menuOrigin[4].y + resultsMenuRect[12].y, resultsMenuRect[12].width, resultsMenuRect[12].height), (Texture)Resources.Load("GUI/Materials/OkButton")))
+			GUI.DrawTexture(new Rect(menuOrigin[4].x + resultsMenuRect[12].x, menuOrigin[4].y + resultsMenuRect[12].y, resultsMenuRect[12].width, resultsMenuRect[12].height), (Texture)Resources.Load("GUI/Materials/QuitButton"));
+			if(GUI.Button(new Rect(menuOrigin[4].x + resultsMenuRect[12].x, menuOrigin[4].y + resultsMenuRect[12].y, resultsMenuRect[12].width, resultsMenuRect[12].height), ""))
 			{
 				Debug.Log("change to lobby");
 				Application.LoadLevel("Menu");
 				menuSelect = Menu.lobbyMenu;
 				//networkHandler.ChangeMenuSelect();
 				//networkHandler.ChangeLevel();
+			}
+
+			GUI.DrawTexture(new Rect(menuOrigin[4].x + resultsMenuRect[13].x, menuOrigin[4].y + resultsMenuRect[13].y, resultsMenuRect[13].width, resultsMenuRect[13].height), (Texture)Resources.Load("GUI/Materials/ResultsSaveScore"));
+			if(GUI.Button(new Rect(menuOrigin[4].x + resultsMenuRect[13].x, menuOrigin[4].y + resultsMenuRect[13].y, resultsMenuRect[13].width, resultsMenuRect[13].height), ""))
+			{
+
+			}
+
+			GUI.DrawTexture(new Rect(menuOrigin[4].x + resultsMenuRect[14].x, menuOrigin[4].y + resultsMenuRect[14].y, resultsMenuRect[14].width, resultsMenuRect[14].height), (Texture)Resources.Load("GUI/Materials/PlayAgainButton"));
+			if(GUI.Button(new Rect(menuOrigin[4].x + resultsMenuRect[14].x, menuOrigin[4].y + resultsMenuRect[14].y, resultsMenuRect[14].width, resultsMenuRect[14].height), ""))
+			{
+				Debug.Log("Reload");
+				Application.LoadLevel("DumbellTrack");
 			}
 		}
 		
