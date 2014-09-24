@@ -1,0 +1,1174 @@
+fileFormatVersion: 2
+guid: 2b01c3395836abc419afc542d352522d
+ModelImporter:
+  serializedVersion: 16
+  fileIDToRecycleName:
+    100000: locator1
+    100002: //RootNode
+    100004: ve_ankle_l_jnt
+    100006: ve_ankle_l_jnt1
+    100008: ve_arm_l_jnt
+    100010: ve_arm_l_jnt1
+    100012: ve_back0_jnt
+    100014: ve_base_jnt1
+    100016: ve_bigToe_l_jnt
+    100018: ve_bigToe_l_jnt1
+    100020: ve_bigToeTip_l_jnt
+    100022: ve_bigToeTip_l_jnt1
+    100024: ve_bothArms_jnt
+    100026: ve_elbow_l_jnt
+    100028: ve_elbow_l_jnt1
+    100030: ve_fingerTip_l_jnt
+    100032: ve_fingerTip_l_jnt1
+    100034: ve_foot_l_jnt
+    100036: ve_foot_l_jnt1
+    100038: ve_head_jnt
+    100040: ve_headTip_jnt
+    100042: ve_hip_l_jnt
+    100044: ve_hip_l_jnt1
+    100046: ve_knee_l_jnt
+    100048: ve_knee_l_jnt1
+    100050: ve_neck_jnt
+    100052: ve_tail0_jnt
+    100054: ve_tail1_jnt
+    100056: ve_tail2_jnt
+    100058: ve_tail3_jnt
+    100060: ve_tail4_jnt
+    100062: ve_tailTip_jnt
+    100064: ve_toes_l_jnt
+    100066: ve_toes_l_jnt1
+    100068: ve_toeTip_l_jnt
+    100070: ve_toeTip_l_jnt1
+    100072: ve_wrist_l_jnt
+    100074: ve_wrist_l_jnt1
+    100076: Veloc1:polySurface6_SeamsColor
+    100078: Veloc:imagePlane1
+    100080: Veloc:polySurface5
+    100082: Veloc:polySurface6
+    100084: Veloc:TRex_Aug25_0002:polySurface5
+    100086: Veloc:TRex_Aug25_0002:polySurface6
+    100088: Veloc:TRex_Aug25_0002:Spino_Aug_14_v3:imagePlane1
+    100090: Veloc:TRex_Aug25_0002:Spino_Aug_14_v3:left
+    100092: Veloc:TRex_Aug25_0002:Spino_Aug_14_v4:imagePlane1
+    100094: Veloc:TRex_Aug25_0002:Spino_Aug_14_v4:left
+    100096: Veloc:TRex_Aug25_0002:transform3
+    400000: locator1
+    400002: //RootNode
+    400004: ve_ankle_l_jnt
+    400006: ve_ankle_l_jnt1
+    400008: ve_arm_l_jnt
+    400010: ve_arm_l_jnt1
+    400012: ve_back0_jnt
+    400014: ve_base_jnt1
+    400016: ve_bigToe_l_jnt
+    400018: ve_bigToe_l_jnt1
+    400020: ve_bigToeTip_l_jnt
+    400022: ve_bigToeTip_l_jnt1
+    400024: ve_bothArms_jnt
+    400026: ve_elbow_l_jnt
+    400028: ve_elbow_l_jnt1
+    400030: ve_fingerTip_l_jnt
+    400032: ve_fingerTip_l_jnt1
+    400034: ve_foot_l_jnt
+    400036: ve_foot_l_jnt1
+    400038: ve_head_jnt
+    400040: ve_headTip_jnt
+    400042: ve_hip_l_jnt
+    400044: ve_hip_l_jnt1
+    400046: ve_knee_l_jnt
+    400048: ve_knee_l_jnt1
+    400050: ve_neck_jnt
+    400052: ve_tail0_jnt
+    400054: ve_tail1_jnt
+    400056: ve_tail2_jnt
+    400058: ve_tail3_jnt
+    400060: ve_tail4_jnt
+    400062: ve_tailTip_jnt
+    400064: ve_toes_l_jnt
+    400066: ve_toes_l_jnt1
+    400068: ve_toeTip_l_jnt
+    400070: ve_toeTip_l_jnt1
+    400072: ve_wrist_l_jnt
+    400074: ve_wrist_l_jnt1
+    400076: Veloc1:polySurface6_SeamsColor
+    400078: Veloc:imagePlane1
+    400080: Veloc:polySurface5
+    400082: Veloc:polySurface6
+    400084: Veloc:TRex_Aug25_0002:polySurface5
+    400086: Veloc:TRex_Aug25_0002:polySurface6
+    400088: Veloc:TRex_Aug25_0002:Spino_Aug_14_v3:imagePlane1
+    400090: Veloc:TRex_Aug25_0002:Spino_Aug_14_v3:left
+    400092: Veloc:TRex_Aug25_0002:Spino_Aug_14_v4:imagePlane1
+    400094: Veloc:TRex_Aug25_0002:Spino_Aug_14_v4:left
+    400096: Veloc:TRex_Aug25_0002:transform3
+    4300000: Veloc:polySurface6
+    7400000: Raptor Idle
+    7400002: Raptor Run
+    7400004: Raptor L-Turn
+    7400006: Raptor R-Turn
+    7400008: Raptor Melee Attack
+    7400010: Raptor Jump Take-off
+    7400012: Raptor Jump Hangtime
+    7400014: Raptor Jump Landing
+    9500000: //RootNode
+    13700000: Veloc:polySurface6
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    optimizeGameObjects: 0
+    motionNodeName: 
+    animationCompression: 1
+    animationRotationError: .5
+    animationPositionError: .5
+    animationScaleError: .5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    clipAnimations:
+    - serializedVersion: 16
+      name: Raptor Idle
+      takeName: Take 001
+      firstFrame: 1
+      lastFrame: 48
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      loopTime: 1
+      loopBlend: 1
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: locator1
+        weight: 1
+      - path: locator1/ve_base_jnt1
+        weight: 1
+      - path: locator1/ve_base_jnt1/ve_back0_jnt
+        weight: 1
+      - path: locator1/ve_base_jnt1/ve_back0_jnt/ve_bothArms_jnt
+        weight: 1
+      - path: locator1/ve_base_jnt1/ve_back0_jnt/ve_bothArms_jnt/ve_arm_l_jnt
+        weight: 1
+      - path: locator1/ve_base_jnt1/ve_back0_jnt/ve_bothArms_jnt/ve_arm_l_jnt/ve_elbow_l_jnt
+        weight: 1
+      - path: locator1/ve_base_jnt1/ve_back0_jnt/ve_bothArms_jnt/ve_arm_l_jnt/ve_elbow_l_jnt/ve_wrist_l_jnt
+        weight: 1
+      - path: locator1/ve_base_jnt1/ve_back0_jnt/ve_bothArms_jnt/ve_arm_l_jnt/ve_elbow_l_jnt/ve_wrist_l_jnt/ve_fingerTip_l_jnt
+        weight: 1
+      - path: locator1/ve_base_jnt1/ve_back0_jnt/ve_bothArms_jnt/ve_arm_l_jnt1
+        weight: 1
+      - path: locator1/ve_base_jnt1/ve_back0_jnt/ve_bothArms_jnt/ve_arm_l_jnt1/ve_elbow_l_jnt1
+        weight: 1
+      - path: locator1/ve_base_jnt1/ve_back0_jnt/ve_bothArms_jnt/ve_arm_l_jnt1/ve_elbow_l_jnt1/ve_wrist_l_jnt1
+        weight: 1
+      - path: locator1/ve_base_jnt1/ve_back0_jnt/ve_bothArms_jnt/ve_arm_l_jnt1/ve_elbow_l_jnt1/ve_wrist_l_jnt1/ve_fingerTip_l_jnt1
+        weight: 1
+      - path: locator1/ve_base_jnt1/ve_back0_jnt/ve_neck_jnt
+        weight: 1
+      - path: locator1/ve_base_jnt1/ve_back0_jnt/ve_neck_jnt/ve_head_jnt
+        weight: 1
+      - path: locator1/ve_base_jnt1/ve_back0_jnt/ve_neck_jnt/ve_head_jnt/ve_headTip_jnt
+        weight: 1
+      - path: locator1/ve_base_jnt1/ve_hip_l_jnt
+        weight: 1
+      - path: locator1/ve_base_jnt1/ve_hip_l_jnt/ve_knee_l_jnt
+        weight: 1
+      - path: locator1/ve_base_jnt1/ve_hip_l_jnt/ve_knee_l_jnt/ve_ankle_l_jnt
+        weight: 1
+      - path: locator1/ve_base_jnt1/ve_hip_l_jnt/ve_knee_l_jnt/ve_ankle_l_jnt/ve_foot_l_jnt
+        weight: 1
+      - path: locator1/ve_base_jnt1/ve_hip_l_jnt/ve_knee_l_jnt/ve_ankle_l_jnt/ve_foot_l_jnt/ve_bigToe_l_jnt
+        weight: 1
+      - path: locator1/ve_base_jnt1/ve_hip_l_jnt/ve_knee_l_jnt/ve_ankle_l_jnt/ve_foot_l_jnt/ve_bigToe_l_jnt/ve_bigToeTip_l_jnt
+        weight: 1
+      - path: locator1/ve_base_jnt1/ve_hip_l_jnt/ve_knee_l_jnt/ve_ankle_l_jnt/ve_foot_l_jnt/ve_toes_l_jnt
+        weight: 1
+      - path: locator1/ve_base_jnt1/ve_hip_l_jnt/ve_knee_l_jnt/ve_ankle_l_jnt/ve_foot_l_jnt/ve_toes_l_jnt/ve_toeTip_l_jnt
+        weight: 1
+      - path: locator1/ve_base_jnt1/ve_hip_l_jnt1
+        weight: 1
+      - path: locator1/ve_base_jnt1/ve_hip_l_jnt1/ve_knee_l_jnt1
+        weight: 1
+      - path: locator1/ve_base_jnt1/ve_hip_l_jnt1/ve_knee_l_jnt1/ve_ankle_l_jnt1
+        weight: 1
+      - path: locator1/ve_base_jnt1/ve_hip_l_jnt1/ve_knee_l_jnt1/ve_ankle_l_jnt1/ve_foot_l_jnt1
+        weight: 1
+      - path: locator1/ve_base_jnt1/ve_hip_l_jnt1/ve_knee_l_jnt1/ve_ankle_l_jnt1/ve_foot_l_jnt1/ve_bigToe_l_jnt1
+        weight: 1
+      - path: locator1/ve_base_jnt1/ve_hip_l_jnt1/ve_knee_l_jnt1/ve_ankle_l_jnt1/ve_foot_l_jnt1/ve_bigToe_l_jnt1/ve_bigToeTip_l_jnt1
+        weight: 1
+      - path: locator1/ve_base_jnt1/ve_hip_l_jnt1/ve_knee_l_jnt1/ve_ankle_l_jnt1/ve_foot_l_jnt1/ve_toes_l_jnt1
+        weight: 1
+      - path: locator1/ve_base_jnt1/ve_hip_l_jnt1/ve_knee_l_jnt1/ve_ankle_l_jnt1/ve_foot_l_jnt1/ve_toes_l_jnt1/ve_toeTip_l_jnt1
+        weight: 1
+      - path: locator1/ve_base_jnt1/ve_tail0_jnt
+        weight: 1
+      - path: locator1/ve_base_jnt1/ve_tail0_jnt/ve_tail1_jnt
+        weight: 1
+      - path: locator1/ve_base_jnt1/ve_tail0_jnt/ve_tail1_jnt/ve_tail2_jnt
+        weight: 1
+      - path: locator1/ve_base_jnt1/ve_tail0_jnt/ve_tail1_jnt/ve_tail2_jnt/ve_tail3_jnt
+        weight: 1
+      - path: locator1/ve_base_jnt1/ve_tail0_jnt/ve_tail1_jnt/ve_tail2_jnt/ve_tail3_jnt/ve_tail4_jnt
+        weight: 1
+      - path: locator1/ve_base_jnt1/ve_tail0_jnt/ve_tail1_jnt/ve_tail2_jnt/ve_tail3_jnt/ve_tail4_jnt/ve_tailTip_jnt
+        weight: 1
+      - path: Veloc1:polySurface6_SeamsColor
+        weight: 1
+      - path: Veloc:imagePlane1
+        weight: 1
+      - path: Veloc:polySurface5
+        weight: 1
+      - path: Veloc:polySurface6
+        weight: 1
+      - path: Veloc:TRex_Aug25_0002:polySurface5
+        weight: 1
+      - path: Veloc:TRex_Aug25_0002:polySurface6
+        weight: 1
+      - path: Veloc:TRex_Aug25_0002:polySurface6/Veloc:TRex_Aug25_0002:transform3
+        weight: 1
+      - path: Veloc:TRex_Aug25_0002:Spino_Aug_14_v3:imagePlane1
+        weight: 1
+      - path: Veloc:TRex_Aug25_0002:Spino_Aug_14_v3:left
+        weight: 1
+      - path: Veloc:TRex_Aug25_0002:Spino_Aug_14_v4:imagePlane1
+        weight: 1
+      - path: Veloc:TRex_Aug25_0002:Spino_Aug_14_v4:left
+        weight: 1
+      maskType: 0
+      maskSource: {instanceID: 0}
+    - serializedVersion: 16
+      name: Raptor Run
+      takeName: Take 001
+      firstFrame: 50
+      lastFrame: 62
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      loopTime: 1
+      loopBlend: 1
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events:
+      - time: .184492111
+        functionName: step
+        data: right
+        objectReferenceParameter: {instanceID: 0}
+        floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
+      - time: .687165737
+        functionName: step
+        data: left
+        objectReferenceParameter: {instanceID: 0}
+        floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
+      transformMask:
+      - path: 
+        weight: 1
+      - path: locator1
+        weight: 1
+      - path: locator1/ve_base_jnt1
+        weight: 1
+      - path: locator1/ve_base_jnt1/ve_back0_jnt
+        weight: 1
+      - path: locator1/ve_base_jnt1/ve_back0_jnt/ve_bothArms_jnt
+        weight: 1
+      - path: locator1/ve_base_jnt1/ve_back0_jnt/ve_bothArms_jnt/ve_arm_l_jnt
+        weight: 1
+      - path: locator1/ve_base_jnt1/ve_back0_jnt/ve_bothArms_jnt/ve_arm_l_jnt/ve_elbow_l_jnt
+        weight: 1
+      - path: locator1/ve_base_jnt1/ve_back0_jnt/ve_bothArms_jnt/ve_arm_l_jnt/ve_elbow_l_jnt/ve_wrist_l_jnt
+        weight: 1
+      - path: locator1/ve_base_jnt1/ve_back0_jnt/ve_bothArms_jnt/ve_arm_l_jnt/ve_elbow_l_jnt/ve_wrist_l_jnt/ve_fingerTip_l_jnt
+        weight: 1
+      - path: locator1/ve_base_jnt1/ve_back0_jnt/ve_bothArms_jnt/ve_arm_l_jnt1
+        weight: 1
+      - path: locator1/ve_base_jnt1/ve_back0_jnt/ve_bothArms_jnt/ve_arm_l_jnt1/ve_elbow_l_jnt1
+        weight: 1
+      - path: locator1/ve_base_jnt1/ve_back0_jnt/ve_bothArms_jnt/ve_arm_l_jnt1/ve_elbow_l_jnt1/ve_wrist_l_jnt1
+        weight: 1
+      - path: locator1/ve_base_jnt1/ve_back0_jnt/ve_bothArms_jnt/ve_arm_l_jnt1/ve_elbow_l_jnt1/ve_wrist_l_jnt1/ve_fingerTip_l_jnt1
+        weight: 1
+      - path: locator1/ve_base_jnt1/ve_back0_jnt/ve_neck_jnt
+        weight: 1
+      - path: locator1/ve_base_jnt1/ve_back0_jnt/ve_neck_jnt/ve_head_jnt
+        weight: 1
+      - path: locator1/ve_base_jnt1/ve_back0_jnt/ve_neck_jnt/ve_head_jnt/ve_headTip_jnt
+        weight: 1
+      - path: locator1/ve_base_jnt1/ve_hip_l_jnt
+        weight: 1
+      - path: locator1/ve_base_jnt1/ve_hip_l_jnt/ve_knee_l_jnt
+        weight: 1
+      - path: locator1/ve_base_jnt1/ve_hip_l_jnt/ve_knee_l_jnt/ve_ankle_l_jnt
+        weight: 1
+      - path: locator1/ve_base_jnt1/ve_hip_l_jnt/ve_knee_l_jnt/ve_ankle_l_jnt/ve_foot_l_jnt
+        weight: 1
+      - path: locator1/ve_base_jnt1/ve_hip_l_jnt/ve_knee_l_jnt/ve_ankle_l_jnt/ve_foot_l_jnt/ve_bigToe_l_jnt
+        weight: 1
+      - path: locator1/ve_base_jnt1/ve_hip_l_jnt/ve_knee_l_jnt/ve_ankle_l_jnt/ve_foot_l_jnt/ve_bigToe_l_jnt/ve_bigToeTip_l_jnt
+        weight: 1
+      - path: locator1/ve_base_jnt1/ve_hip_l_jnt/ve_knee_l_jnt/ve_ankle_l_jnt/ve_foot_l_jnt/ve_toes_l_jnt
+        weight: 1
+      - path: locator1/ve_base_jnt1/ve_hip_l_jnt/ve_knee_l_jnt/ve_ankle_l_jnt/ve_foot_l_jnt/ve_toes_l_jnt/ve_toeTip_l_jnt
+        weight: 1
+      - path: locator1/ve_base_jnt1/ve_hip_l_jnt1
+        weight: 1
+      - path: locator1/ve_base_jnt1/ve_hip_l_jnt1/ve_knee_l_jnt1
+        weight: 1
+      - path: locator1/ve_base_jnt1/ve_hip_l_jnt1/ve_knee_l_jnt1/ve_ankle_l_jnt1
+        weight: 1
+      - path: locator1/ve_base_jnt1/ve_hip_l_jnt1/ve_knee_l_jnt1/ve_ankle_l_jnt1/ve_foot_l_jnt1
+        weight: 1
+      - path: locator1/ve_base_jnt1/ve_hip_l_jnt1/ve_knee_l_jnt1/ve_ankle_l_jnt1/ve_foot_l_jnt1/ve_bigToe_l_jnt1
+        weight: 1
+      - path: locator1/ve_base_jnt1/ve_hip_l_jnt1/ve_knee_l_jnt1/ve_ankle_l_jnt1/ve_foot_l_jnt1/ve_bigToe_l_jnt1/ve_bigToeTip_l_jnt1
+        weight: 1
+      - path: locator1/ve_base_jnt1/ve_hip_l_jnt1/ve_knee_l_jnt1/ve_ankle_l_jnt1/ve_foot_l_jnt1/ve_toes_l_jnt1
+        weight: 1
+      - path: locator1/ve_base_jnt1/ve_hip_l_jnt1/ve_knee_l_jnt1/ve_ankle_l_jnt1/ve_foot_l_jnt1/ve_toes_l_jnt1/ve_toeTip_l_jnt1
+        weight: 1
+      - path: locator1/ve_base_jnt1/ve_tail0_jnt
+        weight: 1
+      - path: locator1/ve_base_jnt1/ve_tail0_jnt/ve_tail1_jnt
+        weight: 1
+      - path: locator1/ve_base_jnt1/ve_tail0_jnt/ve_tail1_jnt/ve_tail2_jnt
+        weight: 1
+      - path: locator1/ve_base_jnt1/ve_tail0_jnt/ve_tail1_jnt/ve_tail2_jnt/ve_tail3_jnt
+        weight: 1
+      - path: locator1/ve_base_jnt1/ve_tail0_jnt/ve_tail1_jnt/ve_tail2_jnt/ve_tail3_jnt/ve_tail4_jnt
+        weight: 1
+      - path: locator1/ve_base_jnt1/ve_tail0_jnt/ve_tail1_jnt/ve_tail2_jnt/ve_tail3_jnt/ve_tail4_jnt/ve_tailTip_jnt
+        weight: 1
+      - path: Veloc1:polySurface6_SeamsColor
+        weight: 1
+      - path: Veloc:imagePlane1
+        weight: 1
+      - path: Veloc:polySurface5
+        weight: 1
+      - path: Veloc:polySurface6
+        weight: 1
+      - path: Veloc:TRex_Aug25_0002:polySurface5
+        weight: 1
+      - path: Veloc:TRex_Aug25_0002:polySurface6
+        weight: 1
+      - path: Veloc:TRex_Aug25_0002:polySurface6/Veloc:TRex_Aug25_0002:transform3
+        weight: 1
+      - path: Veloc:TRex_Aug25_0002:Spino_Aug_14_v3:imagePlane1
+        weight: 1
+      - path: Veloc:TRex_Aug25_0002:Spino_Aug_14_v3:left
+        weight: 1
+      - path: Veloc:TRex_Aug25_0002:Spino_Aug_14_v4:imagePlane1
+        weight: 1
+      - path: Veloc:TRex_Aug25_0002:Spino_Aug_14_v4:left
+        weight: 1
+      maskType: 0
+      maskSource: {instanceID: 0}
+    - serializedVersion: 16
+      name: Raptor L-Turn
+      takeName: Take 001
+      firstFrame: 63
+      lastFrame: 75
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      loopTime: 1
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: locator1
+        weight: 1
+      - path: locator1/ve_base_jnt1
+        weight: 1
+      - path: locator1/ve_base_jnt1/ve_back0_jnt
+        weight: 1
+      - path: locator1/ve_base_jnt1/ve_back0_jnt/ve_bothArms_jnt
+        weight: 1
+      - path: locator1/ve_base_jnt1/ve_back0_jnt/ve_bothArms_jnt/ve_arm_l_jnt
+        weight: 1
+      - path: locator1/ve_base_jnt1/ve_back0_jnt/ve_bothArms_jnt/ve_arm_l_jnt/ve_elbow_l_jnt
+        weight: 1
+      - path: locator1/ve_base_jnt1/ve_back0_jnt/ve_bothArms_jnt/ve_arm_l_jnt/ve_elbow_l_jnt/ve_wrist_l_jnt
+        weight: 1
+      - path: locator1/ve_base_jnt1/ve_back0_jnt/ve_bothArms_jnt/ve_arm_l_jnt/ve_elbow_l_jnt/ve_wrist_l_jnt/ve_fingerTip_l_jnt
+        weight: 1
+      - path: locator1/ve_base_jnt1/ve_back0_jnt/ve_bothArms_jnt/ve_arm_l_jnt1
+        weight: 1
+      - path: locator1/ve_base_jnt1/ve_back0_jnt/ve_bothArms_jnt/ve_arm_l_jnt1/ve_elbow_l_jnt1
+        weight: 1
+      - path: locator1/ve_base_jnt1/ve_back0_jnt/ve_bothArms_jnt/ve_arm_l_jnt1/ve_elbow_l_jnt1/ve_wrist_l_jnt1
+        weight: 1
+      - path: locator1/ve_base_jnt1/ve_back0_jnt/ve_bothArms_jnt/ve_arm_l_jnt1/ve_elbow_l_jnt1/ve_wrist_l_jnt1/ve_fingerTip_l_jnt1
+        weight: 1
+      - path: locator1/ve_base_jnt1/ve_back0_jnt/ve_neck_jnt
+        weight: 1
+      - path: locator1/ve_base_jnt1/ve_back0_jnt/ve_neck_jnt/ve_head_jnt
+        weight: 1
+      - path: locator1/ve_base_jnt1/ve_back0_jnt/ve_neck_jnt/ve_head_jnt/ve_headTip_jnt
+        weight: 1
+      - path: locator1/ve_base_jnt1/ve_hip_l_jnt
+        weight: 1
+      - path: locator1/ve_base_jnt1/ve_hip_l_jnt/ve_knee_l_jnt
+        weight: 1
+      - path: locator1/ve_base_jnt1/ve_hip_l_jnt/ve_knee_l_jnt/ve_ankle_l_jnt
+        weight: 1
+      - path: locator1/ve_base_jnt1/ve_hip_l_jnt/ve_knee_l_jnt/ve_ankle_l_jnt/ve_foot_l_jnt
+        weight: 1
+      - path: locator1/ve_base_jnt1/ve_hip_l_jnt/ve_knee_l_jnt/ve_ankle_l_jnt/ve_foot_l_jnt/ve_bigToe_l_jnt
+        weight: 1
+      - path: locator1/ve_base_jnt1/ve_hip_l_jnt/ve_knee_l_jnt/ve_ankle_l_jnt/ve_foot_l_jnt/ve_bigToe_l_jnt/ve_bigToeTip_l_jnt
+        weight: 1
+      - path: locator1/ve_base_jnt1/ve_hip_l_jnt/ve_knee_l_jnt/ve_ankle_l_jnt/ve_foot_l_jnt/ve_toes_l_jnt
+        weight: 1
+      - path: locator1/ve_base_jnt1/ve_hip_l_jnt/ve_knee_l_jnt/ve_ankle_l_jnt/ve_foot_l_jnt/ve_toes_l_jnt/ve_toeTip_l_jnt
+        weight: 1
+      - path: locator1/ve_base_jnt1/ve_hip_l_jnt1
+        weight: 1
+      - path: locator1/ve_base_jnt1/ve_hip_l_jnt1/ve_knee_l_jnt1
+        weight: 1
+      - path: locator1/ve_base_jnt1/ve_hip_l_jnt1/ve_knee_l_jnt1/ve_ankle_l_jnt1
+        weight: 1
+      - path: locator1/ve_base_jnt1/ve_hip_l_jnt1/ve_knee_l_jnt1/ve_ankle_l_jnt1/ve_foot_l_jnt1
+        weight: 1
+      - path: locator1/ve_base_jnt1/ve_hip_l_jnt1/ve_knee_l_jnt1/ve_ankle_l_jnt1/ve_foot_l_jnt1/ve_bigToe_l_jnt1
+        weight: 1
+      - path: locator1/ve_base_jnt1/ve_hip_l_jnt1/ve_knee_l_jnt1/ve_ankle_l_jnt1/ve_foot_l_jnt1/ve_bigToe_l_jnt1/ve_bigToeTip_l_jnt1
+        weight: 1
+      - path: locator1/ve_base_jnt1/ve_hip_l_jnt1/ve_knee_l_jnt1/ve_ankle_l_jnt1/ve_foot_l_jnt1/ve_toes_l_jnt1
+        weight: 1
+      - path: locator1/ve_base_jnt1/ve_hip_l_jnt1/ve_knee_l_jnt1/ve_ankle_l_jnt1/ve_foot_l_jnt1/ve_toes_l_jnt1/ve_toeTip_l_jnt1
+        weight: 1
+      - path: locator1/ve_base_jnt1/ve_tail0_jnt
+        weight: 1
+      - path: locator1/ve_base_jnt1/ve_tail0_jnt/ve_tail1_jnt
+        weight: 1
+      - path: locator1/ve_base_jnt1/ve_tail0_jnt/ve_tail1_jnt/ve_tail2_jnt
+        weight: 1
+      - path: locator1/ve_base_jnt1/ve_tail0_jnt/ve_tail1_jnt/ve_tail2_jnt/ve_tail3_jnt
+        weight: 1
+      - path: locator1/ve_base_jnt1/ve_tail0_jnt/ve_tail1_jnt/ve_tail2_jnt/ve_tail3_jnt/ve_tail4_jnt
+        weight: 1
+      - path: locator1/ve_base_jnt1/ve_tail0_jnt/ve_tail1_jnt/ve_tail2_jnt/ve_tail3_jnt/ve_tail4_jnt/ve_tailTip_jnt
+        weight: 1
+      - path: Veloc1:polySurface6_SeamsColor
+        weight: 1
+      - path: Veloc:imagePlane1
+        weight: 1
+      - path: Veloc:polySurface5
+        weight: 1
+      - path: Veloc:polySurface6
+        weight: 1
+      - path: Veloc:TRex_Aug25_0002:polySurface5
+        weight: 1
+      - path: Veloc:TRex_Aug25_0002:polySurface6
+        weight: 1
+      - path: Veloc:TRex_Aug25_0002:polySurface6/Veloc:TRex_Aug25_0002:transform3
+        weight: 1
+      - path: Veloc:TRex_Aug25_0002:Spino_Aug_14_v3:imagePlane1
+        weight: 1
+      - path: Veloc:TRex_Aug25_0002:Spino_Aug_14_v3:left
+        weight: 1
+      - path: Veloc:TRex_Aug25_0002:Spino_Aug_14_v4:imagePlane1
+        weight: 1
+      - path: Veloc:TRex_Aug25_0002:Spino_Aug_14_v4:left
+        weight: 1
+      maskType: 0
+      maskSource: {instanceID: 0}
+    - serializedVersion: 16
+      name: Raptor R-Turn
+      takeName: Take 001
+      firstFrame: 77
+      lastFrame: 90
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      loopTime: 1
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: locator1
+        weight: 1
+      - path: locator1/ve_base_jnt1
+        weight: 1
+      - path: locator1/ve_base_jnt1/ve_back0_jnt
+        weight: 1
+      - path: locator1/ve_base_jnt1/ve_back0_jnt/ve_bothArms_jnt
+        weight: 1
+      - path: locator1/ve_base_jnt1/ve_back0_jnt/ve_bothArms_jnt/ve_arm_l_jnt
+        weight: 1
+      - path: locator1/ve_base_jnt1/ve_back0_jnt/ve_bothArms_jnt/ve_arm_l_jnt/ve_elbow_l_jnt
+        weight: 1
+      - path: locator1/ve_base_jnt1/ve_back0_jnt/ve_bothArms_jnt/ve_arm_l_jnt/ve_elbow_l_jnt/ve_wrist_l_jnt
+        weight: 1
+      - path: locator1/ve_base_jnt1/ve_back0_jnt/ve_bothArms_jnt/ve_arm_l_jnt/ve_elbow_l_jnt/ve_wrist_l_jnt/ve_fingerTip_l_jnt
+        weight: 1
+      - path: locator1/ve_base_jnt1/ve_back0_jnt/ve_bothArms_jnt/ve_arm_l_jnt1
+        weight: 1
+      - path: locator1/ve_base_jnt1/ve_back0_jnt/ve_bothArms_jnt/ve_arm_l_jnt1/ve_elbow_l_jnt1
+        weight: 1
+      - path: locator1/ve_base_jnt1/ve_back0_jnt/ve_bothArms_jnt/ve_arm_l_jnt1/ve_elbow_l_jnt1/ve_wrist_l_jnt1
+        weight: 1
+      - path: locator1/ve_base_jnt1/ve_back0_jnt/ve_bothArms_jnt/ve_arm_l_jnt1/ve_elbow_l_jnt1/ve_wrist_l_jnt1/ve_fingerTip_l_jnt1
+        weight: 1
+      - path: locator1/ve_base_jnt1/ve_back0_jnt/ve_neck_jnt
+        weight: 1
+      - path: locator1/ve_base_jnt1/ve_back0_jnt/ve_neck_jnt/ve_head_jnt
+        weight: 1
+      - path: locator1/ve_base_jnt1/ve_back0_jnt/ve_neck_jnt/ve_head_jnt/ve_headTip_jnt
+        weight: 1
+      - path: locator1/ve_base_jnt1/ve_hip_l_jnt
+        weight: 1
+      - path: locator1/ve_base_jnt1/ve_hip_l_jnt/ve_knee_l_jnt
+        weight: 1
+      - path: locator1/ve_base_jnt1/ve_hip_l_jnt/ve_knee_l_jnt/ve_ankle_l_jnt
+        weight: 1
+      - path: locator1/ve_base_jnt1/ve_hip_l_jnt/ve_knee_l_jnt/ve_ankle_l_jnt/ve_foot_l_jnt
+        weight: 1
+      - path: locator1/ve_base_jnt1/ve_hip_l_jnt/ve_knee_l_jnt/ve_ankle_l_jnt/ve_foot_l_jnt/ve_bigToe_l_jnt
+        weight: 1
+      - path: locator1/ve_base_jnt1/ve_hip_l_jnt/ve_knee_l_jnt/ve_ankle_l_jnt/ve_foot_l_jnt/ve_bigToe_l_jnt/ve_bigToeTip_l_jnt
+        weight: 1
+      - path: locator1/ve_base_jnt1/ve_hip_l_jnt/ve_knee_l_jnt/ve_ankle_l_jnt/ve_foot_l_jnt/ve_toes_l_jnt
+        weight: 1
+      - path: locator1/ve_base_jnt1/ve_hip_l_jnt/ve_knee_l_jnt/ve_ankle_l_jnt/ve_foot_l_jnt/ve_toes_l_jnt/ve_toeTip_l_jnt
+        weight: 1
+      - path: locator1/ve_base_jnt1/ve_hip_l_jnt1
+        weight: 1
+      - path: locator1/ve_base_jnt1/ve_hip_l_jnt1/ve_knee_l_jnt1
+        weight: 1
+      - path: locator1/ve_base_jnt1/ve_hip_l_jnt1/ve_knee_l_jnt1/ve_ankle_l_jnt1
+        weight: 1
+      - path: locator1/ve_base_jnt1/ve_hip_l_jnt1/ve_knee_l_jnt1/ve_ankle_l_jnt1/ve_foot_l_jnt1
+        weight: 1
+      - path: locator1/ve_base_jnt1/ve_hip_l_jnt1/ve_knee_l_jnt1/ve_ankle_l_jnt1/ve_foot_l_jnt1/ve_bigToe_l_jnt1
+        weight: 1
+      - path: locator1/ve_base_jnt1/ve_hip_l_jnt1/ve_knee_l_jnt1/ve_ankle_l_jnt1/ve_foot_l_jnt1/ve_bigToe_l_jnt1/ve_bigToeTip_l_jnt1
+        weight: 1
+      - path: locator1/ve_base_jnt1/ve_hip_l_jnt1/ve_knee_l_jnt1/ve_ankle_l_jnt1/ve_foot_l_jnt1/ve_toes_l_jnt1
+        weight: 1
+      - path: locator1/ve_base_jnt1/ve_hip_l_jnt1/ve_knee_l_jnt1/ve_ankle_l_jnt1/ve_foot_l_jnt1/ve_toes_l_jnt1/ve_toeTip_l_jnt1
+        weight: 1
+      - path: locator1/ve_base_jnt1/ve_tail0_jnt
+        weight: 1
+      - path: locator1/ve_base_jnt1/ve_tail0_jnt/ve_tail1_jnt
+        weight: 1
+      - path: locator1/ve_base_jnt1/ve_tail0_jnt/ve_tail1_jnt/ve_tail2_jnt
+        weight: 1
+      - path: locator1/ve_base_jnt1/ve_tail0_jnt/ve_tail1_jnt/ve_tail2_jnt/ve_tail3_jnt
+        weight: 1
+      - path: locator1/ve_base_jnt1/ve_tail0_jnt/ve_tail1_jnt/ve_tail2_jnt/ve_tail3_jnt/ve_tail4_jnt
+        weight: 1
+      - path: locator1/ve_base_jnt1/ve_tail0_jnt/ve_tail1_jnt/ve_tail2_jnt/ve_tail3_jnt/ve_tail4_jnt/ve_tailTip_jnt
+        weight: 1
+      - path: Veloc1:polySurface6_SeamsColor
+        weight: 1
+      - path: Veloc:imagePlane1
+        weight: 1
+      - path: Veloc:polySurface5
+        weight: 1
+      - path: Veloc:polySurface6
+        weight: 1
+      - path: Veloc:TRex_Aug25_0002:polySurface5
+        weight: 1
+      - path: Veloc:TRex_Aug25_0002:polySurface6
+        weight: 1
+      - path: Veloc:TRex_Aug25_0002:polySurface6/Veloc:TRex_Aug25_0002:transform3
+        weight: 1
+      - path: Veloc:TRex_Aug25_0002:Spino_Aug_14_v3:imagePlane1
+        weight: 1
+      - path: Veloc:TRex_Aug25_0002:Spino_Aug_14_v3:left
+        weight: 1
+      - path: Veloc:TRex_Aug25_0002:Spino_Aug_14_v4:imagePlane1
+        weight: 1
+      - path: Veloc:TRex_Aug25_0002:Spino_Aug_14_v4:left
+        weight: 1
+      maskType: 0
+      maskSource: {instanceID: 0}
+    - serializedVersion: 16
+      name: Raptor Melee Attack
+      takeName: Take 001
+      firstFrame: 91
+      lastFrame: 120
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: locator1
+        weight: 1
+      - path: locator1/ve_base_jnt1
+        weight: 1
+      - path: locator1/ve_base_jnt1/ve_back0_jnt
+        weight: 1
+      - path: locator1/ve_base_jnt1/ve_back0_jnt/ve_bothArms_jnt
+        weight: 1
+      - path: locator1/ve_base_jnt1/ve_back0_jnt/ve_bothArms_jnt/ve_arm_l_jnt
+        weight: 1
+      - path: locator1/ve_base_jnt1/ve_back0_jnt/ve_bothArms_jnt/ve_arm_l_jnt/ve_elbow_l_jnt
+        weight: 1
+      - path: locator1/ve_base_jnt1/ve_back0_jnt/ve_bothArms_jnt/ve_arm_l_jnt/ve_elbow_l_jnt/ve_wrist_l_jnt
+        weight: 1
+      - path: locator1/ve_base_jnt1/ve_back0_jnt/ve_bothArms_jnt/ve_arm_l_jnt/ve_elbow_l_jnt/ve_wrist_l_jnt/ve_fingerTip_l_jnt
+        weight: 1
+      - path: locator1/ve_base_jnt1/ve_back0_jnt/ve_bothArms_jnt/ve_arm_l_jnt1
+        weight: 1
+      - path: locator1/ve_base_jnt1/ve_back0_jnt/ve_bothArms_jnt/ve_arm_l_jnt1/ve_elbow_l_jnt1
+        weight: 1
+      - path: locator1/ve_base_jnt1/ve_back0_jnt/ve_bothArms_jnt/ve_arm_l_jnt1/ve_elbow_l_jnt1/ve_wrist_l_jnt1
+        weight: 1
+      - path: locator1/ve_base_jnt1/ve_back0_jnt/ve_bothArms_jnt/ve_arm_l_jnt1/ve_elbow_l_jnt1/ve_wrist_l_jnt1/ve_fingerTip_l_jnt1
+        weight: 1
+      - path: locator1/ve_base_jnt1/ve_back0_jnt/ve_neck_jnt
+        weight: 1
+      - path: locator1/ve_base_jnt1/ve_back0_jnt/ve_neck_jnt/ve_head_jnt
+        weight: 1
+      - path: locator1/ve_base_jnt1/ve_back0_jnt/ve_neck_jnt/ve_head_jnt/ve_headTip_jnt
+        weight: 1
+      - path: locator1/ve_base_jnt1/ve_hip_l_jnt
+        weight: 1
+      - path: locator1/ve_base_jnt1/ve_hip_l_jnt/ve_knee_l_jnt
+        weight: 1
+      - path: locator1/ve_base_jnt1/ve_hip_l_jnt/ve_knee_l_jnt/ve_ankle_l_jnt
+        weight: 1
+      - path: locator1/ve_base_jnt1/ve_hip_l_jnt/ve_knee_l_jnt/ve_ankle_l_jnt/ve_foot_l_jnt
+        weight: 1
+      - path: locator1/ve_base_jnt1/ve_hip_l_jnt/ve_knee_l_jnt/ve_ankle_l_jnt/ve_foot_l_jnt/ve_bigToe_l_jnt
+        weight: 1
+      - path: locator1/ve_base_jnt1/ve_hip_l_jnt/ve_knee_l_jnt/ve_ankle_l_jnt/ve_foot_l_jnt/ve_bigToe_l_jnt/ve_bigToeTip_l_jnt
+        weight: 1
+      - path: locator1/ve_base_jnt1/ve_hip_l_jnt/ve_knee_l_jnt/ve_ankle_l_jnt/ve_foot_l_jnt/ve_toes_l_jnt
+        weight: 1
+      - path: locator1/ve_base_jnt1/ve_hip_l_jnt/ve_knee_l_jnt/ve_ankle_l_jnt/ve_foot_l_jnt/ve_toes_l_jnt/ve_toeTip_l_jnt
+        weight: 1
+      - path: locator1/ve_base_jnt1/ve_hip_l_jnt1
+        weight: 1
+      - path: locator1/ve_base_jnt1/ve_hip_l_jnt1/ve_knee_l_jnt1
+        weight: 1
+      - path: locator1/ve_base_jnt1/ve_hip_l_jnt1/ve_knee_l_jnt1/ve_ankle_l_jnt1
+        weight: 1
+      - path: locator1/ve_base_jnt1/ve_hip_l_jnt1/ve_knee_l_jnt1/ve_ankle_l_jnt1/ve_foot_l_jnt1
+        weight: 1
+      - path: locator1/ve_base_jnt1/ve_hip_l_jnt1/ve_knee_l_jnt1/ve_ankle_l_jnt1/ve_foot_l_jnt1/ve_bigToe_l_jnt1
+        weight: 1
+      - path: locator1/ve_base_jnt1/ve_hip_l_jnt1/ve_knee_l_jnt1/ve_ankle_l_jnt1/ve_foot_l_jnt1/ve_bigToe_l_jnt1/ve_bigToeTip_l_jnt1
+        weight: 1
+      - path: locator1/ve_base_jnt1/ve_hip_l_jnt1/ve_knee_l_jnt1/ve_ankle_l_jnt1/ve_foot_l_jnt1/ve_toes_l_jnt1
+        weight: 1
+      - path: locator1/ve_base_jnt1/ve_hip_l_jnt1/ve_knee_l_jnt1/ve_ankle_l_jnt1/ve_foot_l_jnt1/ve_toes_l_jnt1/ve_toeTip_l_jnt1
+        weight: 1
+      - path: locator1/ve_base_jnt1/ve_tail0_jnt
+        weight: 1
+      - path: locator1/ve_base_jnt1/ve_tail0_jnt/ve_tail1_jnt
+        weight: 1
+      - path: locator1/ve_base_jnt1/ve_tail0_jnt/ve_tail1_jnt/ve_tail2_jnt
+        weight: 1
+      - path: locator1/ve_base_jnt1/ve_tail0_jnt/ve_tail1_jnt/ve_tail2_jnt/ve_tail3_jnt
+        weight: 1
+      - path: locator1/ve_base_jnt1/ve_tail0_jnt/ve_tail1_jnt/ve_tail2_jnt/ve_tail3_jnt/ve_tail4_jnt
+        weight: 1
+      - path: locator1/ve_base_jnt1/ve_tail0_jnt/ve_tail1_jnt/ve_tail2_jnt/ve_tail3_jnt/ve_tail4_jnt/ve_tailTip_jnt
+        weight: 1
+      - path: Veloc1:polySurface6_SeamsColor
+        weight: 1
+      - path: Veloc:imagePlane1
+        weight: 1
+      - path: Veloc:polySurface5
+        weight: 1
+      - path: Veloc:polySurface6
+        weight: 1
+      - path: Veloc:TRex_Aug25_0002:polySurface5
+        weight: 1
+      - path: Veloc:TRex_Aug25_0002:polySurface6
+        weight: 1
+      - path: Veloc:TRex_Aug25_0002:polySurface6/Veloc:TRex_Aug25_0002:transform3
+        weight: 1
+      - path: Veloc:TRex_Aug25_0002:Spino_Aug_14_v3:imagePlane1
+        weight: 1
+      - path: Veloc:TRex_Aug25_0002:Spino_Aug_14_v3:left
+        weight: 1
+      - path: Veloc:TRex_Aug25_0002:Spino_Aug_14_v4:imagePlane1
+        weight: 1
+      - path: Veloc:TRex_Aug25_0002:Spino_Aug_14_v4:left
+        weight: 1
+      maskType: 0
+      maskSource: {instanceID: 0}
+    - serializedVersion: 16
+      name: Raptor Jump Take-off
+      takeName: Take 001
+      firstFrame: 121
+      lastFrame: 132
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: locator1
+        weight: 1
+      - path: locator1/ve_base_jnt1
+        weight: 1
+      - path: locator1/ve_base_jnt1/ve_back0_jnt
+        weight: 1
+      - path: locator1/ve_base_jnt1/ve_back0_jnt/ve_bothArms_jnt
+        weight: 1
+      - path: locator1/ve_base_jnt1/ve_back0_jnt/ve_bothArms_jnt/ve_arm_l_jnt
+        weight: 1
+      - path: locator1/ve_base_jnt1/ve_back0_jnt/ve_bothArms_jnt/ve_arm_l_jnt/ve_elbow_l_jnt
+        weight: 1
+      - path: locator1/ve_base_jnt1/ve_back0_jnt/ve_bothArms_jnt/ve_arm_l_jnt/ve_elbow_l_jnt/ve_wrist_l_jnt
+        weight: 1
+      - path: locator1/ve_base_jnt1/ve_back0_jnt/ve_bothArms_jnt/ve_arm_l_jnt/ve_elbow_l_jnt/ve_wrist_l_jnt/ve_fingerTip_l_jnt
+        weight: 1
+      - path: locator1/ve_base_jnt1/ve_back0_jnt/ve_bothArms_jnt/ve_arm_l_jnt1
+        weight: 1
+      - path: locator1/ve_base_jnt1/ve_back0_jnt/ve_bothArms_jnt/ve_arm_l_jnt1/ve_elbow_l_jnt1
+        weight: 1
+      - path: locator1/ve_base_jnt1/ve_back0_jnt/ve_bothArms_jnt/ve_arm_l_jnt1/ve_elbow_l_jnt1/ve_wrist_l_jnt1
+        weight: 1
+      - path: locator1/ve_base_jnt1/ve_back0_jnt/ve_bothArms_jnt/ve_arm_l_jnt1/ve_elbow_l_jnt1/ve_wrist_l_jnt1/ve_fingerTip_l_jnt1
+        weight: 1
+      - path: locator1/ve_base_jnt1/ve_back0_jnt/ve_neck_jnt
+        weight: 1
+      - path: locator1/ve_base_jnt1/ve_back0_jnt/ve_neck_jnt/ve_head_jnt
+        weight: 1
+      - path: locator1/ve_base_jnt1/ve_back0_jnt/ve_neck_jnt/ve_head_jnt/ve_headTip_jnt
+        weight: 1
+      - path: locator1/ve_base_jnt1/ve_hip_l_jnt
+        weight: 1
+      - path: locator1/ve_base_jnt1/ve_hip_l_jnt/ve_knee_l_jnt
+        weight: 1
+      - path: locator1/ve_base_jnt1/ve_hip_l_jnt/ve_knee_l_jnt/ve_ankle_l_jnt
+        weight: 1
+      - path: locator1/ve_base_jnt1/ve_hip_l_jnt/ve_knee_l_jnt/ve_ankle_l_jnt/ve_foot_l_jnt
+        weight: 1
+      - path: locator1/ve_base_jnt1/ve_hip_l_jnt/ve_knee_l_jnt/ve_ankle_l_jnt/ve_foot_l_jnt/ve_bigToe_l_jnt
+        weight: 1
+      - path: locator1/ve_base_jnt1/ve_hip_l_jnt/ve_knee_l_jnt/ve_ankle_l_jnt/ve_foot_l_jnt/ve_bigToe_l_jnt/ve_bigToeTip_l_jnt
+        weight: 1
+      - path: locator1/ve_base_jnt1/ve_hip_l_jnt/ve_knee_l_jnt/ve_ankle_l_jnt/ve_foot_l_jnt/ve_toes_l_jnt
+        weight: 1
+      - path: locator1/ve_base_jnt1/ve_hip_l_jnt/ve_knee_l_jnt/ve_ankle_l_jnt/ve_foot_l_jnt/ve_toes_l_jnt/ve_toeTip_l_jnt
+        weight: 1
+      - path: locator1/ve_base_jnt1/ve_hip_l_jnt1
+        weight: 1
+      - path: locator1/ve_base_jnt1/ve_hip_l_jnt1/ve_knee_l_jnt1
+        weight: 1
+      - path: locator1/ve_base_jnt1/ve_hip_l_jnt1/ve_knee_l_jnt1/ve_ankle_l_jnt1
+        weight: 1
+      - path: locator1/ve_base_jnt1/ve_hip_l_jnt1/ve_knee_l_jnt1/ve_ankle_l_jnt1/ve_foot_l_jnt1
+        weight: 1
+      - path: locator1/ve_base_jnt1/ve_hip_l_jnt1/ve_knee_l_jnt1/ve_ankle_l_jnt1/ve_foot_l_jnt1/ve_bigToe_l_jnt1
+        weight: 1
+      - path: locator1/ve_base_jnt1/ve_hip_l_jnt1/ve_knee_l_jnt1/ve_ankle_l_jnt1/ve_foot_l_jnt1/ve_bigToe_l_jnt1/ve_bigToeTip_l_jnt1
+        weight: 1
+      - path: locator1/ve_base_jnt1/ve_hip_l_jnt1/ve_knee_l_jnt1/ve_ankle_l_jnt1/ve_foot_l_jnt1/ve_toes_l_jnt1
+        weight: 1
+      - path: locator1/ve_base_jnt1/ve_hip_l_jnt1/ve_knee_l_jnt1/ve_ankle_l_jnt1/ve_foot_l_jnt1/ve_toes_l_jnt1/ve_toeTip_l_jnt1
+        weight: 1
+      - path: locator1/ve_base_jnt1/ve_tail0_jnt
+        weight: 1
+      - path: locator1/ve_base_jnt1/ve_tail0_jnt/ve_tail1_jnt
+        weight: 1
+      - path: locator1/ve_base_jnt1/ve_tail0_jnt/ve_tail1_jnt/ve_tail2_jnt
+        weight: 1
+      - path: locator1/ve_base_jnt1/ve_tail0_jnt/ve_tail1_jnt/ve_tail2_jnt/ve_tail3_jnt
+        weight: 1
+      - path: locator1/ve_base_jnt1/ve_tail0_jnt/ve_tail1_jnt/ve_tail2_jnt/ve_tail3_jnt/ve_tail4_jnt
+        weight: 1
+      - path: locator1/ve_base_jnt1/ve_tail0_jnt/ve_tail1_jnt/ve_tail2_jnt/ve_tail3_jnt/ve_tail4_jnt/ve_tailTip_jnt
+        weight: 1
+      - path: Veloc1:polySurface6_SeamsColor
+        weight: 1
+      - path: Veloc:imagePlane1
+        weight: 1
+      - path: Veloc:polySurface5
+        weight: 1
+      - path: Veloc:polySurface6
+        weight: 1
+      - path: Veloc:TRex_Aug25_0002:polySurface5
+        weight: 1
+      - path: Veloc:TRex_Aug25_0002:polySurface6
+        weight: 1
+      - path: Veloc:TRex_Aug25_0002:polySurface6/Veloc:TRex_Aug25_0002:transform3
+        weight: 1
+      - path: Veloc:TRex_Aug25_0002:Spino_Aug_14_v3:imagePlane1
+        weight: 1
+      - path: Veloc:TRex_Aug25_0002:Spino_Aug_14_v3:left
+        weight: 1
+      - path: Veloc:TRex_Aug25_0002:Spino_Aug_14_v4:imagePlane1
+        weight: 1
+      - path: Veloc:TRex_Aug25_0002:Spino_Aug_14_v4:left
+        weight: 1
+      maskType: 0
+      maskSource: {instanceID: 0}
+    - serializedVersion: 16
+      name: Raptor Jump Hangtime
+      takeName: Take 001
+      firstFrame: 132
+      lastFrame: 144
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      loopTime: 1
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: locator1
+        weight: 1
+      - path: locator1/ve_base_jnt1
+        weight: 1
+      - path: locator1/ve_base_jnt1/ve_back0_jnt
+        weight: 1
+      - path: locator1/ve_base_jnt1/ve_back0_jnt/ve_bothArms_jnt
+        weight: 1
+      - path: locator1/ve_base_jnt1/ve_back0_jnt/ve_bothArms_jnt/ve_arm_l_jnt
+        weight: 1
+      - path: locator1/ve_base_jnt1/ve_back0_jnt/ve_bothArms_jnt/ve_arm_l_jnt/ve_elbow_l_jnt
+        weight: 1
+      - path: locator1/ve_base_jnt1/ve_back0_jnt/ve_bothArms_jnt/ve_arm_l_jnt/ve_elbow_l_jnt/ve_wrist_l_jnt
+        weight: 1
+      - path: locator1/ve_base_jnt1/ve_back0_jnt/ve_bothArms_jnt/ve_arm_l_jnt/ve_elbow_l_jnt/ve_wrist_l_jnt/ve_fingerTip_l_jnt
+        weight: 1
+      - path: locator1/ve_base_jnt1/ve_back0_jnt/ve_bothArms_jnt/ve_arm_l_jnt1
+        weight: 1
+      - path: locator1/ve_base_jnt1/ve_back0_jnt/ve_bothArms_jnt/ve_arm_l_jnt1/ve_elbow_l_jnt1
+        weight: 1
+      - path: locator1/ve_base_jnt1/ve_back0_jnt/ve_bothArms_jnt/ve_arm_l_jnt1/ve_elbow_l_jnt1/ve_wrist_l_jnt1
+        weight: 1
+      - path: locator1/ve_base_jnt1/ve_back0_jnt/ve_bothArms_jnt/ve_arm_l_jnt1/ve_elbow_l_jnt1/ve_wrist_l_jnt1/ve_fingerTip_l_jnt1
+        weight: 1
+      - path: locator1/ve_base_jnt1/ve_back0_jnt/ve_neck_jnt
+        weight: 1
+      - path: locator1/ve_base_jnt1/ve_back0_jnt/ve_neck_jnt/ve_head_jnt
+        weight: 1
+      - path: locator1/ve_base_jnt1/ve_back0_jnt/ve_neck_jnt/ve_head_jnt/ve_headTip_jnt
+        weight: 1
+      - path: locator1/ve_base_jnt1/ve_hip_l_jnt
+        weight: 1
+      - path: locator1/ve_base_jnt1/ve_hip_l_jnt/ve_knee_l_jnt
+        weight: 1
+      - path: locator1/ve_base_jnt1/ve_hip_l_jnt/ve_knee_l_jnt/ve_ankle_l_jnt
+        weight: 1
+      - path: locator1/ve_base_jnt1/ve_hip_l_jnt/ve_knee_l_jnt/ve_ankle_l_jnt/ve_foot_l_jnt
+        weight: 1
+      - path: locator1/ve_base_jnt1/ve_hip_l_jnt/ve_knee_l_jnt/ve_ankle_l_jnt/ve_foot_l_jnt/ve_bigToe_l_jnt
+        weight: 1
+      - path: locator1/ve_base_jnt1/ve_hip_l_jnt/ve_knee_l_jnt/ve_ankle_l_jnt/ve_foot_l_jnt/ve_bigToe_l_jnt/ve_bigToeTip_l_jnt
+        weight: 1
+      - path: locator1/ve_base_jnt1/ve_hip_l_jnt/ve_knee_l_jnt/ve_ankle_l_jnt/ve_foot_l_jnt/ve_toes_l_jnt
+        weight: 1
+      - path: locator1/ve_base_jnt1/ve_hip_l_jnt/ve_knee_l_jnt/ve_ankle_l_jnt/ve_foot_l_jnt/ve_toes_l_jnt/ve_toeTip_l_jnt
+        weight: 1
+      - path: locator1/ve_base_jnt1/ve_hip_l_jnt1
+        weight: 1
+      - path: locator1/ve_base_jnt1/ve_hip_l_jnt1/ve_knee_l_jnt1
+        weight: 1
+      - path: locator1/ve_base_jnt1/ve_hip_l_jnt1/ve_knee_l_jnt1/ve_ankle_l_jnt1
+        weight: 1
+      - path: locator1/ve_base_jnt1/ve_hip_l_jnt1/ve_knee_l_jnt1/ve_ankle_l_jnt1/ve_foot_l_jnt1
+        weight: 1
+      - path: locator1/ve_base_jnt1/ve_hip_l_jnt1/ve_knee_l_jnt1/ve_ankle_l_jnt1/ve_foot_l_jnt1/ve_bigToe_l_jnt1
+        weight: 1
+      - path: locator1/ve_base_jnt1/ve_hip_l_jnt1/ve_knee_l_jnt1/ve_ankle_l_jnt1/ve_foot_l_jnt1/ve_bigToe_l_jnt1/ve_bigToeTip_l_jnt1
+        weight: 1
+      - path: locator1/ve_base_jnt1/ve_hip_l_jnt1/ve_knee_l_jnt1/ve_ankle_l_jnt1/ve_foot_l_jnt1/ve_toes_l_jnt1
+        weight: 1
+      - path: locator1/ve_base_jnt1/ve_hip_l_jnt1/ve_knee_l_jnt1/ve_ankle_l_jnt1/ve_foot_l_jnt1/ve_toes_l_jnt1/ve_toeTip_l_jnt1
+        weight: 1
+      - path: locator1/ve_base_jnt1/ve_tail0_jnt
+        weight: 1
+      - path: locator1/ve_base_jnt1/ve_tail0_jnt/ve_tail1_jnt
+        weight: 1
+      - path: locator1/ve_base_jnt1/ve_tail0_jnt/ve_tail1_jnt/ve_tail2_jnt
+        weight: 1
+      - path: locator1/ve_base_jnt1/ve_tail0_jnt/ve_tail1_jnt/ve_tail2_jnt/ve_tail3_jnt
+        weight: 1
+      - path: locator1/ve_base_jnt1/ve_tail0_jnt/ve_tail1_jnt/ve_tail2_jnt/ve_tail3_jnt/ve_tail4_jnt
+        weight: 1
+      - path: locator1/ve_base_jnt1/ve_tail0_jnt/ve_tail1_jnt/ve_tail2_jnt/ve_tail3_jnt/ve_tail4_jnt/ve_tailTip_jnt
+        weight: 1
+      - path: Veloc1:polySurface6_SeamsColor
+        weight: 1
+      - path: Veloc:imagePlane1
+        weight: 1
+      - path: Veloc:polySurface5
+        weight: 1
+      - path: Veloc:polySurface6
+        weight: 1
+      - path: Veloc:TRex_Aug25_0002:polySurface5
+        weight: 1
+      - path: Veloc:TRex_Aug25_0002:polySurface6
+        weight: 1
+      - path: Veloc:TRex_Aug25_0002:polySurface6/Veloc:TRex_Aug25_0002:transform3
+        weight: 1
+      - path: Veloc:TRex_Aug25_0002:Spino_Aug_14_v3:imagePlane1
+        weight: 1
+      - path: Veloc:TRex_Aug25_0002:Spino_Aug_14_v3:left
+        weight: 1
+      - path: Veloc:TRex_Aug25_0002:Spino_Aug_14_v4:imagePlane1
+        weight: 1
+      - path: Veloc:TRex_Aug25_0002:Spino_Aug_14_v4:left
+        weight: 1
+      maskType: 0
+      maskSource: {instanceID: 0}
+    - serializedVersion: 16
+      name: Raptor Jump Landing
+      takeName: Take 001
+      firstFrame: 144
+      lastFrame: 154
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: locator1
+        weight: 1
+      - path: locator1/ve_base_jnt1
+        weight: 1
+      - path: locator1/ve_base_jnt1/ve_back0_jnt
+        weight: 1
+      - path: locator1/ve_base_jnt1/ve_back0_jnt/ve_bothArms_jnt
+        weight: 1
+      - path: locator1/ve_base_jnt1/ve_back0_jnt/ve_bothArms_jnt/ve_arm_l_jnt
+        weight: 1
+      - path: locator1/ve_base_jnt1/ve_back0_jnt/ve_bothArms_jnt/ve_arm_l_jnt/ve_elbow_l_jnt
+        weight: 1
+      - path: locator1/ve_base_jnt1/ve_back0_jnt/ve_bothArms_jnt/ve_arm_l_jnt/ve_elbow_l_jnt/ve_wrist_l_jnt
+        weight: 1
+      - path: locator1/ve_base_jnt1/ve_back0_jnt/ve_bothArms_jnt/ve_arm_l_jnt/ve_elbow_l_jnt/ve_wrist_l_jnt/ve_fingerTip_l_jnt
+        weight: 1
+      - path: locator1/ve_base_jnt1/ve_back0_jnt/ve_bothArms_jnt/ve_arm_l_jnt1
+        weight: 1
+      - path: locator1/ve_base_jnt1/ve_back0_jnt/ve_bothArms_jnt/ve_arm_l_jnt1/ve_elbow_l_jnt1
+        weight: 1
+      - path: locator1/ve_base_jnt1/ve_back0_jnt/ve_bothArms_jnt/ve_arm_l_jnt1/ve_elbow_l_jnt1/ve_wrist_l_jnt1
+        weight: 1
+      - path: locator1/ve_base_jnt1/ve_back0_jnt/ve_bothArms_jnt/ve_arm_l_jnt1/ve_elbow_l_jnt1/ve_wrist_l_jnt1/ve_fingerTip_l_jnt1
+        weight: 1
+      - path: locator1/ve_base_jnt1/ve_back0_jnt/ve_neck_jnt
+        weight: 1
+      - path: locator1/ve_base_jnt1/ve_back0_jnt/ve_neck_jnt/ve_head_jnt
+        weight: 1
+      - path: locator1/ve_base_jnt1/ve_back0_jnt/ve_neck_jnt/ve_head_jnt/ve_headTip_jnt
+        weight: 1
+      - path: locator1/ve_base_jnt1/ve_hip_l_jnt
+        weight: 1
+      - path: locator1/ve_base_jnt1/ve_hip_l_jnt/ve_knee_l_jnt
+        weight: 1
+      - path: locator1/ve_base_jnt1/ve_hip_l_jnt/ve_knee_l_jnt/ve_ankle_l_jnt
+        weight: 1
+      - path: locator1/ve_base_jnt1/ve_hip_l_jnt/ve_knee_l_jnt/ve_ankle_l_jnt/ve_foot_l_jnt
+        weight: 1
+      - path: locator1/ve_base_jnt1/ve_hip_l_jnt/ve_knee_l_jnt/ve_ankle_l_jnt/ve_foot_l_jnt/ve_bigToe_l_jnt
+        weight: 1
+      - path: locator1/ve_base_jnt1/ve_hip_l_jnt/ve_knee_l_jnt/ve_ankle_l_jnt/ve_foot_l_jnt/ve_bigToe_l_jnt/ve_bigToeTip_l_jnt
+        weight: 1
+      - path: locator1/ve_base_jnt1/ve_hip_l_jnt/ve_knee_l_jnt/ve_ankle_l_jnt/ve_foot_l_jnt/ve_toes_l_jnt
+        weight: 1
+      - path: locator1/ve_base_jnt1/ve_hip_l_jnt/ve_knee_l_jnt/ve_ankle_l_jnt/ve_foot_l_jnt/ve_toes_l_jnt/ve_toeTip_l_jnt
+        weight: 1
+      - path: locator1/ve_base_jnt1/ve_hip_l_jnt1
+        weight: 1
+      - path: locator1/ve_base_jnt1/ve_hip_l_jnt1/ve_knee_l_jnt1
+        weight: 1
+      - path: locator1/ve_base_jnt1/ve_hip_l_jnt1/ve_knee_l_jnt1/ve_ankle_l_jnt1
+        weight: 1
+      - path: locator1/ve_base_jnt1/ve_hip_l_jnt1/ve_knee_l_jnt1/ve_ankle_l_jnt1/ve_foot_l_jnt1
+        weight: 1
+      - path: locator1/ve_base_jnt1/ve_hip_l_jnt1/ve_knee_l_jnt1/ve_ankle_l_jnt1/ve_foot_l_jnt1/ve_bigToe_l_jnt1
+        weight: 1
+      - path: locator1/ve_base_jnt1/ve_hip_l_jnt1/ve_knee_l_jnt1/ve_ankle_l_jnt1/ve_foot_l_jnt1/ve_bigToe_l_jnt1/ve_bigToeTip_l_jnt1
+        weight: 1
+      - path: locator1/ve_base_jnt1/ve_hip_l_jnt1/ve_knee_l_jnt1/ve_ankle_l_jnt1/ve_foot_l_jnt1/ve_toes_l_jnt1
+        weight: 1
+      - path: locator1/ve_base_jnt1/ve_hip_l_jnt1/ve_knee_l_jnt1/ve_ankle_l_jnt1/ve_foot_l_jnt1/ve_toes_l_jnt1/ve_toeTip_l_jnt1
+        weight: 1
+      - path: locator1/ve_base_jnt1/ve_tail0_jnt
+        weight: 1
+      - path: locator1/ve_base_jnt1/ve_tail0_jnt/ve_tail1_jnt
+        weight: 1
+      - path: locator1/ve_base_jnt1/ve_tail0_jnt/ve_tail1_jnt/ve_tail2_jnt
+        weight: 1
+      - path: locator1/ve_base_jnt1/ve_tail0_jnt/ve_tail1_jnt/ve_tail2_jnt/ve_tail3_jnt
+        weight: 1
+      - path: locator1/ve_base_jnt1/ve_tail0_jnt/ve_tail1_jnt/ve_tail2_jnt/ve_tail3_jnt/ve_tail4_jnt
+        weight: 1
+      - path: locator1/ve_base_jnt1/ve_tail0_jnt/ve_tail1_jnt/ve_tail2_jnt/ve_tail3_jnt/ve_tail4_jnt/ve_tailTip_jnt
+        weight: 1
+      - path: Veloc1:polySurface6_SeamsColor
+        weight: 1
+      - path: Veloc:imagePlane1
+        weight: 1
+      - path: Veloc:polySurface5
+        weight: 1
+      - path: Veloc:polySurface6
+        weight: 1
+      - path: Veloc:TRex_Aug25_0002:polySurface5
+        weight: 1
+      - path: Veloc:TRex_Aug25_0002:polySurface6
+        weight: 1
+      - path: Veloc:TRex_Aug25_0002:polySurface6/Veloc:TRex_Aug25_0002:transform3
+        weight: 1
+      - path: Veloc:TRex_Aug25_0002:Spino_Aug_14_v3:imagePlane1
+        weight: 1
+      - path: Veloc:TRex_Aug25_0002:Spino_Aug_14_v3:left
+        weight: 1
+      - path: Veloc:TRex_Aug25_0002:Spino_Aug_14_v4:imagePlane1
+        weight: 1
+      - path: Veloc:TRex_Aug25_0002:Spino_Aug_14_v4:left
+        weight: 1
+      maskType: 0
+      maskSource: {instanceID: 0}
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importBlendShapes: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+  tangentSpace:
+    normalSmoothAngle: 60
+    splitTangentsAcrossUV: 1
+    normalImportMode: 0
+    tangentImportMode: 1
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    human: []
+    skeleton: []
+    armTwist: .5
+    foreArmTwist: .5
+    upperLegTwist: .5
+    legTwist: .5
+    armStretch: .0500000007
+    legStretch: .0500000007
+    feetSpacing: 0
+    rootMotionBoneName: 
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  additionalBone: 0
+  userData: 
