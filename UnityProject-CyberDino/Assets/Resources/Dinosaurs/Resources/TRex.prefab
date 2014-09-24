@@ -10,7 +10,6 @@ GameObject:
   - 4: {fileID: 400040}
   - 54: {fileID: 5400000}
   - 114: {fileID: 11400008}
-  - 114: {fileID: 11400006}
   - 114: {fileID: 11400004}
   - 148: {fileID: 14800000}
   - 136: {fileID: 13600000}
@@ -1386,20 +1385,6 @@ MonoBehaviour:
   hitTimer: 1.5
   lerpStopTime: 0
   dinoRenderer: {fileID: 0}
---- !u!114 &11400006
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 100040}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ad11ff6aa4c1de44ca5a78362d3a8425, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  ragdoll: {fileID: 0}
-  dinoAnimator: {fileID: 0}
-  ragdollBones: []
 --- !u!114 &11400008
 MonoBehaviour:
   m_ObjectHideFlags: 1

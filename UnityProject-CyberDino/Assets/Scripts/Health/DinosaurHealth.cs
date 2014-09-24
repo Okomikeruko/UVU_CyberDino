@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 
 public class DinosaurHealth : Health {
@@ -24,15 +24,15 @@ public class DinosaurHealth : Health {
 	IEnumerator deathclock(float duration)
 	{
 		var ragdoll = GetComponent<DinoRagdoll> ();
-		ragdoll.GoRagdoll ();
+		if(ragdoll != null) ragdoll.GoRagdoll ();
 		var mc = GetComponent<MotionControl> ();
 		mc.enabled = false;
-		//var ragdoll = GetComponent<DinoRagdoll> ();
-		//ragdoll.GoRagdoll ();
+
 		yield return new WaitForSeconds(duration);
+
 		var rm = GetComponent<RespawnManager> ();
 		rm.UseRespawn ();
-		ragdoll.ResetRacer ();
+		if(ragdoll != null) ragdoll.ResetRacer ();
 		mc.enabled = true;
 		Heal (Total);
 	}
