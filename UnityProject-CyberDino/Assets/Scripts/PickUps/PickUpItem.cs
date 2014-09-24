@@ -8,14 +8,9 @@ public class PickUpItem : MonoBehaviour
 
     //Minimum and maximum values when generating a random number to pickup items
     private const int MINIMUM_ITEM_RANGE = 1;
-<<<<<<< HEAD
     private const int MAXIMUM_ITEM_RANGE = 3;
-
 	private PickUpTypes currentType;
 
-=======
-    private const int MAXIMUM_ITEM_RANGE = 4;
->>>>>>> PickUps
     void Start()
 	{
 		RandomizeType();
@@ -54,7 +49,6 @@ public class PickUpItem : MonoBehaviour
         {
             case 1:
                 this.renderer.material.color = Color.blue;
-<<<<<<< HEAD
 				currentType = PickUpTypes.Turbo;
                 break;
             case 2:
@@ -66,23 +60,6 @@ public class PickUpItem : MonoBehaviour
 				currentType = PickUpTypes.Weapon;
 	            break;
             default:				
-=======
-				this.tag = "weapon";
-                HUDScript.AddItem("item1"); //added by Robert
-                break;
-            case 2:
-                this.renderer.material.color = Color.green;
-				this.tag = "turbo";
-				HUDScript.AddItem("item2"); //added by Robert
-                break;
-            case 3:
-                this.renderer.material.color = Color.red;
-				this.tag = "health";
-				HUDScript.AddItem("item3"); //added by Robert
-                break;
-
-            default:
->>>>>>> PickUps
                 break;
         }
     }
