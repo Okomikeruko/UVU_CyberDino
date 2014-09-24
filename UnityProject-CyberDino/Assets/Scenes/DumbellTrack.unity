@@ -7593,7 +7593,6 @@ GameObject:
   - 124: {fileID: 322136275}
   - 81: {fileID: 322136274}
   - 114: {fileID: 322136279}
-  - 114: {fileID: 322136280}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -7684,19 +7683,6 @@ MonoBehaviour:
   damping: 5
   smoothRotation: 1
   rotationDamping: 10
---- !u!114 &322136280
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 322136273}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e5d8a4cffbfb36d4c8ca30f1aa45d6b4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  dinoTrackingScript: {fileID: 2059703707}
-  mapRelativePoint: {fileID: 57520496}
 --- !u!1 &322272712
 GameObject:
   m_ObjectHideFlags: 0
@@ -46984,7 +46970,7 @@ MonoBehaviour:
   lastNode: {fileID: 2015498997}
   maxLap: 1
   playerNum: 0
-  hudScript: {fileID: 322136280}
+  hudScript: {fileID: 1306247642}
 --- !u!4 &2059703708
 Transform:
   m_ObjectHideFlags: 0

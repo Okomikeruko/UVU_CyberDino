@@ -4,9 +4,7 @@ using System.Collections.Generic;
 
 public class HUDScript : MonoBehaviour 
 {
-	/*public delegate void ItemAddition(string _item);
-	public static ItemAddition AddItem;*/
-	
+
 	//an emplty object to group all of the hud together
 	private GameObject grpObj;
 
@@ -82,9 +80,11 @@ public class HUDScript : MonoBehaviour
 	//array for player names
 	private string[] playerNames;
 	
-	private List<GameObject> currentItems;
+	//private List<GameObject> currentItems;
 	
 	private bool isPaused = false;
+
+	private List<PickUpTypes> testList;
 
 
 	// Use this for initialization
@@ -112,8 +112,8 @@ public class HUDScript : MonoBehaviour
 		
 		//AddItem = ItemToAdd;
 		
-		currentItems = new List<GameObject>();
-		
+		//currentItems = new List<GameObject>();
+
 		xMulti = Screen.width / 100.0f;
 		yMulti = Screen.height / 100.0f;
 
@@ -175,11 +175,6 @@ public class HUDScript : MonoBehaviour
 		pauseMenuGfx[3] = (Texture)Resources.Load("GUI/Materials/PauseSettings");
 		pauseMenuGfx[4] = (Texture)Resources.Load("GUI/Materials/QuitButton");
 
-		/*resultsGfx = new Texture[4];
-		resultsGfx[0] = (Texture)Resources.Load("GUI/Materials/ResultsBackground");
-		resultsGfx[1] = (Texture)Resources.Load("GUI/Materials/PlayAgainButton");
-		resultsGfx[2] = (Texture)Resources.Load("GUI/Materials/ResultsSaveScore");
-		resultsGfx[3] = (Texture)Resources.Load("GUI/Materials/QuitButton");*/
 		//************************************************************************
 
 		positionObjs = CreateGUITxtr("Current Position", hudGfx[0], new Vector3(0, 0, 0));
@@ -254,42 +249,6 @@ public class HUDScript : MonoBehaviour
 		
 		pauseMenuPos = new Rect[5];
 
-		/*resultsObjs = new GameObject[13];
-		resultsObjs[0] = CreateGUITxtr("Pause Menu Background", resultsGfx[0], new Vector3(0, 0, 1));
-
-		resultsObjs[1] = CreateGUIText("Name in 1st place", "none", new Vector3(0, 0, 0));
-		resultsObjs[2] = CreateGUIText("Name in 2nd place", "none", new Vector3(0, 0, 0));
-		resultsObjs[3] = CreateGUIText("Name in 3rd place", "none", new Vector3(0, 0, 0));
-		resultsObjs[4] = CreateGUIText("Name in 4th place", "none", new Vector3(0, 0, 0));
-
-		resultsObjs[5] = CreateGUIText("Player 1 Name", "1st", new Vector3(0, 0, 0));
-		resultsObjs[6] = CreateGUIText("Player 1 Name", "2nd", new Vector3(0, 0, 0));
-		resultsObjs[7] = CreateGUIText("Player 1 Name", "3rd", new Vector3(0, 0, 0));
-		resultsObjs[8] = CreateGUIText("Player 1 Name", "4th", new Vector3(0, 0, 0));
-
-		resultsObjs[9] = CreateGUITxtr("Pause Menu Background", resultsGfx[1], new Vector3(0, 0, 1));
-		resultsObjs[10] = CreateGUITxtr("Pause Menu Background", resultsGfx[2], new Vector3(0, 0, 1));
-		resultsObjs[11] = CreateGUITxtr("Pause Menu Background", resultsGfx[3], new Vector3(0, 0, 1));
-
-		resultsObjs[0].guiTexture.pixelInset = ResizeRect(new Rect(150, 0, 100, 100));
-		
-		resultsObjs[1].guiText.pixelOffset = ResizeVec2(new Vector2(120, 60));
-		resultsObjs[2].guiText.pixelOffset = ResizeVec2(new Vector2(120, 50));
-		resultsObjs[3].guiText.pixelOffset = ResizeVec2(new Vector2(120, 40));
-		resultsObjs[4].guiText.pixelOffset = ResizeVec2(new Vector2(120, 30));
-		
-		resultsObjs[5].guiText.pixelOffset = ResizeVec2(new Vector2(40, 5));
-		resultsObjs[6].guiText.pixelOffset = ResizeVec2(new Vector2(40, 5));
-		resultsObjs[7].guiText.pixelOffset = ResizeVec2(new Vector2(40, 5));
-		resultsObjs[8].guiText.pixelOffset = ResizeVec2(new Vector2(40, 5));
-		
-		resultsObjs[9] = CreateGUITxtr("Pause Menu Background", resultsGfx[1], new Vector3(0, 0, 1));
-		resultsObjs[10] = CreateGUITxtr("Pause Menu Background", resultsGfx[2], new Vector3(0, 0, 1));
-		resultsObjs[11] = CreateGUITxtr("Pause Menu Background", resultsGfx[3], new Vector3(0, 0, 1));*/
-
-/*		foreach(Transform child in grpObj.transform)
-			child.gameObject.layer = 5;*/
-
 		items = new GameObject[3];
 		itemsPos = new Vector3[3];
 
@@ -308,22 +267,23 @@ public class HUDScript : MonoBehaviour
 			else if(child.name == "ItemIcon1")
 			{
 				items[0] = child.gameObject;
-				items[0].transform.localScale = new Vector3(0.7f,0.7f,0.7f);
+				items[0].transform.localScale = new Vector3(0.4f,0.4f,0.4f);
 				itemsPos[0] = child.localPosition;
 				//Debug.Log("pos 0 " + itemsPos[0]);
 			}
 			else if(child.name == "ItemIcon2")
 			{
 				items[1] = child.gameObject;
-				items[1].transform.localScale = new Vector3(0.7f,0.7f,0.7f);
+				items[1].transform.localScale = new Vector3(0.4f,0.4f,0.4f);
 				itemsPos[1] = child.localPosition;
 			}
 			else if(child.name == "ItemIcon3")
 			{
 				items[2] = child.gameObject;
-				items[2].transform.localScale = new Vector3(0.7f,0.7f,0.7f);
+				items[2].transform.localScale = new Vector3(0.4f,0.4f,0.4f);
 				itemsPos[2] = child.localPosition;
 			}
+
 
 		}
 
@@ -331,8 +291,14 @@ public class HUDScript : MonoBehaviour
 
 		healthGrpBarRotation = healthGrpBar.transform.localEulerAngles;
 
-		itemCount = 3;
+		itemCount = 0;
 
+		testList = new List<PickUpTypes>();
+		testList.Add(PickUpTypes.Health);
+		testList.Add(PickUpTypes.Weapon);
+		testList.Add(PickUpTypes.Weapon);
+		
+		UpdateItems(testList);
 	}
 	
 	// Update is called once per frame
@@ -450,15 +416,7 @@ public class HUDScript : MonoBehaviour
 
 		
 		int itemIndex = 10;
-
-		if(currentItems != null)
-		{
-			foreach(GameObject _item in currentItems)
-			{
-				_item.guiTexture.pixelInset = ResizeRect(new Rect(itemIndex, 90, 8, 10));
-				itemIndex += 10;
-			}
-		}
+		
 
 		//items[0].transform.localPosition
 		//itemsPos[0] = new Vector3(healthGrp.transform.position.x, healthGrp.transform.position.y, healthGrp.transform.position.z);
@@ -652,16 +610,10 @@ public class HUDScript : MonoBehaviour
 		menuScript.SetResults();
 		menuScript.ShowResults();
 		
-		//menuScript.menuSelect = MenuControl.Menu.resultsMenu;
-		
 		yield return null;
 	}
 	
-	/*public void MoveInFinish()
-	{
-		finishObj = CreateGUITxtr(string _name, Texture _txtr, Vector3 _pos)
-	}*/
-	
+
 	public void ShowFinish()
 	{
 		finishPlaceObj.guiTexture.texture = finishPlaceGfx[racePositions[dinoTrackingScript.playerNum] - 1];
@@ -689,9 +641,7 @@ public class HUDScript : MonoBehaviour
 			//while the the transparency variable is less than 1
 			if(transNum >= middleOfScreen)
 			{
-				//use mathf.lerp to set the transparency of the temp Color
-				//tempPos.x = Mathf.Lerp(tempPos.x, middleOfScreen, transNum);
-				
+
 				//set the guiTexture's color to the temp Color
 				_obj.guiTexture.pixelInset = new Rect(transNum, tempPos.y, tempPos.width, tempPos.height);
 
@@ -708,11 +658,6 @@ public class HUDScript : MonoBehaviour
 
 			if(transNum2 <= middleOfScreen2)
 			{
-				//use mathf.lerp to set the transparency of the temp Color
-				//tempPos.x = Mathf.Lerp(tempPos.x, middleOfScreen, transNum);
-				
-				//set the guiTexture's color to the temp Color
-
 				_obj2.guiTexture.pixelInset = new Rect(transNum2, tempPos2.y, tempPos2.width, tempPos2.height);
 
 				transNum2 += moveSpeed * Time.deltaTime;
@@ -733,38 +678,27 @@ public class HUDScript : MonoBehaviour
 
 	}
 	
-	public void UpdateItems(List<GameObject> _list)
+	public void UpdateItems(List<PickUpTypes> _list)
 	{
 		itemCount = _list.Count;
-
-		/*int index = 0;
-		foreach(GameObject _item in _list)
-		{
-			if(_item.tag == "Health")
-				items[index].renderer.material.mainTexture = itemsGfx[0];
-			else if(_item.tag == "Melee")
-				items[index].renderer.material.mainTexture = itemsGfx[1];
-			else if(_item.tag == "Health")
-				items[index].renderer.material.mainTexture = itemsGfx[2];
-		}
-		
-		index++;*/
 		
 		for(int i = 0; i < items.Length; i++)
 		{
-			if(_list[i] != null)
+			if(i < _list.Count && _list[i] != null)
 			{
 				items[i].SetActive(true);
 				
-				if(_list[i].tag == "")
+				if(_list[i] == PickUpTypes.Weapon)
 					items[i].renderer.material.mainTexture = itemsGfx[0];
-				if(_list[i].tag == "")
+				else if(_list[i] == PickUpTypes.Health)
 					items[i].renderer.material.mainTexture = itemsGfx[1];
-				if(_list[i].tag == "")
+				else if(_list[i] == PickUpTypes.Turbo)
 					items[i].renderer.material.mainTexture = itemsGfx[2];
 			}
 			else
+			{
 				items[i].SetActive(false);
+			}
 		}
 		
 	}
