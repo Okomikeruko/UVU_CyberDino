@@ -145,7 +145,7 @@ public class DinoRagdoll : MonoBehaviour {
 		ColorLerpClass theLerp = transform.gameObject.GetComponent<ColorLerpClass>();
 		theLerp.lerping = false;
 		move.enabled = true;
-		ragdollUpdate -= ResetRacer; 
+		ragdollUpdate = empty;
 	}
 
 	public void TimedRagdoll (float time, float percent)
@@ -164,7 +164,7 @@ public class DinoRagdoll : MonoBehaviour {
 		for (int i = 0; i < ragdollBones.Length; i++)
 		{stopPose[i] = ragdollBones[i].rotation;}
 		RestoreRagdoll ();
-		ragdollUpdate = RestoreRacer;
+		ragdollUpdate = ResetRacer;
 	}
 
 	private void GoRagdollPartial (float percent)
@@ -224,4 +224,6 @@ public class DinoRagdoll : MonoBehaviour {
 			ragdollUpdate = ResetRacer;
 		}
 	}
+
+	private void empty(){}
 }
