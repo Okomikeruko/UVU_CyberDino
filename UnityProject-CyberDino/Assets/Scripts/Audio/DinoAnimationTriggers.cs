@@ -1,7 +1,9 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class DinoAudioTriggers : MonoBehaviour {
+public class DinoAnimationTriggers : MonoBehaviour {
+
+	private AcidSpit acidSpit;
 
 	enum dinoSound
 	{
@@ -16,6 +18,14 @@ public class DinoAudioTriggers : MonoBehaviour {
 	[SerializeField]
 	private dinoSound DinoSound;
 
+
+	void OnEnable()
+	{
+		if (DinoSound == dinoSound.Diloph) {
+			acidSpit = GetComponentInParent<AcidSpit> ();
+		}
+	}
+
 	void step(string foot)
 	{
 		//Play footstep sound
@@ -29,5 +39,10 @@ public class DinoAudioTriggers : MonoBehaviour {
 	void land ()
 	{
 		//Play Landing Sound
+	}
+
+	void spit()
+	{
+		acidSpit.SpitFX ();
 	}
 }

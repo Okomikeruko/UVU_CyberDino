@@ -17,7 +17,6 @@ public class Smite : MeleeAttack {
 		//Play Animation/VFX
 		/* Animation trigger added by Lee*/
 		NetworkAnimations netanim = GetComponentInChildren<NetworkAnimations>();
-		Debug.Log ("This is happening");
 		netanim.AnimTriggerMelee ();
 
 		GameObject target = null;
