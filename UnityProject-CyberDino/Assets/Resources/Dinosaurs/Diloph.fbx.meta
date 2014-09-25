@@ -84,7 +84,7 @@ ModelImporter:
     400076: //RootNode
     400078: DilophosaurusSmallFrill:Diloph_geo
     4300000: DilophosaurusSmallFrill:Diloph_geo
-    7400000: Diloph Idle
+    7400000: Diloph Teleport Slam
     7400002: Diloph Run
     7400004: Diloph L-Turn
     7400006: Diloph R-Turn
@@ -92,6 +92,7 @@ ModelImporter:
     7400010: Diloph Takeoff
     7400012: Diloph Hangtime
     7400014: Diloph Landing
+    7400016: Diloph Idle
     9500000: //RootNode
     13700000: DilophosaurusSmallFrill:Diloph_geo
   materials:
@@ -988,10 +989,118 @@ ModelImporter:
         weight: 1
       maskType: 0
       maskSource: {instanceID: 0}
+    - serializedVersion: 16
+      name: Diloph Teleport Slam
+      takeName: Take 001
+      firstFrame: 118
+      lastFrame: 118.099991
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      loopTime: 1
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: di_base_jnt1
+        weight: 1
+      - path: di_base_jnt1/di_back0_jnt
+        weight: 1
+      - path: di_base_jnt1/di_back0_jnt/di_bothArms_jnt
+        weight: 1
+      - path: di_base_jnt1/di_back0_jnt/di_bothArms_jnt/di_shoulder_l_jnt
+        weight: 1
+      - path: di_base_jnt1/di_back0_jnt/di_bothArms_jnt/di_shoulder_l_jnt/di_arm_l_jnt
+        weight: 1
+      - path: di_base_jnt1/di_back0_jnt/di_bothArms_jnt/di_shoulder_l_jnt/di_arm_l_jnt/di_elbow_l_jnt
+        weight: 1
+      - path: di_base_jnt1/di_back0_jnt/di_bothArms_jnt/di_shoulder_l_jnt/di_arm_l_jnt/di_elbow_l_jnt/di_wrist_l_jnt
+        weight: 1
+      - path: di_base_jnt1/di_back0_jnt/di_bothArms_jnt/di_shoulder_l_jnt/di_arm_l_jnt/di_elbow_l_jnt/di_wrist_l_jnt/di_fingers_l_jnt
+        weight: 1
+      - path: di_base_jnt1/di_back0_jnt/di_bothArms_jnt/di_shoulder_l_jnt/di_arm_l_jnt/di_elbow_l_jnt/di_wrist_l_jnt/di_fingers_l_jnt/di_fingerTip_l_jnt
+        weight: 1
+      - path: di_base_jnt1/di_back0_jnt/di_bothArms_jnt/di_shoulder_r_jnt
+        weight: 1
+      - path: di_base_jnt1/di_back0_jnt/di_bothArms_jnt/di_shoulder_r_jnt1
+        weight: 1
+      - path: di_base_jnt1/di_back0_jnt/di_bothArms_jnt/di_shoulder_r_jnt1/di_arm_r_jnt
+        weight: 1
+      - path: di_base_jnt1/di_back0_jnt/di_bothArms_jnt/di_shoulder_r_jnt1/di_arm_r_jnt/di_elbow_r_jnt
+        weight: 1
+      - path: di_base_jnt1/di_back0_jnt/di_bothArms_jnt/di_shoulder_r_jnt1/di_arm_r_jnt/di_elbow_r_jnt/di_wrist_r_jnt
+        weight: 1
+      - path: di_base_jnt1/di_back0_jnt/di_bothArms_jnt/di_shoulder_r_jnt1/di_arm_r_jnt/di_elbow_r_jnt/di_wrist_r_jnt/di_fingers_r_jnt
+        weight: 1
+      - path: di_base_jnt1/di_back0_jnt/di_bothArms_jnt/di_shoulder_r_jnt1/di_arm_r_jnt/di_elbow_r_jnt/di_wrist_r_jnt/di_fingers_r_jnt/di_fingerTip_r_jnt
+        weight: 1
+      - path: di_base_jnt1/di_back0_jnt/di_neck_jnt
+        weight: 1
+      - path: di_base_jnt1/di_back0_jnt/di_neck_jnt/di_head_jnt
+        weight: 1
+      - path: di_base_jnt1/di_back0_jnt/di_neck_jnt/di_head_jnt/di_headTip_jnt
+        weight: 1
+      - path: di_base_jnt1/di_hip_l_jnt
+        weight: 1
+      - path: di_base_jnt1/di_hip_l_jnt/di_knee_l_jnt
+        weight: 1
+      - path: di_base_jnt1/di_hip_l_jnt/di_knee_l_jnt/di_ankle_l_jnt
+        weight: 1
+      - path: di_base_jnt1/di_hip_l_jnt/di_knee_l_jnt/di_ankle_l_jnt/di_foot_l_jnt
+        weight: 1
+      - path: di_base_jnt1/di_hip_l_jnt/di_knee_l_jnt/di_ankle_l_jnt/di_foot_l_jnt/di_toes_l_jnt
+        weight: 1
+      - path: di_base_jnt1/di_hip_l_jnt/di_knee_l_jnt/di_ankle_l_jnt/di_foot_l_jnt/di_toes_l_jnt/di_toeTip_l_jnt
+        weight: 1
+      - path: di_base_jnt1/di_hip_r_jnt
+        weight: 1
+      - path: di_base_jnt1/di_hip_r_jnt/di_knee_r_jnt
+        weight: 1
+      - path: di_base_jnt1/di_hip_r_jnt/di_knee_r_jnt/di_ankle_r_jnt
+        weight: 1
+      - path: di_base_jnt1/di_hip_r_jnt/di_knee_r_jnt/di_ankle_r_jnt/di_foot_r_jnt
+        weight: 1
+      - path: di_base_jnt1/di_hip_r_jnt/di_knee_r_jnt/di_ankle_r_jnt/di_foot_r_jnt/di_toes_r_jnt
+        weight: 1
+      - path: di_base_jnt1/di_hip_r_jnt/di_knee_r_jnt/di_ankle_r_jnt/di_foot_r_jnt/di_toes_r_jnt/di_toeTip_r_jnt
+        weight: 1
+      - path: di_base_jnt1/di_tail0_jnt
+        weight: 1
+      - path: di_base_jnt1/di_tail0_jnt/di_tail1_jnt
+        weight: 1
+      - path: di_base_jnt1/di_tail0_jnt/di_tail1_jnt/di_tail2_jnt
+        weight: 1
+      - path: di_base_jnt1/di_tail0_jnt/di_tail1_jnt/di_tail2_jnt/di_tail3_jnt
+        weight: 1
+      - path: di_base_jnt1/di_tail0_jnt/di_tail1_jnt/di_tail2_jnt/di_tail3_jnt/di_tail4_jnt
+        weight: 1
+      - path: di_base_jnt1/di_tail0_jnt/di_tail1_jnt/di_tail2_jnt/di_tail3_jnt/di_tail4_jnt/di_tail4_jnt
+          1
+        weight: 1
+      - path: di_base_jnt1/di_tail0_jnt/di_tail1_jnt/di_tail2_jnt/di_tail3_jnt/di_tail4_jnt/di_tail4_jnt
+          1/di_tailTip_jnt
+        weight: 1
+      - path: DilophosaurusSmallFrill:Diloph_geo
+        weight: 1
+      maskType: 0
+      maskSource: {instanceID: 0}
     isReadable: 1
   meshes:
     lODScreenPercentages: []
-    globalScale: .00999999978
+    globalScale: 1
     meshCompression: 0
     addColliders: 0
     importBlendShapes: 1
