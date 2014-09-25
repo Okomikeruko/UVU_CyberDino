@@ -29,7 +29,7 @@ public class UserControl : MonoBehaviour {
 			return;
 		}
 
-		move.SetRun ( Input.GetAxis ("Vertical") );			
+		move.SetRun ( 1 );			
 		if(Input.touches.Length == 0)
 		{
 			move.SetTurn( Input.GetAxis("Horizontal") );
