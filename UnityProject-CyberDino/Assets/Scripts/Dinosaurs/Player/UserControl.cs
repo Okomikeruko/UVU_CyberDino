@@ -6,6 +6,7 @@ public class UserControl : MonoBehaviour {
 	private MotionControl move;
 	private DinoRagdoll ragdoll;
 	private Inventory inv;
+	private MeleeAttack melee;
 
 	public float AttackCooldown = 0.5f;
 	private float AttackCooldownElasped;
@@ -15,6 +16,7 @@ public class UserControl : MonoBehaviour {
 		move = GetComponent<MotionControl>();
 		ragdoll = GetComponent<DinoRagdoll> ();
 		inv = GetComponent<Inventory>();
+		melee = GetComponent<MeleeAttack> ();
 
 		AttackCooldownElasped = 0.0f;
 	}
@@ -79,6 +81,10 @@ public class UserControl : MonoBehaviour {
 		}
 
 		// Debug Keybinds
+		if (Input.GetKeyDown (KeyCode.Y)) 
+		{
+			melee.Fire ();
+		}
 		if (Input.GetKeyDown (KeyCode.R)) 
 		{
 			ragdoll.GoRagdoll();

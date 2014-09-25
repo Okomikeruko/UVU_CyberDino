@@ -37,6 +37,16 @@ public class NetworkAnimations : MonoBehaviour {
 
 	// added by Lee
 
+	public void AnimTriggerMelee()
+	{
+		netView.RPC ("AnimatorTriggerMelee", RPCMode.All);
+	}
+	[RPC]
+	void AnimatorTriggerMelee ()
+	{
+		anim.SetTrigger ("Melee");
+	}
+
 	public void AnimSetMelee(string melee, bool isAttacking){
 		if (isAttacking == true) {
 			attacking = 1;

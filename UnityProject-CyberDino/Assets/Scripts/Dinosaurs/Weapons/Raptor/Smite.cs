@@ -15,6 +15,10 @@ public class Smite : MeleeAttack {
 		Debug.Log ("Smite!");
 
 		//Play Animation/VFX
+		/* Animation trigger added by Lee*/
+		NetworkAnimations netanim = GetComponentInChildren<NetworkAnimations>();
+		Debug.Log ("This is happening");
+		netanim.AnimTriggerMelee ();
 
 		GameObject target = null;
 		Collider[] ListOfObjects = Physics.OverlapSphere (this.transform.position, range);
