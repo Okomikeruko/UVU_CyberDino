@@ -5,7 +5,10 @@ public class Napalm : Bomb {
 
     private NetworkGameHandler networkHandler;
     private int playerID;
-    
+	//private Transform napalmTransform = Napalm.transform;
+	[SerializeField]
+	private float DistanceDroppedBehind = 30f;
+
     // Use this for initialization
     void Start()
     {
@@ -16,14 +19,14 @@ public class Napalm : Bomb {
 	public override void Fire ()
 	{
 		Debug.Log ("Napalm!");
+
         GameObject Napalm = (GameObject)Network.Instantiate((GameObject)Resources.Load("Weapons/Bombs/Napalm"), 
-		                     this.transform.position, Quaternion.LookRotation (this.transform.forward), playerID);
-        // PlayFX()
-        
+		                     this.transform.position - (this.transform.forward * DistanceDroppedBehind), 
+		                      Quaternion.LookRotation (this.transform.forward), playerID);
     }
     
-    /*void PlayFX ()
+    void PlayFX ()
 	{
 		
-	}*/
+	}
 }

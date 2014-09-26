@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+
 public class Napalm_obj : MonoBehaviour {
 
     [SerializeField]
@@ -8,18 +9,18 @@ public class Napalm_obj : MonoBehaviour {
 
     void Update()
     {
-		
+
     }
 
     void OnTriggerEnter(Collider other)
     {
-		if (other.tag == "dino" || other.tag == "ai")
+        if (other.tag == "Dino" || other.tag == "Ai")
         {
-			Health health = other.GetComponent<Health>();
-            //Play VFX here
-            health.Damage(Napalm_Damage);
-            Debug.Log(other.name + "took Napalm_Damage!");
-            Network.Destroy(gameObject);
+			Health health = other.GetComponent<Health> ();
+			//Play VFX here
+			health.Damage(Napalm_Damage);
+			Debug.Log (other.name + "took Napalm_Damage!");
+			Network.Destroy (gameObject);
         }
     }
 
