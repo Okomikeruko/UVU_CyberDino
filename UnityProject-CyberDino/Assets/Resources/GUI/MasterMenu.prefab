@@ -97,6 +97,7 @@ Transform:
   - {fileID: 400004}
   - {fileID: 400008}
   m_Father: {fileID: 0}
+  m_RootOrder: 0
 --- !u!4 &400002
 Transform:
   m_ObjectHideFlags: 1
@@ -108,6 +109,7 @@ Transform:
   m_LocalScale: {x: 0, y: 0, z: 1}
   m_Children: []
   m_Father: {fileID: 400000}
+  m_RootOrder: 0
 --- !u!4 &400004
 Transform:
   m_ObjectHideFlags: 1
@@ -119,6 +121,7 @@ Transform:
   m_LocalScale: {x: 0, y: 0, z: 1}
   m_Children: []
   m_Father: {fileID: 400000}
+  m_RootOrder: 2
 --- !u!4 &400006
 Transform:
   m_ObjectHideFlags: 1
@@ -130,6 +133,7 @@ Transform:
   m_LocalScale: {x: 0, y: 0, z: 1}
   m_Children: []
   m_Father: {fileID: 400000}
+  m_RootOrder: 1
 --- !u!4 &400008
 Transform:
   m_ObjectHideFlags: 1
@@ -141,6 +145,7 @@ Transform:
   m_LocalScale: {x: 0, y: 0, z: 1}
   m_Children: []
   m_Father: {fileID: 400000}
+  m_RootOrder: 3
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -186,11 +191,11 @@ MonoBehaviour:
   levelIndex: 0
   buttonMoveSpeed: 2000
   dinoModels:
-  - {fileID: 100114, guid: 0736e65005f566241a3c33a7e46028fc, type: 2}
+  - {fileID: 100068, guid: 09107957ee5c94446974adb0f2847e61, type: 2}
   - {fileID: 100564, guid: 94bb14f2461b9b940bf8bd728de953a3, type: 2}
-  - {fileID: 100100, guid: b30757a975c52b143972d9a9f784c517, type: 2}
-  - {fileID: 100034, guid: 39c1f5d71f1ec7a40aec7cc93bddbea3, type: 2}
-  - {fileID: 100148, guid: 4b1311fc80bcb6a42842cc5f0231ed7c, type: 2}
+  - {fileID: 100064, guid: 1287ef6fc798bb641b9e411205dd3beb, type: 2}
+  - {fileID: 100078, guid: 4386e9c37a76e2b4eb6b051f42574f5c, type: 2}
+  - {fileID: 0}
   - {fileID: 100200, guid: 51fc98c3e31122f4688b68581b428d76, type: 2}
   rotateSpeed: 10
 --- !u!131 &13100000
