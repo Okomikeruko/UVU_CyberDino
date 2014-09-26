@@ -4,6 +4,7 @@ using System.Collections;
 public class DinoAnimationTriggers : MonoBehaviour {
 
 	private AcidSpit acidSpit;
+	private BuzzSaw buzzSaw;
 
 	enum dinoSound
 	{
@@ -23,6 +24,9 @@ public class DinoAnimationTriggers : MonoBehaviour {
 	{
 		if (DinoSound == dinoSound.Diloph) {
 			acidSpit = GetComponentInParent<AcidSpit> ();
+		}
+		if (DinoSound == dinoSound.Spino) {
+			buzzSaw = GetComponentInParent<BuzzSaw> ();
 		}
 	}
 
@@ -44,5 +48,22 @@ public class DinoAnimationTriggers : MonoBehaviour {
 	void spit()
 	{
 		acidSpit.SpitFX ();
+	}
+
+	void buzzsaw(string state)
+	{
+		switch (state) 
+		{
+			case "start":
+				// Engage rolling VFX
+				buzzSaw.SawFX (true);
+				break;
+			case "stop":
+				// Stop rolling VFX
+				buzzSaw.SawFX (false);
+				break;
+			default:
+				break;
+		}
 	}
 }

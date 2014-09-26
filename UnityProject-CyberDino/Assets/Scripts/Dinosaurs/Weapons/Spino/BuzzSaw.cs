@@ -12,7 +12,19 @@ public class BuzzSaw : MeleeAttack {
 		/* Animation trigger added by Lee*/
 		StartCoroutine (spin (duration));
 	}
-	
+
+	public void SawFX(bool on)
+	{
+		if (on) 
+		{
+			Debug.Log ("Buzz Saw start FX");
+		}
+		else
+		{
+			Debug.Log ("Buzz Saw end FX");
+		}
+	}
+
 	private IEnumerator spin (float seconds)
 	{
 		NetworkAnimations netanim = GetComponentInChildren<NetworkAnimations>();
