@@ -20,6 +20,13 @@ public class DinoCollisions : MonoBehaviour {
 			// Dinosaur on Dinosaur collision
 			if(collisionInfo.gameObject.tag == "Dino" || collisionInfo.gameObject.tag == "Ai")
 			{
+				// Move StickyBomb
+				var sb = collisionInfo.gameObject.GetComponentInChildren<StickyBombTimer>();
+				if(sb != null)
+				{
+					sb.MoveTo(gameObject);
+				}
+
 				// Apply damage
 				var relativeMass = 1.0f / (rigidbody.mass / ((collisionInfo.gameObject.rigidbody.mass + rigidbody.mass) / 2.0f));
 				if(collisionInfo.relativeVelocity.magnitude > CollisionDamageVelocityThreshold)
@@ -72,6 +79,11 @@ public class DinoCollisions : MonoBehaviour {
 						{
 							health.Damage(EnvironmentCollisionDamage * percent);
 						}
+						
+						// Damage object you ran into if it has health
+						var objHealth = collisionInfo.gameObject.GetComponent<Health>();
+						if(objHealth != null)
+							objHealth.Damage(EnvironmentCollisionDamage * percent);
 					}
 
 					rigidbody.velocity = Vector3.Reflect(rigidbody.velocity, contactSum.normalized);

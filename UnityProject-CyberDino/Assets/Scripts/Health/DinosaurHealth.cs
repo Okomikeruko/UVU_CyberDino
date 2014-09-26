@@ -1,7 +1,10 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 
 public class DinosaurHealth : Health {
+
+	[SerializeField]
+	private float RespawnDelay = 3.0f;
 
 	override public void OnDamage()
 	{	
@@ -15,8 +18,23 @@ public class DinosaurHealth : Health {
 
 	override public void OnDeath()
 	{
-		// GoRagdoll();
-		Debug.Log (gameObject.name + " died ... x_x");
+		StartCoroutine(deathclock(RespawnDelay));
+	}
+
+	IEnumerator deathclock(float duration)
+	{
+		var ragdoll = GetComponent<DinoRagdoll> ();
+		if(ragdoll != null) ragdoll.GoRagdoll ();
+		var mc = GetComponent<MotionControl> ();
+		mc.enabled = false;
+
+		yield return new WaitForSeconds(duration);
+
+		var rm = GetComponent<RespawnManager> ();
+		rm.UseRespawn ();
+		if(ragdoll != null) ragdoll.ResetRacer ();
+		mc.enabled = true;
+		Heal (Total);
 	}
 
 }

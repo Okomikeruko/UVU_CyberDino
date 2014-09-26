@@ -71,6 +71,7 @@ public class PlayerPickUp : MonoBehaviour {
 	//if not then switches to that weapon
 	public int switchCurrentWeapon(){
 		if(itemPickUps == null){
+
 		}
 		else if(currentWeapon == 0){
 			if(itemPickUps[1] != null)
