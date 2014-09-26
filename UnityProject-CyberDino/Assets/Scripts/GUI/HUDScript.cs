@@ -274,21 +274,21 @@ public class HUDScript : MonoBehaviour
 			else if(child.name == "ItemIcon1")
 			{
 				items[0] = child.gameObject;
-				items[0].transform.localScale = new Vector3(0.4f,0.4f,0.4f);
-				itemsPos[0] = child.localPosition;
+				//items[0].transform.localScale = new Vector3(0.4f,0.4f,0.4f);
+				//itemsPos[0] = child.localPosition;
 				//Debug.Log("pos 0 " + itemsPos[0]);
 			}
 			else if(child.name == "ItemIcon2")
 			{
 				items[1] = child.gameObject;
-				items[1].transform.localScale = new Vector3(0.4f,0.4f,0.4f);
-				itemsPos[1] = child.localPosition;
+				//items[1].transform.localScale = new Vector3(0.4f,0.4f,0.4f);
+				//itemsPos[1] = child.localPosition;
 			}
 			else if(child.name == "ItemIcon3")
 			{
 				items[2] = child.gameObject;
-				items[2].transform.localScale = new Vector3(0.4f,0.4f,0.4f);
-				itemsPos[2] = child.localPosition;
+				//items[2].transform.localScale = new Vector3(0.4f,0.4f,0.4f);
+				//itemsPos[2] = child.localPosition;
 			}
 
 
@@ -303,7 +303,7 @@ public class HUDScript : MonoBehaviour
 		testList = new List<PickUpTypes>();
 		testList.Add(PickUpTypes.Health);
 		testList.Add(PickUpTypes.Weapon);
-		//testList.Add(PickUpTypes.Weapon);
+		testList.Add(PickUpTypes.Weapon);
 		
 		UpdateItems(testList);
 	}
@@ -398,7 +398,7 @@ public class HUDScript : MonoBehaviour
 		healthGrp.transform.position = Camera.main.ScreenToWorldPoint(new Vector3(healthPos.x, healthPos.y, 20));
 		healthGrp.transform.localRotation = Camera.main.transform.rotation;
 		healthCover.guiTexture.pixelInset = ResizeRect(new Rect(1, 75, 30, 15));
-		
+
 		dinoIcon.guiTexture.pixelInset = ResizeRect(new Rect(2.5f, 82.5f, 7, 13));
 		
 		healthPercent.guiText.pixelOffset = ResizeVec2( new Vector2(16, 90));
@@ -431,10 +431,10 @@ public class HUDScript : MonoBehaviour
 		//itemsPos[0] = new Vector3(healthGrp.transform.position.x, healthGrp.transform.position.y, healthGrp.transform.position.z);
 		//items[0].transform.localPosition = new Vector3(0, -5, 0);
 
-		if(Input.GetKeyDown(KeyCode.Z))
+		/*if(Input.GetKeyDown(KeyCode.Z))
 		{
 			ChangeCurrentItem();
-		}
+		}*/
 
 		if(Input.GetKeyDown(KeyCode.Escape))
 		{
@@ -521,7 +521,10 @@ public class HUDScript : MonoBehaviour
 			//return new Rect(_pos.x, _pos.y, percentResults, _pos.height);
 			healthGrpBar.transform.localScale = new Vector3( _pos.x * percentResults, _pos.y, _pos.z);
 		if(changePoint > percentResults)
+		{
+			healthGrpBar.transform.localScale = new Vector3(changePoint, _pos.y, _pos.z);
 			healthGrpBar.transform.localEulerAngles = Vector3.Lerp(new Vector3(0, 180,70), healthGrpBarRotation, percentResults / changePoint);
+		}
 		else 
 			healthGrpBar.transform.localEulerAngles = healthGrpBarRotation;
 
@@ -709,7 +712,7 @@ public class HUDScript : MonoBehaviour
 		
 	}
 	
-	public void ChangeCurrentItem()
+/*	public void ChangeCurrentItem()
 	{
 		
 		StartCoroutine(ChangeCurrentItemHelper());
@@ -773,7 +776,7 @@ public class HUDScript : MonoBehaviour
 			itemsPos[2] = transferPos;
 		}
 
-	}
+	}*/
 	
 	private void TurnOnOffMenu()
 	{

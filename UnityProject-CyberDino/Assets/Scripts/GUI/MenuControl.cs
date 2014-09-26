@@ -642,6 +642,7 @@ public class MenuControl : MonoBehaviour
 				}
 				networkHandler.UpdatePlayerInformation(myInfo);
 				
+				Destroy(dinoSelected);
 				dinoSelected = (GameObject)Instantiate(dinoModels[dinoIndex], new Vector3(Screen.width, Screen.height, 0), Quaternion.identity);
 			}
 			
@@ -658,6 +659,7 @@ public class MenuControl : MonoBehaviour
 				}
 				networkHandler.UpdatePlayerInformation(myInfo);
 				
+				Destroy(dinoSelected);
 				dinoSelected = (GameObject)Instantiate(dinoModels[dinoIndex], new Vector3(Screen.width, Screen.height, 0), Quaternion.identity);
 			}
 			

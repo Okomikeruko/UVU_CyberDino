@@ -52,7 +52,7 @@ public class TeleportSlam : MeleeAttack {
 			if(Physics.SphereCast(this.transform.position, 20.0f, direction, out hit, 20.0f));
 			if(hit.transform != null && (hit.transform.tag == "Dino" || hit.transform.tag == "Ai"))
 			{
-				rigidbody.velocity = Vector3.zero;
+				//rigidbody.velocity = Vector3.zero;
 				//Debug.Log(hit.collider.)
 				Health health = hit.transform.GetComponent<Health>();
 				health.Damage(damage);
@@ -65,7 +65,7 @@ public class TeleportSlam : MeleeAttack {
 			{
 				//Debug.Log(hit.transform.name);
 				//Debug.Log("stop!");
-				rigidbody.velocity = Vector3.zero;
+				//rigidbody.velocity = Vector3.zero;
 				break;
 			}
 			
