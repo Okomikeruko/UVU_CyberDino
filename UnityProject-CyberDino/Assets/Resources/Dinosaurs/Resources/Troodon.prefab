@@ -1232,6 +1232,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7ccf1b479ffddb345847c8e72659ca60, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  range: 50
+  force: 10
+  damage: 20
 --- !u!114 &11400014
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1327,6 +1330,8 @@ MonoBehaviour:
   ragdoll: {fileID: 0}
   dinoAnimator: {fileID: 0}
   ragdollBones: []
+  RagdollHead: {fileID: 0}
+  RagdollTorso: {fileID: 0}
 --- !u!114 &11400028
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1395,7 +1400,7 @@ CapsuleCollider:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100124}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: 4860c068e3727a24880f4da0c745576a, type: 2}
   m_IsTrigger: 0
   m_Enabled: 1
   m_Radius: 1.03999996
@@ -1408,7 +1413,7 @@ CapsuleCollider:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100124}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: 4860c068e3727a24880f4da0c745576a, type: 2}
   m_IsTrigger: 0
   m_Enabled: 1
   m_Radius: 1.32000005

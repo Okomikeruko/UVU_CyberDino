@@ -27,9 +27,12 @@ public class MotionControl : MonoBehaviour {
 	private float inputRotationAxis;
 	private float InputDeadzone = 0.1f;
 
+	private Collider[] colliders;
+
 	void Start()
 	{
 		netanim = GetComponentInChildren<NetworkAnimations>();
+		colliders = GetComponents<Collider>();
 	}
 
 	// Update is called once per frame
@@ -89,16 +92,23 @@ public class MotionControl : MonoBehaviour {
 		netanim.AnimSetDirection("Direction", inputRotationAxis);
 	}
 
+
 	void OnCollisionStay(Collision collisionInfo) 
 	{
-		if (!networkView.isMine) {
-			return;
-		}
-
+		Vector3 collisionNormal = Vector3.zero;
 		foreach (var col in collisionInfo.contacts) {
-			float cosAngle = Vector3.Dot(col.normal, Vector3.Normalize(-Physics.gravity));
-			if(cosAngle > MaxSurfaceAngle)
+			collisionNormal += col.normal;
+		}
+		collisionNormal = Vector3.Normalize(collisionNormal);
+		
+		float cosAngle = Vector3.Dot(collisionNormal, Vector3.Normalize(-Physics.gravity));
+		if(cosAngle > MaxSurfaceAngle)
+		{
+			// On Ground
+			foreach(var collider in colliders)
+			{
 				onGround = true;
+			}
 		}
 	}
 	
