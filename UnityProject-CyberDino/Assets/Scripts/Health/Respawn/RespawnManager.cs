@@ -44,20 +44,21 @@ public class RespawnManager : MonoBehaviour
 		}
 	}
 
-	public void UseRespawn()
+	public IEnumerator Respawn()
 	{
-		StartCoroutine (Respawn ());
-	}
-	
-	IEnumerator Respawn()
-	{
+		gameObject.GetComponentInChildren<SkinnedMeshRenderer>().enabled = false;
 		Debug.Log("Respawning. Please wait....");
 		gameObject.transform.position = CurrentRespawnNode.transform.position;
 		gameObject.transform.rotation = CurrentRespawnNode.transform.rotation;
+		yield return new WaitForSeconds(0.5f);
 		if (racerRespawnParticalSystem != null){
-			StartCoroutine(PlayParticleSystem(racerRespawnParticalSystem));
+			Debug.Log("Player Respawn Animation");
+			yield return StartCoroutine(PlayParticleSystem(racerRespawnParticalSystem));
+		}else{
+			yield return new WaitForSeconds(1.0f);
 		}
 		Debug.Log("Ready to go!");
+		gameObject.GetComponentInChildren<SkinnedMeshRenderer>().enabled = true;
 		yield return null;
 	}
 
