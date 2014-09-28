@@ -59,6 +59,7 @@ public class DinoRagdoll : MonoBehaviour {
 			playJointLimitStats[i,3] = playJoints[i].swing2Limit.limit;
 		}
 		// Ensure Dino Prefab settings ready to race.
+		setBoneMass ();
 		ResetRacer ();
 	}
 
@@ -223,6 +224,43 @@ public class DinoRagdoll : MonoBehaviour {
 			shell.transform.position = ragdoll.transform.position;
 			ragdollUpdate = ResetRacer;
 		}
+	}
+
+	private void setBoneMass ()
+	{
+		float mass = GetComponent<Rigidbody> ().mass;
+		float totalVolume = 0.0F;
+		foreach(Rigidbody ragdoll in ragdollBones)
+		{
+			totalVolume += getColliderVolume(ragdoll);
+		}
+		foreach(Rigidbody ragdoll in ragdollBones)
+		{
+			float volume = getColliderVolume(ragdoll);
+			ragdoll.mass = mass * volume / totalVolume;
+		}
+	}
+
+	private float getColliderVolume(Rigidbody r)
+	{
+		float volume = 0.0F;
+		BoxCollider[] boxes = r.GetComponentsInChildren<BoxCollider>();
+		foreach (BoxCollider box in boxes)
+		{
+			volume += box.size.x * box.size.y * box.size.z; 
+		}
+		SphereCollider[] sphs = r.GetComponentsInChildren<SphereCollider>();
+		foreach (SphereCollider sph in sphs)
+		{
+			volume += (4/3) * Mathf.PI * Mathf.Pow (sph.radius, 3);
+		}
+		CapsuleCollider[] caps = r.GetComponentsInChildren<CapsuleCollider>();
+		foreach (CapsuleCollider cap in caps)
+		{
+			float a = (cap.height - (2 * cap.radius) > 0) ? cap.height - (2 * cap.radius) : 0;
+			volume += Mathf.PI * Mathf.Pow (cap.radius, 2) * ((4/3)* cap.radius + a); 
+		}
+		return volume;
 	}
 
 	private void empty(){}
