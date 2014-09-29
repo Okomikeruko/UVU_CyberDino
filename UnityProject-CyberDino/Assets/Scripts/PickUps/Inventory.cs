@@ -2,10 +2,17 @@ using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 
-public enum PickUpTypes { Weapon, Health, Turbo };
+public enum PickUpTypes { Weapon, Health, Turbo, Bomb };
 
 public class Inventory : MonoBehaviour {
 
+	GameObject HUD;
+	HUDScript myHud;
+
+	void Start(){
+		HUD = GameObject.Find ("Hud Camera");
+		myHud = HUD.GetComponent<HUDScript>();
+	}
 	[SerializeField]
 	private int MaximumPickupCount = 3;
 
@@ -14,8 +21,16 @@ public class Inventory : MonoBehaviour {
 	public void AddPickUp(PickUpTypes type)
 	{
 		if(PickUps.Count < MaximumPickupCount)
-		{
+		{ 
+			//If you pickup a weapon, and you have a weapon already
+			//That weapon turns into a Bomb
+			if(PickUps.Contains(PickUpTypes.Weapon)){
+				PickUps.Remove(PickUpTypes.Weapon);
+				PickUps.Add(PickUpTypes.Bomb);
+				PickUps.Add(PickUpTypes.Bomb);
+			}
 			PickUps.Add(type);
+			myHud.UpdateItems(PickUps);
 		}
 	}
 
@@ -51,6 +66,11 @@ public class Inventory : MonoBehaviour {
 			PickUps.Add(type);
 		}
 		return false;
+	}
+
+	//Drops all items
+	public void dropAll(){
+		PickUps.Clear();
 	}
 
 	public int Count(PickUpTypes type)

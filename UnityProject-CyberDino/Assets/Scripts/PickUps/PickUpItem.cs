@@ -32,6 +32,7 @@ public class PickUpItem : MonoBehaviour
 			var inv = other.GetComponent<Inventory>();
 			if(inv != null)
 				inv.AddPickUp(currentType);
+
         }
         yield return new WaitForSeconds(waitTime);
 
@@ -49,15 +50,15 @@ public class PickUpItem : MonoBehaviour
         {
             case 1:
                 this.renderer.material.color = Color.blue;
-				currentType = PickUpTypes.Turbo;
+				currentType = PickUpTypes.Weapon;
                 break;
             case 2:
 				this.renderer.material.color = Color.green;
-				currentType = PickUpTypes.Health;
+				currentType = PickUpTypes.Turbo;
 	            break;
 	        case 3:
 				this.renderer.material.color = Color.red;
-				currentType = PickUpTypes.Weapon;
+				currentType = PickUpTypes.Health;
 	            break;
             default:				
                 break;
