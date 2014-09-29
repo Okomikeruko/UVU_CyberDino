@@ -130,88 +130,6 @@ Prefab:
   m_RootGameObject: {fileID: 1197003957}
   m_IsPrefabParent: 0
   m_IsExploded: 1
---- !u!1 &614642519
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 100000, guid: 0a4699168cf361b44a4d8dc13300ad76, type: 2}
-  m_PrefabInternal: {fileID: 0}
-  serializedVersion: 4
-  m_Component:
-  - 4: {fileID: 614642520}
-  - 114: {fileID: 614642522}
-  - 148: {fileID: 614642523}
-  m_Layer: 0
-  m_Name: MasterMenu
-  m_TagString: Menu
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &614642520
-Transform:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 400000, guid: 0a4699168cf361b44a4d8dc13300ad76, type: 2}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 614642519}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 3
---- !u!114 &614642522
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 11400002, guid: 0a4699168cf361b44a4d8dc13300ad76,
-    type: 2}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 614642519}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b98ca4a4bd0dd5040951be6d21a1a55b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  mySkin: {fileID: 11400000, guid: f9cd5d6b739287443973e3770477dc1f, type: 2}
-  menuSelect: 0
-  dinos:
-  - Diloph
-  - Hesp
-  - Raptor
-  - Spino
-  - TRex
-  - Troodon
-  levelTextures:
-  - {fileID: 2800000, guid: c43eafb4df2b8b24e8a981c7852db787, type: 3}
-  readyMe: 0
-  readyAll: 1
-  networkHandlerObject: {fileID: 100000, guid: e6f376646afe95a4ab3370abc3a29b99, type: 2}
-  singlePlayer: 1
-  playAgain: 0
-  playerName: 
-  serverName: 
-  dinoIndex: 0
-  levelIndex: 0
-  buttonMoveSpeed: 2000
-  dinoModels:
-  - {fileID: 100068, guid: 15dad461475ef954785b66356ee923d0, type: 2}
-  - {fileID: 100564, guid: 94bb14f2461b9b940bf8bd728de953a3, type: 2}
-  - {fileID: 100064, guid: 6cf6f780f4d2b56479e1872b180a4940, type: 2}
-  - {fileID: 100078, guid: 9b1c284935da4244fa48848a942c00dc, type: 2}
-  - {fileID: 100040, guid: 0e1355ee5f8b712408677eddfec3a8a8, type: 2}
-  - {fileID: 100200, guid: 51fc98c3e31122f4688b68581b428d76, type: 2}
-  rotateSpeed: 10
---- !u!148 &614642523
-NetworkView:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 614642519}
-  m_Enabled: 1
-  m_StateSynchronization: 1
-  m_Observed: {fileID: 614642520}
-  m_ViewID:
-    m_ID: 2
-    m_Type: 1
 --- !u!1 &1197003957
 GameObject:
   m_ObjectHideFlags: 0
@@ -332,6 +250,89 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
+--- !u!1 &1877066628
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 100000, guid: 0a4699168cf361b44a4d8dc13300ad76, type: 2}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 1877066629}
+  - 114: {fileID: 1877066631}
+  - 148: {fileID: 1877066630}
+  m_Layer: 0
+  m_Name: MasterMenu
+  m_TagString: Menu
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1877066629
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 400000, guid: 0a4699168cf361b44a4d8dc13300ad76, type: 2}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1877066628}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 3
+--- !u!148 &1877066630
+NetworkView:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 14800000, guid: 0a4699168cf361b44a4d8dc13300ad76,
+    type: 2}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1877066628}
+  m_Enabled: 1
+  m_StateSynchronization: 1
+  m_Observed: {fileID: 1877066629}
+  m_ViewID:
+    m_ID: 2
+    m_Type: 1
+--- !u!114 &1877066631
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 11400002, guid: 0a4699168cf361b44a4d8dc13300ad76,
+    type: 2}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1877066628}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b98ca4a4bd0dd5040951be6d21a1a55b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mySkin: {fileID: 11400000, guid: f9cd5d6b739287443973e3770477dc1f, type: 2}
+  menuSelect: 0
+  dinos:
+  - Diloph
+  - Hesp
+  - Raptor
+  - Diloph
+  - TRex
+  - Troodon
+  levelTextures:
+  - {fileID: 2800000, guid: c43eafb4df2b8b24e8a981c7852db787, type: 3}
+  readyMe: 0
+  readyAll: 1
+  networkHandlerObject: {fileID: 100000, guid: e6f376646afe95a4ab3370abc3a29b99, type: 2}
+  singlePlayer: 1
+  playAgain: 0
+  playerName: 
+  serverName: 
+  dinoIndex: 0
+  levelIndex: 0
+  buttonMoveSpeed: 2000
+  dinoModels:
+  - {fileID: 100068, guid: 15dad461475ef954785b66356ee923d0, type: 2}
+  - {fileID: 100564, guid: 94bb14f2461b9b940bf8bd728de953a3, type: 2}
+  - {fileID: 100064, guid: 6cf6f780f4d2b56479e1872b180a4940, type: 2}
+  - {fileID: 100078, guid: 9b1c284935da4244fa48848a942c00dc, type: 2}
+  - {fileID: 100040, guid: b3cd13b42e4c3124ea0f8967b7ef8fe2, type: 2}
+  - {fileID: 100200, guid: 51fc98c3e31122f4688b68581b428d76, type: 2}
+  rotateSpeed: 10
 --- !u!1 &1999964434
 GameObject:
   m_ObjectHideFlags: 0

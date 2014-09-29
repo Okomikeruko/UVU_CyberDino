@@ -1,6 +1,7 @@
-﻿//by Robert Reed
+//by Robert Reed
 using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 public class TeleportSlam : MeleeAttack {
 
@@ -11,7 +12,9 @@ public class TeleportSlam : MeleeAttack {
 	[SerializeField]
 	private float damage = 25;
 
-	private RaycastHit hit;
+	private RaycastHit[] hit;
+	
+	private bool somethingHit = false;
 
 	public override void Fire ()
 	{
@@ -22,10 +25,6 @@ public class TeleportSlam : MeleeAttack {
 
 	private IEnumerator slam (float seconds)
 	{
-		/*NetworkAnimations netanim = GetComponentInChildren<NetworkAnimations>();
-		netanim.AnimSetMelee ("Melee", true);
-		yield return new WaitForSeconds(seconds);
-		netanim.AnimSetMelee ("Melee", false);*/
 
 		float sec = seconds;
 		
@@ -34,38 +33,43 @@ public class TeleportSlam : MeleeAttack {
 		DinoCollisions dinoCol = GetComponent<DinoCollisions>();
 		
 		dinoCol.enabled = false;
-		
-		Debug.Log(dinoCol.enabled);
 
 		NetworkAnimations netanim = GetComponentInChildren<NetworkAnimations>();
 
 		netanim.AnimSetMelee ("Melee", true);
 
+		DinoCollisions otherCol = null;
 		
 		while(sec > 0)
 		{
 			direction = transform.TransformDirection(Vector3.forward);
 			
 			
-			//Debug.Log("go");
+			//if(Physics.SphereCastAll(this.transform.position, 5.0f, direction, out hit, 20.0f));
+			hit = Physics.SphereCastAll(this.transform.position, 10.0f, direction, 20.0f);
 			
-			if(Physics.SphereCast(this.transform.position, 20.0f, direction, out hit, 20.0f));
-			if(hit.transform != null && (hit.transform.tag == "Dino" || hit.transform.tag == "Ai"))
+			foreach(RaycastHit _ray in hit)
 			{
-				//rigidbody.velocity = Vector3.zero;
-				//Debug.Log(hit.collider.)
-				Health health = hit.transform.GetComponent<Health>();
-				health.Damage(damage);
 				
-				//Debug.Log("stop!");
-				break;
-				
+					if(_ray.transform.tag == "Dino" || _ray.transform.tag == "Ai")
+					{
+						otherCol = _ray.transform.GetComponent<DinoCollisions>();
+						otherCol.enabled = false;
+							
+						if(somethingHit == false)
+						{
+							Debug.Log("hit " + _ray.transform.name);
+							Health health = _ray.transform.GetComponent<Health>();
+							health.Damage(damage);
+						}
+						
+						somethingHit = true;
+						break;
+					}
 			}
-			else if(hit.transform != null && hit.transform.tag == "Untagged")
+			
+			if(somethingHit == true)
 			{
-				//Debug.Log(hit.transform.name);
-				//Debug.Log("stop!");
-				//rigidbody.velocity = Vector3.zero;
 				break;
 			}
 			
@@ -76,11 +80,14 @@ public class TeleportSlam : MeleeAttack {
 			yield return null;
 		}
 		
+		yield return new WaitForSeconds(0.5f);
+		
+		if(otherCol != null)
+			otherCol.enabled = true;
+		
 		dinoCol.enabled = true;
 		
-		Debug.Log(dinoCol.enabled);
-
-		//yield return new WaitForSeconds(seconds);
+		somethingHit = false;
 
 		netanim.AnimSetMelee ("Melee", false);
 	}

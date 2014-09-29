@@ -90,6 +90,8 @@ public class GlowLines : MonoBehaviour
 					//randomize the next starting point on the starting side of the screen
 					startPos = SetStartPosition(_obj);
 					endPos = startPos;
+					
+					yield return new WaitForSeconds(0.5f);
 				}
 				//else
 				else

@@ -208,6 +208,12 @@ public class HUDScript : MonoBehaviour
 		healthBorderObjs[1] = CreateGUITxtr("Health Border p2", healthBorderGfx, new Vector3(0, 0, 0));
 		healthBorderObjs[2] = CreateGUITxtr("Health Border p3", healthBorderGfx, new Vector3(0, 0, 0));
 		healthBorderObjs[3] = CreateGUITxtr("Health Border p4", healthBorderGfx, new Vector3(0, 0, 0));
+		
+		for(int i = 0; i < healthBarObjs.Length; i++)
+		{
+			healthBarObjs[i].layer = 0;
+			healthBorderObjs[i].layer = 0;
+		}
 
 		//create guitextures for the player names
 		playerNamesObjs = new GameObject[4];
@@ -274,21 +280,14 @@ public class HUDScript : MonoBehaviour
 			else if(child.name == "ItemIcon1")
 			{
 				items[0] = child.gameObject;
-				//items[0].transform.localScale = new Vector3(0.4f,0.4f,0.4f);
-				//itemsPos[0] = child.localPosition;
-				//Debug.Log("pos 0 " + itemsPos[0]);
 			}
 			else if(child.name == "ItemIcon2")
 			{
 				items[1] = child.gameObject;
-				//items[1].transform.localScale = new Vector3(0.4f,0.4f,0.4f);
-				//itemsPos[1] = child.localPosition;
 			}
 			else if(child.name == "ItemIcon3")
 			{
 				items[2] = child.gameObject;
-				//items[2].transform.localScale = new Vector3(0.4f,0.4f,0.4f);
-				//itemsPos[2] = child.localPosition;
 			}
 
 
@@ -303,7 +302,7 @@ public class HUDScript : MonoBehaviour
 		testList = new List<PickUpTypes>();
 		testList.Add(PickUpTypes.Health);
 		testList.Add(PickUpTypes.Weapon);
-		testList.Add(PickUpTypes.Weapon);
+		//testList.Add(PickUpTypes.Weapon);
 		
 		UpdateItems(testList);
 	}
@@ -337,10 +336,6 @@ public class HUDScript : MonoBehaviour
 				mapPosObjs[3].SetActive(true);
 			}
 		}
-		
-		
-		positionObjs.guiTexture.pixelInset = ResizeRect(new Rect(13, 77, 5, 5));
-		positionObjs.guiTexture.texture = hudGfx[racePositions[dinoTrackingScript.playerNum] - 1];
 		
 		/*lapObjs[0].guiTexture.pixelInset = ResizeRect(new Rect(80, 5, 5, 5));
 		lapObjs[1].guiTexture.pixelInset = ResizeRect(new Rect(86, 6, 1, 3));
@@ -405,26 +400,51 @@ public class HUDScript : MonoBehaviour
 		healthPercent.guiText.fontSize = (int)(5.0f * yMulti);
 		
 		Rect healthSize = ResizeRect(new Rect(20, 85, .11f, .2f));
-		SetPlayerHealth(new Vector3( 1, 1.1f, 1), dinoTrackingScript.playerNum);
-
-		if(dinoTrackingScript.playerNum != 0)
-			AttachHealth(0);
-		if(dinoTrackingScript.playerNum != 1)
-			AttachHealth(1);
-		if(dinoTrackingScript.playerNum != 2)
-			AttachHealth(2);
-		if(dinoTrackingScript.playerNum != 3)
-			AttachHealth(3);
+		
+		if(raceDinos[dinoTrackingScript.playerNum] != null)
+			SetPlayerHealth(new Vector3( 1, 1.1f, 1), dinoTrackingScript.playerNum);
+			
+		if(raceDinos[0] != null)
+		{
+			if(dinoTrackingScript.playerNum != 0)
+				AttachHealth(0);
+			mapPosObjs[0].guiTexture.pixelInset = SetMapPosition(mapInfo.StartPointPos, raceDinos[0]);
+		
+		}
+		if(raceDinos[1] != null)
+		{
+			if(dinoTrackingScript.playerNum != 1)
+				AttachHealth(1);
+			mapPosObjs[1].guiTexture.pixelInset = SetMapPosition(mapInfo.StartPointPos, raceDinos[1]);
+			
+		}
+		if(raceDinos[2] != null)
+		{
+			if(dinoTrackingScript.playerNum != 2)
+				AttachHealth(2);
+			mapPosObjs[2].guiTexture.pixelInset = SetMapPosition(mapInfo.StartPointPos, raceDinos[2]);
+			
+		}
+		if(raceDinos[3] != null)
+		{
+			if(dinoTrackingScript.playerNum != 3)
+				AttachHealth(3);
+			mapPosObjs[3].guiTexture.pixelInset = SetMapPosition(mapInfo.StartPointPos, raceDinos[3]);
+			
+		}
 
 		mapObj.guiTexture.pixelInset = ResizeRect(mapInfo.MapPos);
-
-		mapPosObjs[0].guiTexture.pixelInset = SetMapPosition(mapInfo.StartPointPos, raceDinos[0]);
-		mapPosObjs[1].guiTexture.pixelInset = SetMapPosition(mapInfo.StartPointPos, raceDinos[1]);
-		mapPosObjs[2].guiTexture.pixelInset = SetMapPosition(mapInfo.StartPointPos, raceDinos[2]);
-		mapPosObjs[3].guiTexture.pixelInset = SetMapPosition(mapInfo.StartPointPos, raceDinos[3]);
-
 		
-		int itemIndex = 10;
+		//Debug.Log(positionObjs.guiTexture.texture);
+//		Debug.Log(hudGfx[racePositions[dinoTrackingScript.playerNum] - 1]);
+		//Debug.Log(racePositions[dinoTrackingScript.playerNum] - 1);
+		//Debug.Log(dinoTrackingScript.playerNum);
+		//if((racePositions[dinoTrackingScript.playerNum] - 1) != null)
+		if(hudGfx[racePositions[dinoTrackingScript.playerNum] - 1] != null)
+		{
+			positionObjs.guiTexture.pixelInset = ResizeRect(new Rect(13, 77, 5, 5));
+			positionObjs.guiTexture.texture = hudGfx[racePositions[dinoTrackingScript.playerNum] - 1];
+		}
 		
 
 		//items[0].transform.localPosition
@@ -565,6 +585,7 @@ public class HUDScript : MonoBehaviour
 			playerNamesObjs[_index].guiText.pixelOffset = new Vector2(0, 0);
 			playerNamesObjs[_index].guiText.fontSize = (int)(0);
 		}
+		
 	}
 	
 	public void EndRace()
@@ -711,72 +732,6 @@ public class HUDScript : MonoBehaviour
 		}
 		
 	}
-	
-/*	public void ChangeCurrentItem()
-	{
-		
-		StartCoroutine(ChangeCurrentItemHelper());
-	}
-	
-	private IEnumerator ChangeCurrentItemHelper()
-	{
-
-		float move = 0.0f;
-
-		if(itemCount == 2)
-		{
-			while(true)
-			{
-				//Debug.Log(move);
-				items[0].transform.localPosition = Vector3.Lerp(itemsPos[0], itemsPos[1], move);
-				items[1].transform.localPosition = Vector3.Lerp(itemsPos[1], itemsPos[0], move);
-				
-				
-				if(move >= 1)
-				{
-					break;
-				}
-				
-				move += Time.deltaTime;
-				
-				yield return null;
-			}
-			
-			Vector3 transferPos;
-			
-			transferPos = itemsPos[0];
-			itemsPos[0] = itemsPos[1];
-			itemsPos[1] = transferPos;
-		}
-		else if(itemCount == 3)
-		{
-			while(true)
-			{
-				//Debug.Log(move);
-				items[0].transform.localPosition = Vector3.Lerp(itemsPos[0], itemsPos[1], move);
-				items[1].transform.localPosition = Vector3.Lerp(itemsPos[1], itemsPos[2], move);
-				items[2].transform.localPosition = Vector3.Lerp(itemsPos[2], itemsPos[0], move);
-
-
-				if(move >= 1)
-				{
-					break;
-				}
-
-				move += 3 * Time.deltaTime;
-
-				yield return null;
-			}
-
-			Vector3 transferPos;
-
-			transferPos = itemsPos[0];
-			itemsPos[0] = itemsPos[1];
-			itemsPos[1] = itemsPos[2];
-			itemsPos[2] = transferPos;
-		}
-
-	}*/
 	
 	private void TurnOnOffMenu()
 	{
