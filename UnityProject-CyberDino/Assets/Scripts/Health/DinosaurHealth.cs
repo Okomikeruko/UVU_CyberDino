@@ -30,9 +30,10 @@ public class DinosaurHealth : Health {
 
 		yield return new WaitForSeconds(duration);
 
-		var rm = GetComponent<RespawnManager> ();
-		rm.UseRespawn ();
 		if(ragdoll != null) ragdoll.ResetRacer ();
+		mc.enabled = false; //ragdoll.ResetRacer enabled this, so the dino starts moving before respawn finished. 
+		var rm = GetComponent<RespawnManager> ();
+		yield return StartCoroutine(rm.Respawn());
 		mc.enabled = true;
 		Heal (Total);
 	}

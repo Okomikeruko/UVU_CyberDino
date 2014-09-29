@@ -13,7 +13,13 @@ public class DinoCollisions : MonoBehaviour {
 	[SerializeField]
 	private float ControlLockTime = .25f;
 
+	void Start() {
+	}
+
 	void OnCollisionEnter(Collision collisionInfo) {
+
+		if(enabled == false)
+			return;
 
 		if(networkView.isMine)
 		{
@@ -39,21 +45,10 @@ public class DinoCollisions : MonoBehaviour {
 					}
 				}
 
-				/*
-				// Conservation of momentum:
-				var v1 = rigidbody.velocity;
-				var m1 = rigidbody.mass;
-				var v2 = collisionInfo.gameObject.rigidbody.velocity;
-				var m2 = collisionInfo.gameObject.rigidbody.mass;
-				var v1f = (m1 - m2) / (m1 + m2) * v1 + (2.0f * m2) / (m1 + m2) * v2;
-				rigidbody.velocity = v1f;
-				*/
+				// Leave dino to dino collisions to the physics engine (Dinosaur collision material bounciness
 
-				// Invert velocity... Inaccurate and can have some strange behaviour but a much more pronounced effect
-				rigidbody.velocity = -rigidbody.velocity * relativeMass * .5f;
-
-				var mc = GetComponent<MotionControl>();
-				mc.LockInput(ControlLockTime);
+				//var mc = GetComponent<MotionControl>();
+				//mc.LockInput(ControlLockTime);
 			}
 
 			// Dinosaur on Anything Else
@@ -86,9 +81,16 @@ public class DinoCollisions : MonoBehaviour {
 							objHealth.Damage(EnvironmentCollisionDamage * percent);
 					}
 
-					rigidbody.velocity = Vector3.Reflect(rigidbody.velocity, contactSum.normalized);
 
-					mc.LockInput(ControlLockTime);
+					Vector3 averageCollisionPoint = Vector3.zero;
+					foreach(var point in collisionInfo.contacts)
+					{
+						averageCollisionPoint += point.point;
+					}
+					averageCollisionPoint /= (float) collisionInfo.contacts.Length;
+					rigidbody.AddForceAtPosition((Vector3.Reflect(rigidbody.velocity, contactSum.normalized) - rigidbody.velocity) * 1.5f, averageCollisionPoint, ForceMode.VelocityChange);
+
+					//mc.LockInput(ControlLockTime);
 				}
 			}
 		}

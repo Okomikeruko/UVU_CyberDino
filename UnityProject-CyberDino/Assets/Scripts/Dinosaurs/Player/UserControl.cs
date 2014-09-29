@@ -12,6 +12,9 @@ public class UserControl : MonoBehaviour {
 	public float AttackCooldown = 0.5f;
 	private float AttackCooldownElasped;
 
+	private float steeringMultiplier = 1.0f;
+
+
 	void OnEnable()
 	{
 		move = GetComponent<MotionControl>();
@@ -34,35 +37,32 @@ public class UserControl : MonoBehaviour {
 		}
 
 		move.SetRun ( 1 );			
-		if(Input.touches.Length == 0)
-		{
-			move.SetTurn( Input.GetAxis("Horizontal") );
+		move.SetTurn( Input.GetAxis("Horizontal") * steeringMultiplier );
 
-		}
 		if(Input.GetButton("Jump"))
 		{
 			move.Jump ();
 		}
 
+		var triggers = Input.GetAxis("Triggers");
+
 		AttackCooldownElasped += Time.deltaTime;
 		if(AttackCooldownElasped > AttackCooldown)
 		{
-			if(Input.GetButton("Melee"))
+			if(Input.GetButton("Melee") || triggers > 0.5f)
 			{
 				if(inv.UsePickUp(PickUpTypes.Weapon))
 				{
-					var mw = GetComponent<MeleeAttack>();
-					mw.Fire();
+					melee.Fire();
 
 					AttackCooldownElasped = 0.0f;
 				}
 			}
 			
-			if(Input.GetButton("Bomb"))
+			if(Input.GetButton("Bomb") || triggers < -0.5f)
 			{
 				if(inv.UsePickUp(PickUpTypes.Weapon, 2))
 				{
-					var bomb = GetComponent<Bomb>();
 					bomb.Fire();
 					
 					AttackCooldownElasped = 0.0f;
@@ -99,6 +99,32 @@ public class UserControl : MonoBehaviour {
 		{
 			bomb.Fire ();
 		}
+	}
+
+
+	// Steering Inversion Methods
+	//-----------------------------------------------------------------------------------------
+	public void InvertSteering(float duration)
+	{
+		networkView.RPC("invSteeringRPC", RPCMode.All, duration);
+	}
+
+	[RPC]
+	void invSteeringRPC(float duration)
+	{
+		if(networkView.isMine)
+		{
+			StartCoroutine(InvertSteeringCoroutine(duration));
+		}
+	}
+
+	IEnumerator InvertSteeringCoroutine(float duration)
+	{
+		steeringMultiplier = -1.0f;
+		
+		yield return new WaitForSeconds(duration);
+		
+		steeringMultiplier = 1.0f;
 	}
 
 } 

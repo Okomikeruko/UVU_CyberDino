@@ -23,10 +23,10 @@ public class DinoAnimationTriggers : MonoBehaviour {
 	void OnEnable()
 	{
 		if (DinoSound == dinoSound.Diloph) {
-			acidSpit = GetComponentInParent<AcidSpit> ();
+			//acidSpit = GetComponentInParent<AcidSpit> ();
 		}
 		if (DinoSound == dinoSound.Spino) {
-			buzzSaw = GetComponentInParent<BuzzSaw> ();
+			//buzzSaw = GetComponentInParent<BuzzSaw> ();
 		}
 	}
 

@@ -9396,7 +9396,7 @@ Animator:
   m_GameObject: {fileID: 100266}
   m_Enabled: 1
   m_Avatar: {fileID: 9000000, guid: 3fe4581966709634c841ce07047a8aa5, type: 3}
-  m_Controller: {fileID: 9100000, guid: 51882e2920824de4687a74ca0c01b0f0, type: 2}
+  m_Controller: {fileID: 0}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 1
@@ -9467,6 +9467,8 @@ MonoBehaviour:
   ragdoll: {fileID: 0}
   dinoAnimator: {fileID: 0}
   ragdollBones: []
+  RagdollHead: {fileID: 0}
+  RagdollTorso: {fileID: 0}
 --- !u!114 &11400026
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -9573,6 +9575,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a11faf9c45a5ab14a82ee95e2fec14b3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  range: 50
+  damage: 25
+  arcDegree: 30
 --- !u!114 &11400044
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -9584,6 +9589,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a0a6eba791923ed42b7257151a51f35c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Damage: 25
+  SteeringInversionDuration: 6
 --- !u!114 &11400046
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -9897,7 +9904,7 @@ CapsuleCollider:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100390}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: 4860c068e3727a24880f4da0c745576a, type: 2}
   m_IsTrigger: 0
   m_Enabled: 1
   m_Radius: 1.46000004
@@ -9910,7 +9917,7 @@ CapsuleCollider:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100390}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: 4860c068e3727a24880f4da0c745576a, type: 2}
   m_IsTrigger: 0
   m_Enabled: 1
   m_Radius: 1.44000006
@@ -9929,7 +9936,7 @@ SkinnedMeshRenderer:
   m_LightmapIndex: 255
   m_LightmapTilingOffset: {x: 1, y: 1, z: 0, w: 0}
   m_Materials:
-  - {fileID: 2100000, guid: 7ffa3c79d403b4b42b23ecccc76484aa, type: 2}
+  - {fileID: 0}
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
   m_UseLightProbes: 0
