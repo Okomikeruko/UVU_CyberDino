@@ -11,12 +11,23 @@ public class EMPPulse : MeleeAttack {
 	[SerializeField]
 	private float damage = 20;
 
+	private NetworkAnimations netanim;
+
+	void OnEnable()
+	{
+		netanim = GetComponentInChildren<NetworkAnimations> ();
+	}
+
 	public override void Fire ()
 	{
 		Debug.Log ("EMP Pulse!");
 
 		//Play VFX
+			netanim.AnimTriggerMelee ();
+	}
 
+	public void StartPulse()
+	{
 		HashSet<GameObject> targets = new HashSet<GameObject> ();
 		Collider[] ListOfObjects = Physics.OverlapSphere (this.transform.position, range);
 
@@ -32,7 +43,7 @@ public class EMPPulse : MeleeAttack {
 		Pulse(targets);
 	}
 
-	void Pulse(HashSet<GameObject> targets){
+	private void Pulse(HashSet<GameObject> targets){
 		foreach (var obj in targets) {
 			Vector3 objPos = obj.transform.position;
 			Vector3 thisPos = transform.position;

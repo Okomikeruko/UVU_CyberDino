@@ -1,0 +1,897 @@
+fileFormatVersion: 2
+guid: db8d429d4cbf97b4db83d67f08228eb5
+ModelImporter:
+  serializedVersion: 16
+  fileIDToRecycleName:
+    100000: ankle_l_jnt
+    100002: ankle_r_jnt
+    100004: ball_l_jnt
+    100006: ball_r_jnt
+    100008: base_jnt
+    100010: collar_l_jnt
+    100012: collar_r_jnt
+    100014: elbow_l_jnt
+    100016: elbow_r_jnt
+    100018: head_jnt
+    100020: hip_l_jnt
+    100022: hip_r_jnt
+    100024: knee_l_jnt
+    100026: knee_r_jnt
+    100028: neck0_jnt
+    100030: neck1_jnt
+    100032: neckBase_jnt1
+    100034: noseTip_jnt
+    100036: shoulder_l_jnt
+    100038: shoulder_r_jnt
+    100040: spine1_jnt
+    100042: spineBase_jnt
+    100044: tail1_jnt
+    100046: tail2_jnt
+    100048: tail3_jnt
+    100050: tailBase_jnt
+    100052: tailTip_jnt
+    100054: toes_l_jnt
+    100056: toes_r_jnt
+    100058: Troodon1:Troodon
+    100060: //RootNode
+    100062: troodonModel
+    100064: wrist_l_jnt
+    100066: wrist_r_jnt
+    400000: ankle_l_jnt
+    400002: ankle_r_jnt
+    400004: ball_l_jnt
+    400006: ball_r_jnt
+    400008: base_jnt
+    400010: collar_l_jnt
+    400012: collar_r_jnt
+    400014: elbow_l_jnt
+    400016: elbow_r_jnt
+    400018: head_jnt
+    400020: hip_l_jnt
+    400022: hip_r_jnt
+    400024: knee_l_jnt
+    400026: knee_r_jnt
+    400028: neck0_jnt
+    400030: neck1_jnt
+    400032: neckBase_jnt1
+    400034: noseTip_jnt
+    400036: shoulder_l_jnt
+    400038: shoulder_r_jnt
+    400040: spine1_jnt
+    400042: spineBase_jnt
+    400044: tail1_jnt
+    400046: tail2_jnt
+    400048: tail3_jnt
+    400050: tailBase_jnt
+    400052: tailTip_jnt
+    400054: toes_l_jnt
+    400056: toes_r_jnt
+    400058: Troodon1:Troodon
+    400060: //RootNode
+    400062: troodonModel
+    400064: wrist_l_jnt
+    400066: wrist_r_jnt
+    4300000: troodonModel
+    7400000: Troodon Idle
+    7400002: Troodon Run
+    7400004: Troodon L-Turn
+    7400006: Troodon R-Turn
+    7400008: Troodon Attack
+    7400010: Troodon Airtime
+    7400012: Troodon Takeoff
+    7400014: Troodon Landing
+    9500000: //RootNode
+    13700000: troodonModel
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    optimizeGameObjects: 0
+    motionNodeName: 
+    animationCompression: 1
+    animationRotationError: .5
+    animationPositionError: .5
+    animationScaleError: .5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    clipAnimations:
+    - serializedVersion: 16
+      name: Troodon Idle
+      takeName: Take 001
+      firstFrame: 2
+      lastFrame: 49
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      loopTime: 1
+      loopBlend: 1
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: base_jnt
+        weight: 1
+      - path: base_jnt/hip_l_jnt
+        weight: 1
+      - path: base_jnt/hip_l_jnt/knee_l_jnt
+        weight: 1
+      - path: base_jnt/hip_l_jnt/knee_l_jnt/ankle_l_jnt
+        weight: 1
+      - path: base_jnt/hip_l_jnt/knee_l_jnt/ankle_l_jnt/ball_l_jnt
+        weight: 1
+      - path: base_jnt/hip_l_jnt/knee_l_jnt/ankle_l_jnt/ball_l_jnt/toes_l_jnt
+        weight: 1
+      - path: base_jnt/hip_r_jnt
+        weight: 1
+      - path: base_jnt/hip_r_jnt/knee_r_jnt
+        weight: 1
+      - path: base_jnt/hip_r_jnt/knee_r_jnt/ankle_r_jnt
+        weight: 1
+      - path: base_jnt/hip_r_jnt/knee_r_jnt/ankle_r_jnt/ball_r_jnt
+        weight: 1
+      - path: base_jnt/hip_r_jnt/knee_r_jnt/ankle_r_jnt/ball_r_jnt/toes_r_jnt
+        weight: 1
+      - path: base_jnt/spineBase_jnt
+        weight: 1
+      - path: base_jnt/spineBase_jnt/spine1_jnt
+        weight: 1
+      - path: base_jnt/spineBase_jnt/spine1_jnt/neckBase_jnt1
+        weight: 1
+      - path: base_jnt/spineBase_jnt/spine1_jnt/neckBase_jnt1/collar_l_jnt
+        weight: 1
+      - path: base_jnt/spineBase_jnt/spine1_jnt/neckBase_jnt1/collar_l_jnt/shoulder_l_jnt
+        weight: 1
+      - path: base_jnt/spineBase_jnt/spine1_jnt/neckBase_jnt1/collar_l_jnt/shoulder_l_jnt/elbow_l_jnt
+        weight: 1
+      - path: base_jnt/spineBase_jnt/spine1_jnt/neckBase_jnt1/collar_l_jnt/shoulder_l_jnt/elbow_l_jnt/wrist_l_jnt
+        weight: 1
+      - path: base_jnt/spineBase_jnt/spine1_jnt/neckBase_jnt1/collar_r_jnt
+        weight: 1
+      - path: base_jnt/spineBase_jnt/spine1_jnt/neckBase_jnt1/collar_r_jnt/shoulder_r_jnt
+        weight: 1
+      - path: base_jnt/spineBase_jnt/spine1_jnt/neckBase_jnt1/collar_r_jnt/shoulder_r_jnt/elbow_r_jnt
+        weight: 1
+      - path: base_jnt/spineBase_jnt/spine1_jnt/neckBase_jnt1/collar_r_jnt/shoulder_r_jnt/elbow_r_jnt/wrist_r_jnt
+        weight: 1
+      - path: base_jnt/spineBase_jnt/spine1_jnt/neckBase_jnt1/neck0_jnt
+        weight: 1
+      - path: base_jnt/spineBase_jnt/spine1_jnt/neckBase_jnt1/neck0_jnt/neck1_jnt
+        weight: 1
+      - path: base_jnt/spineBase_jnt/spine1_jnt/neckBase_jnt1/neck0_jnt/neck1_jnt/head_jnt
+        weight: 1
+      - path: base_jnt/spineBase_jnt/spine1_jnt/neckBase_jnt1/neck0_jnt/neck1_jnt/head_jnt/noseTip_jnt
+        weight: 1
+      - path: base_jnt/tailBase_jnt
+        weight: 1
+      - path: base_jnt/tailBase_jnt/tail1_jnt
+        weight: 1
+      - path: base_jnt/tailBase_jnt/tail1_jnt/tail2_jnt
+        weight: 1
+      - path: base_jnt/tailBase_jnt/tail1_jnt/tail2_jnt/tail3_jnt
+        weight: 1
+      - path: base_jnt/tailBase_jnt/tail1_jnt/tail2_jnt/tail3_jnt/tailTip_jnt
+        weight: 1
+      - path: Troodon1:Troodon
+        weight: 1
+      - path: troodonModel
+        weight: 1
+      maskType: 0
+      maskSource: {instanceID: 0}
+    - serializedVersion: 16
+      name: Troodon Run
+      takeName: Take 001
+      firstFrame: 51
+      lastFrame: 63
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      loopTime: 1
+      loopBlend: 1
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: base_jnt
+        weight: 1
+      - path: base_jnt/hip_l_jnt
+        weight: 1
+      - path: base_jnt/hip_l_jnt/knee_l_jnt
+        weight: 1
+      - path: base_jnt/hip_l_jnt/knee_l_jnt/ankle_l_jnt
+        weight: 1
+      - path: base_jnt/hip_l_jnt/knee_l_jnt/ankle_l_jnt/ball_l_jnt
+        weight: 1
+      - path: base_jnt/hip_l_jnt/knee_l_jnt/ankle_l_jnt/ball_l_jnt/toes_l_jnt
+        weight: 1
+      - path: base_jnt/hip_r_jnt
+        weight: 1
+      - path: base_jnt/hip_r_jnt/knee_r_jnt
+        weight: 1
+      - path: base_jnt/hip_r_jnt/knee_r_jnt/ankle_r_jnt
+        weight: 1
+      - path: base_jnt/hip_r_jnt/knee_r_jnt/ankle_r_jnt/ball_r_jnt
+        weight: 1
+      - path: base_jnt/hip_r_jnt/knee_r_jnt/ankle_r_jnt/ball_r_jnt/toes_r_jnt
+        weight: 1
+      - path: base_jnt/spineBase_jnt
+        weight: 1
+      - path: base_jnt/spineBase_jnt/spine1_jnt
+        weight: 1
+      - path: base_jnt/spineBase_jnt/spine1_jnt/neckBase_jnt1
+        weight: 1
+      - path: base_jnt/spineBase_jnt/spine1_jnt/neckBase_jnt1/collar_l_jnt
+        weight: 1
+      - path: base_jnt/spineBase_jnt/spine1_jnt/neckBase_jnt1/collar_l_jnt/shoulder_l_jnt
+        weight: 1
+      - path: base_jnt/spineBase_jnt/spine1_jnt/neckBase_jnt1/collar_l_jnt/shoulder_l_jnt/elbow_l_jnt
+        weight: 1
+      - path: base_jnt/spineBase_jnt/spine1_jnt/neckBase_jnt1/collar_l_jnt/shoulder_l_jnt/elbow_l_jnt/wrist_l_jnt
+        weight: 1
+      - path: base_jnt/spineBase_jnt/spine1_jnt/neckBase_jnt1/collar_r_jnt
+        weight: 1
+      - path: base_jnt/spineBase_jnt/spine1_jnt/neckBase_jnt1/collar_r_jnt/shoulder_r_jnt
+        weight: 1
+      - path: base_jnt/spineBase_jnt/spine1_jnt/neckBase_jnt1/collar_r_jnt/shoulder_r_jnt/elbow_r_jnt
+        weight: 1
+      - path: base_jnt/spineBase_jnt/spine1_jnt/neckBase_jnt1/collar_r_jnt/shoulder_r_jnt/elbow_r_jnt/wrist_r_jnt
+        weight: 1
+      - path: base_jnt/spineBase_jnt/spine1_jnt/neckBase_jnt1/neck0_jnt
+        weight: 1
+      - path: base_jnt/spineBase_jnt/spine1_jnt/neckBase_jnt1/neck0_jnt/neck1_jnt
+        weight: 1
+      - path: base_jnt/spineBase_jnt/spine1_jnt/neckBase_jnt1/neck0_jnt/neck1_jnt/head_jnt
+        weight: 1
+      - path: base_jnt/spineBase_jnt/spine1_jnt/neckBase_jnt1/neck0_jnt/neck1_jnt/head_jnt/noseTip_jnt
+        weight: 1
+      - path: base_jnt/tailBase_jnt
+        weight: 1
+      - path: base_jnt/tailBase_jnt/tail1_jnt
+        weight: 1
+      - path: base_jnt/tailBase_jnt/tail1_jnt/tail2_jnt
+        weight: 1
+      - path: base_jnt/tailBase_jnt/tail1_jnt/tail2_jnt/tail3_jnt
+        weight: 1
+      - path: base_jnt/tailBase_jnt/tail1_jnt/tail2_jnt/tail3_jnt/tailTip_jnt
+        weight: 1
+      - path: Troodon1:Troodon
+        weight: 1
+      - path: troodonModel
+        weight: 1
+      maskType: 0
+      maskSource: {instanceID: 0}
+    - serializedVersion: 16
+      name: Troodon L-Turn
+      takeName: Take 001
+      firstFrame: 64
+      lastFrame: 76
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      loopTime: 1
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: base_jnt
+        weight: 1
+      - path: base_jnt/hip_l_jnt
+        weight: 1
+      - path: base_jnt/hip_l_jnt/knee_l_jnt
+        weight: 1
+      - path: base_jnt/hip_l_jnt/knee_l_jnt/ankle_l_jnt
+        weight: 1
+      - path: base_jnt/hip_l_jnt/knee_l_jnt/ankle_l_jnt/ball_l_jnt
+        weight: 1
+      - path: base_jnt/hip_l_jnt/knee_l_jnt/ankle_l_jnt/ball_l_jnt/toes_l_jnt
+        weight: 1
+      - path: base_jnt/hip_r_jnt
+        weight: 1
+      - path: base_jnt/hip_r_jnt/knee_r_jnt
+        weight: 1
+      - path: base_jnt/hip_r_jnt/knee_r_jnt/ankle_r_jnt
+        weight: 1
+      - path: base_jnt/hip_r_jnt/knee_r_jnt/ankle_r_jnt/ball_r_jnt
+        weight: 1
+      - path: base_jnt/hip_r_jnt/knee_r_jnt/ankle_r_jnt/ball_r_jnt/toes_r_jnt
+        weight: 1
+      - path: base_jnt/spineBase_jnt
+        weight: 1
+      - path: base_jnt/spineBase_jnt/spine1_jnt
+        weight: 1
+      - path: base_jnt/spineBase_jnt/spine1_jnt/neckBase_jnt1
+        weight: 1
+      - path: base_jnt/spineBase_jnt/spine1_jnt/neckBase_jnt1/collar_l_jnt
+        weight: 1
+      - path: base_jnt/spineBase_jnt/spine1_jnt/neckBase_jnt1/collar_l_jnt/shoulder_l_jnt
+        weight: 1
+      - path: base_jnt/spineBase_jnt/spine1_jnt/neckBase_jnt1/collar_l_jnt/shoulder_l_jnt/elbow_l_jnt
+        weight: 1
+      - path: base_jnt/spineBase_jnt/spine1_jnt/neckBase_jnt1/collar_l_jnt/shoulder_l_jnt/elbow_l_jnt/wrist_l_jnt
+        weight: 1
+      - path: base_jnt/spineBase_jnt/spine1_jnt/neckBase_jnt1/collar_r_jnt
+        weight: 1
+      - path: base_jnt/spineBase_jnt/spine1_jnt/neckBase_jnt1/collar_r_jnt/shoulder_r_jnt
+        weight: 1
+      - path: base_jnt/spineBase_jnt/spine1_jnt/neckBase_jnt1/collar_r_jnt/shoulder_r_jnt/elbow_r_jnt
+        weight: 1
+      - path: base_jnt/spineBase_jnt/spine1_jnt/neckBase_jnt1/collar_r_jnt/shoulder_r_jnt/elbow_r_jnt/wrist_r_jnt
+        weight: 1
+      - path: base_jnt/spineBase_jnt/spine1_jnt/neckBase_jnt1/neck0_jnt
+        weight: 1
+      - path: base_jnt/spineBase_jnt/spine1_jnt/neckBase_jnt1/neck0_jnt/neck1_jnt
+        weight: 1
+      - path: base_jnt/spineBase_jnt/spine1_jnt/neckBase_jnt1/neck0_jnt/neck1_jnt/head_jnt
+        weight: 1
+      - path: base_jnt/spineBase_jnt/spine1_jnt/neckBase_jnt1/neck0_jnt/neck1_jnt/head_jnt/noseTip_jnt
+        weight: 1
+      - path: base_jnt/tailBase_jnt
+        weight: 1
+      - path: base_jnt/tailBase_jnt/tail1_jnt
+        weight: 1
+      - path: base_jnt/tailBase_jnt/tail1_jnt/tail2_jnt
+        weight: 1
+      - path: base_jnt/tailBase_jnt/tail1_jnt/tail2_jnt/tail3_jnt
+        weight: 1
+      - path: base_jnt/tailBase_jnt/tail1_jnt/tail2_jnt/tail3_jnt/tailTip_jnt
+        weight: 1
+      - path: Troodon1:Troodon
+        weight: 1
+      - path: troodonModel
+        weight: 1
+      maskType: 0
+      maskSource: {instanceID: 0}
+    - serializedVersion: 16
+      name: Troodon R-Turn
+      takeName: Take 001
+      firstFrame: 77
+      lastFrame: 89
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      loopTime: 1
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: base_jnt
+        weight: 1
+      - path: base_jnt/hip_l_jnt
+        weight: 1
+      - path: base_jnt/hip_l_jnt/knee_l_jnt
+        weight: 1
+      - path: base_jnt/hip_l_jnt/knee_l_jnt/ankle_l_jnt
+        weight: 1
+      - path: base_jnt/hip_l_jnt/knee_l_jnt/ankle_l_jnt/ball_l_jnt
+        weight: 1
+      - path: base_jnt/hip_l_jnt/knee_l_jnt/ankle_l_jnt/ball_l_jnt/toes_l_jnt
+        weight: 1
+      - path: base_jnt/hip_r_jnt
+        weight: 1
+      - path: base_jnt/hip_r_jnt/knee_r_jnt
+        weight: 1
+      - path: base_jnt/hip_r_jnt/knee_r_jnt/ankle_r_jnt
+        weight: 1
+      - path: base_jnt/hip_r_jnt/knee_r_jnt/ankle_r_jnt/ball_r_jnt
+        weight: 1
+      - path: base_jnt/hip_r_jnt/knee_r_jnt/ankle_r_jnt/ball_r_jnt/toes_r_jnt
+        weight: 1
+      - path: base_jnt/spineBase_jnt
+        weight: 1
+      - path: base_jnt/spineBase_jnt/spine1_jnt
+        weight: 1
+      - path: base_jnt/spineBase_jnt/spine1_jnt/neckBase_jnt1
+        weight: 1
+      - path: base_jnt/spineBase_jnt/spine1_jnt/neckBase_jnt1/collar_l_jnt
+        weight: 1
+      - path: base_jnt/spineBase_jnt/spine1_jnt/neckBase_jnt1/collar_l_jnt/shoulder_l_jnt
+        weight: 1
+      - path: base_jnt/spineBase_jnt/spine1_jnt/neckBase_jnt1/collar_l_jnt/shoulder_l_jnt/elbow_l_jnt
+        weight: 1
+      - path: base_jnt/spineBase_jnt/spine1_jnt/neckBase_jnt1/collar_l_jnt/shoulder_l_jnt/elbow_l_jnt/wrist_l_jnt
+        weight: 1
+      - path: base_jnt/spineBase_jnt/spine1_jnt/neckBase_jnt1/collar_r_jnt
+        weight: 1
+      - path: base_jnt/spineBase_jnt/spine1_jnt/neckBase_jnt1/collar_r_jnt/shoulder_r_jnt
+        weight: 1
+      - path: base_jnt/spineBase_jnt/spine1_jnt/neckBase_jnt1/collar_r_jnt/shoulder_r_jnt/elbow_r_jnt
+        weight: 1
+      - path: base_jnt/spineBase_jnt/spine1_jnt/neckBase_jnt1/collar_r_jnt/shoulder_r_jnt/elbow_r_jnt/wrist_r_jnt
+        weight: 1
+      - path: base_jnt/spineBase_jnt/spine1_jnt/neckBase_jnt1/neck0_jnt
+        weight: 1
+      - path: base_jnt/spineBase_jnt/spine1_jnt/neckBase_jnt1/neck0_jnt/neck1_jnt
+        weight: 1
+      - path: base_jnt/spineBase_jnt/spine1_jnt/neckBase_jnt1/neck0_jnt/neck1_jnt/head_jnt
+        weight: 1
+      - path: base_jnt/spineBase_jnt/spine1_jnt/neckBase_jnt1/neck0_jnt/neck1_jnt/head_jnt/noseTip_jnt
+        weight: 1
+      - path: base_jnt/tailBase_jnt
+        weight: 1
+      - path: base_jnt/tailBase_jnt/tail1_jnt
+        weight: 1
+      - path: base_jnt/tailBase_jnt/tail1_jnt/tail2_jnt
+        weight: 1
+      - path: base_jnt/tailBase_jnt/tail1_jnt/tail2_jnt/tail3_jnt
+        weight: 1
+      - path: base_jnt/tailBase_jnt/tail1_jnt/tail2_jnt/tail3_jnt/tailTip_jnt
+        weight: 1
+      - path: Troodon1:Troodon
+        weight: 1
+      - path: troodonModel
+        weight: 1
+      maskType: 0
+      maskSource: {instanceID: 0}
+    - serializedVersion: 16
+      name: Troodon Attack
+      takeName: Take 001
+      firstFrame: 90
+      lastFrame: 133
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events:
+      - time: .819060624
+        functionName: PulseAttack
+        data: 
+        objectReferenceParameter: {instanceID: 0}
+        floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
+      transformMask:
+      - path: 
+        weight: 1
+      - path: base_jnt
+        weight: 1
+      - path: base_jnt/hip_l_jnt
+        weight: 1
+      - path: base_jnt/hip_l_jnt/knee_l_jnt
+        weight: 1
+      - path: base_jnt/hip_l_jnt/knee_l_jnt/ankle_l_jnt
+        weight: 1
+      - path: base_jnt/hip_l_jnt/knee_l_jnt/ankle_l_jnt/ball_l_jnt
+        weight: 1
+      - path: base_jnt/hip_l_jnt/knee_l_jnt/ankle_l_jnt/ball_l_jnt/toes_l_jnt
+        weight: 1
+      - path: base_jnt/hip_r_jnt
+        weight: 1
+      - path: base_jnt/hip_r_jnt/knee_r_jnt
+        weight: 1
+      - path: base_jnt/hip_r_jnt/knee_r_jnt/ankle_r_jnt
+        weight: 1
+      - path: base_jnt/hip_r_jnt/knee_r_jnt/ankle_r_jnt/ball_r_jnt
+        weight: 1
+      - path: base_jnt/hip_r_jnt/knee_r_jnt/ankle_r_jnt/ball_r_jnt/toes_r_jnt
+        weight: 1
+      - path: base_jnt/spineBase_jnt
+        weight: 1
+      - path: base_jnt/spineBase_jnt/spine1_jnt
+        weight: 1
+      - path: base_jnt/spineBase_jnt/spine1_jnt/neckBase_jnt1
+        weight: 1
+      - path: base_jnt/spineBase_jnt/spine1_jnt/neckBase_jnt1/collar_l_jnt
+        weight: 1
+      - path: base_jnt/spineBase_jnt/spine1_jnt/neckBase_jnt1/collar_l_jnt/shoulder_l_jnt
+        weight: 1
+      - path: base_jnt/spineBase_jnt/spine1_jnt/neckBase_jnt1/collar_l_jnt/shoulder_l_jnt/elbow_l_jnt
+        weight: 1
+      - path: base_jnt/spineBase_jnt/spine1_jnt/neckBase_jnt1/collar_l_jnt/shoulder_l_jnt/elbow_l_jnt/wrist_l_jnt
+        weight: 1
+      - path: base_jnt/spineBase_jnt/spine1_jnt/neckBase_jnt1/collar_r_jnt
+        weight: 1
+      - path: base_jnt/spineBase_jnt/spine1_jnt/neckBase_jnt1/collar_r_jnt/shoulder_r_jnt
+        weight: 1
+      - path: base_jnt/spineBase_jnt/spine1_jnt/neckBase_jnt1/collar_r_jnt/shoulder_r_jnt/elbow_r_jnt
+        weight: 1
+      - path: base_jnt/spineBase_jnt/spine1_jnt/neckBase_jnt1/collar_r_jnt/shoulder_r_jnt/elbow_r_jnt/wrist_r_jnt
+        weight: 1
+      - path: base_jnt/spineBase_jnt/spine1_jnt/neckBase_jnt1/neck0_jnt
+        weight: 1
+      - path: base_jnt/spineBase_jnt/spine1_jnt/neckBase_jnt1/neck0_jnt/neck1_jnt
+        weight: 1
+      - path: base_jnt/spineBase_jnt/spine1_jnt/neckBase_jnt1/neck0_jnt/neck1_jnt/head_jnt
+        weight: 1
+      - path: base_jnt/spineBase_jnt/spine1_jnt/neckBase_jnt1/neck0_jnt/neck1_jnt/head_jnt/noseTip_jnt
+        weight: 1
+      - path: base_jnt/tailBase_jnt
+        weight: 1
+      - path: base_jnt/tailBase_jnt/tail1_jnt
+        weight: 1
+      - path: base_jnt/tailBase_jnt/tail1_jnt/tail2_jnt
+        weight: 1
+      - path: base_jnt/tailBase_jnt/tail1_jnt/tail2_jnt/tail3_jnt
+        weight: 1
+      - path: base_jnt/tailBase_jnt/tail1_jnt/tail2_jnt/tail3_jnt/tailTip_jnt
+        weight: 1
+      - path: Troodon1:Troodon
+        weight: 1
+      - path: troodonModel
+        weight: 1
+      maskType: 0
+      maskSource: {instanceID: 0}
+    - serializedVersion: 16
+      name: Troodon Airtime
+      takeName: Take 001
+      firstFrame: 142
+      lastFrame: 153
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      loopTime: 1
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: base_jnt
+        weight: 1
+      - path: base_jnt/hip_l_jnt
+        weight: 1
+      - path: base_jnt/hip_l_jnt/knee_l_jnt
+        weight: 1
+      - path: base_jnt/hip_l_jnt/knee_l_jnt/ankle_l_jnt
+        weight: 1
+      - path: base_jnt/hip_l_jnt/knee_l_jnt/ankle_l_jnt/ball_l_jnt
+        weight: 1
+      - path: base_jnt/hip_l_jnt/knee_l_jnt/ankle_l_jnt/ball_l_jnt/toes_l_jnt
+        weight: 1
+      - path: base_jnt/hip_r_jnt
+        weight: 1
+      - path: base_jnt/hip_r_jnt/knee_r_jnt
+        weight: 1
+      - path: base_jnt/hip_r_jnt/knee_r_jnt/ankle_r_jnt
+        weight: 1
+      - path: base_jnt/hip_r_jnt/knee_r_jnt/ankle_r_jnt/ball_r_jnt
+        weight: 1
+      - path: base_jnt/hip_r_jnt/knee_r_jnt/ankle_r_jnt/ball_r_jnt/toes_r_jnt
+        weight: 1
+      - path: base_jnt/spineBase_jnt
+        weight: 1
+      - path: base_jnt/spineBase_jnt/spine1_jnt
+        weight: 1
+      - path: base_jnt/spineBase_jnt/spine1_jnt/neckBase_jnt1
+        weight: 1
+      - path: base_jnt/spineBase_jnt/spine1_jnt/neckBase_jnt1/collar_l_jnt
+        weight: 1
+      - path: base_jnt/spineBase_jnt/spine1_jnt/neckBase_jnt1/collar_l_jnt/shoulder_l_jnt
+        weight: 1
+      - path: base_jnt/spineBase_jnt/spine1_jnt/neckBase_jnt1/collar_l_jnt/shoulder_l_jnt/elbow_l_jnt
+        weight: 1
+      - path: base_jnt/spineBase_jnt/spine1_jnt/neckBase_jnt1/collar_l_jnt/shoulder_l_jnt/elbow_l_jnt/wrist_l_jnt
+        weight: 1
+      - path: base_jnt/spineBase_jnt/spine1_jnt/neckBase_jnt1/collar_r_jnt
+        weight: 1
+      - path: base_jnt/spineBase_jnt/spine1_jnt/neckBase_jnt1/collar_r_jnt/shoulder_r_jnt
+        weight: 1
+      - path: base_jnt/spineBase_jnt/spine1_jnt/neckBase_jnt1/collar_r_jnt/shoulder_r_jnt/elbow_r_jnt
+        weight: 1
+      - path: base_jnt/spineBase_jnt/spine1_jnt/neckBase_jnt1/collar_r_jnt/shoulder_r_jnt/elbow_r_jnt/wrist_r_jnt
+        weight: 1
+      - path: base_jnt/spineBase_jnt/spine1_jnt/neckBase_jnt1/neck0_jnt
+        weight: 1
+      - path: base_jnt/spineBase_jnt/spine1_jnt/neckBase_jnt1/neck0_jnt/neck1_jnt
+        weight: 1
+      - path: base_jnt/spineBase_jnt/spine1_jnt/neckBase_jnt1/neck0_jnt/neck1_jnt/head_jnt
+        weight: 1
+      - path: base_jnt/spineBase_jnt/spine1_jnt/neckBase_jnt1/neck0_jnt/neck1_jnt/head_jnt/noseTip_jnt
+        weight: 1
+      - path: base_jnt/tailBase_jnt
+        weight: 1
+      - path: base_jnt/tailBase_jnt/tail1_jnt
+        weight: 1
+      - path: base_jnt/tailBase_jnt/tail1_jnt/tail2_jnt
+        weight: 1
+      - path: base_jnt/tailBase_jnt/tail1_jnt/tail2_jnt/tail3_jnt
+        weight: 1
+      - path: base_jnt/tailBase_jnt/tail1_jnt/tail2_jnt/tail3_jnt/tailTip_jnt
+        weight: 1
+      - path: Troodon1:Troodon
+        weight: 1
+      - path: troodonModel
+        weight: 1
+      maskType: 0
+      maskSource: {instanceID: 0}
+    - serializedVersion: 16
+      name: Troodon Takeoff
+      takeName: Take 001
+      firstFrame: 130
+      lastFrame: 141
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: base_jnt
+        weight: 1
+      - path: base_jnt/hip_l_jnt
+        weight: 1
+      - path: base_jnt/hip_l_jnt/knee_l_jnt
+        weight: 1
+      - path: base_jnt/hip_l_jnt/knee_l_jnt/ankle_l_jnt
+        weight: 1
+      - path: base_jnt/hip_l_jnt/knee_l_jnt/ankle_l_jnt/ball_l_jnt
+        weight: 1
+      - path: base_jnt/hip_l_jnt/knee_l_jnt/ankle_l_jnt/ball_l_jnt/toes_l_jnt
+        weight: 1
+      - path: base_jnt/hip_r_jnt
+        weight: 1
+      - path: base_jnt/hip_r_jnt/knee_r_jnt
+        weight: 1
+      - path: base_jnt/hip_r_jnt/knee_r_jnt/ankle_r_jnt
+        weight: 1
+      - path: base_jnt/hip_r_jnt/knee_r_jnt/ankle_r_jnt/ball_r_jnt
+        weight: 1
+      - path: base_jnt/hip_r_jnt/knee_r_jnt/ankle_r_jnt/ball_r_jnt/toes_r_jnt
+        weight: 1
+      - path: base_jnt/spineBase_jnt
+        weight: 1
+      - path: base_jnt/spineBase_jnt/spine1_jnt
+        weight: 1
+      - path: base_jnt/spineBase_jnt/spine1_jnt/neckBase_jnt1
+        weight: 1
+      - path: base_jnt/spineBase_jnt/spine1_jnt/neckBase_jnt1/collar_l_jnt
+        weight: 1
+      - path: base_jnt/spineBase_jnt/spine1_jnt/neckBase_jnt1/collar_l_jnt/shoulder_l_jnt
+        weight: 1
+      - path: base_jnt/spineBase_jnt/spine1_jnt/neckBase_jnt1/collar_l_jnt/shoulder_l_jnt/elbow_l_jnt
+        weight: 1
+      - path: base_jnt/spineBase_jnt/spine1_jnt/neckBase_jnt1/collar_l_jnt/shoulder_l_jnt/elbow_l_jnt/wrist_l_jnt
+        weight: 1
+      - path: base_jnt/spineBase_jnt/spine1_jnt/neckBase_jnt1/collar_r_jnt
+        weight: 1
+      - path: base_jnt/spineBase_jnt/spine1_jnt/neckBase_jnt1/collar_r_jnt/shoulder_r_jnt
+        weight: 1
+      - path: base_jnt/spineBase_jnt/spine1_jnt/neckBase_jnt1/collar_r_jnt/shoulder_r_jnt/elbow_r_jnt
+        weight: 1
+      - path: base_jnt/spineBase_jnt/spine1_jnt/neckBase_jnt1/collar_r_jnt/shoulder_r_jnt/elbow_r_jnt/wrist_r_jnt
+        weight: 1
+      - path: base_jnt/spineBase_jnt/spine1_jnt/neckBase_jnt1/neck0_jnt
+        weight: 1
+      - path: base_jnt/spineBase_jnt/spine1_jnt/neckBase_jnt1/neck0_jnt/neck1_jnt
+        weight: 1
+      - path: base_jnt/spineBase_jnt/spine1_jnt/neckBase_jnt1/neck0_jnt/neck1_jnt/head_jnt
+        weight: 1
+      - path: base_jnt/spineBase_jnt/spine1_jnt/neckBase_jnt1/neck0_jnt/neck1_jnt/head_jnt/noseTip_jnt
+        weight: 1
+      - path: base_jnt/tailBase_jnt
+        weight: 1
+      - path: base_jnt/tailBase_jnt/tail1_jnt
+        weight: 1
+      - path: base_jnt/tailBase_jnt/tail1_jnt/tail2_jnt
+        weight: 1
+      - path: base_jnt/tailBase_jnt/tail1_jnt/tail2_jnt/tail3_jnt
+        weight: 1
+      - path: base_jnt/tailBase_jnt/tail1_jnt/tail2_jnt/tail3_jnt/tailTip_jnt
+        weight: 1
+      - path: Troodon1:Troodon
+        weight: 1
+      - path: troodonModel
+        weight: 1
+      maskType: 0
+      maskSource: {instanceID: 0}
+    - serializedVersion: 16
+      name: Troodon Landing
+      takeName: Take 001
+      firstFrame: 154
+      lastFrame: 162
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: base_jnt
+        weight: 1
+      - path: base_jnt/hip_l_jnt
+        weight: 1
+      - path: base_jnt/hip_l_jnt/knee_l_jnt
+        weight: 1
+      - path: base_jnt/hip_l_jnt/knee_l_jnt/ankle_l_jnt
+        weight: 1
+      - path: base_jnt/hip_l_jnt/knee_l_jnt/ankle_l_jnt/ball_l_jnt
+        weight: 1
+      - path: base_jnt/hip_l_jnt/knee_l_jnt/ankle_l_jnt/ball_l_jnt/toes_l_jnt
+        weight: 1
+      - path: base_jnt/hip_r_jnt
+        weight: 1
+      - path: base_jnt/hip_r_jnt/knee_r_jnt
+        weight: 1
+      - path: base_jnt/hip_r_jnt/knee_r_jnt/ankle_r_jnt
+        weight: 1
+      - path: base_jnt/hip_r_jnt/knee_r_jnt/ankle_r_jnt/ball_r_jnt
+        weight: 1
+      - path: base_jnt/hip_r_jnt/knee_r_jnt/ankle_r_jnt/ball_r_jnt/toes_r_jnt
+        weight: 1
+      - path: base_jnt/spineBase_jnt
+        weight: 1
+      - path: base_jnt/spineBase_jnt/spine1_jnt
+        weight: 1
+      - path: base_jnt/spineBase_jnt/spine1_jnt/neckBase_jnt1
+        weight: 1
+      - path: base_jnt/spineBase_jnt/spine1_jnt/neckBase_jnt1/collar_l_jnt
+        weight: 1
+      - path: base_jnt/spineBase_jnt/spine1_jnt/neckBase_jnt1/collar_l_jnt/shoulder_l_jnt
+        weight: 1
+      - path: base_jnt/spineBase_jnt/spine1_jnt/neckBase_jnt1/collar_l_jnt/shoulder_l_jnt/elbow_l_jnt
+        weight: 1
+      - path: base_jnt/spineBase_jnt/spine1_jnt/neckBase_jnt1/collar_l_jnt/shoulder_l_jnt/elbow_l_jnt/wrist_l_jnt
+        weight: 1
+      - path: base_jnt/spineBase_jnt/spine1_jnt/neckBase_jnt1/collar_r_jnt
+        weight: 1
+      - path: base_jnt/spineBase_jnt/spine1_jnt/neckBase_jnt1/collar_r_jnt/shoulder_r_jnt
+        weight: 1
+      - path: base_jnt/spineBase_jnt/spine1_jnt/neckBase_jnt1/collar_r_jnt/shoulder_r_jnt/elbow_r_jnt
+        weight: 1
+      - path: base_jnt/spineBase_jnt/spine1_jnt/neckBase_jnt1/collar_r_jnt/shoulder_r_jnt/elbow_r_jnt/wrist_r_jnt
+        weight: 1
+      - path: base_jnt/spineBase_jnt/spine1_jnt/neckBase_jnt1/neck0_jnt
+        weight: 1
+      - path: base_jnt/spineBase_jnt/spine1_jnt/neckBase_jnt1/neck0_jnt/neck1_jnt
+        weight: 1
+      - path: base_jnt/spineBase_jnt/spine1_jnt/neckBase_jnt1/neck0_jnt/neck1_jnt/head_jnt
+        weight: 1
+      - path: base_jnt/spineBase_jnt/spine1_jnt/neckBase_jnt1/neck0_jnt/neck1_jnt/head_jnt/noseTip_jnt
+        weight: 1
+      - path: base_jnt/tailBase_jnt
+        weight: 1
+      - path: base_jnt/tailBase_jnt/tail1_jnt
+        weight: 1
+      - path: base_jnt/tailBase_jnt/tail1_jnt/tail2_jnt
+        weight: 1
+      - path: base_jnt/tailBase_jnt/tail1_jnt/tail2_jnt/tail3_jnt
+        weight: 1
+      - path: base_jnt/tailBase_jnt/tail1_jnt/tail2_jnt/tail3_jnt/tailTip_jnt
+        weight: 1
+      - path: Troodon1:Troodon
+        weight: 1
+      - path: troodonModel
+        weight: 1
+      maskType: 0
+      maskSource: {instanceID: 0}
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importBlendShapes: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+  tangentSpace:
+    normalSmoothAngle: 60
+    splitTangentsAcrossUV: 1
+    normalImportMode: 0
+    tangentImportMode: 1
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    human: []
+    skeleton: []
+    armTwist: .5
+    foreArmTwist: .5
+    upperLegTwist: .5
+    legTwist: .5
+    armStretch: .0500000007
+    legStretch: .0500000007
+    feetSpacing: 0
+    rootMotionBoneName: 
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  additionalBone: 0
+  userData: 
