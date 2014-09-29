@@ -39,6 +39,7 @@ GameObject:
   - 114: {fileID: 11400012}
   - 114: {fileID: 11400024}
   - 114: {fileID: 11400026}
+  - 114: {fileID: 11400006}
   m_Layer: 8
   m_Name: Raptor
   m_TagString: Dino
@@ -1962,6 +1963,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   anim: {fileID: 0}
+--- !u!114 &11400006
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100064}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e99a2f5439ca24762bf3abe58961422a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &11400012
 MonoBehaviour:
   m_ObjectHideFlags: 1

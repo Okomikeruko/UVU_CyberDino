@@ -2871,6 +2871,7 @@ GameObject:
   - 136: {fileID: 13600040}
   - 136: {fileID: 13600036}
   - 143: {fileID: 14300000}
+  - 114: {fileID: 11400000}
   m_Layer: 8
   m_Name: Hesp
   m_TagString: Dino
@@ -9416,6 +9417,17 @@ Animation:
   m_PlayAutomatically: 1
   m_AnimatePhysics: 0
   m_CullingType: 1
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100390}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e99a2f5439ca24762bf3abe58961422a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &11400020
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -9467,6 +9479,8 @@ MonoBehaviour:
   ragdoll: {fileID: 0}
   dinoAnimator: {fileID: 0}
   ragdollBones: []
+  RagdollHead: {fileID: 0}
+  RagdollTorso: {fileID: 0}
 --- !u!114 &11400026
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -9573,6 +9587,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a11faf9c45a5ab14a82ee95e2fec14b3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  range: 50
+  damage: 25
+  arcDegree: 30
 --- !u!114 &11400044
 MonoBehaviour:
   m_ObjectHideFlags: 1

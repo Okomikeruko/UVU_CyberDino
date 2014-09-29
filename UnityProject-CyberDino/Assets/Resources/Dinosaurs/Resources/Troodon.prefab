@@ -629,6 +629,7 @@ GameObject:
   - 114: {fileID: 11400018}
   - 114: {fileID: 11400022}
   - 114: {fileID: 11400036}
+  - 114: {fileID: 11400004}
   m_Layer: 8
   m_Name: Troodon
   m_TagString: Dino
@@ -1221,6 +1222,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   anim: {fileID: 0}
+--- !u!114 &11400004
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100124}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e99a2f5439ca24762bf3abe58961422a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &11400010
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1232,6 +1244,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7ccf1b479ffddb345847c8e72659ca60, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  range: 50
+  force: 10
+  damage: 20
 --- !u!114 &11400014
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1327,6 +1342,8 @@ MonoBehaviour:
   ragdoll: {fileID: 0}
   dinoAnimator: {fileID: 0}
   ragdollBones: []
+  RagdollHead: {fileID: 0}
+  RagdollTorso: {fileID: 0}
 --- !u!114 &11400028
 MonoBehaviour:
   m_ObjectHideFlags: 1

@@ -23,6 +23,7 @@ GameObject:
   - 114: {fileID: 11400018}
   - 114: {fileID: 11400022}
   - 114: {fileID: 11400024}
+  - 114: {fileID: 11400006}
   m_Layer: 8
   m_Name: TRex
   m_TagString: Dino
@@ -1385,6 +1386,17 @@ MonoBehaviour:
   hitTimer: 1.5
   lerpStopTime: 0
   dinoRenderer: {fileID: 0}
+--- !u!114 &11400006
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100040}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e99a2f5439ca24762bf3abe58961422a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &11400008
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1408,6 +1420,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fba060a2d0f1fa14f8ca58c7bf283ab8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  range: 50
+  damage: 25
+  duration: 10
+  arcDegree: 45
 --- !u!114 &11400022
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1419,6 +1435,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a5752d8ba16dc5c43806c36a0c430ed7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  DistanceDroppedBehind: 30
 --- !u!114 &11400024
 MonoBehaviour:
   m_ObjectHideFlags: 1
