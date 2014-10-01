@@ -440,11 +440,11 @@ public class HUDScript : MonoBehaviour
 		//Debug.Log(racePositions[dinoTrackingScript.playerNum] - 1);
 		//Debug.Log(dinoTrackingScript.playerNum);
 		//if((racePositions[dinoTrackingScript.playerNum] - 1) != null)
-		//if(hudGfx[racePositions[dinoTrackingScript.playerNum] - 1] != null)
-		//{
-			//positionObjs.guiTexture.pixelInset = ResizeRect(new Rect(13, 77, 5, 5));
-			//positionObjs.guiTexture.texture = hudGfx[racePositions[dinoTrackingScript.playerNum] - 1];
-		//}
+		if(hudGfx[racePositions[dinoTrackingScript.playerNum] - 1] != null)
+		{
+			positionObjs.guiTexture.pixelInset = ResizeRect(new Rect(13, 77, 5, 5));
+			positionObjs.guiTexture.texture = hudGfx[racePositions[dinoTrackingScript.playerNum] - 1];
+		}
 		
 
 		//items[0].transform.localPosition
