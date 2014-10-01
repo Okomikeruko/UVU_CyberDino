@@ -36,7 +36,7 @@ public class EMPBlast : Bomb {
 
 
 			//All other racers drop all of their pickups on the track, which can be picked up again later.
-			//racer.GetComponent<Inventory>().DropAll();
+			racer.GetComponent<Inventory>().dropAll();
 			Debug.Log("Have racers drop all items");
 		}
 		//Add health to firing player's health, up to max health
