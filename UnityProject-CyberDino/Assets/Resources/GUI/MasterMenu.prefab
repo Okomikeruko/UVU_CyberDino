@@ -9,7 +9,6 @@ GameObject:
   m_Component:
   - 4: {fileID: 400000}
   - 114: {fileID: 11400002}
-  - 114: {fileID: 11400000}
   - 148: {fileID: 14800000}
   m_Layer: 0
   m_Name: MasterMenu
@@ -97,6 +96,7 @@ Transform:
   - {fileID: 400004}
   - {fileID: 400008}
   m_Father: {fileID: 0}
+  m_RootOrder: 0
 --- !u!4 &400002
 Transform:
   m_ObjectHideFlags: 1
@@ -108,6 +108,7 @@ Transform:
   m_LocalScale: {x: 0, y: 0, z: 1}
   m_Children: []
   m_Father: {fileID: 400000}
+  m_RootOrder: 0
 --- !u!4 &400004
 Transform:
   m_ObjectHideFlags: 1
@@ -119,6 +120,7 @@ Transform:
   m_LocalScale: {x: 0, y: 0, z: 1}
   m_Children: []
   m_Father: {fileID: 400000}
+  m_RootOrder: 2
 --- !u!4 &400006
 Transform:
   m_ObjectHideFlags: 1
@@ -130,6 +132,7 @@ Transform:
   m_LocalScale: {x: 0, y: 0, z: 1}
   m_Children: []
   m_Father: {fileID: 400000}
+  m_RootOrder: 1
 --- !u!4 &400008
 Transform:
   m_ObjectHideFlags: 1
@@ -141,18 +144,7 @@ Transform:
   m_LocalScale: {x: 0, y: 0, z: 1}
   m_Children: []
   m_Father: {fileID: 400000}
---- !u!114 &11400000
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 100000}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e7c090aebe7b1bd469317c87548cab80, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  swipeDirection: 0
+  m_RootOrder: 3
 --- !u!114 &11400002
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -186,11 +178,11 @@ MonoBehaviour:
   levelIndex: 0
   buttonMoveSpeed: 2000
   dinoModels:
-  - {fileID: 100114, guid: 0736e65005f566241a3c33a7e46028fc, type: 2}
+  - {fileID: 100068, guid: 15dad461475ef954785b66356ee923d0, type: 2}
   - {fileID: 100564, guid: 94bb14f2461b9b940bf8bd728de953a3, type: 2}
-  - {fileID: 100100, guid: b30757a975c52b143972d9a9f784c517, type: 2}
-  - {fileID: 100034, guid: 39c1f5d71f1ec7a40aec7cc93bddbea3, type: 2}
-  - {fileID: 100148, guid: 4b1311fc80bcb6a42842cc5f0231ed7c, type: 2}
+  - {fileID: 100064, guid: 6cf6f780f4d2b56479e1872b180a4940, type: 2}
+  - {fileID: 100078, guid: 9b1c284935da4244fa48848a942c00dc, type: 2}
+  - {fileID: 100040, guid: b3cd13b42e4c3124ea0f8967b7ef8fe2, type: 2}
   - {fileID: 100200, guid: 51fc98c3e31122f4688b68581b428d76, type: 2}
   rotateSpeed: 10
 --- !u!131 &13100000
