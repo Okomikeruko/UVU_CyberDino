@@ -3,9 +3,7 @@ using System.Collections;
 
 public class AcidSpit : Bomb {
 
-	private Animator anim;
-    
-    [SerializeField]
+	[SerializeField]
     private float damage = 50;
     [SerializeField]
     private float dotDuration = 10;
@@ -13,11 +11,6 @@ public class AcidSpit : Bomb {
     private float snareMagnitude = 50;
     [SerializeField]
     private float snareDuration = 2;
-
-	void OnEnable() 
-	{
-		anim = GetComponentInChildren<Animator> ();
-	}
 
 	public override void Fire ()
 	{
