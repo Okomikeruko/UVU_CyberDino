@@ -11,12 +11,27 @@ public class EMPPulse : MeleeAttack {
 	[SerializeField]
 	private float damage = 20;
 
+	[SerializeField]
+	private ParticleSystem EMPPulseFX1;
+	[SerializeField]
+	private ParticleSystem EMPPulseFX2;
+
 	public override void Fire ()
 	{
-		Debug.Log ("EMP Pulse!");
+		StartCoroutine (FXTiming (0.5F));
+	}
 
-		//Play VFX
+	IEnumerator FXTiming (float duration)
+	{
+		EMPPulseFX1.Play ();
+		yield return new WaitForSeconds (duration);
+//		EMPPulseFX1.Stop ();
+		EMPPulseFX2.Play ();
+		StartPulse ();
+	}
 
+	public void StartPulse()
+	{
 		HashSet<GameObject> targets = new HashSet<GameObject> ();
 		Collider[] ListOfObjects = Physics.OverlapSphere (this.transform.position, range);
 
@@ -32,7 +47,7 @@ public class EMPPulse : MeleeAttack {
 		Pulse(targets);
 	}
 
-	void Pulse(HashSet<GameObject> targets){
+	private void Pulse(HashSet<GameObject> targets){
 		foreach (var obj in targets) {
 			Vector3 objPos = obj.transform.position;
 			Vector3 thisPos = transform.position;
