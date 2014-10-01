@@ -3,13 +3,6 @@ using System.Collections;
 
 public class AcidSpit : Bomb {
 
-	private Animator anim;
-
-	void OnEnable() 
-	{
-		anim = GetComponentInChildren<Animator> ();
-	}
-
 	public override void Fire ()
 	{
 		/* Animation trigger added by Lee*/
