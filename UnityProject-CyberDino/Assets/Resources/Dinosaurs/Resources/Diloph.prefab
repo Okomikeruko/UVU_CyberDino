@@ -954,7 +954,7 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100110}
-  m_LocalRotation: {x: -.294324726, y: .523250163, z: -.512444615, w: .613989174}
+  m_LocalRotation: {x: -.294324756, y: .523250222, z: -.512444675, w: .613989234}
   m_LocalPosition: {x: -.806367576, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
@@ -1737,8 +1737,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Duration: .5
-  speedBoost: 200
-  damage: 25
 --- !u!114 &11400006
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1887,6 +1885,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   MaximumPickupCount: 3
+  DropItemPrefab: {fileID: 100000, guid: ae1989ea91c36fc4f9eb0e6267b87341, type: 2}
 --- !u!114 &11400024
 MonoBehaviour:
   m_ObjectHideFlags: 1

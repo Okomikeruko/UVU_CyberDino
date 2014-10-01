@@ -18,6 +18,13 @@ public class Inventory : MonoBehaviour {
 
 	private List<PickUpTypes> PickUps = new List<PickUpTypes>();
 
+	public float newX = 0;
+	public float newY = 20;
+	public float newZ = 0;
+
+	public float newXr = 0;
+	public float newYr = 90;
+	public float newZr = 0;
 	public void AddPickUp(PickUpTypes type)
 	{
 		if(PickUps.Count < MaximumPickupCount)
@@ -63,6 +70,7 @@ public class Inventory : MonoBehaviour {
 
 		for(int i = 0; i < countRemoved; i++)
 		{
+
 			PickUps.Add(type);
 		}
 		return false;
@@ -70,6 +78,22 @@ public class Inventory : MonoBehaviour {
 
 	//Drops all items
 	public void dropAll(){
+		Vector3 newPostion = transform.position;
+		newPostion.x = transform.position.x + newX;
+		newPostion.y = transform.position.y + newY;
+		newPostion.z = transform.position.z + newZ;
+
+		Quaternion target = transform.localRotation;
+
+		target.x = transform.position.x + newXr;
+		target.y = transform.position.y + newYr;
+		target.z = transform.position.z + newZr;
+
+		foreach (PickUpTypes pickUp in PickUps) 
+		{
+			GameObject dropItemClone = (GameObject) Instantiate(Resources.Load("DropItemPrefab"),newPostion,target);
+			dropItemClone.GetComponent<DropItem>().setType(pickUp);
+		}
 		PickUps.Clear();
 	}
 
