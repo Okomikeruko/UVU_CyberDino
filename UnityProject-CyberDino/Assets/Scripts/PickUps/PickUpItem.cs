@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 public class PickUpItem : MonoBehaviour 
 {
@@ -11,17 +12,28 @@ public class PickUpItem : MonoBehaviour
     private const int MAXIMUM_ITEM_RANGE = 3;
 	private PickUpTypes currentType;
 
-    void Start()
-	{
+	public Material weaponPickUp;
+	public Material healthPickUp;
+	public Material turboPickUp;
+
+	private Camera m_Camera;
+	GameObject myContainer;
+	
+	void Awake(){
 		RandomizeType();
-    }
+		m_Camera = Camera.main;
+		myContainer = new GameObject();
+		myContainer.name = "GRP_"+transform.gameObject.name;
+		myContainer.transform.position = transform.position;
+		transform.parent = myContainer.transform;
+		transform.rotation = transform.rotation*Quaternion.Euler(90,0,0);
+	}
 	void Update () 
     {
-        //just rotates the cubes
-        transform.Rotate(new Vector3(15, 30, 45) * Time.deltaTime);
+		myContainer.transform.LookAt(transform.position + m_Camera.transform.rotation * Vector3.back,m_Camera.transform.rotation * Vector3.up);
 	}
-    
-    //When a dino or ai player hits a pickup item, they are assigned a weapon
+	
+	//When a dino or ai player hits a pickup item, they are assigned a weapon
     IEnumerator OnTriggerEnter(Collider other)
     {
         if(other.tag == "Dino" || other.tag == "Ai")
@@ -49,19 +61,21 @@ public class PickUpItem : MonoBehaviour
         switch (randomItemSelection)
         {
             case 1:
-                this.renderer.material.color = Color.blue;
+				renderer.material = weaponPickUp;
 				currentType = PickUpTypes.Weapon;
                 break;
             case 2:
-				this.renderer.material.color = Color.green;
+				renderer.material = turboPickUp;
 				currentType = PickUpTypes.Turbo;
 	            break;
 	        case 3:
-				this.renderer.material.color = Color.red;
+				renderer.material = healthPickUp;
 				currentType = PickUpTypes.Health;
 	            break;
-            default:				
-                break;
+            default:
+				renderer.material = weaponPickUp;
+				currentType = PickUpTypes.Weapon;
+			break;
         }
     }
 }

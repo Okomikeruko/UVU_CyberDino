@@ -1725,8 +1725,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Duration: .5
-  speedBoost: 200
-  damage: 25
 --- !u!114 &11400006
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1875,6 +1873,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   MaximumPickupCount: 3
+  DropItemPrefab: {fileID: 100000, guid: ae1989ea91c36fc4f9eb0e6267b87341, type: 2}
 --- !u!114 &11400024
 MonoBehaviour:
   m_ObjectHideFlags: 1

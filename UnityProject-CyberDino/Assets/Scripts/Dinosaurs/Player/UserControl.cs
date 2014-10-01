@@ -99,6 +99,10 @@ public class UserControl : MonoBehaviour {
 		{
 			bomb.Fire ();
 		}
+		if (Input.GetKeyDown (KeyCode.L)) 
+		{
+			inv.dropAll();
+		}
 	}
 
 
