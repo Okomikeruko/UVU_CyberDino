@@ -299,12 +299,12 @@ public class HUDScript : MonoBehaviour
 
 		itemCount = 0;
 
-		testList = new List<PickUpTypes>();
-		testList.Add(PickUpTypes.Health);
-		testList.Add(PickUpTypes.Weapon);
+		//testList = new List<PickUpTypes>();
+		//testList.Add(PickUpTypes.Health);
+		//testList.Add(PickUpTypes.Weapon);
 		//testList.Add(PickUpTypes.Weapon);
 		
-		UpdateItems(testList);
+		//UpdateItems(testList);
 	}
 	
 	// Update is called once per frame
@@ -711,6 +711,11 @@ public class HUDScript : MonoBehaviour
 	public void UpdateItems(List<PickUpTypes> _list)
 	{
 		itemCount = _list.Count;
+
+		/*foreach(PickUpTypes _type in _list)
+			Debug.Log(_type.ToString());
+
+		Debug.Log("--------------------------");*/
 		
 		for(int i = 0; i < items.Length; i++)
 		{
@@ -719,6 +724,8 @@ public class HUDScript : MonoBehaviour
 				items[i].SetActive(true);
 				
 				if(_list[i] == PickUpTypes.Weapon)
+					items[i].renderer.material.mainTexture = itemsGfx[0];
+				else if(_list[i] == PickUpTypes.Bomb)
 					items[i].renderer.material.mainTexture = itemsGfx[0];
 				else if(_list[i] == PickUpTypes.Health)
 					items[i].renderer.material.mainTexture = itemsGfx[1];
