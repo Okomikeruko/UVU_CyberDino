@@ -31,6 +31,7 @@ Transform:
   m_LocalScale: {x: 1.41776776, y: 1.41776776, z: 1.41776776}
   m_Children: []
   m_Father: {fileID: 0}
+  m_RootOrder: 0
 --- !u!23 &2300000
 Renderer:
   m_ObjectHideFlags: 1
@@ -49,9 +50,8 @@ Renderer:
   m_UseLightProbes: 0
   m_LightProbeAnchor: {fileID: 0}
   m_ScaleInLightmap: 1
-  m_SortingLayer: 0
-  m_SortingOrder: 0
   m_SortingLayerID: 0
+  m_SortingOrder: 0
 --- !u!33 &3300000
 MeshFilter:
   m_ObjectHideFlags: 1
@@ -86,9 +86,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   theWaitTime: 5
-  projSpeed: 30
+  projSpeed: 90
   homeTurret: {fileID: 0}
-  damage: 10
+  damage: 2
 --- !u!135 &13500000
 SphereCollider:
   m_ObjectHideFlags: 1
