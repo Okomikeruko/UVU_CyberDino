@@ -10,6 +10,9 @@ public class HUDScript : MonoBehaviour
 
 	private float xMulti;
 	private float yMulti;
+	
+	public GameObject networkHandlerObject;
+	private NetworkGameHandler networkHandler;
 
 	//guitextures for the hud
 	private GameObject positionObjs;
@@ -87,7 +90,8 @@ public class HUDScript : MonoBehaviour
 	private bool isPaused = false;
 
 	private List<PickUpTypes> testList;
-
+	
+	private bool[] isFading;
 
 	// Use this for initialization
 	void Start () 
@@ -111,6 +115,9 @@ public class HUDScript : MonoBehaviour
 		netView = GetComponent<NetworkView>();
 		
 		playerNames = menuScript.SetNames();
+		
+		networkHandlerObject = GameObject.FindGameObjectWithTag("NetworkHandler");
+		networkHandler = networkHandlerObject.GetComponent("NetworkGameHandler") as NetworkGameHandler;
 		
 		//AddItem = ItemToAdd;
 		
@@ -208,12 +215,6 @@ public class HUDScript : MonoBehaviour
 		healthBorderObjs[1] = CreateGUITxtr("Health Border p2", healthBorderGfx, new Vector3(0, 0, 0));
 		healthBorderObjs[2] = CreateGUITxtr("Health Border p3", healthBorderGfx, new Vector3(0, 0, 0));
 		healthBorderObjs[3] = CreateGUITxtr("Health Border p4", healthBorderGfx, new Vector3(0, 0, 0));
-		
-		for(int i = 0; i < healthBarObjs.Length; i++)
-		{
-			healthBarObjs[i].layer = 0;
-			healthBorderObjs[i].layer = 0;
-		}
 
 		//create guitextures for the player names
 		playerNamesObjs = new GameObject[4];
@@ -221,6 +222,17 @@ public class HUDScript : MonoBehaviour
 		playerNamesObjs[1] = CreateGUIText("Player 2 Name", playerNames[1], new Vector3(0, 0, 0));
 		playerNamesObjs[2] = CreateGUIText("Player 3 Name", playerNames[2], new Vector3(0, 0, 0));
 		playerNamesObjs[3] = CreateGUIText("Player 4 Name", playerNames[3], new Vector3(0, 0, 0));
+		
+		for(int i = 0; i < healthBarObjs.Length; i++)
+		{
+			healthBarObjs[i].layer = 0;
+			healthBorderObjs[i].layer = 0;
+			playerNamesObjs[i].layer = 0;
+			
+			healthBorderObjs[i].SetActive(false);
+			healthBarObjs[i].SetActive(false);
+			playerNamesObjs[i].SetActive(false);
+		}
 
 		mapObj = CreateGUITxtr("Map", mapInfo.MapTxtr, new Vector3(0, 0, 0));
 		mapPosObjs = new GameObject[4];
@@ -264,6 +276,12 @@ public class HUDScript : MonoBehaviour
 
 		items = new GameObject[3];
 		itemsPos = new Vector3[3];
+		
+		isFading = new bool[4];
+		isFading[0] = false;
+		isFading[1] = false;
+		isFading[2] = false;
+		isFading[3] = false;
 
 		foreach(Transform child in healthGrp.transform)
 		{
@@ -383,6 +401,10 @@ public class HUDScript : MonoBehaviour
 			else if(pauseMenuPos[4].Contains( Input.mousePosition))
 			{
 				Time.timeScale = 1;
+
+				var myInfo = networkHandler.GetMyInfo();
+				myInfo.readyState = "LobbyReady";
+				networkHandler.UpdatePlayerInformation(myInfo);
 				
 				menuScript.menuSelect = MenuControl.Menu.lobbyMenu;
 				Application.LoadLevel("Menu");
@@ -435,10 +457,10 @@ public class HUDScript : MonoBehaviour
 
 		mapObj.guiTexture.pixelInset = ResizeRect(mapInfo.MapPos);
 		
-		//Debug.Log(positionObjs.guiTexture.texture);
-//		Debug.Log(hudGfx[racePositions[dinoTrackingScript.playerNum] - 1]);
-		//Debug.Log(racePositions[dinoTrackingScript.playerNum] - 1);
-		//Debug.Log(dinoTrackingScript.playerNum);
+		/*Debug.Log(positionObjs.guiTexture.texture);
+		Debug.Log(dinoTrackingScript.playerNum);
+		Debug.Log(racePositions[dinoTrackingScript.playerNum] - 1);
+		Debug.Log(hudGfx[racePositions[dinoTrackingScript.playerNum] - 1]);*/
 		//if((racePositions[dinoTrackingScript.playerNum] - 1) != null)
 		if(hudGfx[racePositions[dinoTrackingScript.playerNum] - 1] != null)
 		{
@@ -571,20 +593,49 @@ public class HUDScript : MonoBehaviour
 		float yMulti = Screen.height / 100.0f;
 		
 		//if( inSight[_index] == true && screenPoint.z > 0 && playerNamesObjs[_index].guiText.fontSize < 2000)
-		if(screenPoint.z > 20 && screenPoint.z < 200 && playerNamesObjs[_index].guiText.fontSize < 1000)
-		{
-			healthBorderObjs[_index].guiTexture.pixelInset = new Rect(screenPoint.x, screenPoint.y, (1500 * yMulti) / screenPoint.z, (300 * yMulti) / screenPoint.z);
+		if(screenPoint.z > 40 && screenPoint.z < 250 && playerNamesObjs[_index].guiText.fontSize < 800)
+		{	if(healthBarObjs[_index].activeSelf == false)
+			{
+				/*healthBorderObjs[_index].SetActive(true);
+				healthBarObjs[_index].SetActive(true);
+				playerNamesObjs[_index].SetActive(true);*/
+				
+				//Debug.Log("fade in start");
+				
+				StartCoroutine(FadeInHealth(_index));
+			}
+			
+			/*healthBorderObjs[_index].guiTexture.pixelInset = new Rect(screenPoint.x, screenPoint.y, (1500 * yMulti) / screenPoint.z, (300 * yMulti) / screenPoint.z);
 			healthBarObjs[_index].guiTexture.pixelInset = GetHealth(new Rect(screenPoint.x, screenPoint.y, (1500 * yMulti) / screenPoint.z, (300 * yMulti) / screenPoint.z), _index);
 			playerNamesObjs[_index].guiText.pixelOffset = new Vector2(screenPoint.x, screenPoint.y);
-			playerNamesObjs[_index].guiText.fontSize = (int)((300 * yMulti) / screenPoint.z);
+			playerNamesObjs[_index].guiText.fontSize = (int)((300 * yMulti) / screenPoint.z);*/
 		}
 		else
 		{
-			healthBorderObjs[_index].guiTexture.pixelInset = new Rect(0, 0, 0, 0);
+			if(isFading[_index] == false && healthBarObjs[_index].activeSelf == true)
+			{
+				/*healthBorderObjs[_index].SetActive(false);
+				healthBarObjs[_index].SetActive(false);
+				playerNamesObjs[_index].SetActive(false);*/
+				
+				isFading[_index] = true;
+				
+				//Debug.Log("start fade out");
+				
+				StartCoroutine(FadeOutHealth(_index));
+			
+			
+			/*healthBorderObjs[_index].guiTexture.pixelInset = new Rect(0, 0, 0, 0);
 			healthBarObjs[_index].guiTexture.pixelInset = GetHealth(new Rect(0, 0, 0, 0), _index);
 			playerNamesObjs[_index].guiText.pixelOffset = new Vector2(0, 0);
-			playerNamesObjs[_index].guiText.fontSize = (int)(0);
+			playerNamesObjs[_index].guiText.fontSize = (int)(0);*/
+			}
 		}
+		
+		healthBorderObjs[_index].guiTexture.pixelInset = new Rect(screenPoint.x, screenPoint.y, (1500 * yMulti) / screenPoint.z, (300 * yMulti) / screenPoint.z);
+		healthBarObjs[_index].guiTexture.pixelInset = GetHealth(new Rect(screenPoint.x, screenPoint.y, (1500 * yMulti) / screenPoint.z, (300 * yMulti) / screenPoint.z), _index);
+		playerNamesObjs[_index].guiText.pixelOffset = new Vector2(screenPoint.x, screenPoint.y);
+		playerNamesObjs[_index].guiText.fontSize = (int)((300 * yMulti) / screenPoint.z);
 		
 	}
 	
@@ -760,6 +811,130 @@ public class HUDScript : MonoBehaviour
 			pauseMenuObjs[4].SetActive(false);
 			isPaused = false;
 		}
+	}
+	
+	private IEnumerator FadeInHealth(int _index)
+	{
+	//Debug.Log("fade in");
+		Color tempColor1 = healthBorderObjs[_index].guiTexture.color;
+		Color tempColor2 = healthBarObjs[_index].guiTexture.color;
+		Color tempColor3 = playerNamesObjs[_index].guiText.color;
+		
+		healthBorderObjs[_index].SetActive(true);
+		healthBarObjs[_index].SetActive(true);
+		playerNamesObjs[_index].SetActive(true); 
+		
+		float transNum = 0;
+		
+		while(true)
+		{
+			//while the the transparency variable is greater than 0
+			
+			//Debug.Log(transNum);
+			if(transNum < 1)
+			{
+				//use mathf.lerp to set the transparency of the temp Color
+				tempColor1.a = Mathf.Lerp(0, 1, transNum);
+				tempColor2.a = Mathf.Lerp(0, 1, transNum);
+				tempColor3.a = Mathf.Lerp(0, 1, transNum);
+				
+				//Debug.Log(healthBarObjs[_index].guiTexture.color.a);
+				
+				//set the guiTexture's color to the temp Color
+				healthBorderObjs[_index].guiTexture.color = tempColor1;
+				healthBarObjs[_index].guiTexture.color = tempColor2;
+				playerNamesObjs[_index].guiText.color = tempColor3;
+				
+				//decrament the transparency variable
+				transNum += 1 * Time.deltaTime;
+				
+			}
+			else
+			{
+				//set the transparency to 0
+				tempColor1.a = 1;
+				tempColor2.a = 1;
+				tempColor3.a = 1;
+				
+				//set the guiTexture's color to the temp Color
+				healthBorderObjs[_index].guiTexture.color = tempColor1;
+				healthBarObjs[_index].guiTexture.color = tempColor2;
+				playerNamesObjs[_index].guiText.color = tempColor3;
+				
+				//set the guiTexture's color to the temp Color
+				//guiTexture.color = tempColor;
+				
+				//isFaded = true;
+				
+				//stop the repeating
+				break;
+			}
+			
+			yield return null;
+		}
+	}
+	
+	private IEnumerator FadeOutHealth(int _index)
+	{
+		//Debug.Log("fade out");
+		Color tempColor1 = healthBorderObjs[_index].guiTexture.color;
+		Color tempColor2 = healthBarObjs[_index].guiTexture.color;
+		Color tempColor3 = playerNamesObjs[_index].guiText.color;
+		
+		float transNum = 0;
+		
+		while(true)
+		{
+			//while the the transparency variable is greater than 0
+			if(transNum < 1)
+			{
+				//use mathf.lerp to set the transparency of the temp Color
+				tempColor1.a = Mathf.Lerp(1, 0, transNum);
+				tempColor2.a = Mathf.Lerp(1, 0, transNum);
+				tempColor3.a = Mathf.Lerp(1, 0, transNum);
+				
+				//Debug.Log(transNum);
+				
+				//Debug.Log(healthBorderObjs[_index].guiTexture.color.a);
+				
+				//set the guiTexture's color to the temp Color
+				healthBorderObjs[_index].guiTexture.color = tempColor1;
+				healthBarObjs[_index].guiTexture.color = tempColor2;
+				playerNamesObjs[_index].guiText.color = tempColor3;
+				
+				//decrament the transparency variable
+				transNum += 5 * Time.deltaTime;
+				
+			}
+			else
+			{
+				//set the transparency to 0
+				tempColor1.a = 0;
+				tempColor2.a = 0;
+				tempColor3.a = 0;
+				
+				//set the guiTexture's color to the temp Color
+				healthBorderObjs[_index].guiTexture.color = tempColor1;
+				healthBarObjs[_index].guiTexture.color = tempColor2;
+				playerNamesObjs[_index].guiText.color = tempColor3;
+				
+				healthBorderObjs[_index].SetActive(false);
+				healthBarObjs[_index].SetActive(false);
+				playerNamesObjs[_index].SetActive(false);
+				
+				//set the guiTexture's color to the temp Color
+				//guiTexture.color = tempColor;
+				
+				//isFaded = true;
+				
+				//stop the repeating
+				break;
+			}
+			
+			yield return null;
+		}
+		
+		isFading[_index] = false;
 	}
 	
 	

@@ -96,6 +96,20 @@ public class DinoTracking : MonoBehaviour
 
 		tempDinos = new GameObject[4];
 		//private int tempDinoIndex;
+		
+		for(int i = 0; i < currentNodes.Length; i++)
+		{
+			currentNodes[i] = startNode.GetComponent<NodeBehavior>();
+			nextNodes[i] = currentNodes[i].NextNodes[0].GetComponent<NodeBehavior>();
+			
+			finishDist[i] = AddUpDistance(currentNodes[i].GetComponent<NodeBehavior>(), nextNodes[i].GetComponent<NodeBehavior>(), 0);
+		}
+		
+		for(int i = 0; i < currentPositions.Length; i++)
+		{
+			currentPositions[i] = i + 1;
+			//Debug.Log("The start pos " + currentPositions[i]);
+		}
 
 	}
 	
@@ -164,7 +178,7 @@ public class DinoTracking : MonoBehaviour
 			}
 		}
 
-		for(int i = 0; i < currentNodes.Length; i++)
+		/*for(int i = 0; i < currentNodes.Length; i++)
 		{
 			currentNodes[i] = startNode.GetComponent<NodeBehavior>();
 			nextNodes[i] = currentNodes[i].NextNodes[0].GetComponent<NodeBehavior>();
@@ -172,11 +186,11 @@ public class DinoTracking : MonoBehaviour
             finishDist[i] = AddUpDistance(currentNodes[i].GetComponent<NodeBehavior>(), nextNodes[i].GetComponent<NodeBehavior>(), 0);
 		}
 		
-		
 		for(int i = 0; i < currentPositions.Length; i++)
 		{
 			currentPositions[i] = i + 1;
-		}
+			Debug.Log("The start pos " + currentPositions[i]);
+		}*/
 		
 		yield return null;
 	}
@@ -184,6 +198,7 @@ public class DinoTracking : MonoBehaviour
 	void FixedUpdate () 
 	{
 
+//Debug.Log(currentPositions[0]);
 		if(Input.GetKeyDown(KeyCode.E))
 		{
 				
@@ -441,7 +456,7 @@ public class DinoTracking : MonoBehaviour
 			//if the current element's network id is the same as the one passed in
 			if(_dino.networkView.viewID == _id)
 			{
-				Debug.Log("set " + _playerNum + "'s dino to " + _dino);
+				//Debug.Log("set " + _playerNum + "'s dino to " + _dino);
 				//set this dino into the dinos array using the player number as the index
 				dinos[_playerNum] = _dino;
 			}

@@ -1836,12 +1836,18 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100078}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f84b3bfdff616b44ca5f06675cda2e21, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   MaximumPickupCount: 3
+  newX: 0
+  newY: 20
+  newZ: 0
+  newXr: 0
+  newYr: 90
+  newZr: 0
 --- !u!114 &11400004
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1871,7 +1877,7 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100090}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a63cfb6b98a104e41bc791a2aedd788b, type: 3}
   m_Name: 
@@ -1922,6 +1928,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   duration: 2
+  BuzzSpeedPercentIncrease: 75
+  BuzzSawDamage: 25
+  BuzzRange: 50
+  arcDegree: 30
 --- !u!114 &11400016
 MonoBehaviour:
   m_ObjectHideFlags: 1

@@ -17,10 +17,12 @@ public class MenuControl : MonoBehaviour
 	private DinoTracking dinoTrackingScript;
 	
 	//the different dinos to choose
-	public string[] dinos = new string[]{"Diloph", "Hesp", "Raptor", "Spino", "TRex", "Troodon"};
+	[HideInInspector]
+	public string[] dinos;
 	
 	//the different level to choose
-	private string[] levels = new string[]{"Dumbell Track", "CityTrackv2","John's Track", "Lee's Track", "Robert's Track"};
+	[HideInInspector]
+	private string[] levels;
 	
 	public Texture[] levelTextures;
 	
@@ -150,6 +152,9 @@ public class MenuControl : MonoBehaviour
 	// Use this for initialization
 	void Start () 
 	{
+		dinos = new string[]{"Diloph", "Hesp", "Raptor", "Spino", "TRex", "Troodon"};
+		levels = new string[]{"Dumbell Track", "CityTrackv2","John's Track", "Lee's Track", "Robert's Track"};
+		
 		mainMenuBtnTxtr = new Texture[3];
 		mainMenuBtnTxtr[0] = (Texture)Resources.Load("GUI/Materials/SinglePlayerButton");
 		mainMenuBtnTxtr[1] = (Texture)Resources.Load("GUI/Materials/MultiPlayerButton");
@@ -658,6 +663,8 @@ public class MenuControl : MonoBehaviour
 			{
 				DinoSelectionDecrement();
 				
+				Debug.Log(dinoIndex);
+				
 				var myInfo = networkHandler.GetMyInfo();
 				myInfo.dinoName = dinos[dinoIndex];
 				if (Network.isClient){
@@ -674,6 +681,8 @@ public class MenuControl : MonoBehaviour
 			if(GUI.Button(new Rect(menuOrigin[2].x + lobbyMenuBtnRect[3].x, menuOrigin[2].y + lobbyMenuBtnRect[3].y, lobbyMenuBtnRect[3].width, lobbyMenuBtnRect[3].height), ""))
 			{
 				DinoSelectionIncrement();
+				
+				Debug.Log(dinoIndex);
 				
 				var myInfo = networkHandler.GetMyInfo();
 				myInfo.dinoName = dinos[dinoIndex];
@@ -694,6 +703,8 @@ public class MenuControl : MonoBehaviour
 				//menuOrigin[6] = new Rect();
 				//inLobby = false;
 				networkHandler.LeaveGame();
+				
+				dinoIndex = 0;
 				
 				if(singlePlayer == true)
 				{
@@ -718,6 +729,9 @@ public class MenuControl : MonoBehaviour
 					
 					if(GUI.Button(new Rect(menuOrigin[2].x + lobbyMenuBtnRect[5].x, menuOrigin[2].y + lobbyMenuBtnRect[5].y, lobbyMenuBtnRect[5].width, lobbyMenuBtnRect[5].height), ""))
 					{
+						var myInfo = networkHandler.GetMyInfo();
+						//Debug.Log( myInfo.dinoName);
+						
 						menuSelect = Menu.goToLevel;
 						networkHandler.ChangeMenuSelect();
 						networkHandler.ChangeLevel();
@@ -923,6 +937,11 @@ public class MenuControl : MonoBehaviour
 			if(GUI.Button(new Rect(menuOrigin[4].x + resultsMenuRect[12].x, menuOrigin[4].y + resultsMenuRect[12].y, resultsMenuRect[12].width, resultsMenuRect[12].height), ""))
 			{
 				Debug.Log("change to lobby");
+				
+				var myInfo = networkHandler.GetMyInfo();
+				myInfo.readyState = "LobbyReady";
+				networkHandler.UpdatePlayerInformation(myInfo);
+				
 				Application.LoadLevel("Menu");
 				menuSelect = Menu.lobbyMenu;
 				//networkHandler.ChangeMenuSelect();
@@ -938,7 +957,8 @@ public class MenuControl : MonoBehaviour
 			GUI.DrawTexture(new Rect(menuOrigin[4].x + resultsMenuRect[14].x, menuOrigin[4].y + resultsMenuRect[14].y, resultsMenuRect[14].width, resultsMenuRect[14].height), (Texture)Resources.Load("GUI/Materials/PlayAgainButton"));
 			if(GUI.Button(new Rect(menuOrigin[4].x + resultsMenuRect[14].x, menuOrigin[4].y + resultsMenuRect[14].y, resultsMenuRect[14].width, resultsMenuRect[14].height), ""))
 			{
-				Debug.Log("Reload");
+				Debug.Log("Reload");	
+
 				Application.LoadLevel("DumbellTrack");
 			}
 		}
@@ -1061,7 +1081,7 @@ public class MenuControl : MonoBehaviour
 	
 	public IEnumerator MoveLeftOff(int _index1, int _index2, Menu _menu)
 	{
-		Debug.Log("moving " + _menu.ToString());
+		//Debug.Log("moving " + _menu.ToString());
 		menuMoving = true;
 		
 		while(true)
@@ -1115,7 +1135,9 @@ public class MenuControl : MonoBehaviour
 			Destroy(dinoSelected);
 		}
 		
+		Debug.Log("the dino index " + dinoIndex);
 		string bannerName = "GUI/Materials/Banner" + dinos[dinoIndex] + "Large";
+		Debug.Log(bannerName);
 		largeDinoBanner = (Texture)Resources.Load(bannerName);
 		
 		dinoSelected = (GameObject)Instantiate(dinoModels[dinoIndex], new Vector3(Screen.width, Screen.height, 0), Quaternion.identity);
@@ -1139,7 +1161,10 @@ public class MenuControl : MonoBehaviour
 			Destroy(dinoSelected);
 		}
 		
+		Debug.Log("the dino index " + dinoIndex);
+		Debug.Log("the dino name " + dinos[dinoIndex]);
 		string bannerName = "GUI/Materials/Banner" + dinos[dinoIndex] + "Large";
+		Debug.Log(bannerName);
 		largeDinoBanner = (Texture)Resources.Load(bannerName);
 		
 		dinoSelected = (GameObject)Instantiate(dinoModels[dinoIndex], new Vector3(Screen.width, Screen.height, 0), Quaternion.identity);
