@@ -54,7 +54,6 @@ public class PickUpItem : MonoBehaviour
         this.renderer.enabled = true;
     }
 
-    //Assigns weapon to pick up box that will then be given to dino that picks it up, for now it just changes the pickup color
     void RandomizeType()
     {
 		var randomItemSelection = Random.Range(MINIMUM_ITEM_RANGE, MAXIMUM_ITEM_RANGE + 1);
