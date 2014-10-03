@@ -3,12 +3,6 @@ using System.Collections;
 
 public class DropItem : MonoBehaviour {
 
-	//Sets how long it takes for the pickup item to respawn
-	public float waitTime = 5.0f;
-	
-	//Minimum and maximum values when generating a random number to pickup items
-	private const int MINIMUM_ITEM_RANGE = 1;
-	private const int MAXIMUM_ITEM_RANGE = 3;
 	private PickUpTypes currentType;
 	
 	public Material weaponPickUp;
@@ -52,8 +46,8 @@ public class DropItem : MonoBehaviour {
 			renderer.material = bombPickUp;
 		}
 	}
-	//When a dino or ai player hits a pickup item, they are assigned a weapon
-	/*IEnumerator OnTriggerEnter(Collider other)
+
+	IEnumerator OnTriggerEnter(Collider other)
 	{
 		if(other.tag == "Dino" || other.tag == "Ai")
 		{
@@ -65,14 +59,6 @@ public class DropItem : MonoBehaviour {
 				inv.AddPickUp(currentType);
 			
 		}
-		yield return new WaitForSeconds(waitTime);
-		
-		RandomizeType();
-		
-		this.collider.enabled = true;
-		this.renderer.enabled = true;
-	}*/
-	
-	//Assigns weapon to pick up box that will then be given to dino that picks it up, for now it just changes the pickup color
-
+		yield return new WaitForSeconds(0);
+	}
 }

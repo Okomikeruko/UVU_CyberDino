@@ -18,6 +18,7 @@ public class Inventory : MonoBehaviour {
 
 	private List<PickUpTypes> PickUps = new List<PickUpTypes>();
 
+	//using these variables to set rotation of object when it is dropped
 	public float newX = 0;
 	public float newY = 20;
 	public float newZ = 0;
