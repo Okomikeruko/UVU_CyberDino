@@ -14,19 +14,17 @@ public class EMPPulse : MeleeAttack {
 	[SerializeField]
 	private ParticleSystem EMPPulseFX1;
 	[SerializeField]
-	private ParticleSystem EMPPulseFX2;
+	private float EffectOffset;
 
 	public override void Fire ()
 	{
-		StartCoroutine (FXTiming (0.5F));
+		StartCoroutine (FXTiming (EffectOffset));
 	}
 
 	IEnumerator FXTiming (float duration)
 	{
 		EMPPulseFX1.Play ();
 		yield return new WaitForSeconds (duration);
-//		EMPPulseFX1.Stop ();
-		EMPPulseFX2.Play ();
 		StartPulse ();
 	}
 
