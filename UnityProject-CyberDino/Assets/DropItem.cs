@@ -12,6 +12,8 @@ public class DropItem : MonoBehaviour {
 	
 	private Camera m_Camera;
 	GameObject myContainer;
+
+	public bool canCollide;
 	
 	void Awake(){
 		m_Camera = Camera.main;
@@ -19,11 +21,12 @@ public class DropItem : MonoBehaviour {
 		myContainer.name = "GRP_"+transform.gameObject.name;
 		myContainer.transform.position = transform.position;
 		transform.parent = myContainer.transform;
-		transform.rotation = transform.rotation*Quaternion.Euler(90,90,0);
+		transform.rotation = transform.rotation*Quaternion.Euler(90,0,0);
 	}
 	void Update () 
 	{
 		myContainer.transform.LookAt(transform.position + m_Camera.transform.rotation * Vector3.back,m_Camera.transform.rotation * Vector3.up);
+		
 	}
 
 	public void setType(PickUpTypes type)
@@ -51,14 +54,18 @@ public class DropItem : MonoBehaviour {
 	{
 		if(other.tag == "Dino" || other.tag == "Ai")
 		{
-			this.collider.enabled = false;
-			this.renderer.enabled = false;
-			
-			var inv = other.GetComponent<Inventory>();
-			if(inv != null)
-				inv.AddPickUp(currentType);
+			if(canCollide)
+			{
+				this.collider.enabled = false;
+				this.renderer.enabled = false;
+				var inv = other.GetComponent<Inventory>();
+				if(inv != null)
+					inv.AddPickUp(currentType);
+				Destroy(this);
+			}
 			
 		}
-		yield return new WaitForSeconds(0);
+		yield return new WaitForSeconds(1);
+		canCollide = true;
 	}
 }

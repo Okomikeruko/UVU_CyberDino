@@ -43,7 +43,7 @@ public class GameControl : MonoBehaviour {
 			//load environment objects (pickups, turrets, train)
 			GameObject[] turretSpawnPoints = GameObject.FindGameObjectsWithTag ("TurretSpawn");
 			foreach (var unit in turretSpawnPoints) {
-					GameObject Turret = (GameObject)Network.Instantiate ((GameObject)Resources.Load ("Turret02"), unit.transform.position, Quaternion.LookRotation (unit.transform.forward), playerID);
+					GameObject Turret = (GameObject)Network.Instantiate ((GameObject)Resources.Load ("Turret01"), unit.transform.position, Quaternion.LookRotation (unit.transform.forward), playerID);
 			}
 
 			GameObject[] pickupSpawnPoints = GameObject.FindGameObjectsWithTag ("PickUpSpawn");
