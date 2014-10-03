@@ -8,7 +8,11 @@ public class MenuControl : MonoBehaviour
 {
 	//a guiskin to change the look of the buttons
 	public GUISkin mySkin;
-	
+
+	private delegate void Selector();
+	private Selector currentSelection;
+
+
 	//enum to hold the different menu selections
 	public enum Menu{mainMenu, multiPMenu, lobbyMenu, goToLevel, resultsMenu, connecting};
 	public Menu menuSelect;
@@ -148,6 +152,11 @@ public class MenuControl : MonoBehaviour
 	
 	private int[] racePositions;
 
+	private int buttonIndex;
+	private bool isHoldingBtn;
+	private float deadZone;
+	private Rect[] currentRect;
+
 	
 	// Use this for initialization
 	void Start () 
@@ -219,6 +228,10 @@ public class MenuControl : MonoBehaviour
 		glowDashes = new GameObject[12];
 		
 		netView = GetComponent<NetworkView>();
+
+		currentSelection = MainMenuSelection;
+		currentRect = mainMenuBtnRect;
+		deadZone = 0.5f;
 		
 	}
 	
@@ -274,6 +287,10 @@ public class MenuControl : MonoBehaviour
 		//playerNames = SetNames();
 		
 		//Debug.Log("the names " + playerNames[0]);
+
+		buttonIndex = 0;
+
+		isHoldingBtn = false;
 	}
 	
 /*	void Update()
@@ -378,6 +395,23 @@ public class MenuControl : MonoBehaviour
 		
 		xMulti = Screen.width / 100.0f;
 		yMulti = Screen.height / 100.0f;
+		
+		//if horizontal or virtual movement is detected
+		if(isHoldingBtn == false && 
+		   (Input.GetAxis("Horizontal") >= deadZone || Input.GetAxis("Horizontal") <= -deadZone || 
+		 	Input.GetAxis("Vertical") >= deadZone || Input.GetAxis("Vertical") <= -deadZone || 
+		 	Input.GetButton("Jump")))
+		{
+			isHoldingBtn = true;
+			currentSelection();
+
+		}
+		else if(Input.GetAxis("Horizontal") <= deadZone && Input.GetAxis("Horizontal") >= -deadZone && 
+		        Input.GetAxis("Vertical") <= deadZone && Input.GetAxis("Vertical") >= -deadZone &&
+		        Input.GetButton("Jump") == false)
+			isHoldingBtn = false;
+			//call the selection control delegate.
+			
 		
 		/*if(mainMenuBkgd != null && menuBkgd != null)
 		{
@@ -988,7 +1022,11 @@ public class MenuControl : MonoBehaviour
 
 			
 		}
+
+		int menuIndex = (int)menuSelect;
 		
+		GUI.DrawTexture(new Rect(menuOrigin[0].x + currentRect[buttonIndex].x, menuOrigin[0].y + currentRect[buttonIndex].y, currentRect[buttonIndex].width, currentRect[buttonIndex].height), lobbyMenuBtnTxtr[0]);
+
 	}
 	
 	/*******************************************************************************************************************/
@@ -1439,6 +1477,64 @@ public class MenuControl : MonoBehaviour
 	{
 		playerNames[_index] = _name;
 	}
-	
+
+	//***********menu selection**************//
+	//main menu selection
+	private void MainMenuSelection()
+	{
+		Debug.Log("buttonIndex " + buttonIndex);
+
+		//if pressing up and the index is not 0
+		if(Input.GetAxis("Vertical") < 0 && buttonIndex > 0)
+		{
+			//decrement buttonSelect
+			buttonIndex--;
+			//Debug.Log("buttonIndex" + buttonIndex);
+			//assign the rect to the selector
+		}
+		//if pressing down and the index isn't the last one
+		else if(Input.GetAxis("Vertical") > 0 && buttonIndex < mainMenuBtnRect.Length - 1)
+		{
+			//increment buttonSelect
+			buttonIndex++;
+			//Debug.Log("buttonIndex" + buttonIndex);
+			//assign the rect to the selector
+		}
+		//if pressing a button
+		else if(Input.GetButton("Jump"))
+		{
+			Debug.Log("it works");
+			if(buttonIndex == 0)
+			{
+				Debug.Log("go to lobby!");
+				singlePlayer = true;
+				
+				//inLobby = true;
+				networkHandler.HostGame("SinglePlayer", "player");
+				
+				var myInfo = networkHandler.GetMyInfo();
+				myInfo.readyState = "LobbyReady";
+				networkHandler.UpdatePlayerInformation(myInfo);
+				
+				StartCoroutine(MoveLeftOff(0, 2, Menu.lobbyMenu));
+
+				currentRect = lobbyMenuBtnRect;
+			}
+				//
+				//go to the lobby
+			else if(buttonIndex == 1)
+			{
+				Debug.Log("go to multiplayer!");
+				singlePlayer = false;
+				
+				StartCoroutine(MoveLeftOff(0, 1, Menu.multiPMenu));
+
+				currentRect = multiPMenuBtnRect;
+			}
+				//go to the
+
+
+		}
+	}
 
 }
