@@ -1211,7 +1211,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100068}
   m_LocalRotation: {x: 0, y: .707106829, z: 0, w: .707106829}
-  m_LocalPosition: {x: 0, y: 3.81239915, z: .518297136}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: .476190448, y: .476190507, z: .476190448}
   m_Children:
   - {fileID: 400080}
@@ -1284,7 +1284,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100080}
   m_LocalRotation: {x: -.492438167, y: -.50744915, z: .50744915, w: .492438167}
-  m_LocalPosition: {x: .836234629, y: .391290635, z: 0}
+  m_LocalPosition: {x: -.930000007, y: 8.51000023, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 400078}
@@ -1868,8 +1868,8 @@ MonoBehaviour:
   range: 50
   force: 10
   damage: 20
-  EMPPulseFX1: {fileID: 0}
-  EMPPulseFX2: {fileID: 0}
+  EMPPulseFX1: {fileID: 19800006}
+  EffectOffset: 1
 --- !u!114 &11400014
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -3635,7 +3635,7 @@ ParticleSystem:
   randomSeed: 0
   looping: 0
   prewarm: 0
-  playOnAwake: 1
+  playOnAwake: 0
   moveWithTransform: 0
   InitialModule:
     enabled: 1
@@ -4592,7 +4592,7 @@ ParticleSystem:
   randomSeed: 0
   looping: 0
   prewarm: 0
-  playOnAwake: 1
+  playOnAwake: 0
   moveWithTransform: 0
   InitialModule:
     enabled: 1
@@ -5554,7 +5554,7 @@ ParticleSystem:
   randomSeed: 0
   looping: 1
   prewarm: 0
-  playOnAwake: 1
+  playOnAwake: 0
   moveWithTransform: 1
   InitialModule:
     enabled: 1
@@ -6576,7 +6576,7 @@ ParticleSystem:
   randomSeed: 0
   looping: 0
   prewarm: 0
-  playOnAwake: 1
+  playOnAwake: 0
   moveWithTransform: 1
   InitialModule:
     enabled: 1
