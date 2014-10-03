@@ -11,6 +11,8 @@ public class AcidSpit : Bomb {
     private float snareMagnitude = 50;
     [SerializeField]
     private float snareDuration = 2;
+	[SerializeField]
+	private ParticleSystem WeaponVFX;
 
 	public override void Fire ()
 	{
@@ -28,6 +30,7 @@ public class AcidSpit : Bomb {
 	public void SpitFX()
 	{
 		// FX triggered on spit frame. 
+		WeaponVFX.Play ();
 		Debug.Log("Acid Spit!");
 	}
 

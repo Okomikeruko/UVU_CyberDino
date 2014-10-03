@@ -12,12 +12,15 @@ public class Flamethrower : MeleeAttack {
 	private float duration = 10;
 	[SerializeField]
 	private float arcDegree = 45.0f;
+	[SerializeField]
+	private ParticleSystem WeaponVFX;
 
 	public override void Fire ()
 	{		
 		Debug.Log ("Flamethrower!");
 
 		//Play VFX/Animation
+		WeaponVFX.Play ();
 
 		HashSet<GameObject> targets = new HashSet<GameObject> ();
 		Collider[] ListOfObjects = Physics.OverlapSphere (this.transform.position, range);
