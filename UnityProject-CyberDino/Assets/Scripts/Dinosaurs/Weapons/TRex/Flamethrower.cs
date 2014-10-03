@@ -35,6 +35,7 @@ public class Flamethrower : MeleeAttack {
 		}
 
 		StartCoroutine(dot (targets));
+
 	}
 	
 	IEnumerator dot(HashSet<GameObject> targets)
@@ -50,7 +51,6 @@ public class Flamethrower : MeleeAttack {
 				health.Damage(dotTick);
 			}
 		}
+		WeaponVFX.Stop ();
 	}
-
-
 }

@@ -1220,7 +1220,7 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100110}
-  m_LocalRotation: {x: -.294324726, y: .523250163, z: -.512444615, w: .613989174}
+  m_LocalRotation: {x: -.294324756, y: .523250222, z: -.512444675, w: .613989234}
   m_LocalPosition: {x: -.806367576, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
@@ -2064,6 +2064,7 @@ MonoBehaviour:
   Duration: .5
   speedBoost: 200
   damage: 25
+  WeaponVFX: {fileID: 19800000}
 --- !u!114 &11400006
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2091,6 +2092,7 @@ MonoBehaviour:
   dotDuration: 10
   snareMagnitude: 50
   snareDuration: 2
+  WeaponVFX: {fileID: 0}
 --- !u!114 &11400010
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2219,9 +2221,6 @@ MonoBehaviour:
   newX: 0
   newY: 20
   newZ: 0
-  newXr: 0
-  newYr: 90
-  newZr: 0
 --- !u!114 &11400024
 MonoBehaviour:
   m_ObjectHideFlags: 1

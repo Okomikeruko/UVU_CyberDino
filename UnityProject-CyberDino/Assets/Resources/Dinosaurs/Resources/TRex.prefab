@@ -2323,6 +2323,7 @@ MonoBehaviour:
   damage: 25
   duration: 10
   arcDegree: 45
+  WeaponVFX: {fileID: 19800004}
 --- !u!114 &11400022
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2335,6 +2336,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   DistanceDroppedBehind: 30
+  WeaponVFX: {fileID: 19800012}
 --- !u!114 &11400024
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2350,9 +2352,6 @@ MonoBehaviour:
   newX: 0
   newY: 20
   newZ: 0
-  newXr: 0
-  newYr: 90
-  newZr: 0
 --- !u!114 &11400028
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -4165,7 +4164,7 @@ ParticleSystem:
   randomSeed: 0
   looping: 1
   prewarm: 0
-  playOnAwake: 1
+  playOnAwake: 0
   moveWithTransform: 1
   InitialModule:
     enabled: 1
@@ -5187,7 +5186,7 @@ ParticleSystem:
   randomSeed: 0
   looping: 1
   prewarm: 0
-  playOnAwake: 1
+  playOnAwake: 0
   moveWithTransform: 1
   InitialModule:
     enabled: 1
@@ -6209,7 +6208,7 @@ ParticleSystem:
   randomSeed: 0
   looping: 1
   prewarm: 0
-  playOnAwake: 1
+  playOnAwake: 0
   moveWithTransform: 0
   InitialModule:
     enabled: 1

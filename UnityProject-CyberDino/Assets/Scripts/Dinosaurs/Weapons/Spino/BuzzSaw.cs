@@ -14,7 +14,7 @@ public class BuzzSaw : MeleeAttack {
     [SerializeField]
     private float arcDegree = 30.0f;
 	[SerializeField]
-	private ParticleSystem WeaponVFX;
+	private GameObject WeaponVFX;
 	[SerializeField]
 	private GameObject mesh;
 
@@ -67,7 +67,7 @@ public class BuzzSaw : MeleeAttack {
 		{
 			Debug.Log ("Buzz Saw start FX");
             // (2) Any effect or code that's called after Spino finishes curling up.
-			WeaponVFX.Play ();
+			WeaponVFX.SetActive(true);
 
 			// "TopSpeedMod" starts a coroutine inside MotionControl speeding up Dino by a percentage for duration seconds
             motContr.TopSpeedMod(BuzzSpeedPercentIncrease, duration);
@@ -82,7 +82,7 @@ public class BuzzSaw : MeleeAttack {
 		{
             // (3) Any effect or code that's called when Spino starts to uncurl.
             // Stop Saw effect
-			WeaponVFX.Stop();
+			WeaponVFX.SetActive(false);
             // ***CODE***
             // (MAKE MESH RE-APPEAR(The mesh prefab that's a child of Spino prefab))
 			mesh.SetActive(true);
@@ -98,14 +98,12 @@ public class BuzzSaw : MeleeAttack {
         
         // Spino starts to curl up, isAttacking true, start Audio Effect
 		netanim.AnimSetMelee ("Melee", true); 
-        // Goes into SawFX (turn on)
-        SawFX(true); 
+        // Goes into SawFX (turn on) called my mecanim automatically
         // Wait "duration" seconds
 		yield return new WaitForSeconds(seconds);
         // Spino starts to uncurl, stop Audio Effect
 		netanim.AnimSetMelee ("Melee", false);
-        // Stop SawFX (turn off)
-        SawFX(false);
+        // Stop SawFX (turn off) called by mecanim automatically
 	}
 	
 }
