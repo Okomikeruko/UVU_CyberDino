@@ -22,7 +22,13 @@ public class RespawnManager : MonoBehaviour
 
 	void OnEnable() 
 	{
-		racerRespawnParticalSystem = gameObject.GetComponentInChildren<ParticleSystem>();
+		ParticleSystem[] particleSystems = gameObject.GetComponentsInChildren<ParticleSystem>();
+		foreach(var ps in particleSystems){
+			if (ps.name == "Respawn_VFX"){
+				racerRespawnParticalSystem = ps;
+				break;	
+			}
+		}
 	}
 	
 	void OnDisable() 
