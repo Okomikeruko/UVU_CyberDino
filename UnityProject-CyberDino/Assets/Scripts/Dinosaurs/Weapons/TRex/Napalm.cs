@@ -8,6 +8,8 @@ public class Napalm : Bomb {
 	//private Transform napalmTransform = Napalm.transform;
 	[SerializeField]
 	private float DistanceDroppedBehind = 30f;
+	[SerializeField]
+	private ParticleSystem WeaponVFX;
 
     // Use this for initialization
     void Start()
@@ -27,6 +29,6 @@ public class Napalm : Bomb {
     
     void PlayFX ()
 	{
-		
+		WeaponVFX.Play ();
 	}
 }

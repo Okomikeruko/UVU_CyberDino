@@ -4,11 +4,14 @@ using System.Collections.Generic;
 
 public class EMPBlast : Bomb {
 
-	public const float DAMAGE = 10.0f;
+	[SerializeField]
+	private const float DAMAGE = 10.0f;
+	[SerializeField]
+	private ParticleSystem WeaponVFX;
 
 	public override void Fire ()
 	{
-		Debug.Log ("EMP Blast!");
+		// Debug.Log ("EMP Blast!");
 		float gatheredHealth = 0;
 		var DinoRacers = GameObject.FindGameObjectsWithTag("Dino");
 		var AiRacers = GameObject.FindGameObjectsWithTag("Ai");
@@ -20,11 +23,11 @@ public class EMPBlast : Bomb {
 				continue;
 			}
 
-			//Lightning strikes all other racers
-			Debug.Log("Play lightening strike animation");
-			//Play strike animation
-
-			//Take up to 10 health from those racers
+			// Lightning strikes all other racers
+			// Debug.Log("Play lightening strike animation");
+			// Play strike animation
+			WeaponVFX.Play ();
+			// Take up to 10 health from those racers
 			var dinosaurhHealth = racer.GetComponent<DinosaurHealth>();
 			if (dinosaurhHealth.Current >= DAMAGE){
 				gatheredHealth += DAMAGE;

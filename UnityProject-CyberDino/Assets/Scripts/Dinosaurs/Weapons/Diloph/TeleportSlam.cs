@@ -11,6 +11,8 @@ public class TeleportSlam : MeleeAttack {
 	private float speedBoost = 200;
 	[SerializeField]
 	private float damage = 25;
+	[SerializeField]
+	private ParticleSystem WeaponVFX;
 
 	private RaycastHit[] hit;
 	
@@ -20,6 +22,7 @@ public class TeleportSlam : MeleeAttack {
 	{
 		Debug.Log("Teleport Slam!");
 		/* Animation trigger added by Lee*/
+		WeaponVFX.Play ();
 		StartCoroutine (slam(Duration));
 	}
 

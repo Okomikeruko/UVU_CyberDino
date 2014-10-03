@@ -6,9 +6,14 @@ public class StickyBomb : Bomb {
 
 	[SerializeField]
 	private float Range = 1000.0f;
+	[SerializeField]
+	private ParticleSystem WeaponVFX;
 
 	public override void Fire ()
 	{
+		// Play VFX
+		WeaponVFX.Play ();
+
 		// Find Nearest Opponent
 		var dinos = GameObject.FindGameObjectsWithTag("Dino");
 		var ais = GameObject.FindGameObjectsWithTag("Ai");

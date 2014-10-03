@@ -9,12 +9,16 @@ public class SonicScream : MeleeAttack {
 	private float damage = 25;
 	[SerializeField]
 	private float arcDegree = 30.0f;
+	[SerializeField]
+	private ParticleSystem WeaponVFX;
 
 	public override void Fire ()
 	{				
 		Debug.Log("Sonic Scream!");
+		
+		// Play VFX
+		WeaponVFX.Play ();
 
-		//Play VFX/Animation
 		GameObject target = null;
 		Collider[] ListOfObjects = Physics.OverlapSphere (this.transform.position, range);
 
