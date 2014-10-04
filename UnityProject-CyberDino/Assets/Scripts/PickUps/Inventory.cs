@@ -18,24 +18,15 @@ public class Inventory : MonoBehaviour {
 
 	private List<PickUpTypes> PickUps = new List<PickUpTypes>();
 
-	public float newX = 0;
-	public float newY = 20;
+	//using these variables to set rotation of object when it is dropped
+	public float newX = 10;
+	public float newY = 10;
 	public float newZ = 0;
 
-	public float newXr = 0;
-	public float newYr = 90;
-	public float newZr = 0;
 	public void AddPickUp(PickUpTypes type)
 	{
 		if(PickUps.Count < MaximumPickupCount)
 		{ 
-			//If you pickup a weapon, and you have a weapon already
-			//That weapon turns into a Bomb
-			if(PickUps.Contains(PickUpTypes.Weapon)){
-				PickUps.Remove(PickUpTypes.Weapon);
-				PickUps.Add(PickUpTypes.Bomb);
-				PickUps.Add(PickUpTypes.Bomb);
-			}
 			PickUps.Add(type);
 			myHud.UpdateItems(PickUps);
 		}
@@ -86,15 +77,17 @@ public class Inventory : MonoBehaviour {
 		newPostion.y = transform.position.y + newY;
 		newPostion.z = transform.position.z + newZ;
 
-		Quaternion target = transform.localRotation;
+		Quaternion target = transform.rotation;
 
-		target.x = transform.position.x + newXr;
-		target.y = transform.position.y + newYr;
-		target.z = transform.position.z + newZr;
+		target.x = 0;
+		target.y = 0;
+		target.z = 0;
 
 		foreach (PickUpTypes pickUp in PickUps) 
 		{
 			GameObject dropItemClone = (GameObject) Instantiate(Resources.Load("DropItemPrefab"),newPostion,target);
+			newPostion.x += 10;
+			newPostion.z += 7;
 			dropItemClone.GetComponent<DropItem>().setType(pickUp);
 		}
 		PickUps.Clear();

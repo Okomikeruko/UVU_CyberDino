@@ -28,6 +28,7 @@ public class DinoAnimationTriggers : MonoBehaviour {
 		}
 		if (DinoSound == dinoSound.Spino) {
 			buzzSaw = GetComponentInParent<BuzzSaw> ();
+			Debug.Log (buzzSaw);
 		}
 		if (DinoSound == dinoSound.Troodon) {
 			empPulse = GetComponentInParent<EMPPulse>();

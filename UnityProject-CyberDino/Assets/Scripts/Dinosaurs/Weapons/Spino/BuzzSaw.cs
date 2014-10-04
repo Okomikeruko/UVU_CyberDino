@@ -13,6 +13,10 @@ public class BuzzSaw : MeleeAttack {
     private float BuzzRange = 50.0f;
     [SerializeField]
     private float arcDegree = 30.0f;
+	[SerializeField]
+	private GameObject WeaponVFX;
+	[SerializeField]
+	private GameObject mesh;
 
 	public override void Fire ()
 	{
@@ -63,19 +67,25 @@ public class BuzzSaw : MeleeAttack {
 		{
 			Debug.Log ("Buzz Saw start FX");
             // (2) Any effect or code that's called after Spino finishes curling up.
-            // "TopSpeedMod" starts a coroutine inside MotionControl speeding up Dino by a percentage for duration seconds
+			WeaponVFX.SetActive(true);
+
+			// "TopSpeedMod" starts a coroutine inside MotionControl speeding up Dino by a percentage for duration seconds
             motContr.TopSpeedMod(BuzzSpeedPercentIncrease, duration);
-            // (MAKE MESH DISAPPEAR(The mesh prefab that's a child of Spino prefab))
+            
+			// (MAKE MESH DISAPPEAR(The mesh prefab that's a child of Spino prefab))
 		    // ***CODE*** Or saw effect override mesh
-            // Start Saw effect
+			mesh.SetActive(false);
+			// Start Saw effect
             // ***CODE***
         }
 		else
 		{
             // (3) Any effect or code that's called when Spino starts to uncurl.
             // Stop Saw effect
+			WeaponVFX.SetActive(false);
             // ***CODE***
             // (MAKE MESH RE-APPEAR(The mesh prefab that's a child of Spino prefab))
+			mesh.SetActive(true);
             // ***CODE***
 			Debug.Log ("Buzz Saw end FX");
 		}
@@ -88,14 +98,12 @@ public class BuzzSaw : MeleeAttack {
         
         // Spino starts to curl up, isAttacking true, start Audio Effect
 		netanim.AnimSetMelee ("Melee", true); 
-        // Goes into SawFX (turn on)
-        SawFX(true); 
+        // Goes into SawFX (turn on) called my mecanim automatically
         // Wait "duration" seconds
 		yield return new WaitForSeconds(seconds);
         // Spino starts to uncurl, stop Audio Effect
 		netanim.AnimSetMelee ("Melee", false);
-        // Stop SawFX (turn off)
-        SawFX(false);
+        // Stop SawFX (turn off) called by mecanim automatically
 	}
 	
 }

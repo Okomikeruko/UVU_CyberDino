@@ -8,9 +8,13 @@ public class EpicScream : Bomb {
 	private float Damage = 25.0f;
 	[SerializeField]
 	private float SteeringInversionDuration = 6.0f;
+	[SerializeField]
+	private ParticleSystem WeaponVFX;
 
 	public override void Fire ()
 	{		
+		// Play VFX
+		WeaponVFX.Play ();
 		// Find Nearest Opponent
 		var dinos = GameObject.FindGameObjectsWithTag("Dino");
 		var ais = GameObject.FindGameObjectsWithTag("Ai");

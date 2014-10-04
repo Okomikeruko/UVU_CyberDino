@@ -6,10 +6,13 @@ using System;
 public class MadDash : Bomb {
 	public int damage = 25;
 	private DinoTracking dinoTracking;
+	[SerializeField]
+	private ParticleSystem WeaponVFX;
 	
 	public override void Fire ()
 	{
 		Debug.Log ("Mad Dash!");
+		WeaponVFX.Play ();
 		dinoTracking = GameObject.Find("Checkpoints").GetComponent<DinoTracking>();
 		int[] positions = dinoTracking.GetCurrentPositions();
 		int playerNum = dinoTracking.playerNum;
