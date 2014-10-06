@@ -17,7 +17,7 @@ public class AcidSpit : Bomb {
 	private ParticleSystem WeaponVFX;
 	
 	private float journey;
-	private Time startTime;
+	private float startTime;
 	private GameObject target;
 	delegate void myDelegate();
 	myDelegate SpitUpdate; 
