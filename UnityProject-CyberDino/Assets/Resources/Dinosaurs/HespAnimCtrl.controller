@@ -233,7 +233,7 @@ Transition:
   m_TransitionOffset: 0
   m_Conditions:
   - m_ConditionMode: 1
-    m_ConditionEvent: Melee
+    m_ConditionEvent: Bomb
     m_EventTreshold: 0
     m_ExitTime: .75
   m_Atomic: 1
@@ -469,31 +469,31 @@ StateMachine:
   m_ChildStateMachinePosition: []
   m_OrderedTransitions:
     data:
-      first: {fileID: 110270030}
-      second:
-      - {fileID: 110117750}
-    data:
-      first: {fileID: 110224498}
-      second:
-      - {fileID: 110175622}
-    data:
-      first: {fileID: 110218750}
-      second:
-      - {fileID: 110141771}
-    data:
-      first: {fileID: 110203138}
-      second:
-      - {fileID: 110176201}
-    data:
-      first: {fileID: 110256686}
-      second:
-      - {fileID: 110192265}
-    data:
       first: {fileID: 110200000}
       second:
       - {fileID: 110100000}
       - {fileID: 110140160}
       - {fileID: 110103756}
+    data:
+      first: {fileID: 110256686}
+      second:
+      - {fileID: 110192265}
+    data:
+      first: {fileID: 110203138}
+      second:
+      - {fileID: 110176201}
+    data:
+      first: {fileID: 110218750}
+      second:
+      - {fileID: 110141771}
+    data:
+      first: {fileID: 110224498}
+      second:
+      - {fileID: 110175622}
+    data:
+      first: {fileID: 110270030}
+      second:
+      - {fileID: 110117750}
   m_MotionSetCount: 1
   m_AnyStatePosition: {x: 108, y: -120, z: 0}
   m_ParentStateMachinePosition: {x: 800, y: 20, z: 0}
