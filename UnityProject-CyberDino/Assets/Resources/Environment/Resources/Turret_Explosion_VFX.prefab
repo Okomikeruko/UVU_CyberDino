@@ -27,13 +27,14 @@ GameObject:
   - 4: {fileID: 400002}
   - 198: {fileID: 19800002}
   - 199: {fileID: 19900002}
+  - 114: {fileID: 11400000}
   m_Layer: 0
   m_Name: Turret_Explosion_VFX
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &400000
 Transform:
   m_ObjectHideFlags: 1
@@ -53,12 +54,24 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100002}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 29.2508354, y: 9.7213974, z: 41.7492523}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 400000}
   m_Father: {fileID: 0}
   m_RootOrder: 0
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100002}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e521a3608de4f4375a435fded533ed65, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  theWaitTime: 2
 --- !u!198 &19800000
 ParticleSystem:
   m_ObjectHideFlags: 1
@@ -71,7 +84,7 @@ ParticleSystem:
   randomSeed: 0
   looping: 0
   prewarm: 0
-  playOnAwake: 0
+  playOnAwake: 1
   moveWithTransform: 0
   InitialModule:
     enabled: 1
@@ -1058,7 +1071,7 @@ ParticleSystem:
   randomSeed: 0
   looping: 0
   prewarm: 0
-  playOnAwake: 0
+  playOnAwake: 1
   moveWithTransform: 1
   InitialModule:
     enabled: 1

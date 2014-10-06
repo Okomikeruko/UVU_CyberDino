@@ -135,7 +135,7 @@ public class TurretFire : MonoBehaviour {
 		firing = true;
 		audio.Play();
 		foreach(Transform muzzle in muzzlePoints){
-			Transform obj = TurretProjectilePooling.current.GetPooledObject();
+			Transform obj = TurretProjectilePooling.current.GetProjPooledObject();
 
 			if(obj == null) yield return null;
 
