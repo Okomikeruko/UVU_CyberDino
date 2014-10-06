@@ -13,6 +13,12 @@ public class EpicScream : Bomb {
 
 	public override void Fire ()
 	{		
+		NetworkAnimations netanim = GetComponentInChildren<NetworkAnimations> ();
+		netanim.AnimTriggerBomb ();
+	}
+
+	public void PlayFX()
+	{
 		// Play VFX
 		WeaponVFX.Play ();
 		// Find Nearest Opponent
