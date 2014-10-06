@@ -8,10 +8,13 @@ public class MadDash : Bomb {
 	private DinoTracking dinoTracking;
 	[SerializeField]
 	private ParticleSystem WeaponVFX;
+	[SerializeField]
+	private float duration;
 	
 	public override void Fire ()
 	{
 		Debug.Log ("Mad Dash!");
+		WeaponVFX.enableEmission = true;
 		WeaponVFX.Play ();
 		dinoTracking = GameObject.Find("Checkpoints").GetComponent<DinoTracking>();
 		int[] positions = dinoTracking.GetCurrentPositions();
@@ -34,6 +37,13 @@ public class MadDash : Bomb {
 		dinos[opponentPosition].transform.position = playerTempPosition;
 		dinos[opponentPosition].transform.rotation = playerTempRotation;
 		dinos[opponentPosition].GetComponent<DinosaurHealth>().Damage(damage);
+		StartCoroutine (effect ());
 	}
-	
+
+	private IEnumerator effect()
+	{
+		yield return new WaitForSeconds(duration);
+		WeaponVFX.enableEmission = false;
+	}
+
 }
