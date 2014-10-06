@@ -20,8 +20,8 @@ public class TurretProjectile : MonoBehaviour {
 
 	public int damage;
 
-//	[SerializeField]
-//	private GameObject hitParticle;
+	private ParticleSystem theExplosion;
+	
 	#endregion Fields
 	
 	#region Properties
@@ -48,17 +48,7 @@ public class TurretProjectile : MonoBehaviour {
 			projDist = value;
 		}
 	}
-//	public GameObject HitParticle
-//	{
-//		get
-//		{
-//			return hitParticle;
-//		}
-//		set
-//		{
-//			hitParticle = value;
-//		}
-//	}
+
 	#endregion Properties
 
 	
@@ -92,6 +82,12 @@ public class TurretProjectile : MonoBehaviour {
 
 	void OnTriggerEnter(Collider other)
 	{
+		Transform obj = TurretProjectilePooling.current.GetExPooledObject();
+//		theExplosion = obj.GetComponent<ParticleSystem>();
+		obj.position = transform.position;
+		obj.rotation = transform.rotation;
+		obj.gameObject.SetActive(true);
+//		theExplosion.Play()
 
 		Health theHealth = other.gameObject.GetComponent<Health>();
 
