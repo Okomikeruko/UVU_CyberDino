@@ -22,6 +22,7 @@ public class TeleportSlam : MeleeAttack {
 	{
 		Debug.Log("Teleport Slam!");
 		/* Animation trigger added by Lee*/
+		WeaponVFX.enableEmission = true;
 		WeaponVFX.Play ();
 		StartCoroutine (slam(Duration));
 	}
@@ -87,11 +88,12 @@ public class TeleportSlam : MeleeAttack {
 		
 		if(otherCol != null)
 			otherCol.enabled = true;
-		
+		WeaponVFX.enableEmission = false;
 		dinoCol.enabled = true;
 		
 		somethingHit = false;
 
 		netanim.AnimSetMelee ("Melee", false);
+
 	}
 }
