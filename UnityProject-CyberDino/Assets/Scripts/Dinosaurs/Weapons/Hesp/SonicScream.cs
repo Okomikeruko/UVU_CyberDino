@@ -17,7 +17,8 @@ public class SonicScream : MeleeAttack {
 	public override void Fire ()
 	{				
 		Debug.Log("Sonic Scream!");
-		PlayFX ();
+		NetworkAnimations netanim = GetComponentInChildren<NetworkAnimations> ();
+		netanim.AnimTriggerMelee();
 
 		GameObject target = null;
 		Collider[] ListOfObjects = Physics.OverlapSphere (this.transform.position, range);
@@ -44,7 +45,7 @@ public class SonicScream : MeleeAttack {
 		health.Damage(damage);
 	}
 
-	private void PlayFX()
+	public void PlayFX()
 	{
 		StartCoroutine(scream());
 	}

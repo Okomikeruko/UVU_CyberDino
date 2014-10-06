@@ -6,6 +6,7 @@ public class DinoAnimationTriggers : MonoBehaviour {
 	private AcidSpit acidSpit;
 	private BuzzSaw buzzSaw;
 	private EMPPulse empPulse;
+	private SonicScream sonicScream;
 
 	enum dinoSound
 	{
@@ -26,9 +27,11 @@ public class DinoAnimationTriggers : MonoBehaviour {
 		if (DinoSound == dinoSound.Diloph) {
 			acidSpit = GetComponentInParent<AcidSpit> ();
 		}
+		if (DinoSound == dinoSound.Hesp) {
+			sonicScream = GetComponentInParent<SonicScream> (); 
+			}
 		if (DinoSound == dinoSound.Spino) {
 			buzzSaw = GetComponentInParent<BuzzSaw> ();
-			Debug.Log (buzzSaw);
 		}
 		if (DinoSound == dinoSound.Troodon) {
 			empPulse = GetComponentInParent<EMPPulse>();
@@ -74,5 +77,10 @@ public class DinoAnimationTriggers : MonoBehaviour {
 	void PulseAttack ()
 	{
 		empPulse.StartPulse ();
+	}
+
+	void littleScream()
+	{
+		sonicScream.PlayFX ();
 	}
 }
