@@ -106,17 +106,20 @@ public class TurretProjectile : MonoBehaviour {
 
 		if(theMotion != null)
 		{
-			if(willSlowFirst)
+			if(theMotion.GetTopSpeed() >= 100)
 			{
-				Debug.Log(theMotion.GetTopSpeed());
-				theMotion.TopSpeedMod(firstSlowSpeed, slowDuration);
-				Debug.Log(theMotion.GetTopSpeed());
-				willSlowFirst = false;
-			}
-			else if(willSlowSecond)
-			{
-				theMotion.TopSpeedMod(secondSlowSpeed, slowDuration);
-				willSlowSecond = false;
+				if(willSlowFirst)
+				{
+					Debug.Log(theMotion.GetTopSpeed());
+					theMotion.TopSpeedMod(firstSlowSpeed, slowDuration);
+					Debug.Log(theMotion.GetTopSpeed());
+					willSlowFirst = false;
+				}
+				else if(willSlowSecond)
+				{
+					theMotion.TopSpeedMod(secondSlowSpeed, slowDuration);
+					willSlowSecond = false;
+				}
 			}
 		}
 
