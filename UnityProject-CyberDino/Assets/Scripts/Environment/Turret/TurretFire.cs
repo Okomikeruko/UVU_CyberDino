@@ -21,7 +21,10 @@ public class TurretFire : MonoBehaviour {
 
 	private TurretProjectile theProj;
 
-//	private Quaternion TargetRotation;
+	[SerializeField]
+	private bool willSlowFirst = false;
+	[SerializeField]
+	private bool willSlowSecond = false;
 
 	public float setTime = .5F;
 
@@ -141,6 +144,8 @@ public class TurretFire : MonoBehaviour {
 
 			theProj = obj.gameObject.GetComponent<TurretProjectile>();
 			theProj.homeTurret = this.transform;
+			theProj.willSlowFirst = willSlowFirst;
+			theProj.willSlowSecond = willSlowSecond;
 
 			obj.position = muzzle.position;
 			obj.rotation = muzzle.rotation;
@@ -149,7 +154,7 @@ public class TurretFire : MonoBehaviour {
 		}
 		yield return new WaitForSeconds(fireTime);
 		firing = false;
-		
+
 	}
 	
 	IEnumerator CheckTarget()
@@ -187,22 +192,32 @@ public class TurretFire : MonoBehaviour {
 			if(targets.Contains(thePositions[0].transform))
 			{
 				myTarget = thePositions[0].transform;
+				willSlowFirst = true;
+				willSlowSecond = false;
 			}
 			else if(targets.Contains(thePositions[1].transform))
 			{
 				myTarget = thePositions[1].transform;
+				willSlowFirst = false;
+				willSlowSecond = true;
 			}
 			else if(targets.Contains(thePositions[2].transform))
 			{
 				myTarget = thePositions[2].transform;
+				willSlowFirst = false;
+				willSlowSecond = false;
 			}
 			else if(targets.Contains(thePositions[3].transform))
 			{
 				myTarget = thePositions[3].transform;
+				willSlowFirst = false;
+				willSlowSecond = false;
 			}
 			else
 			{
 				myTarget = null;
+				willSlowFirst = false;
+				willSlowSecond = false;
 			}
 
 		}

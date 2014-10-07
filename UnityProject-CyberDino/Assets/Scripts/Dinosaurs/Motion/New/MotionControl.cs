@@ -21,6 +21,7 @@ public class MotionControl : MonoBehaviour {
 	[SerializeField]
 	private float AirControl = 0.25f;
 
+	private bool land = true;
 	private bool isJumping = false;
 	private bool onGround = false;
 	private float inputMovementAxis;
@@ -76,12 +77,22 @@ public class MotionControl : MonoBehaviour {
 
 		// Jumping
 		if (onGround) {						
-			netanim.AnimSetJump ("Jump", false);			
-			
 			// The Jump Function
+			netanim.AnimSetJump ("Jump", false);
 			if (isJumping) {
 				rigidbody.velocity = new Vector3 (rigidbody.velocity.x, Mathf.Sqrt (2.0f * JumpHeight * -Physics.gravity.y), rigidbody.velocity.z);
 				netanim.AnimSetJump ("Jump", true);
+				land = false;
+			}
+		} else if (isJumping) {
+			float jumpDamper = rigidbody.velocity.magnitude * Time.deltaTime;
+			RaycastHit hit;
+			Ray downray = new Ray(rigidbody.transform.position, rigidbody.velocity.normalized);
+			if (Physics.Raycast (downray, out hit, jumpDamper) && !land)
+			{
+				Debug.Log ("JumpDamper = " + Mathf.Abs(jumpDamper));
+				netanim.AnimSetJump ("Jump", false);
+				land = true;
 			}
 		}
 		
