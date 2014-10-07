@@ -65,10 +65,11 @@ public class MenuControl : MonoBehaviour
 	private bool inLobby = false;
 	
 	//Player name
-	public string playerName = "";
-	
+	public string playerName;
+	private char[] inputPlayerName;
 	//server name
-	public string serverName = "";
+	public string serverName;
+	private char[] inputServerName;
 	
 	//the index of the dino selected
 	public int dinoIndex = 0;
@@ -248,6 +249,9 @@ public class MenuControl : MonoBehaviour
 		};
 		
 		keyBoardInputRect = new Rect[4,10];*/
+
+		inputPlayerName = new char[1];
+		inputServerName = new char[1];
 		
 		glowDashes = new GameObject[12];
 		
@@ -445,7 +449,7 @@ public class MenuControl : MonoBehaviour
 			if(isHoldingBtn == false && 
 			   (Input.GetAxis("Horizontal") >= deadZone || Input.GetAxis("Horizontal") <= -deadZone || 
 			 Input.GetAxis("Vertical") >= deadZone || Input.GetAxis("Vertical") <= -deadZone || 
-			 Input.GetButton("Jump")))
+			 Input.GetButton("Jump") || Input.GetButton("Melee") || Input.GetButton("Bomb")))
 			{
 				Debug.Log("button is pressed");
 				isHoldingBtn = true;
@@ -454,7 +458,7 @@ public class MenuControl : MonoBehaviour
 			}
 			else if(isHoldingBtn == true && Input.GetAxis("Horizontal") <= deadZone && Input.GetAxis("Horizontal") >= -deadZone && 
 			        Input.GetAxis("Vertical") <= deadZone && Input.GetAxis("Vertical") >= -deadZone &&
-			        Input.GetButton("Jump") == false)
+			        !Input.GetButton("Jump") && !Input.GetButton("Melee") && !Input.GetButton("Bomb"))
 			{
 				Debug.Log("button is released");
 				isHoldingBtn = false;
@@ -527,8 +531,6 @@ public class MenuControl : MonoBehaviour
 			GUI.DrawTexture(new Rect(menuOrigin[1].x + multiPMenuBtnRect[2].x, menuOrigin[1].y + multiPMenuBtnRect[2].y, multiPMenuBtnRect[2].width, multiPMenuBtnRect[2].height), mPlayerMenuBtnTxtr[0]);
 			GUI.DrawTexture(new Rect(menuOrigin[1].x + multiPMenuBtnRect[3].x, menuOrigin[1].y + multiPMenuBtnRect[3].y, multiPMenuBtnRect[3].width, multiPMenuBtnRect[3].height), mPlayerMenuBtnTxtr[1]);
 			GUI.DrawTexture(new Rect(menuOrigin[1].x + multiPMenuBtnRect[4].x, menuOrigin[1].y + multiPMenuBtnRect[4].y, multiPMenuBtnRect[4].width, multiPMenuBtnRect[4].height), backBtnTxtr);
-			
-			ShowKeyboard(name);
 			
 			//host game button
 			if(GUI.Button(new Rect(menuOrigin[1].x + multiPMenuBtnRect[2].x, menuOrigin[1].y + multiPMenuBtnRect[2].y, multiPMenuBtnRect[2].width, multiPMenuBtnRect[2].height), ""))
@@ -1737,7 +1739,11 @@ public class MenuControl : MonoBehaviour
 		{
 			if(buttonIndex == 0)
 			{
-				//StartCoroutine(ShowKeyboard(name));
+				currentSelection = InputName;
+			}
+			if(buttonIndex == 1)
+			{
+				currentSelection = InputName;
 			}
 			if(buttonIndex == 2)
 			{
@@ -1752,7 +1758,7 @@ public class MenuControl : MonoBehaviour
 				buttonIndex = 1;
 				
 				currentRect = mainMenuBtnRect;
-				
+
 				currentSelection = MainMenuSelection; 
 				
 				StartCoroutine(MoveRightOff(1, 0, Menu.mainMenu));
@@ -1795,6 +1801,165 @@ public class MenuControl : MonoBehaviour
 			
 			StartCoroutine(MoveLeftOff(1, 3, Menu.connecting));
 		}
+	}
+
+	private void InputName()
+	{
+		string nameSelected = "";
+		char[] charSelected = new char[0];
+
+		if(buttonIndex == 0)
+		{
+			nameSelected = (string)serverName.Clone();
+			charSelected = (char[])inputServerName.Clone();
+		}
+		else if(buttonIndex == 1)
+		{
+			nameSelected = (string)playerName.Clone();
+			charSelected = (char[])inputPlayerName.Clone();
+		}
+
+		/*Debug.Log(inputPlayerName[inputIndex] == null);*/
+		Debug.Log("length " + charSelected.Length);
+		Debug.Log("index " + inputIndex);
+
+		if(charSelected[inputIndex] == default(char))
+		{
+			charSelected[inputIndex] = 'a';
+
+		}
+
+		if(Input.GetAxis("Horizontal") < 0 && inputIndex > 0) 
+		{
+			inputIndex--;
+			Debug.Log("go left ");
+		}
+		else if(Input.GetAxis("Horizontal") > 0 && inputIndex < charSelected.Length - 1) 
+		{
+			inputIndex++;
+			Debug.Log("go right ");
+		}
+		else if(Input.GetAxis("Vertical") > 0) 
+		{
+			Debug.Log("char up");
+			charSelected[inputIndex]++;
+
+		}
+		else if(Input.GetAxis("Vertical") < 0) 
+		{
+			Debug.Log("char down");
+			charSelected[inputIndex]--;
+		}
+		else if(Input.GetButton("Jump") && inputIndex == nameSelected.Length - 1)
+		{
+			Debug.Log("add char");
+			//Debug.Log("next " + inputPlayerName.Length + 1);
+			//Debug.Log("input length " + inputPlayerName.Length);
+			//Debug.Log("added length " + inputPlayerName.Length + 1);
+			char[] temp = new char[charSelected.Length + 1];
+			//Debug.Log("temp length " + temp.Length);
+			charSelected.CopyTo(temp, 0);
+
+			charSelected = temp;
+
+			inputIndex++;
+			charSelected[inputIndex] = 'a';
+
+			/*playerName = "";
+
+			foreach(char _char in inputPlayerName)
+			{
+				playerName += _char.ToString();
+			}*/
+		}
+		else if(Input.GetButton("Melee"))
+		{
+			currentSelection = MultiPlayerSelection; 
+		}
+
+		nameSelected = "";
+		
+		foreach(char _char in charSelected)
+		{
+			Debug.Log(_char.ToString());
+			nameSelected += _char.ToString();
+		}
+
+		Debug.Log("name selected " + nameSelected);
+		Debug.Log("actual name " + serverName);
+	}
+
+	private void InputNameHelper(char[] _charArr, string _name)
+	{
+		
+		/*Debug.Log(inputPlayerName[inputIndex] == null);*/
+		Debug.Log("length " + _charArr.Length);
+		Debug.Log("index " + inputIndex);
+		
+		if(_charArr[inputIndex] == default(char))
+		{
+			_charArr[inputIndex] = 'a';
+			
+		}
+		
+		if(Input.GetAxis("Horizontal") < 0 && inputIndex > 0) 
+		{
+			inputIndex--;
+			Debug.Log("go left ");
+		}
+		else if(Input.GetAxis("Horizontal") > 0 && inputIndex < _charArr.Length - 1) 
+		{
+			inputIndex++;
+			Debug.Log("go right ");
+		}
+		else if(Input.GetAxis("Vertical") > 0) 
+		{
+			Debug.Log("char up");
+			_charArr[inputIndex]++;
+			
+		}
+		else if(Input.GetAxis("Vertical") < 0) 
+		{
+			Debug.Log("char down");
+			_charArr[inputIndex]--;
+		}
+		else if(Input.GetButton("Jump") && inputIndex == _name.Length - 1)
+		{
+			Debug.Log("add char");
+			//Debug.Log("next " + inputPlayerName.Length + 1);
+			//Debug.Log("input length " + inputPlayerName.Length);
+			//Debug.Log("added length " + inputPlayerName.Length + 1);
+			char[] temp = new char[_charArr.Length + 1];
+			//Debug.Log("temp length " + temp.Length);
+			_charArr.CopyTo(temp, 0);
+			
+			_charArr = temp;
+			
+			inputIndex++;
+			_charArr[inputIndex] = 'a';
+			
+			/*playerName = "";
+
+			foreach(char _char in inputPlayerName)
+			{
+				playerName += _char.ToString();
+			}*/
+		}
+		else if(Input.GetButton("Melee"))
+		{
+			currentSelection = MultiPlayerSelection; 
+		}
+		
+		_name = "";
+		
+		foreach(char _char in _charArr)
+		{
+			Debug.Log(_char.ToString());
+			_name += _char.ToString();
+		}
+		
+		Debug.Log("name selected " + _name);
+		Debug.Log("actual name " + serverName);
 	}
 	
 	//*************End of Multiplayer Selection

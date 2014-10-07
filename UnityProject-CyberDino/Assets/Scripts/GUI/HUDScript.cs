@@ -14,11 +14,13 @@ public class HUDScript : MonoBehaviour
 	public GameObject networkHandlerObject;
 	private NetworkGameHandler networkHandler;
 
+	private GameObject[] test;
+
 	//guitextures for the hud
 	private GameObject positionObjs;
 	private GameObject[] lapObjs;
 	private GameObject[] healthBarObjs;
-	private GameObject[] healthBorderObjs;
+	private GameObject[] healthBackgroundObjs;
 	private GameObject[] playerNamesObjs;
 	private GameObject mapObj;
 	private GameObject[] mapPosObjs;
@@ -101,6 +103,12 @@ public class HUDScript : MonoBehaviour
 
 		grpObj.layer = 5;
 
+		test = new GameObject[4];
+		test[0] = new GameObject("test object");
+		test[1] = new GameObject("test object");
+		test[2] = new GameObject("test object");
+		test[3] = new GameObject("test object");
+
 		//settings for the mini map
 		if(Application.loadedLevelName == "DumbellTrack")
 			mapInfo = new MapGUIInfo(105.0f, new Rect(89.5f, 24.7f, 1, 1), new Rect(85, 10, 10, 30), (Texture)Resources.Load("GUI/Materials/DumbBellmap"));
@@ -149,12 +157,12 @@ public class HUDScript : MonoBehaviour
 		numGfx[9] = (Texture)Resources.Load("GUI/Materials/num9Graphic");
 
 		//textures for the health bar
-		healthBarGfx = (Texture)Resources.Load("GUI/Materials/HealthBar");
-		healthBarRedGfx = (Texture)Resources.Load("GUI/Materials/HealthBarRed");
+		healthBarGfx = (Texture)Resources.Load("GUI/Materials/EnemyHealthBar");
+		healthBarRedGfx = (Texture)Resources.Load("GUI/Materials/EnemyHealthBarRed");
 		healthCoverGfx = (Texture)Resources.Load("GUI/Materials/HubHealthBarCover");
 		
 		//texture for the health border
-		healthBorderGfx = (Texture)Resources.Load("GUI/Materials/HealthBarBorder");
+		healthBorderGfx = (Texture)Resources.Load("GUI/Materials/EnemyHealthBackground");
 		
 		//texture for weapon graphics
 		itemsGfx = new Texture[3];
@@ -204,17 +212,17 @@ public class HUDScript : MonoBehaviour
 
 		//create guitextures for the health bars
 		healthBarObjs = new GameObject[4];
-		healthBarObjs[0] = CreateGUITxtr("Health Bar p1", healthBarGfx, new Vector3(0, 0, -1));
-		healthBarObjs[1] = CreateGUITxtr("Health Bar p2", healthBarGfx, new Vector3(0, 0, -1));
-		healthBarObjs[2] = CreateGUITxtr("Health Bar p3", healthBarGfx, new Vector3(0, 0, -1));
-		healthBarObjs[3] = CreateGUITxtr("Health Bar p4", healthBarGfx, new Vector3(0, 0, -1));
+		healthBarObjs[0] = CreateGUITxtr("Health Bar p1", healthBarGfx, new Vector3(0, 0, 0));
+		healthBarObjs[1] = CreateGUITxtr("Health Bar p2", healthBarGfx, new Vector3(0, 0, 0));
+		healthBarObjs[2] = CreateGUITxtr("Health Bar p3", healthBarGfx, new Vector3(0, 0, 0));
+		healthBarObjs[3] = CreateGUITxtr("Health Bar p4", healthBarGfx, new Vector3(0, 0, 0));
 
 		//create guitextures for the health borders
-		healthBorderObjs = new GameObject[4];
-		healthBorderObjs[0] = CreateGUITxtr("Health Border p1", healthBorderGfx, new Vector3(0, 0, 0));
-		healthBorderObjs[1] = CreateGUITxtr("Health Border p2", healthBorderGfx, new Vector3(0, 0, 0));
-		healthBorderObjs[2] = CreateGUITxtr("Health Border p3", healthBorderGfx, new Vector3(0, 0, 0));
-		healthBorderObjs[3] = CreateGUITxtr("Health Border p4", healthBorderGfx, new Vector3(0, 0, 0));
+		healthBackgroundObjs = new GameObject[4];
+		healthBackgroundObjs[0] = CreateGUITxtr("Health Border p1", healthBorderGfx, new Vector3(0, 0, -1));
+		healthBackgroundObjs[1] = CreateGUITxtr("Health Border p2", healthBorderGfx, new Vector3(0, 0, -1));
+		healthBackgroundObjs[2] = CreateGUITxtr("Health Border p3", healthBorderGfx, new Vector3(0, 0, -1));
+		healthBackgroundObjs[3] = CreateGUITxtr("Health Border p4", healthBorderGfx, new Vector3(0, 0, -1));
 
 		//create guitextures for the player names
 		playerNamesObjs = new GameObject[4];
@@ -226,10 +234,10 @@ public class HUDScript : MonoBehaviour
 		for(int i = 0; i < healthBarObjs.Length; i++)
 		{
 			healthBarObjs[i].layer = 0;
-			healthBorderObjs[i].layer = 0;
+			healthBackgroundObjs[i].layer = 0;
 			playerNamesObjs[i].layer = 0;
 			
-			healthBorderObjs[i].SetActive(false);
+			healthBackgroundObjs[i].SetActive(false);
 			healthBarObjs[i].SetActive(false);
 			playerNamesObjs[i].SetActive(false);
 		}
@@ -590,13 +598,17 @@ public class HUDScript : MonoBehaviour
 	private void AttachHealth(int _index)
 	{
 		Vector3 screenPoint = Camera.main.WorldToScreenPoint(new Vector3(raceDinos[_index].transform.position.x, raceDinos[_index].transform.position.y + 20, raceDinos[_index].transform.position.z));
+		/*Vector3 test = this.transform.rotation.eulerAngles.normalized;
+		Debug.Log(normalized);*/
+
+		Vector3 screenPoint2 = Camera.main.WorldToScreenPoint(new Vector3(raceDinos[_index].transform.position.x, raceDinos[_index].transform.position.y + 25, raceDinos[_index].transform.position.z));
 		float yMulti = Screen.height / 100.0f;
 		
 		//if( inSight[_index] == true && screenPoint.z > 0 && playerNamesObjs[_index].guiText.fontSize < 2000)
 		if(screenPoint.z > 40 && screenPoint.z < 250 && playerNamesObjs[_index].guiText.fontSize < 800)
 		{	if(healthBarObjs[_index].activeSelf == false)
 			{
-				/*healthBorderObjs[_index].SetActive(true);
+				/*healthBackgroundObjs[_index].SetActive(true);
 				healthBarObjs[_index].SetActive(true);
 				playerNamesObjs[_index].SetActive(true);*/
 				
@@ -605,7 +617,7 @@ public class HUDScript : MonoBehaviour
 				StartCoroutine(FadeInHealth(_index));
 			}
 			
-			/*healthBorderObjs[_index].guiTexture.pixelInset = new Rect(screenPoint.x, screenPoint.y, (1500 * yMulti) / screenPoint.z, (300 * yMulti) / screenPoint.z);
+			/*healthBackgroundObjs[_index].guiTexture.pixelInset = new Rect(screenPoint.x, screenPoint.y, (1500 * yMulti) / screenPoint.z, (300 * yMulti) / screenPoint.z);
 			healthBarObjs[_index].guiTexture.pixelInset = GetHealth(new Rect(screenPoint.x, screenPoint.y, (1500 * yMulti) / screenPoint.z, (300 * yMulti) / screenPoint.z), _index);
 			playerNamesObjs[_index].guiText.pixelOffset = new Vector2(screenPoint.x, screenPoint.y);
 			playerNamesObjs[_index].guiText.fontSize = (int)((300 * yMulti) / screenPoint.z);*/
@@ -614,7 +626,7 @@ public class HUDScript : MonoBehaviour
 		{
 			if(isFading[_index] == false && healthBarObjs[_index].activeSelf == true)
 			{
-				/*healthBorderObjs[_index].SetActive(false);
+				/*healthBackgroundObjs[_index].SetActive(false);
 				healthBarObjs[_index].SetActive(false);
 				playerNamesObjs[_index].SetActive(false);*/
 				
@@ -625,17 +637,18 @@ public class HUDScript : MonoBehaviour
 				StartCoroutine(FadeOutHealth(_index));
 			
 			
-			/*healthBorderObjs[_index].guiTexture.pixelInset = new Rect(0, 0, 0, 0);
+			/*healthBackgroundObjs[_index].guiTexture.pixelInset = new Rect(0, 0, 0, 0);
 			healthBarObjs[_index].guiTexture.pixelInset = GetHealth(new Rect(0, 0, 0, 0), _index);
 			playerNamesObjs[_index].guiText.pixelOffset = new Vector2(0, 0);
 			playerNamesObjs[_index].guiText.fontSize = (int)(0);*/
 			}
 		}
 		
-		healthBorderObjs[_index].guiTexture.pixelInset = new Rect(screenPoint.x, screenPoint.y, (1500 * yMulti) / screenPoint.z, (300 * yMulti) / screenPoint.z);
-		healthBarObjs[_index].guiTexture.pixelInset = GetHealth(new Rect(screenPoint.x, screenPoint.y, (1500 * yMulti) / screenPoint.z, (300 * yMulti) / screenPoint.z), _index);
-		playerNamesObjs[_index].guiText.pixelOffset = new Vector2(screenPoint.x, screenPoint.y);
-		playerNamesObjs[_index].guiText.fontSize = (int)((300 * yMulti) / screenPoint.z);
+		healthBackgroundObjs[_index].guiTexture.pixelInset = new Rect(screenPoint.x, screenPoint.y, (1500 * yMulti) / screenPoint.z, (400 * yMulti) / screenPoint.z);
+		healthBarObjs[_index].guiTexture.pixelInset = GetHealth(new Rect(screenPoint.x, screenPoint.y, (1500 * yMulti) / screenPoint.z, (400 * yMulti) / screenPoint.z), _index);
+		//playerNamesObjs[_index].guiText.pixelOffset = new Vector2(screenPoint.x, screenPoint.y);
+		playerNamesObjs[_index].guiText.pixelOffset = new Vector2(screenPoint2.x+(30*normalized.y), screenPoint2.y);
+		playerNamesObjs[_index].guiText.fontSize = (int)((200 * yMulti) / screenPoint2.z);
 		
 	}
 	
@@ -816,11 +829,11 @@ public class HUDScript : MonoBehaviour
 	private IEnumerator FadeInHealth(int _index)
 	{
 	//Debug.Log("fade in");
-		Color tempColor1 = healthBorderObjs[_index].guiTexture.color;
+		Color tempColor1 = healthBackgroundObjs[_index].guiTexture.color;
 		Color tempColor2 = healthBarObjs[_index].guiTexture.color;
 		Color tempColor3 = playerNamesObjs[_index].guiText.color;
 		
-		healthBorderObjs[_index].SetActive(true);
+		healthBackgroundObjs[_index].SetActive(true);
 		healthBarObjs[_index].SetActive(true);
 		playerNamesObjs[_index].SetActive(true); 
 		
@@ -841,7 +854,7 @@ public class HUDScript : MonoBehaviour
 				//Debug.Log(healthBarObjs[_index].guiTexture.color.a);
 				
 				//set the guiTexture's color to the temp Color
-				healthBorderObjs[_index].guiTexture.color = tempColor1;
+				healthBackgroundObjs[_index].guiTexture.color = tempColor1;
 				healthBarObjs[_index].guiTexture.color = tempColor2;
 				playerNamesObjs[_index].guiText.color = tempColor3;
 				
@@ -857,7 +870,7 @@ public class HUDScript : MonoBehaviour
 				tempColor3.a = 1;
 				
 				//set the guiTexture's color to the temp Color
-				healthBorderObjs[_index].guiTexture.color = tempColor1;
+				healthBackgroundObjs[_index].guiTexture.color = tempColor1;
 				healthBarObjs[_index].guiTexture.color = tempColor2;
 				playerNamesObjs[_index].guiText.color = tempColor3;
 				
@@ -877,7 +890,7 @@ public class HUDScript : MonoBehaviour
 	private IEnumerator FadeOutHealth(int _index)
 	{
 		//Debug.Log("fade out");
-		Color tempColor1 = healthBorderObjs[_index].guiTexture.color;
+		Color tempColor1 = healthBackgroundObjs[_index].guiTexture.color;
 		Color tempColor2 = healthBarObjs[_index].guiTexture.color;
 		Color tempColor3 = playerNamesObjs[_index].guiText.color;
 		
@@ -895,10 +908,10 @@ public class HUDScript : MonoBehaviour
 				
 				//Debug.Log(transNum);
 				
-				//Debug.Log(healthBorderObjs[_index].guiTexture.color.a);
+				//Debug.Log(healthBackgroundObjs[_index].guiTexture.color.a);
 				
 				//set the guiTexture's color to the temp Color
-				healthBorderObjs[_index].guiTexture.color = tempColor1;
+				healthBackgroundObjs[_index].guiTexture.color = tempColor1;
 				healthBarObjs[_index].guiTexture.color = tempColor2;
 				playerNamesObjs[_index].guiText.color = tempColor3;
 				
@@ -914,11 +927,11 @@ public class HUDScript : MonoBehaviour
 				tempColor3.a = 0;
 				
 				//set the guiTexture's color to the temp Color
-				healthBorderObjs[_index].guiTexture.color = tempColor1;
+				healthBackgroundObjs[_index].guiTexture.color = tempColor1;
 				healthBarObjs[_index].guiTexture.color = tempColor2;
 				playerNamesObjs[_index].guiText.color = tempColor3;
 				
-				healthBorderObjs[_index].SetActive(false);
+				healthBackgroundObjs[_index].SetActive(false);
 				healthBarObjs[_index].SetActive(false);
 				playerNamesObjs[_index].SetActive(false);
 				
