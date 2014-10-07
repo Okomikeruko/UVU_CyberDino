@@ -18,9 +18,17 @@ public class TurretProjectile : MonoBehaviour {
 
 	public Transform homeTurret;
 
-	public int damage;
+	public float damage;
 
 	private ParticleSystem theExplosion;
+
+	public bool willSlowFirst = false;
+	public bool willSlowSecond = false;
+
+	public float firstSlowSpeed = 0.97f;
+	public float secondSlowSpeed = 0.98f;
+
+	public float slowDuration = 1.0f;
 	
 	#endregion Fields
 	
@@ -83,17 +91,33 @@ public class TurretProjectile : MonoBehaviour {
 	void OnTriggerEnter(Collider other)
 	{
 		Transform obj = TurretProjectilePooling.current.GetExPooledObject();
-//		theExplosion = obj.GetComponent<ParticleSystem>();
 		obj.position = transform.position;
 		obj.rotation = transform.rotation;
 		obj.gameObject.SetActive(true);
-//		theExplosion.Play()
+
+		MotionControl theMotion = other.gameObject.GetComponent<MotionControl>();
 
 		Health theHealth = other.gameObject.GetComponent<Health>();
 
 		if(theHealth != null)
 		{
 			theHealth.Damage(damage);
+		}
+
+		if(theMotion != null)
+		{
+			if(willSlowFirst)
+			{
+				Debug.Log(theMotion.GetTopSpeed());
+				theMotion.TopSpeedMod(firstSlowSpeed, slowDuration);
+				Debug.Log(theMotion.GetTopSpeed());
+				willSlowFirst = false;
+			}
+			else if(willSlowSecond)
+			{
+				theMotion.TopSpeedMod(secondSlowSpeed, slowDuration);
+				willSlowSecond = false;
+			}
 		}
 
 		if(transform.collider != other.collider)
@@ -103,6 +127,9 @@ public class TurretProjectile : MonoBehaviour {
 				gameObject.SetActive(false);
 			}
 		}
+
+
+
 	}
 
 	IEnumerator Destroy()
