@@ -12,26 +12,64 @@ public class AcidSpit : Bomb {
     [SerializeField]
     private float snareDuration = 2;
 	[SerializeField]
+	private float projectileSpeed = 10;
+	[SerializeField]
 	private ParticleSystem WeaponVFX;
+	
+	private float journey;
+	private float startTime;
+	private GameObject target;
+	delegate void myDelegate();
+	myDelegate SpitUpdate; 
+
+	void OnEnable()
+	{
+		SpitUpdate = empty;
+	}
+
+	void Update()
+	{
+		SpitUpdate ();
+	}
+
+	private void empty(){ }
 
 	public override void Fire ()
 	{
 		/* Animation trigger added by Lee*/
 		NetworkAnimations netanim = GetComponentInChildren<NetworkAnimations>();
 		netanim.AnimTriggerBomb ();
-
-        var target = getTarget();
-        if (target != null)
+		
+        target = getTarget();
+	/*  if (target != null)
         {
             StartCoroutine(acidSpitDotAndSnare(target));
         }
+	*/
 	}
 
 	public void SpitFX()
 	{
 		// FX triggered on spit frame. 
 		WeaponVFX.Play ();
+		startTime = Time.time;
+		journey = Vector3.Distance (WeaponVFX.transform.position, target.transform.position);
+		SpitUpdate = follow;
 		Debug.Log("Acid Spit!");
+	}
+
+	private void follow()
+	{
+		if (target != null) 
+		{
+			float distCovered = (Time.time - startTime) * projectileSpeed;
+			float fracJourney = distCovered / journey;
+			WeaponVFX.transform.position = Vector3.Lerp (WeaponVFX.transform.position, target.transform.position, fracJourney); 
+		}
+		else
+		{
+			SpitUpdate = empty;
+		}
 	}
 
     /// <summary>
@@ -80,4 +118,6 @@ public class AcidSpit : Bomb {
             health.Damage(dotTick);
         }
     }
+
+
 }

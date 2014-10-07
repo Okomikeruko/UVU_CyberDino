@@ -10,14 +10,15 @@ public class SonicScream : MeleeAttack {
 	[SerializeField]
 	private float arcDegree = 30.0f;
 	[SerializeField]
-	private ParticleSystem WeaponVFX;
+	private float Duration;
+	[SerializeField]
+	private ParticleEmitter WeaponVFX;
 
 	public override void Fire ()
 	{				
 		Debug.Log("Sonic Scream!");
-		
-		// Play VFX
-		WeaponVFX.Play ();
+		NetworkAnimations netanim = GetComponentInChildren<NetworkAnimations> ();
+		netanim.AnimTriggerMelee();
 
 		GameObject target = null;
 		Collider[] ListOfObjects = Physics.OverlapSphere (this.transform.position, range);
@@ -44,4 +45,14 @@ public class SonicScream : MeleeAttack {
 		health.Damage(damage);
 	}
 
+	public void PlayFX()
+	{
+		StartCoroutine(scream());
+	}
+	private IEnumerator scream()
+	{
+		WeaponVFX.emit = true;
+		yield return new WaitForSeconds(Duration);
+		WeaponVFX.emit = false;
+	}
 }

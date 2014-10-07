@@ -10,14 +10,24 @@ public class Smite : MeleeAttack {
 	[SerializeField]
 	private float arcDegree = 30.0f;
 	[SerializeField]
+	private float duration;
+	[SerializeField]
 	private ParticleSystem WeaponVFX;
+
+	private IEnumerator PlayFX ()
+	{
+		WeaponVFX.enableEmission = true;
+		WeaponVFX.Play ();
+		yield return new WaitForSeconds (duration);
+		WeaponVFX.enableEmission = false;
+	}
 
 	public override void Fire ()
 	{
 		Debug.Log ("Smite!");
 
 		//Play Animation/VFX
-		WeaponVFX.Play ();
+		StartCoroutine (PlayFX ());
 
 		/* Animation trigger added by Lee*/
 		NetworkAnimations netanim = GetComponentInChildren<NetworkAnimations>();
