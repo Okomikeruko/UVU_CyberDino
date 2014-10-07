@@ -12,6 +12,7 @@ public class EMPBlast : Bomb {
 	public override void Fire ()
 	{
 		// Debug.Log ("EMP Blast!");
+		WeaponVFX.Play ();
 		float gatheredHealth = 0;
 		var DinoRacers = GameObject.FindGameObjectsWithTag("Dino");
 		var AiRacers = GameObject.FindGameObjectsWithTag("Ai");
@@ -23,11 +24,10 @@ public class EMPBlast : Bomb {
 				continue;
 			}
 
-			// Lightning strikes all other racers
-			// Debug.Log("Play lightening strike animation");
-			// Play strike animation
-			WeaponVFX.Play ();
-			// Take up to 10 health from those racers
+			// Lightning strikes racer
+			PlayLighteningStrike(racer);
+
+			//Take up to 10 health from those racers
 			var dinosaurhHealth = racer.GetComponent<DinosaurHealth>();
 			if (dinosaurhHealth.Current >= DAMAGE){
 				gatheredHealth += DAMAGE;
@@ -45,5 +45,20 @@ public class EMPBlast : Bomb {
 		//Add health to firing player's health, up to max health
 		this.GetComponent<DinosaurHealth>().Heal(gatheredHealth);
 
+	}
+	private void PlayLighteningStrike(GameObject racer){
+		ParticleSystem[] particleSystems = racer.GetComponentsInChildren<ParticleSystem>();
+		foreach(var ps in particleSystems){
+			if (ps.name == "LighteningStrike_VFX"){
+				StartCoroutine(PlayParticleSystem(ps));
+				break;	
+			}
+		}
+	}
+	private IEnumerator PlayParticleSystem(ParticleSystem particleSystem){
+		float particleSystemDuration = particleSystem.duration;
+		particleSystem.Play();
+		yield return new WaitForSeconds(particleSystemDuration);
+		particleSystem.Stop();
 	}
 }
