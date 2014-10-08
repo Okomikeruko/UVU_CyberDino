@@ -219,7 +219,15 @@ public class TurretFire : MonoBehaviour {
 				willSlowFirst = false;
 				willSlowSecond = false;
 			}
-
+			if(myTarget)
+			{
+				Health theHealth = myTarget.gameObject.GetComponent<Health>();
+				if(theHealth.Current <= 0)
+				{
+					targets.Remove(myTarget);
+					myTarget = null;
+				}
+			}
 		}
 		
 		yield return new WaitForSeconds(checkTime);
