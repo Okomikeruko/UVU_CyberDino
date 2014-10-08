@@ -2160,11 +2160,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7ccf1b479ffddb345847c8e72659ca60, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+<<<<<<< HEAD
   range: 50
   force: 10
   damage: 20
   EMPPulseFX1: {fileID: 19800010}
   EffectOffset: 1
+=======
+  MaxSpeed: 100
+  MaxSpeedBack: 10
+  MaxDeltaVelocity: 2.5
+  MaxSurfaceAngle: .800000012
+  TurnSpeed: 1.5
+  JumpHeight: 25
+  AirControl: .25
+>>>>>>> master
 --- !u!114 &11400012
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2246,6 +2256,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cfe4a63865d356e45ac1e57f29dc6377, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+<<<<<<< HEAD
   MaxSpeed: 100
   MaxSpeedBack: 10
   MaxDeltaVelocity: 2.5
@@ -2254,6 +2265,10 @@ MonoBehaviour:
   JumpHeight: 25
   AirControl: .25
 --- !u!114 &11400024
+=======
+  FirstNavNode: Respawn_Bridge_Negative05
+--- !u!114 &11400026
+>>>>>>> master
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -2693,8 +2708,13 @@ CapsuleCollider:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
+<<<<<<< HEAD
   m_GameObject: {fileID: 100042}
   m_Material: {fileID: 0}
+=======
+  m_GameObject: {fileID: 100094}
+  m_Material: {fileID: 13400000, guid: 7958f891903dd76418d917a0dbe790e8, type: 2}
+>>>>>>> master
   m_IsTrigger: 0
   m_Enabled: 1
   m_Radius: .280000001
@@ -2706,8 +2726,13 @@ CapsuleCollider:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
+<<<<<<< HEAD
   m_GameObject: {fileID: 100004}
   m_Material: {fileID: 0}
+=======
+  m_GameObject: {fileID: 100094}
+  m_Material: {fileID: 13400000, guid: 7958f891903dd76418d917a0dbe790e8, type: 2}
+>>>>>>> master
   m_IsTrigger: 0
   m_Enabled: 1
   m_Radius: .310000002

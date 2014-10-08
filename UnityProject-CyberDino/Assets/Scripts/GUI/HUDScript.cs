@@ -767,8 +767,6 @@ public class HUDScript : MonoBehaviour
 				
 				if(_list[i] == PickUpTypes.Weapon)
 					items[i].renderer.material.mainTexture = itemsGfx[0];
-				else if(_list[i] == PickUpTypes.Bomb)
-					items[i].renderer.material.mainTexture = itemsGfx[0];
 				else if(_list[i] == PickUpTypes.Health)
 					items[i].renderer.material.mainTexture = itemsGfx[1];
 				else if(_list[i] == PickUpTypes.Turbo)

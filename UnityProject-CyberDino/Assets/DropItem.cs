@@ -44,10 +44,6 @@ public class DropItem : MonoBehaviour {
 		{
 			renderer.material = weaponPickUp;
 		}
-		if(type == PickUpTypes.Bomb)
-		{
-			renderer.material = bombPickUp;
-		}
 	}
 
 	IEnumerator OnTriggerEnter(Collider other)
@@ -61,7 +57,7 @@ public class DropItem : MonoBehaviour {
 				var inv = other.GetComponent<Inventory>();
 				if(inv != null)
 					inv.AddPickUp(currentType);
-				Destroy(this);
+				Network.Destroy(gameObject);
 			}
 			
 		}

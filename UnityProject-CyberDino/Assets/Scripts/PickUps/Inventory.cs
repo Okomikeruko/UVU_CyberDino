@@ -2,7 +2,7 @@ using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 
-public enum PickUpTypes { Weapon, Health, Turbo, Bomb };
+public enum PickUpTypes { Weapon, Health, Turbo };
 
 public class Inventory : MonoBehaviour {
 
@@ -85,7 +85,7 @@ public class Inventory : MonoBehaviour {
 
 		foreach (PickUpTypes pickUp in PickUps) 
 		{
-			GameObject dropItemClone = (GameObject) Instantiate(Resources.Load("DropItemPrefab"),newPostion,target);
+			GameObject dropItemClone = (GameObject)Network.Instantiate(Resources.Load("DropItemPrefab"),newPostion,target, 1);
 			newPostion.x += 10;
 			newPostion.z += 7;
 			dropItemClone.GetComponent<DropItem>().setType(pickUp);
