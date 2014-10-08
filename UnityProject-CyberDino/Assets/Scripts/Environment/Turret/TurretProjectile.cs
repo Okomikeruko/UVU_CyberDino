@@ -91,34 +91,37 @@ public class TurretProjectile : MonoBehaviour {
 	void OnTriggerEnter(Collider other)
 	{
 		Transform obj = TurretProjectilePooling.current.GetExPooledObject();
-		obj.position = transform.position;
-		obj.rotation = transform.rotation;
-		obj.gameObject.SetActive(true);
-
-		MotionControl theMotion = other.gameObject.GetComponent<MotionControl>();
-
-		Health theHealth = other.gameObject.GetComponent<Health>();
-
-		if(theHealth != null)
+		if(obj != null)
 		{
-			theHealth.Damage(damage);
-		}
+			obj.position = transform.position;
+			obj.rotation = transform.rotation;
+			obj.gameObject.SetActive(true);
 
-		if(theMotion != null)
-		{
-			if(theMotion.GetTopSpeed() >= 100)
+			MotionControl theMotion = other.gameObject.GetComponent<MotionControl>();
+
+			Health theHealth = other.gameObject.GetComponent<Health>();
+
+			if(theHealth != null)
 			{
-				if(willSlowFirst)
+				theHealth.Damage(damage);
+			}
+
+			if(theMotion != null)
+			{
+				if(theMotion.GetTopSpeed() >= 100)
 				{
-					Debug.Log(theMotion.GetTopSpeed());
-					theMotion.TopSpeedMod(firstSlowSpeed, slowDuration);
-					Debug.Log(theMotion.GetTopSpeed());
-					willSlowFirst = false;
-				}
-				else if(willSlowSecond)
-				{
-					theMotion.TopSpeedMod(secondSlowSpeed, slowDuration);
-					willSlowSecond = false;
+					if(willSlowFirst)
+					{
+						Debug.Log(theMotion.GetTopSpeed());
+						theMotion.TopSpeedMod(firstSlowSpeed, slowDuration);
+						Debug.Log(theMotion.GetTopSpeed());
+						willSlowFirst = false;
+					}
+					else if(willSlowSecond)
+					{
+						theMotion.TopSpeedMod(secondSlowSpeed, slowDuration);
+						willSlowSecond = false;
+					}
 				}
 			}
 		}
