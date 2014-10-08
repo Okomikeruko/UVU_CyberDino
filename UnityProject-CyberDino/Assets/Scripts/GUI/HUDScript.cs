@@ -598,57 +598,35 @@ public class HUDScript : MonoBehaviour
 	private void AttachHealth(int _index)
 	{
 		Vector3 screenPoint = Camera.main.WorldToScreenPoint(new Vector3(raceDinos[_index].transform.position.x, raceDinos[_index].transform.position.y + 20, raceDinos[_index].transform.position.z));
-		/*Vector3 test = this.transform.rotation.eulerAngles.normalized;
-		Debug.Log(normalized);*/
+		Vector3 normDir = Camera.main.transform.TransformDirection(Vector3.forward).normalized;
+		Vector3 namePos = raceDinos[_index].transform.TransformPoint(new Vector3(-7 * normDir.x, 0, -7 * normDir.z));
 
-		Vector3 screenPoint2 = Camera.main.WorldToScreenPoint(new Vector3(raceDinos[_index].transform.position.x, raceDinos[_index].transform.position.y + 25, raceDinos[_index].transform.position.z));
+		Vector3 screenPoint2 = Camera.main.WorldToScreenPoint(new Vector3(namePos.x, namePos.y + 24.4f, namePos.z));
 		float yMulti = Screen.height / 100.0f;
 		
 		//if( inSight[_index] == true && screenPoint.z > 0 && playerNamesObjs[_index].guiText.fontSize < 2000)
 		if(screenPoint.z > 40 && screenPoint.z < 250 && playerNamesObjs[_index].guiText.fontSize < 800)
 		{	if(healthBarObjs[_index].activeSelf == false)
 			{
-				/*healthBackgroundObjs[_index].SetActive(true);
-				healthBarObjs[_index].SetActive(true);
-				playerNamesObjs[_index].SetActive(true);*/
-				
-				//Debug.Log("fade in start");
-				
 				StartCoroutine(FadeInHealth(_index));
 			}
-			
-			/*healthBackgroundObjs[_index].guiTexture.pixelInset = new Rect(screenPoint.x, screenPoint.y, (1500 * yMulti) / screenPoint.z, (300 * yMulti) / screenPoint.z);
-			healthBarObjs[_index].guiTexture.pixelInset = GetHealth(new Rect(screenPoint.x, screenPoint.y, (1500 * yMulti) / screenPoint.z, (300 * yMulti) / screenPoint.z), _index);
-			playerNamesObjs[_index].guiText.pixelOffset = new Vector2(screenPoint.x, screenPoint.y);
-			playerNamesObjs[_index].guiText.fontSize = (int)((300 * yMulti) / screenPoint.z);*/
+
 		}
 		else
 		{
 			if(isFading[_index] == false && healthBarObjs[_index].activeSelf == true)
 			{
-				/*healthBackgroundObjs[_index].SetActive(false);
-				healthBarObjs[_index].SetActive(false);
-				playerNamesObjs[_index].SetActive(false);*/
-				
 				isFading[_index] = true;
-				
-				//Debug.Log("start fade out");
-				
+
 				StartCoroutine(FadeOutHealth(_index));
-			
-			
-			/*healthBackgroundObjs[_index].guiTexture.pixelInset = new Rect(0, 0, 0, 0);
-			healthBarObjs[_index].guiTexture.pixelInset = GetHealth(new Rect(0, 0, 0, 0), _index);
-			playerNamesObjs[_index].guiText.pixelOffset = new Vector2(0, 0);
-			playerNamesObjs[_index].guiText.fontSize = (int)(0);*/
+
 			}
 		}
 		
 		healthBackgroundObjs[_index].guiTexture.pixelInset = new Rect(screenPoint.x, screenPoint.y, (1500 * yMulti) / screenPoint.z, (400 * yMulti) / screenPoint.z);
 		healthBarObjs[_index].guiTexture.pixelInset = GetHealth(new Rect(screenPoint.x, screenPoint.y, (1500 * yMulti) / screenPoint.z, (400 * yMulti) / screenPoint.z), _index);
-		//playerNamesObjs[_index].guiText.pixelOffset = new Vector2(screenPoint.x, screenPoint.y);
-		playerNamesObjs[_index].guiText.pixelOffset = new Vector2(screenPoint2.x+(30*normalized.y), screenPoint2.y);
-		playerNamesObjs[_index].guiText.fontSize = (int)((200 * yMulti) / screenPoint2.z);
+		playerNamesObjs[_index].guiText.pixelOffset = new Vector2(screenPoint2.x, screenPoint2.y);
+		playerNamesObjs[_index].guiText.fontSize = (int)((150 * yMulti) / screenPoint2.z);
 		
 	}
 	

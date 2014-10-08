@@ -44,7 +44,8 @@ public class MenuControl : MonoBehaviour
 	/*private string[,] keyBoardInput;
 	private Rect[,] keyBoardInputRect;*/
 	
-	private int inputIndex;
+	private int sNameIndex;
+	private int pNameIndex;
 	private bool isInputting;
 	
 	//the position of the dino models
@@ -320,8 +321,8 @@ public class MenuControl : MonoBehaviour
 
 		isHoldingBtn = false;
 		
-		inputIndex = 0;
-		
+		sNameIndex = 0;
+		pNameIndex = 0;
 	}
 	
 /*	void Update()
@@ -423,6 +424,7 @@ public class MenuControl : MonoBehaviour
 	{
 		//set this skin as the active one
 		GUI.skin = mySkin;
+
 		
 		xMulti = Screen.width / 100.0f;
 		yMulti = Screen.height / 100.0f;
@@ -451,7 +453,7 @@ public class MenuControl : MonoBehaviour
 			 Input.GetAxis("Vertical") >= deadZone || Input.GetAxis("Vertical") <= -deadZone || 
 			 Input.GetButton("Jump") || Input.GetButton("Melee") || Input.GetButton("Bomb")))
 			{
-				Debug.Log("button is pressed");
+				//Debug.Log("button is pressed");
 				isHoldingBtn = true;
 				currentSelection();
 				
@@ -460,7 +462,7 @@ public class MenuControl : MonoBehaviour
 			        Input.GetAxis("Vertical") <= deadZone && Input.GetAxis("Vertical") >= -deadZone &&
 			        !Input.GetButton("Jump") && !Input.GetButton("Melee") && !Input.GetButton("Bomb"))
 			{
-				Debug.Log("button is released");
+				//Debug.Log("button is released");
 				isHoldingBtn = false;
 			}
 			
@@ -520,13 +522,13 @@ public class MenuControl : MonoBehaviour
 			GUI.DrawTexture(new Rect(menuOrigin[1].x + multiPMenuBtnRect[0].x, menuOrigin[1].y + multiPMenuBtnRect[0].y, multiPMenuBtnRect[0].width, multiPMenuBtnRect[0].height), serverNameGFX);
 			
 			//a text field to save the server name
-			serverName = GUI.TextField(new Rect(menuOrigin[1].x + multiPMenuRect[0].x, menuOrigin[1].y + multiPMenuRect[0].y, multiPMenuRect[0].width, multiPMenuRect[0].height), serverName);
+			/*serverName =*/ GUI.TextField(new Rect(menuOrigin[1].x + multiPMenuRect[0].x, menuOrigin[1].y + multiPMenuRect[0].y, multiPMenuRect[0].width, multiPMenuRect[0].height), serverName);
 			
 			//a label for the player name
 			GUI.DrawTexture(new Rect(menuOrigin[1].x + multiPMenuBtnRect[1].x, menuOrigin[1].y + multiPMenuBtnRect[1].y, multiPMenuBtnRect[1].width, multiPMenuBtnRect[1].height), playerNameGFX);
 			
 			//a text field to save the player name
-			playerName = GUI.TextField(new Rect(menuOrigin[1].x + multiPMenuRect[1].x, menuOrigin[1].y + multiPMenuRect[1].y, multiPMenuRect[1].width, multiPMenuRect[1].height), playerName);
+			/*playerName =*/ GUI.TextField(new Rect(menuOrigin[1].x + multiPMenuRect[1].x, menuOrigin[1].y + multiPMenuRect[1].y, multiPMenuRect[1].width, multiPMenuRect[1].height), playerName);
 			
 			GUI.DrawTexture(new Rect(menuOrigin[1].x + multiPMenuBtnRect[2].x, menuOrigin[1].y + multiPMenuBtnRect[2].y, multiPMenuBtnRect[2].width, multiPMenuBtnRect[2].height), mPlayerMenuBtnTxtr[0]);
 			GUI.DrawTexture(new Rect(menuOrigin[1].x + multiPMenuBtnRect[3].x, menuOrigin[1].y + multiPMenuBtnRect[3].y, multiPMenuBtnRect[3].width, multiPMenuBtnRect[3].height), mPlayerMenuBtnTxtr[1]);
@@ -1805,161 +1807,93 @@ public class MenuControl : MonoBehaviour
 
 	private void InputName()
 	{
-		string nameSelected = "";
-		char[] charSelected = new char[0];
-
 		if(buttonIndex == 0)
 		{
-			nameSelected = (string)serverName.Clone();
-			charSelected = (char[])inputServerName.Clone();
+			InputNameHelper(ref inputServerName, ref serverName, ref sNameIndex);
 		}
 		else if(buttonIndex == 1)
 		{
-			nameSelected = (string)playerName.Clone();
-			charSelected = (char[])inputPlayerName.Clone();
+			InputNameHelper(ref inputPlayerName, ref playerName, ref pNameIndex);
 		}
 
-		/*Debug.Log(inputPlayerName[inputIndex] == null);*/
-		Debug.Log("length " + charSelected.Length);
-		Debug.Log("index " + inputIndex);
-
-		if(charSelected[inputIndex] == default(char))
-		{
-			charSelected[inputIndex] = 'a';
-
-		}
-
-		if(Input.GetAxis("Horizontal") < 0 && inputIndex > 0) 
-		{
-			inputIndex--;
-			Debug.Log("go left ");
-		}
-		else if(Input.GetAxis("Horizontal") > 0 && inputIndex < charSelected.Length - 1) 
-		{
-			inputIndex++;
-			Debug.Log("go right ");
-		}
-		else if(Input.GetAxis("Vertical") > 0) 
-		{
-			Debug.Log("char up");
-			charSelected[inputIndex]++;
-
-		}
-		else if(Input.GetAxis("Vertical") < 0) 
-		{
-			Debug.Log("char down");
-			charSelected[inputIndex]--;
-		}
-		else if(Input.GetButton("Jump") && inputIndex == nameSelected.Length - 1)
-		{
-			Debug.Log("add char");
-			//Debug.Log("next " + inputPlayerName.Length + 1);
-			//Debug.Log("input length " + inputPlayerName.Length);
-			//Debug.Log("added length " + inputPlayerName.Length + 1);
-			char[] temp = new char[charSelected.Length + 1];
-			//Debug.Log("temp length " + temp.Length);
-			charSelected.CopyTo(temp, 0);
-
-			charSelected = temp;
-
-			inputIndex++;
-			charSelected[inputIndex] = 'a';
-
-			/*playerName = "";
-
-			foreach(char _char in inputPlayerName)
-			{
-				playerName += _char.ToString();
-			}*/
-		}
-		else if(Input.GetButton("Melee"))
-		{
-			currentSelection = MultiPlayerSelection; 
-		}
-
-		nameSelected = "";
-		
-		foreach(char _char in charSelected)
-		{
-			Debug.Log(_char.ToString());
-			nameSelected += _char.ToString();
-		}
-
-		Debug.Log("name selected " + nameSelected);
-		Debug.Log("actual name " + serverName);
 	}
 
-	private void InputNameHelper(char[] _charArr, string _name)
+	private void InputNameHelper(ref char[] _charArr, ref string _name, ref int _index)
 	{
-		
-		/*Debug.Log(inputPlayerName[inputIndex] == null);*/
-		Debug.Log("length " + _charArr.Length);
-		Debug.Log("index " + inputIndex);
-		
-		if(_charArr[inputIndex] == default(char))
+		if(_name == "")
 		{
-			_charArr[inputIndex] = 'a';
+			_charArr = new char[1];
 			
+			_charArr[0] = 'a';
 		}
 		
-		if(Input.GetAxis("Horizontal") < 0 && inputIndex > 0) 
+		if(Input.GetAxis("Horizontal") < 0 && _index > 0 && _charArr.Length > 0) 
 		{
-			inputIndex--;
+			_index--;
 			Debug.Log("go left ");
 		}
-		else if(Input.GetAxis("Horizontal") > 0 && inputIndex < _charArr.Length - 1) 
+		else if(Input.GetAxis("Horizontal") > 0 && _index < _charArr.Length - 1) 
 		{
-			inputIndex++;
+			_index++;
 			Debug.Log("go right ");
 		}
-		else if(Input.GetAxis("Vertical") > 0) 
+		else if(Input.GetAxis("Vertical") > 0 && _charArr.Length > 0) 
 		{
 			Debug.Log("char up");
-			_charArr[inputIndex]++;
+			_charArr[_index]++;
 			
 		}
-		else if(Input.GetAxis("Vertical") < 0) 
+		else if(Input.GetAxis("Vertical") < 0 && _charArr.Length > 0) 
 		{
 			Debug.Log("char down");
-			_charArr[inputIndex]--;
+			_charArr[_index]--;
 		}
-		else if(Input.GetButton("Jump") && inputIndex == _name.Length - 1)
+		else if(Input.GetButton("Jump") && _index >= _name.Length - 1)
 		{
-			Debug.Log("add char");
-			//Debug.Log("next " + inputPlayerName.Length + 1);
-			//Debug.Log("input length " + inputPlayerName.Length);
-			//Debug.Log("added length " + inputPlayerName.Length + 1);
 			char[] temp = new char[_charArr.Length + 1];
-			//Debug.Log("temp length " + temp.Length);
+
 			_charArr.CopyTo(temp, 0);
 			
 			_charArr = temp;
 			
-			inputIndex++;
-			_charArr[inputIndex] = 'a';
 			
-			/*playerName = "";
-
-			foreach(char _char in inputPlayerName)
-			{
-				playerName += _char.ToString();
-			}*/
+			_index = _charArr.Length - 1;
+			_charArr[_index] = 'a';
+			
+			for(int i = 0; i < _charArr.Length - 1; i++)
+				Debug.Log(_charArr[i]);
+			
 		}
 		else if(Input.GetButton("Melee"))
 		{
 			currentSelection = MultiPlayerSelection; 
 		}
+		else if(Input.GetButton("Bomb") && _charArr.Length > 0 && _index >= _name.Length - 1)
+		{
+			char[] temp = new char[_charArr.Length - 1];
+
+			for(int i = 0; i < _charArr.Length - 1; i++)
+				temp[i] = _charArr[i];
+			
+			_charArr = temp;
+			
+			if(_index > 0)
+			{
+				_index--;
+			}
+		}
 		
 		_name = "";
 		
-		foreach(char _char in _charArr)
+		for(int i = 0; i < _charArr.Length; i++)
 		{
-			Debug.Log(_char.ToString());
-			_name += _char.ToString();
+			//Debug.Log("the letter to add " + _charArr[i].ToString());
+			_name = _name +  _charArr[i].ToString();
+			//Debug.Log("the resulting temp name " + _name);
 		}
 		
-		Debug.Log("name selected " + _name);
-		Debug.Log("actual name " + serverName);
+		//_name = tempName;
+		//Debug.Log("the resulting name " + _name);
 	}
 	
 	//*************End of Multiplayer Selection
