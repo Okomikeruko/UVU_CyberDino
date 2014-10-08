@@ -28,7 +28,8 @@ public class Inventory : MonoBehaviour {
 		if(PickUps.Count < MaximumPickupCount)
 		{ 
 			PickUps.Add(type);
-			myHud.UpdateItems(PickUps);
+			if(tag == "Dino")
+				myHud.UpdateItems(PickUps);
 		}
 	}
 
