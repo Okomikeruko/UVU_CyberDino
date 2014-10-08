@@ -168,6 +168,8 @@ public class MenuControl : MonoBehaviour
 	private bool isHoldingBtn;
 	private float deadZone;
 	private Rect[] currentRect;
+	
+	private bool isBlinking;
 
 	
 	// Use this for initialization
@@ -261,6 +263,8 @@ public class MenuControl : MonoBehaviour
 		currentSelection = MainMenuSelection;
 		currentRect = mainMenuBtnRect;
 		deadZone = 0.5f;
+		
+		isBlinking = false;
 		
 	}
 	
@@ -522,13 +526,13 @@ public class MenuControl : MonoBehaviour
 			GUI.DrawTexture(new Rect(menuOrigin[1].x + multiPMenuBtnRect[0].x, menuOrigin[1].y + multiPMenuBtnRect[0].y, multiPMenuBtnRect[0].width, multiPMenuBtnRect[0].height), serverNameGFX);
 			
 			//a text field to save the server name
-			/*serverName =*/ GUI.TextField(new Rect(menuOrigin[1].x + multiPMenuRect[0].x, menuOrigin[1].y + multiPMenuRect[0].y, multiPMenuRect[0].width, multiPMenuRect[0].height), serverName);
+			serverName = GUI.TextField(new Rect(menuOrigin[1].x + multiPMenuRect[0].x, menuOrigin[1].y + multiPMenuRect[0].y, multiPMenuRect[0].width, multiPMenuRect[0].height), serverName);
 			
 			//a label for the player name
 			GUI.DrawTexture(new Rect(menuOrigin[1].x + multiPMenuBtnRect[1].x, menuOrigin[1].y + multiPMenuBtnRect[1].y, multiPMenuBtnRect[1].width, multiPMenuBtnRect[1].height), playerNameGFX);
 			
 			//a text field to save the player name
-			/*playerName =*/ GUI.TextField(new Rect(menuOrigin[1].x + multiPMenuRect[1].x, menuOrigin[1].y + multiPMenuRect[1].y, multiPMenuRect[1].width, multiPMenuRect[1].height), playerName);
+			playerName = GUI.TextField(new Rect(menuOrigin[1].x + multiPMenuRect[1].x, menuOrigin[1].y + multiPMenuRect[1].y, multiPMenuRect[1].width, multiPMenuRect[1].height), playerName);
 			
 			GUI.DrawTexture(new Rect(menuOrigin[1].x + multiPMenuBtnRect[2].x, menuOrigin[1].y + multiPMenuBtnRect[2].y, multiPMenuBtnRect[2].width, multiPMenuBtnRect[2].height), mPlayerMenuBtnTxtr[0]);
 			GUI.DrawTexture(new Rect(menuOrigin[1].x + multiPMenuBtnRect[3].x, menuOrigin[1].y + multiPMenuBtnRect[3].y, multiPMenuBtnRect[3].width, multiPMenuBtnRect[3].height), mPlayerMenuBtnTxtr[1]);
@@ -1741,11 +1745,15 @@ public class MenuControl : MonoBehaviour
 		{
 			if(buttonIndex == 0)
 			{
-				currentSelection = InputName;
+				//currentSelection = InputName;
+				isBlinking = true;
+				//StartCoroutine(StartBlink(ref serverName, ref sNameIndex));
 			}
 			if(buttonIndex == 1)
 			{
-				currentSelection = InputName;
+				//currentSelection = InputName;
+				isBlinking = true;
+				//StartCoroutine(StartBlink(ref playerName, ref pNameIndex));
 			}
 			if(buttonIndex == 2)
 			{
@@ -1867,6 +1875,7 @@ public class MenuControl : MonoBehaviour
 		else if(Input.GetButton("Melee"))
 		{
 			currentSelection = MultiPlayerSelection; 
+			isBlinking = false;
 		}
 		else if(Input.GetButton("Bomb") && _charArr.Length > 0 && _index >= _name.Length - 1)
 		{
@@ -1895,6 +1904,44 @@ public class MenuControl : MonoBehaviour
 		//_name = tempName;
 		//Debug.Log("the resulting name " + _name);
 	}
+	
+	/*private IEnumerator StartBlink(System.Action<string> updateName, System.Action<int> updateIndex)
+	{
+		char[] name = null;
+		int index = 0;
+		
+		
+		char charToReplace = _name[_index];
+		int currentIndex = _index;
+		
+		while(true)
+		{
+			if(isBlinking == false)
+				break;
+				
+			if(currentIndex != _index)
+			{
+				charToReplace = _name[_index];
+				currentIndex = _index;
+			}
+			
+			if(_name[_index] == charToReplace)
+			{
+				_name.Remove(_index, 1);
+				_name.Insert(_index, "_");
+			}
+			else if(_name[_index] == '_')
+			{
+				_name.Remove(_index, 1);
+				_name.Insert(_index, charToReplace.ToString());
+			}
+			
+			yield return new WaitForSeconds(0.5f);
+		}
+		
+		_name.Remove(_index, 1);
+		_name.Insert(_index, charToReplace.ToString());
+	}*/
 	
 	//*************End of Multiplayer Selection
 	

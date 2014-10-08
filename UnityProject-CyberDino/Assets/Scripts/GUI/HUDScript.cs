@@ -166,9 +166,9 @@ public class HUDScript : MonoBehaviour
 		
 		//texture for weapon graphics
 		itemsGfx = new Texture[3];
-		itemsGfx[0] = (Texture)Resources.Load("GUI/Materials/HudDamage");
-		itemsGfx[1] = (Texture)Resources.Load("GUI/Materials/HudShield");
-		itemsGfx[2] = (Texture)Resources.Load("GUI/Materials/HudSpeed");
+		itemsGfx[0] = (Texture)Resources.Load("GUI/Materials/HudMelee");
+		itemsGfx[1] = (Texture)Resources.Load("GUI/Materials/HudHealth");
+		itemsGfx[2] = (Texture)Resources.Load("GUI/Materials/HudTurbo");
 
 		//textures for the points on the mini map
 		mapPosGfx = (Texture)Resources.Load("GUI/Materials/MapPointPosition");
