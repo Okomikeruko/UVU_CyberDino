@@ -135,14 +135,14 @@ public class DinoRagdoll : MonoBehaviour {
 
 	public void ResetRacer()
 	{
-		this.rigidbody.isKinematic = false;
-		foreach(Collider collider in playColliders)
-			collider.enabled = true;
 		foreach(Rigidbody ragdoll in ragdollBones)
 			ragdoll.isKinematic = true;
+		this.rigidbody.isKinematic = false;
 		foreach(Collider collider in ragdollColliders)
 			collider.enabled = false;
 		dinoAnimator.enabled = true;
+		foreach(Collider collider in playColliders)
+			collider.enabled = true;
 		ColorLerpClass theLerp = transform.gameObject.GetComponent<ColorLerpClass>();
 		theLerp.lerping = false;
 		move.enabled = true;
