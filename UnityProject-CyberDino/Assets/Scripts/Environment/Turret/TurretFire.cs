@@ -220,11 +220,35 @@ public class TurretFire : MonoBehaviour {
 				willSlowSecond = false;
 			}
 
+			RemoveTarget();
+
 		}
 		
 		yield return new WaitForSeconds(checkTime);
 		checking = false;
 	}
+
+	public void RemoveTarget()
+	{
+		if(myTarget)
+		{
+			Health theHealth = myTarget.gameObject.GetComponent<Health>();
+			if(theHealth.Current <= 0)
+			{
+				targets.Remove(myTarget);
+				myTarget = null;
+			}
+		}
+		for(int i = 0; i < targets.Count; i++)
+		{
+			Health targetHealth = targets[i].gameObject.GetComponent<Health>();
+			if(targetHealth.Current <= 0)
+			{
+				targets.Remove(targets[i]);
+			}
+		}
+	}
+
 
 	IEnumerator SetDinos()
 	{
