@@ -93,6 +93,10 @@ public abstract class Health : MonoBehaviour
 	{
 		if (currentHealth > 0) {
 			netview.RPC ("AdjustCurrentHealth", RPCMode.AllBuffered, -value);
+			if (this.tag == "Dino" || this.tag == "Ai")
+			{
+				this.GetComponent<DinoRagdoll>().TimedRagdoll(value/currentHealth, value/currentHealth);
+			}
 		}
 	}
 	public void Heal(float value)
