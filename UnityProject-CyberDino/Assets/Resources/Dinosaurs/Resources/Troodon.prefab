@@ -2071,7 +2071,7 @@ MonoBehaviour:
   MaxSpeed: 100
   MaxSpeedBack: 10
   MaxDeltaVelocity: 2.5
-  MaxSurfaceAngle: .899999976
+  MaxSurfaceAngle: .800000012
   TurnSpeed: 1.5
   JumpHeight: 25
   AirControl: .25
@@ -2173,6 +2173,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a0a9ff7af9ea72f459a87697bf010a45, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  FirstNavNode: Respawn_Bridge_Negative05
 --- !u!114 &11400026
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2576,7 +2577,7 @@ CapsuleCollider:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100094}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: 7958f891903dd76418d917a0dbe790e8, type: 2}
   m_IsTrigger: 0
   m_Enabled: 1
   m_Radius: 1.03999996
@@ -2589,7 +2590,7 @@ CapsuleCollider:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100094}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: 7958f891903dd76418d917a0dbe790e8, type: 2}
   m_IsTrigger: 0
   m_Enabled: 1
   m_Radius: 1.32000005

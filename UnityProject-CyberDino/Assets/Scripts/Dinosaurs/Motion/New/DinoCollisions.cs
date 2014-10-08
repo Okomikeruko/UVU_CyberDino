@@ -34,14 +34,12 @@ public class DinoCollisions : MonoBehaviour {
 				}
 
 				// Apply damage
-				var relativeMass = 1.0f / (rigidbody.mass / ((collisionInfo.gameObject.rigidbody.mass + rigidbody.mass) / 2.0f));
 				if(collisionInfo.relativeVelocity.magnitude > CollisionDamageVelocityThreshold)
 				{
-					var percent = (collisionInfo.relativeVelocity.magnitude / CollisionDamageVelocityThreshold) - 1.0f;
 					var health = GetComponent<Health>();
 					if(health != null)
 					{
-						health.Damage(CollisionDamage * percent * relativeMass);
+						health.Damage(CollisionDamage);
 					}
 				}
 
@@ -68,17 +66,16 @@ public class DinoCollisions : MonoBehaviour {
 				{
 					if(collisionInfo.relativeVelocity.magnitude > CollisionDamageVelocityThreshold)
 					{
-						var percent = (collisionInfo.relativeVelocity.magnitude / CollisionDamageVelocityThreshold) - 1.0f;
 						var health = GetComponent<Health>();
 						if(health != null)
 						{
-							health.Damage(EnvironmentCollisionDamage * percent);
+							health.Damage(EnvironmentCollisionDamage);
 						}
 						
 						// Damage object you ran into if it has health
 						var objHealth = collisionInfo.gameObject.GetComponent<Health>();
 						if(objHealth != null)
-							objHealth.Damage(EnvironmentCollisionDamage * percent);
+							objHealth.Damage(EnvironmentCollisionDamage);
 					}
 
 
