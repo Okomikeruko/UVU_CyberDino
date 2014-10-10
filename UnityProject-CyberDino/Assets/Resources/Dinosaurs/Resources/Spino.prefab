@@ -2478,11 +2478,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9c583eaa465333047933c9733da3395b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  duration: 3
-  BuzzSpeedPercentIncrease: 1.75
+  duration: 2
+  BuzzSpeedFactor: 180
   BuzzSawDamage: 25
   BuzzRange: 50
-  arcDegree: 30
+  BuzzRadius: 10
   WeaponVFX: {fileID: 100020}
   mesh: {fileID: 100036}
 --- !u!114 &11400018
