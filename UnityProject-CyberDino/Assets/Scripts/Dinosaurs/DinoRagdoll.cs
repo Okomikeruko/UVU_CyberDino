@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 public class DinoRagdoll : MonoBehaviour {
 	
@@ -27,6 +28,8 @@ public class DinoRagdoll : MonoBehaviour {
 	private Quaternion[] startPose;			// Rotations of each bone in ragdoll at time ragdoll is engaged
 	private Quaternion[] stopPose;			// Rotations of each bone in ragdoll at time ragdoll ends
 
+	private List<Vector3> startPosition;
+	private List<Quaternion> startOrientation;
 
 /* ---------------- Delegate Initialization -------------------- */
 	private delegate void RagdollUpdate();  
@@ -71,6 +74,14 @@ public class DinoRagdoll : MonoBehaviour {
 
 /* ---------------- Public Functions --------------------------- */
 	public void GoRagdoll() {
+		
+		startPosition = new List<Vector3>();
+		startOrientation = new List<Quaternion>();
+		for (int i = 0; i < ragdollBones.Length; i++) {
+			startPosition.Add(ragdollBones[i].transform.localPosition);
+			startOrientation.Add(ragdollBones[i].transform.localRotation);
+		}
+
 		// Modified by Sam
 		move.enabled = false;
 		this.rigidbody.isKinematic = true;
@@ -147,6 +158,11 @@ public class DinoRagdoll : MonoBehaviour {
 		theLerp.lerping = false;
 		move.enabled = true;
 		ragdollUpdate = empty;
+
+		for (int i = 0; i < ragdollBones.Length; i++) {
+			ragdollBones[i].transform.localPosition = startPosition[i];
+			ragdollBones[i].transform.localRotation = startOrientation[i];
+		}
 	}
 
 	public void TimedRagdoll (float time, float percent)

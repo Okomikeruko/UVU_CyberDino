@@ -57,6 +57,7 @@ public class RespawnManager : MonoBehaviour
 		gameObject.transform.position = CurrentRespawnNode.transform.position;
 		gameObject.transform.rotation = CurrentRespawnNode.transform.rotation;
 		yield return new WaitForSeconds(0.5f);
+		gameObject.GetComponentInChildren<SkinnedMeshRenderer>().enabled = true;
 		if (racerRespawnParticalSystem != null){
 			Debug.Log("Player Respawn Animation");
 			yield return StartCoroutine(PlayParticleSystem(racerRespawnParticalSystem));
@@ -64,7 +65,6 @@ public class RespawnManager : MonoBehaviour
 			yield return new WaitForSeconds(1.0f);
 		}
 		Debug.Log("Ready to go!");
-		gameObject.GetComponentInChildren<SkinnedMeshRenderer>().enabled = true;
 		yield return null;
 	}
 
