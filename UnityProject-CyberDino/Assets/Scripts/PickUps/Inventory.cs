@@ -28,7 +28,7 @@ public class Inventory : MonoBehaviour {
 		if(PickUps.Count < MaximumPickupCount)
 		{ 
 			PickUps.Add(type);
-			if(tag == "Dino")
+			if(tag == "Dino" && networkView.isMine)
 				myHud.UpdateItems(PickUps);
 		}
 	}
@@ -56,8 +56,9 @@ public class Inventory : MonoBehaviour {
 				var move = GetComponent<MotionControl>();
 				move.TopSpeedMod(1.5f, 5.0f);
 			}
-
-			myHud.UpdateItems(PickUps);
+			
+			if(tag == "Dino" && networkView.isMine)
+				myHud.UpdateItems(PickUps);
 			return true;
 		}
 
@@ -66,8 +67,9 @@ public class Inventory : MonoBehaviour {
 
 			PickUps.Add(type);
 		}
-
-		myHud.UpdateItems(PickUps);
+		
+		if(tag == "Dino" && networkView.isMine)
+			myHud.UpdateItems(PickUps);
 		return false;
 	}
 
@@ -92,7 +94,8 @@ public class Inventory : MonoBehaviour {
 			dropItemClone.GetComponent<DropItem>().setType(pickUp);
 		}
 		PickUps.Clear();
-		myHud.UpdateItems(PickUps);
+		if(tag == "Dino" && networkView.isMine)
+			myHud.UpdateItems(PickUps);
 	}
 
 	public int Count(PickUpTypes type)

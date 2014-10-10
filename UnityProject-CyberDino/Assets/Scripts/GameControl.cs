@@ -37,6 +37,8 @@ public class GameControl : MonoBehaviour {
 		var playerInfo = networkHandler.GetMyInfo();
 		int playerID = int.Parse(Network.player.ToString());
 		GameObject PlayerDino = (GameObject)Network.Instantiate((GameObject)Resources.Load(playerInfo.dinoName), spawnPoint[playerID].transform.position, Quaternion.LookRotation(spawnPoint[playerID].transform.forward), playerID);
+		var AIControl = PlayerDino.GetComponent<AIControl> ();
+		AIControl.enabled = false;
 		MainCameraFollow.target = PlayerDino.transform;
 
 		if (Network.isServer) {
@@ -63,7 +65,7 @@ public class GameControl : MonoBehaviour {
 					AiDino.tag = "Ai";
 					var PlayerControl = AiDino.GetComponent<UserControl> ();
 					PlayerControl.enabled = false;
-					var AIControl = AiDino.GetComponent<AIControl> ();
+					AIControl = AiDino.GetComponent<AIControl> ();
 					AIControl.enabled = true;
 			}
 		}
