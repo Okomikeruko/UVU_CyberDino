@@ -183,6 +183,18 @@ public class MotionControl : MonoBehaviour {
 		MaxSpeed /= percent;
 	}
 
+	public void AccelerationMod(float percent, float duration)
+	{
+		StartCoroutine(ChangeMyAcceleration(percent, duration));
+	}
+	
+	IEnumerator ChangeMyAcceleration(float percent, float duration)
+	{
+		MaxDeltaVelocity *= percent;
+		yield return new WaitForSeconds(duration);
+		MaxDeltaVelocity /= percent;
+	}
+
 	public void LockInput(float duration)
 	{
 		StartCoroutine(lockInput(duration));
