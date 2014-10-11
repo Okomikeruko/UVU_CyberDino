@@ -74,6 +74,7 @@ public class HUDScript : MonoBehaviour
 	//the finish object
 	private GameObject finishObj;
 	private GameObject finishPlaceObj;
+	private bool hasFinished;
 	
 	//the speed that the finish object moves
 	private float moveSpeed = 2000.0f;
@@ -258,6 +259,8 @@ public class HUDScript : MonoBehaviour
 		healthDangerObj = CreateGUITxtr("Finish Place", healthDangerGfx , new Vector3(0, 0, 1));
 		healthDangerObj.SetActive(false);
 		
+		hasFinished = false;
+		
 		dinoIcon = CreateGUITxtr("Dino Icon", dinoIconsGfx[0], new Vector3(0, 0, 0));
 		
 		healthPercent = CreateGUIText("Health Percent", "100%", new Vector3(0, 0, 0));
@@ -429,6 +432,12 @@ public class HUDScript : MonoBehaviour
 		healthPercent.guiText.pixelOffset = ResizeVec2( new Vector2(16, 90));
 		healthPercent.guiText.fontSize = (int)(5.0f * yMulti);
 		
+		if(!hasFinished)
+		{
+			finishObj.guiTexture.pixelInset = ResizeRect(new Rect(150, 0, 100, 100));
+			finishPlaceObj.guiTexture.pixelInset = ResizeRect(new Rect(-80, 20, 30, 70));
+		}
+		
 		Rect healthSize = ResizeRect(new Rect(20, 85, .11f, .2f));
 		
 		if(raceDinos[dinoTrackingScript.playerNum] != null)
@@ -579,9 +588,53 @@ public class HUDScript : MonoBehaviour
 			healthGrpBar.transform.localEulerAngles = healthGrpBarRotation;
 
 		if((changePoint / 2) > percentResults)
-			healthDangerObj.SetActive(true);
+			//healthDangerObj.SetActive(true);
+			StartCoroutine("DangerPulse");
 		else
+		{
 			healthDangerObj.SetActive(false);
+			StopCoroutine("DangerPulse");
+		}
+	}
+	
+	private IEnumerator DangerPulse()
+	{
+		healthDangerObj.SetActive(true);
+		
+		float trans = 0;
+		float tempWidth = 0;
+		float tempX = 0;
+		
+		bool isGrowing = true;
+		
+		Rect tempRect = new Rect(0, 0, 100, 100);
+		
+		while(true)
+		{
+			if(isGrowing && trans < 1.0f)
+			{
+				trans += 0.05f;
+				//tempWidth = Mathf.Lerp(100, 120, trans);
+				//tempWidth = Mathf.Lerp(400, 500, trans);
+			}
+			else
+				isGrowing = false;
+				
+			if(!isGrowing && trans > 0)
+			{
+				trans -= 0.05f;
+				//tempWidth = Mathf.Lerp(100, 500, trans);
+				//tempWidth = Mathf.Lerp(400, 500, trans);
+			}
+			else
+				isGrowing = true;
+			
+			tempRect.width = Mathf.Lerp(100, 150, trans);
+			tempRect.x = Mathf.Lerp(0, -30, trans);
+			healthDangerObj.guiTexture.pixelInset = ResizeRect(tempRect);
+			
+			yield return null;
+		}
 	}
 
 	private Rect SetMapPosition(Rect _pos, GameObject _dino)
@@ -694,10 +747,16 @@ public class HUDScript : MonoBehaviour
 
 	public void ShowFinish()
 	{
+		
 		finishPlaceObj.guiTexture.texture = finishPlaceGfx[racePositions[dinoTrackingScript.playerNum] - 1];
 		/*Debug.Log("the finish object " + finishObj);
 		Debug.Log("the finish place object " + finishPlaceObj);*/
-		StartCoroutine(MoveIn(finishObj, finishPlaceObj));
+		
+		if(hasFinished == false)
+		{
+			hasFinished = true;
+			StartCoroutine(MoveIn(finishObj, finishPlaceObj));
+		}
 	}
 	
 	private IEnumerator MoveIn(GameObject _obj, GameObject _obj2)
