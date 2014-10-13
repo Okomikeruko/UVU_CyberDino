@@ -10,9 +10,9 @@ public class BuzzSaw : MeleeAttack
     [SerializeField]
     private float BuzzSawDamage = 25.0f;
     [SerializeField]
-    private float BuzzRange = 20.0f;
+    private float ColliderRange = 20.0f;
     [SerializeField]
-    private float BuzzRadius = 10.0f;
+    private float ColliderRadius = 10.0f;
     [SerializeField]
     private GameObject WeaponVFX;
     [SerializeField]
@@ -31,48 +31,22 @@ public class BuzzSaw : MeleeAttack
         /* Animation trigger added by Lee*/
         StartCoroutine(spin(duration));		
     }
-    /*
-    private void BuzzAttack(float time)
-    {
-        float seconds = time;
-        GameObject myTarget = null;
-        Collider[] ObjectColliders = Physics.OverlapSphere(this.transform.position, BuzzRange);
-        // (1) Any effect or code that's called before Spino curls up.
 
-        while (seconds > 0)
-        {
-            foreach (var col in ObjectColliders)
-            {
-                if (col.gameObject.tag == "Dino" || col.gameObject.tag == "Ai")
-                {
-                    float angle = Vector3.Angle(col.gameObject.transform.position - transform.position, transform.forward);
-                    if (angle < arcDegree)
-                    {
-                        if (myTarget == null)
-                        {
-                            myTarget = col.gameObject;
-                        }
-                        var distance = Vector3.Distance(transform.position, col.gameObject.transform.position);
-                        var distance2 = Vector3.Distance(transform.position, myTarget.transform.position);
-                        if (distance < distance2)
-                        {
-                            myTarget = col.gameObject;
-                            Debug.Log(myTarget.name);
-                        }
-                    }
-                }
-            }
-            if (myTarget != null)
-            {
-                Health health = myTarget.GetComponent<Health>();
-                if (health != null)
-                    health.Damage(BuzzSawDamage);
-            } 
-            seconds -= 1 * Time.deltaTime;
-        }
+    private IEnumerator spin(float seconds)
+    { 
+        
+        NetworkAnimations netanim = GetComponentInChildren<NetworkAnimations>();
+        // Spino starts to curl up, isAttacking true, start Audio Effect
+        netanim.AnimSetMelee("Melee", true);
+        
+        // Goes into SawFX (turn on) called my mecanim automatically
+        // Wait "duration" seconds
+        yield return new WaitForSeconds(seconds);
+        // Spino starts to uncurl, stop Audio Effect
+        netanim.AnimSetMelee("Melee", false);
+        // Stop SawFX (turn off) called by mecanim automatically
     }
-    */
-
+  
     // If true, turns on Saw animation. If false, turns off...
     public void SawFX(bool on)
     {
@@ -87,6 +61,7 @@ public class BuzzSaw : MeleeAttack
             StartCoroutine(buzz(duration));
             // "InstantSpeedMod" speeds up Dino by a percentage multiplier for duration seconds
             //InstantSpeedMod(BuzzSpeedFactorIncrease, duration);
+            //motControl.AccelerationMod(BuzzSpeedFactor, duration);
             isBuzzing = true;
             //BuzzAttack(duration);
         }
@@ -103,37 +78,22 @@ public class BuzzSaw : MeleeAttack
             Debug.Log("Buzz Saw end FX");
         }
     }
-
-
-
-
-    private IEnumerator spin(float seconds)
-    { 
-        
-        NetworkAnimations netanim = GetComponentInChildren<NetworkAnimations>();
-        // Spino starts to curl up, isAttacking true, start Audio Effect
-        netanim.AnimSetMelee("Melee", true);
-        
-        // Goes into SawFX (turn on) called my mecanim automatically
-        // Wait "duration" seconds
-        yield return new WaitForSeconds(seconds);
-        // Spino starts to uncurl, stop Audio Effect
-        netanim.AnimSetMelee("Melee", false);
-        // Stop SawFX (turn off) called by mecanim automatically
-    }    
     
     private IEnumerator buzz(float time)
     {
-        RaycastHit[] target;
+        /* Using a Raycast out the front of the Dino to detect a collision seems to work
+         * well for forward melee attacks such as this as it prevents a weapon like the BuzzSaw 
+         * here from doing damage to dinos behind the attacker on trigger pull who may be in 
+         * range of the "capsule colliders", but are in fact behind the BuzzSaw attacker where 
+         * the attack should not affect them. Darren */
+
+        RaycastHit[] targets;
         bool hitOne = false;
         float seconds = time;
 
         DinoCollisions myCollision = GetComponent<DinoCollisions>();
-
         myCollision.enabled = false;
-
         NetworkAnimations netanim = GetComponentInChildren<NetworkAnimations>();
-
         netanim.AnimSetMelee("Melee", true);
 
         DinoCollisions damageColl = null;
@@ -141,19 +101,19 @@ public class BuzzSaw : MeleeAttack
         while (seconds > 0)
         {
             buzzForward = transform.TransformDirection(Vector3.forward);
-            target = Physics.SphereCastAll(this.transform.position, BuzzRadius, buzzForward, BuzzRange);
+            targets = Physics.SphereCastAll(this.transform.position, ColliderRadius, buzzForward, ColliderRange);
 
-            foreach (RaycastHit buzzRay in target)
+            foreach (RaycastHit rayHit in targets)
             {
-                if (buzzRay.transform.tag == "Dino" || buzzRay.transform.tag == "Ai")
+                if (rayHit.transform.tag == "Dino" || rayHit.transform.tag == "Ai")
                 {
-                    damageColl = buzzRay.transform.GetComponent<DinoCollisions>();
+                    damageColl = rayHit.transform.GetComponent<DinoCollisions>();
                     damageColl.enabled = false;
 
                     if (hitOne == false)
                     {
-                        Debug.Log(buzzRay.transform.name + "Took BuzzSaw damage");
-                        Health health = buzzRay.transform.GetComponent<Health>();
+                        Debug.Log(rayHit.transform.name + "Took BuzzSaw damage");
+                        Health health = rayHit.transform.GetComponent<Health>();
                         health.Damage(BuzzSawDamage);
                     }
                     hitOne = true;
@@ -165,13 +125,24 @@ public class BuzzSaw : MeleeAttack
             {
                 break;
             }
+            // COMMENTS: On instantaneous speed burst...
 
+            /* I tried the AccelationMod from motioncontrol here and in 
+             * one other place and it didn't seem to have any effect on speed */
+            // motControl.AccelerationMod(BuzzSpeedFactor, duration);
+            
+
+            /* I tried several different versions of the AddForce/AddRelativeForce etc with 
+             * or without a ForceMode. The ForceMode.VelocityChange did speed up the Spino
+             * but on collision with damagable walls this newly applied force had him bouncing
+             * around like he's in a pinball machine, or blasting other dinos in to outerspace. So 
+             * I'm finding the rigidbody.velocity = transform.TransformDirection(Vector3.forward) * speedfactor;
+             * method to be the best way to go for a temporary, instant speed burst. Darren */
+            //this.rigidbody.AddForce(buzzForward * BuzzSpeedFactor, ForceMode.VelocityChange);
             this.rigidbody.velocity = buzzForward * BuzzSpeedFactor;
             seconds -= 1 * Time.deltaTime;
             yield return null;
         }
-
-        yield return new WaitForSeconds(0.5f);
 
         if (damageColl != null)
         {
@@ -182,46 +153,4 @@ public class BuzzSaw : MeleeAttack
         hitOne = false;
         netanim.AnimSetMelee("Melee", false);
     }
-    /*
-    public void InstantSpeedMod(float speedFactor, float time)
-    {
-        motControl = GetComponent<MotionControl>();
-        float seconds = time;
-        inputMovementAxis = motControl.GetRun();
-        float MaxSpeed = (100f * BuzzSpeedFactorIncrease);
-        //float MaxSpeedBack = 10f;
-        while (seconds > 0)
-        {
-            motControl.enabled = !motControl.enabled;
-            // Calculate how fast we should be moving (maxSpeed * speedFactor)
-            var targetVelocity = new Vector3(0, 0, inputMovementAxis);
-            targetVelocity = transform.TransformDirection(targetVelocity);
-            targetVelocity *= (inputMovementAxis > 0) ? MaxSpeed : MaxSpeedBack;
-
-            // Apply a force that attempts to reach our target velocity
-            var velocity = rigidbody.velocity;
-            //var velocityChange = (targetVelocity - velocity);
-            //velocityChange.y = 0;
-            //velocity = (MaxSpeed * BuzzSpeedFactorIncrease);
-
-            rigidbody.AddForce(rigidbody.velocity, ForceMode.VelocityChange);
-
-            seconds -= 1 * Time.deltaTime;
-            
-            //yield return new WaitForSeconds(duration);
-            // Slow back to MaxSpeed
-            
-            //var targetVelocity = new Vector3(0, 0, inputMovementAxis);
-            targetVelocity = transform.TransformDirection(targetVelocity);
-            targetVelocity *= (inputMovementAxis > 0) ? MaxSpeed : MaxSpeedBack;
-
-            // Apply a force that attempts to reach our target velocity
-            velocity = rigidbody.velocity;
-            velocityChange = (targetVelocity - velocity);
-            velocityChange.y = 0;
-            // Velocity change will be a negative number here (slow down)
-            rigidbody.AddForce(velocityChange, ForceMode.VelocityChange);
-        }
-        motControl.enabled = true;
-    }*/
 }
