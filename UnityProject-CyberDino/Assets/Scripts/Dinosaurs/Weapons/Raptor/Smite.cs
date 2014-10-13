@@ -56,9 +56,10 @@ public class Smite : MeleeAttack {
 			}
 		}
 
-		Health health = target.GetComponent<Health>();
-		health.Damage(damage);
-
+		if (target != null) {
+			Health health = target.GetComponent<Health> ();
+			health.Damage (damage);
+		}
 
 		//Multiple Targets.
 /*		foreach (var obj in ListOfObjects) {

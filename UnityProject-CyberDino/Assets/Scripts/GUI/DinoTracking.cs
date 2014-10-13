@@ -311,6 +311,15 @@ public class DinoTracking : MonoBehaviour
                 currentNodes[_index] = startNode.GetComponent<NodeBehavior>();
                 nextNodes[_index] = currentNodes[_index].NextNodes[0].GetComponent<NodeBehavior>();
 
+				if(lapCount[_index] >= maxLap)
+				{
+					var d = dinos[_index];
+					var uc = d.GetComponent<UserControl>();
+					var ac = d.GetComponent<AIControl>();
+					uc.enabled = false;
+					ac.enabled = true;
+				}
+
                 //test to see how many player dinos have completed all of the laps
                 for (int i = 0; i < dinos.Length; i++)
                 {
@@ -328,7 +337,6 @@ public class DinoTracking : MonoBehaviour
                 if (lapTest > playerCount)
                 {
 					hudScript.ShowFinish();
-					
 					hudScript.EndRace();
                 }
 

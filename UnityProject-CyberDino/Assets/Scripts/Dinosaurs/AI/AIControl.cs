@@ -20,17 +20,34 @@ public class AIControl : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		if (networkView.isMine) {
+			mc = GetComponent<MotionControl> ();
+			inv = GetComponent<Inventory> ();
+			melee = GetComponent<MeleeAttack> ();
+			bomb = GetComponent<Bomb> ();
+			health = GetComponent<Health> ();
+
+			current = GameObject.Find (FirstNavNode).GetComponent<RespawnNode> ();
+			current = current.nextNodes [0];
+
+			Debug.Log ("AI Current Target: " + current.name);
+
+			StartCoroutine (AITick ());
+		}
+	}
+
+	void Enabled() {
+		if (networkView.isMine) {
 			mc = GetComponent<MotionControl>();
 			inv = GetComponent<Inventory>();
 			melee = GetComponent<MeleeAttack>();
 			bomb = GetComponent<Bomb>();
 			health = GetComponent<Health>();
-
+			
 			current = GameObject.Find(FirstNavNode).GetComponent<RespawnNode>();
 			current = current.nextNodes[0];
-
+			
 			Debug.Log("AI Current Target: " + current.name);
-
+			
 			StartCoroutine(AITick());
 		}
 	}
