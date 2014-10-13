@@ -1258,10 +1258,7 @@ public class MenuControl : MonoBehaviour
 		currentRect = resultsMenuBtnRect;
 		
 		currentSelection = ResultsSelection; 
-		
-		MotionControl mCon = raceDinos[playerNum].GetComponent<MotionControl>();
-		mCon.enabled = false;
-		
+				
 		
 		StartCoroutine(MoveLeftOff(5, 4, Menu.resultsMenu));
 	}

@@ -159,9 +159,11 @@ public class DinoRagdoll : MonoBehaviour {
 		move.enabled = true;
 		ragdollUpdate = empty;
 
-		for (int i = 0; i < ragdollBones.Length; i++) {
-			ragdollBones[i].transform.localPosition = startPosition[i];
-			ragdollBones[i].transform.localRotation = startOrientation[i];
+		if (startPosition != null) {
+			for (int i = 0; i < ragdollBones.Length; i++) {
+				ragdollBones [i].transform.localPosition = startPosition [i];
+				ragdollBones [i].transform.localRotation = startOrientation [i];
+			}
 		}
 	}
 
