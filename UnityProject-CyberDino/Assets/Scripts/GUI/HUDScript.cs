@@ -629,8 +629,8 @@ public class HUDScript : MonoBehaviour
 			else
 				isGrowing = true;
 			
-			tempRect.width = Mathf.Lerp(100, 150, trans);
-			tempRect.x = Mathf.Lerp(0, -30, trans);
+			tempRect.width = Mathf.Lerp(100, 110, trans);
+			tempRect.x = Mathf.Lerp(0, -5, trans);
 			healthDangerObj.guiTexture.pixelInset = ResizeRect(tempRect);
 			
 			yield return null;
@@ -650,10 +650,12 @@ public class HUDScript : MonoBehaviour
 
 	private void AttachHealth(int _index)
 	{
-		Vector3 screenPoint = Camera.main.WorldToScreenPoint(new Vector3(raceDinos[_index].transform.position.x, raceDinos[_index].transform.position.y + 20, raceDinos[_index].transform.position.z));
 		Vector3 normDir = Camera.main.transform.TransformDirection(Vector3.forward).normalized;
-		Vector3 namePos = raceDinos[_index].transform.TransformPoint(new Vector3(-7 * normDir.x, 0, -7 * normDir.z));
+		//Vector3 screenPoint = Camera.main.WorldToScreenPoint(new Vector3(raceDinos[_index].transform.position.x, raceDinos[_index].transform.position.y + 20, raceDinos[_index].transform.position.z));
+		Vector3 healthPos = raceDinos[_index].transform.localPosition + new Vector3(0 * normDir.z, 0, 0 * normDir.x);
+		Vector3 namePos = raceDinos[_index].transform.localPosition + new Vector3(10 * normDir.z, 0, -10 * normDir.x);
 
+		Vector3 screenPoint = Camera.main.WorldToScreenPoint(new Vector3(healthPos.x, healthPos.y + 20, healthPos.z));
 		Vector3 screenPoint2 = Camera.main.WorldToScreenPoint(new Vector3(namePos.x, namePos.y + 24.4f, namePos.z));
 		float yMulti = Screen.height / 100.0f;
 		
