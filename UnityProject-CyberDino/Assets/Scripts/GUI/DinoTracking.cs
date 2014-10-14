@@ -323,7 +323,7 @@ public class DinoTracking : MonoBehaviour
                 //test to see how many player dinos have completed all of the laps
                 for (int i = 0; i < dinos.Length; i++)
                 {
-                    if (lapCount[i] >= maxLap)
+                    if (lapCount[i] >= maxLap && dinos[i].tag == "Dino")
                     {
                         lapTest++;
                     }
@@ -340,7 +340,7 @@ public class DinoTracking : MonoBehaviour
 					hudScript.EndRace();
                 }
 
-                if (lapCount[playerNum] >= maxLap)
+                if (lapCount[playerNum] > maxLap)
                 {
 					hudScript.ShowFinish();
                 }

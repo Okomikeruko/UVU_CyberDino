@@ -172,6 +172,7 @@ public class MenuControl : MonoBehaviour
 	private Rect[] currentRect;
 	
 	private bool isBlinking;
+	private char charToReplace; 
 
 	
 	// Use this for initialization
@@ -255,8 +256,8 @@ public class MenuControl : MonoBehaviour
 		
 		keyBoardInputRect = new Rect[4,10];*/
 
-		inputPlayerName = new char[1];
-		inputServerName = new char[1];
+		inputPlayerName = new char[0];
+		inputServerName = new char[0];
 		
 		glowDashes = new GameObject[12];
 		
@@ -284,8 +285,7 @@ public class MenuControl : MonoBehaviour
 	
 	void OnLevelWasLoaded(int _level)
 	{
-	//Debug.Log("haaaaaaaaaaaaayo");
-		//if(menuSelect != Menu.goToLevel)
+
 		if(_level == 1)
 		{
 			Debug.Log("menu scene was loaded");
@@ -325,7 +325,7 @@ public class MenuControl : MonoBehaviour
 		}
 		else if(_level == 2)
 		{
-			Debug.Log("track scene was loaded");
+			//Debug.Log("track scene was loaded");
 		//the names of the players in the order that they past the finished line
 		resultsMenuRect = new Rect[16];
 		
@@ -363,57 +363,37 @@ public class MenuControl : MonoBehaviour
 	
 	void Update()
 	{
+		xMulti = Screen.width / 100.0f;
+		yMulti = Screen.height / 100.0f;
+
 		if(menuSelect != Menu.goToLevel && !menuMoving)
 		{ 
 			
 			//Debug.Log(Input.GetButtonDown("Jump"));
 			//Debug.Log(menuMoving);
 			
-			/*if(isHoldingBtn == false && 
-			   (Input.GetAxis("Horizontal") > deadZone || Input.GetAxis("Horizontal") < -deadZone || 
-			 Input.GetAxis("Vertical") > deadZone || Input.GetAxis("Vertical") < -deadZone || 
-			 Input.GetButton("Jump") || Input.GetButton("Melee") || Input.GetButton("Bomb")))
-			{
-				Debug.Log("button is pressed");
-				isHoldingBtn = true;
-				//currentSelection();
-				
-				StartCoroutine(PushButton());
-			}
-			else if(isHoldingBtn == true && Input.GetAxis("Horizontal") <= deadZone && Input.GetAxis("Horizontal") >= -deadZone && 
-			        Input.GetAxis("Vertical") <= deadZone && Input.GetAxis("Vertical") >= -deadZone &&
-			        !Input.GetButton("Jump") && !Input.GetButton("Melee") && !Input.GetButton("Bomb"))
-			{
-				Debug.Log("button is released");
-				isHoldingBtn = false;
-			}*/
-			
 			if(isHoldingBtn == false && 
 			   (Input.GetAxis("Horizontal") >= deadZone || Input.GetAxis("Horizontal") <= -deadZone || 
 			 Input.GetAxis("Vertical") >= deadZone || Input.GetAxis("Vertical") <= -deadZone))
 			{
-				Debug.Log("button is pressed");
-				//isHoldingBtn = true;
-				//currentSelection();
-				//StopCoroutine("PushButton");
+				//Debug.Log("button is pressed");
 				StartCoroutine("PushButton");
 			}
 			else if(isHoldingBtn == true && Input.GetAxis("Horizontal") < deadZone && Input.GetAxis("Horizontal") > -deadZone && 
 			        Input.GetAxis("Vertical") < deadZone && Input.GetAxis("Vertical") > -deadZone)
 			{
-				Debug.Log("button is released");
+				//Debug.Log("button is released");
 				StopCoroutine("PushButton");
 				isHoldingBtn = false;
 			}
 			
 			if(Input.GetButtonDown("Jump") || Input.GetButtonDown("Melee") || Input.GetButtonDown("Bomb") )
 			{
-				Debug.Log("single key pressed");
+				//Debug.Log("single key pressed");
 				//isHoldingBtn = true;
 				currentSelection();
 			}
-			
-			//GUI.DrawTexture(new Rect(menuOrigin[(int)menuSelect].x + currentRect[buttonIndex].x - (2 * xMulti) , menuOrigin[(int)menuSelect].y + currentRect[buttonIndex].y - (5 * yMulti), currentRect[buttonIndex].width + (5 * xMulti), currentRect[buttonIndex].height + (10 * yMulti)), selectorGfx); 
+
 		}
 		
 	}
@@ -423,26 +403,6 @@ public class MenuControl : MonoBehaviour
 		//set this skin as the active one
 		GUI.skin = mySkin;
 
-		
-		xMulti = Screen.width / 100.0f;
-		yMulti = Screen.height / 100.0f;
-
-			//call the selection control delegate.
-			
-		
-		/*if(mainMenuBkgd != null && menuBkgd != null)
-		{
-			if(menuSelect == Menu.mainMenu)
-			{
-				mainMenuBkgd.SetActive(true);
-				menuBkgd.SetActive(false);
-			}
-			else if(menuSelect != Menu.mainMenu && menuSelect != Menu.goToLevel && menuSelect != Menu.resultsMenu)
-			{
-				mainMenuBkgd.SetActive(false);
-				menuBkgd.SetActive(true);
-			}
-		}*/
 		
 		if(menuSelect != Menu.goToLevel && !menuMoving)
 		{ 
@@ -565,9 +525,6 @@ public class MenuControl : MonoBehaviour
 			
 			menuBkgdPos  = ResizeRect(new Rect(50, 50, 100, 100));
 			
-			//startDinoPos = ResizeRect(new Rect(72, 40, 0, 0));
-			//dinoSize = ResizeRect(new Rect(50, 55, 0, 0));
-			
 			if(menuBkgd != null)
 			{
 				Vector3 pointInWorld = Camera.main.ScreenToWorldPoint(new Vector3(Screen.width, Screen.height, Camera.main.transform.position.z + 100));
@@ -676,7 +633,7 @@ public class MenuControl : MonoBehaviour
 			//Back Button
 			if(GUI.Button(new Rect(menuOrigin[2].x + lobbyMenuBtnRect[0].x, menuOrigin[2].y + lobbyMenuBtnRect[0].y, lobbyMenuBtnRect[0].width, lobbyMenuBtnRect[0].height), "")) 
 			{
-				ReturnFromLobby();
+				StartCoroutine(ReturnFromLobby());
 			}
 			
 			//start level button
@@ -929,14 +886,10 @@ public class MenuControl : MonoBehaviour
 	
 	private IEnumerator PushButton()
 	{
-		//isHoldingBtn = true;
-		
-		Debug.Log("start holding button");
+		//Debug.Log("start holding button");
 		
 		currentSelection();
-		
-		//yield return new WaitForSeconds(0.5f);
-		
+
 		if(isHoldingBtn == false && !Input.GetButton("Jump") && !Input.GetButton("Melee") && !Input.GetButton("Bomb"))
 		{
 			isHoldingBtn = true;
@@ -944,7 +897,7 @@ public class MenuControl : MonoBehaviour
 		
 			while(isHoldingBtn == true)
 			{
-				Debug.Log("is holding button");
+				//Debug.Log("is holding button");
 				if(isHoldingBtn == false)
 					break;
 					
@@ -959,10 +912,6 @@ public class MenuControl : MonoBehaviour
 	
 	Rect ResizeRect(Rect _pos)
 	{
-		//variables used to move the buttons
-		/*float xMulti = Screen.width / 100.0f;
-		float yMulti = Screen.height / 100.0f;*/
-		
 		//set the rect position and size
 		return new Rect(_pos.x * xMulti, _pos.y * yMulti, _pos.width * xMulti, _pos.height * yMulti);
 		
@@ -1210,7 +1159,6 @@ public class MenuControl : MonoBehaviour
 		if(Network.isServer)
 		{
 		//Debug.Log("setting the results");
-			//playerNames = new string[4];
 
 			GameObject[] tempDinos = dinoTrackingScript.GetDinoArray();
 			tempDinos.CopyTo(raceDinos, 0);
@@ -1229,29 +1177,13 @@ public class MenuControl : MonoBehaviour
 			}
 		}
 		
-		/*int index = 0;
-		
-		int playerNum = 0;
-		
-		int.TryParse(Network.player.ToString(), out playerNum);
-		
-		while(index < 4)
-		{
-		
-			resultsFName[racePositions[index] - 1] = "GUI/Materials/Banner" + GetNameFromClone(raceDinos[index].ToString()) + "Small";
-			
-			index++;
-			
-			yield return null;
-		}*/
-		
 		yield return null;
 		
 	}
 	
 	public void ShowResults()
 	{
-		Debug.Log("showing results");
+		//Debug.Log("showing results");
 		
 		buttonIndex = 2;
 		
@@ -1273,8 +1205,7 @@ public class MenuControl : MonoBehaviour
 	[RPC]
 	private void SetResultsInfo(string _name, string _dinoName, int _playerNum)
 	{
-		Debug.Log("setting the results");
-		//playerNames[_playerNum - 1] = _name;
+		//Debug.Log("setting the results");
 		resultsFName[_playerNum - 1] = "GUI/Materials/Banner" + GetNameFromClone(_dinoName) + "Small";
 
 	}
@@ -1317,55 +1248,6 @@ public class MenuControl : MonoBehaviour
 		playerNames[_index] = _name;
 	}
 	
-	
-	/*private IEnumerator ShowKeyboard(string _input)
-	{
-		Debug.Log("start coroutine");
-		int index = 0;
-		while(true)
-		{
-			//Debug.Log(ResizeRect( new Rect(50 * index, 50, 10, 10)));
-			//GUI.Label(ResizeRect( new Rect(10 * index, 50, 10, 10)), keyBoardInput[0, index]);
-			GUI.Label(ResizeRect( new Rect(50, 50, 50, 50)), keyBoardInput[0, index]);
-			if(index < keyBoardInput.GetLength(1) - 1)
-			{
-				index++;
-			}
-			else
-			{
-				index = 0;
-			}
-			yield return null;
-		}
-	}*/
-	
-	/*private void ShowKeyboard(string _input)
-	{
-		keyBoardInputRect[0,0] = ResizeRect(new Rect(6, 50, 5, 10));
-		keyBoardInputRect[0,1] = ResizeRect(new Rect(11, 50, 5, 10));
-		keyBoardInputRect[0,2] = ResizeRect(new Rect(16, 50, 5, 10));
-		keyBoardInputRect[0,3] = ResizeRect(new Rect(21, 50, 5, 10));
-		keyBoardInputRect[0,4] = ResizeRect(new Rect(26, 50, 5, 10));
-		keyBoardInputRect[0,5] = ResizeRect(new Rect(31, 50, 5, 10));
-		keyBoardInputRect[0,6] = ResizeRect(new Rect(36, 50, 5, 10));
-		keyBoardInputRect[0,7] = ResizeRect(new Rect(41, 50, 5, 10));
-		keyBoardInputRect[0,8] = ResizeRect(new Rect(46, 50, 5, 10));
-		keyBoardInputRect[0,9] = ResizeRect(new Rect(51, 50, 5, 10));
-		
-		
-		
-		GUI.Label(ResizeRect( new Rect(6, 50, 5, 10)), keyBoardInput[0, 0]);
-		GUI.Label(ResizeRect( new Rect(11, 50, 5, 10)), keyBoardInput[0, 1]);
-		GUI.Label(ResizeRect( new Rect(16, 50, 5, 10)), keyBoardInput[0, 2]);
-		GUI.Label(ResizeRect( new Rect(21, 50, 5, 10)), keyBoardInput[0, 3]);
-		GUI.Label(ResizeRect( new Rect(26, 50, 5, 10)), keyBoardInput[0, 4]);
-		GUI.Label(ResizeRect( new Rect(31, 50, 5, 10)), keyBoardInput[0, 5]);
-		GUI.Label(ResizeRect( new Rect(36, 50, 5, 10)), keyBoardInput[0, 6]);
-		GUI.Label(ResizeRect( new Rect(41, 50, 5, 10)), keyBoardInput[0, 7]);
-		GUI.Label(ResizeRect( new Rect(46, 50, 5, 10)), keyBoardInput[0, 8]);
-		GUI.Label(ResizeRect( new Rect(51, 50, 5, 10)), keyBoardInput[0, 9]);
-	}*/
-	
 	//***********menu selection**************//
 	private void MainMenuSelection()
 	{
@@ -1373,39 +1255,23 @@ public class MenuControl : MonoBehaviour
 
 		//if pressing up and the index is not 0
 		if(Input.GetAxis("Vertical") > 0 && buttonIndex > 0) 
-		{
-			//decrement buttonSelect
 			buttonIndex--;
-			//Debug.Log("buttonIndex" + buttonIndex);
-			//assign the rect to the selector
-		}
 		//if pressing down and the index isn't the last one
 		else if(Input.GetAxis("Vertical") < 0 && buttonIndex < currentRect.Length - 1) 
-		{
-			//increment buttonSelect
 			buttonIndex++;
-			//Debug.Log("buttonIndex" + buttonIndex);
-			//assign the rect to the selector
-		}
 		//if pressing a button
 		else if(Input.GetButton("Jump"))
 		{
 			if(buttonIndex == 0)
-			{
-			Debug.Log("now go to the lobby!");
 				MainToLobby();
-			}
-				//go to the lobby
 			else if(buttonIndex == 1)
-			{
 				MainToMulti();
-			}
 		}
 	}
 
 	private void MainToLobby()
 	{
-		Debug.Log("go to lobby!");
+		//Debug.Log("go to lobby!");
 		singlePlayer = true;
 		
 		//inLobby = true;
@@ -1426,7 +1292,7 @@ public class MenuControl : MonoBehaviour
 
 	private void MainToMulti()
 	{
-		Debug.Log("go to multiplayer!");
+		//Debug.Log("go to multiplayer!");
 		singlePlayer = false;
 		
 		StartCoroutine(MoveLeftOff(0, 1, Menu.multiPMenu));
@@ -1445,87 +1311,55 @@ public class MenuControl : MonoBehaviour
 	{
 		//if pressing up and the index is not 0
 		if(Input.GetAxis("Vertical") > 0 && buttonIndex == 0)
-		{
-			//decrement buttonSelect
 			buttonIndex = 1;
-		}
 		else if(Input.GetAxis("Horizontal") > 0 && buttonIndex == 0)
-		{
 			//decrement buttonSelect
 			buttonIndex = currentRect.Length - 1;
-		}
 		else if(Input.GetAxis("Vertical") < 0 && buttonIndex <= 2)
-		{
 			//decrement buttonSelect
 			buttonIndex = 0;
-		}
 		else if(Input.GetAxis("Horizontal") > 0 && buttonIndex >= 1 && buttonIndex <= 4)
-		{
 			//decrement buttonSelect
 			buttonIndex++;
-		}
 		else if(Input.GetAxis("Horizontal") < 0 && buttonIndex >= 1 && buttonIndex <= 4)
-		{
 			//decrement buttonSelect
 			buttonIndex--;
-		}
 		else if(Input.GetAxis("Vertical") < 0 && buttonIndex >= 3)
-		{
 			//decrement buttonSelect
 			buttonIndex = currentRect.Length - 1;
-		}
 		else if(Input.GetAxis("Vertical") > 0 && buttonIndex == currentRect.Length - 1)
-		{
 			//decrement buttonSelect
 			buttonIndex = 4;
-		}
 		else if(Input.GetAxis("Horizontal") < 0 && buttonIndex == currentRect.Length - 1)
-		{
 			//decrement buttonSelect
 			buttonIndex = 0;
-		}
 		else if(Input.GetButton("Jump"))
 		{
 			if(buttonIndex == 0)
-			{
-				ReturnFromLobby();
-			}
+				StartCoroutine(ReturnFromLobby());
 			else if(Network.isServer && buttonIndex == 1)
-			{
 				LevelSelectionDecrement();
-			}
 			else if(Network.isServer && buttonIndex == 2)
-			{
 				LevelSelectionIncrement();
-			}
 			else if(buttonIndex == 3)
-			{
 				DinoSelectionDecrement();
-			}
 			else if(buttonIndex == 4)
-			{
 				DinoSelectionIncrement();
-			}
 			else if(Network.isServer && readyAll == true && buttonIndex == 5)
-			{
 				LobbyToMain();
-			}
 			else if(Network.isClient && readyMe == false && buttonIndex == 5)
-			{
 				ClientReady("LobbyReady", true);
-			}
 			else if(Network.isClient && readyMe == true && buttonIndex == 5)
-			{
 				ClientReady("NotReady", false);
-			}
-
 		}
 
 	} 
 
-	private void ReturnFromLobby()
+	private IEnumerator ReturnFromLobby()
 	{
 		networkHandler.LeaveGame();
+
+		yield return new WaitForSeconds(.1f); 
 		
 		dinoIndex = 0;
 	
@@ -1548,18 +1382,16 @@ public class MenuControl : MonoBehaviour
 			
 			currentSelection = MultiPlayerSelection; 
 		}
+
+		yield return null; 
 	}
 
 	void LevelSelectionDecrement()
 	{
 		if(levelIndex <= 0)
-		{
 			levelIndex = lvlSelectTxtr.Length - 1;
-		}
 		else
-		{
 			levelIndex--;
-		}
 		
 		var gameMap = networkHandler.gameMap;
 		if(levelIndex == 0){
@@ -1583,13 +1415,9 @@ public class MenuControl : MonoBehaviour
 	void LevelSelectionIncrement()
 	{
 		if(levelIndex >= lvlSelectTxtr.Length - 1)
-		{
 			levelIndex = 0;
-		}
 		else
-		{
 			levelIndex++;
-		}
 		
 		var gameMap = networkHandler.gameMap;
 		if(levelIndex == 0){
@@ -1613,18 +1441,12 @@ public class MenuControl : MonoBehaviour
 	void DinoSelectionDecrement()
 	{
 		if(dinoIndex <= 0)
-		{
 			dinoIndex = dinoModels.Length - 1;
-		}
 		else
-		{
 			dinoIndex--;
-		}
 		
 		if(dinoSelected != null)
-		{
 			Destroy(dinoSelected);
-		}
 		
 		//Debug.Log("the dino index " + dinoIndex);
 		string bannerName = "GUI/Materials/Banner" + dinos[dinoIndex] + "Large";
@@ -1651,18 +1473,12 @@ public class MenuControl : MonoBehaviour
 	{
 		
 		if(dinoIndex >= dinoModels.Length - 1)
-		{
 			dinoIndex = 0;
-		}
 		else
-		{
 			dinoIndex++;
-		}
 		
 		if(dinoSelected != null)
-		{
 			Destroy(dinoSelected);
-		}
 		
 		//Debug.Log("the dino index " + dinoIndex);
 		//Debug.Log("the dino name " + dinos[dinoIndex]);
@@ -1712,72 +1528,64 @@ public class MenuControl : MonoBehaviour
 		
 		//if pressing up and the index is not 0
 		if(Input.GetAxis("Vertical") < 0 && buttonIndex == 0) 
-		{
 			buttonIndex = 1;
-		}
 		else if(Input.GetAxis("Horizontal") > 0 && buttonIndex == 0) 
-		{
 			buttonIndex = 2;
-		}
 		else if(Input.GetAxis("Vertical") > 0 && buttonIndex == 1) 
-		{
 			buttonIndex = 0;
-		}
 		else if(Input.GetAxis("Vertical") < 0 && buttonIndex == 1) 
-		{
 			buttonIndex = 4;
-		}
 		else if(Input.GetAxis("Horizontal") > 0 && buttonIndex == 1) 
-		{
 			buttonIndex = 3;
-		}
 		else if(Input.GetAxis("Vertical") < 0 && buttonIndex == 2) 
-		{
 			buttonIndex = 3;
-		}
 		else if(Input.GetAxis("Horizontal") < 0 && buttonIndex == 2) 
-		{
 			buttonIndex = 0;
-		}
 		else if(Input.GetAxis("Vertical") > 0 && buttonIndex == 3) 
-		{
 			buttonIndex = 2;
-		}
 		else if(Input.GetAxis("Vertical") < 0 && buttonIndex == 3) 
-		{
 			buttonIndex = 4;
-		}
 		else if(Input.GetAxis("Horizontal") < 0 && buttonIndex == 3) 
-		{
 			buttonIndex = 1;
-		}
 		else if(Input.GetAxis("Vertical") > 0 && buttonIndex == 4) 
-		{
 			buttonIndex = 1;
-		}
 		//if pressing a button
 		else if(Input.GetButton("Jump"))
 		{
 			if(buttonIndex == 0)
 			{
 				currentSelection = InputName;
-				isBlinking = true;
-				//StartCoroutine(StartBlink(ref serverName, ref sNameIndex));
+
+				if(inputServerName.Length == 0)
+				{
+					inputServerName = new char[1];
+					
+					inputServerName[0] = 'a';
+
+					charToReplace = 'a';
+				}
+
+				StartCoroutine(StartServerBlinking()); 
 			}
-			if(buttonIndex == 1)
+			else if(buttonIndex == 1)
 			{
 				currentSelection = InputName;
-				isBlinking = true;
-				//StartCoroutine(StartBlink(ref playerName, ref pNameIndex));
+
+				if(inputPlayerName.Length == 0)
+				{
+					inputPlayerName = new char[1];
+					
+					inputPlayerName[0] = 'a';
+					
+					charToReplace = 'a';
+				}
+
+				StartCoroutine(StartPlayerBlinking()); 
 			}
-			if(buttonIndex == 2)
-			{
+			else if(buttonIndex == 2)
 				HostToLobby();
-			}
 			else if(buttonIndex == 3)
-			{
 				ClientToLobby();
-			}
 			else if(buttonIndex == 4)
 			{
 				buttonIndex = 1;
@@ -1837,48 +1645,53 @@ public class MenuControl : MonoBehaviour
 	private void InputName()
 	{
 		if(buttonIndex == 0)
-		{
 			InputNameHelper(ref inputServerName, ref serverNameHolder, ref sNameIndex);
-		}
 		else if(buttonIndex == 1)
-		{
 			InputNameHelper(ref inputPlayerName, ref playerNameHolder, ref pNameIndex);
-		}
-
 	}
 
 	private void InputNameHelper(ref char[] _charArr, ref string _name, ref int _index)
 	{
-		if(_name == "")
+		/*if(_name == "")
 		{
 			_charArr = new char[1];
 			
 			_charArr[0] = 'a';
-		}
+		}*/
 		
 		if(Input.GetAxis("Horizontal") < 0 && _index > 0 && _charArr.Length > 0) 
 		{
+			//UpdateString(_charArr, ref _name, ref _index,  charToReplace); 
+			_charArr[_index] = charToReplace; 
 			_index--;
-			Debug.Log("go left ");
+			charToReplace = _charArr[_index]; 
+			_charArr[_index] = '_';
 		}
 		else if(Input.GetAxis("Horizontal") > 0 && _index < _charArr.Length - 1) 
 		{
+			//UpdateString(_charArr, ref _name, ref _index,  charToReplace); 
+			_charArr[_index] = charToReplace; 
 			_index++;
-			Debug.Log("go right ");
+			charToReplace = _charArr[_index]; 
+			_charArr[_index] = '_';
 		}
 		else if(Input.GetAxis("Vertical") > 0 && _charArr.Length > 0) 
 		{
-			Debug.Log("char up");
-			_charArr[_index]++;
+			charToReplace++; 
+			_charArr[_index] = charToReplace; 
 			
 		}
 		else if(Input.GetAxis("Vertical") < 0 && _charArr.Length > 0) 
 		{
-			Debug.Log("char down");
-			_charArr[_index]--;
+			charToReplace--; 
+			_charArr[_index] = charToReplace; 
 		}
 		else if(Input.GetButton("Jump") && _index >= _name.Length - 1)
 		{
+			_charArr[_index] = charToReplace; 
+
+			UpdateString(_charArr, ref _name, ref _index,  charToReplace); 
+
 			char[] temp = new char[_charArr.Length + 1];
 
 			_charArr.CopyTo(temp, 0);
@@ -1889,13 +1702,12 @@ public class MenuControl : MonoBehaviour
 			_index = _charArr.Length - 1;
 			_charArr[_index] = 'a';
 			
-			for(int i = 0; i < _charArr.Length - 1; i++)
-				Debug.Log(_charArr[i]);
+			charToReplace = _charArr[_index]; 
 			
 		}
 		else if(Input.GetButton("Melee"))
 		{
-		Debug.Log("switch it");
+			//UpdateString(_charArr, ref _name, ref _index,  charToReplace); 
 			currentSelection = MultiPlayerSelection; 
 			isBlinking = false;
 		}
@@ -1911,59 +1723,77 @@ public class MenuControl : MonoBehaviour
 			if(_index > 0)
 			{
 				_index--;
+				charToReplace = _charArr[_index]; 
+
+			}
+			else
+			{
+				_name = "";
+				currentSelection = MultiPlayerSelection; 
+				isBlinking = false;
 			}
 		}
-		
-		_name = "";
-		
-		for(int i = 0; i < _charArr.Length; i++)
-		{
-			//Debug.Log("the letter to add " + _charArr[i].ToString());
-			_name = _name +  _charArr[i].ToString();
-			//Debug.Log("the resulting temp name " + _name);
-		}
-		
-		//_name = tempName;
-		//Debug.Log("the resulting name " + _name);
+
+		//Debug.Log("array length " + _charArr.Length);
+		if(_charArr.Length > 0)
+			UpdateString(_charArr, ref _name, ref _index,  charToReplace); 
 	}
 	
-	/*private IEnumerator StartBlink(System.Action<string> updateName, System.Action<int> updateIndex)
+	private IEnumerator StartServerBlinking()
 	{
-		char[] name = null;
-		int index = 0;
+		isBlinking = true;
 		
+		charToReplace = inputServerName[sNameIndex];
 		
-		char charToReplace = _name[_index];
-		int currentIndex = _index;
+		while(true)
+		{
+			//Debug.Log(charToReplace);
+			if(isBlinking == false)
+				break;
+			
+			StartBlinkingHelper(inputServerName, ref serverNameHolder, ref sNameIndex);
+			
+			yield return new WaitForSeconds(1);
+		}
+		
+	}
+	
+	private IEnumerator StartPlayerBlinking()
+	{
+		isBlinking = true;
+		
+		charToReplace = inputPlayerName[pNameIndex];
 		
 		while(true)
 		{
 			if(isBlinking == false)
 				break;
-				
-			if(currentIndex != _index)
-			{
-				charToReplace = _name[_index];
-				currentIndex = _index;
-			}
 			
-			if(_name[_index] == charToReplace)
-			{
-				_name.Remove(_index, 1);
-				_name.Insert(_index, "_");
-			}
-			else if(_name[_index] == '_')
-			{
-				_name.Remove(_index, 1);
-				_name.Insert(_index, charToReplace.ToString());
-			}
+			StartBlinkingHelper(inputPlayerName, ref playerNameHolder, ref pNameIndex);
 			
-			yield return new WaitForSeconds(0.5f);
+			yield return new WaitForSeconds(1);
 		}
 		
-		_name.Remove(_index, 1);
-		_name.Insert(_index, charToReplace.ToString());
-	}*/
+	}
+	
+	private void StartBlinkingHelper(char[] _nameInput, ref string _name, ref int currentIndex)
+	{
+		
+		if(_nameInput[currentIndex] == charToReplace)
+			UpdateString(_nameInput, ref _name, ref currentIndex, '_');
+		else if(_nameInput[currentIndex] == '_')
+			UpdateString(_nameInput, ref _name, ref currentIndex,  charToReplace);
+	}
+	
+	private void UpdateString(char[] _nameInput, ref string _name, ref int _index,  char _char)
+	{
+		_nameInput[_index] = _char;
+		
+		_name = "";
+		
+		for(int i = 0; i < _nameInput.Length; i++)
+			_name = _name +  _nameInput[i].ToString();
+	}
 	
 	//*************End of Multiplayer Selection
 	
@@ -2028,7 +1858,9 @@ public class MenuControl : MonoBehaviour
 	private void LeaveGame()
 	{
 		Debug.Log("change to lobby");
-		
+
+		Application.LoadLevel("Menu");
+
 		var myInfo = networkHandler.GetMyInfo();
 		myInfo.readyState = "LobbyReady";
 		networkHandler.UpdatePlayerInformation(myInfo);
@@ -2039,7 +1871,7 @@ public class MenuControl : MonoBehaviour
 		
 		currentSelection = LobbySelection; 
 		
-		Application.LoadLevel("Menu");
+		//Application.LoadLevel("Menu");
 		menuSelect = Menu.lobbyMenu;
 		//networkHandler.ChangeMenuSelect();
 		//networkHandler.ChangeLevel();
