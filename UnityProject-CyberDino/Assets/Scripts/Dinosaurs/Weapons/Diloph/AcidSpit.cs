@@ -11,6 +11,8 @@ public class AcidSpit : Bomb {
     private float snareMagnitude = 50;
     [SerializeField]
     private float snareDuration = 2;
+	public Rigidbody spit;
+	
 
 	public override void Fire ()
 	{
@@ -32,28 +34,30 @@ public class AcidSpit : Bomb {
 	}
 
     /// <summary>
-    /// Finds the proper target. The AcidSpit should hit whatever dino is in the position immediately before this dino.
-    /// For example, if the dino is in 2nd place, it should hit whichever dino is in first place.
+    /// Finds the proper target. The AcidSpit should hit whatever dino is closest
     /// </summary>
     /// <returns>The Game Object corresponding to the proper dino target, or NULL if this dino is in first place</returns>
     private GameObject getTarget()
     {
-        const int first = 0;
-        DinoTracking tracker = GetComponent<DinoTracking>();
-        int currentDino = tracker.playerNum;
-        var position = tracker.GetCurrentPositions();
-        var dinoObjects = tracker.GetDinoArray();
-
-        int currentDinoIndex = first;
-        for(int i = 0; i < position.Length; ++i){
-            if(currentDino == position[i]){
-                currentDinoIndex = i;
-            }
-        }
-
-        return (currentDinoIndex == first) ? null : dinoObjects[currentDinoIndex - 1];
-        // below line can be used instead for testing (allows the spit to hit self)
-        // return (currentDinoIndex == first) ? dinoObjects[currentDinoIndex] : dinoObjects[currentDinoIndex - 1];
+		GameObject[] gos;
+		gos = GameObject.FindGameObjectsWithTag("Ai");
+		//need to know tags of other players
+		GameObject closest = new GameObject();
+		float distance = Mathf.Infinity;
+		Vector3 position = transform.position;
+		foreach (GameObject go in gos) {
+			Vector3 diff = go.transform.position - position;
+			float curDistance = diff.sqrMagnitude;
+			if (curDistance < distance) {
+				closest = go;
+				distance = curDistance;
+			}
+		}
+		Transform spitPosition = transform;
+		//spitPosition.position += new Vector3(10,10,10);
+		Rigidbody spitClone = (Rigidbody) Instantiate(spit, spitPosition.position,transform.rotation);
+		spitClone.GetComponent<AcidSpitObject>().setTarget(closest.transform);
+		return closest;
     }
 
     /// <summary>
