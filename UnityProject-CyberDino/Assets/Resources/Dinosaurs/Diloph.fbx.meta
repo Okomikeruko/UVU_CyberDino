@@ -243,15 +243,15 @@ ModelImporter:
       curves: []
       events:
       - time: .201456547
-        functionName: step
-        data: right
+        functionName: OnStep
+        data: Right
         objectReferenceParameter: {instanceID: 0}
         floatParameter: 0
         intParameter: 0
         messageOptions: 0
       - time: .684465885
-        functionName: step
-        data: left
+        functionName: OnStep
+        data: Left
         objectReferenceParameter: {instanceID: 0}
         floatParameter: 0
         intParameter: 0
@@ -581,7 +581,7 @@ ModelImporter:
       curves: []
       events:
       - time: .747312248
-        functionName: spit
+        functionName: OnSpit
         data: 
         objectReferenceParameter: {instanceID: 0}
         floatParameter: 0

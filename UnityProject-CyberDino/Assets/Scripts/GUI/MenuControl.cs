@@ -311,7 +311,6 @@ public class MenuControl : MonoBehaviour
 				startDinoPos = ResizeRect(new Rect(72, 40, 0, 0));
 				dinoSelected = (GameObject)Instantiate(dinoModels[dinoIndex], new Vector3(Screen.width, Screen.height, 0), Quaternion.identity);
 				Vector3 pointInWorld = Camera.main.ScreenToWorldPoint(new Vector3(Screen.width, Screen.height, Camera.main.transform.position.z + 50));
-				dinoSelected.transform.localScale = new Vector3(pointInWorld.x / 26, pointInWorld.y / 12, pointInWorld.x / 26);
 			}
 			
 			if(dinoBoxLg == null)
@@ -534,8 +533,6 @@ public class MenuControl : MonoBehaviour
 			
 			if(dinoSelected != null)
 			{
-				//dinoSelected = (GameObject)Instantiate(dinoModels[dinoIndex], new Vector3(Screen.width, Screen.height, 0), Quaternion.identity);
-				dinoSelected.transform.localScale = new Vector3(10, 10, 10);
 				dinoSelected.transform.position = Camera.main.ScreenToWorldPoint(new Vector3(menuOrigin[2].x + startDinoPos.x, menuOrigin[2].y + startDinoPos.y, 130));
 				dinoSelected.transform.RotateAround(new Vector3(0, 1, 0), Vector3.up, rotateSpeed * Time.deltaTime);
 				startDinoPos = ResizeRect(new Rect(72, 40, 0, 0));

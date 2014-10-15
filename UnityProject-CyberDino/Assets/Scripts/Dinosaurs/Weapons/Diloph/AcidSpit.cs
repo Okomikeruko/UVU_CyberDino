@@ -13,9 +13,9 @@ public class AcidSpit : Bomb {
     private float snareDuration = 2;
 	[SerializeField]
 	private float projectileSpeed = 10;
-	[SerializeField]
-	private ParticleSystem WeaponVFX;
-	
+
+	private GameObject spitVFX;
+
 	private float journey;
 	private float startTime;
 	private GameObject target;
@@ -25,6 +25,8 @@ public class AcidSpit : Bomb {
 	void OnEnable()
 	{
 		SpitUpdate = empty;
+
+		var spitVFX = transform.FindChild("Diloph_AcidSpit_VFX").gameObject;
 	}
 
 	void Update()
@@ -36,26 +38,22 @@ public class AcidSpit : Bomb {
 
 	public override void Fire ()
 	{
-		/* Animation trigger added by Lee*/
-		NetworkAnimations netanim = GetComponentInChildren<NetworkAnimations>();
-		netanim.AnimTriggerBomb ();
-		
-        target = getTarget();
-	/*  if (target != null)
-        {
-            StartCoroutine(acidSpitDotAndSnare(target));
-        }
-	*/
+		if (!spitVFX.activeSelf) {
+			NetworkAnimations netanim = GetComponentInChildren<NetworkAnimations> ();
+			netanim.AnimTriggerBomb ();
+		}
 	}
 
-	public void SpitFX()
-	{
-		// FX triggered on spit frame. 
-		WeaponVFX.Play ();
+	public void OnSpit()
+	{		
+		target = getTarget();
+
+		// FX triggered on spit frame.
+		spitVFX.SetActive (true);
+
 		startTime = Time.time;
-		journey = Vector3.Distance (WeaponVFX.transform.position, target.transform.position);
+		journey = Vector3.Distance (spitVFX.transform.position, target.transform.position);
 		SpitUpdate = follow;
-		Debug.Log("Acid Spit!");
 	}
 
 	private void follow()
@@ -64,7 +62,7 @@ public class AcidSpit : Bomb {
 		{
 			float distCovered = (Time.time - startTime) * projectileSpeed;
 			float fracJourney = distCovered / journey;
-			WeaponVFX.transform.position = Vector3.Lerp (WeaponVFX.transform.position, target.transform.position, fracJourney); 
+			spitVFX.transform.position = Vector3.Lerp (spitVFX.transform.position, target.transform.position, fracJourney); 
 		}
 		else
 		{
@@ -80,7 +78,7 @@ public class AcidSpit : Bomb {
     private GameObject getTarget()
     {
         const int first = 0;
-        DinoTracking tracker = GetComponent<DinoTracking>();
+        DinoTracking tracker = GameObject.Find("Checkpoints").GetComponent<DinoTracking>();
         int currentDino = tracker.playerNum;
         var position = tracker.GetCurrentPositions();
         var dinoObjects = tracker.GetDinoArray();
