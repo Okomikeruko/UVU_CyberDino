@@ -2481,8 +2481,8 @@ MonoBehaviour:
   duration: 2
   BuzzSpeedFactor: 180
   BuzzSawDamage: 25
-  BuzzRange: 20
-  BuzzRadius: 10
+  ColliderRange: 20
+  ColliderRadius: 10
   WeaponVFX: {fileID: 100020}
   mesh: {fileID: 100036}
 --- !u!114 &11400018
@@ -2963,10 +2963,10 @@ CapsuleCollider:
   m_Material: {fileID: 13400000, guid: 7958f891903dd76418d917a0dbe790e8, type: 2}
   m_IsTrigger: 0
   m_Enabled: 1
-  m_Radius: 7.63000011
-  m_Height: 25.7800007
+  m_Radius: 7
+  m_Height: 22
   m_Direction: 1
-  m_Center: {x: 0, y: 2.75, z: 0}
+  m_Center: {x: 0, y: 0, z: 3}
 --- !u!137 &13700000
 SkinnedMeshRenderer:
   m_ObjectHideFlags: 1
