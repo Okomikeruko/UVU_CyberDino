@@ -4,13 +4,16 @@ using System.Collections;
 public class AcidSpitObject : MonoBehaviour {
 
 	private Transform target;
-	public float speed = 50.0f;
+	public float speed = 10.0f;
 	void Update() {
-		float step = speed;
-		transform.position = Vector3.MoveTowards(transform.position, target.position, step);
+		this.transform.position = Vector3.MoveTowards(transform.position, target.position, speed);
+		if(transform.position == target.position){
+			DestroyObject(this);
+		}
 	}
-	public void setTarget(Transform t)
+	public void setTarget(GameObject t)
 	{
-		target = t;
+
+		target = t.transform;
 	}
 }
