@@ -23,6 +23,7 @@ public class NodeBehavior : MonoBehaviour
 		}
 		catch(UnityException e)
 		{
+			Debug.Log(e.Message);
 			this.enabled = false;
 		}
 

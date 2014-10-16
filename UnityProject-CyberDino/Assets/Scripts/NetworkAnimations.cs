@@ -5,7 +5,6 @@ public class NetworkAnimations : MonoBehaviour {
 
 	int jumping = 0;
 	int attacking = 0;
-	int shooting = 0;
 
 	private Animator anim;
 	private NetworkView netView;

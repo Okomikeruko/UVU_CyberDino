@@ -36,34 +36,35 @@ public class GameControl : MonoBehaviour {
 
 		var playerInfo = networkHandler.GetMyInfo();
 		int playerID = int.Parse(Network.player.ToString());
+
 		GameObject PlayerDino = (GameObject)Network.Instantiate((GameObject)Resources.Load(playerInfo.dinoName), spawnPoint[playerID].transform.position, Quaternion.LookRotation(spawnPoint[playerID].transform.forward), playerID);
+		var PlayerControl = PlayerDino.GetComponent<UserControl> ();
+		PlayerControl.enabled = true;
 		var AIControl = PlayerDino.GetComponent<AIControl> ();
 		AIControl.enabled = false;
+
 		MainCameraFollow.target = PlayerDino.transform;
 
 		if (Network.isServer) {
 			//load environment objects (pickups, turrets, train)
 			GameObject[] turretSpawnPoints = GameObject.FindGameObjectsWithTag ("TurretSpawn");
 			foreach (var unit in turretSpawnPoints) {
-					GameObject Turret = (GameObject)Network.Instantiate ((GameObject)Resources.Load ("Turret02"), unit.transform.position, Quaternion.LookRotation (unit.transform.forward), playerID);
+					Network.Instantiate ((GameObject)Resources.Load ("Turret02"), unit.transform.position, Quaternion.LookRotation (unit.transform.forward), playerID);
 			}
 
 			GameObject[] pickupSpawnPoints = GameObject.FindGameObjectsWithTag ("PickUpSpawn");
 			foreach (var unit in pickupSpawnPoints) {
-					GameObject PickUp = (GameObject)Network.Instantiate ((GameObject)Resources.Load ("PickUpItem"), unit.transform.position, Quaternion.LookRotation (unit.transform.forward), playerID);
+					Network.Instantiate ((GameObject)Resources.Load ("PickUpItem"), unit.transform.position, Quaternion.LookRotation (unit.transform.forward), playerID);
 			}
 
 			int i = 0;
-
-			foreach (var player in networkHandler.playerInformation) {
-					i++;
-			}
+			i += networkHandler.playerInformation.Count;
 
 			for (; i < NetworkGameHandler.MAX_PLAYERS; i++) {
 					GameObject AiDino = (GameObject)Network.Instantiate((GameObject)Resources.Load(menuControl.dinos[Random.Range(0,5)]), spawnPoint[i].transform.position, Quaternion.LookRotation(spawnPoint[i].transform.forward), playerID);
 					//GameObject AiDino = (GameObject)Network.Instantiate ((GameObject)Resources.Load (menuControl.dinos [4]), spawnPoint [i].transform.position, Quaternion.LookRotation (spawnPoint [i].transform.forward), playerID);
 					AiDino.tag = "Ai";
-					var PlayerControl = AiDino.GetComponent<UserControl> ();
+					PlayerControl = AiDino.GetComponent<UserControl> ();
 					PlayerControl.enabled = false;
 					AIControl = AiDino.GetComponent<AIControl> ();
 					AIControl.enabled = true;
@@ -86,8 +87,7 @@ public class GameControl : MonoBehaviour {
 		}
 
 		if (readyAll == true) {
-			int playerID = int.Parse(Network.player.ToString());
-			GameObject CountDown = (GameObject)Instantiate ((GameObject)Resources.Load("CountDown"), new Vector3(0,0,0), Quaternion.LookRotation(transform.forward));
+			Instantiate ((GameObject)Resources.Load("CountDown"), new Vector3(0,0,0), Quaternion.LookRotation(transform.forward));
 		}
 	}
 }

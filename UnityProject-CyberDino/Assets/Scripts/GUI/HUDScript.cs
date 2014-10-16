@@ -31,15 +31,11 @@ public class HUDScript : MonoBehaviour
 	private GameObject[] pauseMenuObjs;
 	private GameObject healthDangerObj;
 	//private GameObject[] resultsObjs;
-	
-	private Vector3[] itemsPos;
-	private Rect[] pauseMenuPos;
 
-	private int itemCount;
+	private Rect[] pauseMenuPos;
 
 	private GameObject healthGrp;
 	private GameObject healthGrpBar;
-	private GameObject healthMask;
 	private GameObject healthCover;
 	private Rect healthPos;
 	private Vector3 healthGrpBarRotation;
@@ -87,9 +83,7 @@ public class HUDScript : MonoBehaviour
 	
 	//array for player names
 	private string[] playerNames;
-	
-	//private List<GameObject> currentItems;
-	
+		
 	private bool isPaused = false;
 
 	private List<PickUpTypes> testList;
@@ -129,8 +123,6 @@ public class HUDScript : MonoBehaviour
 		networkHandler = networkHandlerObject.GetComponent("NetworkGameHandler") as NetworkGameHandler;
 		
 		//AddItem = ItemToAdd;
-		
-		//currentItems = new List<GameObject>();
 
 		xMulti = Screen.width / 100.0f;
 		yMulti = Screen.height / 100.0f;
@@ -286,7 +278,6 @@ public class HUDScript : MonoBehaviour
 		pauseMenuPos = new Rect[5];
 
 		items = new GameObject[3];
-		itemsPos = new Vector3[3];
 		
 		isFading = new bool[4];
 		isFading[0] = false;
@@ -301,10 +292,6 @@ public class HUDScript : MonoBehaviour
 			{
 				healthGrpBar = child.gameObject;
 
-			}
-			else if(child.name == "HealthMask")
-			{
-				healthMask = child.gameObject;
 			}
 			else if(child.name == "ItemIcon1")
 			{
@@ -325,8 +312,6 @@ public class HUDScript : MonoBehaviour
 		healthCover = CreateGUITxtr("Health Cover", healthCoverGfx, new Vector3(0, 0, 3));
 
 		healthGrpBarRotation = healthGrpBar.transform.localEulerAngles;
-
-		itemCount = 0;
 
 		//testList = new List<PickUpTypes>();
 		//testList.Add(PickUpTypes.Health);
@@ -437,9 +422,7 @@ public class HUDScript : MonoBehaviour
 			finishObj.guiTexture.pixelInset = ResizeRect(new Rect(150, 0, 100, 100));
 			finishPlaceObj.guiTexture.pixelInset = ResizeRect(new Rect(-80, 20, 30, 70));
 		}
-		
-		Rect healthSize = ResizeRect(new Rect(20, 85, .11f, .2f));
-		
+				
 		if(raceDinos[dinoTrackingScript.playerNum] != null)
 			SetPlayerHealth(new Vector3( 1, 1.1f, 1), dinoTrackingScript.playerNum);
 			
@@ -484,16 +467,7 @@ public class HUDScript : MonoBehaviour
 			positionObjs.guiTexture.pixelInset = ResizeRect(new Rect(13, 77, 5, 5));
 			positionObjs.guiTexture.texture = hudGfx[racePositions[dinoTrackingScript.playerNum] - 1];
 		}
-		
 
-		//items[0].transform.localPosition
-		//itemsPos[0] = new Vector3(healthGrp.transform.position.x, healthGrp.transform.position.y, healthGrp.transform.position.z);
-		//items[0].transform.localPosition = new Vector3(0, -5, 0);
-
-		/*if(Input.GetKeyDown(KeyCode.Z))
-		{
-			ChangeCurrentItem();
-		}*/
 
 		if(Input.GetKeyDown(KeyCode.Escape))
 		{
@@ -602,8 +576,6 @@ public class HUDScript : MonoBehaviour
 		healthDangerObj.SetActive(true);
 		
 		float trans = 0;
-		float tempWidth = 0;
-		float tempX = 0;
 		
 		bool isGrowing = true;
 		
@@ -769,8 +741,6 @@ public class HUDScript : MonoBehaviour
 		Rect tempPos2 = _obj2.guiTexture.pixelInset;
 		float transNum2 = tempPos2.x;
 		
-
-		float middleOfScreen =  (Screen.width / 2) /*- (tempPos.width / 2)*/;
 		float thirdOfScreen = Screen.width / 5;
 		float middleOfScreen2 =  (Screen.width - thirdOfScreen) - (tempPos2.width / 2);
 		
@@ -811,34 +781,36 @@ public class HUDScript : MonoBehaviour
 
 	}
 	
-	public void UpdateItems(List<PickUpTypes> _list)
+	public void UpdateItems(Inventory inv)
 	{
-		itemCount = _list.Count;
+		var weaponCount = inv.Count(PickUpTypes.Weapon);
+		var healthCount = inv.Count(PickUpTypes.Health);
+		var turboCount = inv.Count(PickUpTypes.Turbo);
 
-		/*foreach(PickUpTypes _type in _list)
-			Debug.Log(_type.ToString());
-
-		Debug.Log("--------------------------");*/
-		
-		for(int i = 0; i < items.Length; i++)
+		int i = 0;
+		while (i < weaponCount)
 		{
-			if(i < _list.Count && _list[i] != null)
-			{
-				items[i].SetActive(true);
-				
-				if(_list[i] == PickUpTypes.Weapon)
-					items[i].renderer.material.mainTexture = itemsGfx[0];
-				else if(_list[i] == PickUpTypes.Health)
-					items[i].renderer.material.mainTexture = itemsGfx[1];
-				else if(_list[i] == PickUpTypes.Turbo)
-					items[i].renderer.material.mainTexture = itemsGfx[2];
-			}
-			else
-			{
-				items[i].SetActive(false);
-			}
+			items[i].SetActive(true);
+			items[i].renderer.material.mainTexture = itemsGfx[0];
+			i++;
 		}
-		
+		while (i < weaponCount + healthCount)
+		{
+			items[i].SetActive(true);
+			items[i].renderer.material.mainTexture = itemsGfx[1];
+			i++;
+		}
+		while (i < weaponCount + healthCount + turboCount)
+		{
+			items[i].SetActive(true);
+			items[i].renderer.material.mainTexture = itemsGfx[2];
+			i++;
+		}
+		while (i < 3)
+		{
+			items[i].SetActive(false);
+			i++;
+		}
 	}
 	
 	private void TurnOnOffMenu()

@@ -19,14 +19,12 @@ public class TurretControl : MonoBehaviour {
 	public float _reloadTime = 2f;
 
 	private float _lastShotTime = 0f;
-	private Quaternion _horizontalPitch;
 	private float _targetingRange;
 	private float _bulletVelocity;
 
 
 	// Use this for initialization
 	void Start () {
-		_horizontalPitch = _pitchControl.transform.rotation;
 		_bulletVelocity = _bulletImpulseMax / _bullet.rigidbody.mass;
 		_targetingRange = (float)(_bulletVelocity * _bulletVelocity * Math.Sin(2 * (_maxPitchAngle * Math.PI / 180)) / Physics.gravity.magnitude);
 		if (_targetingRange > _maxTargetingRange)

@@ -22,9 +22,9 @@ public class Napalm : Bomb {
 	{
 		Debug.Log ("Napalm!");
 
-        GameObject Napalm = (GameObject)Network.Instantiate((GameObject)Resources.Load("Weapons/Bombs/Napalm"), 
-		                     this.transform.position - (this.transform.forward * DistanceDroppedBehind), 
-		                      Quaternion.LookRotation (this.transform.forward), playerID);
+        Network.Instantiate((GameObject)Resources.Load("Weapons/Bombs/Napalm"), 
+			this.transform.position - (this.transform.forward * DistanceDroppedBehind), 
+			Quaternion.LookRotation (this.transform.forward), playerID);
     }
     
     void PlayFX ()

@@ -8,13 +8,12 @@ public class dusttrail : MonoBehaviour {
 
 	void Start ()
 	{
-		var playerInfo = networkHandler.GetMyInfo();
 		playerID = int.Parse(Network.player.ToString());
 	}
 
 	void step(string foot)
 	{
-		GameObject newSmoke = (GameObject)Network.Instantiate ((GameObject)Resources.Load ("dustTrail"), this.transform.position, Quaternion.LookRotation (this.transform.forward), playerID);
+		Network.Instantiate ((GameObject)Resources.Load ("dustTrail"), this.transform.position, Quaternion.LookRotation (this.transform.forward), playerID);
 	}
 
 }

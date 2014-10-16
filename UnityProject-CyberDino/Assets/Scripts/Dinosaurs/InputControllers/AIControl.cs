@@ -11,18 +11,16 @@ public class AIControl : MonoBehaviour {
 	
 	private MotionControl mc;
 	private Inventory inv;
-	private MeleeAttack melee;
+	//private MeleeAttack melee;
 	private Bomb bomb;
 	private Health health;
 
-	private float turnAxis = 0.0f;
-	
 	// Use this for initialization
 	void Start () {
 		if (networkView.isMine) {
 			mc = GetComponent<MotionControl> ();
 			inv = GetComponent<Inventory> ();
-			melee = GetComponent<MeleeAttack> ();
+			//melee = GetComponent<MeleeAttack> ();
 			bomb = GetComponent<Bomb> ();
 			health = GetComponent<Health> ();
 
@@ -39,7 +37,7 @@ public class AIControl : MonoBehaviour {
 		if (networkView.isMine) {
 			mc = GetComponent<MotionControl>();
 			inv = GetComponent<Inventory>();
-			melee = GetComponent<MeleeAttack>();
+			//melee = GetComponent<MeleeAttack>();
 			bomb = GetComponent<Bomb>();
 			health = GetComponent<Health>();
 			

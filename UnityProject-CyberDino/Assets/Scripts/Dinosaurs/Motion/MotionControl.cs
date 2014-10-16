@@ -28,12 +28,10 @@ public class MotionControl : MonoBehaviour {
 	private float inputRotationAxis;
 	private float InputDeadzone = 0.1f;
 
-	private Collider[] colliders;
 
 	void Start()
 	{
 		netanim = GetComponentInChildren<NetworkAnimations>();
-		colliders = GetComponents<Collider>();
 	}
 
 	// Update is called once per frame
@@ -116,10 +114,7 @@ public class MotionControl : MonoBehaviour {
 		if(cosAngle > MaxSurfaceAngle)
 		{
 			// On Ground
-			foreach(var collider in colliders)
-			{
-				onGround = true;
-			}
+			onGround = true;
 		}
 	}
 	

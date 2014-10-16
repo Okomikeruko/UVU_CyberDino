@@ -26,7 +26,7 @@ public class AcidSpit : Bomb {
 	{
 		SpitUpdate = empty;
 
-		var spitVFX = transform.FindChild("Diloph_AcidSpit_VFX").gameObject;
+		spitVFX = transform.FindChild("Diloph_AcidSpit_VFX").gameObject;
 	}
 
 	void Update()

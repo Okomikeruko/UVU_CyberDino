@@ -29,7 +29,7 @@ public class Inventory : MonoBehaviour {
 		{ 
 			PickUps.Add(type);
 			if(tag == "Dino" && networkView.isMine)
-				myHud.UpdateItems(PickUps);
+				myHud.UpdateItems(this);
 		}
 	}
 
@@ -58,7 +58,7 @@ public class Inventory : MonoBehaviour {
 			}
 			
 			if(tag == "Dino" && networkView.isMine)
-				myHud.UpdateItems(PickUps);
+				myHud.UpdateItems(this);
 			return true;
 		}
 
@@ -69,7 +69,7 @@ public class Inventory : MonoBehaviour {
 		}
 		
 		if(tag == "Dino" && networkView.isMine)
-			myHud.UpdateItems(PickUps);
+			myHud.UpdateItems(this);
 		return false;
 	}
 
@@ -95,7 +95,7 @@ public class Inventory : MonoBehaviour {
 		}
 		PickUps.Clear();
 		if(tag == "Dino" && networkView.isMine)
-			myHud.UpdateItems(PickUps);
+			myHud.UpdateItems(this);
 	}
 
 	public int Count(PickUpTypes type)

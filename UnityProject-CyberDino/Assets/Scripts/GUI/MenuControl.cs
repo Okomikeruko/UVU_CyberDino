@@ -63,7 +63,6 @@ public class MenuControl : MonoBehaviour
 	//what mode is being played
 	public bool singlePlayer = false;
 	public bool playAgain = false;
-	private bool inLobby = false;
 	
 	//Player name
 	public string playerName;
@@ -141,8 +140,6 @@ public class MenuControl : MonoBehaviour
 	//the box behind the dino selection
 	private GameObject dinoBoxLg;
 	private Rect dinoBoxLgPos;
-	private Texture dinoBoxLgTxtr;
-	//private Vector3 dinoBoxLgV3Pos;
 	
 	private Texture smallBoxGFX;
 	
@@ -162,7 +159,6 @@ public class MenuControl : MonoBehaviour
 	private GameObject[] raceDinos;
 	//private int[] racePositions;
 	private int[] currentLaps;
-	private int playerNum;
 	
 	private int[] racePositions;
 
@@ -208,9 +204,7 @@ public class MenuControl : MonoBehaviour
 		
 		serverNameGFX = (Texture)Resources.Load("GUI/Materials/ServerName");
 		playerNameGFX = (Texture)Resources.Load("GUI/Materials/PlayerName");
-		
-		dinoBoxLgTxtr = (Texture)Resources.Load("GUI/Materials/DinoSelectBackground");
-		
+				
 		smallBoxGFX = (Texture)Resources.Load("GUI/Materials/OtherPlayerSelection");
 		
 		largeDinoBanner = (Texture)Resources.Load("GUI/Materials/BannerDilophLarge");
@@ -262,9 +256,7 @@ public class MenuControl : MonoBehaviour
 		glowDashes = new GameObject[12];
 		
 		netView = GetComponent<NetworkView>();
-		
-		int.TryParse(Network.player.ToString(), out playerNum);
-		
+				
 		buttonIndex = 0;
 		
 		isHoldingBtn = false;
@@ -306,13 +298,6 @@ public class MenuControl : MonoBehaviour
 				menuBkgd.transform.Rotate(new Vector3(90, 180, 0));
 			}
 			
-			if(dinoSelected == null)
-			{
-				startDinoPos = ResizeRect(new Rect(72, 40, 0, 0));
-				dinoSelected = (GameObject)Instantiate(dinoModels[dinoIndex], new Vector3(Screen.width, Screen.height, 0), Quaternion.identity);
-				Vector3 pointInWorld = Camera.main.ScreenToWorldPoint(new Vector3(Screen.width, Screen.height, Camera.main.transform.position.z + 50));
-			}
-			
 			if(dinoBoxLg == null)
 			{
 				dinoBoxLgPos = ResizeRect(new Rect(80, 40, 0, 0));
@@ -346,8 +331,6 @@ public class MenuControl : MonoBehaviour
 			menuOrigin[5].x = 0;
 		}
 		
-		int.TryParse(Network.player.ToString(), out playerNum);
-
 		buttonIndex = 0;
 
 		isHoldingBtn = false;
@@ -530,11 +513,20 @@ public class MenuControl : MonoBehaviour
 				menuBkgd.transform.localScale = new Vector3(pointInWorld.x / 5, 1, pointInWorld.y / 5);
 				menuBkgd.transform.position = Camera.main.ScreenToWorldPoint(new Vector3(menuOrigin[2].x + menuBkgdPos.x, menuOrigin[2].y + menuBkgdPos.y, 500));
 			}
-			
-			if(dinoSelected != null)
+
+			if(dinoSelected == null)
+			{
+				startDinoPos = ResizeRect(new Rect(72, 40, 0, 0));
+
+				dinoIndex = 0;
+				dinoSelected = (GameObject)Instantiate(dinoModels[dinoIndex], 
+				                                       Camera.main.ScreenToWorldPoint(new Vector3(menuOrigin[2].x + startDinoPos.x, menuOrigin[2].y + startDinoPos.y, 130)), 
+				                                       Quaternion.identity);
+			}
+			else // (dinoSelected != null)
 			{
 				dinoSelected.transform.position = Camera.main.ScreenToWorldPoint(new Vector3(menuOrigin[2].x + startDinoPos.x, menuOrigin[2].y + startDinoPos.y, 130));
-				dinoSelected.transform.RotateAround(new Vector3(0, 1, 0), Vector3.up, rotateSpeed * Time.deltaTime);
+				dinoSelected.transform.RotateAround(dinoSelected.transform.position, Vector3.up, rotateSpeed * Time.deltaTime);
 				startDinoPos = ResizeRect(new Rect(72, 40, 0, 0));
 			}
 			
@@ -558,9 +550,8 @@ public class MenuControl : MonoBehaviour
 			{
 				GUI.Label(new Rect(menuOrigin[2].x + lvlGraphicPos.x, menuOrigin[2].y + lvlGraphicPos.y, lvlGraphicPos.width, lvlGraphicPos.height), levels[levelIndex]);
 			}
-			
-			//if (inLobby == true)
-			//{		
+
+
 			//display the names of the other players and the dinos that they have chosen
 			if(singlePlayer == false)
 			{
@@ -781,9 +772,7 @@ public class MenuControl : MonoBehaviour
 					{
 						Destroy(_dash);
 					}
-					
-					//inLobby = true;
-					
+										
 					StartCoroutine(MoveLeftOff(3, 2, Menu.lobbyMenu));
 				}
 			}
@@ -1210,9 +1199,7 @@ public class MenuControl : MonoBehaviour
 	public string[] SetNames()
 	{
 		int index = 0;
-		
-		int playerNum = dinoTrackingScript.playerNum;
-		
+				
 		
 		while(index < 4)
 		{
@@ -1270,8 +1257,7 @@ public class MenuControl : MonoBehaviour
 	{
 		//Debug.Log("go to lobby!");
 		singlePlayer = true;
-		
-		//inLobby = true;
+
 		networkHandler.HostGame("SinglePlayer", "player");
 		
 		var myInfo = networkHandler.GetMyInfo();
@@ -1441,19 +1427,15 @@ public class MenuControl : MonoBehaviour
 			dinoIndex = dinoModels.Length - 1;
 		else
 			dinoIndex--;
-		
-		if(dinoSelected != null)
-			Destroy(dinoSelected);
+
+		Quaternion currentRotation = dinoSelected.transform.rotation;
+		Destroy(dinoSelected);
 		
 		//Debug.Log("the dino index " + dinoIndex);
 		string bannerName = "GUI/Materials/Banner" + dinos[dinoIndex] + "Large";
 		//Debug.Log(bannerName);
 		largeDinoBanner = (Texture)Resources.Load(bannerName);
-		
-		dinoSelected = (GameObject)Instantiate(dinoModels[dinoIndex], new Vector3(Screen.width, Screen.height, 0), Quaternion.identity);
-		dinoSelected.transform.Rotate(new Vector3(0, 180, 0));
-		
-		// Debug.Log(dinoIndex);
+				
 		
 		var myInfo = networkHandler.GetMyInfo();
 		myInfo.dinoName = dinos[dinoIndex];
@@ -1462,8 +1444,9 @@ public class MenuControl : MonoBehaviour
 		}
 		networkHandler.UpdatePlayerInformation(myInfo);
 		
-		Destroy(dinoSelected);
-		dinoSelected = (GameObject)Instantiate(dinoModels[dinoIndex], new Vector3(Screen.width, Screen.height, 0), Quaternion.identity);
+		dinoSelected = (GameObject)Instantiate(dinoModels[dinoIndex], 
+		                                       Camera.main.ScreenToWorldPoint(new Vector3(menuOrigin[2].x + startDinoPos.x, menuOrigin[2].y + startDinoPos.y, 130)), 
+		                                       currentRotation);
 	}
 	
 	void DinoSelectionIncrement()
@@ -1474,18 +1457,15 @@ public class MenuControl : MonoBehaviour
 		else
 			dinoIndex++;
 		
-		if(dinoSelected != null)
-			Destroy(dinoSelected);
+		Quaternion currentRotation = dinoSelected.transform.rotation;
+		Destroy(dinoSelected);
 		
 		//Debug.Log("the dino index " + dinoIndex);
 		//Debug.Log("the dino name " + dinos[dinoIndex]);
 		string bannerName = "GUI/Materials/Banner" + dinos[dinoIndex] + "Large";
 		//Debug.Log(bannerName);
 		largeDinoBanner = (Texture)Resources.Load(bannerName);
-		
-		dinoSelected = (GameObject)Instantiate(dinoModels[dinoIndex], new Vector3(Screen.width, Screen.height, 0), Quaternion.identity);
-		dinoSelected.transform.Rotate(new Vector3(0, 180, 0));
-		
+				
 		//Debug.Log(dinoIndex);
 		
 		var myInfo = networkHandler.GetMyInfo();
@@ -1495,13 +1475,14 @@ public class MenuControl : MonoBehaviour
 		}
 		networkHandler.UpdatePlayerInformation(myInfo);
 		
-		Destroy(dinoSelected);
-		dinoSelected = (GameObject)Instantiate(dinoModels[dinoIndex], new Vector3(Screen.width, Screen.height, 0), Quaternion.Euler(new Vector3(0, 90, 0)));
+		dinoSelected = (GameObject)Instantiate(dinoModels[dinoIndex], 
+		                                       Camera.main.ScreenToWorldPoint(new Vector3(menuOrigin[2].x + startDinoPos.x, menuOrigin[2].y + startDinoPos.y, 130)), 
+		                                       currentRotation);
 	}
 
 	private void LobbyToMain()
 	{
-		var myInfo = networkHandler.GetMyInfo();
+		//var myInfo = networkHandler.GetMyInfo();
 		//Debug.Log( myInfo.dinoName);
 		
 		menuSelect = Menu.goToLevel;
@@ -1600,7 +1581,6 @@ public class MenuControl : MonoBehaviour
 	{
 		if(serverNameHolder != "" && playerNameHolder != "")
 		{
-			//inLobby = true;
 			serverName = serverNameHolder;
 			playerName = playerNameHolder;
 			

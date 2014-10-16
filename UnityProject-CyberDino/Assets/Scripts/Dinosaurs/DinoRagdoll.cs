@@ -154,8 +154,6 @@ public class DinoRagdoll : MonoBehaviour {
 		dinoAnimator.enabled = true;
 		foreach(Collider collider in playColliders)
 			collider.enabled = true;
-		ColorLerpClass theLerp = transform.gameObject.GetComponent<ColorLerpClass>();
-		theLerp.lerping = false;
 		move.enabled = true;
 		ragdollUpdate = empty;
 

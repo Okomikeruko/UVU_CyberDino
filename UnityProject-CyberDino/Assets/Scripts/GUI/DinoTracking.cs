@@ -36,9 +36,7 @@ public class DinoTracking : MonoBehaviour
 	private int[] lapCount;
 	
 	public int maxLap = 1;
-	
-	private int playerCount;
-	
+		
 	private int connectedPlayers;
 	
 	private NetworkView netView;
@@ -329,12 +327,8 @@ public class DinoTracking : MonoBehaviour
                     }
                 }
 
-                /*Debug.Log("laptest " + lapTest);
-                Debug.Log("playercount " + playerCount);*/
-                //Debug.Log("player count " + playerCount + " lap comp " + lapTest);
-
                 //if all player dinos have completed all of the laps end the race
-                if (lapTest > playerCount)
+                if (lapTest >= connectedPlayers)
                 {
 					hudScript.ShowFinish();
 					hudScript.EndRace();

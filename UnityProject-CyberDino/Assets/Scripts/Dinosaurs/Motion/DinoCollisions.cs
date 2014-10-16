@@ -10,8 +10,6 @@ public class DinoCollisions : MonoBehaviour {
 	private float CollisionDamage = 10.0f;
 	[SerializeField]
 	private float EnvironmentCollisionDamage = 5.0f;
-	[SerializeField]
-	private float ControlLockTime = .25f;
 
 	void Start() {
 	}

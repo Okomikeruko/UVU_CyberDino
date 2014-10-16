@@ -47,9 +47,9 @@ public class EMPPulse : MeleeAttack {
 
 	private void Pulse(HashSet<GameObject> targets){
 		foreach (var obj in targets) {
-			Vector3 objPos = obj.transform.position;
-			Vector3 thisPos = transform.position;
-			Vector3 direction = (objPos - thisPos).normalized;
+			//Vector3 objPos = obj.transform.position;
+			//Vector3 thisPos = transform.position;
+			//Vector3 direction = (objPos - thisPos).normalized;
 			//obj.rigidbody.AddForce((direction + Vector3.up) * force, ForceMode.VelocityChange);
 			obj.rigidbody.AddExplosionForce(force * obj.rigidbody.mass, transform.position, 0, 1, ForceMode.Impulse);
 			Health health = obj.GetComponent<Health>();
