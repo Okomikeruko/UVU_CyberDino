@@ -297,7 +297,7 @@ GameObject:
   - 4: {fileID: 400034}
   - 137: {fileID: 13700000}
   m_Layer: 0
-  m_Name: Spino_Final1:polySurface4_SeamsColor1
+  m_Name: Model
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -803,7 +803,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 400016}
-  m_RootOrder: 6
+  m_RootOrder: 2
 --- !u!4 &400002
 Transform:
   m_ObjectHideFlags: 1
@@ -829,7 +829,7 @@ Transform:
   m_Children:
   - {fileID: 400070}
   m_Father: {fileID: 400016}
-  m_RootOrder: 5
+  m_RootOrder: 3
 --- !u!4 &400006
 Transform:
   m_ObjectHideFlags: 1
@@ -854,7 +854,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 400016}
-  m_RootOrder: 2
+  m_RootOrder: 4
 --- !u!4 &400010
 Transform:
   m_ObjectHideFlags: 1
@@ -895,7 +895,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 400016}
-  m_RootOrder: 7
+  m_RootOrder: 5
 --- !u!4 &400016
 Transform:
   m_ObjectHideFlags: 1
@@ -907,15 +907,15 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 400052}
-  - {fileID: 400044}
-  - {fileID: 400008}
   - {fileID: 400034}
-  - {fileID: 400018}
-  - {fileID: 400004}
   - {fileID: 400000}
+  - {fileID: 400004}
+  - {fileID: 400008}
   - {fileID: 400014}
+  - {fileID: 400018}
   - {fileID: 400032}
   - {fileID: 400042}
+  - {fileID: 400044}
   m_Father: {fileID: 400040}
   m_RootOrder: 0
 --- !u!4 &400018
@@ -929,7 +929,7 @@ Transform:
   m_LocalScale: {x: -1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 400016}
-  m_RootOrder: 4
+  m_RootOrder: 6
 --- !u!4 &400020
 Transform:
   m_ObjectHideFlags: 1
@@ -1018,7 +1018,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 400016}
-  m_RootOrder: 8
+  m_RootOrder: 7
 --- !u!4 &400034
 Transform:
   m_ObjectHideFlags: 1
@@ -1030,7 +1030,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 400016}
-  m_RootOrder: 3
+  m_RootOrder: 1
 --- !u!4 &400036
 Transform:
   m_ObjectHideFlags: 1
@@ -1064,7 +1064,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100040}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 60, y: 0, z: 0}
   m_LocalScale: {x: 5, y: 5, z: 5}
   m_Children:
   - {fileID: 400016}
@@ -1081,7 +1081,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 400016}
-  m_RootOrder: 9
+  m_RootOrder: 8
 --- !u!4 &400044
 Transform:
   m_ObjectHideFlags: 1
@@ -1093,7 +1093,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 400016}
-  m_RootOrder: 1
+  m_RootOrder: 9
 --- !u!4 &400046
 Transform:
   m_ObjectHideFlags: 1
@@ -2127,7 +2127,7 @@ SkinnedMeshRenderer:
   m_LightmapIndex: 255
   m_LightmapTilingOffset: {x: 1, y: 1, z: 0, w: 0}
   m_Materials:
-  - {fileID: 2100000, guid: d27f049f59ad43447a078c149e056396, type: 2}
+  - {fileID: 2100000, guid: 7e5b6430704db1644b7ce469a6a697b7, type: 2}
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
   m_UseLightProbes: 0
@@ -2294,7 +2294,7 @@ CharacterJoint:
   m_Anchor: {x: -.239999995, y: 0, z: 0}
   m_Axis: {x: 0, y: 1, z: 0}
   m_AutoConfigureConnectedAnchor: 1
-  m_ConnectedAnchor: {x: -.0398635268, y: .0454387367, z: -3.47081852}
+  m_ConnectedAnchor: {x: -.0398634858, y: .0454387367, z: -3.47081852}
   m_SwingAxis: {x: -1, y: 0, z: 0}
   m_LowTwistLimit:
     limit: -20
@@ -2329,7 +2329,7 @@ CharacterJoint:
   m_Anchor: {x: 0, y: 0, z: 0}
   m_Axis: {x: -1, y: 0, z: 0}
   m_AutoConfigureConnectedAnchor: 1
-  m_ConnectedAnchor: {x: -.134541914, y: .333953321, z: -.469870269}
+  m_ConnectedAnchor: {x: -.134541973, y: .333953321, z: -.469870269}
   m_SwingAxis: {x: 0, y: -1, z: 0}
   m_LowTwistLimit:
     limit: -30
@@ -2749,7 +2749,7 @@ CharacterJoint:
   m_Anchor: {x: 0, y: 0, z: 0}
   m_Axis: {x: -1, y: 0, z: 0}
   m_AutoConfigureConnectedAnchor: 1
-  m_ConnectedAnchor: {x: .295719981, y: -.735062659, z: -.0804831982}
+  m_ConnectedAnchor: {x: .295719922, y: -.735062659, z: -.0804831982}
   m_SwingAxis: {x: 0, y: -1, z: 0}
   m_LowTwistLimit:
     limit: -10
@@ -2784,7 +2784,7 @@ CharacterJoint:
   m_Anchor: {x: 0, y: 0, z: 0}
   m_Axis: {x: 0, y: 1, z: 0}
   m_AutoConfigureConnectedAnchor: 1
-  m_ConnectedAnchor: {x: .0843369216, y: -.284334123, z: -2.64633036}
+  m_ConnectedAnchor: {x: .0843369737, y: -.284334123, z: -2.64633036}
   m_SwingAxis: {x: -1, y: 0, z: 0}
   m_LowTwistLimit:
     limit: -20
@@ -2819,7 +2819,7 @@ CharacterJoint:
   m_Anchor: {x: 0, y: 0, z: .200000003}
   m_Axis: {x: -1, y: 0, z: 0}
   m_AutoConfigureConnectedAnchor: 1
-  m_ConnectedAnchor: {x: .0796605051, y: .639821231, z: .223620832}
+  m_ConnectedAnchor: {x: .0796605647, y: .639821231, z: .223620832}
   m_SwingAxis: {x: 0, y: -1, z: 0}
   m_LowTwistLimit:
     limit: -20
@@ -2889,7 +2889,7 @@ CharacterJoint:
   m_Anchor: {x: 0, y: .150000006, z: -.129999995}
   m_Axis: {x: -1, y: 0, z: 0}
   m_AutoConfigureConnectedAnchor: 1
-  m_ConnectedAnchor: {x: -.000821858644, y: 1.14664698, z: -.604942799}
+  m_ConnectedAnchor: {x: -.00082179904, y: 1.14664698, z: -.604942799}
   m_SwingAxis: {x: 0, y: -1, z: 0}
   m_LowTwistLimit:
     limit: -20
@@ -2959,7 +2959,7 @@ CharacterJoint:
   m_Anchor: {x: 0, y: 0, z: 0}
   m_Axis: {x: -1, y: 0, z: 0}
   m_AutoConfigureConnectedAnchor: 1
-  m_ConnectedAnchor: {x: .128377199, y: -.34011656, z: .469864786}
+  m_ConnectedAnchor: {x: .128377259, y: -.34011656, z: .469864786}
   m_SwingAxis: {x: 0, y: 1, z: 0}
   m_LowTwistLimit:
     limit: -30
@@ -2994,7 +2994,7 @@ CharacterJoint:
   m_Anchor: {x: 0, y: 0, z: 0}
   m_Axis: {x: -1, y: 0, z: 0}
   m_AutoConfigureConnectedAnchor: 1
-  m_ConnectedAnchor: {x: -.295719892, y: -.735061944, z: -.0804831982}
+  m_ConnectedAnchor: {x: -.295719922, y: -.735061944, z: -.0804831982}
   m_SwingAxis: {x: 0, y: 1, z: 0}
   m_LowTwistLimit:
     limit: -10
