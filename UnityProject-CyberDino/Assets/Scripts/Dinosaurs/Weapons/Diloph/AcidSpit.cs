@@ -1,5 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
 
 public class AcidSpit : Bomb {
 
@@ -10,68 +12,31 @@ public class AcidSpit : Bomb {
     [SerializeField]
     private float snareMagnitude = 50;
     [SerializeField]
-    private float snareDuration = 2;
+    private float snareDuration = 10;
 	[SerializeField]
 	private float projectileSpeed = 10;
 	[SerializeField]
-	private ParticleSystem WeaponVFX;
-	
-	private float journey;
-	private float startTime;
-	private GameObject target;
-	delegate void myDelegate();
-	myDelegate SpitUpdate; 
-
-	public Rigidbody spitObject;
-
-	void OnEnable()
-	{
-		SpitUpdate = empty;
-	}
-
-	void Update()
-	{
-		SpitUpdate ();
-	}
-
-	private void empty(){ }
+	private GameObject projectileStartLocation;
 
 	public override void Fire ()
 	{
 		/* Animation trigger added by Lee*/
 		NetworkAnimations netanim = GetComponentInChildren<NetworkAnimations>();
-		netanim.AnimTriggerBomb ();
-		
-        target = getTarget();
-	/*  if (target != null)
-        {
-            StartCoroutine(acidSpitDotAndSnare(target));
-        }
-	*/
+		netanim.AnimTriggerBomb();
 	}
 
-	public void SpitFX()
+	public void OnSpit()
 	{
-		// FX triggered on spit frame. 
-		WeaponVFX.Play ();
-		startTime = Time.time;
-		journey = Vector3.Distance (WeaponVFX.transform.position, target.transform.position);
-		SpitUpdate = follow;
-		Debug.Log("Acid Spit!");
+		var spit = (GameObject)Network.Instantiate((GameObject)Resources.Load("Weapons/Bombs/AcidSpit"), 
+		                    projectileStartLocation.transform.position, 
+		                    projectileStartLocation.transform.rotation, int.Parse(Network.player.ToString()));
+		var aso = spit.GetComponent<AcidSpitObject>();
+		aso.SetValues(projectileSpeed, getTarget(), gameObject);
 	}
 
-	private void follow()
+	public void OnHit(GameObject target)
 	{
-		if (target != null) 
-		{
-			float distCovered = (Time.time - startTime) * projectileSpeed;
-			float fracJourney = distCovered / journey;
-			WeaponVFX.transform.position = Vector3.Lerp (WeaponVFX.transform.position, target.transform.position, fracJourney); 
-		}
-		else
-		{
-			SpitUpdate = empty;
-		}
+		StartCoroutine(acidSpitDotAndSnare(target));
 	}
 
     /// <summary>
@@ -80,22 +45,22 @@ public class AcidSpit : Bomb {
     /// <returns>The Game Object corresponding to the proper dino target, or NULL if this dino is in first place</returns>
     private GameObject getTarget()
     {
-		GameObject[] gos;
-		gos = GameObject.FindGameObjectsWithTag("Ai");
-		GameObject closest = new GameObject();
+		var ais = GameObject.FindGameObjectsWithTag("Ai");
+		var players = GameObject.FindGameObjectsWithTag("Dino");
+		var gos = from dino in ais.Concat(players)
+			      where dino != gameObject
+			      select dino;
+
+		GameObject closest = null;
 		float distance = Mathf.Infinity;
 		Vector3 position = transform.position;
 		foreach (GameObject go in gos) {
-			Vector3 diff = go.transform.position - position;
-			float curDistance = diff.sqrMagnitude;
+			float curDistance = Vector3.Distance(go.transform.position, position);
 			if (curDistance < distance) {
 				closest = go;
 				distance = curDistance;
 			}
 		}
-		Transform spitPosition = transform;
-		Rigidbody spitClone = (Rigidbody) Instantiate (spitObject,spitPosition.position,transform.rotation);
-		spitClone.GetComponent<AcidSpitObject>().setTarget(closest);
 		return closest;
     }
 
@@ -109,15 +74,15 @@ public class AcidSpit : Bomb {
         float elapsedTime = 0.0f;
         float dotTick = damage / dotDuration;
         Health health = target.GetComponent<Health>();
-        MotionControl control = target.GetComponent<MotionControl>();
-        control.TopSpeedMod(snareMagnitude, snareDuration);
+		MotionControl control = target.GetComponent<MotionControl>();
+		control.TopSpeedMod(snareMagnitude, snareDuration);
 
         while (elapsedTime < dotDuration)
         {
             yield return new WaitForSeconds(1.0f);
             elapsedTime += 1.0f;
 
-            health.Damage(dotTick);
+			health.Damage(dotTick);
         }
     }
 

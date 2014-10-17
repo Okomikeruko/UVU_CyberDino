@@ -7,9 +7,9 @@ public class DinoCollisions : MonoBehaviour {
 	[SerializeField]
 	private float CollisionDamageVelocityThreshold = 50.0f;
 	[SerializeField]
-	private float CollisionDamage = 10.0f;
+	private float CollisionDamage = 5.0f;
 	[SerializeField]
-	private float EnvironmentCollisionDamage = 5.0f;
+	private float EnvironmentCollisionDamage = 2.0f;
 
 	void Start() {
 	}

@@ -9,14 +9,15 @@ public class destroyTimer : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		timer = deathTime;
-		this.particleSystem.Play ();
-		//Debug.Log (this.particleSystem.isPlaying);
+		var pss = GetComponentsInChildren<ParticleSystem>();
+		foreach(var ps in pss)
+			ps.Play();
 	}
 	
 	// Update is called once per frame
 	void Update () {
 		if (timer <= 0.0f) {
-			Destroy (this.gameObject);
+			Network.Destroy(gameObject);
 		}
 		timer -= Time.deltaTime;
 	}
