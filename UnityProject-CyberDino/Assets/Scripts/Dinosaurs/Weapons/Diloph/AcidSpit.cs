@@ -13,20 +13,20 @@ public class AcidSpit : Bomb {
     private float snareDuration = 2;
 	[SerializeField]
 	private float projectileSpeed = 10;
-
-	private GameObject spitVFX;
-
+	[SerializeField]
+	private ParticleSystem WeaponVFX;
+	
 	private float journey;
 	private float startTime;
 	private GameObject target;
 	delegate void myDelegate();
 	myDelegate SpitUpdate; 
 
+	public Rigidbody spitObject;
+
 	void OnEnable()
 	{
 		SpitUpdate = empty;
-
-		spitVFX = transform.FindChild("Diloph_AcidSpit_VFX").gameObject;
 	}
 
 	void Update()
@@ -38,22 +38,26 @@ public class AcidSpit : Bomb {
 
 	public override void Fire ()
 	{
-		if (!spitVFX.activeSelf) {
-			NetworkAnimations netanim = GetComponentInChildren<NetworkAnimations> ();
-			netanim.AnimTriggerBomb ();
-		}
+		/* Animation trigger added by Lee*/
+		NetworkAnimations netanim = GetComponentInChildren<NetworkAnimations>();
+		netanim.AnimTriggerBomb ();
+		
+        target = getTarget();
+	/*  if (target != null)
+        {
+            StartCoroutine(acidSpitDotAndSnare(target));
+        }
+	*/
 	}
 
-	public void OnSpit()
-	{		
-		target = getTarget();
-
-		// FX triggered on spit frame.
-		spitVFX.SetActive (true);
-
+	public void SpitFX()
+	{
+		// FX triggered on spit frame. 
+		WeaponVFX.Play ();
 		startTime = Time.time;
-		journey = Vector3.Distance (spitVFX.transform.position, target.transform.position);
+		journey = Vector3.Distance (WeaponVFX.transform.position, target.transform.position);
 		SpitUpdate = follow;
+		Debug.Log("Acid Spit!");
 	}
 
 	private void follow()
@@ -62,7 +66,7 @@ public class AcidSpit : Bomb {
 		{
 			float distCovered = (Time.time - startTime) * projectileSpeed;
 			float fracJourney = distCovered / journey;
-			spitVFX.transform.position = Vector3.Lerp (spitVFX.transform.position, target.transform.position, fracJourney); 
+			WeaponVFX.transform.position = Vector3.Lerp (WeaponVFX.transform.position, target.transform.position, fracJourney); 
 		}
 		else
 		{
@@ -71,28 +75,28 @@ public class AcidSpit : Bomb {
 	}
 
     /// <summary>
-    /// Finds the proper target. The AcidSpit should hit whatever dino is in the position immediately before this dino.
-    /// For example, if the dino is in 2nd place, it should hit whichever dino is in first place.
+    /// Finds the proper target. The AcidSpit should hit the closest dino.
     /// </summary>
     /// <returns>The Game Object corresponding to the proper dino target, or NULL if this dino is in first place</returns>
     private GameObject getTarget()
     {
-        const int first = 0;
-        DinoTracking tracker = GameObject.Find("Checkpoints").GetComponent<DinoTracking>();
-        int currentDino = tracker.playerNum;
-        var position = tracker.GetCurrentPositions();
-        var dinoObjects = tracker.GetDinoArray();
-
-        int currentDinoIndex = first;
-        for(int i = 0; i < position.Length; ++i){
-            if(currentDino == position[i]){
-                currentDinoIndex = i;
-            }
-        }
-
-        return (currentDinoIndex == first) ? null : dinoObjects[currentDinoIndex - 1];
-        // below line can be used instead for testing (allows the spit to hit self)
-        // return (currentDinoIndex == first) ? dinoObjects[currentDinoIndex] : dinoObjects[currentDinoIndex - 1];
+		GameObject[] gos;
+		gos = GameObject.FindGameObjectsWithTag("Ai");
+		GameObject closest = new GameObject();
+		float distance = Mathf.Infinity;
+		Vector3 position = transform.position;
+		foreach (GameObject go in gos) {
+			Vector3 diff = go.transform.position - position;
+			float curDistance = diff.sqrMagnitude;
+			if (curDistance < distance) {
+				closest = go;
+				distance = curDistance;
+			}
+		}
+		Transform spitPosition = transform;
+		Rigidbody spitClone = (Rigidbody) Instantiate (spitObject,spitPosition.position,transform.rotation);
+		spitClone.GetComponent<AcidSpitObject>().setTarget(closest);
+		return closest;
     }
 
     /// <summary>
