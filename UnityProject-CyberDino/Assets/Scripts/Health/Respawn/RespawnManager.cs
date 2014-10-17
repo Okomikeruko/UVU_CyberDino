@@ -12,6 +12,7 @@ public class RespawnManager : MonoBehaviour
 	[SerializeField]
 	public string FirstRespawnNode;
 	private GameObject CurrentRespawnNode;
+	public float GhostSeconds = 5.0f;
 	#endregion Fields
 
 	void Start()
@@ -52,19 +53,22 @@ public class RespawnManager : MonoBehaviour
 
 	public IEnumerator Respawn()
 	{
+		gameObject.layer = 11;//Respawn Layer
 		gameObject.GetComponentInChildren<SkinnedMeshRenderer>().enabled = false;
 		Debug.Log("Respawning. Please wait....");
 		gameObject.transform.position = CurrentRespawnNode.transform.position;
 		gameObject.transform.rotation = CurrentRespawnNode.transform.rotation;
 		yield return new WaitForSeconds(0.5f);
-		gameObject.GetComponentInChildren<SkinnedMeshRenderer>().enabled = true;
 		if (racerRespawnParticalSystem != null){
 			Debug.Log("Player Respawn Animation");
 			yield return StartCoroutine(PlayParticleSystem(racerRespawnParticalSystem));
 		}else{
 			yield return new WaitForSeconds(1.0f);
 		}
+		gameObject.GetComponentInChildren<SkinnedMeshRenderer>().enabled = true;
 		Debug.Log("Ready to go!");
+		StartCoroutine(RespawnGhost());
+
 		yield return null;
 	}
 
@@ -73,5 +77,10 @@ public class RespawnManager : MonoBehaviour
 		particleSystem.Play();
 		yield return new WaitForSeconds(particleSystemDuration);
 		particleSystem.Stop();
+	}
+
+	private IEnumerator RespawnGhost(){
+		yield return new WaitForSeconds(GhostSeconds);
+		gameObject.layer = 8;//Player Layer
 	}
 }
