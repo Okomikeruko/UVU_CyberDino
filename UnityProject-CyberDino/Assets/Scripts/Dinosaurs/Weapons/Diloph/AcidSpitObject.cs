@@ -7,32 +7,30 @@ public class AcidSpitObject : MonoBehaviour {
 	private GameObject Target;
 	private GameObject Firer;
 
-	void OnTriggerEnter(Collider other) {
-
-		if(other.gameObject == Firer)
-			return;
-
-		if(networkView.isMine)
-		{
-			if(other.tag == "Dino" || other.tag == "Ai")
-			{
-				var acidspit = Firer.GetComponent<AcidSpit>();
-				acidspit.OnHit(other.gameObject);
-				
-				Network.Instantiate((GameObject)Resources.Load("Weapons/Bombs/AcidSpitExplosion"), 
-				                    transform.position, 
-				                    Quaternion.LookRotation(-transform.forward), int.Parse(Network.player.ToString()));
-				
-				Network.Destroy(gameObject);
-			}						
-		}
-	}
-
 	void FixedUpdate() {
 		if(networkView.isMine)
 		{
 			var toTarget = Target.transform.position - transform.position + new Vector3(0.0f, 5.0f, 0.0f);
 			rigidbody.AddForce(toTarget.normalized * Speed - rigidbody.velocity, ForceMode.VelocityChange);
+
+			RaycastHit hit;
+			if (Physics.SphereCast(transform.position, 2.5f, rigidbody.velocity.normalized, out hit, rigidbody.velocity.magnitude * Time.fixedDeltaTime))
+			{
+				if(hit.collider.gameObject != Firer)
+				{
+					if(hit.collider.tag == "Dino" || hit.collider.tag == "Ai")
+					{
+						var acidspit = Firer.GetComponent<AcidSpit>();
+						acidspit.OnHit(hit.collider.gameObject);
+					}	
+					
+					Network.Instantiate((GameObject)Resources.Load("Weapons/Bombs/AcidSpitExplosion"), 
+					                    hit.point, 
+					                    Quaternion.LookRotation(hit.normal), int.Parse(Network.player.ToString()));
+				
+					Network.Destroy(gameObject);
+				}
+			}
 		}
 	}
 

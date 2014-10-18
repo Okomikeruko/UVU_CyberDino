@@ -20,10 +20,7 @@ public class TeleportSlam : MeleeAttack {
 
 	public override void Fire ()
 	{
-		Debug.Log("Teleport Slam!");
-		/* Animation trigger added by Lee*/
-		WeaponVFX.enableEmission = true;
-		WeaponVFX.Play ();
+		networkView.RPC("EnableVFX", RPCMode.All);
 		StartCoroutine (slam(Duration));
 	}
 
@@ -34,8 +31,7 @@ public class TeleportSlam : MeleeAttack {
 		
 		Vector3 direction;
 		
-		DinoCollisions dinoCol = GetComponent<DinoCollisions>();
-		
+		DinoCollisions dinoCol = GetComponent<DinoCollisions>();		
 		dinoCol.enabled = false;
 
 		NetworkAnimations netanim = GetComponentInChildren<NetworkAnimations>();
@@ -88,12 +84,26 @@ public class TeleportSlam : MeleeAttack {
 		
 		if(otherCol != null)
 			otherCol.enabled = true;
-		WeaponVFX.enableEmission = false;
 		dinoCol.enabled = true;
-		
+
+
+
 		somethingHit = false;
 
 		netanim.AnimSetMelee ("Melee", false);
+		
+		networkView.RPC("DisableVFX", RPCMode.All);
+	}
 
+	[RPC]
+	void EnableVFX()
+	{
+		WeaponVFX.enableEmission = true;
+		WeaponVFX.Play ();
+	}
+	[RPC]
+	void DisableVFX()
+	{
+		WeaponVFX.enableEmission = false;
 	}
 }

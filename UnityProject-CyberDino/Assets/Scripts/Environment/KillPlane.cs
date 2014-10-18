@@ -6,7 +6,7 @@ public class KillPlane : MonoBehaviour {
 	
 	void OnTriggerEnter (Collider other)
 	{
-		if(other.networkView.isMine)
+		if(other.networkView != null && other.networkView.isMine)
 		{
 			if(other.tag == "Dino" || other.tag == "Ai")
 			{
