@@ -38,10 +38,8 @@ public class GameControl : MonoBehaviour {
 		int playerID = int.Parse(Network.player.ToString());
 
 		GameObject PlayerDino = (GameObject)Network.Instantiate((GameObject)Resources.Load(playerInfo.dinoName), spawnPoint[playerID].transform.position, Quaternion.LookRotation(spawnPoint[playerID].transform.forward), playerID);
-		var PlayerControl = PlayerDino.GetComponent<UserControl> ();
-		PlayerControl.enabled = true;
-		var AIControl = PlayerDino.GetComponent<AIControl> ();
-		AIControl.enabled = false;
+		var PlayerControl = PlayerDino.GetComponent<UserControl>();
+		PlayerControl.InitAsPlayer();
 
 		MainCameraFollow.target = PlayerDino.transform;
 
@@ -61,20 +59,15 @@ public class GameControl : MonoBehaviour {
 			i += networkHandler.playerInformation.Count;
 
 			for (; i < NetworkGameHandler.MAX_PLAYERS; i++) {
-					GameObject AiDino = (GameObject)Network.Instantiate((GameObject)Resources.Load(menuControl.dinos[Random.Range(0,5)]), spawnPoint[i].transform.position, Quaternion.LookRotation(spawnPoint[i].transform.forward), playerID);
-					//GameObject AiDino = (GameObject)Network.Instantiate ((GameObject)Resources.Load (menuControl.dinos [4]), spawnPoint [i].transform.position, Quaternion.LookRotation (spawnPoint [i].transform.forward), playerID);
-					AiDino.tag = "Ai";
-					PlayerControl = AiDino.GetComponent<UserControl> ();
-					PlayerControl.enabled = false;
-					AIControl = AiDino.GetComponent<AIControl> ();
-					AIControl.enabled = true;
+				GameObject AiDino = (GameObject)Network.Instantiate((GameObject)Resources.Load(menuControl.dinos[Random.Range(0,5)]), spawnPoint[i].transform.position, Quaternion.LookRotation(spawnPoint[i].transform.forward), playerID);
+				PlayerControl = AiDino.GetComponent<UserControl> ();				
+				PlayerControl.InitAsAi();
 			}
 		}
 
 		var myInfo = networkHandler.GetMyInfo();
 		myInfo.readyState = "GameReady";
 		networkHandler.UpdatePlayerInformation(myInfo);
-
 	}
 
 	public void ReadyStateCheck() {

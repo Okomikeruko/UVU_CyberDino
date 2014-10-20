@@ -1,9 +1,7 @@
-﻿// Name: Robert Reed
-// Project: Cyber-Dino Racing
-// Date: 12/06/2013
-
-using UnityEngine;
+﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
 
 public class RaceStart : MonoBehaviour {
 	
@@ -12,10 +10,7 @@ public class RaceStart : MonoBehaviour {
 	public GameObject player;
 
 	public GameObject[] ai;
-	
-	//the motion scripts
-	private MotionControl playerMotion;
-	
+		
 	//hold the children of this object
 	public GameObject[] childTex = new GameObject[4];
 	
@@ -37,27 +32,14 @@ public class RaceStart : MonoBehaviour {
 			}
 		}
 
-		foreach (var unit in ai) {
-			if (unit != null) {
-				var aiMotion = unit.GetComponent<MotionControl>();
-				aiMotion.enabled = false;
-			}
+		//get the MotionControllers from the player and the cpu
+		foreach (var unit in players.Concat(ai)) {
+			var playerMotion = unit.GetComponent<MotionControl> ();
+			playerMotion.enabled = false;
 		}
 
-		//get the MotionControllers from the player and the cpu
-		playerMotion = player.GetComponent<MotionControl>();
-
-		//turn off the motion scripts for the player and the cpu
-		playerMotion.enabled = false;
-
-
 		//invoke the CountDown method
-		InvokeRepeating ("CountDown", 1.0f, 1.0f);
-	}
-	
-	// Update is called once per frame
-	void FixedUpdate () {
-
+		InvokeRepeating("CountDown", 1.0f, 1.0f);
 	}
 	
 	void CountDown()
@@ -69,11 +51,9 @@ public class RaceStart : MonoBehaviour {
 			childTex[index - 1].SetActive(false);
 
 			//reenable the motion scripts
-			playerMotion.enabled = true;
-
-			foreach (var unit in ai){
-				var aiMotion = unit.GetComponent<MotionControl>();
-				aiMotion.enabled = true;
+			foreach(var unit in players.Concat(ai))
+			{
+				unit.GetComponent<MotionControl>().enabled = true;
 			}
 
 			//stop the repeating

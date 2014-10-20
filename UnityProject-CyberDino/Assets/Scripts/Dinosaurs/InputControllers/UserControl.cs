@@ -130,4 +130,30 @@ public class UserControl : MonoBehaviour {
 		steeringMultiplier = 1.0f;
 	}
 
+
+	// Dino Initialization
+	//-----------------------------------------------------------------------------------------
+	public void InitAsPlayer()
+	{
+		networkView.RPC("initializePlayerType", RPCMode.AllBuffered, false);
+	}
+	public void InitAsAi()
+	{
+		networkView.RPC("initializePlayerType", RPCMode.AllBuffered, true);
+	}
+	
+	[RPC]
+	void initializePlayerType(bool isAi)
+	{
+		if (isAi) {
+			tag = "Ai";
+			enabled = false;
+			GetComponent<AIControl>().enabled = true;
+		}
+		else {
+			tag = "Dino";
+			enabled = true;
+			GetComponent<AIControl>().enabled = false;
+		}
+	}
 } 
