@@ -155,10 +155,5 @@ public class UserControl : MonoBehaviour {
 			enabled = true;
 			GetComponent<AIControl>().enabled = false;
 		}
-
-		if (!networkView.isMine)
-		{
-			GetComponentInChildren<Animator>().enabled = false;
-		}
 	}
 } 
