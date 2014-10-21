@@ -147,11 +147,11 @@ public class DinoRagdoll : MonoBehaviour {
 	public void ResetRacer()
 	{
 		foreach(Rigidbody ragdoll in ragdollBones)
-			ragdoll.isKinematic = true;
+			ragdoll.isKinematic = (networkView.isMine) ? true : false;
 		this.rigidbody.isKinematic = false;
 		foreach(Collider collider in ragdollColliders)
 			collider.enabled = false;
-		dinoAnimator.enabled = true;
+		dinoAnimator.enabled = (networkView.isMine) ? true : false;
 		foreach(Collider collider in playColliders)
 			collider.enabled = true;
 		move.enabled = true;
