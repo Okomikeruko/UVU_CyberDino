@@ -100,7 +100,7 @@ public class UserControl : MonoBehaviour {
 		}
 		if (Input.GetKeyDown (KeyCode.L)) 
 		{
-			inv.dropAll();
+			inv.DropAll();
 		}
 	}
 

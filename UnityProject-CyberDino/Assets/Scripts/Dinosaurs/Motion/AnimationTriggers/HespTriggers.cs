@@ -3,13 +3,20 @@ using System.Collections;
 
 public class HespTriggers : AnimationTriggers {
 
-	// Use this for initialization
+	private SonicScream ss;
+	private EpicScream es;
+
 	void Start () {
-	
+		ss = GetComponentInParent<SonicScream>();
+		es = GetComponentInParent<EpicScream>();
 	}
-	
-	// Update is called once per frame
-	void Update () {
-	
+
+	void SonicScream() {
+		ss.PlayFX();
 	}
+
+	void EpicScream() {
+		es.PlayFX();
+	}
+
 }

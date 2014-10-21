@@ -71,7 +71,10 @@ public class Inventory : MonoBehaviour {
 	public float newY = 10;
 	public float newZ = 0;
 
-	public void dropAll(){
+	public void DropOne() {
+	}
+
+	public void DropAll() {
 		Vector3 newPostion = transform.position;
 		newPostion.x = transform.position.x + newX;
 		newPostion.y = transform.position.y + newY;
