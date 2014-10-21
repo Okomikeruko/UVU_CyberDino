@@ -14,13 +14,21 @@ public class EpicScream : Bomb {
 	public override void Fire ()
 	{		
 		NetworkAnimations netanim = GetComponentInChildren<NetworkAnimations> ();
-		netanim.SetTrigger("Bomb");
+		netanim.SetBool("Bomb", true);
 	}
 
 	public void PlayFX()
 	{
 		// Play VFX
-		WeaponVFX.Play ();
+		WeaponVFX.Play();
+
+		StartCoroutine(Effect());
+	}
+
+	IEnumerator Effect()
+	{
+		yield return new WaitForSeconds(1.0f);
+
 		// Find Nearest Opponent
 		var dinos = GameObject.FindGameObjectsWithTag("Dino");
 		var ais = GameObject.FindGameObjectsWithTag("Ai");
@@ -33,7 +41,7 @@ public class EpicScream : Bomb {
 				var health = d.GetComponent<Health>();
 				if(health != null)
 					health.Damage(Damage);
-
+				
 				if(health == null || health.Current > 0.0f)
 				{
 					var uc = d.GetComponent<UserControl>();
