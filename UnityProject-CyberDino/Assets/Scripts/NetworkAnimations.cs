@@ -43,7 +43,7 @@ public class NetworkAnimations : MonoBehaviour {
 	[RPC]
 	void AnimatorTriggerMelee ()
 	{
-		anim.SetTrigger ("Melee");
+		if(anim != null) anim.SetTrigger ("Melee");
 	}
 
 	public void AnimTriggerBomb()
@@ -53,7 +53,7 @@ public class NetworkAnimations : MonoBehaviour {
 	[RPC]
 	void AnimatorTriggerBomb ()
 	{
-		anim.SetTrigger ("Bomb");
+		if(anim != null) anim.SetTrigger ("Bomb");
 	}
 	
 
@@ -72,21 +72,21 @@ public class NetworkAnimations : MonoBehaviour {
 
 	[RPC]
 	void AnimatorSpeed (string speed, float velocity, float topSpeed) {
-		anim.SetFloat("Speed", velocity/topSpeed);
+		if(anim != null) anim.SetFloat("Speed", velocity/topSpeed);
 	}
 
 	[RPC]
 	void AnimatorDirection (string dir, float horizontalDir) {
-		anim.SetFloat("Direction", horizontalDir);
+		if(anim != null) anim.SetFloat("Direction", horizontalDir);
 	}
 
 	[RPC]
 	void AnimatorJump (string jump, int jumping) {
 		if (jumping == 1) {
-			anim.SetBool ("Jump", true);
+			if(anim != null) anim.SetBool ("Jump", true);
 		}
 		else {
-			anim.SetBool ("Jump", false);
+			if(anim != null) anim.SetBool ("Jump", false);
 		}
 	}
 
@@ -94,10 +94,10 @@ public class NetworkAnimations : MonoBehaviour {
 	[RPC]
 	void AnimatorMelee (string melee, int isAttacking) {
 		if(isAttacking == 1) {
-			anim.SetBool (melee, true);
+			if(anim != null) anim.SetBool (melee, true);
 		}
 		else{
-			anim.SetBool (melee, false);
+			if(anim != null) anim.SetBool (melee, false);
 		}
 	}
 }
