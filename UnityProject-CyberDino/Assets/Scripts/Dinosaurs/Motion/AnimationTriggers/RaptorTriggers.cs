@@ -3,13 +3,15 @@ using System.Collections;
 
 public class RaptorTriggers : AnimationTriggers {
 
+	private Smite smite;
+
 	// Use this for initialization
 	void Start () {
-	
+		smite = GetComponentInParent<Smite>();
 	}
-	
-	// Update is called once per frame
-	void Update () {
-	
+
+	void OnClaw () {
+		smite.PlayVFX();
 	}
+
 }
