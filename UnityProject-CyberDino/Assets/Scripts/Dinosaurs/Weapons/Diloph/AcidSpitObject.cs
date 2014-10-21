@@ -10,7 +10,7 @@ public class AcidSpitObject : MonoBehaviour {
 	void FixedUpdate() {
 		if(networkView.isMine)
 		{
-			var toTarget = Target.transform.position - transform.position + new Vector3(0.0f, 5.0f, 0.0f);
+			var toTarget = Target.transform.position - transform.position;
 			rigidbody.AddForce(toTarget.normalized * Speed - rigidbody.velocity, ForceMode.VelocityChange);
 
 			RaycastHit hit;
