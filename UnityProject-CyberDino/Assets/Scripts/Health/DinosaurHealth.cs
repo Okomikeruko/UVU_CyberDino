@@ -23,19 +23,32 @@ public class DinosaurHealth : Health {
 
 	IEnumerator deathclock(float duration)
 	{
-		var ragdoll = GetComponent<DinoRagdoll> ();
-		if(ragdoll != null) ragdoll.GoRagdoll ();
+		networkView.RPC("StartRagdoll", RPCMode.All);
 		var mc = GetComponent<MotionControl> ();
 		mc.enabled = false;
 
 		yield return new WaitForSeconds(duration);
-
-		if(ragdoll != null) ragdoll.ResetRacer ();
+		
+		networkView.RPC("ResetRagdoll", RPCMode.All);
 		mc.enabled = false; //ragdoll.ResetRacer enabled this, so the dino starts moving before respawn finished. 
 		var rm = GetComponent<RespawnManager> ();
 		yield return StartCoroutine(rm.Respawn());
 		mc.enabled = true;
 		Heal (Total);
+	}
+
+	[RPC]
+	void StartRagdoll()
+	{
+		var ragdoll = GetComponent<DinoRagdoll> ();
+		if(ragdoll != null) ragdoll.GoRagdoll ();
+	}
+
+	[RPC]
+	void ResetRagdoll()
+	{
+		var ragdoll = GetComponent<DinoRagdoll> ();
+		if(ragdoll != null) ragdoll.ResetRacer ();
 	}
 
 }

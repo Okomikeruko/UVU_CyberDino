@@ -105,6 +105,7 @@ public class DinoRagdoll : MonoBehaviour {
 		foreach(Rigidbody ragdoll in ragdollBones)
 		{
 			ragdoll.isKinematic = false;
+			ragdoll.networkView.enabled = true;
 			ragdoll.rigidbody.velocity = rigidbody.velocity;
 		}
 		float force = rigidbody.velocity.magnitude;
@@ -147,11 +148,14 @@ public class DinoRagdoll : MonoBehaviour {
 	public void ResetRacer()
 	{
 		foreach(Rigidbody ragdoll in ragdollBones)
-			ragdoll.isKinematic = (networkView.isMine) ? true : false;
+		{
+			ragdoll.isKinematic = true;
+			ragdoll.networkView.enabled = false;
+		}
 		this.rigidbody.isKinematic = false;
 		foreach(Collider collider in ragdollColliders)
 			collider.enabled = false;
-		dinoAnimator.enabled = (networkView.isMine) ? true : false;
+		dinoAnimator.enabled = true;
 		foreach(Collider collider in playColliders)
 			collider.enabled = true;
 		move.enabled = true;
