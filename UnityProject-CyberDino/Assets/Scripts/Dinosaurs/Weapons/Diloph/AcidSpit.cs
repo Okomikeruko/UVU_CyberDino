@@ -22,7 +22,7 @@ public class AcidSpit : Bomb {
 	{
 		/* Animation trigger added by Lee*/
 		NetworkAnimations netanim = GetComponentInChildren<NetworkAnimations>();
-		netanim.AnimTriggerBomb();
+		netanim.SetTrigger("Bomb");
 	}
 
 	public void OnSpit()

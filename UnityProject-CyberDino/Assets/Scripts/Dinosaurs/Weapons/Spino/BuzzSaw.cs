@@ -37,13 +37,13 @@ public class BuzzSaw : MeleeAttack
         
         NetworkAnimations netanim = GetComponentInChildren<NetworkAnimations>();
         // Spino starts to curl up, isAttacking true, start Audio Effect
-        netanim.AnimSetMelee("Melee", true);
+        netanim.SetTrigger("Melee");
         
         // Goes into SawFX (turn on) called my mecanim automatically
         // Wait "duration" seconds
         yield return new WaitForSeconds(seconds);
         // Spino starts to uncurl, stop Audio Effect
-        netanim.AnimSetMelee("Melee", false);
+        netanim.SetTrigger("Melee");
         // Stop SawFX (turn off) called by mecanim automatically
     }
   
@@ -94,7 +94,7 @@ public class BuzzSaw : MeleeAttack
         DinoCollisions myCollision = GetComponent<DinoCollisions>();
         myCollision.enabled = false;
         NetworkAnimations netanim = GetComponentInChildren<NetworkAnimations>();
-        netanim.AnimSetMelee("Melee", true);
+        netanim.SetTrigger("Melee");
 
         DinoCollisions damageColl = null;
         Vector3 buzzForward;
@@ -151,6 +151,6 @@ public class BuzzSaw : MeleeAttack
         myCollision.enabled = true;
 
         hitOne = false;
-        netanim.AnimSetMelee("Melee", false);
+        netanim.SetTrigger("Melee");
     }
 }

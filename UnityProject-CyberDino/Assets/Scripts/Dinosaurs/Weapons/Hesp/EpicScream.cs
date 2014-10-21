@@ -14,7 +14,7 @@ public class EpicScream : Bomb {
 	public override void Fire ()
 	{		
 		NetworkAnimations netanim = GetComponentInChildren<NetworkAnimations> ();
-		netanim.AnimTriggerBomb ();
+		netanim.SetTrigger("Bomb");
 	}
 
 	public void PlayFX()

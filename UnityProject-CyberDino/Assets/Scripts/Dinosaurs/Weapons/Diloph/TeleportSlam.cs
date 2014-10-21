@@ -36,7 +36,7 @@ public class TeleportSlam : MeleeAttack {
 
 		NetworkAnimations netanim = GetComponentInChildren<NetworkAnimations>();
 
-		netanim.AnimSetMelee ("Melee", true);
+		netanim.SetTrigger("Melee");
 
 		DinoCollisions otherCol = null;
 		
@@ -90,7 +90,7 @@ public class TeleportSlam : MeleeAttack {
 
 		somethingHit = false;
 
-		netanim.AnimSetMelee ("Melee", false);
+		netanim.SetTrigger("Melee");
 		
 		networkView.RPC("DisableVFX", RPCMode.All);
 	}

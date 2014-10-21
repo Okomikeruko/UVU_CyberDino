@@ -76,11 +76,13 @@ public class MotionControl : MonoBehaviour {
 		// Jumping
 		if (onGround) {						
 			// The Jump Function
-			netanim.AnimSetJump ("Jump", false);
 			if (isJumping) {
 				rigidbody.velocity = new Vector3 (rigidbody.velocity.x, Mathf.Sqrt (2.0f * JumpHeight * -Physics.gravity.y), rigidbody.velocity.z);
-				netanim.AnimSetJump ("Jump", true);
+				netanim.SetBool("Jump", true);
 				land = false;
+			}
+			else {				
+				netanim.SetBool("Jump", false);
 			}
 		} else if (isJumping) {
 			float jumpDamper = rigidbody.velocity.magnitude * Time.deltaTime;
@@ -89,7 +91,7 @@ public class MotionControl : MonoBehaviour {
 			if (Physics.Raycast (downray, out hit, jumpDamper) && !land)
 			{
 				Debug.Log ("JumpDamper = " + Mathf.Abs(jumpDamper));
-				netanim.AnimSetJump ("Jump", false);
+				netanim.SetBool("Jump", false);
 				land = true;
 			}
 		}
@@ -97,8 +99,8 @@ public class MotionControl : MonoBehaviour {
 		isJumping = false;
 		onGround = false;
 
-		netanim.AnimSetSpeed ("Speed", rigidbody.velocity.magnitude, MaxSpeed);
-		netanim.AnimSetDirection("Direction", inputRotationAxis);
+		netanim.SetFloat("Speed", rigidbody.velocity.magnitude / MaxSpeed);
+		netanim.SetFloat("Direction", inputRotationAxis);
 	}
 
 
@@ -163,7 +165,7 @@ public class MotionControl : MonoBehaviour {
 	
 	public void SetMelee(bool isAttacking)
 	{
-		netanim.AnimSetMelee("Melee", isAttacking);
+		netanim.SetBool("Melee", isAttacking);
 	}
 	
 	public void TopSpeedMod(float percent, float duration)

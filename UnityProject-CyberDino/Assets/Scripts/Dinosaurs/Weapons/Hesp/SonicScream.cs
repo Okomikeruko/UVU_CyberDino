@@ -18,7 +18,7 @@ public class SonicScream : MeleeAttack {
 	{				
 		Debug.Log("Sonic Scream!");
 		NetworkAnimations netanim = GetComponentInChildren<NetworkAnimations> ();
-		netanim.AnimTriggerMelee();
+		netanim.SetTrigger("Melee");
 
 		GameObject target = null;
 		Collider[] ListOfObjects = Physics.OverlapSphere (this.transform.position, range);
