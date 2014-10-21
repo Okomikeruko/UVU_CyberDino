@@ -43,8 +43,6 @@ public class DinoCollisions : MonoBehaviour {
 
 				// Leave dino to dino collisions to the physics engine (Dinosaur collision material bounciness
 
-				//var mc = GetComponent<MotionControl>();
-				//mc.LockInput(ControlLockTime);
 			}
 
 			// Dinosaur on Anything Else
@@ -76,16 +74,7 @@ public class DinoCollisions : MonoBehaviour {
 							objHealth.Damage(EnvironmentCollisionDamage);
 					}
 
-
-					Vector3 averageCollisionPoint = Vector3.zero;
-					foreach(var point in collisionInfo.contacts)
-					{
-						averageCollisionPoint += point.point;
-					}
-					averageCollisionPoint /= (float) collisionInfo.contacts.Length;
-					rigidbody.AddForceAtPosition((Vector3.Reflect(rigidbody.velocity, contactSum.normalized) - rigidbody.velocity) * 1.5f, averageCollisionPoint, ForceMode.VelocityChange);
-
-					//mc.LockInput(ControlLockTime);
+					rigidbody.AddForce((Vector3.Reflect(rigidbody.velocity, contactSum.normalized) - rigidbody.velocity) * 1.0f, ForceMode.VelocityChange);
 				}
 			}
 		}

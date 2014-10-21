@@ -19,31 +19,35 @@ public class BuzzSaw : MeleeAttack
     private GameObject mesh;
 
     private MotionControl motControl;
-    private bool canDamage = false;
-    private bool isBuzzing = false;
     private float inputMovementAxis;
-    
+	private bool isSpinning;
+	private NetworkAnimations netanim;
+
+	void Start() {
+		netanim = GetComponentInChildren<NetworkAnimations>();
+	}
 
     public override void Fire()
     {
-        Debug.Log("Buzz Saw!");
-        canDamage = true;
-        /* Animation trigger added by Lee*/
         StartCoroutine(spin(duration));		
     }
 
     private IEnumerator spin(float seconds)
-    { 
-        
-        NetworkAnimations netanim = GetComponentInChildren<NetworkAnimations>();
-        // Spino starts to curl up, isAttacking true, start Audio Effect
-        netanim.SetTrigger("Melee");
+    { 		
+		// Spino starts to curl up, isAttacking true, start Audio Effect 
+		isSpinning = true;       
+        netanim.SetBool("Melee", true);
         
         // Goes into SawFX (turn on) called my mecanim automatically
         // Wait "duration" seconds
         yield return new WaitForSeconds(seconds);
-        // Spino starts to uncurl, stop Audio Effect
-        netanim.SetTrigger("Melee");
+
+        // Spino starts to uncurl
+		if(isSpinning)
+		{
+			netanim.SetBool("Melee", false);
+			isSpinning = false;
+		}
         // Stop SawFX (turn off) called by mecanim automatically
     }
   
@@ -52,30 +56,24 @@ public class BuzzSaw : MeleeAttack
     {
         if (on)
         {
-            Debug.Log("Buzz Saw start FX");
             // (2) Any effect or code that's called AFTER Spino finishes curling up.
             // Start Saw effect
             WeaponVFX.SetActive(true);
+
             // MAKE MESH DISAPPEAR
             mesh.SetActive(false);
-            StartCoroutine(buzz(duration));
-            // "InstantSpeedMod" speeds up Dino by a percentage multiplier for duration seconds
-            //InstantSpeedMod(BuzzSpeedFactorIncrease, duration);
-            //motControl.AccelerationMod(BuzzSpeedFactor, duration);
-            isBuzzing = true;
-            //BuzzAttack(duration);
+
+			if(networkView.isMine)
+           		StartCoroutine(buzz(duration));            
         }
         else
         {
             // (3) Any effect or code that's called when Spino STARTS TO UNCURL
             // Stop Saw effect
             WeaponVFX.SetActive(false);
-            // Can no longer cause damage
-            canDamage = false;
-            isBuzzing = false;
+
             // (MAKE MESH RE-APPEAR(The mesh prefab that's a child of Spino prefab))
             mesh.SetActive(true);
-            Debug.Log("Buzz Saw end FX");
         }
     }
     
@@ -93,14 +91,12 @@ public class BuzzSaw : MeleeAttack
 
         DinoCollisions myCollision = GetComponent<DinoCollisions>();
         myCollision.enabled = false;
-        NetworkAnimations netanim = GetComponentInChildren<NetworkAnimations>();
-        netanim.SetTrigger("Melee");
 
         DinoCollisions damageColl = null;
         Vector3 buzzForward;
         while (seconds > 0)
         {
-            buzzForward = transform.TransformDirection(Vector3.forward);
+            buzzForward = transform.forward;
             targets = Physics.SphereCastAll(this.transform.position, ColliderRadius, buzzForward, ColliderRange);
 
             foreach (RaycastHit rayHit in targets)
@@ -140,7 +136,7 @@ public class BuzzSaw : MeleeAttack
              * method to be the best way to go for a temporary, instant speed burst. Darren */
             //this.rigidbody.AddForce(buzzForward * BuzzSpeedFactor, ForceMode.VelocityChange);
             this.rigidbody.velocity = buzzForward * BuzzSpeedFactor;
-            seconds -= 1 * Time.deltaTime;
+            seconds -= Time.deltaTime;
             yield return null;
         }
 
@@ -150,7 +146,9 @@ public class BuzzSaw : MeleeAttack
         }
         myCollision.enabled = true;
 
-        hitOne = false;
-        netanim.SetTrigger("Melee");
+		hitOne = false;
+		
+		netanim.SetBool("Melee", false);
+		isSpinning = false;
     }
 }

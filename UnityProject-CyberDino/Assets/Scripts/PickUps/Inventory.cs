@@ -5,29 +5,24 @@ using System.Collections.Generic;
 public enum PickUpTypes { Weapon, Health, Turbo };
 
 public class Inventory : MonoBehaviour {
-
-	GameObject HUD;
-	HUDScript myHud;
-
-	void Start(){
-		HUD = GameObject.Find ("Hud Camera");
-		myHud = HUD.GetComponent<HUDScript>();
-	}
-	[SerializeField]
-	private int MaximumPickupCount = 3;
-
+	
 	private List<PickUpTypes> PickUps = new List<PickUpTypes>();
 
-	//using these variables to set rotation of object when it is dropped
-	public float newX = 10;
-	public float newY = 10;
-	public float newZ = 0;
+	private HUDScript myHud;
+
+	void Start() {
+		var HUD = GameObject.Find ("Hud Camera");
+		myHud = HUD.GetComponent<HUDScript>();
+	}
 
 	public void AddPickUp(PickUpTypes type)
 	{
-		if(PickUps.Count < MaximumPickupCount)
+		int pickupLimit = (type == PickUpTypes.Weapon) ? 2 : 1;
+
+		if(Count(type) < pickupLimit)
 		{ 
 			PickUps.Add(type);
+
 			if(tag == "Dino" && networkView.isMine)
 				myHud.UpdateItems(this);
 		}
@@ -47,14 +42,12 @@ public class Inventory : MonoBehaviour {
 		{
 			if(type == PickUpTypes.Health)
 			{
-				var health = GetComponent<Health>();
-				health.Heal(25.0f);
+				OnHealthPickupUse();
 			}
 
 			if(type == PickUpTypes.Turbo)
 			{
-				var move = GetComponent<MotionControl>();
-				move.TopSpeedMod(1.5f, 5.0f);
+				OnTurboPickupUse();
 			}
 			
 			if(tag == "Dino" && networkView.isMine)
@@ -64,7 +57,6 @@ public class Inventory : MonoBehaviour {
 
 		for(int i = 0; i < countRemoved; i++)
 		{
-
 			PickUps.Add(type);
 		}
 		
@@ -74,6 +66,11 @@ public class Inventory : MonoBehaviour {
 	}
 
 	//Drops all items
+	//using these variables to set rotation of object when it is dropped
+	public float newX = 10;
+	public float newY = 10;
+	public float newZ = 0;
+
 	public void dropAll(){
 		Vector3 newPostion = transform.position;
 		newPostion.x = transform.position.x + newX;
@@ -88,12 +85,13 @@ public class Inventory : MonoBehaviour {
 
 		foreach (PickUpTypes pickUp in PickUps) 
 		{
-			GameObject dropItemClone = (GameObject)Network.Instantiate(Resources.Load("DropItemPrefab"),newPostion,target, 1);
+			GameObject dropItemClone = (GameObject)Network.Instantiate(Resources.Load("DropItemPrefab"), newPostion, target, 0);
 			newPostion.x += 10;
 			newPostion.z += 7;
 			dropItemClone.GetComponent<DropItem>().setType(pickUp);
 		}
 		PickUps.Clear();
+
 		if(tag == "Dino" && networkView.isMine)
 			myHud.UpdateItems(this);
 	}
@@ -107,6 +105,18 @@ public class Inventory : MonoBehaviour {
 				count++;
 		}
 		return count;
+	}
+
+	private void OnHealthPickupUse()
+	{
+		var health = GetComponent<Health>();
+		health.Heal(25.0f);
+	}
+
+	private void OnTurboPickupUse()
+	{
+		var move = GetComponent<MotionControl>();
+		move.TopSpeedMod(1.5f, 5.0f);
 	}
 
 }
