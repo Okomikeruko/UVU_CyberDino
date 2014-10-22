@@ -5,37 +5,46 @@ using System.Collections.Generic;
 public class Flamethrower : MeleeAttack {
 
 	[SerializeField]
-	private float range = 50;
+	private float range = 100;
 	[SerializeField]
 	private float damage = 25;
 	[SerializeField]
 	private float duration = 10;
 	[SerializeField]
-	private float arcDegree = 45.0f;
+	private float arcDegree = 30.0f;
 	[SerializeField]
 	private ParticleSystem WeaponVFX;
 
-	public override void Fire ()
+	public override void Fire()
 	{		
-		Debug.Log ("Flamethrower!");
+		networkView.RPC ("StartFlamethrower", RPCMode.All);
 
-		//Play VFX/Animation
-		WeaponVFX.Play ();
+		StartCoroutine(Ignite());
+	}
 
-		HashSet<GameObject> targets = new HashSet<GameObject> ();
-		Collider[] ListOfObjects = Physics.OverlapSphere (this.transform.position, range);
+	[RPC]
+	void StartFlamethrower()
+	{
+		WeaponVFX.Play();
+	}
+
+	IEnumerator Ignite()
+	{		
+		yield return new WaitForSeconds(0.25f);
+
+		HashSet<GameObject> targets = new HashSet<GameObject>();
+		Collider[] ListOfObjects = Physics.OverlapSphere (WeaponVFX.transform.position, range);
 		
 		foreach (var obj in ListOfObjects) {
-			float angle = Vector3.Angle(obj.gameObject.transform.position - transform.position, transform.forward);
+			float angle = Vector3.Angle(obj.gameObject.transform.position - WeaponVFX.transform.position, WeaponVFX.transform.forward);
 			if(angle < arcDegree){
 				Health health = obj.gameObject.GetComponent<Health>();
 				if (health != null)
 					targets.Add(obj.gameObject);
 			}
 		}
-
-		StartCoroutine(dot (targets));
-
+		
+		StartCoroutine(dot(targets));
 	}
 	
 	IEnumerator dot(HashSet<GameObject> targets)
@@ -51,6 +60,5 @@ public class Flamethrower : MeleeAttack {
 				health.Damage(dotTick);
 			}
 		}
-		WeaponVFX.Stop ();
 	}
 }
