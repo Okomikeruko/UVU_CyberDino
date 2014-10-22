@@ -15,8 +15,12 @@ public class SpinoTriggers : AnimationTriggers {
 	
 	}
 
-	void buzzsaw (string state) {
-		bs.SawFX((state == "start"));
+	void StartBuzzsaw() {
+		bs.StartSaw();
+	}
+
+	void StopBuzzsaw() {
+		bs.StopSaw();
 	}
 
 }

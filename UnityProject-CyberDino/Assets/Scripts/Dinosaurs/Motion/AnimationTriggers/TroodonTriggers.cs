@@ -3,13 +3,14 @@ using System.Collections;
 
 public class TroodonTriggers : AnimationTriggers {
 
-	// Use this for initialization
-	void Start () {
-	
+	private EMPPulse pulse; 
+
+	void Start() {
+		pulse = GetComponentInParent<EMPPulse>();
 	}
-	
-	// Update is called once per frame
-	void Update () {
-	
+
+	void OnPulse() {
+		pulse.PlayVFX();
 	}
+
 }

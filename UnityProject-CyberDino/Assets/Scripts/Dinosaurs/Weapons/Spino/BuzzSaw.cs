@@ -20,7 +20,6 @@ public class BuzzSaw : MeleeAttack
 
     private MotionControl motControl;
     private float inputMovementAxis;
-	private bool isSpinning;
 	private NetworkAnimations netanim;
 
 	void Start() {
@@ -28,55 +27,24 @@ public class BuzzSaw : MeleeAttack
 	}
 
     public override void Fire()
-    {
-        StartCoroutine(spin(duration));		
+	{
+		netanim.SetBool("Melee", true);	
     }
 
-    private IEnumerator spin(float seconds)
-    { 		
-		// Spino starts to curl up, isAttacking true, start Audio Effect 
-		isSpinning = true;       
-        netanim.SetBool("Melee", true);
-        
-        // Goes into SawFX (turn on) called my mecanim automatically
-        // Wait "duration" seconds
-        yield return new WaitForSeconds(seconds);
+	public void StartSaw() {
+		WeaponVFX.SetActive(true);
+		mesh.SetActive(false);   
 
-        // Spino starts to uncurl
-		if(isSpinning)
-		{
-			netanim.SetBool("Melee", false);
-			isSpinning = false;
-		}
-        // Stop SawFX (turn off) called by mecanim automatically
-    }
-  
-    // If true, turns on Saw animation. If false, turns off...
-    public void SawFX(bool on)
-    {
-        if (on)
-        {
-            // (2) Any effect or code that's called AFTER Spino finishes curling up.
-            // Start Saw effect
-            WeaponVFX.SetActive(true);
+		if(networkView.isMine)
+			StartCoroutine(buzz(duration));
+	}
 
-            // MAKE MESH DISAPPEAR
-            mesh.SetActive(false);
+	public void StopSaw() {
+		netanim.SetBool("Melee", false);	
+		WeaponVFX.SetActive(false);
+		mesh.SetActive(true);   
+	}
 
-			if(networkView.isMine)
-           		StartCoroutine(buzz(duration));            
-        }
-        else
-        {
-            // (3) Any effect or code that's called when Spino STARTS TO UNCURL
-            // Stop Saw effect
-            WeaponVFX.SetActive(false);
-
-            // (MAKE MESH RE-APPEAR(The mesh prefab that's a child of Spino prefab))
-            mesh.SetActive(true);
-        }
-    }
-    
     private IEnumerator buzz(float time)
     {
         /* Using a Raycast out the front of the Dino to detect a collision seems to work
@@ -149,6 +117,5 @@ public class BuzzSaw : MeleeAttack
 		hitOne = false;
 		
 		netanim.SetBool("Melee", false);
-		isSpinning = false;
     }
 }

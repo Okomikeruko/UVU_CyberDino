@@ -7,7 +7,7 @@ public class EMPPulse : MeleeAttack {
 	[SerializeField]
 	private float range = 50;
 	[SerializeField]
-	private float force = 10;
+	private float force = 100;
 	[SerializeField]
 	private float damage = 20;
 
@@ -18,17 +18,23 @@ public class EMPPulse : MeleeAttack {
 
 	public override void Fire ()
 	{
-		StartCoroutine (FXTiming (EffectOffset));
+		NetworkAnimations netanim = GetComponentInChildren<NetworkAnimations>();
+		netanim.SetBool("Attack", true);
 	}
 
+	public void PlayVFX() {
+		EMPPulseFX1.Play();
+
+		if(networkView.isMine)
+			StartCoroutine(FXTiming(EffectOffset));
+	}
 	IEnumerator FXTiming (float duration)
 	{
-		EMPPulseFX1.Play ();
 		yield return new WaitForSeconds (duration);
 		StartPulse ();
 	}
 
-	public void StartPulse()
+	private void StartPulse()
 	{
 		HashSet<GameObject> targets = new HashSet<GameObject> ();
 		Collider[] ListOfObjects = Physics.OverlapSphere (this.transform.position, range);
@@ -37,7 +43,7 @@ public class EMPPulse : MeleeAttack {
 			if (obj.gameObject.rigidbody != null){
 				if(obj.gameObject.tag == "Dino" && obj.gameObject.networkView.isMine == true){
 				}
-				else
+				else if(obj.gameObject.tag == "Dino" || obj.gameObject.tag == "Ai")
 					targets.Add(obj.gameObject);
 			}
 		}
@@ -45,7 +51,7 @@ public class EMPPulse : MeleeAttack {
 		Pulse(targets);
 	}
 
-	private void Pulse(HashSet<GameObject> targets){
+	private void Pulse(HashSet<GameObject> targets) {
 		foreach (var obj in targets) {
 			//Vector3 objPos = obj.transform.position;
 			//Vector3 thisPos = transform.position;

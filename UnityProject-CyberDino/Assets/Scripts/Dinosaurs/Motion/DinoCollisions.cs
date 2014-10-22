@@ -74,7 +74,7 @@ public class DinoCollisions : MonoBehaviour {
 							objHealth.Damage(EnvironmentCollisionDamage);
 					}
 
-					rigidbody.AddForce((Vector3.Reflect(rigidbody.velocity, contactSum.normalized) - rigidbody.velocity) * 1.0f, ForceMode.VelocityChange);
+					//rigidbody.AddForce((Vector3.Reflect(rigidbody.velocity, contactSum.normalized) - rigidbody.velocity) * 1.0f, ForceMode.VelocityChange);
 				}
 			}
 		}
