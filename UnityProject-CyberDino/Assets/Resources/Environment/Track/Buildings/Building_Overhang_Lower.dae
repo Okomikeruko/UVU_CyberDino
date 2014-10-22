@@ -1,0 +1,246 @@
+<?xml version="1.0" encoding="utf-8"?>
+<COLLADA xmlns="http://www.collada.org/2005/11/COLLADASchema" version="1.4.1">
+  <asset><contributor><author></author><authoring_tool>FBX COLLADA exporter</authoring_tool><comments></comments></contributor><created>2014-10-22T15:43:39Z</created><keywords></keywords><modified>2014-10-22T15:43:39Z</modified><revision></revision><subject></subject><title></title><unit meter="0.010000" name="centimeter"></unit><up_axis>Y_UP</up_axis></asset>
+  <library_images>
+    <image id="file19-image" name="file19"><init_from>file://C:\Users\10554449\Documents\UVU_CyberDino\UnityProject-CyberDino\Assets\Resources\Environment\Track\Buildings\Textures\Building_Overhang_Lower.png</init_from></image>
+  </library_images>
+  <library_materials>
+    <material id="lambert16" name="lambert16">
+      <instance_effect url="#lambert16-fx"/>
+    </material>
+  </library_materials>
+  <library_effects>
+    <effect id="lambert16-fx" name="lambert16">
+      <profile_COMMON>
+        <technique sid="standard">
+          <lambert>
+            <emission>
+              <color sid="emission">0.000000  0.000000 0.000000 1.000000</color>
+            </emission>
+            <ambient>
+              <color sid="ambient">0.000000  0.000000 0.000000 1.000000</color>
+            </ambient>
+            <diffuse>
+              <texture texture="file19-image" texcoord="CHANNEL0">
+                <extra>
+                  <technique profile="MAYA">
+                    <wrapU sid="wrapU0">TRUE</wrapU>
+                    <wrapV sid="wrapV0">TRUE</wrapV>
+                    <blend_mode>NONE</blend_mode>
+                  </technique>
+                </extra>
+              </texture>
+            </diffuse>
+            <transparent opaque="RGB_ZERO">
+              <color sid="transparent">0.000000  0.000000 0.000000 1.000000</color>
+            </transparent>
+            <transparency>
+              <float sid="transparency">1.000000</float>
+            </transparency>
+          </lambert>
+        </technique>
+      </profile_COMMON>
+    </effect>
+  </library_effects>
+  <library_geometries>
+    <geometry id="Buiding_Overhang_Lower-lib" name="Buiding_Overhang_LowerMesh">
+      <mesh>
+        <source id="Buiding_Overhang_Lower-POSITION">
+          <float_array id="Buiding_Overhang_Lower-POSITION-array" count="81">
+18.165033 12.778008 22.527542
+18.165033 0.226309 22.527542
+22.527586 0.226309 22.527542
+22.527586 12.772908 22.527542
+-22.511564 0.226319 -18.142906
+-18.149014 0.226331 -18.136755
+13.555158 0.226330 -12.773666
+18.165033 0.226323 0.007969
+18.165033 0.226316 10.318756
+13.555156 12.799418 -12.832765
+-18.149014 12.799418 -18.136755
+18.165033 12.799413 0.007969
+18.165033 12.799405 10.318756
+-22.511564 12.772908 -22.511608
+-22.511564 0.226309 -22.511608
+-22.511564 12.777621 -18.149920
+0.111692 0.226331 -18.136755
+0.111692 12.799418 -18.136755
+22.527586 25.611217 22.527554
+18.165033 25.636738 22.660494
+18.165033 25.637470 0.007969
+13.555156 25.637478 -12.832769
+18.165033 25.637463 10.318770
+-22.511564 25.635960 -18.150787
+-22.511564 25.611217 -22.511614
+-18.149712 25.636623 -18.136761
+0.110837 25.636623 -18.136761
+</float_array>
+          <technique_common>
+            <accessor source="#Buiding_Overhang_Lower-POSITION-array" count="27" stride="3">
+              <param name="X" type="float"/>
+              <param name="Y" type="float"/>
+              <param name="Z" type="float"/>
+            </accessor>
+          </technique_common>
+        </source>
+        <source id="Buiding_Overhang_Lower-Normal0">
+          <float_array id="Buiding_Overhang_Lower-Normal0-array" count="288">
+0.007693 -0.002616 0.999967
+0.000000 0.000000 1.000000
+0.000000 0.000000 1.000000
+0.000000 0.000000 1.000000
+0.007693 -0.002616 0.999967
+0.007704 -0.002619 0.999967
+0.015216 -0.005174 0.999871
+0.007704 -0.002619 0.999967
+0.007693 -0.002616 0.999967
+0.007704 -0.002619 0.999967
+0.015216 -0.005174 0.999871
+0.015216 -0.005174 0.999871
+-0.940937 0.000796 0.338580
+-0.940937 0.000796 0.338580
+-0.940937 0.000796 0.338580
+-0.940937 0.000796 0.338580
+-0.940937 0.000796 0.338580
+-0.940937 0.000796 0.338580
+-1.000000 0.000000 0.000000
+-1.000000 0.000000 0.000000
+-1.000000 0.000000 0.000000
+-1.000000 0.000000 0.000000
+-1.000000 0.000000 0.000000
+-1.000000 0.000000 0.000000
+-1.000000 0.000000 0.000000
+-1.000000 0.000000 0.000000
+-1.000000 0.000000 0.000000
+-1.000000 0.000000 0.000000
+-1.000000 0.000000 0.000000
+-1.000000 0.000000 0.000000
+-0.941186 0.000000 0.337890
+-0.941186 0.000000 0.337890
+-0.941186 0.000000 0.337890
+-0.941186 0.000000 0.337890
+-0.941186 0.000000 0.337890
+-0.941186 0.000000 0.337890
+-1.000000 0.000000 0.000000
+-1.000000 0.000000 0.000000
+-1.000000 0.000000 0.000000
+-1.000000 0.000000 0.000000
+-1.000000 0.000000 0.000000
+-1.000000 0.000000 0.000000
+-1.000000 0.000000 0.000000
+-1.000000 0.000000 0.000000
+-1.000000 0.000000 0.000000
+-1.000000 0.000000 0.000000
+-1.000000 0.000000 0.000000
+-1.000000 0.000000 0.000000
+-1.000000 0.000000 0.000000
+-1.000000 0.000000 0.000000
+-1.000000 0.000000 0.000000
+-1.000000 0.000000 0.000000
+-1.000000 0.000000 0.000000
+-1.000000 0.000000 0.000000
+-1.000000 0.000000 0.000000
+-1.000000 0.000000 0.000000
+-1.000000 0.000000 0.000000
+-1.000000 0.000000 0.000000
+-1.000000 0.000000 0.000000
+-1.000000 0.000000 0.000000
+-0.002214 0.000279 0.999997
+-0.002214 0.000279 0.999997
+-0.002214 0.000279 0.999997
+-0.002214 0.000279 0.999997
+-0.002214 0.000279 0.999997
+-0.002214 0.000279 0.999997
+-0.003117 0.000034 0.999995
+-0.003117 0.000034 0.999995
+-0.003117 0.000034 0.999995
+-0.003117 0.000034 0.999995
+-0.003117 0.000034 0.999995
+-0.003117 0.000034 0.999995
+0.000000 0.000000 1.000000
+0.000000 0.000000 1.000000
+0.000000 0.000000 1.000000
+0.000000 0.000000 1.000000
+0.000000 0.000000 1.000000
+0.000000 0.000000 1.000000
+0.000000 0.000000 1.000000
+0.000000 0.000000 1.000000
+0.000000 0.000000 1.000000
+0.000000 0.000000 1.000000
+0.000000 0.000000 1.000000
+0.000000 0.000000 1.000000
+-0.368775 0.002185 0.929516
+-0.368775 0.002185 0.929516
+-0.368775 0.002185 0.929516
+-0.368775 0.002185 0.929516
+-0.368775 0.002185 0.929516
+-0.368775 0.002185 0.929516
+-0.366998 -0.000012 0.930222
+-0.366998 -0.000012 0.930222
+-0.366998 -0.000012 0.930222
+-0.366998 -0.000012 0.930222
+-0.366998 -0.000012 0.930222
+-0.366998 -0.000012 0.930222
+</float_array>
+          <technique_common>
+            <accessor source="#Buiding_Overhang_Lower-Normal0-array" count="96" stride="3">
+              <param name="X" type="float"/>
+              <param name="Y" type="float"/>
+              <param name="Z" type="float"/>
+            </accessor>
+          </technique_common>
+        </source>
+        <source id="Buiding_Overhang_Lower-UV0">
+          <float_array id="Buiding_Overhang_Lower-UV0-array" count="54">
+0.940839 0.480917
+0.941168 0.207634
+0.993892 0.207682
+0.993577 0.480788
+0.941774 0.752252
+0.994540 0.751760
+0.504836 0.206974
+0.669022 0.207225
+0.668625 0.480678
+0.503776 0.480366
+0.793640 0.207419
+0.793249 0.480912
+0.668015 0.751641
+0.503149 0.751284
+0.792651 0.751921
+0.003763 0.205638
+0.056547 0.205757
+0.055822 0.478941
+0.003113 0.478758
+0.055126 0.750166
+0.002453 0.749730
+0.109261 0.205893
+0.108534 0.479337
+0.107840 0.750311
+0.329940 0.206488
+0.329176 0.479919
+0.328513 0.750877
+</float_array>
+          <technique_common>
+            <accessor source="#Buiding_Overhang_Lower-UV0-array" count="27" stride="2">
+              <param name="S" type="float"/>
+              <param name="T" type="float"/>
+            </accessor>
+          </technique_common>
+        </source>
+        <vertices id="Buiding_Overhang_Lower-VERTEX">
+          <input semantic="POSITION" source="#Buiding_Overhang_Lower-POSITION"/>
+        </vertices>
+        <triangles count="32" material="lambert16"><input semantic="VERTEX" offset="0" source="#Buiding_Overhang_Lower-VERTEX"/><input semantic="NORMAL" offset="1" source="#Buiding_Overhang_Lower-Normal0"/><input semantic="TEXCOORD" offset="2" set="0" source="#Buiding_Overhang_Lower-UV0"/><p> 3 0 3 1 1 1 2 2 2 1 3 1 3 4 3 0 5 0 18 6 5 0 7 0 3 8 3 0 9 0 18 10 5 19 11 4 11 12 8 6 13 6 7 14 7 6 15 6 11 16 8 9 17 9 12 18 11 7 19 7 8 20 10 7 21 7 12 22 11 11 23 8 0 24 0 8 25 10 1 26 1 8 27 10 0 28 0 12 29 11 20 30 12 9 31 9 11 32 8 9 33 9 20 34 12 21 35 13 22 36 14 11 37 8 12 38 11 11 39 8 22 40 14 20 41 12 0 42 0 22 43 14 12 44 11 22 45 14 0 46 0 19 47 4 4 48 16 13 49 18 14 50 15 13 51 18 4 52 16 15 53 17 15 54 17 24 55 20 13 56 18 24 57 20 15 58 17 23 59 19 15 60 17 5 61 21 10 62 22 5 63 21 15 64 17 4 65 16 23 66 19 10 67 22 25 68 23 10 69 22 23 70 19 15 71 17 17 72 25 10 73 22 16 74 24 10 75 22 5 76 21 16 77 24 26 78 26 10 79 22 17 80 25 10 81 22 26 82 26 25 83 23 9 84 9 16 85 24 6 86 6 16 87 24 9 88 9 17 89 25 21 90 13 17 91 25 9 92 9 17 93 25 21 94 13 26 95 26</p></triangles>
+      </mesh>
+    </geometry>
+  </library_geometries>
+  <library_visual_scenes>
+    <visual_scene id="Building_Overhang_Lower" name="Building_Overhang_Lower">
+      <node name="Buiding_Overhang_Lower" id="Buiding_Overhang_Lower" sid="Buiding_Overhang_Lower"><matrix sid="matrix">1.000000 0.000000 0.000000 0.000000 0.000000 1.000000 0.000000 0.000000 0.000000 0.000000 1.000000 0.000000 0.000000 0.000000 0.000000 1.000000</matrix><instance_geometry url="#Buiding_Overhang_Lower-lib"><bind_material><technique_common><instance_material symbol="lambert16" target="#lambert16"/></technique_common></bind_material></instance_geometry><extra><technique profile="FCOLLADA"><visibility>1.000000</visibility></technique></extra></node>
+      <extra><technique profile="MAX3D"><frame_rate>24.000000</frame_rate></technique><technique profile="FCOLLADA"><start_time>0.041667</start_time><end_time>2.000000</end_time></technique></extra>
+    </visual_scene>
+  </library_visual_scenes>
+  <scene>
+    <instance_visual_scene url="#Building_Overhang_Lower"></instance_visual_scene>
+  </scene>
+</COLLADA>

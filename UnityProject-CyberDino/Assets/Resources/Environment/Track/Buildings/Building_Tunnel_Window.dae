@@ -1,13 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <COLLADA xmlns="http://www.collada.org/2005/11/COLLADASchema" version="1.4.1">
-  <asset><contributor><author></author><authoring_tool>FBX COLLADA exporter</authoring_tool><comments></comments></contributor><created>2014-10-14T18:48:49Z</created><keywords></keywords><modified>2014-10-14T18:48:49Z</modified><revision></revision><subject></subject><title></title><unit meter="0.010000" name="centimeter"></unit><up_axis>Y_UP</up_axis></asset>
+  <asset><contributor><author></author><authoring_tool>FBX COLLADA exporter</authoring_tool><comments></comments></contributor><created>2014-10-22T15:28:34Z</created><keywords></keywords><modified>2014-10-22T15:28:34Z</modified><revision></revision><subject></subject><title></title><unit meter="0.010000" name="centimeter"></unit><up_axis>Y_UP</up_axis></asset>
+  <library_images>
+    <image id="file2-image" name="file2"><init_from>file://C:/Users/10554449/Documents/UVU_CyberDino/UnityProject-CyberDino/Assets/Resources/Environment/Track/Buildings/Textures/Building_Tunnel_Corner.png</init_from></image>
+  </library_images>
   <library_materials>
-    <material id="lambert6" name="lambert6">
-      <instance_effect url="#lambert6-fx"/>
+    <material id="lambert7" name="lambert7">
+      <instance_effect url="#lambert7-fx"/>
     </material>
   </library_materials>
   <library_effects>
-    <effect id="lambert6-fx" name="lambert6">
+    <effect id="lambert7-fx" name="lambert7">
       <profile_COMMON>
         <technique sid="standard">
           <lambert>
@@ -18,7 +21,15 @@
               <color sid="ambient">0.000000  0.000000 0.000000 1.000000</color>
             </ambient>
             <diffuse>
-              <color sid="diffuse">0.400000  0.400000 0.400000 1.000000</color>
+              <texture texture="file2-image" texcoord="CHANNEL0">
+                <extra>
+                  <technique profile="MAYA">
+                    <wrapU sid="wrapU0">TRUE</wrapU>
+                    <wrapV sid="wrapV0">TRUE</wrapV>
+                    <blend_mode>NONE</blend_mode>
+                  </technique>
+                </extra>
+              </texture>
             </diffuse>
             <transparent opaque="RGB_ZERO">
               <color sid="transparent">0.000000  0.000000 0.000000 1.000000</color>
@@ -95,24 +106,18 @@
 0.000000 0.000000 1.000000
 0.000000 0.000000 1.000000
 0.000000 0.000000 1.000000
--0.000000 0.000000 1.000000
--0.000000 0.000000 1.000000
--0.000000 0.000000 1.000000
--0.000000 0.000000 1.000000
--0.000000 0.000000 1.000000
--0.000000 0.000000 1.000000
 0.000000 0.000000 1.000000
 0.000000 0.000000 1.000000
 0.000000 0.000000 1.000000
 0.000000 0.000000 1.000000
 0.000000 0.000000 1.000000
 0.000000 0.000000 1.000000
--0.000000 0.000000 -1.000000
--0.000000 0.000000 -1.000000
--0.000000 0.000000 -1.000000
--0.000000 0.000000 -1.000000
--0.000000 0.000000 -1.000000
--0.000000 0.000000 -1.000000
+0.000000 0.000000 1.000000
+0.000000 0.000000 1.000000
+0.000000 0.000000 1.000000
+0.000000 0.000000 1.000000
+0.000000 0.000000 1.000000
+0.000000 0.000000 1.000000
 0.000000 0.000000 -1.000000
 0.000000 0.000000 -1.000000
 0.000000 0.000000 -1.000000
@@ -125,18 +130,24 @@
 0.000000 0.000000 -1.000000
 0.000000 0.000000 -1.000000
 0.000000 0.000000 -1.000000
--0.000000 0.000000 -1.000000
--0.000000 0.000000 -1.000000
--0.000000 0.000000 -1.000000
--0.000000 0.000000 -1.000000
--0.000000 0.000000 -1.000000
--0.000000 0.000000 -1.000000
--0.000000 0.000000 -1.000000
--0.000000 0.000000 -1.000000
--0.000000 0.000000 -1.000000
--0.000000 0.000000 -1.000000
--0.000000 0.000000 -1.000000
--0.000000 0.000000 -1.000000
+0.000000 0.000000 -1.000000
+0.000000 0.000000 -1.000000
+0.000000 0.000000 -1.000000
+0.000000 0.000000 -1.000000
+0.000000 0.000000 -1.000000
+0.000000 0.000000 -1.000000
+0.000000 0.000000 -1.000000
+0.000000 0.000000 -1.000000
+0.000000 0.000000 -1.000000
+0.000000 0.000000 -1.000000
+0.000000 0.000000 -1.000000
+0.000000 0.000000 -1.000000
+0.000000 0.000000 -1.000000
+0.000000 0.000000 -1.000000
+0.000000 0.000000 -1.000000
+0.000000 0.000000 -1.000000
+0.000000 0.000000 -1.000000
+0.000000 0.000000 -1.000000
 0.000000 0.000000 -1.000000
 0.000000 0.000000 -1.000000
 0.000000 0.000000 -1.000000
@@ -246,13 +257,13 @@
         <vertices id="Building_Tunnel_Window-VERTEX">
           <input semantic="POSITION" source="#Building_Tunnel_Window-POSITION"/>
         </vertices>
-        <triangles count="40" material="lambert6"><input semantic="VERTEX" offset="0" source="#Building_Tunnel_Window-VERTEX"/><input semantic="NORMAL" offset="1" source="#Building_Tunnel_Window-Normal0"/><input semantic="TEXCOORD" offset="2" set="0" source="#Building_Tunnel_Window-UV0"/><p> 13 0 1 14 1 2 12 2 0 12 3 0 14 4 2 15 5 3 16 6 4 14 7 2 13 8 1 14 9 2 16 10 4 17 11 5 14 12 2 19 13 7 15 14 3 19 15 7 14 16 2 18 17 6 17 18 5 20 19 8 14 20 2 14 21 2 20 22 8 18 23 6 18 24 6 22 25 10 19 26 7 22 27 10 18 28 6 21 29 9 20 30 8 23 31 11 18 32 6 18 33 6 23 34 11 21 35 9 5 36 22 0 37 23 3 38 21 3 39 21 0 40 23 4 41 24 0 42 23 6 43 26 4 44 24 6 45 26 0 46 23 7 47 25 8 48 27 0 49 23 5 50 22 0 51 23 8 52 27 1 53 28 9 54 29 0 55 23 1 56 28 0 57 23 9 58 29 7 59 25 10 60 30 1 61 28 8 62 27 1 63 28 10 64 30 2 65 31 11 66 32 1 67 28 2 68 31 1 69 28 11 70 32 9 71 29 13 72 1 12 73 0 3 74 12 13 75 1 3 76 12 4 77 13 12 78 0 15 79 3 5 80 14 12 81 0 5 82 14 3 83 12 16 84 4 13 85 1 4 86 13 16 87 4 4 88 13 6 89 15 17 90 5 16 91 4 6 92 15 17 93 5 6 94 15 7 95 16 15 96 3 19 97 7 8 98 17 15 99 3 8 100 17 5 101 14 20 102 8 17 103 5 7 104 16 20 105 8 7 106 16 9 107 18 19 108 7 22 109 10 10 110 19 19 111 7 10 112 19 8 113 17 23 114 11 20 115 8 9 116 18 23 117 11 9 118 18 11 119 20</p></triangles>
+        <triangles count="40" material="lambert7"><input semantic="VERTEX" offset="0" source="#Building_Tunnel_Window-VERTEX"/><input semantic="NORMAL" offset="1" source="#Building_Tunnel_Window-Normal0"/><input semantic="TEXCOORD" offset="2" set="0" source="#Building_Tunnel_Window-UV0"/><p> 13 0 1 14 1 2 12 2 0 12 3 0 14 4 2 15 5 3 16 6 4 14 7 2 13 8 1 14 9 2 16 10 4 17 11 5 14 12 2 19 13 7 15 14 3 19 15 7 14 16 2 18 17 6 17 18 5 20 19 8 14 20 2 14 21 2 20 22 8 18 23 6 18 24 6 22 25 10 19 26 7 22 27 10 18 28 6 21 29 9 20 30 8 23 31 11 18 32 6 18 33 6 23 34 11 21 35 9 5 36 22 0 37 23 3 38 21 3 39 21 0 40 23 4 41 24 0 42 23 6 43 26 4 44 24 6 45 26 0 46 23 7 47 25 8 48 27 0 49 23 5 50 22 0 51 23 8 52 27 1 53 28 9 54 29 0 55 23 1 56 28 0 57 23 9 58 29 7 59 25 10 60 30 1 61 28 8 62 27 1 63 28 10 64 30 2 65 31 11 66 32 1 67 28 2 68 31 1 69 28 11 70 32 9 71 29 13 72 1 12 73 0 3 74 12 13 75 1 3 76 12 4 77 13 12 78 0 15 79 3 5 80 14 12 81 0 5 82 14 3 83 12 16 84 4 13 85 1 4 86 13 16 87 4 4 88 13 6 89 15 17 90 5 16 91 4 6 92 15 17 93 5 6 94 15 7 95 16 15 96 3 19 97 7 8 98 17 15 99 3 8 100 17 5 101 14 20 102 8 17 103 5 7 104 16 20 105 8 7 106 16 9 107 18 19 108 7 22 109 10 10 110 19 19 111 7 10 112 19 8 113 17 23 114 11 20 115 8 9 116 18 23 117 11 9 118 18 11 119 20</p></triangles>
       </mesh>
     </geometry>
   </library_geometries>
   <library_visual_scenes>
     <visual_scene id="Building_Tunnel_Window" name="Building_Tunnel_Window">
-      <node name="Building_Tunnel_Window" id="Building_Tunnel_Window" sid="Building_Tunnel_Window"><matrix sid="matrix">1.000000 0.000000 0.000000 0.000000 0.000000 1.000000 0.000000 0.000000 0.000000 0.000000 1.000000 0.000000 0.000000 0.000000 0.000000 1.000000</matrix><instance_geometry url="#Building_Tunnel_Window-lib"><bind_material><technique_common><instance_material symbol="lambert6" target="#lambert6"/></technique_common></bind_material></instance_geometry><extra><technique profile="FCOLLADA"><visibility>1.000000</visibility></technique></extra></node>
+      <node name="Building_Tunnel_Window" id="Building_Tunnel_Window" sid="Building_Tunnel_Window"><matrix sid="matrix">1.000000 0.000000 0.000000 0.000000 0.000000 1.000000 0.000000 0.000000 0.000000 0.000000 1.000000 0.000000 0.000000 0.000000 0.000000 1.000000</matrix><instance_geometry url="#Building_Tunnel_Window-lib"><bind_material><technique_common><instance_material symbol="lambert7" target="#lambert7"/></technique_common></bind_material></instance_geometry><extra><technique profile="FCOLLADA"><visibility>1.000000</visibility></technique></extra></node>
       <extra><technique profile="MAX3D"><frame_rate>24.000000</frame_rate></technique><technique profile="FCOLLADA"><start_time>0.041667</start_time><end_time>2.000000</end_time></technique></extra>
     </visual_scene>
   </library_visual_scenes>
