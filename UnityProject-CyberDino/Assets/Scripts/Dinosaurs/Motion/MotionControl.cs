@@ -202,4 +202,15 @@ public class MotionControl : MonoBehaviour {
 		yield return new WaitForSeconds(duration);
 		enabled = true;
 	}
+
+	public void ApplyExplosiveForce(float explosionForce, Vector3 explosionPosition, float explosionRadius, float upwardsModifier)
+	{
+		networkView.RPC ("explosiveForce", RPCMode.All, explosionForce, explosionPosition, explosiveRadius, upwardsModifier);
+	}
+	[RPC]
+	void explosiveForce(float explosionForce, Vector3 explosionPosition, float explosionRadius, float upwardsModifier)
+	{
+		if(networkView.isMine)
+			rigidbody.AddExplosionForce(explosionForce, explosionPosition, explosionRadius, upwardsModifier, ForceMode.Impulse);
+	}
 }

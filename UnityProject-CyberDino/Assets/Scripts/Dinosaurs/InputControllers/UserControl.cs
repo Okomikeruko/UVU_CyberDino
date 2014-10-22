@@ -61,11 +61,11 @@ public class UserControl : MonoBehaviour {
 			
 			if(Input.GetButton("Bomb") || triggers < -0.5f)
 			{
-				//if(inv.UsePickUp(PickUpTypes.Weapon, 2))
-				//{
+				if(inv.UsePickUp(PickUpTypes.Weapon, 2))
+				{
 					bomb.Fire();
 					AttackCooldownElasped = 0.0f;
-				//}
+				}
 			}
 			
 			if(Input.GetButton("Turbo"))
