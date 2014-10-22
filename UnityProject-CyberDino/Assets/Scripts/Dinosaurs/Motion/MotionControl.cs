@@ -205,7 +205,7 @@ public class MotionControl : MonoBehaviour {
 
 	public void ApplyExplosiveForce(float explosionForce, Vector3 explosionPosition, float explosionRadius, float upwardsModifier)
 	{
-		networkView.RPC ("explosiveForce", RPCMode.All, explosionForce, explosionPosition, explosiveRadius, upwardsModifier);
+		networkView.RPC ("explosiveForce", RPCMode.All, explosionForce, explosionPosition, explosionRadius, upwardsModifier);
 	}
 	[RPC]
 	void explosiveForce(float explosionForce, Vector3 explosionPosition, float explosionRadius, float upwardsModifier)
