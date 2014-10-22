@@ -9,10 +9,16 @@ public class EMPBlast : Bomb {
 	[SerializeField]
 	private ParticleSystem WeaponVFX;
 
+	private float blastDelay = 0.5f;
+
 	public override void Fire ()
 	{
-		// Debug.Log ("EMP Blast!");
-		WeaponVFX.Play ();
+		networkView.RPC("blastVFX", RPCMode.All);
+	}
+
+	IEnumerator Blast() {		
+		yield return new WaitForSeconds (blastDelay);
+				
 		float gatheredHealth = 0;
 		var DinoRacers = GameObject.FindGameObjectsWithTag("Dino");
 		var AiRacers = GameObject.FindGameObjectsWithTag("Ai");
@@ -23,42 +29,45 @@ public class EMPBlast : Bomb {
 			if (racer == this.gameObject){
 				continue;
 			}
-
+			
 			// Lightning strikes racer
 			PlayLighteningStrike(racer);
 
-			//Take up to 10 health from those racers
-			var dinosaurhHealth = racer.GetComponent<DinosaurHealth>();
-			if (dinosaurhHealth.Current >= DAMAGE){
-				gatheredHealth += DAMAGE;
-				dinosaurhHealth.Damage(DAMAGE);
-			}else{
-				gatheredHealth += dinosaurhHealth.Current;
-				dinosaurhHealth.Damage(dinosaurhHealth.Current);
+			if(networkView.isMine)
+			{
+				//Take up to 10 health from those racers
+				var dinosaurhHealth = racer.GetComponent<Health>();
+				if (dinosaurhHealth.Current >= DAMAGE){
+					gatheredHealth += DAMAGE;
+					dinosaurhHealth.Damage(DAMAGE);
+				}else{
+					gatheredHealth += dinosaurhHealth.Current;
+					dinosaurhHealth.Damage(dinosaurhHealth.Current);
+				}
+
+				//All other racers drop all of their pickups on the track, which can be picked up again later.
+				racer.GetComponent<Inventory>().DropAll();
 			}
-
-
-			//All other racers drop all of their pickups on the track, which can be picked up again later.
-			racer.GetComponent<Inventory>().DropAll();
-			Debug.Log("Have racers drop all items");
 		}
 		//Add health to firing player's health, up to max health
-		this.GetComponent<DinosaurHealth>().Heal(gatheredHealth);
-
+		if(networkView.isMine) this.GetComponent<Health>().Heal(gatheredHealth);
 	}
-	private void PlayLighteningStrike(GameObject racer){
+
+	void PlayLighteningStrike(GameObject racer) {
 		ParticleSystem[] particleSystems = racer.GetComponentsInChildren<ParticleSystem>();
 		foreach(var ps in particleSystems){
-			if (ps.name == "LighteningStrike_VFX"){
-				StartCoroutine(PlayParticleSystem(ps));
+			if (ps.name == "Troodon_Lightning"){
+				ps.Play();
 				break;	
 			}
 		}
 	}
-	private IEnumerator PlayParticleSystem(ParticleSystem particleSystem){
-		float particleSystemDuration = particleSystem.duration;
-		particleSystem.Play();
-		yield return new WaitForSeconds(particleSystemDuration);
-		particleSystem.Stop();
+
+	[RPC]
+	void blastVFX() {
+		WeaponVFX.Play();
+		
+		StartCoroutine(Blast());
 	}
+
 }
