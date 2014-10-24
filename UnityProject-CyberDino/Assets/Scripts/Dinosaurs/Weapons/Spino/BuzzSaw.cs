@@ -103,7 +103,7 @@ public class BuzzSaw : MeleeAttack
              * I'm finding the rigidbody.velocity = transform.TransformDirection(Vector3.forward) * speedfactor;
              * method to be the best way to go for a temporary, instant speed burst. Darren */
             //this.rigidbody.AddForce(buzzForward * BuzzSpeedFactor, ForceMode.VelocityChange);
-            this.rigidbody.velocity = buzzForward * BuzzSpeedFactor;
+			rigidbody.velocity = buzzForward * BuzzSpeedFactor + new Vector3(0, rigidbody.velocity.y, 0);
             seconds -= Time.deltaTime;
             yield return null;
         }
