@@ -716,7 +716,7 @@ public class MenuLogic : MonoBehaviour
 		//while
 		while(true)
 		{
-			Debug.Log(transNum);
+			//Debug.Log(transNum);
 
 			//Debug.Log(tempColor.a);
 			if(fadeOut == false)

@@ -403,6 +403,7 @@ public class MenuControl : MenuLogic
 		//if menuSelet is the lobby menu
 		else if(menuSelect == Menu.lobbyMenu)
 		{	
+
 			//set the positions and size for the lobby menu elements
 			lobbyMenuRect[0] = ResizeRect(new Rect(70, 1, 30, 10));
 			lobbyMenuRect[1] = ResizeRect(new Rect(52, 7, 13, 15));
@@ -429,6 +430,7 @@ public class MenuControl : MenuLogic
 			//if the menu background is there set it's position and scale
 			if(menuBkgd != null)
 			{
+				Debug.Log("it is not null");
 				Vector3 pointInWorld = Camera.main.ScreenToWorldPoint(new Vector3(Screen.width, Screen.height, Camera.main.transform.position.z + 100));
 				menuBkgd.transform.localScale = new Vector3(pointInWorld.x / 5, 1, pointInWorld.y / 5);
 				menuBkgd.transform.position = Camera.main.ScreenToWorldPoint(new Vector3(menuOrigin[2].x + menuBkgdPos.x, menuOrigin[2].y + menuBkgdPos.y, 500));
@@ -755,6 +757,8 @@ public class MenuControl : MenuLogic
 			if(GUI.Button(new Rect(menuOrigin[4].x + resultsMenuBtnRect[0].x, menuOrigin[4].y + resultsMenuBtnRect[0].y, resultsMenuBtnRect[0].width, resultsMenuBtnRect[0].height), resultsMenuTxtr[1]))
 			{
 				LeaveGame(LobbySelection, lobbyMenuBtnRect);
+
+				SetMenuToLobby();
 				
 				UpdateDinoInfo(dinoModels, ref dinoSelected, dinos, ref largeDinoBanner);
 			}
@@ -818,6 +822,7 @@ public class MenuControl : MenuLogic
 		menuSelect = Menu.lobbyMenu;
 		currentSelection = LobbySelection;
 		currentRect = lobbyMenuBtnRect;
+		menuOrigin[2].x = 0;
 	}
 	
 	
