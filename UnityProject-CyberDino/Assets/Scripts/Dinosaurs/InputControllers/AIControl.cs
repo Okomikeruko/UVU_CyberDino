@@ -53,13 +53,7 @@ public class AIControl : MonoBehaviour {
 	void Update() {		
 		if (networkView.isMine) {
 			mc.SetRun(1);
-
-			// Adjust turn axis
-			var target = current.transform.position - transform.position;
-			target.y = 0.0f;
-			var sinTheta = Vector3.Cross(transform.forward, Vector3.Normalize(target));
-
-			mc.SetTurn(2.0f * sinTheta.y);
+			mc.SetTurn(2.0f * CalculateAngleToObject(current));
 		}
 	}
 
@@ -87,5 +81,15 @@ public class AIControl : MonoBehaviour {
 
 			yield return new WaitForSeconds(NavTick);
 		}
+	}
+
+	float CalculateAngleToObject(GameObject target)
+	{
+		// Adjust turn axis
+		var toTarget = target.position - transform.position;
+		target.y = 0.0f;
+		var forward = transform.forward;
+		forward.y = 0.0f;
+		return Vector3.Cross(forward.normalized, toTarget.normalized);
 	}
 }
