@@ -53,7 +53,7 @@ public class AIControl : MonoBehaviour {
 	void Update() {		
 		if (networkView.isMine) {
 			mc.SetRun(1);
-			mc.SetTurn(2.0f * CalculateAngleToObject(current));
+			mc.SetTurn(2.0f * CalculateAngleToObject(current.gameObject));
 		}
 	}
 
@@ -86,10 +86,10 @@ public class AIControl : MonoBehaviour {
 	float CalculateAngleToObject(GameObject target)
 	{
 		// Adjust turn axis
-		var toTarget = target.position - transform.position;
-		target.y = 0.0f;
+		var toTarget = target.transform.position - transform.position;
+		toTarget.y = 0.0f;
 		var forward = transform.forward;
 		forward.y = 0.0f;
-		return Vector3.Cross(forward.normalized, toTarget.normalized);
+		return Vector3.Cross(forward.normalized, toTarget.normalized).y;
 	}
 }
