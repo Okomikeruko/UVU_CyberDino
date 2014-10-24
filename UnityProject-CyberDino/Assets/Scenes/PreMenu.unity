@@ -123,7 +123,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: e6f376646afe95a4ab3370abc3a29b99, type: 2}
       propertyPath: m_RootOrder
-      value: 6
+      value: 3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: e6f376646afe95a4ab3370abc3a29b99, type: 2}
@@ -303,8 +303,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b98ca4a4bd0dd5040951be6d21a1a55b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mySkin: {fileID: 11400000, guid: f9cd5d6b739287443973e3770477dc1f, type: 2}
   menuSelect: 0
+  dinoIndex: 0
+  levelIndex: 0
+  dinoSelected: {fileID: 0}
+  raceDinos: []
+  racePositions: 
+  playerNames: []
+  mySkin: {fileID: 11400000, guid: f9cd5d6b739287443973e3770477dc1f, type: 2}
   dinos:
   - Diloph
   - Hesp
@@ -314,16 +320,6 @@ MonoBehaviour:
   - Troodon
   levelTextures:
   - {fileID: 2800000, guid: c43eafb4df2b8b24e8a981c7852db787, type: 3}
-  readyMe: 0
-  readyAll: 1
-  networkHandlerObject: {fileID: 100000, guid: e6f376646afe95a4ab3370abc3a29b99, type: 2}
-  singlePlayer: 1
-  playAgain: 0
-  playerName: 
-  serverName: 
-  dinoIndex: 0
-  levelIndex: 0
-  buttonMoveSpeed: 2000
   dinoModels:
   - {fileID: 100056, guid: cc2cd984260e8304cb448bdc52cc2f1c, type: 2}
   - {fileID: 100048, guid: cba5b64a1d1920e4c8fcc14a82b94831, type: 2}
@@ -396,7 +392,7 @@ Camera:
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 4294967295
+    m_Bits: 4294967263
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 0

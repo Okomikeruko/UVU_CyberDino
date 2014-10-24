@@ -312,13 +312,7 @@ public class HUDScript : MonoBehaviour
 		healthCover = CreateGUITxtr("Health Cover", healthCoverGfx, new Vector3(0, 0, 3));
 
 		healthGrpBarRotation = healthGrpBar.transform.localEulerAngles;
-
-		//testList = new List<PickUpTypes>();
-		//testList.Add(PickUpTypes.Health);
-		//testList.Add(PickUpTypes.Weapon);
-		//testList.Add(PickUpTypes.Weapon);
 		
-		//UpdateItems(testList);
 	}
 	
 	// Update is called once per frame
@@ -401,8 +395,10 @@ public class HUDScript : MonoBehaviour
 				var myInfo = networkHandler.GetMyInfo();
 				myInfo.readyState = "LobbyReady";
 				networkHandler.UpdatePlayerInformation(myInfo);
-				
-				menuScript.menuSelect = MenuControl.Menu.lobbyMenu;
+
+				menuScript.enabled = true;
+
+				menuScript.SetMenuToLobby();
 				Application.LoadLevel("Menu");
 			}
 		}
@@ -665,6 +661,7 @@ public class HUDScript : MonoBehaviour
 	[RPC]
 	private void EndRaceHelper()
 	{
+		menuScript.enabled = true;
 		StartCoroutine("ShowResults");
 	}
 	
