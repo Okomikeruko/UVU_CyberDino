@@ -16,6 +16,10 @@ public class PickUpItem : MonoBehaviour
 	public Material healthPickUp;
 	public Material turboPickUp;
 
+	public ParticleSystem weaponVFX;
+	public ParticleSystem healthVFX;
+	public ParticleSystem turboVFX;
+
 	private Camera m_Camera;
 	GameObject myContainer;
 	
@@ -45,6 +49,15 @@ public class PickUpItem : MonoBehaviour
 			if(inv != null)
 				inv.AddPickUp(currentType);
 
+			if(currentType == PickUpTypes.Health) {
+				healthVFX.Play();
+			}
+			else if(currentType == PickUpTypes.Turbo) {
+				turboVFX.Play();
+			}
+			else if(currentType == PickUpTypes.Weapon) {
+				weaponVFX.Play();
+			}
         }
         yield return new WaitForSeconds(waitTime);
 
