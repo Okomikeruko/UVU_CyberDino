@@ -8,39 +8,74 @@ public class DropItem : MonoBehaviour {
 	public Material weaponPickUp;
 	public Material healthPickUp;
 	public Material turboPickUp;
-	public Material bombPickUp;
+
+	public ParticleSystem weaponVFX;
+	public ParticleSystem healthVFX;
+	public ParticleSystem turboVFX;
 	
 	private Camera m_Camera;
 	GameObject myContainer;
 
 	public bool canCollide;
+
+	private float centerOffset = 10.0f;
+	private float dropDistance = 30.0f;
+	private Vector3 targetPosition;
+	private Vector3 initPosition;
+	private float t = 0.0f;
+	private float tMax = 0.5f;
 	
-	void Awake(){
+	void Start()
+	{		
+		initPosition = transform.position;
+		RaycastHit hit;
+		Physics.Raycast(transform.position + transform.forward * dropDistance, -transform.up, out hit);
+		targetPosition = hit.point + transform.up * centerOffset;
+
 		m_Camera = Camera.main;
-		myContainer = new GameObject();
-		myContainer.name = "GRP_"+transform.gameObject.name;
-		myContainer.transform.position = transform.position;
-		transform.parent = myContainer.transform;
-		transform.rotation = transform.rotation*Quaternion.Euler(90,0,0);
 	}
+
 	void Update () 
 	{
-		myContainer.transform.LookAt(transform.position + m_Camera.transform.rotation * Vector3.back,m_Camera.transform.rotation * Vector3.up);
-		
+		transform.LookAt(transform.position + m_Camera.transform.rotation * Vector3.back,m_Camera.transform.rotation * Vector3.up);
+		transform.rotation *= Quaternion.Euler(90,0,0);
+	}
+
+	void FixedUpdate()
+	{
+		if(t < tMax)
+		{
+			t += Time.fixedDeltaTime;
+			var p = t / tMax;
+
+			if(p < 1.0f)
+			{
+				transform.position = Vector3.Lerp(initPosition, targetPosition, p);
+			}
+			else
+			{			
+				transform.position = targetPosition;
+			}
+		}
 	}
 
 	public void setType(PickUpTypes type)
 	{
-		currentType = type;
-		if(type == PickUpTypes.Health)
+		networkView.RPC ("initType", RPCMode.AllBuffered, (int)type);
+	}
+	[RPC]
+	void initType(int type)
+	{
+		currentType = (PickUpTypes)type;
+		if(currentType == PickUpTypes.Health)
 		{
 			renderer.material = healthPickUp;
 		}
-		if(type == PickUpTypes.Turbo)
+		if(currentType == PickUpTypes.Turbo)
 		{
 			renderer.material = turboPickUp;
 		}
-		if(type == PickUpTypes.Weapon)
+		if(currentType == PickUpTypes.Weapon)
 		{
 			renderer.material = weaponPickUp;
 		}
@@ -48,19 +83,35 @@ public class DropItem : MonoBehaviour {
 
 	IEnumerator OnTriggerEnter(Collider other)
 	{
-		if(other.tag == "Dino" || other.tag == "Ai")
+		if(canCollide)
 		{
-			if(canCollide)
+			if(other.tag == "Dino" || other.tag == "Ai")
 			{
 				this.collider.enabled = false;
 				this.renderer.enabled = false;
-				var inv = other.GetComponent<Inventory>();
-				if(inv != null)
-					inv.AddPickUp(currentType);
-				Network.Destroy(gameObject);
+
+				if(currentType == PickUpTypes.Health) {
+					healthVFX.Play();
+				}
+				else if(currentType == PickUpTypes.Turbo) {
+					turboVFX.Play();
+				}
+				else if(currentType == PickUpTypes.Weapon) {
+					weaponVFX.Play();
+				}
+
+				if(other.networkView.isMine)
+				{
+					var inv = other.GetComponent<Inventory>();
+					if(inv != null)
+						inv.AddPickUp(currentType);
+					
+					yield return new WaitForSeconds(1);
+					Network.Destroy(gameObject);
+				}
 			}
-			
 		}
+
 		yield return new WaitForSeconds(1);
 		canCollide = true;
 	}

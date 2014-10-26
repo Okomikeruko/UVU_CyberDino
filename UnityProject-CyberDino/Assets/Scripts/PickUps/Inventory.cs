@@ -17,14 +17,17 @@ public class Inventory : MonoBehaviour {
 
 	public void AddPickUp(PickUpTypes type)
 	{
-		int pickupLimit = (type == PickUpTypes.Weapon) ? 2 : 1;
+		if(networkView.isMine)
+		{
+			int pickupLimit = (type == PickUpTypes.Weapon) ? 2 : 1;
 
-		if(Count(type) < pickupLimit)
-		{ 
-			PickUps.Add(type);
+			if(Count(type) < pickupLimit)
+			{ 
+				PickUps.Add(type);
 
-			if(tag == "Dino" && networkView.isMine)
-				myHud.UpdateItems(this);
+				if(tag == "Dino" && networkView.isMine)
+					myHud.UpdateItems(this);
+			}
 		}
 	}
 
@@ -65,38 +68,54 @@ public class Inventory : MonoBehaviour {
 		return false;
 	}
 
-	//Drops all items
-	//using these variables to set rotation of object when it is dropped
-	public float newX = 10;
-	public float newY = 10;
-	public float newZ = 0;
+
 
 	public void DropOne() {
+		networkView.RPC ("DropOnePickup", RPCMode.All);
+	}
+	[RPC]
+	void DropOnePickup()
+	{
+		if(PickUps.Count != 0 && networkView.isMine)
+		{
+			Quaternion target = Quaternion.LookRotation(-transform.forward);
+			int pickup = Random.Range(0, PickUps.Count);
+			
+			GameObject dropItemClone = (GameObject)Network.Instantiate(Resources.Load("DropItemPrefab"), transform.position, target, 0);
+			dropItemClone.GetComponent<DropItem>().setType(PickUps[pickup]);
+			PickUps.RemoveAt(pickup);
+			
+			if(tag == "Dino" && networkView.isMine)
+				myHud.UpdateItems(this);
+		}
 	}
 
 	public void DropAll() {
-		Vector3 newPostion = transform.position;
-		newPostion.x = transform.position.x + newX;
-		newPostion.y = transform.position.y + newY;
-		newPostion.z = transform.position.z + newZ;
-
-		Quaternion target = transform.rotation;
-
-		target.x = 0;
-		target.y = 0;
-		target.z = 0;
-
-		foreach (PickUpTypes pickUp in PickUps) 
+		networkView.RPC ("DropAllPickups", RPCMode.All);
+	}
+	[RPC]
+	void DropAllPickups()
+	{
+		if(PickUps.Count != 0 && networkView.isMine)
 		{
-			GameObject dropItemClone = (GameObject)Network.Instantiate(Resources.Load("DropItemPrefab"), newPostion, target, 0);
-			newPostion.x += 10;
-			newPostion.z += 7;
-			dropItemClone.GetComponent<DropItem>().setType(pickUp);
-		}
-		PickUps.Clear();
+			Quaternion target = Quaternion.LookRotation(-transform.forward);
+			Quaternion adjust = Quaternion.AngleAxis(-15.0f, transform.up);
+			Quaternion increment = Quaternion.AngleAxis(30.0f, transform.up);
+			for(int i = 0; i < PickUps.Count; i++)
+				target *= adjust;
 
-		if(tag == "Dino" && networkView.isMine)
-			myHud.UpdateItems(this);
+			foreach (PickUpTypes pickUp in PickUps) 
+			{
+				GameObject dropItemClone = (GameObject)Network.Instantiate(Resources.Load("DropItemPrefab"), transform.position, target, 0);
+				dropItemClone.GetComponent<DropItem>().setType(pickUp);
+
+				target *= increment;
+			}
+			PickUps.Clear();
+
+			if(tag == "Dino" && networkView.isMine)
+				myHud.UpdateItems(this);
+		}
 	}
 
 	public int Count(PickUpTypes type)

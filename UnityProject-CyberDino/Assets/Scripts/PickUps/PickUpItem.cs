@@ -24,7 +24,8 @@ public class PickUpItem : MonoBehaviour
 	GameObject myContainer;
 	
 	void Awake(){
-		RandomizeType();
+		if(networkView.isMine)
+			RandomizeType();
 		m_Camera = Camera.main;
 		myContainer = new GameObject();
 		myContainer.name = "GRP_"+transform.gameObject.name;
@@ -61,7 +62,8 @@ public class PickUpItem : MonoBehaviour
         }
         yield return new WaitForSeconds(waitTime);
 
-		RandomizeType();
+		if(networkView.isMine)
+			RandomizeType();
 
         this.collider.enabled = true;
         this.renderer.enabled = true;
@@ -69,25 +71,29 @@ public class PickUpItem : MonoBehaviour
 
     void RandomizeType()
     {
-		var randomItemSelection = Random.Range(MINIMUM_ITEM_RANGE, MAXIMUM_ITEM_RANGE + 1);
-        switch (randomItemSelection)
-        {
-            case 1:
-				renderer.material = weaponPickUp;
-				currentType = PickUpTypes.Weapon;
-                break;
-            case 2:
-				renderer.material = turboPickUp;
-				currentType = PickUpTypes.Turbo;
-	            break;
-	        case 3:
-				renderer.material = healthPickUp;
-				currentType = PickUpTypes.Health;
-	            break;
-            default:
-				renderer.material = weaponPickUp;
-				currentType = PickUpTypes.Weapon;
-			break;
-        }
+		networkView.RPC("SetPickupType", RPCMode.All, Random.Range(MINIMUM_ITEM_RANGE, MAXIMUM_ITEM_RANGE + 1));
     }
+	[RPC]
+	void SetPickupType(int selection)
+	{
+		switch (selection)
+		{
+		case 1:
+			renderer.material = weaponPickUp;
+			currentType = PickUpTypes.Weapon;
+			break;
+		case 2:
+			renderer.material = turboPickUp;
+			currentType = PickUpTypes.Turbo;
+			break;
+		case 3:
+			renderer.material = healthPickUp;
+			currentType = PickUpTypes.Health;
+			break;
+		default:
+			renderer.material = weaponPickUp;
+			currentType = PickUpTypes.Weapon;
+			break;
+		}
+	}
 }
