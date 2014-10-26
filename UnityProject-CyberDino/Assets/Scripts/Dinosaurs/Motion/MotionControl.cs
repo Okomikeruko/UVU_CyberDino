@@ -213,4 +213,23 @@ public class MotionControl : MonoBehaviour {
 		if(networkView.isMine)
 			rigidbody.AddExplosionForce(explosionForce, explosionPosition, explosionRadius, upwardsModifier, ForceMode.Impulse);
 	}
+
+	public void AIIncreaseAcceleration(float percent)
+	{
+		MaxDeltaVelocity *= percent;
+	}
+	public void AIDecreaseAcceleration(float percent)
+	{
+		MaxDeltaVelocity /= percent;
+	}
+
+	public void AIIncreaseTopSpeed(float percent)
+	{
+		MaxSpeed *= percent;
+	}
+
+	public void AIDecreaseTopSpeed(float percent)
+	{
+		MaxSpeed /= percent;
+	}
 }

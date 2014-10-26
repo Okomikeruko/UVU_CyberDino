@@ -15,6 +15,17 @@ public class AIControl : MonoBehaviour {
 	private Bomb bomb;
 	private Health health;
 
+	//AI Bridge Speed Modification//
+	private bool inBridgeArea = false;
+	private bool isCheating = false;
+	private float bridgeTopSpeed = 1.5f;
+	private float bridgeAcceleration = 50.0f;
+	private DinoTracking dinoTracking;
+	private GameObject[] dinos;
+	private bool hasValidDinoArray = false;
+	private int dinoArrayPosition = -1;
+	//---------------------------//
+
 	// Use this for initialization
 	void Start () {
 		if (networkView.isMine) {
@@ -28,7 +39,7 @@ public class AIControl : MonoBehaviour {
 			current = current.nextNodes [0];
 
 			Debug.Log ("AI Current Target: " + current.name);
-
+			dinoTracking = GameObject.Find("Checkpoints").GetComponent<DinoTracking>();
 			StartCoroutine (AITick ());
 		}
 	}
@@ -55,6 +66,12 @@ public class AIControl : MonoBehaviour {
 			mc.SetRun(1);
 			mc.SetTurn(2.0f * CalculateAngleToObject(current.gameObject));
 		}
+		if (inBridgeArea)
+			HandleBridgeCheating();
+		if (!inBridgeArea && isCheating){
+			TurnOffCheating();
+		}
+
 	}
 
 	IEnumerator AITick()
@@ -91,5 +108,63 @@ public class AIControl : MonoBehaviour {
 		var forward = transform.forward;
 		forward.y = 0.0f;
 		return Vector3.Cross(forward.normalized, toTarget.normalized).y;
+	}
+
+	public void EnterBridge(){
+		inBridgeArea = true;
+
+	}
+
+	public void ExitBridge(){
+		inBridgeArea = false;
+
+	}
+
+	private void HandleBridgeCheating(){
+		if (dinos == null || dinos.Length == 0){
+			dinos = dinoTracking.GetDinoArray();
+				
+		}
+		if (dinos.Length != 0 && !hasValidDinoArray){
+			if (dinos[0] != null){
+				for (int i = 0; i < dinos.Length; i++){
+					if (dinos[i] == gameObject){
+						dinoArrayPosition = i;
+						break;
+					}
+				}
+				hasValidDinoArray = true;
+			}
+		}
+		if (hasValidDinoArray){
+			int[] positions = dinoTracking.GetCurrentPositions();
+			int playerNum = dinoTracking.playerNum;
+			int playerPosition = positions[playerNum];
+			int myPosition = positions[dinoArrayPosition];
+
+			if (playerPosition < myPosition) {//Player is beating me
+				if (!isCheating){
+					TurnOnCheating();
+				}
+			}else{//Player is losing to me
+				if(isCheating){
+					TurnOffCheating();
+				}
+			}
+		}
+	}
+
+	private void TurnOnCheating(){
+		isCheating = true;
+		MotionControl mc = GetComponent<MotionControl>();
+		mc.AIIncreaseAcceleration(bridgeAcceleration);
+		mc.AIIncreaseTopSpeed(bridgeTopSpeed);
+	}
+
+	private void TurnOffCheating(){
+		isCheating = false;
+		MotionControl mc = GetComponent<MotionControl>();
+		mc.AIDecreaseAcceleration(bridgeAcceleration);
+		mc.AIDecreaseTopSpeed(bridgeTopSpeed);
 	}
 }
