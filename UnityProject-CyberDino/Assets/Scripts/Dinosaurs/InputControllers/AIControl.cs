@@ -16,7 +16,7 @@ public class AIControl : MonoBehaviour {
 	private Health health;
 
 	//AI Bridge Speed Modification//
-	private bool inBridgeArea = false;
+	private bool inStraightArea = false;
 	private bool isCheating = false;
 	private float bridgeTopSpeed = 1.5f;
 	private float bridgeAcceleration = 50.0f;
@@ -61,17 +61,17 @@ public class AIControl : MonoBehaviour {
 		}
 	}
 
-	void Update() {		
+	void FixedUpdate() {		
 		if (networkView.isMine) {
 			mc.SetRun(1);
 			mc.SetTurn(2.0f * CalculateAngleToObject(current.gameObject));
+			
+			if (inStraightArea)
+				HandleBridgeCheating();
+			if (!inStraightArea && isCheating){
+				TurnOffCheating();
+			}
 		}
-		if (inBridgeArea)
-			HandleBridgeCheating();
-		if (!inBridgeArea && isCheating){
-			TurnOffCheating();
-		}
-
 	}
 
 	IEnumerator AITick()
@@ -110,13 +110,13 @@ public class AIControl : MonoBehaviour {
 		return Vector3.Cross(forward.normalized, toTarget.normalized).y;
 	}
 
-	public void EnterBridge(){
-		inBridgeArea = true;
+	public void EnterStraight(){
+		inStraightArea = true;
 
 	}
 
-	public void ExitBridge(){
-		inBridgeArea = false;
+	public void ExitStraight(){
+		inStraightArea = false;
 
 	}
 

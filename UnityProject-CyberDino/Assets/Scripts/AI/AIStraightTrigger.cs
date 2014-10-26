@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class Bridge_AI : MonoBehaviour {
+public class AIStraightTrigger : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
@@ -16,14 +16,14 @@ public class Bridge_AI : MonoBehaviour {
 	void OnTriggerEnter(Collider other){
 		if (other.tag == "Ai"){
 			AIControl aiControl = other.GetComponent<AIControl>();
-			aiControl.EnterBridge();
+			aiControl.EnterStraight();
 		}
 	}
 
 	void OnTriggerExit(Collider other){
 		if (other.tag == "Ai"){
 			AIControl aiControl = other.GetComponent<AIControl>();
-			aiControl.ExitBridge();
+			aiControl.ExitStraight();
 		}
 	}
 }
