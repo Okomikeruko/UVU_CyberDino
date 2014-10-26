@@ -18,11 +18,24 @@ public class AcidSpit : Bomb {
 	[SerializeField]
 	private GameObject projectileStartLocation;
 
+	private GameObject currentTarget;
+
 	public override void Fire ()
 	{
-		/* Animation trigger added by Lee*/
-		NetworkAnimations netanim = GetComponentInChildren<NetworkAnimations>();
-		netanim.SetTrigger("Bomb");
+		currentTarget = getTarget();
+
+		if(currentTarget != null)
+		{
+			NetworkAnimations netanim = GetComponentInChildren<NetworkAnimations>();
+			netanim.SetTrigger("Bomb");
+		}
+		else 
+		{
+			// no valid target, refund pickups
+			var inv = GetComponent<Inventory>();
+			inv.AddPickUp(PickUpTypes.Weapon);
+			inv.AddPickUp(PickUpTypes.Weapon);
+		}
 	}
 
 	public void OnSpit()
@@ -31,7 +44,7 @@ public class AcidSpit : Bomb {
 		                    projectileStartLocation.transform.position, 
 		                    projectileStartLocation.transform.rotation, int.Parse(Network.player.ToString()));
 		var aso = spit.GetComponent<AcidSpitObject>();
-		aso.SetValues(projectileSpeed, getTarget(), gameObject);
+		aso.SetValues(projectileSpeed, currentTarget, gameObject);
 	}
 
 	public void OnHit(GameObject target)
@@ -56,7 +69,7 @@ public class AcidSpit : Bomb {
 		Vector3 position = transform.position;
 		foreach (GameObject go in gos) {
 			float curDistance = Vector3.Distance(go.transform.position, position);
-			if (curDistance < distance) {
+			if (curDistance < distance && Vector3.Dot(transform.forward, (go.transform.position - transform.position).normalized) > 0.0f) {
 				closest = go;
 				distance = curDistance;
 			}
