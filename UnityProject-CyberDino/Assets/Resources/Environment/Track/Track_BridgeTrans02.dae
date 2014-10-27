@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="utf-8"?>
+<COLLADA xmlns="http://www.collada.org/2005/11/COLLADASchema" version="1.4.1">
+  <asset><contributor><author></author><authoring_tool>FBX COLLADA exporter</authoring_tool><comments></comments></contributor><created>2014-10-27T04:45:36Z</created><keywords></keywords><modified>2014-10-27T04:45:36Z</modified><revision></revision><subject></subject><title></title><unit meter="0.010000" name="centimeter"></unit><up_axis>Y_UP</up_axis></asset>
+  <library_images>
+    <image id="file7-image" name="file7"><init_from>file://C:\Users\Myles\Documents\UVU_CyberDino\UnityProject-CyberDino\Assets\Resources\Environment\Textures\Trackpc2yellownoglow.png</init_from></image>
+  </library_images>
+  <library_materials>
+    <material id="Bridge_Trans" name="Bridge_Trans">
+      <instance_effect url="#Bridge_Trans-fx"/>
+    </material>
+  </library_materials>
+  <library_effects>
+    <effect id="Bridge_Trans-fx" name="Bridge_Trans">
+      <profile_COMMON>
+        <technique sid="standard">
+          <lambert>
+            <emission>
+              <color sid="emission">0.000000  0.000000 0.000000 1.000000</color>
+            </emission>
+            <ambient>
+              <color sid="ambient">0.000000  0.000000 0.000000 1.000000</color>
+            </ambient>
+            <diffuse>
+              <texture texture="file7-image" texcoord="CHANNEL0">
+                <extra>
+                  <technique profile="MAYA">
+                    <wrapU sid="wrapU0">TRUE</wrapU>
+                    <wrapV sid="wrapV0">TRUE</wrapV>
+                    <blend_mode>NONE</blend_mode>
+                  </technique>
+                </extra>
+              </texture>
+            </diffuse>
+            <transparent opaque="RGB_ZERO">
+              <color sid="transparent">0.000000  0.000000 0.000000 1.000000</color>
+            </transparent>
+            <transparency>
+              <float sid="transparency">1.000000</float>
+            </transparency>
+          </lambert>
+        </technique>
+      </profile_COMMON>
+    </effect>
+  </library_effects>
+  <library_geometries>
+    <geometry id="pPlane1-lib" name="pPlane1Mesh">
+      <mesh>
+        <source id="pPlane1-POSITION">
+          <float_array id="pPlane1-POSITION-array" count="21">
+-69.500000 0.000000 69.500000
+-69.500000 0.000000 -69.500000
+69.500000 0.000000 -41.450264
+46.213428 0.000000 -46.213428
+-67.632034 0.000000 -69.500000
+69.500000 0.000000 42.233311
+-68.611710 0.000000 69.500000
+</float_array>
+          <technique_common>
+            <accessor source="#pPlane1-POSITION-array" count="7" stride="3">
+              <param name="X" type="float"/>
+              <param name="Y" type="float"/>
+              <param name="Z" type="float"/>
+            </accessor>
+          </technique_common>
+        </source>
+        <source id="pPlane1-Normal0">
+          <float_array id="pPlane1-Normal0-array" count="21">
+0.000000 1.000000 0.000000
+0.000000 1.000000 0.000000
+0.000000 1.000000 0.000000
+0.000000 1.000000 0.000000
+0.000000 1.000000 0.000000
+0.000000 1.000000 0.000000
+0.000000 1.000000 0.000000
+</float_array>
+          <technique_common>
+            <accessor source="#pPlane1-Normal0-array" count="7" stride="3">
+              <param name="X" type="float"/>
+              <param name="Y" type="float"/>
+              <param name="Z" type="float"/>
+            </accessor>
+          </technique_common>
+        </source>
+        <source id="pPlane1-UV0">
+          <float_array id="pPlane1-UV0-array" count="14">
+0.001992 0.001992
+0.001992 0.998008
+0.998008 0.797015
+0.831146 0.831146
+0.015377 0.998008
+0.998008 0.197374
+0.008357 0.001992
+</float_array>
+          <technique_common>
+            <accessor source="#pPlane1-UV0-array" count="7" stride="2">
+              <param name="S" type="float"/>
+              <param name="T" type="float"/>
+            </accessor>
+          </technique_common>
+        </source>
+        <vertices id="pPlane1-VERTEX">
+          <input semantic="POSITION" source="#pPlane1-POSITION"/>
+          <input semantic="NORMAL" source="#pPlane1-Normal0"/>
+        </vertices>
+        <triangles count="5" material="Bridge_Trans"><input semantic="VERTEX" offset="0" source="#pPlane1-VERTEX"/><input semantic="TEXCOORD" offset="1" set="0" source="#pPlane1-UV0"/><p> 0 0 3 3 4 4 0 0 4 4 1 1 5 5 3 3 6 6 3 3 5 5 2 2 3 3 0 0 6 6</p></triangles>
+      </mesh>
+    </geometry>
+  </library_geometries>
+  <library_visual_scenes>
+    <visual_scene id="Track_BridgeTrans02" name="Track_BridgeTrans02">
+      <node name="pPlane1" id="pPlane1" sid="pPlane1"><matrix sid="matrix">1.000000 0.000000 0.000000 0.000000 0.000000 1.000000 0.000000 0.000000 0.000000 0.000000 1.000000 0.000000 0.000000 0.000000 0.000000 1.000000</matrix><instance_geometry url="#pPlane1-lib"><bind_material><technique_common><instance_material symbol="Bridge_Trans" target="#Bridge_Trans"/></technique_common></bind_material></instance_geometry><extra><technique profile="FCOLLADA"><visibility>1.000000</visibility></technique></extra></node>
+      <extra><technique profile="MAX3D"><frame_rate>24.000000</frame_rate></technique><technique profile="FCOLLADA"><start_time>0.041667</start_time><end_time>2.000000</end_time></technique></extra>
+    </visual_scene>
+  </library_visual_scenes>
+  <scene>
+    <instance_visual_scene url="#Track_BridgeTrans02"></instance_visual_scene>
+  </scene>
+</COLLADA>
