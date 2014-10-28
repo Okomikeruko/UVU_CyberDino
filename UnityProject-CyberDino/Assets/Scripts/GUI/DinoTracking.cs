@@ -206,7 +206,8 @@ public class DinoTracking : MonoBehaviour
 
 		//Debug.Log("dino1 " + totalDist[0]);
 		//Debug.Log("dino2 " + totalDist[1]);
-		
+
+		//Debug.Log(playerNum);
 		if(Input.GetKeyDown(KeyCode.E))
 		{
 				

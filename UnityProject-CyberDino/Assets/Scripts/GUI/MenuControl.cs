@@ -220,7 +220,16 @@ public class MenuControl : MenuLogic
 		else if(_level == 2)
 		{
 			//set the variable for the race
-			SetRaceInfo();
+			//SetRaceInfo();
+
+			dinoTracking = GameObject.Find("Checkpoints");
+			
+			if(dinoTracking != null)
+			{
+				//Debug.Log("set tracking script!!!!!!!!!!!!");
+				dinoTrackingScript = dinoTracking.GetComponent<DinoTracking>();
+				//Debug.Log("dinoTrackingScript " + dinoTrackingScript);
+			}
 		}
 	}
 	
@@ -555,7 +564,7 @@ public class MenuControl : MenuLogic
 					
 					if(GUI.Button(new Rect(menuOrigin[2].x + lobbyMenuBtnRect[5].x, menuOrigin[2].y + lobbyMenuBtnRect[5].y, lobbyMenuBtnRect[5].width, lobbyMenuBtnRect[5].height), ""))
 					{
-						StartCoroutine(MoveLeftOff(2, 5, Menu.goToLevel, null, null));
+						//StartCoroutine(MoveLeftOff(2, 5, Menu.goToLevel, null, null));
 						netView.RPC("TransitionFade", RPCMode.AllBuffered);
 					}
 				}

@@ -126,7 +126,7 @@ public class DinoTracking : MonoBehaviour
 		bool gotAllDinos = true;
 		while(true)
 		{
-			Debug.Log("waiting for players");
+			//Debug.Log("waiting for players");
 			//Debug.Log(tempDinos[3]);
 			
 			for(int i = 0; i < tempDinos.Length; i++)
@@ -158,8 +158,7 @@ public class DinoTracking : MonoBehaviour
 				int.TryParse(Network.player.ToString(), out playerNum);
 			}
 		}
-
-		Debug.Log("SEEEEEEEEEEEEEEEEEEEEd");
+		
 		//call rpc function to send the dino network id as well as the player number
 		netView.RPC("SetPlayerDino", RPCMode.AllBuffered, dinoId, playerNum);
 		
@@ -207,7 +206,8 @@ public class DinoTracking : MonoBehaviour
 
 		//Debug.Log("dino1 " + totalDist[0]);
 		//Debug.Log("dino2 " + totalDist[1]);
-		
+
+		//Debug.Log(playerNum);
 		if(Input.GetKeyDown(KeyCode.E))
 		{
 				

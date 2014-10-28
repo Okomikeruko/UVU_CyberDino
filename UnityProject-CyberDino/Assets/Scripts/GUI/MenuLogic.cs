@@ -21,8 +21,8 @@ public class MenuLogic : MonoBehaviour
 	internal NetworkGameHandler networkHandler;
 
 	//the dino tracking script
-	private GameObject dinoTracking;
-	private DinoTracking dinoTrackingScript;
+	internal GameObject dinoTracking;
+	internal DinoTracking dinoTrackingScript;
 
 	//the glow lines script
 	internal GlowLines glowLinesScript;
@@ -138,14 +138,14 @@ public class MenuLogic : MonoBehaviour
 	//the method for when the race level is loaded
 	public void SetRaceInfo()
 	{
-		dinoTracking = GameObject.Find("Checkpoints");
+		/*dinoTracking = GameObject.Find("Checkpoints");
 			
 		if(dinoTracking != null)
 		{
 			//Debug.Log("set tracking script!!!!!!!!!!!!");
 			dinoTrackingScript = dinoTracking.GetComponent<DinoTracking>();
 			//Debug.Log("dinoTrackingScript " + dinoTrackingScript);
-		}
+		}*/
 
 		resultsFName = new string[4];
 			
@@ -531,11 +531,14 @@ public class MenuLogic : MonoBehaviour
 	public string[] SetNames()
 	{
 		int index = 0;
-		
+
+		/*Debug.Log("dino tracking script");
+		Debug.Log(dinoTrackingScript);*/
+
 		int playerNum = dinoTrackingScript.playerNum;
 		
 		
-		while(index < 4)
+		while(index < playerNames.Length)
 		{
 			playerNames[index] = "CPU " + index;
 			
@@ -725,6 +728,7 @@ public class MenuLogic : MonoBehaviour
 	[RPC]
 	public void TransitionFade()
 	{
+		StartCoroutine(MoveLeftOff(2, 5, Menu.goToLevel, null, null));
 		StartCoroutine(TransitionFadeHelper());
 	}
 
