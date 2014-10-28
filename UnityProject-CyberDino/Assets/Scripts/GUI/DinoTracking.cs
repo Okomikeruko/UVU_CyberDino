@@ -103,6 +103,9 @@ public class DinoTracking : MonoBehaviour
 			finishDist[i] = AddUpDistance(currentNodes[i].GetComponent<NodeBehavior>(), nextNodes[i].GetComponent<NodeBehavior>(), 0);
 		}
 		
+		//finishDist[0] = AddUpDistance(currentNodes[0].GetComponent<NodeBehavior>(), nextNodes[0].GetComponent<NodeBehavior>(), 0);
+		
+		
 		for(int i = 0; i < currentPositions.Length; i++)
 		{
 			currentPositions[i] = i + 1;
@@ -196,7 +199,9 @@ public class DinoTracking : MonoBehaviour
 	void FixedUpdate () 
 	{
 
-//Debug.Log(currentPositions[0]);
+		//Debug.Log("dino1 " + totalDist[0]);
+		//Debug.Log("dino2 " + totalDist[1]);
+		
 		if(Input.GetKeyDown(KeyCode.E))
 		{
 				
@@ -206,16 +211,13 @@ public class DinoTracking : MonoBehaviour
 			//netView.RPC("EndRace", RPCMode.All);
 		}
 
-		//posText.guiText.text = "Dino1: " + currentPositions[0] + " Dino2: " + currentPositions[1] + " Dino3: " + currentPositions[2] + " Dino4: " + currentPositions[3];
-		//lapText.guiText.text = "Dino1 lap: " + lapCount[0] + " Dino2 lap: " + lapCount[1] + " Dino3 lap: " + lapCount[2] + " Dino4 lap: " + lapCount[3];
-		
 		//add each dinos current distance from the next nodes
 		for(int i = 0; i < finishDist.Length; i++)
 		{
 			
 			if(currentNodes[i] != null /*&& currentNodes[i].isShortCut == false*/ && dinos[i] != null) 
 			{
-				totalDist[i] = Vector3.Distance(currentNodes[i].NextNodes[0].transform.position, dinos[i].transform.position) + finishDist[i];
+				totalDist[i] = Vector3.Distance(nextNodes[i].transform.position, dinos[i].transform.position) + finishDist[i];
 			}
 
 		}
@@ -274,15 +276,15 @@ public class DinoTracking : MonoBehaviour
 		}
 		else if(dinos[1] == _dino)
 		{
-			UpdateSpecificDino(_node, 1);
+			//UpdateSpecificDino(_node, 1);
 		}
 		else if(dinos[2] == _dino)
 		{
-			UpdateSpecificDino(_node, 2);
+			//UpdateSpecificDino(_node, 2);
 		}
 		else if(dinos[3] == _dino)
 		{
-			UpdateSpecificDino(_node, 3);
+			//UpdateSpecificDino(_node, 3);
 		}
 		
 		//recursevly add up all of the distances between each node until the end
@@ -407,11 +409,14 @@ public class DinoTracking : MonoBehaviour
         NodeBehavior prevNodeScript = _previousNode.GetComponent<NodeBehavior>();
         NodeBehavior nextNodeScript = _nextNode.GetComponent<NodeBehavior>();
 
-        /*Debug.Log("previous node " + _previousNode);
-        Debug.Log("next node " + _nextNode);*/
+        //Debug.Log("previous node " + _previousNode);
+        //Debug.Log("next node " + _nextNode);
 
         float tempNum = _dist + Vector3.Distance(_nextNode.gameObject.transform.position, _previousNode.gameObject.transform.position);
 
+		//Debug.Log(nextNodeScript.isFinishLine == true);
+		//Debug.Log(prevNodeScript == lastNode.GetComponent<NodeBehavior>());
+		
         if (nextNodeScript.isFinishLine == true && prevNodeScript == lastNode.GetComponent<NodeBehavior>())
         {
             return _dist + tempNum;

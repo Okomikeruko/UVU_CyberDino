@@ -41,10 +41,23 @@ public class GlowLines : MonoBehaviour
 		}
 		
 		//call the coroutines for each line
-		StartCoroutine(MoveLine(upLine));
+		/*StartCoroutine(MoveLine(upLine));
 		StartCoroutine(MoveLine(downLine));
 		StartCoroutine(MoveLine(leftLine));
-		StartCoroutine(MoveLine(rightLine));
+		StartCoroutine(MoveLine(rightLine));*/
+		StartCoroutine("MoveLine", upLine);
+		StartCoroutine("MoveLine", downLine);
+		StartCoroutine("MoveLine", leftLine);
+		StartCoroutine("MoveLine", rightLine);
+	}
+	
+	public void OnDisable()
+	{
+		StopCoroutine("MoveLine");
+		StopCoroutine("MoveLine");
+		StopCoroutine("MoveLine");
+		StopCoroutine("MoveLine");
+		
 	}
 
 	//a coroutine funtion for moving from one point to another

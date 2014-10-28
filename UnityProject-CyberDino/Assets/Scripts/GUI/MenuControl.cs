@@ -177,6 +177,8 @@ public class MenuControl : MenuLogic
 		
 		resultsMenuBtnRect = new Rect[4];
 		
+		resultsMenuRect = new Rect[16];
+		
 		//don't destroy this object
 		DontDestroyOnLoad(this);
 		
@@ -205,33 +207,12 @@ public class MenuControl : MenuLogic
 		{
 			Debug.Log("menu scene was loaded");
 			
-			//if there is no main menu background then instantiate it
-			if(mainMenuBkgd == null)
-			{
-				mainMenuBkgdPos  = ResizeRect(new Rect(100, 50, 100, 100));
-				Vector3 backgroundPos = Camera.main.ScreenToWorldPoint(new Vector3(mainMenuBkgdPos.x, mainMenuBkgdPos.y, 500));
-				mainMenuBkgd = (GameObject)Instantiate(Resources.Load("GUI/MainMenuBackground"), backgroundPos, Quaternion.identity);
-				mainMenuBkgd.transform.Rotate(new Vector3(90, 180, 0));
-			}
+			if(glowLinesScript == null)
+				glowLinesScript = Camera.main.GetComponent<GlowLines>();
+				
+			UpdateDinoInfo(dinoModels, ref dinoSelected, dinos, ref largeDinoBanner);
 			
-			//if there is no menu background then instantiate it
-			if(menuBkgd == null)
-			{
-				menuBkgdPos  = ResizeRect(new Rect(100, 50, 100, 100));
-				Vector3 backgroundPos = Camera.main.ScreenToWorldPoint(new Vector3(menuBkgdPos.x, menuBkgdPos.y, 500));
-				menuBkgd = (GameObject)Instantiate(Resources.Load("GUI/MenuBackground"), backgroundPos, Quaternion.identity);
-				menuBkgd.transform.Rotate(new Vector3(90, 180, 0));
-			}
-			
-			//if there is no dino box background then instantiate it
-			if(dinoBoxLg == null)
-			{
-				dinoBoxLgPos = ResizeRect(new Rect(80, 40, 0, 0));
-				dinoBoxLg = (GameObject)Instantiate(Resources.Load("GUI/DinoSelectBackground"), new Vector3(Screen.width, Screen.height, 0), Quaternion.identity);
-				Vector3 pointInWorld = Camera.main.ScreenToWorldPoint(new Vector3(Screen.width, Screen.height, Camera.main.transform.position.z + 50));
-				dinoBoxLg.transform.localScale = new Vector3(pointInWorld.x / 20, pointInWorld.y / 15, pointInWorld.x / 20);
-				dinoBoxLg.transform.Rotate(270, 0, 0);
-			}
+			//InstantiateMenuObj();
 
 		}
 		//if the dumbbell track was loaded
@@ -239,8 +220,6 @@ public class MenuControl : MenuLogic
 		{
 			//set the variable for the race
 			SetRaceInfo();
-			
-			resultsMenuRect = new Rect[16];
 		}
 	}
 	
@@ -249,6 +228,7 @@ public class MenuControl : MenuLogic
 		//set the width and the height multiplier
 		xMulti = Screen.width / 100.0f;
 		yMulti = Screen.height / 100.0f;
+		
 		
 		//if not currently in the race or the menu is moving
 		if(menuSelect != Menu.goToLevel && !menuMoving)
@@ -306,11 +286,17 @@ public class MenuControl : MenuLogic
 			//draw the cyberdino logo
 			GUI.DrawTexture(new Rect(menuOrigin[0].x + mainMenuGfxRect.x, menuOrigin[0].y + mainMenuGfxRect.y, mainMenuGfxRect.width, mainMenuGfxRect.height), mainMenuBtnTxtr[2]);
 			
-			//set the position and the scale of the main menu background
-			Vector3 pointInWorld = Camera.main.ScreenToWorldPoint(new Vector3(Screen.width, Screen.height, Camera.main.transform.position.z + 100));
-			mainMenuBkgd.transform.localScale = new Vector3(pointInWorld.x / 5, 1, pointInWorld.y / 5);
-			mainMenuBkgd.transform.position = Camera.main.ScreenToWorldPoint(new Vector3(menuOrigin[0].x + mainMenuBkgdPos.x, menuOrigin[0].y + mainMenuBkgdPos.y, 500));
-			mainMenuBkgdPos  = ResizeRect(new Rect(50, 50, 100, 100));
+			if(mainMenuBkgd != null)
+			{
+				//set the position and the scale of the main menu background
+				Vector3 pointInWorld = Camera.main.ScreenToWorldPoint(new Vector3(Screen.width, Screen.height, Camera.main.transform.position.z + 100));
+				mainMenuBkgd.transform.localScale = new Vector3(pointInWorld.x / 5, 1, pointInWorld.y / 5);
+				mainMenuBkgd.transform.position = Camera.main.ScreenToWorldPoint(new Vector3(menuOrigin[0].x + mainMenuBkgdPos.x, menuOrigin[0].y + mainMenuBkgdPos.y, 500));
+				mainMenuBkgdPos  = ResizeRect(new Rect(50, 50, 100, 100));
+			}
+			else
+				InstantiateMenuObj();
+			
 			
 			//single player button
 			if(GUI.Button(new Rect(menuOrigin[0].x + mainMenuBtnRect[0].x, menuOrigin[0].y + mainMenuBtnRect[0].y, mainMenuBtnRect[0].width, mainMenuBtnRect[0].height), mainMenuBtnTxtr[0]))
@@ -349,11 +335,16 @@ public class MenuControl : MenuLogic
 			multiPMenuBtnRect[3] = ResizeRect(new Rect(68, 50, 25, 10));
 			multiPMenuBtnRect[4] = ResizeRect(new Rect(5, 82, 15, 8));
 			
-			//set the position and scale of the menu background
-			Vector3 pointInWorld = Camera.main.ScreenToWorldPoint(new Vector3(Screen.width, Screen.height, Camera.main.transform.position.z + 100));
-			menuBkgd.transform.localScale = new Vector3(pointInWorld.x / 5, 1, pointInWorld.y / 5);
-			menuBkgd.transform.position = Camera.main.ScreenToWorldPoint(new Vector3(menuOrigin[1].x + menuBkgdPos.x, menuOrigin[1].y + menuBkgdPos.y, 500));
-			menuBkgdPos  = ResizeRect(new Rect(50, 50, 100, 100));
+			if(menuBkgd != null)
+			{
+				//set the position and scale of the menu background
+				Vector3 pointInWorld = Camera.main.ScreenToWorldPoint(new Vector3(Screen.width, Screen.height, Camera.main.transform.position.z + 100));
+				menuBkgd.transform.localScale = new Vector3(pointInWorld.x / 5, 1, pointInWorld.y / 5);
+				menuBkgd.transform.position = Camera.main.ScreenToWorldPoint(new Vector3(menuOrigin[1].x + menuBkgdPos.x, menuOrigin[1].y + menuBkgdPos.y, 500));
+				menuBkgdPos  = ResizeRect(new Rect(50, 50, 100, 100));
+			}
+			else
+				InstantiateMenuObj();
 			
 			//a label for the server name
 			GUI.DrawTexture(new Rect(menuOrigin[1].x + multiPMenuBtnRect[0].x, menuOrigin[1].y + multiPMenuBtnRect[0].y, multiPMenuBtnRect[0].width, multiPMenuBtnRect[0].height), serverNameGFX);
@@ -430,11 +421,13 @@ public class MenuControl : MenuLogic
 			//if the menu background is there set it's position and scale
 			if(menuBkgd != null)
 			{
-				Debug.Log("it is not null");
+				//Debug.Log("it is not null");
 				Vector3 pointInWorld = Camera.main.ScreenToWorldPoint(new Vector3(Screen.width, Screen.height, Camera.main.transform.position.z + 100));
 				menuBkgd.transform.localScale = new Vector3(pointInWorld.x / 5, 1, pointInWorld.y / 5);
 				menuBkgd.transform.position = Camera.main.ScreenToWorldPoint(new Vector3(menuOrigin[2].x + menuBkgdPos.x, menuOrigin[2].y + menuBkgdPos.y, 500));
 			}
+			else
+				InstantiateMenuObj();
 			
 			if(dinoSelected == null)
 			{
@@ -463,6 +456,8 @@ public class MenuControl : MenuLogic
 				dinoBoxLg.transform.position = Camera.main.ScreenToWorldPoint(new Vector3(menuOrigin[2].x + dinoBoxLgPos.x, menuOrigin[2].y + dinoBoxLgPos.y, 350));
 				dinoBoxLgPos = ResizeRect(new Rect(72, 53, 0, 0));
 			}
+			else
+				InstantiateMenuObj();
 			
 			//level name graphic
 			GUI.DrawTexture(new Rect(menuOrigin[2].x + lobbyMenuRect[4].x, menuOrigin[2].y + lobbyMenuRect[4].y, lobbyMenuRect[4].width, lobbyMenuRect[4].height), lvlNameGFX);
@@ -718,16 +713,16 @@ public class MenuControl : MenuLogic
 		{		
 			
 			//size and positions for the numbers
-			resultsMenuRect[0] = ResizeRect(new Rect(33, 35, 40, 40));
-			resultsMenuRect[1] = ResizeRect(new Rect(33, 43, 40, 40));
-			resultsMenuRect[2] = ResizeRect(new Rect(33, 51, 40, 40));
-			resultsMenuRect[3] = ResizeRect(new Rect(33, 59, 40, 40));
+			resultsMenuRect[0] = ResizeRect(new Rect(33, 35, 10, 20));
+			resultsMenuRect[1] = ResizeRect(new Rect(33, 43, 10, 20));
+			resultsMenuRect[2] = ResizeRect(new Rect(33, 51, 10, 20));
+			resultsMenuRect[3] = ResizeRect(new Rect(33, 59, 10, 20));
 			
 			//size and positions for the names
-			resultsMenuRect[4] = ResizeRect(new Rect(17, 35, 40, 40));
-			resultsMenuRect[5] = ResizeRect(new Rect(17, 43, 40, 40));
-			resultsMenuRect[6] = ResizeRect(new Rect(17, 51, 40, 40));
-			resultsMenuRect[7] = ResizeRect(new Rect(17, 59, 40, 40));
+			resultsMenuRect[4] = ResizeRect(new Rect(17, 35, 20, 20));
+			resultsMenuRect[5] = ResizeRect(new Rect(17, 43, 20, 20));
+			resultsMenuRect[6] = ResizeRect(new Rect(17, 51, 20, 20));
+			resultsMenuRect[7] = ResizeRect(new Rect(17, 59, 20, 20));
 			
 			//size and positions for the buttons
 			resultsMenuBtnRect[0] = ResizeRect(new Rect(65, 85, 20, 10));
@@ -825,7 +820,36 @@ public class MenuControl : MenuLogic
 		menuOrigin[2].x = 0;
 	}
 	
-	
+	public void InstantiateMenuObj()
+	{
+		//if there is no main menu background then instantiate it
+		if(mainMenuBkgd == null)
+		{
+			mainMenuBkgdPos  = ResizeRect(new Rect(100, 50, 100, 100));
+			Vector3 backgroundPos = Camera.main.ScreenToWorldPoint(new Vector3(mainMenuBkgdPos.x, mainMenuBkgdPos.y, 500));
+			mainMenuBkgd = (GameObject)Instantiate(Resources.Load("GUI/MainMenuBackground"), backgroundPos, Quaternion.identity);
+			mainMenuBkgd.transform.Rotate(new Vector3(90, 180, 0));
+		}
+		
+		//if there is no menu background then instantiate it
+		if(menuBkgd == null)
+		{
+			menuBkgdPos  = ResizeRect(new Rect(100, 50, 100, 100));
+			Vector3 backgroundPos = Camera.main.ScreenToWorldPoint(new Vector3(menuBkgdPos.x, menuBkgdPos.y, 500));
+			menuBkgd = (GameObject)Instantiate(Resources.Load("GUI/MenuBackground"), backgroundPos, Quaternion.identity);
+			menuBkgd.transform.Rotate(new Vector3(90, 180, 0));
+		}
+		
+		//if there is no dino box background then instantiate it
+		if(dinoBoxLg == null)
+		{
+			dinoBoxLgPos = ResizeRect(new Rect(80, 40, 0, 0));
+			dinoBoxLg = (GameObject)Instantiate(Resources.Load("GUI/DinoSelectBackground"), new Vector3(Screen.width, Screen.height, 0), Quaternion.identity);
+			Vector3 pointInWorld = Camera.main.ScreenToWorldPoint(new Vector3(Screen.width, Screen.height, Camera.main.transform.position.z + 50));
+			dinoBoxLg.transform.localScale = new Vector3(pointInWorld.x / 20, pointInWorld.y / 15, pointInWorld.x / 20);
+			dinoBoxLg.transform.Rotate(270, 0, 0);
+		}
+	}
 	
 	//***********menu selection**************//
 	private void MainMenuSelection()
