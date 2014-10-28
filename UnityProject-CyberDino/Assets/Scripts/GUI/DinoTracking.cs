@@ -121,7 +121,7 @@ public class DinoTracking : MonoBehaviour
 		NetworkViewID dinoId = default(NetworkViewID);
 		
 		//rpc increment the connectedPlayers variable
-		netView.RPC("IncrementConnnected", RPCMode.AllBuffered);
+		//netView.RPC("IncrementConnnected", RPCMode.AllBuffered);
 		
 		bool gotAllDinos = true;
 		while(true)
@@ -141,9 +141,23 @@ public class DinoTracking : MonoBehaviour
 			}
 
 			if(gotAllDinos == true)
+			{
+				netView.RPC("IncrementConnnected", RPCMode.AllBuffered);
 				break;
+			}
 
 			gotAllDinos = true;
+
+			yield return null;
+		}
+
+		//Debug.Log("before while");
+		while(true)
+		{
+			//Debug.Log("connectedPlayers " + connectedPlayers);
+			//Debug.Log("length " + Network.connections.Length);
+			if(connectedPlayers >= Network.connections.Length + 1)
+				break;
 
 			yield return null;
 		}
@@ -158,9 +172,12 @@ public class DinoTracking : MonoBehaviour
 				int.TryParse(Network.player.ToString(), out playerNum);
 			}
 		}
-		
+
+
 		//call rpc function to send the dino network id as well as the player number
 		netView.RPC("SetPlayerDino", RPCMode.AllBuffered, dinoId, playerNum);
+
+		//Debug.Log("after while");
 		
 		int index = Network.connections.Length + 1;
 		
@@ -456,6 +473,7 @@ public class DinoTracking : MonoBehaviour
 	[RPC]
 	private void IncrementConnnected()
 	{
+//		Debug.Log(connectedPlayers + " have connected");
 		connectedPlayers++;
 	}
 	
