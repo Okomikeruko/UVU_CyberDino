@@ -39,6 +39,11 @@ public class GlowLines : MonoBehaviour
 		{
 			rightLine = (GameObject)Instantiate(Resources.Load("GUI/GlowLight"), new Vector3(0, 0, 0), Quaternion.identity);
 		}
+
+		upLine.SetActive(true);
+		downLine.SetActive(true);
+		leftLine.SetActive(true);
+		rightLine.SetActive(true);
 		
 		//call the coroutines for each line
 		/*StartCoroutine(MoveLine(upLine));
@@ -57,6 +62,14 @@ public class GlowLines : MonoBehaviour
 		StopCoroutine("MoveLine");
 		StopCoroutine("MoveLine");
 		StopCoroutine("MoveLine");
+		if(upLine != null)
+			upLine.SetActive(false);
+		if(downLine != null)
+			downLine.SetActive(false);
+		if(leftLine != null)
+			leftLine.SetActive(false);
+		if(rightLine != null)
+			rightLine.SetActive(false);
 		
 	}
 
