@@ -71,7 +71,7 @@ public class MenuLogic : MonoBehaviour
 	//the positions of the dinos in the race
 	[HideInInspector]
 	public int[] racePositions;
-	private NetworkView netView;
+	internal NetworkView netView;
 
 	//the names of the players
 	[HideInInspector]
@@ -722,7 +722,13 @@ public class MenuLogic : MonoBehaviour
 		networkHandler.UpdatePlayerInformation(myInfo);
 	}
 
-	public IEnumerator TransitionFade()
+	[RPC]
+	public void TransitionFade()
+	{
+		StartCoroutine(TransitionFadeHelper());
+	}
+
+	private IEnumerator TransitionFadeHelper()
 	{
 		//a bool to know when it has reached full opacity
 		bool fadeOut = false;

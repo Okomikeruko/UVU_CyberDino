@@ -556,7 +556,7 @@ public class MenuControl : MenuLogic
 					if(GUI.Button(new Rect(menuOrigin[2].x + lobbyMenuBtnRect[5].x, menuOrigin[2].y + lobbyMenuBtnRect[5].y, lobbyMenuBtnRect[5].width, lobbyMenuBtnRect[5].height), ""))
 					{
 						StartCoroutine(MoveLeftOff(2, 5, Menu.goToLevel, null, null));
-						StartCoroutine(TransitionFade());
+						netView.RPC("TransitionFade", RPCMode.AllBuffered);
 					}
 				}
 			}
@@ -705,7 +705,7 @@ public class MenuControl : MenuLogic
 					}
 					
 					//move the connecting menu and get the lobby menu
-					StartCoroutine(MoveLeftOff(3, 2, Menu.lobbyMenu, LobbySelection, lobbyMenuRect));
+					StartCoroutine(MoveLeftOff(3, 2, Menu.lobbyMenu, LobbySelection, lobbyMenuBtnRect));
 					
 					//update the dino info so the right one is displayed
 					//UpdateDinoInfo(dinoModels, ref dinoSelected, dinos, ref largeDinoBanner);
@@ -934,7 +934,7 @@ public class MenuControl : MenuLogic
 			else if(Network.isServer && readyAll == true && buttonIndex == 5)
 			{
 				StartCoroutine(MoveLeftOff(2, 5, Menu.goToLevel, null, null));
-				StartCoroutine(TransitionFade());
+				netView.RPC("TransitionFade", RPCMode.AllBuffered);
 			}
 			//button to indicate that this player is ready
 			else if(Network.isClient && readyMe == false && buttonIndex == 5)

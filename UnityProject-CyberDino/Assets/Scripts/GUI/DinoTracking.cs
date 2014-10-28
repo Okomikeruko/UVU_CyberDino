@@ -130,10 +130,15 @@ public class DinoTracking : MonoBehaviour
 			//Debug.Log(tempDinos[3]);
 			
 			for(int i = 0; i < tempDinos.Length; i++)
+			{
+				//Debug.Log(tempDinos[i]);
 				if(tempDinos[i] == null)
 				{
 					gotAllDinos = false;
 				}
+				else
+					tempDinos[i].GetComponent<MotionControl>().enabled = false;
+			}
 
 			if(gotAllDinos == true)
 				break;
