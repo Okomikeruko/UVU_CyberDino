@@ -210,7 +210,8 @@ public class MenuControl : MenuLogic
 			if(glowLinesScript == null)
 				glowLinesScript = Camera.main.GetComponent<GlowLines>();
 				
-			UpdateDinoInfo(dinoModels, ref dinoSelected, dinos, ref largeDinoBanner);
+			if(menuSelect == Menu.lobbyMenu)
+				UpdateDinoInfo(dinoModels, ref dinoSelected, dinos, ref largeDinoBanner);
 			
 			//InstantiateMenuObj();
 
@@ -273,6 +274,9 @@ public class MenuControl : MenuLogic
 		if(menuSelect != Menu.goToLevel && !menuMoving)
 		{ 
 			GUI.DrawTexture(new Rect(menuOrigin[(int)menuSelect].x + currentRect[buttonIndex].x - (2 * xMulti) , menuOrigin[(int)menuSelect].y + currentRect[buttonIndex].y - (5 * yMulti), currentRect[buttonIndex].width + (5 * xMulti), currentRect[buttonIndex].height + (10 * yMulti)), selectorGfx); 
+			//make sure that menuOrigin is supposed to be where it should be
+			if(menuOrigin[(int)menuSelect].x != 0)
+				menuOrigin[(int)menuSelect].x = 0;
 		}
 
 		//the main menu gui
@@ -305,7 +309,7 @@ public class MenuControl : MenuLogic
 				SetLobbyOnePlayer();
 				
 				//update the dino information so the right dino appears
-				UpdateDinoInfo(dinoModels, ref dinoSelected, dinos, ref largeDinoBanner);
+				//UpdateDinoInfo(dinoModels, ref dinoSelected, dinos, ref largeDinoBanner);
 				
 				//move the main menu and get the lobby menu
 				StartCoroutine(MoveLeftOff(0, 2, Menu.lobbyMenu, LobbySelection, lobbyMenuBtnRect));
@@ -365,7 +369,7 @@ public class MenuControl : MenuLogic
 				HostToLobby();
 				
 				//update the dino info so the right one appears
-				UpdateDinoInfo(dinoModels, ref dinoSelected, dinos, ref largeDinoBanner);
+				//UpdateDinoInfo(dinoModels, ref dinoSelected, dinos, ref largeDinoBanner);
 				
 				//move the multiplayer menu off of the screen and get the lobby menu
 				StartCoroutine(MoveLeftOff(0, 2, Menu.lobbyMenu, LobbySelection, lobbyMenuBtnRect));
@@ -704,7 +708,7 @@ public class MenuControl : MenuLogic
 					StartCoroutine(MoveLeftOff(3, 2, Menu.lobbyMenu, LobbySelection, lobbyMenuRect));
 					
 					//update the dino info so the right one is displayed
-					UpdateDinoInfo(dinoModels, ref dinoSelected, dinos, ref largeDinoBanner);
+					//UpdateDinoInfo(dinoModels, ref dinoSelected, dinos, ref largeDinoBanner);
 				}
 			}
 		}
@@ -755,7 +759,7 @@ public class MenuControl : MenuLogic
 
 				SetMenuToLobby();
 				
-				UpdateDinoInfo(dinoModels, ref dinoSelected, dinos, ref largeDinoBanner);
+				//UpdateDinoInfo(dinoModels, ref dinoSelected, dinos, ref largeDinoBanner);
 			}
 			
 			//the save score button
@@ -1020,7 +1024,7 @@ public class MenuControl : MenuLogic
 			{
 				HostToLobby();
 				
-				UpdateDinoInfo(dinoModels, ref dinoSelected, dinos, ref largeDinoBanner);
+				//UpdateDinoInfo(dinoModels, ref dinoSelected, dinos, ref largeDinoBanner);
 				
 				StartCoroutine(MoveLeftOff(0, 2, Menu.lobbyMenu, LobbySelection, lobbyMenuBtnRect));
 			}

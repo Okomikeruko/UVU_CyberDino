@@ -223,12 +223,13 @@ public class MenuLogic : MonoBehaviour
 	{
 		menuMoving = true;
 		
-		menuOrigin[_index1].x = -Screen.width;
-		menuOrigin[_index2].x = 0;
+		menuOrigin[_index1].x = 0;
+		menuOrigin[_index2].x = -Screen.width;
 		
 		if(glowLinesScript != null)
 			glowLinesScript.enabled = false;
 		
+
 		while(true)
 		{
 			//if the first menu is left of the screen size
@@ -290,6 +291,7 @@ public class MenuLogic : MonoBehaviour
 		if(glowLinesScript != null)
 			glowLinesScript.enabled = false;
 		
+
 		while(true)
 		{
 			//Debug.Log(menuMoving);
@@ -312,7 +314,7 @@ public class MenuLogic : MonoBehaviour
 				
 				menuOrigin[_index1].x = -Screen.width;
 
-				menuOrigin[_index2].x = Screen.width;
+				//menuOrigin[_index2].x = Screen.width;
 				
 			}
 			

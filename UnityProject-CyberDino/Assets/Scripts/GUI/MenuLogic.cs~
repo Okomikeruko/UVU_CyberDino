@@ -25,7 +25,7 @@ public class MenuLogic : MonoBehaviour
 	private DinoTracking dinoTrackingScript;
 
 	//the glow lines script
-	private GlowLines glowLinesScript;
+	internal GlowLines glowLinesScript;
 
 	//an array of rects to hold the origin of the button positions so
 	//that all of the buttons and graphics move at once
@@ -98,7 +98,7 @@ public class MenuLogic : MonoBehaviour
 		networkHandlerObject = GameObject.FindGameObjectWithTag("NetworkHandler");
 		networkHandler = networkHandlerObject.GetComponent("NetworkGameHandler") as NetworkGameHandler;
 
-		glowLinesScript = new GlowLines();
+		glowLinesScript = Camera.main.GetComponent<GlowLines>();
 
 		netView = GetComponent<NetworkView>();
 
@@ -144,6 +144,7 @@ public class MenuLogic : MonoBehaviour
 		{
 			//Debug.Log("set tracking script!!!!!!!!!!!!");
 			dinoTrackingScript = dinoTracking.GetComponent<DinoTracking>();
+			//Debug.Log("dinoTrackingScript " + dinoTrackingScript);
 		}
 
 		resultsFName = new string[4];
@@ -222,9 +223,13 @@ public class MenuLogic : MonoBehaviour
 	{
 		menuMoving = true;
 		
+		menuOrigin[_index1].x = 0;
+		menuOrigin[_index2].x = -Screen.width;
+		
 		if(glowLinesScript != null)
 			glowLinesScript.enabled = false;
 		
+
 		while(true)
 		{
 			//if the first menu is left of the screen size
@@ -255,9 +260,8 @@ public class MenuLogic : MonoBehaviour
 				menuOrigin[_index2].x = menuOrigin[_index2].x + buttonMoveSpeed * Time.deltaTime;
 			}
 			
-			
 			//if the rect position is the same as the end position
-			if(menuOrigin[_index2].x > 0)
+			if(menuOrigin[_index2].x >= 0)
 			{
 				menuOrigin[_index2].x = 0;
 				
@@ -279,15 +283,23 @@ public class MenuLogic : MonoBehaviour
 		//Debug.Log("moving " + _menu.ToString());
 		menuMoving = true;
 		/*Debug.Log(menuMoving);*/
+		//Debug.Log(glowLinesScript);
+		
+		menuOrigin[_index1].x = 0;
+		menuOrigin[_index2].x = Screen.width;
 		
 		if(glowLinesScript != null)
 			glowLinesScript.enabled = false;
 		
+
 		while(true)
 		{
 			//Debug.Log(menuMoving);
 			//Debug.Log("moveing " + _menu.ToString());
+			//Debug.Log(menuOrigin[_index1].x);
 			//Debug.Log(menuOrigin[_index2].x);
+			//Debug.Log("--------------------");
+			
 			if(menuOrigin[_index1].x > -Screen.width)
 			{
 				menuOrigin[_index1].x = menuOrigin[_index1].x - buttonMoveSpeed * Time.deltaTime;
@@ -299,8 +311,10 @@ public class MenuLogic : MonoBehaviour
 				currentRect = _rect;
 				
 				currentSelection = _selector; 
+				
+				menuOrigin[_index1].x = -Screen.width;
 
-				menuOrigin[_index2].x = Screen.width;
+				//menuOrigin[_index2].x = Screen.width;
 				
 			}
 			
@@ -309,8 +323,9 @@ public class MenuLogic : MonoBehaviour
 				menuOrigin[_index2].x = menuOrigin[_index2].x - buttonMoveSpeed * Time.deltaTime;
 			}
 			
+			//Debug.Log(menuOrigin[_index2].x <= 0);
 			
-			if(menuOrigin[_index2].x < 0)
+			if(menuOrigin[_index2].x <= 0)
 			{
 				menuOrigin[_index2].x = 0;
 				
@@ -580,7 +595,7 @@ public class MenuLogic : MonoBehaviour
 		
 		yield return new WaitForSeconds(.2f); 
 		
-		dinoIndex = 0;
+		//dinoIndex = 0;
 		
 		//Destroy(dinoSelected);
 		
@@ -677,7 +692,7 @@ public class MenuLogic : MonoBehaviour
 		//Debug.Log("the name going to network " + myInfo.dinoName);
 		
 		Destroy(_selected);
-		Debug.Log(_models[dinoIndex].name);
+		//Debug.Log(_models[dinoIndex].name);
 		_selected = (GameObject)Instantiate(_models[dinoIndex], new Vector3(Screen.width, Screen.height, 0), Quaternion.Euler(new Vector3(0, 90, 0)));
 	}
 	
@@ -690,8 +705,11 @@ public class MenuLogic : MonoBehaviour
 		currentSelection = null;
 		currentRect = null;
 		
+		
 		networkHandler.ChangeMenuSelect();
 		networkHandler.ChangeLevel();
+		
+		SetRaceInfo();
 		
 		this.enabled = false;
 	}
