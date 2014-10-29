@@ -34,6 +34,18 @@ public class TurretFire : MonoBehaviour {
 	public float checkTime = .2f;
 	public bool checking = false;
 
+	public float damageTime = .5f;
+	public bool damaging = false;
+
+	public float damage;
+
+	public int dinoTopSpeed = 100;
+
+	public float firstSlowSpeed = 0.97f;
+	public float secondSlowSpeed = 0.98f;
+	
+	public float slowDuration = 1.0f;
+
 	[SerializeField]
 	private List<Transform> targets;
 	[SerializeField]
@@ -43,17 +55,6 @@ public class TurretFire : MonoBehaviour {
 	void OnEnable () {
 		audio.Stop();
 		StartCoroutine(SetDinos());
-//		if(theDinos.Length <= 0)
-//		{
-//			theDinos = DinoTracking.trackingScript.GetDinoArray();
-//		}
-//		if(thePositions.Count <= 0)
-//		{
-//			for(int i = 0; i < theDinos.Length; i++)
-//			{
-//				thePositions.Add(theDinos[i]);
-//			}
-//		}
 	}
 	
 	void OnDisable() 
@@ -73,8 +74,6 @@ public class TurretFire : MonoBehaviour {
 				myTarget = other.transform;
 			}
 		}
-		
-		
 		
 	}
 	
@@ -111,7 +110,51 @@ public class TurretFire : MonoBehaviour {
 				StartCoroutine(FireWeapon());
 			}
 			Aim();
+			if(damaging == false)
+			{
+				StartCoroutine(DamageDinos());
+			}
 		}
+	}
+
+
+	IEnumerator DamageDinos()
+	{
+		damaging = true;
+
+		MotionControl theMotion = myTarget.gameObject.GetComponent<MotionControl>();
+
+		Health theHealth = myTarget.gameObject.GetComponent<Health>();
+
+		if(theHealth != null)
+		{
+			theHealth.Damage(damage);
+			Debug.Log(transform + " dealt " + damage + " to " + myTarget);
+			Debug.Log(myTarget + " has " + theHealth.Current + " health");
+		}
+
+		if(theMotion != null)
+		{
+			if(theMotion.GetTopSpeed() >= dinoTopSpeed)
+			{
+				if(willSlowFirst)
+				{
+					Debug.Log(myTarget + " top speed is " + theMotion.GetTopSpeed());
+					theMotion.TopSpeedMod(firstSlowSpeed, slowDuration);
+					Debug.Log(myTarget + " current speed is " + theMotion.GetTopSpeed());
+					willSlowFirst = false;
+				}
+				else if(willSlowSecond)
+				{
+					Debug.Log(myTarget + " top speed is " + theMotion.GetTopSpeed());
+					theMotion.TopSpeedMod(secondSlowSpeed, slowDuration);
+					Debug.Log(myTarget + " current speed is " + theMotion.GetTopSpeed());
+					willSlowSecond = false;
+				}
+			}
+		}
+		yield return new WaitForSeconds(damageTime);
+		damaging = false;
 	}
 
 	public void Aim()
@@ -136,6 +179,8 @@ public class TurretFire : MonoBehaviour {
 	IEnumerator FireWeapon() 
 	{
 		firing = true;
+		yield return new WaitForSeconds(fireTime);
+
 		audio.Play();
 		foreach(Transform muzzle in muzzlePoints){
 			Transform obj = TurretProjectilePooling.current.GetProjPooledObject();
@@ -144,15 +189,15 @@ public class TurretFire : MonoBehaviour {
 
 			theProj = obj.gameObject.GetComponent<TurretProjectile>();
 			theProj.homeTurret = this.transform;
-			theProj.willSlowFirst = willSlowFirst;
-			theProj.willSlowSecond = willSlowSecond;
+//			theProj.willSlowFirst = willSlowFirst;
+//			theProj.willSlowSecond = willSlowSecond;
 
 			obj.position = muzzle.position;
 			obj.rotation = muzzle.rotation;
 			obj.gameObject.SetActive(true);
 			Physics.IgnoreCollision(obj.collider, transform.collider);
 		}
-		yield return new WaitForSeconds(fireTime);
+
 		firing = false;
 
 	}
