@@ -388,7 +388,7 @@ public class HUDScript : MonoBehaviour
 				
 				TurnOnOffMenu();
 			}
-			else if(pauseMenuPos[4].Contains( Input.mousePosition))
+			else if(isPaused == true && pauseMenuPos[4].Contains( Input.mousePosition))
 			{
 				Time.timeScale = 1;
 

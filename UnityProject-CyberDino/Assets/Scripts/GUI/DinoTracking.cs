@@ -299,15 +299,15 @@ public class DinoTracking : MonoBehaviour
 		}
 		else if(dinos[1] == _dino)
 		{
-			//UpdateSpecificDino(_node, 1);
+			UpdateSpecificDino(_node, 1);
 		}
 		else if(dinos[2] == _dino)
 		{
-			//UpdateSpecificDino(_node, 2);
+			UpdateSpecificDino(_node, 2);
 		}
 		else if(dinos[3] == _dino)
 		{
-			//UpdateSpecificDino(_node, 3);
+			UpdateSpecificDino(_node, 3);
 		}
 		
 		//recursevly add up all of the distances between each node until the end
