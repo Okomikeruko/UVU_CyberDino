@@ -456,6 +456,7 @@ public class MenuControl : MenuLogic
 			{
 				//dinoSelected = (GameObject)Instantiate(dinoModels[dinoIndex], new Vector3(Screen.width, Screen.height, 0), Quaternion.identity)
 				dinoSelected.transform.RotateAround(dinoSelected.transform.position, Vector3.up, rotateSpeed * Time.deltaTime);
+				dinoSelected.transform.position = Camera.main.ScreenToWorldPoint(new Vector3(menuOrigin[2].x + startDinoPos.x, menuOrigin[2].y + startDinoPos.y, 130));
 				startDinoPos = ResizeRect(new Rect(72, 40, 0, 0));
 			}
 			
