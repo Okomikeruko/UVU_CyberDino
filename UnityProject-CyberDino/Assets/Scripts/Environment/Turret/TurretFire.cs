@@ -39,6 +39,11 @@ public class TurretFire : MonoBehaviour {
 
 	public float damage;
 
+	public int hitChance;
+	public int hitThreshold = 11;
+	public int rangeMax = 100;
+	public int rangeMin = 0;
+
 	public int dinoTopSpeed = 100;
 
 	public float firstSlowSpeed = 0.97f;
@@ -112,7 +117,11 @@ public class TurretFire : MonoBehaviour {
 			Aim();
 			if(damaging == false)
 			{
-				StartCoroutine(DamageDinos());
+				hitChance = Random.Range(rangeMin, rangeMax);
+				if(hitChance >= hitThreshold)
+				{
+					StartCoroutine(DamageDinos());
+				}
 			}
 		}
 	}
@@ -129,8 +138,8 @@ public class TurretFire : MonoBehaviour {
 		if(theHealth != null)
 		{
 			theHealth.Damage(damage);
-			Debug.Log(transform + " dealt " + damage + " to " + myTarget);
-			Debug.Log(myTarget + " has " + theHealth.Current + " health");
+//			Debug.Log(transform + " dealt " + damage + " to " + myTarget);
+//			Debug.Log(myTarget + " has " + theHealth.Current + " health");
 		}
 
 		if(theMotion != null)
@@ -139,16 +148,16 @@ public class TurretFire : MonoBehaviour {
 			{
 				if(willSlowFirst)
 				{
-					Debug.Log(myTarget + " top speed is " + theMotion.GetTopSpeed());
+//					Debug.Log(myTarget + " top speed is " + theMotion.GetTopSpeed());
 					theMotion.TopSpeedMod(firstSlowSpeed, slowDuration);
-					Debug.Log(myTarget + " current speed is " + theMotion.GetTopSpeed());
+//					Debug.Log(myTarget + " current speed is " + theMotion.GetTopSpeed());
 					willSlowFirst = false;
 				}
 				else if(willSlowSecond)
 				{
-					Debug.Log(myTarget + " top speed is " + theMotion.GetTopSpeed());
+//					Debug.Log(myTarget + " top speed is " + theMotion.GetTopSpeed());
 					theMotion.TopSpeedMod(secondSlowSpeed, slowDuration);
-					Debug.Log(myTarget + " current speed is " + theMotion.GetTopSpeed());
+//					Debug.Log(myTarget + " current speed is " + theMotion.GetTopSpeed());
 					willSlowSecond = false;
 				}
 			}
