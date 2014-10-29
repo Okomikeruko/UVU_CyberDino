@@ -535,7 +535,7 @@ public class MenuLogic : MonoBehaviour
 		/*Debug.Log("dino tracking script");
 		Debug.Log(dinoTrackingScript);*/
 
-		int playerNum = dinoTrackingScript.playerNum;
+		//int playerNum = dinoTrackingScript.playerNum;
 		
 		
 		while(index < playerNames.Length)

@@ -68,6 +68,8 @@ public class GameControl : MonoBehaviour {
 		var myInfo = networkHandler.GetMyInfo();
 		myInfo.readyState = "GameReady";
 		networkHandler.UpdatePlayerInformation(myInfo);
+		var hud = Camera.main.GetComponentInChildren<HUDScript> ();
+		hud.enabled = true;
 	}
 
 	public void ReadyStateCheck() {

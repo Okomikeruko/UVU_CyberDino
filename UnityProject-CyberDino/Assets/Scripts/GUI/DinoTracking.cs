@@ -225,14 +225,14 @@ public class DinoTracking : MonoBehaviour
 		//Debug.Log("dino2 " + totalDist[1]);
 
 		//Debug.Log(playerNum);
-		if(Input.GetKeyDown(KeyCode.E))
+		/*if(Input.GetKeyDown(KeyCode.E))
 		{
 				
 			hudScript.ShowFinish();
 
 			hudScript.EndRace();
 			//netView.RPC("EndRace", RPCMode.All);
-		}
+		}*/
 
 		//add each dinos current distance from the next nodes
 		for(int i = 0; i < finishDist.Length; i++)
