@@ -448,15 +448,13 @@ public class MenuControl : MenuLogic
 				
 				dinoIndex = 0;
 				dinoSelected = (GameObject)Instantiate(dinoModels[dinoIndex],
-				                Camera.main.ScreenToWorldPoint(new Vector3(menuOrigin[2].x + startDinoPos.x, menuOrigin[2].y + startDinoPos.y, 130)),
+				                GameObject.Find("MenuDinoSpawnLocation").transform.position,
 				                Quaternion.identity);
 			}
 			//if a dino is there set it's scale and position
 			else 
 			{
-				//dinoSelected = (GameObject)Instantiate(dinoModels[dinoIndex], new Vector3(Screen.width, Screen.height, 0), Quaternion.identity);
-				dinoSelected.transform.localScale = new Vector3(10, 10, 10);
-				dinoSelected.transform.position = Camera.main.ScreenToWorldPoint(new Vector3(menuOrigin[2].x + startDinoPos.x, menuOrigin[2].y + startDinoPos.y, 130));
+				//dinoSelected = (GameObject)Instantiate(dinoModels[dinoIndex], new Vector3(Screen.width, Screen.height, 0), Quaternion.identity)
 				dinoSelected.transform.RotateAround(dinoSelected.transform.position, Vector3.up, rotateSpeed * Time.deltaTime);
 				startDinoPos = ResizeRect(new Rect(72, 40, 0, 0));
 			}

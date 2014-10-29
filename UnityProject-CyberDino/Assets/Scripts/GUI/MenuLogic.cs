@@ -696,7 +696,7 @@ public class MenuLogic : MonoBehaviour
 		
 		Destroy(_selected);
 		//Debug.Log(_models[dinoIndex].name);
-		_selected = (GameObject)Instantiate(_models[dinoIndex], new Vector3(Screen.width, Screen.height, 0), Quaternion.Euler(new Vector3(0, 90, 0)));
+		_selected = (GameObject)Instantiate(_models[dinoIndex], GameObject.Find("MenuDinoSpawnLocation").transform.position, Quaternion.Euler(new Vector3(0, 90, 0)));
 	}
 	
 	public void LobbyToLevel(Menu _menu)

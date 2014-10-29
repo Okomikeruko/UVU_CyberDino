@@ -1218,7 +1218,7 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100050}
-  m_LocalRotation: {x: -.294324756, y: .523250222, z: -.512444675, w: .613989234}
+  m_LocalRotation: {x: -.294324726, y: .523250163, z: -.512444615, w: .613989174}
   m_LocalPosition: {x: -.806367576, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
@@ -1983,7 +1983,7 @@ MonoBehaviour:
   MaxDeltaVelocity: 2.5
   MaxSurfaceAngle: .899999976
   TurnSpeed: 1.5
-  JumpHeight: 25
+  JumpHeight: 35
   AirControl: .25
 --- !u!114 &11400004
 MonoBehaviour:
@@ -2018,9 +2018,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f84b3bfdff616b44ca5f06675cda2e21, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  newX: 0
-  newY: 20
-  newZ: 0
 --- !u!114 &11400010
 MonoBehaviour:
   m_ObjectHideFlags: 1

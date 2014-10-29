@@ -13,6 +13,8 @@ public class MadDash : Bomb {
 	
 	public override void Fire ()
 	{
+		return;
+
 		Debug.Log ("Mad Dash!");
 		WeaponVFX.enableEmission = true;
 		WeaponVFX.Play ();

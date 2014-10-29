@@ -18,8 +18,8 @@ public class AIControl : MonoBehaviour {
 	//AI Bridge Speed Modification//
 	private bool inStraightArea = false;
 	private bool isCheating = false;
-	private float bridgeTopSpeed = 1.5f;
-	private float bridgeAcceleration = 50.0f;
+	private float bridgeTopSpeed = 1.1f;
+	private float bridgeAcceleration = 1.0f;
 	private DinoTracking dinoTracking;
 	private GameObject[] dinos;
 	private bool hasValidDinoArray = false;
