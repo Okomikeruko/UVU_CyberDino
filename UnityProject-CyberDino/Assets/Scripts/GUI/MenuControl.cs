@@ -28,6 +28,8 @@ public class MenuControl : MenuLogic
 	private Rect[] resultsMenuBtnRect;
 	private Rect[] connectingRect;
 	
+	private Rect[] keyBoardRect;
+	
 	//the position of the dino models
 	private Rect startDinoPos;
 	//private Rect dinoSize;
@@ -39,6 +41,9 @@ public class MenuControl : MenuLogic
 	private Texture[] lobbyMenuBtnTxtr;
 	private Texture[] connectingMenuTxtr;
 	private Texture[] resultsMenuTxtr;
+	
+	private char[] charKeys;
+	private bool showKeys;
 	
 	//hold the textures of the back button texture
 	private Texture backBtnTxtr;
@@ -160,6 +165,14 @@ public class MenuControl : MenuLogic
 		//set the texture for the selector
 		selectorGfx = (Texture)Resources.Load("GUI/Materials/Selector");
 		
+		charKeys = new char[26];
+		charKeys[0] = 'q'; charKeys[1] = 'w'; charKeys[2] = 'e'; charKeys[3] = 'r'; charKeys[4] = 't'; 
+		charKeys[5] = 'y'; charKeys[6] = 'u'; charKeys[7] = 'i'; charKeys[8] = 'o'; charKeys[9] = 'p'; 
+		charKeys[10] = 'a'; charKeys[11] = 's'; charKeys[12] = 'd'; charKeys[13] = 'f'; charKeys[14] = 'g'; 
+		charKeys[15] = 'h'; charKeys[16] = 'j'; charKeys[17] = 'k'; charKeys[18] = 'l'; charKeys[19] = 'z'; 
+		charKeys[20] = 'x'; charKeys[21] = 'c'; charKeys[22] = 'v'; charKeys[23] = 'b'; charKeys[24] = 'n'; 
+		charKeys[25] = 'm'; 
+		
 		//graphics ----------------------------------------
 		mainMenuBtnRect = new Rect[2];
 		
@@ -179,12 +192,16 @@ public class MenuControl : MenuLogic
 		
 		resultsMenuRect = new Rect[16];
 		
+		keyBoardRect = new Rect[26];
+		
 		//don't destroy this object
 		DontDestroyOnLoad(this);
 		
 		//set the main menu at the start of the game
 		currentRect = mainMenuBtnRect;
 		currentSelection = MainMenuSelection;
+		
+		showKeys = false;
 		
 		deadZone = 0.5f;
 		
@@ -338,6 +355,8 @@ public class MenuControl : MenuLogic
 		//the multiplayer menu gui
 		else if(menuSelect == Menu.multiPMenu)
 		{
+			
+			
 			//set the size and positions of the buttons and the graphics
 			multiPMenuRect[0] = ResizeRect(new Rect(37, 22, 27, 10));
 			multiPMenuRect[1] = ResizeRect(new Rect(37, 52, 27, 10));
@@ -403,6 +422,8 @@ public class MenuControl : MenuLogic
 				StartCoroutine(MoveRightOff(1, 0, Menu.mainMenu, MainMenuSelection, mainMenuBtnRect));
 			}
 			
+			if(showKeys)
+				KeyBoardGui();
 		}
 		//if menuSelet is the lobby menu
 		else if(menuSelect == Menu.lobbyMenu)
@@ -786,7 +807,7 @@ public class MenuControl : MenuLogic
 		
 		//when in a race
 		else if(menuSelect == Menu.goToLevel)
-	{
+		{
 			if(mainMenuBkgd != null)
 			{
 				Destroy(mainMenuBkgd);
@@ -809,6 +830,32 @@ public class MenuControl : MenuLogic
 			
 			
 		}
+	}
+	
+	private void KeyBoardGui()
+	{
+	
+		int i = 0;
+		
+		for(; i < 11; i++)
+		{
+			keyBoardRect[i] = ResizeRect(new Rect(20 + i * 10, 50, 20, 20));
+			GUI.DrawTexture(new Rect(menuOrigin[1].x + keyBoardRect[i].x, menuOrigin[1].y + keyBoardRect[i].y, keyBoardRect[i].width, keyBoardRect[i].height), smallBoxGFX);
+			GUI.TextField(new Rect(menuOrigin[1].x + keyBoardRect[i].x, menuOrigin[1].y + keyBoardRect[i].y, keyBoardRect[i].width, keyBoardRect[i].height), charKeys[i].ToString());
+		}
+		/*for(; i < 20; i++)
+		{
+			keyBoardRect[i] = ResizeRect(new Rect(20 + i * 10, 30, 20, 20));
+			GUI.TextField(new Rect(menuOrigin[1].x + keyBoardRect[i].x, menuOrigin[1].y + keyBoardRect[i].y, keyBoardRect[i].width, keyBoardRect[i].height), charKeys[i].ToString());
+		}
+		for(; i < 26; i++)
+		{
+			keyBoardRect[i] = ResizeRect(new Rect(20 + i * 10, 10, 20, 20));
+			GUI.TextField(new Rect(menuOrigin[1].x + keyBoardRect[i].x, menuOrigin[1].y + keyBoardRect[i].y, keyBoardRect[i].width, keyBoardRect[i].height), charKeys[i].ToString());
+		}*/
+			
+		
+
 	}
 	
 	//call this to show the results menu
@@ -988,11 +1035,13 @@ public class MenuControl : MenuLogic
 			//the server name
 			if(buttonIndex == 0)
 			{
+			Debug.Log("show keys");
 				//switch the selection to inputting a name for the server
-				currentSelection = InputName;
+				//currentSelection = InputName;
+				showKeys = true;
 				
 				//if the name is empty
-				if(serverName.inputName.Length == 0)
+				/*if(serverName.inputName.Length == 0)
 				{
 					serverName.nameHolder = "";
 					
@@ -1001,19 +1050,22 @@ public class MenuControl : MenuLogic
 					serverName.inputName[0] = 'a';
 					
 					charToReplace = 'a';
-				}
+				}*/
 				
 				//start blinking the letter
-				StartCoroutine(StartBlinking(serverName)); 
+				//StartCoroutine(StartBlinking(serverName)); 
 			}
 			//the player name
 			else if(buttonIndex == 1)
 			{
+				Debug.Log("show keys");
+				showKeys = true;
+				
 				//switch the selection to inputting a name for the player
-				currentSelection = InputName;
+				//currentSelection = InputName;
 				
 				//if the name is empty
-				if(playerName.inputName.Length == 0)
+				/*if(playerName.inputName.Length == 0)
 				{
 					playerName.nameHolder = "";
 					
@@ -1022,15 +1074,16 @@ public class MenuControl : MenuLogic
 					playerName.inputName[0] = 'a';
 					
 					charToReplace = 'a';
-				}
+				}*/
 				
 				//start blinking the letter
-				StartCoroutine(StartBlinking(playerName)); 
+				//StartCoroutine(StartBlinking(playerName)); 
 			}
 			//the host button
 			else if(buttonIndex == 2)
 			{
 				HostToLobby();
+				
 				
 				//UpdateDinoInfo(dinoModels, ref dinoSelected, dinos, ref largeDinoBanner);
 				
