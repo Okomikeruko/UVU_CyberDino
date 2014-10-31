@@ -95,6 +95,7 @@ public class MenuControl : MenuLogic
 
 	private int keyBoardIndex;
 	private bool isShifting;
+	private bool isCapsOn;
 	
 	
 	
@@ -212,6 +213,7 @@ public class MenuControl : MenuLogic
 		showKeys = false;
 
 		isShifting = false;
+		isCapsOn = false;
 		
 		deadZone = 0.5f;
 		
@@ -1253,31 +1255,31 @@ public class MenuControl : MenuLogic
 
 	private void InputNameHelper(NameInput _name)
 	{
-		Debug.Log(keyBoardIndex);
+		//Debug.Log(keyBoardIndex);
 
 		//if pressing left and the index is not at the beginning of the char array
 		if(Input.GetAxis("Horizontal") < 0 && keyBoardIndex != 0 && keyBoardIndex != 10 && keyBoardIndex != 20 && keyBoardIndex != 30) 
 		{
-			Debug.Log("go left");
+			//Debug.Log("go left");
 			keyBoardIndex--;
 		}
 		//if pressing right and the index is not at the end of the array
 		else if(Input.GetAxis("Horizontal") > 0 && keyBoardIndex != 9 && keyBoardIndex != 19 && keyBoardIndex != 29 && keyBoardIndex != 39) 
 		{
-			Debug.Log("go right");
+			//Debug.Log("go right");
 			keyBoardIndex++;
 		}
 		//if pressing up
 		else if(Input.GetAxis("Vertical") > 0 && keyBoardIndex >= 10 ) 
 		{
-			Debug.Log("go up");
+			//Debug.Log("go up");
 			keyBoardIndex -= 10;
 			
 		}
 		//if pressing down
 		else if(Input.GetAxis("Vertical") < 0 && keyBoardIndex <= 29) 
 		{
-			Debug.Log("go down");
+			//Debug.Log("go down");
 			keyBoardIndex += 10;
 		}
 		//if pressing jump add a new char to the array
@@ -1290,43 +1292,71 @@ public class MenuControl : MenuLogic
 			}
 			else if(keyBoardIndex == 37)
 			{
-				//_name.nameHolder = _name.nameHolder.Substring(0, _name.nameHolder.Length - 1); 
+				isShifting = true;
+				ChangeKeyCaps();
+			}
+			else if(keyBoardIndex == 38)
+			{
+				if(!isCapsOn)
+				{
+					isShifting = true;
+					isCapsOn = true;
+				}
+				else
+				{
+					isShifting = false;
+					isCapsOn = false;
+				}
+				
+				ChangeKeyCaps();
+			}
+			else if(keyBoardIndex == 39)
+			{
+				_name.nameHolder += " ";
 			}
 			else if(keyBoardIndex != 29)
+			{
 				_name.nameHolder += charKeys[keyBoardIndex];
+				
+				if(isShifting && !isCapsOn)
+				{
+					isShifting = false;
+					ChangeKeyCaps();
+				}
+				
+			}
 			
 		}
 		//if pressing melee then change the selector back to the multiplayer menu
 		else if(Input.GetButton("Melee"))
 		{
-			currentSelection = MultiPlayerSelection; 
-			isInputting = false;
+			currentSelection = MultiPlayerSelection;
+			currentRect = multiPMenuBtnRect;
+			//isInputting = false;
+			showKeys = false;
 		}
-		//if pressing bomb and the index is at the end of the array 
-		/*else if(Input.GetButton("Bomb") && _name.inputName.Length > 0 && _name.nameIndex >= _name.inputName.Length - 1)
+	}
+	
+	private void ChangeKeyCaps()
+	{
+		//Debug.Log("change key caps");
+		if(isShifting)
 		{
-			//declare a temp array with one less element
-			char[] temp = new char[_name.inputName.Length - 1];
-			
-			//copy the content into
-			for(int i = 0; i < _name.inputName.Length - 1; i++)
-				temp[i] = _name.inputName[i];
-			
-			_name.inputName = temp;
-			
-			if(_name.nameIndex > 0)
+			for(int i = 0; i < charKeys.Length; i++)
 			{
-				_name.nameIndex--;
-				charToReplace = _name.inputName[_name.nameIndex]; 
-				
+				if(i != 29 && i != 37 && i != 38 && i != 39)
+					charKeys[i] = charKeys[i].ToUpper();
 			}
-			else
+		}
+		else
+		{
+			for(int i = 0; i < charKeys.Length; i++)
 			{
-				_name.nameHolder = "";
-				currentSelection = MultiPlayerSelection; 
-				isInputting = false;
+				if(i != 29 && i != 37 && i != 38 && i != 39)
+					charKeys[i] = charKeys[i].ToLower();
 			}
-		}*/
+		}
+	
 	}
 	
 	//*************Start of Connecting Selection
