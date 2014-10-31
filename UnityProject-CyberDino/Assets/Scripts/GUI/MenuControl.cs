@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 
 public class MenuControl : MenuLogic
@@ -42,7 +42,7 @@ public class MenuControl : MenuLogic
 	private Texture[] connectingMenuTxtr;
 	private Texture[] resultsMenuTxtr;
 	
-	private char[] charKeys;
+	private string[] charKeys;
 	private bool showKeys;
 	
 	//hold the textures of the back button texture
@@ -92,6 +92,9 @@ public class MenuControl : MenuLogic
 	
 	//the dead zone for the joystick
 	private float deadZone;
+
+	private int keyBoardIndex;
+	private bool isShifting;
 	
 	
 	
@@ -165,13 +168,18 @@ public class MenuControl : MenuLogic
 		//set the texture for the selector
 		selectorGfx = (Texture)Resources.Load("GUI/Materials/Selector");
 		
-		charKeys = new char[26];
-		charKeys[0] = 'q'; charKeys[1] = 'w'; charKeys[2] = 'e'; charKeys[3] = 'r'; charKeys[4] = 't'; 
-		charKeys[5] = 'y'; charKeys[6] = 'u'; charKeys[7] = 'i'; charKeys[8] = 'o'; charKeys[9] = 'p'; 
-		charKeys[10] = 'a'; charKeys[11] = 's'; charKeys[12] = 'd'; charKeys[13] = 'f'; charKeys[14] = 'g'; 
-		charKeys[15] = 'h'; charKeys[16] = 'j'; charKeys[17] = 'k'; charKeys[18] = 'l'; charKeys[19] = 'z'; 
-		charKeys[20] = 'x'; charKeys[21] = 'c'; charKeys[22] = 'v'; charKeys[23] = 'b'; charKeys[24] = 'n'; 
-		charKeys[25] = 'm'; 
+		charKeys = new string[40];
+		charKeys[0] = "1"; charKeys[1] = "2"; charKeys[2] = "3"; charKeys[3] = "4"; charKeys[4] = "5"; 
+		charKeys[5] = "6"; charKeys[6] = "7"; charKeys[7] = "8"; charKeys[8] = "9"; charKeys[9] = "0";
+
+		charKeys[10] = "q"; charKeys[11] = "w"; charKeys[12] = "e"; charKeys[13] = "r"; charKeys[14] = "t"; 
+		charKeys[15] = "y"; charKeys[16] = "u"; charKeys[17] = "i"; charKeys[18] = "o"; charKeys[19] = "p";
+
+		charKeys[20] = "a"; charKeys[21] = "s"; charKeys[22] = "d"; charKeys[23] = "f"; charKeys[24] = "g"; 
+		charKeys[25] = "h"; charKeys[26] = "j"; charKeys[27] = "k"; charKeys[28] = "l"; charKeys[29] = "<--";
+
+		charKeys[30] = "z"; charKeys[31] = "x"; charKeys[32] = "c"; charKeys[33] = "v"; charKeys[34] = "b"; 
+		charKeys[35] = "n"; charKeys[36] = "m"; charKeys[37] = "Shift"; charKeys[38] = "Caps"; charKeys[39] = "Space";
 		
 		//graphics ----------------------------------------
 		mainMenuBtnRect = new Rect[2];
@@ -192,7 +200,7 @@ public class MenuControl : MenuLogic
 		
 		resultsMenuRect = new Rect[16];
 		
-		keyBoardRect = new Rect[26];
+		keyBoardRect = new Rect[40];
 		
 		//don't destroy this object
 		DontDestroyOnLoad(this);
@@ -202,6 +210,8 @@ public class MenuControl : MenuLogic
 		currentSelection = MainMenuSelection;
 		
 		showKeys = false;
+
+		isShifting = false;
 		
 		deadZone = 0.5f;
 		
@@ -255,8 +265,7 @@ public class MenuControl : MenuLogic
 		//set the width and the height multiplier
 		xMulti = Screen.width / 100.0f;
 		yMulti = Screen.height / 100.0f;
-		
-		
+
 		//if not currently in the race or the menu is moving
 		if(menuSelect != Menu.goToLevel && !menuMoving)
 		{ 
@@ -297,12 +306,16 @@ public class MenuControl : MenuLogic
 		GUI.skin = mySkin;
 
 		//draw the selector texture if not in the level or the menu is moving
-		if(menuSelect != Menu.goToLevel && !menuMoving)
+		if(menuSelect != Menu.goToLevel && !menuMoving && !showKeys)
 		{ 
 			GUI.DrawTexture(new Rect(menuOrigin[(int)menuSelect].x + currentRect[buttonIndex].x - (2 * xMulti) , menuOrigin[(int)menuSelect].y + currentRect[buttonIndex].y - (5 * yMulti), currentRect[buttonIndex].width + (5 * xMulti), currentRect[buttonIndex].height + (10 * yMulti)), selectorGfx); 
 			//make sure that menuOrigin is supposed to be where it should be
 			if(menuOrigin[(int)menuSelect].x != 0)
 				menuOrigin[(int)menuSelect].x = 0;
+		}
+		else if(showKeys)
+		{
+			GUI.DrawTexture(new Rect(menuOrigin[(int)menuSelect].x + currentRect[keyBoardIndex].x - (2 * xMulti) , menuOrigin[(int)menuSelect].y + currentRect[keyBoardIndex].y - (5 * yMulti), currentRect[keyBoardIndex].width + (5 * xMulti), currentRect[keyBoardIndex].height + (10 * yMulti)), selectorGfx); 
 		}
 
 		//the main menu gui
@@ -835,25 +848,36 @@ public class MenuControl : MenuLogic
 	private void KeyBoardGui()
 	{
 	
-		int i = 0;
-		
-		for(; i < 11; i++)
+		int index = 0;
+
+		for(int i = 0; i < 10; i++)
 		{
-			keyBoardRect[i] = ResizeRect(new Rect(20 + i * 10, 50, 20, 20));
-			GUI.DrawTexture(new Rect(menuOrigin[1].x + keyBoardRect[i].x, menuOrigin[1].y + keyBoardRect[i].y, keyBoardRect[i].width, keyBoardRect[i].height), smallBoxGFX);
-			GUI.TextField(new Rect(menuOrigin[1].x + keyBoardRect[i].x, menuOrigin[1].y + keyBoardRect[i].y, keyBoardRect[i].width, keyBoardRect[i].height), charKeys[i].ToString());
+			keyBoardRect[index] = ResizeRect(new Rect(10 + i * 8, 60, 8, 10));
+			GUI.DrawTexture(new Rect(menuOrigin[1].x + keyBoardRect[index].x, menuOrigin[1].y + keyBoardRect[index].y, keyBoardRect[index].width, keyBoardRect[index].height), smallBoxGFX);
+			GUI.TextField(new Rect(menuOrigin[1].x + keyBoardRect[index].x, menuOrigin[1].y + keyBoardRect[index].y, keyBoardRect[index].width, keyBoardRect[index].height), charKeys[index].ToString());
+			index++;
 		}
-		/*for(; i < 20; i++)
+		for(int i = 0; i < 10; i++)
 		{
-			keyBoardRect[i] = ResizeRect(new Rect(20 + i * 10, 30, 20, 20));
-			GUI.TextField(new Rect(menuOrigin[1].x + keyBoardRect[i].x, menuOrigin[1].y + keyBoardRect[i].y, keyBoardRect[i].width, keyBoardRect[i].height), charKeys[i].ToString());
+			keyBoardRect[index] = ResizeRect(new Rect(10 + i * 8, 70, 8, 10));
+			GUI.DrawTexture(new Rect(menuOrigin[1].x + keyBoardRect[index].x, menuOrigin[1].y + keyBoardRect[index].y, keyBoardRect[index].width, keyBoardRect[index].height), smallBoxGFX);
+			GUI.TextField(new Rect(menuOrigin[1].x + keyBoardRect[index].x, menuOrigin[1].y + keyBoardRect[index].y, keyBoardRect[index].width, keyBoardRect[index].height), charKeys[index].ToString());
+			index++;
 		}
-		for(; i < 26; i++)
+		for(int i = 0; i < 10; i++)
 		{
-			keyBoardRect[i] = ResizeRect(new Rect(20 + i * 10, 10, 20, 20));
-			GUI.TextField(new Rect(menuOrigin[1].x + keyBoardRect[i].x, menuOrigin[1].y + keyBoardRect[i].y, keyBoardRect[i].width, keyBoardRect[i].height), charKeys[i].ToString());
-		}*/
-			
+			keyBoardRect[index] = ResizeRect(new Rect(10 + i * 8, 80, 8, 10));
+			GUI.DrawTexture(new Rect(menuOrigin[1].x + keyBoardRect[index].x, menuOrigin[1].y + keyBoardRect[index].y, keyBoardRect[index].width, keyBoardRect[index].height), smallBoxGFX);
+			GUI.TextField(new Rect(menuOrigin[1].x + keyBoardRect[index].x, menuOrigin[1].y + keyBoardRect[index].y, keyBoardRect[index].width, keyBoardRect[index].height), charKeys[index].ToString());
+			index++;
+		}
+		for(int i = 0; i < 10; i++)
+		{
+			keyBoardRect[index] = ResizeRect(new Rect(10 + i * 8, 90, 8, 10));
+			GUI.DrawTexture(new Rect(menuOrigin[1].x + keyBoardRect[index].x, menuOrigin[1].y + keyBoardRect[index].y, keyBoardRect[index].width, keyBoardRect[index].height), smallBoxGFX);
+			GUI.TextField(new Rect(menuOrigin[1].x + keyBoardRect[index].x, menuOrigin[1].y + keyBoardRect[index].y, keyBoardRect[index].width, keyBoardRect[index].height), charKeys[index].ToString());
+			index++;
+		}
 		
 
 	}
@@ -1037,20 +1061,22 @@ public class MenuControl : MenuLogic
 			{
 			Debug.Log("show keys");
 				//switch the selection to inputting a name for the server
-				//currentSelection = InputName;
+				currentSelection = InputName;
+				currentRect = keyBoardRect;
+				keyBoardIndex = 0;
 				showKeys = true;
 				
 				//if the name is empty
-				/*if(serverName.inputName.Length == 0)
+				if(serverName.inputName.Length == 0)
 				{
 					serverName.nameHolder = "";
 					
 					serverName.inputName = new char[1];
 					
-					serverName.inputName[0] = 'a';
+					serverName.inputName[0] = ' ';
 					
-					charToReplace = 'a';
-				}*/
+					//charToReplace = 'a';
+				}
 				
 				//start blinking the letter
 				//StartCoroutine(StartBlinking(serverName)); 
@@ -1059,13 +1085,16 @@ public class MenuControl : MenuLogic
 			else if(buttonIndex == 1)
 			{
 				Debug.Log("show keys");
+				currentSelection = InputName;
+				currentRect = keyBoardRect;
+				keyBoardIndex = 0;
 				showKeys = true;
 				
 				//switch the selection to inputting a name for the player
 				//currentSelection = InputName;
 				
 				//if the name is empty
-				/*if(playerName.inputName.Length == 0)
+				if(playerName.inputName.Length == 0)
 				{
 					playerName.nameHolder = "";
 					
@@ -1073,8 +1102,8 @@ public class MenuControl : MenuLogic
 					
 					playerName.inputName[0] = 'a';
 					
-					charToReplace = 'a';
-				}*/
+					//charToReplace = 'a';
+				}
 				
 				//start blinking the letter
 				//StartCoroutine(StartBlinking(playerName)); 
@@ -1117,7 +1146,7 @@ public class MenuControl : MenuLogic
 	}
 	
 	//control for the name input
-	public void InputNameHelper(NameInput _name)
+	/*public void InputNameHelper(NameInput _name)
 	{
 		//if pressing left and the index is not at the beginning of the char array
 		if(Input.GetAxis("Horizontal") < 0 && _name.nameIndex > 0 && _name.inputName.Length > 0) 
@@ -1220,6 +1249,84 @@ public class MenuControl : MenuLogic
 		//Debug.Log("array length " + _charArr.Length);
 		if(_name.inputName.Length > 0)
 			UpdateString(_name, charToReplace); 
+	}*/
+
+	private void InputNameHelper(NameInput _name)
+	{
+		Debug.Log(keyBoardIndex);
+
+		//if pressing left and the index is not at the beginning of the char array
+		if(Input.GetAxis("Horizontal") < 0 && keyBoardIndex != 0 && keyBoardIndex != 10 && keyBoardIndex != 20 && keyBoardIndex != 30) 
+		{
+			Debug.Log("go left");
+			keyBoardIndex--;
+		}
+		//if pressing right and the index is not at the end of the array
+		else if(Input.GetAxis("Horizontal") > 0 && keyBoardIndex != 9 && keyBoardIndex != 19 && keyBoardIndex != 29 && keyBoardIndex != 39) 
+		{
+			Debug.Log("go right");
+			keyBoardIndex++;
+		}
+		//if pressing up
+		else if(Input.GetAxis("Vertical") > 0 && keyBoardIndex >= 10 ) 
+		{
+			Debug.Log("go up");
+			keyBoardIndex -= 10;
+			
+		}
+		//if pressing down
+		else if(Input.GetAxis("Vertical") < 0 && keyBoardIndex <= 29) 
+		{
+			Debug.Log("go down");
+			keyBoardIndex += 10;
+		}
+		//if pressing jump add a new char to the array
+		else if(Input.GetButton("Jump"))
+		{
+
+			if(keyBoardIndex == 29 && _name.nameHolder.Length > 0)
+			{
+				_name.nameHolder = _name.nameHolder.Substring(0, _name.nameHolder.Length - 1); 
+			}
+			else if(keyBoardIndex == 37)
+			{
+				//_name.nameHolder = _name.nameHolder.Substring(0, _name.nameHolder.Length - 1); 
+			}
+			else if(keyBoardIndex != 29)
+				_name.nameHolder += charKeys[keyBoardIndex];
+			
+		}
+		//if pressing melee then change the selector back to the multiplayer menu
+		else if(Input.GetButton("Melee"))
+		{
+			currentSelection = MultiPlayerSelection; 
+			isInputting = false;
+		}
+		//if pressing bomb and the index is at the end of the array 
+		/*else if(Input.GetButton("Bomb") && _name.inputName.Length > 0 && _name.nameIndex >= _name.inputName.Length - 1)
+		{
+			//declare a temp array with one less element
+			char[] temp = new char[_name.inputName.Length - 1];
+			
+			//copy the content into
+			for(int i = 0; i < _name.inputName.Length - 1; i++)
+				temp[i] = _name.inputName[i];
+			
+			_name.inputName = temp;
+			
+			if(_name.nameIndex > 0)
+			{
+				_name.nameIndex--;
+				charToReplace = _name.inputName[_name.nameIndex]; 
+				
+			}
+			else
+			{
+				_name.nameHolder = "";
+				currentSelection = MultiPlayerSelection; 
+				isInputting = false;
+			}
+		}*/
 	}
 	
 	//*************Start of Connecting Selection

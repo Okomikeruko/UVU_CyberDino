@@ -833,7 +833,7 @@ public class MenuLogic : MonoBehaviour
 		
 		while(true)
 		{
-			Debug.Log("is inputting " + isInputting);
+			//Debug.Log("is inputting " + isInputting);
 			//Debug.Log(charToReplace);
 			if(isInputting == false)
 				break;
