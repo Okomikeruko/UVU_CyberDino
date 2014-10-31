@@ -10,7 +10,7 @@ GameObject:
   - 4: {fileID: 400000}
   - 198: {fileID: 19800000}
   - 199: {fileID: 19900000}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: Turret_Trail_VFX
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -30,7 +30,7 @@ GameObject:
   - 114: {fileID: 11400000}
   - 135: {fileID: 13500000}
   - 54: {fileID: 5400000}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: Turret_Shot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -55,8 +55,8 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100002}
-  m_LocalRotation: {x: .242829978, y: -.113989986, z: .028746048, w: .962919295}
-  m_LocalPosition: {x: -945.455811, y: 13.1761646, z: 46.7842064}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -24.9059525, y: 19.0782166, z: -14.928237}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 400000}
@@ -76,7 +76,7 @@ Rigidbody:
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 0
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -89,14 +89,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   theWaitTime: 2
-  projSpeed: 400
+  projSpeed: 1200
   homeTurret: {fileID: 0}
-  damage: .00999999978
-  willSlowFirst: 0
-  willSlowSecond: 0
-  firstSlowSpeed: .970000029
-  secondSlowSpeed: .980000019
-  slowDuration: 1
 --- !u!135 &13500000
 SphereCollider:
   m_ObjectHideFlags: 1
@@ -107,7 +101,7 @@ SphereCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: .439999998
+  m_Radius: .649999976
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!198 &19800000
 ParticleSystem:
