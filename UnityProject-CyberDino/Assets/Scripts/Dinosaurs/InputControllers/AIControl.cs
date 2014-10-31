@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
-
+using System.Collections.Generic;
 public class AIControl : MonoBehaviour {
 
 	[SerializeField]
@@ -23,7 +23,8 @@ public class AIControl : MonoBehaviour {
 	private DinoTracking dinoTracking;
 	private GameObject[] dinos;
 	private bool hasValidDinoArray = false;
-	private int dinoArrayPosition = -1;
+	private int aiArrayPosition = -1;
+	private List<int> dinoArrayPositions;
 	//---------------------------//
 
 	// Use this for initialization
@@ -127,10 +128,12 @@ public class AIControl : MonoBehaviour {
 		}
 		if (dinos.Length != 0 && !hasValidDinoArray){
 			if (dinos[0] != null){
+				dinoArrayPositions = new List<int>();
 				for (int i = 0; i < dinos.Length; i++){
 					if (dinos[i] == gameObject){
-						dinoArrayPosition = i;
-						break;
+						aiArrayPosition = i;
+					}else if (dinos[i].tag == "Dino"){
+						dinoArrayPositions.Add(i);
 					}
 				}
 				hasValidDinoArray = true;
@@ -138,11 +141,17 @@ public class AIControl : MonoBehaviour {
 		}
 		if (hasValidDinoArray){
 			int[] positions = dinoTracking.GetCurrentPositions();
-			int playerNum = dinoTracking.playerNum;
-			int playerPosition = positions[playerNum];
-			int myPosition = positions[dinoArrayPosition];
 
-			if (playerPosition < myPosition) {//Player is beating me
+			int lastPlayerPosition = -1;
+			//Find position of last human player
+			foreach (int dino in dinoArrayPositions){
+				if (lastPlayerPosition < positions[dino]){
+					lastPlayerPosition = positions[dino];
+				}
+			}
+			int myPosition = positions[aiArrayPosition];
+
+			if (lastPlayerPosition < myPosition) {//Player is beating me
 				if (!isCheating){
 					TurnOnCheating();
 				}
