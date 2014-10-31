@@ -17,11 +17,14 @@ public class TeleportSlam : MeleeAttack {
 	private RaycastHit[] hit;
 	
 	private bool somethingHit = false;
+	private bool isActive;
 
 	public override void Fire ()
 	{
-		networkView.RPC("EnableVFX", RPCMode.All);
-		StartCoroutine (slam(Duration));
+		if (!isActive) {
+			networkView.RPC ("EnableVFX", RPCMode.All);
+			StartCoroutine (slam (Duration));
+		}
 	}
 
 	private IEnumerator slam (float seconds)
@@ -77,7 +80,7 @@ public class TeleportSlam : MeleeAttack {
 			
 			sec -= 1 * Time.deltaTime;
 			
-			yield return null;
+			yield return new WaitForSeconds(0.01f);;
 		}
 		
 		yield return new WaitForSeconds(0.5f);
@@ -98,12 +101,15 @@ public class TeleportSlam : MeleeAttack {
 	[RPC]
 	void EnableVFX()
 	{
-		WeaponVFX.enableEmission = true;
+		isActive = true;
 		WeaponVFX.Play ();
+		WeaponVFX.enableEmission = true;
 	}
 	[RPC]
 	void DisableVFX()
 	{
+		WeaponVFX.Stop ();
 		WeaponVFX.enableEmission = false;
+		isActive = false;
 	}
 }

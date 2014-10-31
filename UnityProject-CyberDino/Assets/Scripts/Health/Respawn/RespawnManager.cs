@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Collections;
+using System.Linq;
 
 public class RespawnManager : MonoBehaviour 
 {
@@ -43,7 +44,7 @@ public class RespawnManager : MonoBehaviour
 		{
 			yield return new WaitForSeconds (1.0f);
 			var n = CurrentRespawnNode.GetComponent<RespawnNode> ();
-			foreach (var node in n.nextNodes) {
+			foreach (var node in n.nextNodes.Concat(n.prevNodes)) {
 				if (Vector3.Distance (CurrentRespawnNode.transform.position, transform.position) > Vector3.Distance (node.transform.position, transform.position)) {
 						CurrentRespawnNode = node.gameObject;
 				}
