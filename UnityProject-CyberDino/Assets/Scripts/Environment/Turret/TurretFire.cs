@@ -72,7 +72,7 @@ public class TurretFire : MonoBehaviour {
 	void OnTriggerEnter(Collider other)
 	{
 
-		if (other.gameObject.tag == "Dino")
+		if (other.gameObject.tag == "Dino" || other.gameObject.tag == "Ai")
 		{
 			targets.Add(other.transform);
 			
@@ -86,7 +86,7 @@ public class TurretFire : MonoBehaviour {
 	
 	void OnTriggerExit(Collider other)
 	{
-		if (other.gameObject.tag == "Dino")
+		if (other.gameObject.tag == "Dino" || other.gameObject.tag == "Ai")
 		{
 			targets.Remove(other.transform);
 			
