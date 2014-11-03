@@ -12,40 +12,78 @@ public class DinoStatusEffects : MonoBehaviour {
 	[SerializeField]
 	private ParticleSystem Fire;
 
-	void OnEnable()
-	{
-	}
+	private float AcidDuration;
+	private float AcidElapsed;
+	private float DisorientDuration;
+	private float DisorientElapsed;
+	private float FireDuration;
+	private float FireElapsed;
 
 	void OnDisable()
-	{
-		RemoveEffect(StatusEffectType.Acid);
-		RemoveEffect(StatusEffectType.Disorient);
-		RemoveEffect(StatusEffectType.Fire);
+	{		
+		networkView.RPC ("removeEffect", RPCMode.All, (int)StatusEffectType.Acid);
+		networkView.RPC ("removeEffect", RPCMode.All, (int)StatusEffectType.Disorient);
+		networkView.RPC ("removeEffect", RPCMode.All, (int)StatusEffectType.Fire);
 	}
 
-	public void ApplyEffect(StatusEffectType effect)
+	void Update()
 	{
-		networkView.RPC("applyEffect", RPCMode.All, (int)effect);
+		if (networkView.isMine) {
+			AcidElapsed += Time.deltaTime;
+			DisorientElapsed += Time.deltaTime;
+			FireElapsed += Time.deltaTime;
+
+			if(AcidElapsed > AcidDuration) {
+				networkView.RPC ("removeEffect", RPCMode.All, (int)StatusEffectType.Acid);
+			}
+
+			if(DisorientElapsed > DisorientDuration) {
+				networkView.RPC ("removeEffect", RPCMode.All, (int)StatusEffectType.Disorient);
+			}
+
+			if(FireElapsed > FireDuration) {
+				networkView.RPC ("removeEffect", RPCMode.All, (int)StatusEffectType.Fire);
+			}
+		}
 	}
 
-	public void RemoveEffect(StatusEffectType effect)
+	public void ApplyEffect(StatusEffectType effect, float duration)
 	{
-		networkView.RPC("removeEffect", RPCMode.All, (int)effect);
+		if(enabled)
+			networkView.RPC("applyEffect", RPCMode.All, (int)effect, duration);
 	}
 
 	[RPC]
-	void applyEffect(int effect)
+	void applyEffect(int effect, float duration)
 	{
 		var seffect = (StatusEffectType)effect;
+
 		if (seffect == StatusEffectType.Acid) {
-			Acid.enableEmission = true;
-			Acid.Play();
+			if(AcidDuration - AcidElapsed < duration)
+			{
+				Acid.enableEmission = true;
+				Acid.Play();
+				AcidElapsed = 0.0f;
+				AcidDuration = duration;
+			}
+
 		} else if (seffect == StatusEffectType.Disorient) {
-			Disorient.enableEmission = true;
-			Disorient.Play();
+			if(DisorientDuration - DisorientElapsed < duration)
+			{
+				Disorient.enableEmission = true;
+				Disorient.Play();
+				DisorientElapsed = 0.0f;
+				DisorientDuration = duration;
+			}
+
 		} else if (seffect == StatusEffectType.Fire) {
-			Fire.enableEmission = true;
-			Fire.Play();
+			if(FireDuration - FireElapsed < duration)
+			{
+				Fire.enableEmission = true;
+				Fire.Play();
+				FireElapsed = 0.0f;
+				FireDuration = duration;
+			}
 		}
 	}
 

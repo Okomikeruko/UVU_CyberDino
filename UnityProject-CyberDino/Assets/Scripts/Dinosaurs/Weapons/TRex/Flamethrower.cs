@@ -49,6 +49,11 @@ public class Flamethrower : MeleeAttack {
 	
 	IEnumerator dot(HashSet<GameObject> targets)
 	{
+		foreach (var d in targets) {
+			var statFX = d.GetComponent<DinoStatusEffects>();
+			statFX.ApplyEffect(StatusEffectType.Fire, duration);
+		}
+
 		float elapsedTime = 0.0f;
 		float dotTick = damage/duration;
 
