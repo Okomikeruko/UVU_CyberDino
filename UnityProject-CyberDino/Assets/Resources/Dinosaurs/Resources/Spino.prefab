@@ -920,6 +920,7 @@ GameObject:
   - 114: {fileID: 11400022}
   - 114: {fileID: 11400020}
   - 114: {fileID: 11400024}
+  - 114: {fileID: 11400004}
   - 114: {fileID: 11400012}
   - 114: {fileID: 11400016}
   - 114: {fileID: 11400014}
@@ -2177,6 +2178,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rotationSpeed: 50
   rotationDirection: {x: 0, y: -1, z: 0}
+--- !u!114 &11400004
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100114}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5b9472bdfbd92494c8c0d18f1879c735, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Acid: {fileID: 19800018}
+  Disorient: {fileID: 19800014}
+  Fire: {fileID: 19800016}
 --- !u!114 &11400006
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -3009,7 +3024,7 @@ CharacterJoint:
   m_Anchor: {x: 0, y: 0, z: 0}
   m_Axis: {x: -1, y: 0, z: 0}
   m_AutoConfigureConnectedAnchor: 1
-  m_ConnectedAnchor: {x: -.134542003, y: .333953559, z: -.469869316}
+  m_ConnectedAnchor: {x: -.134541973, y: .333953559, z: -.469869316}
   m_SwingAxis: {x: 0, y: -1, z: 0}
   m_LowTwistLimit:
     limit: -30
@@ -3044,7 +3059,7 @@ CharacterJoint:
   m_Anchor: {x: 0, y: 0, z: .200000003}
   m_Axis: {x: -1, y: 0, z: 0}
   m_AutoConfigureConnectedAnchor: 1
-  m_ConnectedAnchor: {x: .0796605349, y: .639821231, z: .223619401}
+  m_ConnectedAnchor: {x: .0796605647, y: .639821231, z: .223619401}
   m_SwingAxis: {x: 0, y: -1, z: 0}
   m_LowTwistLimit:
     limit: -20
@@ -3464,7 +3479,7 @@ CharacterJoint:
   m_Anchor: {x: 0, y: 0, z: 0}
   m_Axis: {x: -1, y: 0, z: 0}
   m_AutoConfigureConnectedAnchor: 1
-  m_ConnectedAnchor: {x: .0421317853, y: 1.6753937, z: -.69581306}
+  m_ConnectedAnchor: {x: .0421317816, y: 1.6753937, z: -.69581306}
   m_SwingAxis: {x: 0, y: -1, z: 0}
   m_LowTwistLimit:
     limit: -8
