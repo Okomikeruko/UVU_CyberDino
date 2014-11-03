@@ -21,6 +21,8 @@ public class TurretFire : MonoBehaviour {
 
 	private TurretProjectile theProj;
 
+	private List<Transform> projectiles;
+
 	[SerializeField]
 	private bool willSlowFirst = false;
 	[SerializeField]
@@ -110,19 +112,12 @@ public class TurretFire : MonoBehaviour {
 			{
 				StartCoroutine(CheckTarget());
 			}
+			Aim();
 			if(firing == false)
 			{
 				StartCoroutine(FireWeapon());
 			}
-			Aim();
-			if(damaging == false)
-			{
-				hitChance = Random.Range(rangeMin, rangeMax);
-				if(hitChance >= hitThreshold)
-				{
-					StartCoroutine(DamageDinos());
-				}
-			}
+
 		}
 	}
 
@@ -138,8 +133,8 @@ public class TurretFire : MonoBehaviour {
 		if(theHealth != null)
 		{
 			theHealth.Damage(damage);
-//			Debug.Log(transform + " dealt " + damage + " to " + myTarget);
-//			Debug.Log(myTarget + " has " + theHealth.Current + " health");
+			Debug.Log(transform + " dealt " + damage + " to " + myTarget);
+			Debug.Log(myTarget + " has " + theHealth.Current + " health");
 		}
 
 		if(theMotion != null)
@@ -162,7 +157,14 @@ public class TurretFire : MonoBehaviour {
 				}
 			}
 		}
-		yield return new WaitForSeconds(damageTime);
+
+		TurretHit hits = myTarget.gameObject.GetComponent<TurretHit>();
+		if(hits != null)
+		{
+			hits.PlayExplosion();
+		}
+
+		yield return null;
 		damaging = false;
 	}
 
@@ -191,20 +193,30 @@ public class TurretFire : MonoBehaviour {
 		yield return new WaitForSeconds(fireTime);
 
 		audio.Play();
+		projectiles = new List<Transform>();
 		foreach(Transform muzzle in muzzlePoints){
 			Transform obj = TurretProjectilePooling.current.GetProjPooledObject();
 
 			if(obj == null) yield return null;
 
+			projectiles.Add(obj);
+
 			theProj = obj.gameObject.GetComponent<TurretProjectile>();
 			theProj.homeTurret = this.transform;
-//			theProj.willSlowFirst = willSlowFirst;
-//			theProj.willSlowSecond = willSlowSecond;
+
 
 			obj.position = muzzle.position;
 			obj.rotation = muzzle.rotation;
 			obj.gameObject.SetActive(true);
 			Physics.IgnoreCollision(obj.collider, transform.collider);
+		}
+		if(damaging == false)
+		{
+			hitChance = Random.Range(rangeMin, rangeMax);
+			if(hitChance >= hitThreshold)
+			{
+				StartCoroutine(DamageDinos());
+			}
 		}
 
 		firing = false;
