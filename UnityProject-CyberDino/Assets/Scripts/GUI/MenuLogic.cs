@@ -26,6 +26,13 @@ public class MenuLogic : MonoBehaviour
 
 	//the glow lines script
 	internal GlowLines glowLinesScript;
+	
+	internal Vector3 keysPos;
+	internal string[] charKeys;
+	internal bool showKeys;
+	
+	public AnimationCurve easeIn;
+	public AnimationCurve easeOut;
 
 	//an array of rects to hold the origin of the button positions so
 	//that all of the buttons and graphics move at once
@@ -39,7 +46,7 @@ public class MenuLogic : MonoBehaviour
 	internal bool readyAll{get;set;}
 
 	//an int for the speed of the menu sliding
-	private int buttonMoveSpeed;
+	private float buttonMoveSpeed;
 	//a bool for when the menu is moving
 	internal bool menuMoving{get;set;}
 
@@ -120,7 +127,7 @@ public class MenuLogic : MonoBehaviour
 
 		levelIndex = 0;
 
-		buttonMoveSpeed = 2000;
+		buttonMoveSpeed = 2.0f;
 
 		//inputPlayerName = new char[0];
 		//inputServerName = new char[0];
@@ -131,6 +138,10 @@ public class MenuLogic : MonoBehaviour
 		glowDashes = new GameObject[12];
 
 		isHoldingBtn = false;
+		
+		showKeys = false;
+		
+		keysPos = new Vector3(0, 0, 0);
 
 		//isBlinking = false;
 	}
@@ -226,21 +237,28 @@ public class MenuLogic : MonoBehaviour
 		menuOrigin[_index1].x = 0;
 		menuOrigin[_index2].x = -Screen.width;
 		
+		float pos = 0;
+		
 		if(glowLinesScript != null)
 			glowLinesScript.enabled = false;
 		
 
 		while(true)
 		{
+			pos += buttonMoveSpeed * Time.deltaTime;
+			
 			//if the first menu is left of the screen size
 			if(menuOrigin[_index1].x < Screen.width)
 			{
 				//move the first menu to the right
-				menuOrigin[_index1].x = menuOrigin[_index1].x + buttonMoveSpeed * Time.deltaTime;
+				menuOrigin[_index1].x = Mathf.Lerp(0, Screen.width, easeOut.Evaluate(pos));
+				//menuOrigin[_index1].x = menuOrigin[_index1].x + buttonMoveSpeed * Time.deltaTime;
 			}
 			//if the first menu is off of the screen to the right
 			else if(menuSelect != _menu)
 			{
+				pos = 0;
+				
 				//change which menu to show
 				menuSelect = _menu;
 				
@@ -257,7 +275,8 @@ public class MenuLogic : MonoBehaviour
 			if(menuSelect == _menu && menuOrigin[_index2].x < 0)
 			{
 				//move the second menu to the right
-				menuOrigin[_index2].x = menuOrigin[_index2].x + buttonMoveSpeed * Time.deltaTime;
+				menuOrigin[_index2].x = Mathf.Lerp(-Screen.width, 0, easeIn.Evaluate(pos));
+				//menuOrigin[_index2].x = menuOrigin[_index2].x + buttonMoveSpeed * Time.deltaTime;
 			}
 			
 			//if the rect position is the same as the end position
@@ -284,6 +303,7 @@ public class MenuLogic : MonoBehaviour
 		menuMoving = true;
 		/*Debug.Log(menuMoving);*/
 		//Debug.Log(glowLinesScript);
+		float pos = 0;
 		
 		menuOrigin[_index1].x = 0;
 		menuOrigin[_index2].x = Screen.width;
@@ -299,13 +319,18 @@ public class MenuLogic : MonoBehaviour
 			//Debug.Log(menuOrigin[_index1].x);
 			//Debug.Log(menuOrigin[_index2].x);
 			//Debug.Log("--------------------");
+			pos += buttonMoveSpeed * Time.deltaTime;
 			
 			if(menuOrigin[_index1].x > -Screen.width)
 			{
-				menuOrigin[_index1].x = menuOrigin[_index1].x - buttonMoveSpeed * Time.deltaTime;
+				menuOrigin[_index1].x = Mathf.Lerp(0, -Screen.width, easeOut.Evaluate(pos));
+				//menuOrigin[_index1].x = menuOrigin[_index1].x - buttonMoveSpeed * Time.deltaTime;
 			}
 			else if(menuSelect != _menu)
 			{
+			
+				pos = 0;
+				
 				menuSelect = _menu;
 				
 				currentRect = _rect;
@@ -314,13 +339,14 @@ public class MenuLogic : MonoBehaviour
 				
 				menuOrigin[_index1].x = -Screen.width;
 
-				//menuOrigin[_index2].x = Screen.width;
+				menuOrigin[_index2].x = Screen.width;
 				
 			}
 			
 			if(menuSelect == _menu && menuOrigin[_index2].x > 0)
 			{
-				menuOrigin[_index2].x = menuOrigin[_index2].x - buttonMoveSpeed * Time.deltaTime;
+				menuOrigin[_index2].x = Mathf.Lerp(Screen.width, 0, easeIn.Evaluate(pos));
+				//menuOrigin[_index2].x = menuOrigin[_index2].x - buttonMoveSpeed * Time.deltaTime;
 			}
 			
 			//Debug.Log(menuOrigin[_index2].x <= 0);
@@ -338,6 +364,50 @@ public class MenuLogic : MonoBehaviour
 			}
 			
 			yield return null;
+		}
+	}
+	
+	public IEnumerator EaseKeyBoard(Selector _selector, Rect[] _rect)
+	{
+		float pos = 0;
+
+		if(showKeys == false)
+		{
+			showKeys = true;
+			currentSelection = _selector;
+			currentRect = _rect;
+			
+			while(true)
+			{
+				Debug.Log(pos);
+				pos += buttonMoveSpeed * Time.deltaTime;
+				
+				if(pos < 1)
+					keysPos.y = Mathf.Lerp(Screen.height / 2.0f, 0.0f, easeIn.Evaluate(pos));
+				else
+					break;
+				
+				yield return null;
+			}
+		}
+		else
+		{
+			while(true)
+			{
+				pos += buttonMoveSpeed * Time.deltaTime;
+				
+				if(pos < 1)
+					keysPos.y = Mathf.Lerp(0.0f, Screen.height / 2.0f, easeOut.Evaluate(pos));
+				else
+				{
+					currentSelection = _selector;
+					currentRect = _rect;
+					showKeys = false;
+					break;
+				}
+				
+				yield return null;
+			}
 		}
 	}
 
