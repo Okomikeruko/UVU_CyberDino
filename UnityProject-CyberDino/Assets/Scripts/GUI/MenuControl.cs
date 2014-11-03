@@ -244,7 +244,7 @@ public class MenuControl : MenuLogic
 		else if(_level == 2)
 		{
 			//set the variable for the race
-			//SetRaceInfo();
+			SetRaceInfo();
 
 			dinoTracking = GameObject.Find("Checkpoints");
 			

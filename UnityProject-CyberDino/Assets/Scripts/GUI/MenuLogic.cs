@@ -598,12 +598,9 @@ public class MenuLogic : MonoBehaviour
 	}
 
 	//sets the names of the players
-	public string[] SetNames()
+	/*public string[] SetNames()
 	{
 		int index = 0;
-
-		/*Debug.Log("dino tracking script");
-		Debug.Log(dinoTrackingScript);*/
 
 		//int playerNum = dinoTrackingScript.playerNum;
 		
@@ -637,8 +634,9 @@ public class MenuLogic : MonoBehaviour
 	[RPC]
 	private void AddName(string _name, int _index)
 	{
+		Debug.Log("the name is " + _name + " to " + _index);
 		playerNames[_index] = _name;
-	}
+	}*/
 	
 	//***********menu selection**************//
 	
