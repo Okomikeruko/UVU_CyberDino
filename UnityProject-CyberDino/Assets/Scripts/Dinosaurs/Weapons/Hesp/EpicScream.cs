@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 using System.Linq;
 
 public class EpicScream : Bomb {
@@ -34,6 +35,7 @@ public class EpicScream : Bomb {
 		var ais = GameObject.FindGameObjectsWithTag("Ai");
 		var dinosaurs = dinos.Concat(ais);
 
+		var hitTargets = new List<GameObject>();
 		foreach(var d in dinosaurs)
 		{
 			if(d != gameObject)
@@ -44,9 +46,16 @@ public class EpicScream : Bomb {
 				
 				if(health == null || health.Current > 0.0f)
 				{
+					hitTargets.Add(d);
+
 					var uc = d.GetComponent<UserControl>();
 					if(uc != null)
+					{
 						uc.InvertSteering(SteeringInversionDuration);
+					}
+
+					var statfx = d.GetComponent<DinoStatusEffects>();
+					statfx.ApplyEffect(StatusEffectType.Disorient, SteeringInversionDuration);
 				}
 			}
 		}
