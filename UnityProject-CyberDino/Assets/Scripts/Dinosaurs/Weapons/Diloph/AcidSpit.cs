@@ -84,6 +84,9 @@ public class AcidSpit : Bomb {
     /// <returns></returns>
     IEnumerator acidSpitDotAndSnare(GameObject target)
     {
+		var statFX = target.GetComponent<DinoStatusEffects>();
+		statFX.ApplyEffect(StatusEffectType.Acid);
+
         float elapsedTime = 0.0f;
         float dotTick = damage / dotDuration;
         Health health = target.GetComponent<Health>();
@@ -96,8 +99,12 @@ public class AcidSpit : Bomb {
             elapsedTime += 1.0f;
 
 			health.Damage(dotTick);
+
+			if(health.Current <= 0.0f)
+			{				
+				statFX.RemoveEffect(StatusEffectType.Acid);
+				break;
+			}
         }
     }
-
-
 }
