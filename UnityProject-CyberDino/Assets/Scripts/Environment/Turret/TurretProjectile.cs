@@ -90,43 +90,43 @@ public class TurretProjectile : MonoBehaviour {
 
 	void OnTriggerEnter(Collider other)
 	{
-
-		Transform obj = TurretProjectilePooling.current.GetExPooledObject();
-		if(obj != null)
-		{
-			obj.position = transform.position;
-			obj.rotation = transform.rotation;
-			obj.gameObject.SetActive(true);
 //
-//			MotionControl theMotion = other.gameObject.GetComponent<MotionControl>();
+//		Transform obj = TurretProjectilePooling.current.GetExPooledObject();
+//		if(obj != null)
+//		{
+//			obj.position = transform.position;
+//			obj.rotation = transform.rotation;
+//			obj.gameObject.SetActive(true);
+////
+////			MotionControl theMotion = other.gameObject.GetComponent<MotionControl>();
+////
+////			Health theHealth = other.gameObject.GetComponent<Health>();
+////
+////			if(theHealth != null)
+////			{
+////				theHealth.Damage(damage);
+////			}
+////
+////			if(theMotion != null)
+////			{
+////				if(theMotion.GetTopSpeed() >= 100)
+////				{
+////					if(willSlowFirst)
+////					{
+////						Debug.Log(theMotion.GetTopSpeed());
+////						theMotion.TopSpeedMod(firstSlowSpeed, slowDuration);
+////						Debug.Log(theMotion.GetTopSpeed());
+////						willSlowFirst = false;
+////					}
+////					else if(willSlowSecond)
+////					{
+////						theMotion.TopSpeedMod(secondSlowSpeed, slowDuration);
+////						willSlowSecond = false;
+////					}
+////				}
+////			}
+//		}
 //
-//			Health theHealth = other.gameObject.GetComponent<Health>();
-//
-//			if(theHealth != null)
-//			{
-//				theHealth.Damage(damage);
-//			}
-//
-//			if(theMotion != null)
-//			{
-//				if(theMotion.GetTopSpeed() >= 100)
-//				{
-//					if(willSlowFirst)
-//					{
-//						Debug.Log(theMotion.GetTopSpeed());
-//						theMotion.TopSpeedMod(firstSlowSpeed, slowDuration);
-//						Debug.Log(theMotion.GetTopSpeed());
-//						willSlowFirst = false;
-//					}
-//					else if(willSlowSecond)
-//					{
-//						theMotion.TopSpeedMod(secondSlowSpeed, slowDuration);
-//						willSlowSecond = false;
-//					}
-//				}
-//			}
-		}
-
 		if(transform.collider != other.collider)
 		{
 			if(other.gameObject.transform != homeTurret)
