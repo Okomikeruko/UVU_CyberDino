@@ -324,26 +324,6 @@ public class HUDScript : MonoBehaviour
 
 		xMulti = Screen.width / 100.0f;
 		yMulti = Screen.height / 100.0f;
-
-		if(Input.GetKeyDown(KeyCode.C) && mapObj != null)
-		{
-			if(mapObj.activeInHierarchy)
-			{
-				mapObj.SetActive(false);
-				mapPosObjs[0].SetActive(false);
-				mapPosObjs[1].SetActive(false);
-				mapPosObjs[2].SetActive(false);
-				mapPosObjs[3].SetActive(false);
-			}
-			else
-			{
-				mapObj.SetActive(true);
-				mapPosObjs[0].SetActive(true);
-				mapPosObjs[1].SetActive(true);
-				mapPosObjs[2].SetActive(true);
-				mapPosObjs[3].SetActive(true);
-			}
-		}
 		
 		/*lapObjs[0].guiTexture.pixelInset = ResizeRect(new Rect(80, 5, 5, 5));
 		lapObjs[1].guiTexture.pixelInset = ResizeRect(new Rect(86, 6, 1, 3));
