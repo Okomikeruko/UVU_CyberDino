@@ -602,10 +602,10 @@ public class HUDScript : MonoBehaviour
 		Vector3 normDir = Camera.main.transform.TransformDirection(Vector3.forward).normalized;
 		//Vector3 screenPoint = Camera.main.WorldToScreenPoint(new Vector3(raceDinos[_index].transform.position.x, raceDinos[_index].transform.position.y + 20, raceDinos[_index].transform.position.z));
 		Vector3 healthPos = raceDinos[_index].transform.localPosition + new Vector3(0 * normDir.z, 0, 0 * normDir.x);
-		Vector3 namePos = raceDinos[_index].transform.localPosition + new Vector3(10 * normDir.z, 0, -10 * normDir.x);
+		Vector3 namePos = raceDinos[_index].transform.localPosition + new Vector3(9 * normDir.z, 0, -9 * normDir.x);
 
-		Vector3 screenPoint = Camera.main.WorldToScreenPoint(new Vector3(healthPos.x, healthPos.y + 20, healthPos.z));
-		Vector3 screenPoint2 = Camera.main.WorldToScreenPoint(new Vector3(namePos.x, namePos.y + 24.4f, namePos.z));
+		Vector3 screenPoint = Camera.main.WorldToScreenPoint(new Vector3(healthPos.x, healthPos.y + 10, healthPos.z));
+		Vector3 screenPoint2 = Camera.main.WorldToScreenPoint(new Vector3(namePos.x, namePos.y + 14.4f, namePos.z));
 		float yMulti = Screen.height / 100.0f;
 		
 		//if( inSight[_index] == true && screenPoint.z > 0 && playerNamesObjs[_index].guiText.fontSize < 2000)
@@ -690,7 +690,7 @@ public class HUDScript : MonoBehaviour
 
 		}
 		
-		menuScript.SetResults();
+		menuScript.SetResults(playerNames);
 		menuScript.ShowResults();
 		
 		yield return null;

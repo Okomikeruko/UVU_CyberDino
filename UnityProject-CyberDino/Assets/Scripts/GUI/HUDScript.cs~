@@ -91,7 +91,7 @@ public class HUDScript : MonoBehaviour
 	private bool[] isFading;
 
 	// Use this for initialization
-	void Start () 
+	void OnLevelWasLoaded () 
 	{
 		//create the hud group
 		grpObj = new GameObject("HUD Group");
@@ -116,8 +116,6 @@ public class HUDScript : MonoBehaviour
 		
 		
 		netView = GetComponent<NetworkView>();
-		
-		playerNames = menuScript.SetNames();
 		
 		networkHandlerObject = GameObject.FindGameObjectWithTag("NetworkHandler");
 		networkHandler = networkHandlerObject.GetComponent("NetworkGameHandler") as NetworkGameHandler;
@@ -216,13 +214,16 @@ public class HUDScript : MonoBehaviour
 		healthBackgroundObjs[1] = CreateGUITxtr("Health Border p2", healthBorderGfx, new Vector3(0, 0, -1));
 		healthBackgroundObjs[2] = CreateGUITxtr("Health Border p3", healthBorderGfx, new Vector3(0, 0, -1));
 		healthBackgroundObjs[3] = CreateGUITxtr("Health Border p4", healthBorderGfx, new Vector3(0, 0, -1));
-
+		
 		//create guitextures for the player names
 		playerNamesObjs = new GameObject[4];
-		playerNamesObjs[0] = CreateGUIText("Player 1 Name", playerNames[0], new Vector3(0, 0, 0));
-		playerNamesObjs[1] = CreateGUIText("Player 2 Name", playerNames[1], new Vector3(0, 0, 0));
-		playerNamesObjs[2] = CreateGUIText("Player 3 Name", playerNames[2], new Vector3(0, 0, 0));
-		playerNamesObjs[3] = CreateGUIText("Player 4 Name", playerNames[3], new Vector3(0, 0, 0));
+		playerNamesObjs[0] = CreateGUIText("Player 1 Name", "None", new Vector3(0, 0, 0));
+		playerNamesObjs[1] = CreateGUIText("Player 2 Name", "None", new Vector3(0, 0, 0));
+		playerNamesObjs[2] = CreateGUIText("Player 3 Name", "None", new Vector3(0, 0, 0));
+		playerNamesObjs[3] = CreateGUIText("Player 4 Name", "None", new Vector3(0, 0, 0));
+		
+		playerNames = new string[4];
+		SetNames();
 		
 		for(int i = 0; i < healthBarObjs.Length; i++)
 		{
@@ -324,26 +325,6 @@ public class HUDScript : MonoBehaviour
 
 		xMulti = Screen.width / 100.0f;
 		yMulti = Screen.height / 100.0f;
-
-		if(Input.GetKeyDown(KeyCode.C) && mapObj != null)
-		{
-			if(mapObj.activeInHierarchy)
-			{
-				mapObj.SetActive(false);
-				mapPosObjs[0].SetActive(false);
-				mapPosObjs[1].SetActive(false);
-				mapPosObjs[2].SetActive(false);
-				mapPosObjs[3].SetActive(false);
-			}
-			else
-			{
-				mapObj.SetActive(true);
-				mapPosObjs[0].SetActive(true);
-				mapPosObjs[1].SetActive(true);
-				mapPosObjs[2].SetActive(true);
-				mapPosObjs[3].SetActive(true);
-			}
-		}
 		
 		/*lapObjs[0].guiTexture.pixelInset = ResizeRect(new Rect(80, 5, 5, 5));
 		lapObjs[1].guiTexture.pixelInset = ResizeRect(new Rect(86, 6, 1, 3));
@@ -388,7 +369,7 @@ public class HUDScript : MonoBehaviour
 				
 				TurnOnOffMenu();
 			}
-			else if(pauseMenuPos[4].Contains( Input.mousePosition))
+			else if(isPaused == true && pauseMenuPos[4].Contains( Input.mousePosition))
 			{
 				Time.timeScale = 1;
 
@@ -621,14 +602,14 @@ public class HUDScript : MonoBehaviour
 		Vector3 normDir = Camera.main.transform.TransformDirection(Vector3.forward).normalized;
 		//Vector3 screenPoint = Camera.main.WorldToScreenPoint(new Vector3(raceDinos[_index].transform.position.x, raceDinos[_index].transform.position.y + 20, raceDinos[_index].transform.position.z));
 		Vector3 healthPos = raceDinos[_index].transform.localPosition + new Vector3(0 * normDir.z, 0, 0 * normDir.x);
-		Vector3 namePos = raceDinos[_index].transform.localPosition + new Vector3(10 * normDir.z, 0, -10 * normDir.x);
+		Vector3 namePos = raceDinos[_index].transform.localPosition + new Vector3(9 * normDir.z, 0, -9 * normDir.x);
 
-		Vector3 screenPoint = Camera.main.WorldToScreenPoint(new Vector3(healthPos.x, healthPos.y + 20, healthPos.z));
-		Vector3 screenPoint2 = Camera.main.WorldToScreenPoint(new Vector3(namePos.x, namePos.y + 24.4f, namePos.z));
+		Vector3 screenPoint = Camera.main.WorldToScreenPoint(new Vector3(healthPos.x, healthPos.y + 10, healthPos.z));
+		Vector3 screenPoint2 = Camera.main.WorldToScreenPoint(new Vector3(namePos.x, namePos.y + 14.4f, namePos.z));
 		float yMulti = Screen.height / 100.0f;
 		
 		//if( inSight[_index] == true && screenPoint.z > 0 && playerNamesObjs[_index].guiText.fontSize < 2000)
-		if(screenPoint.z > 40 && screenPoint.z < 250 && playerNamesObjs[_index].guiText.fontSize < 800)
+		if(screenPoint.z > 40 && screenPoint.z < 400 && playerNamesObjs[_index].guiText.fontSize < 800)
 		{	if(healthBarObjs[_index].activeSelf == false)
 			{
 				StartCoroutine(FadeInHealth(_index));
@@ -709,7 +690,7 @@ public class HUDScript : MonoBehaviour
 
 		}
 		
-		menuScript.SetResults();
+		menuScript.SetResults(playerNames);
 		menuScript.ShowResults();
 		
 		yield return null;
@@ -954,6 +935,50 @@ public class HUDScript : MonoBehaviour
 		}
 		
 		isFading[_index] = false;
+	}
+	
+	public string[] SetNames()
+	{
+		int index = 0;
+		
+		/*Debug.Log("dino tracking script");
+		Debug.Log(dinoTrackingScript);*/
+		
+		//int playerNum = dinoTrackingScript.playerNum;
+		
+		
+		while(index < playerNames.Length)
+		{
+			playerNames[index] = "CPU " + index;
+			playerNamesObjs[index].guiText.text = playerNames[index];
+			
+			index++;
+		}
+		
+		if(Network.isServer)
+		{
+			PlayerInformation[] infoArr = new PlayerInformation[4];
+			
+			networkHandler.playerInformation.Values.CopyTo(infoArr, 0);
+			
+			for(int i = 0; i < infoArr.Length; i++)
+			{
+				
+				if(infoArr[i] != null)
+					netView.RPC("AddName", RPCMode.AllBuffered, infoArr[i].playerName, i);
+				
+			}
+		}
+		
+		return playerNames;
+	}
+	
+	//sends the names to all of the players
+	[RPC]
+	private void AddName(string _name, int _index)
+	{
+		playerNames[_index] = _name;
+		playerNamesObjs[_index].guiText.text = playerNames[_index];
 	}
 	
 	

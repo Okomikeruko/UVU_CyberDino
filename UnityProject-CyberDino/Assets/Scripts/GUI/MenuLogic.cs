@@ -545,9 +545,10 @@ public class MenuLogic : MonoBehaviour
 	}
 
 	//helps to set the results
-	public void SetResults()
+	public void SetResults(string[] _name)
 	{
-		StartCoroutine("SettingResults");
+		playerNames = _name;
+		StartCoroutine(SettingResults());
 		
 	}
 
