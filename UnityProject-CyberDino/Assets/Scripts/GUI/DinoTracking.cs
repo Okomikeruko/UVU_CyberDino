@@ -56,6 +56,9 @@ public class DinoTracking : MonoBehaviour
 	// Use this for initialization
 	void Awake () 
 	{
+
+		trackingScript = this;
+
 		netView = GetComponent<NetworkView>();
 
 		AddDino += DinoToAdd;

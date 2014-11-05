@@ -125,45 +125,46 @@ public class TurretFire : MonoBehaviour {
 	IEnumerator DamageDinos()
 	{
 		damaging = true;
-
-		MotionControl theMotion = myTarget.gameObject.GetComponent<MotionControl>();
-
-		Health theHealth = myTarget.gameObject.GetComponent<Health>();
-
-		if(theHealth != null)
+		if(myTarget)
 		{
-			theHealth.Damage(damage);
-			Debug.Log(transform + " dealt " + damage + " to " + myTarget);
-			Debug.Log(myTarget + " has " + theHealth.Current + " health");
-		}
+			MotionControl theMotion = myTarget.gameObject.GetComponent<MotionControl>();
 
-		if(theMotion != null)
-		{
-			if(theMotion.GetTopSpeed() >= dinoTopSpeed)
+			Health theHealth = myTarget.gameObject.GetComponent<Health>();
+
+			if(theHealth != null)
 			{
-				if(willSlowFirst)
+				theHealth.Damage(damage);
+				Debug.Log(transform + " dealt " + damage + " to " + myTarget);
+				Debug.Log(myTarget + " has " + theHealth.Current + " health");
+			}
+
+			if(theMotion != null)
+			{
+				if(theMotion.GetTopSpeed() >= dinoTopSpeed)
 				{
-//					Debug.Log(myTarget + " top speed is " + theMotion.GetTopSpeed());
-					theMotion.TopSpeedMod(firstSlowSpeed, slowDuration);
-//					Debug.Log(myTarget + " current speed is " + theMotion.GetTopSpeed());
-					willSlowFirst = false;
-				}
-				else if(willSlowSecond)
-				{
-//					Debug.Log(myTarget + " top speed is " + theMotion.GetTopSpeed());
-					theMotion.TopSpeedMod(secondSlowSpeed, slowDuration);
-//					Debug.Log(myTarget + " current speed is " + theMotion.GetTopSpeed());
-					willSlowSecond = false;
+					if(willSlowFirst)
+					{
+	//					Debug.Log(myTarget + " top speed is " + theMotion.GetTopSpeed());
+						theMotion.TopSpeedMod(firstSlowSpeed, slowDuration);
+	//					Debug.Log(myTarget + " current speed is " + theMotion.GetTopSpeed());
+						willSlowFirst = false;
+					}
+					else if(willSlowSecond)
+					{
+	//					Debug.Log(myTarget + " top speed is " + theMotion.GetTopSpeed());
+						theMotion.TopSpeedMod(secondSlowSpeed, slowDuration);
+	//					Debug.Log(myTarget + " current speed is " + theMotion.GetTopSpeed());
+						willSlowSecond = false;
+					}
 				}
 			}
-		}
 
-		TurretHit hits = myTarget.gameObject.GetComponent<TurretHit>();
-		if(hits != null)
-		{
-			hits.PlayExplosion();
+			TurretHit hits = myTarget.gameObject.GetComponent<TurretHit>();
+			if(hits != null)
+			{
+				hits.PlayExplosion();
+			}
 		}
-
 		yield return null;
 		damaging = false;
 	}
