@@ -23,6 +23,8 @@ public class DinosaurHealth : Health {
 
 	IEnumerator deathclock(float duration)
 	{
+		var dse = GetComponent<DinoStatusEffects>();
+		dse.enabled = false;
 		networkView.RPC("StartRagdoll", RPCMode.AllBuffered);
 		var mc = GetComponent<MotionControl> ();
 		mc.enabled = false;
@@ -35,6 +37,8 @@ public class DinosaurHealth : Health {
 		yield return StartCoroutine(rm.Respawn());
 		mc.enabled = true;
 		Heal (Total);
+		
+		dse.enabled = true;
 	}
 
 	[RPC]

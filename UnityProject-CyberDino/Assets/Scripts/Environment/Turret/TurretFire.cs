@@ -21,6 +21,8 @@ public class TurretFire : MonoBehaviour {
 
 	private TurretProjectile theProj;
 
+	private List<Transform> projectiles;
+
 	[SerializeField]
 	private bool willSlowFirst = false;
 	[SerializeField]
@@ -70,7 +72,7 @@ public class TurretFire : MonoBehaviour {
 	void OnTriggerEnter(Collider other)
 	{
 
-		if (other.gameObject.tag == "Dino")
+		if (other.gameObject.tag == "Dino" || other.gameObject.tag == "Ai")
 		{
 			targets.Add(other.transform);
 			
@@ -84,7 +86,7 @@ public class TurretFire : MonoBehaviour {
 	
 	void OnTriggerExit(Collider other)
 	{
-		if (other.gameObject.tag == "Dino")
+		if (other.gameObject.tag == "Dino" || other.gameObject.tag == "Ai")
 		{
 			targets.Remove(other.transform);
 			
@@ -110,19 +112,12 @@ public class TurretFire : MonoBehaviour {
 			{
 				StartCoroutine(CheckTarget());
 			}
+			Aim();
 			if(firing == false)
 			{
 				StartCoroutine(FireWeapon());
 			}
-			Aim();
-			if(damaging == false)
-			{
-				hitChance = Random.Range(rangeMin, rangeMax);
-				if(hitChance >= hitThreshold)
-				{
-					StartCoroutine(DamageDinos());
-				}
-			}
+
 		}
 	}
 
@@ -130,39 +125,47 @@ public class TurretFire : MonoBehaviour {
 	IEnumerator DamageDinos()
 	{
 		damaging = true;
-
-		MotionControl theMotion = myTarget.gameObject.GetComponent<MotionControl>();
-
-		Health theHealth = myTarget.gameObject.GetComponent<Health>();
-
-		if(theHealth != null)
+		if(myTarget)
 		{
-			theHealth.Damage(damage);
-//			Debug.Log(transform + " dealt " + damage + " to " + myTarget);
-//			Debug.Log(myTarget + " has " + theHealth.Current + " health");
-		}
+			MotionControl theMotion = myTarget.gameObject.GetComponent<MotionControl>();
 
-		if(theMotion != null)
-		{
-			if(theMotion.GetTopSpeed() >= dinoTopSpeed)
+			Health theHealth = myTarget.gameObject.GetComponent<Health>();
+
+			if(theHealth != null)
 			{
-				if(willSlowFirst)
+				theHealth.Damage(damage);
+				Debug.Log(transform + " dealt " + damage + " to " + myTarget);
+				Debug.Log(myTarget + " has " + theHealth.Current + " health");
+			}
+
+			if(theMotion != null)
+			{
+				if(theMotion.GetTopSpeed() >= dinoTopSpeed)
 				{
-//					Debug.Log(myTarget + " top speed is " + theMotion.GetTopSpeed());
-					theMotion.TopSpeedMod(firstSlowSpeed, slowDuration);
-//					Debug.Log(myTarget + " current speed is " + theMotion.GetTopSpeed());
-					willSlowFirst = false;
-				}
-				else if(willSlowSecond)
-				{
-//					Debug.Log(myTarget + " top speed is " + theMotion.GetTopSpeed());
-					theMotion.TopSpeedMod(secondSlowSpeed, slowDuration);
-//					Debug.Log(myTarget + " current speed is " + theMotion.GetTopSpeed());
-					willSlowSecond = false;
+					if(willSlowFirst)
+					{
+	//					Debug.Log(myTarget + " top speed is " + theMotion.GetTopSpeed());
+						theMotion.TopSpeedMod(firstSlowSpeed, slowDuration);
+	//					Debug.Log(myTarget + " current speed is " + theMotion.GetTopSpeed());
+						willSlowFirst = false;
+					}
+					else if(willSlowSecond)
+					{
+	//					Debug.Log(myTarget + " top speed is " + theMotion.GetTopSpeed());
+						theMotion.TopSpeedMod(secondSlowSpeed, slowDuration);
+	//					Debug.Log(myTarget + " current speed is " + theMotion.GetTopSpeed());
+						willSlowSecond = false;
+					}
 				}
 			}
+
+			TurretHit hits = myTarget.gameObject.GetComponent<TurretHit>();
+			if(hits != null)
+			{
+				hits.PlayExplosion();
+			}
 		}
-		yield return new WaitForSeconds(damageTime);
+		yield return null;
 		damaging = false;
 	}
 
@@ -191,20 +194,30 @@ public class TurretFire : MonoBehaviour {
 		yield return new WaitForSeconds(fireTime);
 
 		audio.Play();
+		projectiles = new List<Transform>();
 		foreach(Transform muzzle in muzzlePoints){
 			Transform obj = TurretProjectilePooling.current.GetProjPooledObject();
 
 			if(obj == null) yield return null;
 
+			projectiles.Add(obj);
+
 			theProj = obj.gameObject.GetComponent<TurretProjectile>();
 			theProj.homeTurret = this.transform;
-//			theProj.willSlowFirst = willSlowFirst;
-//			theProj.willSlowSecond = willSlowSecond;
+
 
 			obj.position = muzzle.position;
 			obj.rotation = muzzle.rotation;
 			obj.gameObject.SetActive(true);
 			Physics.IgnoreCollision(obj.collider, transform.collider);
+		}
+		if(damaging == false)
+		{
+			hitChance = Random.Range(rangeMin, rangeMax);
+			if(hitChance >= hitThreshold)
+			{
+				StartCoroutine(DamageDinos());
+			}
 		}
 
 		firing = false;

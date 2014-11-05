@@ -56,9 +56,10 @@ public class DinoTracking : MonoBehaviour
 	// Use this for initialization
 	void Awake () 
 	{
+
+		trackingScript = this;
+
 		netView = GetComponent<NetworkView>();
-		
-		CreateSingleton();
 
 		AddDino += DinoToAdd;
 		
@@ -409,20 +410,6 @@ public class DinoTracking : MonoBehaviour
             }
         }
     }
-	
-	public void CreateSingleton()
-	{
-		if(trackingScript == null)
-		{
-			//Debug.Log("create tracking singleton");
-			trackingScript = this;
-		}
-		else
-		{
-			Debug.Log("did not create tracking singleton");
-			
-		}
-	}
 
     //a function that will recursivly add up the distance that the dino has until getting to the finish line
     private float AddUpDistance(NodeBehavior _previousNode, NodeBehavior _nextNode/*,int _index*/, float _dist)

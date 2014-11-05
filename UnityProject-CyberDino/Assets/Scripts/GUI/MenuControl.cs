@@ -42,9 +42,6 @@ public class MenuControl : MenuLogic
 	private Texture[] connectingMenuTxtr;
 	private Texture[] resultsMenuTxtr;
 	
-	private string[] charKeys;
-	private bool showKeys;
-	
 	//hold the textures of the back button texture
 	private Texture backBtnTxtr;
 	
@@ -209,8 +206,6 @@ public class MenuControl : MenuLogic
 		//set the main menu at the start of the game
 		currentRect = mainMenuBtnRect;
 		currentSelection = MainMenuSelection;
-		
-		showKeys = false;
 
 		isShifting = false;
 		isCapsOn = false;
@@ -249,7 +244,7 @@ public class MenuControl : MenuLogic
 		else if(_level == 2)
 		{
 			//set the variable for the race
-			//SetRaceInfo();
+			SetRaceInfo();
 
 			dinoTracking = GameObject.Find("Checkpoints");
 			
@@ -317,7 +312,7 @@ public class MenuControl : MenuLogic
 		}
 		else if(showKeys)
 		{
-			GUI.DrawTexture(new Rect(menuOrigin[(int)menuSelect].x + currentRect[keyBoardIndex].x - (2 * xMulti) , menuOrigin[(int)menuSelect].y + currentRect[keyBoardIndex].y - (5 * yMulti), currentRect[keyBoardIndex].width + (5 * xMulti), currentRect[keyBoardIndex].height + (10 * yMulti)), selectorGfx); 
+			GUI.DrawTexture(new Rect(keysPos.x + currentRect[keyBoardIndex].x - (2 * xMulti) , keysPos.y + currentRect[keyBoardIndex].y - (5 * yMulti), currentRect[keyBoardIndex].width + (5 * xMulti), currentRect[keyBoardIndex].height + (10 * yMulti)), selectorGfx); 
 		}
 
 		//the main menu gui
@@ -855,29 +850,29 @@ public class MenuControl : MenuLogic
 		for(int i = 0; i < 10; i++)
 		{
 			keyBoardRect[index] = ResizeRect(new Rect(10 + i * 8, 60, 8, 10));
-			GUI.DrawTexture(new Rect(menuOrigin[1].x + keyBoardRect[index].x, menuOrigin[1].y + keyBoardRect[index].y, keyBoardRect[index].width, keyBoardRect[index].height), smallBoxGFX);
-			GUI.TextField(new Rect(menuOrigin[1].x + keyBoardRect[index].x, menuOrigin[1].y + keyBoardRect[index].y, keyBoardRect[index].width, keyBoardRect[index].height), charKeys[index].ToString());
+			GUI.DrawTexture(new Rect(keysPos.x + keyBoardRect[index].x, keysPos.y + keyBoardRect[index].y, keyBoardRect[index].width, keyBoardRect[index].height), smallBoxGFX);
+			GUI.TextField(new Rect(keysPos.x + keyBoardRect[index].x, keysPos.y + keyBoardRect[index].y, keyBoardRect[index].width, keyBoardRect[index].height), charKeys[index].ToString());
 			index++;
 		}
 		for(int i = 0; i < 10; i++)
 		{
 			keyBoardRect[index] = ResizeRect(new Rect(10 + i * 8, 70, 8, 10));
-			GUI.DrawTexture(new Rect(menuOrigin[1].x + keyBoardRect[index].x, menuOrigin[1].y + keyBoardRect[index].y, keyBoardRect[index].width, keyBoardRect[index].height), smallBoxGFX);
-			GUI.TextField(new Rect(menuOrigin[1].x + keyBoardRect[index].x, menuOrigin[1].y + keyBoardRect[index].y, keyBoardRect[index].width, keyBoardRect[index].height), charKeys[index].ToString());
+			GUI.DrawTexture(new Rect(keysPos.x + keyBoardRect[index].x, keysPos.y + keyBoardRect[index].y, keyBoardRect[index].width, keyBoardRect[index].height), smallBoxGFX);
+			GUI.TextField(new Rect(keysPos.x + keyBoardRect[index].x, keysPos.y + keyBoardRect[index].y, keyBoardRect[index].width, keyBoardRect[index].height), charKeys[index].ToString());
 			index++;
 		}
 		for(int i = 0; i < 10; i++)
 		{
 			keyBoardRect[index] = ResizeRect(new Rect(10 + i * 8, 80, 8, 10));
-			GUI.DrawTexture(new Rect(menuOrigin[1].x + keyBoardRect[index].x, menuOrigin[1].y + keyBoardRect[index].y, keyBoardRect[index].width, keyBoardRect[index].height), smallBoxGFX);
-			GUI.TextField(new Rect(menuOrigin[1].x + keyBoardRect[index].x, menuOrigin[1].y + keyBoardRect[index].y, keyBoardRect[index].width, keyBoardRect[index].height), charKeys[index].ToString());
+			GUI.DrawTexture(new Rect(keysPos.x + keyBoardRect[index].x, keysPos.y + keyBoardRect[index].y, keyBoardRect[index].width, keyBoardRect[index].height), smallBoxGFX);
+			GUI.TextField(new Rect(keysPos.x + keyBoardRect[index].x, keysPos.y + keyBoardRect[index].y, keyBoardRect[index].width, keyBoardRect[index].height), charKeys[index].ToString());
 			index++;
 		}
 		for(int i = 0; i < 10; i++)
 		{
 			keyBoardRect[index] = ResizeRect(new Rect(10 + i * 8, 90, 8, 10));
-			GUI.DrawTexture(new Rect(menuOrigin[1].x + keyBoardRect[index].x, menuOrigin[1].y + keyBoardRect[index].y, keyBoardRect[index].width, keyBoardRect[index].height), smallBoxGFX);
-			GUI.TextField(new Rect(menuOrigin[1].x + keyBoardRect[index].x, menuOrigin[1].y + keyBoardRect[index].y, keyBoardRect[index].width, keyBoardRect[index].height), charKeys[index].ToString());
+			GUI.DrawTexture(new Rect(keysPos.x + keyBoardRect[index].x, keysPos.y + keyBoardRect[index].y, keyBoardRect[index].width, keyBoardRect[index].height), smallBoxGFX);
+			GUI.TextField(new Rect(keysPos.x + keyBoardRect[index].x, keysPos.y + keyBoardRect[index].y, keyBoardRect[index].width, keyBoardRect[index].height), charKeys[index].ToString());
 			index++;
 		}
 		
@@ -1063,10 +1058,12 @@ public class MenuControl : MenuLogic
 			{
 			Debug.Log("show keys");
 				//switch the selection to inputting a name for the server
-				currentSelection = InputName;
-				currentRect = keyBoardRect;
+				//currentSelection = InputName;
+				//currentRect = keyBoardRect;
 				keyBoardIndex = 0;
-				showKeys = true;
+				//showKeys = true;
+				
+				StartCoroutine(EaseKeyBoard(InputName, keyBoardRect));
 				
 				//if the name is empty
 				if(serverName.inputName.Length == 0)
@@ -1086,11 +1083,13 @@ public class MenuControl : MenuLogic
 			//the player name
 			else if(buttonIndex == 1)
 			{
-				Debug.Log("show keys");
-				currentSelection = InputName;
-				currentRect = keyBoardRect;
+				//Debug.Log("show keys");
+				//currentSelection = InputName;
+				//currentRect = keyBoardRect;
 				keyBoardIndex = 0;
-				showKeys = true;
+				//showKeys = true;
+				
+				StartCoroutine(EaseKeyBoard(InputName, keyBoardRect));
 				
 				//switch the selection to inputting a name for the player
 				//currentSelection = InputName;
@@ -1146,112 +1145,6 @@ public class MenuControl : MenuLogic
 		else if(buttonIndex == 1)
 			InputNameHelper(playerName);
 	}
-	
-	//control for the name input
-	/*public void InputNameHelper(NameInput _name)
-	{
-		//if pressing left and the index is not at the beginning of the char array
-		if(Input.GetAxis("Horizontal") < 0 && _name.nameIndex > 0 && _name.inputName.Length > 0) 
-		{
-			//make sure that the char is in the array
-			_name.inputName[_name.nameIndex] = charToReplace;
-			//decrement the index 
-			_name.nameIndex--;
-			//set this char as the new blinking char
-			charToReplace = _name.inputName[_name.nameIndex]; 
-			//set this char to _ so that we know where the index is currently at
-			_name.inputName[_name.nameIndex] = '_';
-		}
-		//if pressing right and the index is not at the end of the array
-		else if(Input.GetAxis("Horizontal") > 0 && _name.nameIndex < _name.inputName.Length - 1) 
-		{
-			//make sure that the char is in the array
-			_name.inputName[_name.nameIndex] = charToReplace; 
-			//increment the index
-			_name.nameIndex++;
-			//set this char as the new blinking char
-			charToReplace = _name.inputName[_name.nameIndex];
-			//set this char to _ so that we know where the index is currently at 
-			_name.inputName[_name.nameIndex] = '_';
-		}
-		//if pressing up
-		else if(Input.GetAxis("Vertical") > 0 && _name.inputName.Length > 0) 
-		{
-			//increment the char
-			charToReplace++; 
-			_name.inputName[_name.nameIndex] = charToReplace; 
-			
-		}
-		//if pressing down
-		else if(Input.GetAxis("Vertical") < 0 && _name.inputName.Length > 0) 
-		{
-			//decrement the char
-			charToReplace--; 
-			_name.inputName[_name.nameIndex] = charToReplace; 
-		}
-		//if pressing jump add a new char to the array
-		else if(Input.GetButton("Jump") && _name.nameIndex >= _name.inputName.Length - 1)
-		{
-			//make sure the char doesn't show _
-			_name.inputName[_name.nameIndex] = charToReplace; 
-			
-			//update the string to reflect that
-			UpdateString(_name, charToReplace); 
-			
-			//declare a temp array and increase the array by 1
-			char[] temp = new char[_name.inputName.Length + 1];
-			
-			//copy the elements of the name array into the temp array
-			_name.inputName.CopyTo(temp, 0);
-			
-			//have the name array point to the temp array
-			_name.inputName = temp;
-			
-			//move the index to the end of the array
-			_name.nameIndex = _name.inputName.Length - 1;
-			//have the new char be 'a'
-			_name.inputName[_name.nameIndex] = 'a';
-			
-			//set chartoreplace as the new char
-			charToReplace = _name.inputName[_name.nameIndex]; 
-			
-		}
-		//if pressing melee then change the selector back to the multiplayer menu
-		else if(Input.GetButton("Melee"))
-		{
-			currentSelection = MultiPlayerSelection; 
-			isInputting = false;
-		}
-		//if pressing bomb and the index is at the end of the array 
-		else if(Input.GetButton("Bomb") && _name.inputName.Length > 0 && _name.nameIndex >= _name.inputName.Length - 1)
-		{
-			//declare a temp array with one less element
-			char[] temp = new char[_name.inputName.Length - 1];
-			
-			//copy the content into
-			for(int i = 0; i < _name.inputName.Length - 1; i++)
-				temp[i] = _name.inputName[i];
-			
-			_name.inputName = temp;
-			
-			if(_name.nameIndex > 0)
-			{
-				_name.nameIndex--;
-				charToReplace = _name.inputName[_name.nameIndex]; 
-				
-			}
-			else
-			{
-				_name.nameHolder = "";
-				currentSelection = MultiPlayerSelection; 
-				isInputting = false;
-			}
-		}
-		
-		//Debug.Log("array length " + _charArr.Length);
-		if(_name.inputName.Length > 0)
-			UpdateString(_name, charToReplace); 
-	}*/
 
 	private void InputNameHelper(NameInput _name)
 	{
@@ -1330,10 +1223,11 @@ public class MenuControl : MenuLogic
 		//if pressing melee then change the selector back to the multiplayer menu
 		else if(Input.GetButton("Melee"))
 		{
-			currentSelection = MultiPlayerSelection;
-			currentRect = multiPMenuBtnRect;
 			//isInputting = false;
-			showKeys = false;
+			//showKeys = false;
+			StartCoroutine(EaseKeyBoard(MultiPlayerSelection, multiPMenuBtnRect));
+			//currentSelection = MultiPlayerSelection;
+			//currentRect = multiPMenuBtnRect;
 		}
 	}
 	

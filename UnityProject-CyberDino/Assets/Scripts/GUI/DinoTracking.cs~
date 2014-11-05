@@ -57,8 +57,6 @@ public class DinoTracking : MonoBehaviour
 	void Awake () 
 	{
 		netView = GetComponent<NetworkView>();
-		
-		CreateSingleton();
 
 		AddDino += DinoToAdd;
 		
@@ -225,14 +223,14 @@ public class DinoTracking : MonoBehaviour
 		//Debug.Log("dino2 " + totalDist[1]);
 
 		//Debug.Log(playerNum);
-		if(Input.GetKeyDown(KeyCode.E))
+		/*if(Input.GetKeyDown(KeyCode.E))
 		{
 				
 			hudScript.ShowFinish();
 
 			hudScript.EndRace();
 			//netView.RPC("EndRace", RPCMode.All);
-		}
+		}*/
 
 		//add each dinos current distance from the next nodes
 		for(int i = 0; i < finishDist.Length; i++)
@@ -299,15 +297,15 @@ public class DinoTracking : MonoBehaviour
 		}
 		else if(dinos[1] == _dino)
 		{
-			//UpdateSpecificDino(_node, 1);
+			UpdateSpecificDino(_node, 1);
 		}
 		else if(dinos[2] == _dino)
 		{
-			//UpdateSpecificDino(_node, 2);
+			UpdateSpecificDino(_node, 2);
 		}
 		else if(dinos[3] == _dino)
 		{
-			//UpdateSpecificDino(_node, 3);
+			UpdateSpecificDino(_node, 3);
 		}
 		
 		//recursevly add up all of the distances between each node until the end
@@ -409,20 +407,6 @@ public class DinoTracking : MonoBehaviour
             }
         }
     }
-	
-	public void CreateSingleton()
-	{
-		if(trackingScript == null)
-		{
-			//Debug.Log("create tracking singleton");
-			trackingScript = this;
-		}
-		else
-		{
-			Debug.Log("did not create tracking singleton");
-			
-		}
-	}
 
     //a function that will recursivly add up the distance that the dino has until getting to the finish line
     private float AddUpDistance(NodeBehavior _previousNode, NodeBehavior _nextNode/*,int _index*/, float _dist)
