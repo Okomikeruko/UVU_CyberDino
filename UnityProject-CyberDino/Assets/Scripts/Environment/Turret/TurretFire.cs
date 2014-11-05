@@ -4,11 +4,14 @@ using System.Collections.Generic;
 
 public class TurretFire : MonoBehaviour {
 
-	public Transform pivot_pan;
-	public Transform pivot_tilt;
-
-	public Transform aim_pan;
-	public Transform aim_tilt;
+	[SerializeField]
+	private Transform pivot_pan;
+	[SerializeField]
+	private Transform pivot_tilt;
+	[SerializeField]
+	private Transform aim_pan;
+	[SerializeField]
+	private Transform aim_tilt;
 
 	[SerializeField]
 	private GameObject[] theDinos;
@@ -22,34 +25,38 @@ public class TurretFire : MonoBehaviour {
 	private TurretProjectile theProj;
 
 	private List<Transform> projectiles;
-
-	[SerializeField]
+	
 	private bool willSlowFirst = false;
-	[SerializeField]
 	private bool willSlowSecond = false;
 
 	public float setTime = .5F;
 
 	public float fireTime = .5f;
-	public bool firing = false;
+	private bool firing = false;
 	
 	public float checkTime = .2f;
-	public bool checking = false;
+	private bool checking = false;
 
 	public float damageTime = .5f;
-	public bool damaging = false;
+	private bool damaging = false;
 
 	public float damage;
 
-	public int hitChance;
-	public int hitThreshold = 11;
-	public int rangeMax = 100;
-	public int rangeMin = 0;
+	private int hitChance;
+	[SerializeField]
+	private int hitThreshold = 11;
+	[SerializeField]
+	private int rangeMax = 100;
+	[SerializeField]
+	private int rangeMin = 0;
 
-	public int dinoTopSpeed = 100;
+	[SerializeField]
+	private int dinoTopSpeed = 100;
 
-	public float firstSlowSpeed = 0.97f;
-	public float secondSlowSpeed = 0.98f;
+	[SerializeField]
+	private float firstSlowSpeed = 0.97f;
+	[SerializeField]
+	private float secondSlowSpeed = 0.98f;
 	
 	public float slowDuration = 1.0f;
 
@@ -134,8 +141,8 @@ public class TurretFire : MonoBehaviour {
 			if(theHealth != null)
 			{
 				theHealth.Damage(damage);
-				Debug.Log(transform + " dealt " + damage + " to " + myTarget);
-				Debug.Log(myTarget + " has " + theHealth.Current + " health");
+//				Debug.Log(transform + " dealt " + damage + " to " + myTarget);
+//				Debug.Log(myTarget + " has " + theHealth.Current + " health");
 			}
 
 			if(theMotion != null)
