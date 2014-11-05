@@ -8,12 +8,12 @@ public class DinosaurHealth : Health {
 
 	override public void OnDamage()
 	{	
-		Debug.Log (gameObject.name + " took damage.");
+		//Debug.Log (gameObject.name + " took damage.");
 	}
 
 	override public void OnHeal()
 	{
-		Debug.Log (gameObject.name + " was healed.");
+		//Debug.Log (gameObject.name + " was healed.");
 	}
 
 	override public void OnDeath()
