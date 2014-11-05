@@ -701,21 +701,11 @@ public class MenuLogic : MonoBehaviour
 	private void UpdateMapInfo()
 	{
 		var gameMap = networkHandler.gameMap;
-		if(levelIndex == 0){
+		if(levelIndex == 0)
 			gameMap = "DumbellTrack";
-		}
-		if(levelIndex == 1){
-			gameMap = "CityTrack2.1";
-		}
-		if(levelIndex == 2){
-			gameMap = "John_CityTrack2.0_TestScene";
-		}
-		if(levelIndex == 3){
-			gameMap = "Lee_CityTrack2.0_TestScene";
-		}
-		if(levelIndex == 4){
-			gameMap = "Robert_Reed_CityTrack2.1";
-		}
+		if(levelIndex == 1)
+			gameMap = "NightTimeTrack";
+			
 		networkHandler.UpdateMapInformation(gameMap);
 	}
 	

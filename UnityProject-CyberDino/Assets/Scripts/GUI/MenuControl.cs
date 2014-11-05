@@ -104,7 +104,7 @@ public class MenuControl : MenuLogic
 		
 		//set the names of the dinos and the levels
 		dinos = new string[]{"Diloph", "Hesp", "Raptor", "Spino", "TRex", "Troodon"};
-		levels = new string[]{"Dumbell Track", "CityTrackv2","John's Track", "Lee's Track", "Robert's Track"};
+		levels = new string[]{"Dumbell Track", "Night Time Track"};
 		
 		//set the textures for the main menu buttons
 		mainMenuBtnTxtr = new Texture[3];
@@ -142,9 +142,8 @@ public class MenuControl : MenuLogic
 		//set the texture for the back button
 		backBtnTxtr = (Texture)Resources.Load("GUI/Materials/BackButton");
 		
-		lvlSelectTxtr = new Texture[5];
-		//lvlSelectTxtr[0] = (Texture)Resources.Load("GUI/Materials/CityTrackGFX");
-		lvlSelectTxtr[1] = (Texture)Resources.Load("GUI/Materials/CityTrackGraphic");
+		lvlSelectTxtr = new Texture[2];
+		lvlSelectTxtr[0] = (Texture)Resources.Load("GUI/Materials/CityTrackGraphic");
 		
 		lvlNameGFX = (Texture)Resources.Load("GUI/Materials/CityTrackWord");
 		
