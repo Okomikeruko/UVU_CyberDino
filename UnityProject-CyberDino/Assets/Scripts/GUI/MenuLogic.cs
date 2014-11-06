@@ -7,6 +7,10 @@ public class MenuLogic : MonoBehaviour
 	public enum Menu{mainMenu, multiPMenu, lobbyMenu, goToLevel, resultsMenu, connecting};
 	[HideInInspector]
 	public Menu menuSelect;
+	
+	public delegate void FadeTransition();
+	internal FadeTransition fadeAction;
+	internal FadeTransition afterFadeAction;
 
 	//floats to hold the width and height multiplier
 	internal float xMulti{get;set;}
@@ -98,6 +102,8 @@ public class MenuLogic : MonoBehaviour
 	internal char charToReplace{get;set;} 
 
 	internal GameObject fadeTransition;
+	
+	internal GameObject loadingObj;
 
 	//the method for setting up the variable of menulogic
 	public void SetUp()
@@ -597,47 +603,6 @@ public class MenuLogic : MonoBehaviour
 		resultsFName[_playerNum - 1] = "GUI/Materials/Banner" + GetNameFromClone(_dinoName) + "Small";
 		
 	}
-
-	//sets the names of the players
-	/*public string[] SetNames()
-	{
-		int index = 0;
-
-		//int playerNum = dinoTrackingScript.playerNum;
-		
-		
-		while(index < playerNames.Length)
-		{
-			playerNames[index] = "CPU " + index;
-			
-			index++;
-		}
-		
-		if(Network.isServer)
-		{
-			PlayerInformation[] infoArr = new PlayerInformation[4];
-			
-			networkHandler.playerInformation.Values.CopyTo(infoArr, 0);
-			
-			for(int i = 0; i < infoArr.Length; i++)
-			{
-				
-				if(infoArr[i] != null)
-					netView.RPC("AddName", RPCMode.AllBuffered, infoArr[i].playerName, i);
-				
-			}
-		}
-		
-		return playerNames;
-	}
-
-	//sends the names to all of the players
-	[RPC]
-	private void AddName(string _name, int _index)
-	{
-		Debug.Log("the name is " + _name + " to " + _index);
-		playerNames[_index] = _name;
-	}*/
 	
 	//***********menu selection**************//
 	
@@ -758,12 +723,12 @@ public class MenuLogic : MonoBehaviour
 		_selected = (GameObject)Instantiate(_models[dinoIndex], GameObject.Find("MenuDinoSpawnLocation").transform.position, Quaternion.Euler(new Vector3(0, 90, 0)));
 	}
 	
-	public void LobbyToLevel(Menu _menu)
+	public void LobbyToLevel()
 	{
 		var myInfo = networkHandler.GetMyInfo();
 		//Debug.Log( myInfo.dinoName);
 		
-		menuSelect = _menu;
+		menuSelect = Menu.goToLevel;
 		currentSelection = null;
 		currentRect = null;
 		
@@ -776,6 +741,16 @@ public class MenuLogic : MonoBehaviour
 		this.enabled = false;
 	}
 	
+	public void TurnOnLoading()
+	{
+		loadingObj.SetActive(true);
+	}
+	
+	public void TurnOffLoading()
+	{
+		loadingObj.SetActive(false);
+	}
+	
 	public void ClientReady(string _state, bool _ready)
 	{
 		var myInfo = networkHandler.GetMyInfo();
@@ -783,11 +758,16 @@ public class MenuLogic : MonoBehaviour
 		readyMe = _ready;
 		networkHandler.UpdatePlayerInformation(myInfo);
 	}
+	
+	[RPC]
+	public void GroupToLevel()
+	{
+		StartCoroutine(MoveLeftOff(2, 5, Menu.goToLevel, null, null));
+	}
 
 	[RPC]
 	public void TransitionFade()
 	{
-		StartCoroutine(MoveLeftOff(2, 5, Menu.goToLevel, null, null));
 		StartCoroutine(TransitionFadeHelper());
 	}
 
@@ -812,7 +792,8 @@ public class MenuLogic : MonoBehaviour
 				{
 					fadeOut = true;
 
-					LobbyToLevel(Menu.goToLevel);
+					//LobbyToLevel(Menu.goToLevel);
+					fadeAction();
 					
 					transNum = 0;
 				}
@@ -824,7 +805,7 @@ public class MenuLogic : MonoBehaviour
 					//set the guiTexture's color to the temp Color
 					fadeTransition.guiTexture.color = tempColor;
 					
-					transNum +=  .8f * Time.deltaTime ;
+					transNum +=  2f * Time.deltaTime ;
 				}
 			}
 			else
@@ -832,6 +813,8 @@ public class MenuLogic : MonoBehaviour
 				
 				if(tempColor.a <= 0)
 				{
+					if(afterFadeAction != null)
+						afterFadeAction();
 					yield break;
 				}
 				else
@@ -843,12 +826,13 @@ public class MenuLogic : MonoBehaviour
 					fadeTransition.guiTexture.color = tempColor;
 					
 					
-					transNum += .5f * Time.deltaTime  ;
+					transNum += 2f * Time.deltaTime  ;
 				}
 			}
 			
 			yield return null;
 		}
+		
 	}
 
 

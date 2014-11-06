@@ -152,8 +152,44 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b98ca4a4bd0dd5040951be6d21a1a55b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mySkin: {fileID: 11400000, guid: f9cd5d6b739287443973e3770477dc1f, type: 2}
   menuSelect: 0
+  easeIn:
+    serializedVersion: 2
+    m_Curve:
+    - time: 0
+      value: 0
+      inSlope: 2
+      outSlope: 2
+      tangentMode: 0
+    - time: 1
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+  easeOut:
+    serializedVersion: 2
+    m_Curve:
+    - time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    - time: 1
+      value: 1
+      inSlope: 2
+      outSlope: 2
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+  dinoIndex: 0
+  levelIndex: 0
+  dinoSelected: {fileID: 0}
+  raceDinos: []
+  racePositions: 
+  playerNames: []
+  mySkin: {fileID: 11400000, guid: f9cd5d6b739287443973e3770477dc1f, type: 2}
   dinos:
   - Diloph
   - Hesp
@@ -162,24 +198,13 @@ MonoBehaviour:
   - TRex
   - Troodon
   levelTextures:
-  - {fileID: 2800000, guid: c43eafb4df2b8b24e8a981c7852db787, type: 3}
-  readyMe: 0
-  readyAll: 1
-  networkHandlerObject: {fileID: 100000, guid: e6f376646afe95a4ab3370abc3a29b99, type: 2}
-  singlePlayer: 1
-  playAgain: 0
-  playerName: 
-  serverName: 
-  dinoIndex: 0
-  levelIndex: 0
-  buttonMoveSpeed: 2000
+  - {fileID: 2800000, guid: 4a356b26654333d49bd4d1c5de7dd241, type: 3}
   dinoModels:
-  - {fileID: 100068, guid: 15dad461475ef954785b66356ee923d0, type: 2}
-  - {fileID: 100390, guid: 62cbf337c9333304faf46f250ce3f1e0, type: 2}
-  - {fileID: 100064, guid: 6cf6f780f4d2b56479e1872b180a4940, type: 2}
-  - {fileID: 100078, guid: 9b1c284935da4244fa48848a942c00dc, type: 2}
-  - {fileID: 100040, guid: b3cd13b42e4c3124ea0f8967b7ef8fe2, type: 2}
-  - {fileID: 100124, guid: 6ad618e5505495d4da4bfda2646644df, type: 2}
+  - {fileID: 100056, guid: cc2cd984260e8304cb448bdc52cc2f1c, type: 2}
+  - {fileID: 100048, guid: cba5b64a1d1920e4c8fcc14a82b94831, type: 2}
+  - {fileID: 100040, guid: 89dd74e01d60cca4cbfad41188a67c01, type: 2}
+  - {fileID: 100034, guid: 00a6b34982f670444873384c5d1bb09f, type: 2}
+  - {fileID: 100006, guid: 19ba4b23df9e07744a5fdce976fe85cd, type: 2}
   rotateSpeed: 10
 --- !u!148 &14800000
 NetworkView:

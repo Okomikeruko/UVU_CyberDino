@@ -201,20 +201,6 @@ public class DinoTracking : MonoBehaviour
 				}
 			}
 		}
-
-		/*for(int i = 0; i < currentNodes.Length; i++)
-		{
-			currentNodes[i] = startNode.GetComponent<NodeBehavior>();
-			nextNodes[i] = currentNodes[i].NextNodes[0].GetComponent<NodeBehavior>();
-
-            finishDist[i] = AddUpDistance(currentNodes[i].GetComponent<NodeBehavior>(), nextNodes[i].GetComponent<NodeBehavior>(), 0);
-		}
-		
-		for(int i = 0; i < currentPositions.Length; i++)
-		{
-			currentPositions[i] = i + 1;
-			Debug.Log("The start pos " + currentPositions[i]);
-		}*/
 		
 		yield return null;
 	}

@@ -103,7 +103,7 @@ public class MenuControl : MenuLogic
 		SetUp();
 		
 		//set the names of the dinos and the levels
-		dinos = new string[]{"Diloph", "Hesp", "Raptor", "Spino", "TRex", "Troodon"};
+		dinos = new string[]{"Diloph", "Hesp", "Spino", "TRex", "Troodon"};
 		levels = new string[]{"Dumbell Track", "Night Time Track"};
 		
 		//set the textures for the main menu buttons
@@ -213,7 +213,7 @@ public class MenuControl : MenuLogic
 		
 	}
 	
-	void OnLevelWasLoaded(int _level)
+	IEnumerator OnLevelWasLoaded(int _level)
 	{
 		if(fadeTransition == null)
 		{
@@ -224,9 +224,16 @@ public class MenuControl : MenuLogic
 			fadeTransition.guiTexture.color = tempColor;
 			fadeTransition.layer = 5;
 		}
+		
+		if(loadingObj == null)
+		{
+			loadingObj = CreateGUITxtr(fadeTransition, "LoadingObj", (Texture)Resources.Load("GUI/Materials/CityTrackGFX"), ResizeRect(new Rect(0, 0, 100, 100)));
+			loadingObj.transform.position = new Vector3(0, 0, 29);
+			loadingObj.layer = 5;
+		}
 
 		//if the menu is loaded
-		if(_level == 1)
+		if(_level == 2)
 		{
 			Debug.Log("menu scene was loaded");
 			
@@ -235,15 +242,41 @@ public class MenuControl : MenuLogic
 				
 			if(menuSelect == Menu.lobbyMenu)
 				UpdateDinoInfo(dinoModels, ref dinoSelected, dinos, ref largeDinoBanner);
+				
+			if(loadingObj != null)
+				loadingObj.SetActive(false);
 			
 			//InstantiateMenuObj();
 
 		}
 		//if the dumbbell track was loaded
-		else if(_level == 2)
+		else
 		{
 			//set the variable for the race
 			SetRaceInfo();
+			
+			GameObject countDownObj = GameObject.Find("CountDown(Clone)");
+			RaceStart start = null;
+			
+			do
+			{
+				if(start != null)
+					break;
+					
+				countDownObj = GameObject.Find("CountDown(Clone)");
+				
+				if(countDownObj != null)
+					start = countDownObj.GetComponent<RaceStart>();
+				
+				yield return new WaitForSeconds(0.5f);
+			}while(true);
+			
+			fadeAction = TurnOffLoading;
+			afterFadeAction = start.FadeFinishCount;
+			netView.RPC("TransitionFade", RPCMode.AllBuffered);
+			
+			if(loadingObj != null)
+				loadingObj.SetActive(true);
 
 			dinoTracking = GameObject.Find("Checkpoints");
 			
@@ -593,7 +626,11 @@ public class MenuControl : MenuLogic
 					
 					if(GUI.Button(new Rect(menuOrigin[2].x + lobbyMenuBtnRect[5].x, menuOrigin[2].y + lobbyMenuBtnRect[5].y, lobbyMenuBtnRect[5].width, lobbyMenuBtnRect[5].height), ""))
 					{
+						GroupToLevel();
+						fadeAction = TurnOnLoading;
+						afterFadeAction = LobbyToLevel;
 						//StartCoroutine(MoveLeftOff(2, 5, Menu.goToLevel, null, null));
+						//LobbyToLevel(Menu.goToLevel)
 						netView.RPC("TransitionFade", RPCMode.AllBuffered);
 					}
 				}
@@ -1008,7 +1045,8 @@ public class MenuControl : MenuLogic
 			//button to start the race
 			else if(Network.isServer && readyAll == true && buttonIndex == 5)
 			{
-				StartCoroutine(MoveLeftOff(2, 5, Menu.goToLevel, null, null));
+				GroupToLevel();
+				fadeAction = TurnOnLoading;
 				netView.RPC("TransitionFade", RPCMode.AllBuffered);
 			}
 			//button to indicate that this player is ready

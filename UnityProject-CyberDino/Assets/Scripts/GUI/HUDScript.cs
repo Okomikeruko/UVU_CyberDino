@@ -14,7 +14,7 @@ public class HUDScript : MonoBehaviour
 	public GameObject networkHandlerObject;
 	private NetworkGameHandler networkHandler;
 
-	private GameObject[] test;
+	//private GameObject[] test;
 
 	//guitextures for the hud
 	private GameObject positionObjs;
@@ -102,11 +102,11 @@ public class HUDScript : MonoBehaviour
 		
 		grpObj.layer = 5;
 
-		test = new GameObject[4];
+/*		test = new GameObject[4];
 		test[0] = new GameObject("test object");
 		test[1] = new GameObject("test object");
 		test[2] = new GameObject("test object");
-		test[3] = new GameObject("test object");
+		test[3] = new GameObject("test object");*/
 
 		//settings for the mini map
 		if(Application.loadedLevelName == "DumbellTrack")
