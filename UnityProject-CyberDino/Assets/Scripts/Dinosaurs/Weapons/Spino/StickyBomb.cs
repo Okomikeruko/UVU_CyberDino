@@ -27,7 +27,7 @@ public class StickyBomb : Bomb {
 
 		// Attach Sticky Bomb
 		Debug.Log ("Sticky Bomb! - " + nearest.name);
-		GameObject stickyBomb = (GameObject)Network.Instantiate((GameObject)Resources.Load("Weapons/Bombs/StickyBomb"), Vector3.zero, Quaternion.identity, int.Parse(Network.player.ToString()));
+		GameObject stickyBomb = (GameObject)Network.Instantiate((GameObject)Resources.Load("Weapons/Bombs/StickyBomb"), transform.position, Quaternion.identity, int.Parse(Network.player.ToString()));
 		stickyBomb.transform.parent = nearest.transform;
 	}
 

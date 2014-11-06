@@ -17,7 +17,7 @@ public class Napalm_obj : MonoBehaviour {
 	private float activationDelay = 1.0f;
 	private float activationTimeElasped = 0.0f;
 
-	private bool active = false;
+	new private bool active = false;
 
     void Update()
     {
@@ -45,11 +45,7 @@ public class Napalm_obj : MonoBehaviour {
 					health.Damage(Napalm_Damage);
 				}
 
-				var colliders = Physics.OverlapSphere(transform.position, Explosion_Radius);		
-				foreach (var hit in colliders){	
-					if(hit.gameObject.rigidbody != null)
-						hit.gameObject.rigidbody.AddExplosionForce(Explosion_Force * hit.gameObject.rigidbody.mass, transform.position, 0, 1, ForceMode.Impulse);
-				}
+				networkView.RPC ("ExplosiveForce", RPCMode.All);
 
 				Network.Instantiate((GameObject)Resources.Load("Weapons/Bombs/NapalmExplosion"), 
 				                    this.transform.position, Quaternion.LookRotation(-transform.forward), 
@@ -59,4 +55,14 @@ public class Napalm_obj : MonoBehaviour {
 			}
 		}
     }
+
+	[RPC]
+	void ExplosiveForce()
+	{
+		var colliders = Physics.OverlapSphere(transform.position, Explosion_Radius);		
+		foreach (var hit in colliders){	
+			if(hit.gameObject.rigidbody != null)
+				hit.gameObject.rigidbody.AddExplosionForce(Explosion_Force * hit.gameObject.rigidbody.mass, transform.position, 0, 1, ForceMode.Impulse);
+		}
+	}
 }
