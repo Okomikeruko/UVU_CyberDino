@@ -9,15 +9,20 @@ public class StickyBombTimer : MonoBehaviour {
 
 	[SerializeField]
 	private float Damage = 50.0f;
-
+	
 	[SerializeField]
-	private Vector3 ExplosiveVelocity = new Vector3(0.0f, 100.0f, 0.0f);
+	private float Explosion_Radius = 15.0f;
+	
+	[SerializeField]
+	private float Explosion_Force = 50.0f;
 
 	[SerializeField]
 	private float SwapCooldown = 1.0f;
 	private float SwapElapsed = 0.0f;
 
 	void Update () {
+		transform.position = transform.parent.position;
+
 		if(networkView.isMine)
 		{
 			SwapElapsed += Time.deltaTime;
@@ -27,12 +32,19 @@ public class StickyBombTimer : MonoBehaviour {
 			{
 				// Explode
 				var p = transform.parent;
-				
-				p.rigidbody.velocity += ExplosiveVelocity;
-
 				var health = p.GetComponent<Health>();
 				health.Damage(Damage);
 
+				var colliders = Physics.OverlapSphere(transform.position, Explosion_Radius);		
+				foreach (var hit in colliders){	
+					if(hit.gameObject.rigidbody != null)
+						hit.gameObject.rigidbody.AddExplosionForce(Explosion_Force * hit.gameObject.rigidbody.mass, transform.position, 0, 1, ForceMode.Impulse);
+				}
+
+				Network.Instantiate((GameObject)Resources.Load("Weapons/Bombs/StickyBombExplosion"), 
+				                    this.transform.position, Quaternion.LookRotation(-transform.forward), 
+				                    int.Parse(Network.player.ToString()));
+				
 				Network.Destroy(gameObject);
 			}
 		}
@@ -46,12 +58,5 @@ public class StickyBombTimer : MonoBehaviour {
 			transform.parent = go.transform;
 			SwapElapsed = 0.0f;
 		}
-	}
-
-
-	// Debug text
-	void OnGUI()
-	{
-		GUI.Label(new Rect(20, 500, 500, 20), "Sticky Bomb: " + transform.parent.gameObject.name + ", " + (FuseTime - ElapsedTime).ToString());
 	}
 }
