@@ -69,6 +69,8 @@ public class MenuControl : MenuLogic
 
 	private Texture fadeTxtr;
 	
+	private Texture loadingTxtr;
+	
 	//the main menu background
 	private GameObject mainMenuBkgd;
 	private Rect mainMenuBkgdPos;
@@ -157,6 +159,8 @@ public class MenuControl : MenuLogic
 
 		fadeTxtr = (Texture)Resources.Load("GUI/Materials/BlackScreen");
 		
+		loadingTxtr = (Texture)Resources.Load("GUI/Materials/how to play");
+		
 		//set the texture for the small white boxes
 		smallBoxGFX = (Texture)Resources.Load("GUI/Materials/OtherPlayerSelection");
 		
@@ -231,7 +235,7 @@ public class MenuControl : MenuLogic
 		
 		if(loadingObj == null)
 		{
-			loadingObj = CreateGUITxtr(fadeTransition, "LoadingObj", (Texture)Resources.Load("GUI/Materials/CityTrackGFX"), ResizeRect(new Rect(0, 0, 100, 100)));
+			loadingObj = CreateGUITxtr(fadeTransition, "LoadingObj", loadingTxtr, ResizeRect(new Rect(0, 0, 100, 100)));
 			loadingObj.transform.position = new Vector3(0, 0, 29);
 			loadingObj.layer = 5;
 			
