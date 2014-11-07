@@ -582,7 +582,7 @@ public class MenuControl : MenuLogic
 
 						GUI.DrawTexture(new Rect(menuOrigin[2].x + lobbyMenuRect[i].x, menuOrigin[2].y + lobbyMenuRect[i].y, lobbyMenuRect[i].width, lobbyMenuRect[i].height), smallBoxGFX);
 						GUI.DrawTexture(new Rect(menuOrigin[2].x + lobbyMenuRect[i + 5].x, menuOrigin[2].y + lobbyMenuRect[i + 5].y, lobbyMenuRect[i + 5].width, lobbyMenuRect[i + 5].height), largeDinoBanner);
-						GUI.Label(new Rect(menuOrigin[2].x + lobbyMenuRect[i + 5].x, menuOrigin[2].y + lobbyMenuRect[i + 5].y, lobbyMenuRect[i + 5].width, lobbyMenuRect[i + 5].height), dinos[i], noGfxSkin);
+						GUI.Label(new Rect(menuOrigin[2].x + lobbyMenuRect[i + 5].x, menuOrigin[2].y + lobbyMenuRect[i + 5].y, lobbyMenuRect[i + 5].width, lobbyMenuRect[i + 5].height), player.Value.dinoName, noGfxSkin);
 						GUI.Label(new Rect(menuOrigin[2].x + lobbyMenuRect[i].x, menuOrigin[2].y + lobbyMenuRect[i].y - 15, lobbyMenuRect[i].width, lobbyMenuRect[i].height), player.Value.playerName);
 						i++;
 					}
@@ -653,9 +653,9 @@ public class MenuControl : MenuLogic
 					
 					if(GUI.Button(new Rect(menuOrigin[2].x + lobbyMenuBtnRect[5].x, menuOrigin[2].y + lobbyMenuBtnRect[5].y, lobbyMenuBtnRect[5].width, lobbyMenuBtnRect[5].height), "Play", noGfxSkin))
 					{
-						GroupToLevel();
-						fadeAction = TurnOnLoading;
-						afterFadeAction = LobbyToLevel;
+						netView.RPC("GroupToLevel", RPCMode.AllBuffered);
+						/*fadeAction = TurnOnLoading;
+						afterFadeAction = LobbyToLevel;*/
 						//StartCoroutine(MoveLeftOff(2, 5, Menu.goToLevel, null, null));
 						//LobbyToLevel(Menu.goToLevel)
 						netView.RPC("TransitionFade", RPCMode.AllBuffered);
@@ -831,9 +831,10 @@ public class MenuControl : MenuLogic
 			resultsMenuRect[7] = ResizeRect(new Rect(17, 59, 20, 20));
 			 
 			//size and positions for the buttons
-			resultsMenuBtnRect[0] = ResizeRect(new Rect(65, 85, 20, 10));
+			//resultsMenuBtnRect[0] = ResizeRect(new Rect(65, 85, 20, 10));
+			resultsMenuBtnRect[0] = ResizeRect(new Rect(15, 85, 20, 10));
 			resultsMenuBtnRect[1] = ResizeRect(new Rect(40, 85, 20, 10));
-			resultsMenuBtnRect[2] = ResizeRect(new Rect(15, 85, 20, 10));
+			resultsMenuBtnRect[2] = ResizeRect(new Rect(65, 85, 20, 10));
 			
 			//size and position for the window texture
 			resultsMenuRect[8] = ResizeRect(new Rect(0, 0, 100, 100));
@@ -858,7 +859,7 @@ public class MenuControl : MenuLogic
 			if(GUI.Button(new Rect(menuOrigin[4].x + resultsMenuBtnRect[0].x, menuOrigin[4].y + resultsMenuBtnRect[0].y, resultsMenuBtnRect[0].width, resultsMenuBtnRect[0].height), "Exit"))
 			{
 				//LeaveGame(LobbySelection, lobbyMenuBtnRect);
-				t
+				
 
 				fadeAction = LeaveGame;
 
@@ -970,9 +971,6 @@ public class MenuControl : MenuLogic
 	public void LeaveGame()
 	{
 		//Debug.Log("the current menu" + menuSelect.ToString());
-		if(menuSelect == Menu.resultsMenu)
-		{
-			
 			menuSelect = Menu.lobbyMenu;
 			//Debug.Log("the current menu" + menuSelect.ToString());
 			//Debug.Log("change to lobby");
@@ -989,7 +987,7 @@ public class MenuControl : MenuLogic
 			currentSelection = LobbySelection;
 			currentRect = lobbyMenuBtnRect;
 			menuOrigin[2].x = 0;
-		}
+
 	}
 	
 	public void InstantiateMenuObj()
@@ -1101,8 +1099,7 @@ public class MenuControl : MenuLogic
 			//button to start the race
 			else if(Network.isServer && readyAll == true && buttonIndex == 5)
 			{
-				GroupToLevel();
-				fadeAction = TurnOnLoading;
+				netView.RPC("GroupToLevel", RPCMode.AllBuffered);
 				netView.RPC("TransitionFade", RPCMode.AllBuffered);
 			}
 			//button to indicate that this player is ready

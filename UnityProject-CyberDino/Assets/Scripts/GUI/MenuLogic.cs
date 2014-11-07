@@ -757,6 +757,8 @@ public class MenuLogic : MonoBehaviour
 	public void GroupToLevel()
 	{
 		StartCoroutine(MoveLeftOff(2, 5, Menu.goToLevel, null, null));
+		fadeAction = TurnOnLoading;
+		afterFadeAction = LobbyToLevel;
 	}
 
 	[RPC]

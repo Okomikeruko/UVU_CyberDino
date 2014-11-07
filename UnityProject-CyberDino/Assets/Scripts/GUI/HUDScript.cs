@@ -33,6 +33,7 @@ public class HUDScript : MonoBehaviour
 	//private GameObject[] resultsObjs;
 
 	private Rect[] pauseMenuPos;
+	private Vector2[] pauseMenuTextPos;
 
 	private GameObject healthGrp;
 	private GameObject healthGrpBar;
@@ -62,6 +63,7 @@ public class HUDScript : MonoBehaviour
 	private int[] currentLaps;
 	
 	private Font gameFont;
+	private Font buttonFont;
 
 	//the dino tracking script
 	public DinoTracking dinoTrackingScript;
@@ -99,6 +101,7 @@ public class HUDScript : MonoBehaviour
 		grpObj = new GameObject("HUD Group");
 		
 		gameFont = (Font)Resources.Load("GUI/Materials/Glen Jan - CertaSans-MediumItalic");
+		buttonFont = (Font)Resources.Load("GUI/Materials/Typodermic - EthnocentricRg-Italic");
 		
 		grpObj.layer = 5;
 
@@ -182,10 +185,10 @@ public class HUDScript : MonoBehaviour
 		
 		pauseMenuGfx = new Texture[5];
 		pauseMenuGfx[0] = (Texture)Resources.Load("GUI/Materials/PauseMenuBackground");
-		pauseMenuGfx[1] = (Texture)Resources.Load("GUI/Materials/PauseContinue");
-		pauseMenuGfx[2] = (Texture)Resources.Load("GUI/Materials/PauseRestart");
+		pauseMenuGfx[1] = (Texture)Resources.Load("GUI/Materials/empty button");
+		/*pauseMenuGfx[2] = (Texture)Resources.Load("GUI/Materials/PauseRestart");
 		pauseMenuGfx[3] = (Texture)Resources.Load("GUI/Materials/PauseSettings");
-		pauseMenuGfx[4] = (Texture)Resources.Load("GUI/Materials/QuitButton");
+		pauseMenuGfx[4] = (Texture)Resources.Load("GUI/Materials/QuitButton")*/;
 		
 		healthDangerGfx = (Texture)Resources.Load("GUI/Materials/Dying");
 
@@ -260,27 +263,29 @@ public class HUDScript : MonoBehaviour
 		
 		dinoIcon = CreateGUITxtr("Dino Icon", dinoIconsGfx[0], new Vector3(0, 0, 0));
 		
-		healthPercent = CreateGUIText("Health Percent", "100%", new Vector3(0, 0, 0));
+		healthPercent = CreateButtonText("Health Percent", "100%", new Vector3(0, 0, 0));
 
 		raceDinos = dinoTrackingScript.GetDinoArray();
 
 		healthGrp = (GameObject)Instantiate(Resources.Load("GUI/HealthMaskObj"), Camera.main.transform.position, Quaternion.identity);
 		healthGrp.transform.Rotate(new Vector3(0, 90, 0));
 		
-		pauseMenuObjs = new GameObject[5];
+		pauseMenuObjs = new GameObject[9];
 		pauseMenuObjs[0] = CreateGUITxtr("Pause Menu Background", pauseMenuGfx[0], new Vector3(0, 0, 1));
-		pauseMenuObjs[1] = CreateGUITxtr("Continue", pauseMenuGfx[1], new Vector3(0, 0, 2));
-		pauseMenuObjs[2] = CreateGUITxtr("Restart", pauseMenuGfx[2], new Vector3(0, 0, 2));
-		pauseMenuObjs[3] = CreateGUITxtr("Setting", pauseMenuGfx[3], new Vector3(0, 0, 2));
-		pauseMenuObjs[4] = CreateGUITxtr("Exit", pauseMenuGfx[4], new Vector3(0, 0, 2));
+		pauseMenuObjs[1] = CreateGUITxtr("ContinueTxtr", pauseMenuGfx[1], new Vector3(0, 0, 2));
+		pauseMenuObjs[2] = CreateGUITxtr("RestartTxtr", pauseMenuGfx[1], new Vector3(0, 0, 2));
+		pauseMenuObjs[3] = CreateGUITxtr("SettingTxtr", pauseMenuGfx[1], new Vector3(0, 0, 2));
+		pauseMenuObjs[4] = CreateGUITxtr("QuitTxtr", pauseMenuGfx[1], new Vector3(0, 0, 2));
+		pauseMenuObjs[5] = CreateButtonText("ContinueText", "Continue", new Vector3(0, 0, 3));
+		pauseMenuObjs[6] = CreateButtonText("RestartText", "Restart", new Vector3(0, 0, 3));
+		pauseMenuObjs[7] = CreateButtonText("SettingText", "Settings", new Vector3(0, 0, 3));
+		pauseMenuObjs[8] = CreateButtonText("QuitText", "Quit", new Vector3(0, 0, 3));
 
-		pauseMenuObjs[0].SetActive(false);
-		pauseMenuObjs[1].SetActive(false);
-		pauseMenuObjs[2].SetActive(false);
-		pauseMenuObjs[3].SetActive(false);
-		pauseMenuObjs[4].SetActive(false);
+		foreach(GameObject _obj in pauseMenuObjs)
+			_obj.SetActive(false);
 		
 		pauseMenuPos = new Rect[5];
+		pauseMenuTextPos = new Vector2[4];
 
 		items = new GameObject[3];
 		
@@ -357,12 +362,21 @@ public class HUDScript : MonoBehaviour
 		pauseMenuPos[2] = ResizeRect( new Rect(32, 45, 35, 13));
 		pauseMenuPos[3] = ResizeRect( new Rect(32, 30, 35, 13));
 		pauseMenuPos[4] = ResizeRect( new Rect(32, 15, 35, 13));
+		pauseMenuTextPos[0] = ResizeVec2( new Vector2(39, 70));
+		pauseMenuTextPos[1] = ResizeVec2( new Vector2(39, 55));
+		pauseMenuTextPos[2] = ResizeVec2( new Vector2(39, 40));
+		pauseMenuTextPos[3] = ResizeVec2( new Vector2(45, 25));
 		
 		pauseMenuObjs[0].guiTexture.pixelInset = pauseMenuPos[0];
 		pauseMenuObjs[1].guiTexture.pixelInset = pauseMenuPos[1];
 		pauseMenuObjs[2].guiTexture.pixelInset = pauseMenuPos[2];
 		pauseMenuObjs[3].guiTexture.pixelInset = pauseMenuPos[3];
 		pauseMenuObjs[4].guiTexture.pixelInset = pauseMenuPos[4];
+		pauseMenuObjs[5].guiText.pixelOffset = pauseMenuTextPos[0];
+		pauseMenuObjs[6].guiText.pixelOffset = pauseMenuTextPos[1];
+		pauseMenuObjs[7].guiText.pixelOffset = pauseMenuTextPos[2];
+		pauseMenuObjs[8].guiText.pixelOffset = pauseMenuTextPos[3];
+		
 		
 		if(Input.GetMouseButtonDown(0))
 		{
@@ -388,7 +402,7 @@ public class HUDScript : MonoBehaviour
 				
 				menuScript.TransitionFade();
 
-				Application.LoadLevel("Menu");
+				//Application.LoadLevel("Menu");
 			}
 		}
 
@@ -458,6 +472,7 @@ public class HUDScript : MonoBehaviour
 		{
 			if(isPaused == false)
 			{
+				Debug.Log("pause activated");
 				Time.timeScale = 0;
 			}
 			else
@@ -471,14 +486,20 @@ public class HUDScript : MonoBehaviour
 
 	private Rect ResizeRect(Rect _pos)
 	{
-		//set the rect position and size
-		return new Rect(_pos.x * xMulti, _pos.y * yMulti, _pos.width * xMulti, _pos.height * yMulti);
+		_pos.x *= xMulti;
+		_pos.y *= yMulti;
+		_pos.width *= xMulti;
+		_pos.height *= yMulti;
+		
+		return _pos;
 	}
 
 	private Vector2 ResizeVec2(Vector2 _pos)
 	{
-		//set the rect position and size
-		return new Vector2(_pos.x * xMulti, _pos.y * yMulti);
+		_pos.x *= xMulti;
+		_pos.y *= yMulti;
+		
+		return _pos;
 	}
 
 	private GameObject CreateGUITxtr(string _name, Texture _txtr, Vector3 _pos)
@@ -507,6 +528,22 @@ public class HUDScript : MonoBehaviour
 		_obj.layer = 5;
 		_obj.guiText.color = Color.cyan;
 		_obj.guiText.font = gameFont;
+		
+		return _obj;
+	}
+	
+	private GameObject CreateButtonText(string _name, string _text, Vector3 _pos)
+	{
+		GameObject _obj = new GameObject(_name);
+		_obj.transform.position = _pos;
+		_obj.transform.localScale = new Vector3(0, 0, 0);
+		_obj.AddComponent("GUIText");
+		//_obj.guiTexture.pixelInset = _pos;
+		_obj.guiText.text = _text;
+		_obj.transform.parent = grpObj.transform;
+		_obj.layer = 5;
+		_obj.guiText.color = Color.white;
+		_obj.guiText.font = buttonFont;
 		
 		return _obj;
 	}
@@ -807,20 +844,16 @@ public class HUDScript : MonoBehaviour
 	{
 		if(isPaused == false)
 		{
-			pauseMenuObjs[0].SetActive(true);
-			pauseMenuObjs[1].SetActive(true);
-			pauseMenuObjs[2].SetActive(true);
-			pauseMenuObjs[3].SetActive(true);
-			pauseMenuObjs[4].SetActive(true);
+			foreach(GameObject _obj in pauseMenuObjs)
+				_obj.SetActive(true);
+			
 			isPaused = true;
 		}
 		else if(isPaused == true)
 		{
-			pauseMenuObjs[0].SetActive(false);
-			pauseMenuObjs[1].SetActive(false);
-			pauseMenuObjs[2].SetActive(false);
-			pauseMenuObjs[3].SetActive(false);
-			pauseMenuObjs[4].SetActive(false);
+			foreach(GameObject _obj in pauseMenuObjs)
+				_obj.SetActive(false);
+			
 			isPaused = false;
 		}
 	}
