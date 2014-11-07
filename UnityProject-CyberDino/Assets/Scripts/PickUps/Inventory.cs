@@ -139,6 +139,9 @@ public class Inventory : MonoBehaviour {
 	{
 		var move = GetComponent<MotionControl>();
 		move.TopSpeedMod(1.5f, 5.0f);
+
+		var statFX = GetComponent<DinoStatusEffects> ();
+		statFX.ApplyEffect (StatusEffectType.Sprint, 5.0f);
 	}
 
 }

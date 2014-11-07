@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public enum StatusEffectType {Acid, Disorient, Fire};
+public enum StatusEffectType {Acid, Disorient, Fire, Sprint};
 
 public class DinoStatusEffects : MonoBehaviour {
 
@@ -11,6 +11,8 @@ public class DinoStatusEffects : MonoBehaviour {
 	private ParticleSystem Disorient;
 	[SerializeField]
 	private ParticleSystem Fire;
+	[SerializeField]
+	private ParticleSystem Sprint;
 
 	private float AcidDuration;
 	private float AcidElapsed;
@@ -18,12 +20,15 @@ public class DinoStatusEffects : MonoBehaviour {
 	private float DisorientElapsed;
 	private float FireDuration;
 	private float FireElapsed;
+	private float SprintDuration;
+	private float SprintElapsed;
 
 	void OnDisable()
 	{		
 		networkView.RPC ("removeEffect", RPCMode.All, (int)StatusEffectType.Acid);
 		networkView.RPC ("removeEffect", RPCMode.All, (int)StatusEffectType.Disorient);
 		networkView.RPC ("removeEffect", RPCMode.All, (int)StatusEffectType.Fire);
+		networkView.RPC ("removeEffect", RPCMode.All, (int)StatusEffectType.Sprint);
 	}
 
 	void Update()
@@ -32,6 +37,7 @@ public class DinoStatusEffects : MonoBehaviour {
 			AcidElapsed += Time.deltaTime;
 			DisorientElapsed += Time.deltaTime;
 			FireElapsed += Time.deltaTime;
+			SprintElapsed += Time.deltaTime;
 
 			if(AcidElapsed > AcidDuration) {
 				networkView.RPC ("removeEffect", RPCMode.All, (int)StatusEffectType.Acid);
@@ -43,6 +49,10 @@ public class DinoStatusEffects : MonoBehaviour {
 
 			if(FireElapsed > FireDuration) {
 				networkView.RPC ("removeEffect", RPCMode.All, (int)StatusEffectType.Fire);
+			}
+
+			if(SprintElapsed > SprintDuration) {
+				networkView.RPC ("removeEffect", RPCMode.All, (int)StatusEffectType.Sprint);
 			}
 		}
 	}
@@ -84,6 +94,14 @@ public class DinoStatusEffects : MonoBehaviour {
 				FireElapsed = 0.0f;
 				FireDuration = duration;
 			}
+		} else if (seffect == StatusEffectType.Sprint) {
+			if(SprintDuration - SprintElapsed < duration)
+			{
+				Sprint.enableEmission = true;
+				Sprint.Play();
+				SprintElapsed = 0.0f;
+				SprintDuration = duration;
+			}
 		}
 	}
 
@@ -100,6 +118,9 @@ public class DinoStatusEffects : MonoBehaviour {
 		} else if (seffect == StatusEffectType.Fire) {
 			Fire.Stop();
 			Fire.enableEmission = false;
+		} else if (seffect == StatusEffectType.Sprint) {
+			Sprint.Stop();
+			Sprint.enableEmission = false;
 		}
 	}
 
