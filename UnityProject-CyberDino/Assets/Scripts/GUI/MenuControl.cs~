@@ -4,7 +4,8 @@ using System.Collections;
 public class MenuControl : MenuLogic
 {
 	//a guiskin to change the look of the buttons
-	public GUISkin mySkin;
+	public GUISkin buttonSkin;
+	public GUIStyle noGfxSkin;
 	
 	//the names of the dinos
 	[HideInInspector]
@@ -37,13 +38,12 @@ public class MenuControl : MenuLogic
 	
 	//the textures of each menu
 	private Texture[] mainMenuBtnTxtr;
-	private Texture[] mPlayerMenuBtnTxtr;
+	//private Texture[] mPlayerMenuBtnTxtr;
 	private Texture[] lobbyMenuBtnTxtr;
 	private Texture[] connectingMenuTxtr;
 	private Texture[] resultsMenuTxtr;
-	
-	private string[] charKeys;
-	private bool showKeys;
+	private Texture buttonTxtr;
+	private Texture darkButtonTxtr;
 	
 	//hold the textures of the back button texture
 	private Texture backBtnTxtr;
@@ -95,6 +95,7 @@ public class MenuControl : MenuLogic
 
 	private int keyBoardIndex;
 	private bool isShifting;
+	private bool isCapsOn;
 	
 	
 	
@@ -105,28 +106,29 @@ public class MenuControl : MenuLogic
 		SetUp();
 		
 		//set the names of the dinos and the levels
-		dinos = new string[]{"Diloph", "Hesp", "Raptor", "Spino", "TRex", "Troodon"};
-		levels = new string[]{"Dumbell Track", "CityTrackv2","John's Track", "Lee's Track", "Robert's Track"};
+		dinos = new string[]{"Diloph", "Hesp", "Spino", "TRex", "Troodon"};
+		levels = new string[]{"Dumbell Track", "Night Time Track"};
+
+		buttonTxtr = (Texture)Resources.Load("GUI/Materials/empty button");;
+		darkButtonTxtr = (Texture)Resources.Load("GUI/Materials/empty button dark");
 		
 		//set the textures for the main menu buttons
 		mainMenuBtnTxtr = new Texture[3];
-		mainMenuBtnTxtr[0] = (Texture)Resources.Load("GUI/Materials/SinglePlayerButton");
-		mainMenuBtnTxtr[1] = (Texture)Resources.Load("GUI/Materials/MultiPlayerButton");
+/*		mainMenuBtnTxtr[0] = (Texture)Resources.Load("GUI/Materials/SinglePlayerButton");
+		mainMenuBtnTxtr[1] = (Texture)Resources.Load("GUI/Materials/MultiPlayerButton");*/
 		mainMenuBtnTxtr[2] = (Texture)Resources.Load("GUI/Materials/CyberDinoLogo");
 		
 		//set the textures for the multiplayer menu buttons
-		mPlayerMenuBtnTxtr = new Texture[2];
+/*		mPlayerMenuBtnTxtr = new Texture[2];
 		mPlayerMenuBtnTxtr[0] = (Texture)Resources.Load("GUI/Materials/HostButton");
-		mPlayerMenuBtnTxtr[1] = (Texture)Resources.Load("GUI/Materials/JoinButton");
+		mPlayerMenuBtnTxtr[1] = (Texture)Resources.Load("GUI/Materials/JoinButton");*/
 		
 		//set the textures for the lobby menu button textures
 		lobbyMenuBtnTxtr = new Texture[6];
 		lobbyMenuBtnTxtr[0] = (Texture)Resources.Load("GUI/Materials/LeftArrow");
 		lobbyMenuBtnTxtr[1] = (Texture)Resources.Load("GUI/Materials/RightArrow");
-		lobbyMenuBtnTxtr[2] = (Texture)Resources.Load("GUI/Materials/PlayButtonNotReady");
-		lobbyMenuBtnTxtr[3] = (Texture)Resources.Load("GUI/Materials/PlayButtonReady");
-		lobbyMenuBtnTxtr[4] = (Texture)Resources.Load("GUI/Materials/ReadyButtonNotReady");
-		lobbyMenuBtnTxtr[5] = (Texture)Resources.Load("GUI/Materials/ReadyButtonReady");
+		//lobbyMenuBtnTxtr[2] = (Texture)Resources.Load("GUI/Materials/empty button");
+		//lobbyMenuBtnTxtr[3] = (Texture)Resources.Load("GUI/Materials/empty button dark");
 		
 		//set the textures for the connecting menu
 		connectingMenuTxtr = new Texture[3];
@@ -137,16 +139,15 @@ public class MenuControl : MenuLogic
 		//set the textures for the results menu
 		resultsMenuTxtr = new Texture[4];
 		resultsMenuTxtr[0] = (Texture)Resources.Load("GUI/Materials/ResultsBackground");
-		resultsMenuTxtr[1] = (Texture)Resources.Load("GUI/Materials/QuitButton");
+/*		resultsMenuTxtr[1] = (Texture)Resources.Load("GUI/Materials/QuitButton");
 		resultsMenuTxtr[2] = (Texture)Resources.Load("GUI/Materials/ResultsSaveScore");
-		resultsMenuTxtr[3] = (Texture)Resources.Load("GUI/Materials/PlayAgainButton");
+		resultsMenuTxtr[3] = (Texture)Resources.Load("GUI/Materials/PlayAgainButton");*/
 		
 		//set the texture for the back button
-		backBtnTxtr = (Texture)Resources.Load("GUI/Materials/BackButton");
+		//backBtnTxtr = (Texture)Resources.Load("GUI/Materials/BackButton");
 		
-		lvlSelectTxtr = new Texture[5];
-		//lvlSelectTxtr[0] = (Texture)Resources.Load("GUI/Materials/CityTrackGFX");
-		lvlSelectTxtr[1] = (Texture)Resources.Load("GUI/Materials/CityTrackGraphic");
+		lvlSelectTxtr = new Texture[2];
+		lvlSelectTxtr[0] = (Texture)Resources.Load("GUI/Materials/CityTrackGraphic");
 		
 		lvlNameGFX = (Texture)Resources.Load("GUI/Materials/CityTrackWord");
 		
@@ -160,7 +161,7 @@ public class MenuControl : MenuLogic
 		smallBoxGFX = (Texture)Resources.Load("GUI/Materials/OtherPlayerSelection");
 		
 		//set the texture for the dino names
-		largeDinoBanner = (Texture)Resources.Load("GUI/Materials/BannerDilophLarge");
+		largeDinoBanner = (Texture)Resources.Load("GUI/Materials/BannerLarge");
 		
 		//set the texture for the looking words
 		connectTxtr = (Texture)Resources.Load("GUI/Materials/LookingGraphic");
@@ -182,7 +183,7 @@ public class MenuControl : MenuLogic
 		charKeys[35] = "n"; charKeys[36] = "m"; charKeys[37] = "Shift"; charKeys[38] = "Caps"; charKeys[39] = "Space";
 		
 		//graphics ----------------------------------------
-		mainMenuBtnRect = new Rect[2];
+		mainMenuBtnRect = new Rect[3];
 		
 		multiPMenuRect = new Rect[3];
 		
@@ -208,16 +209,15 @@ public class MenuControl : MenuLogic
 		//set the main menu at the start of the game
 		currentRect = mainMenuBtnRect;
 		currentSelection = MainMenuSelection;
-		
-		showKeys = false;
 
 		isShifting = false;
+		isCapsOn = false;
 		
 		deadZone = 0.5f;
 		
 	}
 	
-	void OnLevelWasLoaded(int _level)
+	IEnumerator OnLevelWasLoaded(int _level)
 	{
 		if(fadeTransition == null)
 		{
@@ -228,9 +228,19 @@ public class MenuControl : MenuLogic
 			fadeTransition.guiTexture.color = tempColor;
 			fadeTransition.layer = 5;
 		}
+		
+		if(loadingObj == null)
+		{
+			loadingObj = CreateGUITxtr(fadeTransition, "LoadingObj", (Texture)Resources.Load("GUI/Materials/CityTrackGFX"), ResizeRect(new Rect(0, 0, 100, 100)));
+			loadingObj.transform.position = new Vector3(0, 0, 29);
+			loadingObj.layer = 5;
+			
+			if(_level == 2)
+				loadingObj.SetActive(false);
+		}
 
 		//if the menu is loaded
-		if(_level == 1)
+		if(_level == 2)
 		{
 			Debug.Log("menu scene was loaded");
 			
@@ -238,16 +248,36 @@ public class MenuControl : MenuLogic
 				glowLinesScript = Camera.main.GetComponent<GlowLines>();
 				
 			if(menuSelect == Menu.lobbyMenu)
-				UpdateDinoInfo(dinoModels, ref dinoSelected, dinos, ref largeDinoBanner);
+				UpdateDinoInfo(dinoModels, ref dinoSelected, dinos);
 			
 			//InstantiateMenuObj();
 
 		}
 		//if the dumbbell track was loaded
-		else if(_level == 2)
+		else if(_level == 3)
 		{
 			//set the variable for the race
-			//SetRaceInfo();
+			SetRaceInfo();
+			
+			GameObject countDownObj = GameObject.Find("CountDown(Clone)");
+			RaceStart start = null;
+			
+			do
+			{
+				if(start != null)
+					break;
+					
+				countDownObj = GameObject.Find("CountDown(Clone)");
+				
+				if(countDownObj != null)
+					start = countDownObj.GetComponent<RaceStart>();
+				
+				yield return new WaitForSeconds(0.5f);
+			}while(true);
+			
+			fadeAction = TurnOffLoading;
+			afterFadeAction = start.FadeFinishCount;
+			netView.RPC("TransitionFade", RPCMode.AllBuffered);
 
 			dinoTracking = GameObject.Find("Checkpoints");
 			
@@ -265,12 +295,17 @@ public class MenuControl : MenuLogic
 		//set the width and the height multiplier
 		xMulti = Screen.width / 100.0f;
 		yMulti = Screen.height / 100.0f;
+		
+
 
 		//if not currently in the race or the menu is moving
 		if(menuSelect != Menu.goToLevel && !menuMoving)
 		{ 
 			//Debug.Log(Input.GetButtonDown("Jump"));
 			//Debug.Log(menuMoving);
+			buttonSkin.button.fontSize = (int)((xMulti + yMulti) * 2);
+			buttonSkin.textField.fontSize = (int)((xMulti + yMulti) * 2);
+			noGfxSkin.fontSize = (int)((xMulti + yMulti) * 2);
 			
 			//if the joystick goes beyond the dead zone then start the pushbutton function
 			if(isHoldingBtn == false && 
@@ -292,7 +327,7 @@ public class MenuControl : MenuLogic
 			//if one of the action keys was pressed
 			if(Input.GetButtonDown("Jump") || Input.GetButtonDown("Melee") || Input.GetButtonDown("Bomb") )
 			{
-				//Debug.Log("single key pressed");
+				Debug.Log("single key pressed");
 				currentSelection();
 			}
 			
@@ -303,7 +338,8 @@ public class MenuControl : MenuLogic
 	void OnGUI()
 	{
 		//set this skin as the active one
-		GUI.skin = mySkin;
+		GUI.skin = buttonSkin;
+
 
 		//draw the selector texture if not in the level or the menu is moving
 		if(menuSelect != Menu.goToLevel && !menuMoving && !showKeys)
@@ -315,15 +351,16 @@ public class MenuControl : MenuLogic
 		}
 		else if(showKeys)
 		{
-			GUI.DrawTexture(new Rect(menuOrigin[(int)menuSelect].x + currentRect[keyBoardIndex].x - (2 * xMulti) , menuOrigin[(int)menuSelect].y + currentRect[keyBoardIndex].y - (5 * yMulti), currentRect[keyBoardIndex].width + (5 * xMulti), currentRect[keyBoardIndex].height + (10 * yMulti)), selectorGfx); 
+			GUI.DrawTexture(new Rect(keysPos.x + currentRect[keyBoardIndex].x - (2 * xMulti) , keysPos.y + currentRect[keyBoardIndex].y - (5 * yMulti), currentRect[keyBoardIndex].width + (5 * xMulti), currentRect[keyBoardIndex].height + (10 * yMulti)), selectorGfx); 
 		}
 
 		//the main menu gui
 		if(menuSelect == Menu.mainMenu)
 		{
 			//set the rects of the textures and buttons
-			mainMenuBtnRect[0] = ResizeRect(new Rect(68, 20, 25, 10));
-			mainMenuBtnRect[1] = ResizeRect(new Rect(68, 50, 25, 10));
+			mainMenuBtnRect[0] = ResizeRect(new Rect(55, 20, 40, 13));
+			mainMenuBtnRect[1] = ResizeRect(new Rect(55, 40, 40, 13));
+			mainMenuBtnRect[2] = ResizeRect(new Rect(55, 60, 40, 13));
 			mainMenuGfxRect = ResizeRect(new Rect(10, 20, 30, 20));
 			
 			//draw the cyberdino logo
@@ -342,7 +379,7 @@ public class MenuControl : MenuLogic
 			
 			
 			//single player button
-			if(GUI.Button(new Rect(menuOrigin[0].x + mainMenuBtnRect[0].x, menuOrigin[0].y + mainMenuBtnRect[0].y, mainMenuBtnRect[0].width, mainMenuBtnRect[0].height), mainMenuBtnTxtr[0]))
+			if(GUI.Button(new Rect(menuOrigin[0].x + mainMenuBtnRect[0].x, menuOrigin[0].y + mainMenuBtnRect[0].y, mainMenuBtnRect[0].width, mainMenuBtnRect[0].height), "Single Player"))
 			{
 				//set the lobby for single player
 				SetLobbyOnePlayer();
@@ -354,7 +391,7 @@ public class MenuControl : MenuLogic
 				StartCoroutine(MoveLeftOff(0, 2, Menu.lobbyMenu, LobbySelection, lobbyMenuBtnRect));
 			}
 			//multiplayer button
-			if(GUI.Button(new Rect(menuOrigin[0].x + mainMenuBtnRect[1].x, menuOrigin[0].y + mainMenuBtnRect[1].y, mainMenuBtnRect[1].width, mainMenuBtnRect[1].height), mainMenuBtnTxtr[1]))
+			if(GUI.Button(new Rect(menuOrigin[0].x + mainMenuBtnRect[1].x, menuOrigin[0].y + mainMenuBtnRect[1].y, mainMenuBtnRect[1].width, mainMenuBtnRect[1].height), "Multiplayer"))
 			{
 				singlePlayer = false;
 				
@@ -363,6 +400,10 @@ public class MenuControl : MenuLogic
 				
 				//set the selector index to 0
 				buttonIndex = 0;
+			}	
+			if(GUI.Button(new Rect(menuOrigin[0].x + mainMenuBtnRect[2].x, menuOrigin[0].y + mainMenuBtnRect[2].y, mainMenuBtnRect[2].width, mainMenuBtnRect[2].height), "Exit Game"))
+			{
+				Application.Quit();
 			}	
 		}
 		//the multiplayer menu gui
@@ -374,11 +415,11 @@ public class MenuControl : MenuLogic
 			multiPMenuRect[0] = ResizeRect(new Rect(37, 22, 27, 10));
 			multiPMenuRect[1] = ResizeRect(new Rect(37, 52, 27, 10));
 			
-			multiPMenuBtnRect[0] = ResizeRect(new Rect(10, 20, 55, 10));
-			multiPMenuBtnRect[1] = ResizeRect(new Rect(10, 50, 55, 10));
+			multiPMenuBtnRect[0] = ResizeRect(new Rect(10, 20, 55, 12));
+			multiPMenuBtnRect[1] = ResizeRect(new Rect(10, 50, 55, 12));
 			multiPMenuBtnRect[2] = ResizeRect(new Rect(68, 20, 25, 10));
 			multiPMenuBtnRect[3] = ResizeRect(new Rect(68, 50, 25, 10));
-			multiPMenuBtnRect[4] = ResizeRect(new Rect(5, 82, 15, 8));
+			multiPMenuBtnRect[4] = ResizeRect(new Rect(10, 80, 30, 10));
 			
 			if(menuBkgd != null)
 			{
@@ -404,30 +445,36 @@ public class MenuControl : MenuLogic
 			playerName.nameHolder = GUI.TextField(new Rect(menuOrigin[1].x + multiPMenuRect[1].x, menuOrigin[1].y + multiPMenuRect[1].y, multiPMenuRect[1].width, multiPMenuRect[1].height), playerName.nameHolder);
 			
 			//host game button
-			if(GUI.Button(new Rect(menuOrigin[1].x + multiPMenuBtnRect[2].x, menuOrigin[1].y + multiPMenuBtnRect[2].y, multiPMenuBtnRect[2].width, multiPMenuBtnRect[2].height), mPlayerMenuBtnTxtr[0]))
+			if(GUI.Button(new Rect(menuOrigin[1].x + multiPMenuBtnRect[2].x, menuOrigin[1].y + multiPMenuBtnRect[2].y, multiPMenuBtnRect[2].width, multiPMenuBtnRect[2].height), "Host"))
 			{
-				//set this game to be a host
-				HostToLobby();
-				
-				//update the dino info so the right one appears
-				//UpdateDinoInfo(dinoModels, ref dinoSelected, dinos, ref largeDinoBanner);
-				
-				//move the multiplayer menu off of the screen and get the lobby menu
-				StartCoroutine(MoveLeftOff(0, 2, Menu.lobbyMenu, LobbySelection, lobbyMenuBtnRect));
+				if(serverName.nameHolder != "" && playerName.nameHolder != "")
+				{
+					//set this game to be a host
+					HostToLobby();
+					
+					//update the dino info so the right one appears
+					//UpdateDinoInfo(dinoModels, ref dinoSelected, dinos, ref largeDinoBanner);
+					
+					//move the multiplayer menu off of the screen and get the lobby menu
+					StartCoroutine(MoveLeftOff(0, 2, Menu.lobbyMenu, LobbySelection, lobbyMenuBtnRect));
+				}
 			}
 			
 			//join game button
-			if(GUI.Button(new Rect(menuOrigin[1].x + multiPMenuBtnRect[3].x, menuOrigin[1].y + multiPMenuBtnRect[3].y, multiPMenuBtnRect[3].width, multiPMenuBtnRect[3].height), mPlayerMenuBtnTxtr[1]))
+			if(GUI.Button(new Rect(menuOrigin[1].x + multiPMenuBtnRect[3].x, menuOrigin[1].y + multiPMenuBtnRect[3].y, multiPMenuBtnRect[3].width, multiPMenuBtnRect[3].height), "Join"))
 			{
-				//set the game to be a client
-				ClientToLobby();
-				
-				//move the multiplayer off the screen and get the connecting menu
-				StartCoroutine(MoveLeftOff(1, 3, Menu.connecting, ConnectingSelection, connectingRect));
+				if(serverName.nameHolder != "" && playerName.nameHolder != "")
+				{
+					//set the game to be a client
+					ClientToLobby();
+					
+					//move the multiplayer off the screen and get the connecting menu
+					StartCoroutine(MoveLeftOff(1, 3, Menu.connecting, ConnectingSelection, connectingRect));
+				}
 			}
 			
 			//back button
-			if(GUI.Button(new Rect(menuOrigin[1].x + multiPMenuBtnRect[4].x, menuOrigin[1].y + multiPMenuBtnRect[4].y, multiPMenuBtnRect[4].width, multiPMenuBtnRect[4].height), backBtnTxtr))
+			if(GUI.Button(new Rect(menuOrigin[1].x + multiPMenuBtnRect[4].x, menuOrigin[1].y + multiPMenuBtnRect[4].y, multiPMenuBtnRect[4].width, multiPMenuBtnRect[4].height), "Back"))
 			{
 				buttonIndex = 1;
 				
@@ -447,8 +494,8 @@ public class MenuControl : MenuLogic
 			lobbyMenuRect[1] = ResizeRect(new Rect(52, 7, 13, 15));
 			lobbyMenuRect[2] = ResizeRect(new Rect(66, 7, 13, 15));
 			lobbyMenuRect[3] = ResizeRect(new Rect(80, 7, 13, 15));
-			lobbyMenuRect[4] = ResizeRect(new Rect(15, 10, 20, 10));
-			lobbyMenuRect[5] = ResizeRect(new Rect(55, 10, 30, 10));
+			lobbyMenuRect[4] = ResizeRect(new Rect(12, 10, 30, 10));
+			lobbyMenuRect[5] = ResizeRect(new Rect(52, 10, 40, 10));
 			lobbyMenuRect[6] = ResizeRect(new Rect(52, 14, 13, 7));
 			lobbyMenuRect[7] = ResizeRect(new Rect(66, 14, 13, 7));
 			lobbyMenuRect[8] = ResizeRect(new Rect(80, 14, 13, 7));
@@ -506,7 +553,8 @@ public class MenuControl : MenuLogic
 				InstantiateMenuObj();
 			
 			//level name graphic
-			GUI.DrawTexture(new Rect(menuOrigin[2].x + lobbyMenuRect[4].x, menuOrigin[2].y + lobbyMenuRect[4].y, lobbyMenuRect[4].width, lobbyMenuRect[4].height), lvlNameGFX);
+			GUI.DrawTexture(new Rect(menuOrigin[2].x + lobbyMenuRect[4].x, menuOrigin[2].y + lobbyMenuRect[4].y, lobbyMenuRect[4].width, lobbyMenuRect[4].height), buttonTxtr);
+			GUI.Label(new Rect(menuOrigin[2].x + lobbyMenuRect[4].x, menuOrigin[2].y + lobbyMenuRect[4].y, lobbyMenuRect[4].width, lobbyMenuRect[4].height), "Twin City", noGfxSkin);
 			
 			//level graphic
 			if(lvlSelectTxtr[levelIndex] != null)
@@ -526,10 +574,15 @@ public class MenuControl : MenuLogic
 				foreach(var player in networkHandler.playerInformation){
 					if(player.Key != Network.player.ToString()){
 						
-						string textureFileName = "GUI/Materials/Banner" + player.Value.dinoName + "Small";
+						//string textureFileName = "GUI/Materials/Banner" + player.Value.dinoName + "Small";
 						
-						GUI.DrawTexture(new Rect(menuOrigin[2].x + lobbyMenuRect[i].x, menuOrigin[2].y + lobbyMenuRect[i].y, lobbyMenuRect[i].width, lobbyMenuRect[i].height), smallBoxGFX);
+						/*GUI.DrawTexture(new Rect(menuOrigin[2].x + lobbyMenuRect[i].x, menuOrigin[2].y + lobbyMenuRect[i].y, lobbyMenuRect[i].width, lobbyMenuRect[i].height), smallBoxGFX);
 						GUI.DrawTexture(new Rect(menuOrigin[2].x + lobbyMenuRect[i + 5].x, menuOrigin[2].y + lobbyMenuRect[i + 5].y, lobbyMenuRect[i + 5].width, lobbyMenuRect[i + 5].height), (Texture)Resources.Load(textureFileName));
+						GUI.Label(new Rect(menuOrigin[2].x + lobbyMenuRect[i].x, menuOrigin[2].y + lobbyMenuRect[i].y - 15, lobbyMenuRect[i].width, lobbyMenuRect[i].height), player.Value.playerName);*/
+
+						GUI.DrawTexture(new Rect(menuOrigin[2].x + lobbyMenuRect[i].x, menuOrigin[2].y + lobbyMenuRect[i].y, lobbyMenuRect[i].width, lobbyMenuRect[i].height), smallBoxGFX);
+						GUI.DrawTexture(new Rect(menuOrigin[2].x + lobbyMenuRect[i + 5].x, menuOrigin[2].y + lobbyMenuRect[i + 5].y, lobbyMenuRect[i + 5].width, lobbyMenuRect[i + 5].height), largeDinoBanner);
+						GUI.Label(new Rect(menuOrigin[2].x + lobbyMenuRect[i + 5].x, menuOrigin[2].y + lobbyMenuRect[i + 5].y, lobbyMenuRect[i + 5].width, lobbyMenuRect[i + 5].height), dinos[i], noGfxSkin);
 						GUI.Label(new Rect(menuOrigin[2].x + lobbyMenuRect[i].x, menuOrigin[2].y + lobbyMenuRect[i].y - 15, lobbyMenuRect[i].width, lobbyMenuRect[i].height), player.Value.playerName);
 						i++;
 					}
@@ -542,18 +595,19 @@ public class MenuControl : MenuLogic
 			//display the word "single player"
 			else
 			{
-				GUI.DrawTexture(new Rect(menuOrigin[2].x + lobbyMenuRect[5].x, menuOrigin[2].y + lobbyMenuRect[5].y, lobbyMenuRect[5].width, lobbyMenuRect[5].height), mainMenuBtnTxtr[0]);	
+				GUI.DrawTexture(new Rect(menuOrigin[2].x + lobbyMenuRect[5].x, menuOrigin[2].y + lobbyMenuRect[5].y, lobbyMenuRect[5].width, lobbyMenuRect[5].height), buttonTxtr);	
+				GUI.Label(new Rect(menuOrigin[2].x + lobbyMenuRect[5].x, menuOrigin[2].y + lobbyMenuRect[5].y, lobbyMenuRect[5].width, lobbyMenuRect[5].height), "Single Player", noGfxSkin);	
 			}
 			
 			
 			//left button for level select
-			if(GUI.Button(new Rect(menuOrigin[2].x + lobbyMenuBtnRect[1].x, menuOrigin[2].y + lobbyMenuBtnRect[1].y, lobbyMenuBtnRect[1].width, lobbyMenuBtnRect[1].height), lobbyMenuBtnTxtr[0])) 
+			if(GUI.Button(new Rect(menuOrigin[2].x + lobbyMenuBtnRect[1].x, menuOrigin[2].y + lobbyMenuBtnRect[1].y, lobbyMenuBtnRect[1].width, lobbyMenuBtnRect[1].height), lobbyMenuBtnTxtr[0], noGfxSkin)) 
 			{
 				LevelSelectionDecrement(lvlSelectTxtr.Length);
 			}
 			
 			//right arrow for the level select
-			if(GUI.Button(new Rect(menuOrigin[2].x + lobbyMenuBtnRect[2].x, menuOrigin[2].y + lobbyMenuBtnRect[2].y, lobbyMenuBtnRect[2].width, lobbyMenuBtnRect[2].height), lobbyMenuBtnTxtr[1])) 
+			if(GUI.Button(new Rect(menuOrigin[2].x + lobbyMenuBtnRect[2].x, menuOrigin[2].y + lobbyMenuBtnRect[2].y, lobbyMenuBtnRect[2].width, lobbyMenuBtnRect[2].height), lobbyMenuBtnTxtr[1], noGfxSkin)) 
 			{
 				LevelSelectionIncrement(lvlSelectTxtr.Length);
 				
@@ -561,22 +615,23 @@ public class MenuControl : MenuLogic
 			
 			//the banner for the dino selection
 			GUI.DrawTexture(new Rect(menuOrigin[2].x + lobbyMenuRect[9].x, menuOrigin[2].y + lobbyMenuRect[9].y, lobbyMenuRect[9].width, lobbyMenuRect[9].height), largeDinoBanner);
+			GUI.Label(new Rect(menuOrigin[2].x + lobbyMenuRect[9].x, menuOrigin[2].y + lobbyMenuRect[9].y, lobbyMenuRect[9].width, lobbyMenuRect[9].height), dinos[dinoIndex], noGfxSkin);
 			
 			//left arrow for dino select
-			if(GUI.Button(new Rect(menuOrigin[2].x + lobbyMenuBtnRect[3].x, menuOrigin[2].y + lobbyMenuBtnRect[3].y, lobbyMenuBtnRect[3].width, lobbyMenuBtnRect[3].height), lobbyMenuBtnTxtr[0])) 
+			if(GUI.Button(new Rect(menuOrigin[2].x + lobbyMenuBtnRect[3].x, menuOrigin[2].y + lobbyMenuBtnRect[3].y, lobbyMenuBtnRect[3].width, lobbyMenuBtnRect[3].height), lobbyMenuBtnTxtr[0], noGfxSkin))
 			{
-				DinoSelectionDecrement(dinoModels, ref dinoSelected, dinos, ref largeDinoBanner);
+				DinoSelectionDecrement(dinoModels, ref dinoSelected, dinos);
 				
 			}
 			
 			//right arrow for dino select
-			if(GUI.Button(new Rect(menuOrigin[2].x + lobbyMenuBtnRect[4].x, menuOrigin[2].y + lobbyMenuBtnRect[4].y, lobbyMenuBtnRect[4].width, lobbyMenuBtnRect[4].height), lobbyMenuBtnTxtr[1])) 
+			if(GUI.Button(new Rect(menuOrigin[2].x + lobbyMenuBtnRect[4].x, menuOrigin[2].y + lobbyMenuBtnRect[4].y, lobbyMenuBtnRect[4].width, lobbyMenuBtnRect[4].height), lobbyMenuBtnTxtr[1], noGfxSkin)) 
 			{
-				DinoSelectionIncrement(dinoModels, ref dinoSelected, dinos, ref largeDinoBanner);
+				DinoSelectionIncrement(dinoModels, ref dinoSelected, dinos);
 			}
 			
 			//Back Button
-			if(GUI.Button(new Rect(menuOrigin[2].x + lobbyMenuBtnRect[0].x, menuOrigin[2].y + lobbyMenuBtnRect[0].y, lobbyMenuBtnRect[0].width, lobbyMenuBtnRect[0].height), backBtnTxtr)) 
+			if(GUI.Button(new Rect(menuOrigin[2].x + lobbyMenuBtnRect[0].x, menuOrigin[2].y + lobbyMenuBtnRect[0].y, lobbyMenuBtnRect[0].width, lobbyMenuBtnRect[0].height), "Back")) 
 			{
 				
 				if(singlePlayer == true)
@@ -589,15 +644,20 @@ public class MenuControl : MenuLogic
 			if (Network.isServer)
 			{
 				if (readyAll == false){
-					GUI.DrawTexture(new Rect(menuOrigin[2].x + lobbyMenuBtnRect[5].x, menuOrigin[2].y + lobbyMenuBtnRect[5].y, lobbyMenuBtnRect[5].width, lobbyMenuBtnRect[5].height), lobbyMenuBtnTxtr[2]);
+					GUI.DrawTexture(new Rect(menuOrigin[2].x + lobbyMenuBtnRect[5].x, menuOrigin[2].y + lobbyMenuBtnRect[5].y, lobbyMenuBtnRect[5].width, lobbyMenuBtnRect[5].height), darkButtonTxtr);
+					GUI.Label(new Rect(menuOrigin[2].x + lobbyMenuBtnRect[5].x, menuOrigin[2].y + lobbyMenuBtnRect[5].y, lobbyMenuBtnRect[5].width, lobbyMenuBtnRect[5].height), "Play", noGfxSkin);
 				}
 				
 				if (readyAll == true){
-					GUI.DrawTexture(new Rect(menuOrigin[2].x + lobbyMenuBtnRect[5].x, menuOrigin[2].y + lobbyMenuBtnRect[5].y, lobbyMenuBtnRect[5].width, lobbyMenuBtnRect[5].height), lobbyMenuBtnTxtr[3]);
+					GUI.DrawTexture(new Rect(menuOrigin[2].x + lobbyMenuBtnRect[5].x, menuOrigin[2].y + lobbyMenuBtnRect[5].y, lobbyMenuBtnRect[5].width, lobbyMenuBtnRect[5].height), buttonTxtr);
 					
-					if(GUI.Button(new Rect(menuOrigin[2].x + lobbyMenuBtnRect[5].x, menuOrigin[2].y + lobbyMenuBtnRect[5].y, lobbyMenuBtnRect[5].width, lobbyMenuBtnRect[5].height), ""))
+					if(GUI.Button(new Rect(menuOrigin[2].x + lobbyMenuBtnRect[5].x, menuOrigin[2].y + lobbyMenuBtnRect[5].y, lobbyMenuBtnRect[5].width, lobbyMenuBtnRect[5].height), "Play", noGfxSkin))
 					{
+						GroupToLevel();
+						fadeAction = TurnOnLoading;
+						afterFadeAction = LobbyToLevel;
 						//StartCoroutine(MoveLeftOff(2, 5, Menu.goToLevel, null, null));
+						//LobbyToLevel(Menu.goToLevel)
 						netView.RPC("TransitionFade", RPCMode.AllBuffered);
 					}
 				}
@@ -607,17 +667,17 @@ public class MenuControl : MenuLogic
 			if (Network.isClient)
 			{
 				if (readyMe == false) {
-					GUI.DrawTexture(new Rect(menuOrigin[2].x + lobbyMenuBtnRect[5].x, menuOrigin[2].y + lobbyMenuBtnRect[5].y, lobbyMenuBtnRect[5].width, lobbyMenuBtnRect[5].height), lobbyMenuBtnTxtr[4]);
+					GUI.DrawTexture(new Rect(menuOrigin[2].x + lobbyMenuBtnRect[5].x, menuOrigin[2].y + lobbyMenuBtnRect[5].y, lobbyMenuBtnRect[5].width, lobbyMenuBtnRect[5].height), darkButtonTxtr);
 					
-					if(GUI.Button(new Rect(menuOrigin[2].x + lobbyMenuBtnRect[5].x, menuOrigin[2].y + lobbyMenuBtnRect[5].y, lobbyMenuBtnRect[5].width, lobbyMenuBtnRect[5].height), ""))
+					if(GUI.Button(new Rect(menuOrigin[2].x + lobbyMenuBtnRect[5].x, menuOrigin[2].y + lobbyMenuBtnRect[5].y, lobbyMenuBtnRect[5].width, lobbyMenuBtnRect[5].height), "Ready", noGfxSkin))
 					{
 						ClientReady("LobbyReady", true);
 					}
 				}
 				if (readyMe == true) {
-					GUI.DrawTexture(new Rect(menuOrigin[2].x + lobbyMenuBtnRect[5].x, menuOrigin[2].y + lobbyMenuBtnRect[5].y, lobbyMenuBtnRect[5].width, lobbyMenuBtnRect[5].height), lobbyMenuBtnTxtr[5]);
+					GUI.DrawTexture(new Rect(menuOrigin[2].x + lobbyMenuBtnRect[5].x, menuOrigin[2].y + lobbyMenuBtnRect[5].y, lobbyMenuBtnRect[5].width, lobbyMenuBtnRect[5].height), buttonTxtr);
 					
-					if(GUI.Button(new Rect(menuOrigin[2].x + lobbyMenuBtnRect[5].x, menuOrigin[2].y + lobbyMenuBtnRect[5].y, lobbyMenuBtnRect[5].width, lobbyMenuBtnRect[5].height), ""))
+					if(GUI.Button(new Rect(menuOrigin[2].x + lobbyMenuBtnRect[5].x, menuOrigin[2].y + lobbyMenuBtnRect[5].y, lobbyMenuBtnRect[5].width, lobbyMenuBtnRect[5].height), "Ready", noGfxSkin))
 					{
 						ClientReady("NotReady", false);
 					}
@@ -631,7 +691,7 @@ public class MenuControl : MenuLogic
 			connectingRect[0] = ResizeRect(new Rect(30, 20, 40, 40));
 			connectingRect[1] = ResizeRect(new Rect(55, 15, 25, 20));
 			connectingRect[2] = ResizeRect(new Rect(70, 30, 40, 40));
-			connectingRect[3] = ResizeRect(new Rect(5, 75, 25, 20));
+			connectingRect[3] = ResizeRect(new Rect(10, 80, 30, 10));
 			connectingRect[4] = ResizeRect(new Rect(45, 45, 5, 10));
 			connectingRect[5] = ResizeRect(new Rect(50, 45, 5, 10));
 			connectingRect[6] = ResizeRect(new Rect(45, 35, 5, 10));
@@ -722,7 +782,7 @@ public class MenuControl : MenuLogic
 			GUI.DrawTexture(new Rect(menuOrigin[3].x + connectingRect[7].x, menuOrigin[3].y + connectingRect[7].y, connectingRect[7].width, connectingRect[7].height), connectingMenuTxtr[1]);
 			
 			//the back button
-			if (GUI.Button (new Rect(menuOrigin[3].x + connectingRect[3].x, menuOrigin[3].y + connectingRect[3].y, connectingRect[3].width, connectingRect[3].height), backBtnTxtr)) 
+			if (GUI.Button (new Rect(menuOrigin[3].x + connectingRect[3].x, menuOrigin[3].y + connectingRect[3].y, connectingRect[3].width, connectingRect[3].height), "Back")) 
 			{
 				//stop the glow dashes and stop looking for a game
 				ConnectToMulti();
@@ -769,7 +829,7 @@ public class MenuControl : MenuLogic
 			resultsMenuRect[5] = ResizeRect(new Rect(17, 43, 20, 20));
 			resultsMenuRect[6] = ResizeRect(new Rect(17, 51, 20, 20));
 			resultsMenuRect[7] = ResizeRect(new Rect(17, 59, 20, 20));
-			
+			 
 			//size and positions for the buttons
 			resultsMenuBtnRect[0] = ResizeRect(new Rect(65, 85, 20, 10));
 			resultsMenuBtnRect[1] = ResizeRect(new Rect(40, 85, 20, 10));
@@ -795,27 +855,30 @@ public class MenuControl : MenuLogic
 			GUI.TextField(new Rect(menuOrigin[4].x + resultsMenuRect[4 + racePositions[3] - 1].x, menuOrigin[4].y + resultsMenuRect[4 + racePositions[3] - 1].y, resultsMenuRect[4 + racePositions[3] - 1].width, resultsMenuRect[4 + racePositions[3] - 1].height), playerNames[3]);
 			
 			//the exit button
-			if(GUI.Button(new Rect(menuOrigin[4].x + resultsMenuBtnRect[0].x, menuOrigin[4].y + resultsMenuBtnRect[0].y, resultsMenuBtnRect[0].width, resultsMenuBtnRect[0].height), resultsMenuTxtr[1]))
+			if(GUI.Button(new Rect(menuOrigin[4].x + resultsMenuBtnRect[0].x, menuOrigin[4].y + resultsMenuBtnRect[0].y, resultsMenuBtnRect[0].width, resultsMenuBtnRect[0].height), "Exit"))
 			{
-				LeaveGame(LobbySelection, lobbyMenuBtnRect);
+				//LeaveGame(LobbySelection, lobbyMenuBtnRect);
 
-				SetMenuToLobby();
+				fadeAction = LeaveGame;
+
+				afterFadeAction = null;
+
+				TransitionFade();
 				
 				//UpdateDinoInfo(dinoModels, ref dinoSelected, dinos, ref largeDinoBanner);
 			}
 			
 			//the save score button
-			if(GUI.Button(new Rect(menuOrigin[4].x + resultsMenuBtnRect[1].x, menuOrigin[4].y + resultsMenuBtnRect[1].y, resultsMenuBtnRect[1].width, resultsMenuBtnRect[1].height), resultsMenuTxtr[2]))
+			/*if(GUI.Button(new Rect(menuOrigin[4].x + resultsMenuBtnRect[1].x, menuOrigin[4].y + resultsMenuBtnRect[1].y, resultsMenuBtnRect[1].width, resultsMenuBtnRect[1].height), resultsMenuTxtr[2]))
 			{
 				
-			}
+			}*/
 			
 			//replay button
-			if(GUI.Button(new Rect(menuOrigin[4].x + resultsMenuBtnRect[2].x, menuOrigin[4].y + resultsMenuBtnRect[2].y, resultsMenuBtnRect[2].width, resultsMenuBtnRect[2].height), resultsMenuTxtr[3]))
+			/*if(GUI.Button(new Rect(menuOrigin[4].x + resultsMenuBtnRect[2].x, menuOrigin[4].y + resultsMenuBtnRect[2].y, resultsMenuBtnRect[2].width, resultsMenuBtnRect[2].height), "Replay"))
 			{
-				/*Debug.Log("Reload");	
-				Application.LoadLevel("DumbellTrack");*/
-			}
+
+			}*/
 		}
 		
 		//when in a race
@@ -853,29 +916,29 @@ public class MenuControl : MenuLogic
 		for(int i = 0; i < 10; i++)
 		{
 			keyBoardRect[index] = ResizeRect(new Rect(10 + i * 8, 60, 8, 10));
-			GUI.DrawTexture(new Rect(menuOrigin[1].x + keyBoardRect[index].x, menuOrigin[1].y + keyBoardRect[index].y, keyBoardRect[index].width, keyBoardRect[index].height), smallBoxGFX);
-			GUI.TextField(new Rect(menuOrigin[1].x + keyBoardRect[index].x, menuOrigin[1].y + keyBoardRect[index].y, keyBoardRect[index].width, keyBoardRect[index].height), charKeys[index].ToString());
+			GUI.DrawTexture(new Rect(keysPos.x + keyBoardRect[index].x, keysPos.y + keyBoardRect[index].y, keyBoardRect[index].width, keyBoardRect[index].height), smallBoxGFX);
+			GUI.TextField(new Rect(keysPos.x + keyBoardRect[index].x, keysPos.y + keyBoardRect[index].y, keyBoardRect[index].width, keyBoardRect[index].height), charKeys[index].ToString());
 			index++;
 		}
 		for(int i = 0; i < 10; i++)
 		{
 			keyBoardRect[index] = ResizeRect(new Rect(10 + i * 8, 70, 8, 10));
-			GUI.DrawTexture(new Rect(menuOrigin[1].x + keyBoardRect[index].x, menuOrigin[1].y + keyBoardRect[index].y, keyBoardRect[index].width, keyBoardRect[index].height), smallBoxGFX);
-			GUI.TextField(new Rect(menuOrigin[1].x + keyBoardRect[index].x, menuOrigin[1].y + keyBoardRect[index].y, keyBoardRect[index].width, keyBoardRect[index].height), charKeys[index].ToString());
+			GUI.DrawTexture(new Rect(keysPos.x + keyBoardRect[index].x, keysPos.y + keyBoardRect[index].y, keyBoardRect[index].width, keyBoardRect[index].height), smallBoxGFX);
+			GUI.TextField(new Rect(keysPos.x + keyBoardRect[index].x, keysPos.y + keyBoardRect[index].y, keyBoardRect[index].width, keyBoardRect[index].height), charKeys[index].ToString());
 			index++;
 		}
 		for(int i = 0; i < 10; i++)
 		{
 			keyBoardRect[index] = ResizeRect(new Rect(10 + i * 8, 80, 8, 10));
-			GUI.DrawTexture(new Rect(menuOrigin[1].x + keyBoardRect[index].x, menuOrigin[1].y + keyBoardRect[index].y, keyBoardRect[index].width, keyBoardRect[index].height), smallBoxGFX);
-			GUI.TextField(new Rect(menuOrigin[1].x + keyBoardRect[index].x, menuOrigin[1].y + keyBoardRect[index].y, keyBoardRect[index].width, keyBoardRect[index].height), charKeys[index].ToString());
+			GUI.DrawTexture(new Rect(keysPos.x + keyBoardRect[index].x, keysPos.y + keyBoardRect[index].y, keyBoardRect[index].width, keyBoardRect[index].height), smallBoxGFX);
+			GUI.TextField(new Rect(keysPos.x + keyBoardRect[index].x, keysPos.y + keyBoardRect[index].y, keyBoardRect[index].width, keyBoardRect[index].height), charKeys[index].ToString());
 			index++;
 		}
 		for(int i = 0; i < 10; i++)
 		{
 			keyBoardRect[index] = ResizeRect(new Rect(10 + i * 8, 90, 8, 10));
-			GUI.DrawTexture(new Rect(menuOrigin[1].x + keyBoardRect[index].x, menuOrigin[1].y + keyBoardRect[index].y, keyBoardRect[index].width, keyBoardRect[index].height), smallBoxGFX);
-			GUI.TextField(new Rect(menuOrigin[1].x + keyBoardRect[index].x, menuOrigin[1].y + keyBoardRect[index].y, keyBoardRect[index].width, keyBoardRect[index].height), charKeys[index].ToString());
+			GUI.DrawTexture(new Rect(keysPos.x + keyBoardRect[index].x, keysPos.y + keyBoardRect[index].y, keyBoardRect[index].width, keyBoardRect[index].height), smallBoxGFX);
+			GUI.TextField(new Rect(keysPos.x + keyBoardRect[index].x, keysPos.y + keyBoardRect[index].y, keyBoardRect[index].width, keyBoardRect[index].height), charKeys[index].ToString());
 			index++;
 		}
 		
@@ -895,12 +958,37 @@ public class MenuControl : MenuLogic
 		}
 	}
 
-	public void SetMenuToLobby()
+	/*public void SetMenuToLobby()
 	{
 		menuSelect = Menu.lobbyMenu;
 		currentSelection = LobbySelection;
 		currentRect = lobbyMenuBtnRect;
 		menuOrigin[2].x = 0;
+	}*/
+
+	public void LeaveGame()
+	{
+		//Debug.Log("the current menu" + menuSelect.ToString());
+		if(menuSelect == Menu.resultsMenu)
+		{
+			
+			menuSelect = Menu.lobbyMenu;
+			//Debug.Log("the current menu" + menuSelect.ToString());
+			//Debug.Log("change to lobby");
+			
+			Application.LoadLevel("Menu");
+			
+			var myInfo = networkHandler.GetMyInfo();
+			myInfo.readyState = "LobbyReady";
+			networkHandler.UpdatePlayerInformation(myInfo);
+			
+			buttonIndex = 0;
+			
+			menuSelect = Menu.lobbyMenu;
+			currentSelection = LobbySelection;
+			currentRect = lobbyMenuBtnRect;
+			menuOrigin[2].x = 0;
+		}
 	}
 	
 	public void InstantiateMenuObj()
@@ -1005,14 +1093,15 @@ public class MenuControl : MenuLogic
 				LevelSelectionIncrement(lvlSelectTxtr.Length);
 			//dino decrement button
 			else if(buttonIndex == 3)
-				DinoSelectionDecrement(dinoModels, ref dinoSelected, dinos, ref largeDinoBanner);
+				DinoSelectionDecrement(dinoModels, ref dinoSelected, dinos);
 			//dino increment button
 			else if(buttonIndex == 4)
-				DinoSelectionIncrement(dinoModels, ref dinoSelected, dinos, ref largeDinoBanner);
+				DinoSelectionIncrement(dinoModels, ref dinoSelected, dinos);
 			//button to start the race
 			else if(Network.isServer && readyAll == true && buttonIndex == 5)
 			{
-				StartCoroutine(MoveLeftOff(2, 5, Menu.goToLevel, null, null));
+				GroupToLevel();
+				fadeAction = TurnOnLoading;
 				netView.RPC("TransitionFade", RPCMode.AllBuffered);
 			}
 			//button to indicate that this player is ready
@@ -1061,10 +1150,12 @@ public class MenuControl : MenuLogic
 			{
 			Debug.Log("show keys");
 				//switch the selection to inputting a name for the server
-				currentSelection = InputName;
-				currentRect = keyBoardRect;
+				//currentSelection = InputName;
+				//currentRect = keyBoardRect;
 				keyBoardIndex = 0;
-				showKeys = true;
+				//showKeys = true;
+				
+				StartCoroutine(EaseKeyBoard(InputName, keyBoardRect));
 				
 				//if the name is empty
 				if(serverName.inputName.Length == 0)
@@ -1084,11 +1175,13 @@ public class MenuControl : MenuLogic
 			//the player name
 			else if(buttonIndex == 1)
 			{
-				Debug.Log("show keys");
-				currentSelection = InputName;
-				currentRect = keyBoardRect;
+				//Debug.Log("show keys");
+				//currentSelection = InputName;
+				//currentRect = keyBoardRect;
 				keyBoardIndex = 0;
-				showKeys = true;
+				//showKeys = true;
+				
+				StartCoroutine(EaseKeyBoard(InputName, keyBoardRect));
 				
 				//switch the selection to inputting a name for the player
 				//currentSelection = InputName;
@@ -1144,140 +1237,34 @@ public class MenuControl : MenuLogic
 		else if(buttonIndex == 1)
 			InputNameHelper(playerName);
 	}
-	
-	//control for the name input
-	/*public void InputNameHelper(NameInput _name)
-	{
-		//if pressing left and the index is not at the beginning of the char array
-		if(Input.GetAxis("Horizontal") < 0 && _name.nameIndex > 0 && _name.inputName.Length > 0) 
-		{
-			//make sure that the char is in the array
-			_name.inputName[_name.nameIndex] = charToReplace;
-			//decrement the index 
-			_name.nameIndex--;
-			//set this char as the new blinking char
-			charToReplace = _name.inputName[_name.nameIndex]; 
-			//set this char to _ so that we know where the index is currently at
-			_name.inputName[_name.nameIndex] = '_';
-		}
-		//if pressing right and the index is not at the end of the array
-		else if(Input.GetAxis("Horizontal") > 0 && _name.nameIndex < _name.inputName.Length - 1) 
-		{
-			//make sure that the char is in the array
-			_name.inputName[_name.nameIndex] = charToReplace; 
-			//increment the index
-			_name.nameIndex++;
-			//set this char as the new blinking char
-			charToReplace = _name.inputName[_name.nameIndex];
-			//set this char to _ so that we know where the index is currently at 
-			_name.inputName[_name.nameIndex] = '_';
-		}
-		//if pressing up
-		else if(Input.GetAxis("Vertical") > 0 && _name.inputName.Length > 0) 
-		{
-			//increment the char
-			charToReplace++; 
-			_name.inputName[_name.nameIndex] = charToReplace; 
-			
-		}
-		//if pressing down
-		else if(Input.GetAxis("Vertical") < 0 && _name.inputName.Length > 0) 
-		{
-			//decrement the char
-			charToReplace--; 
-			_name.inputName[_name.nameIndex] = charToReplace; 
-		}
-		//if pressing jump add a new char to the array
-		else if(Input.GetButton("Jump") && _name.nameIndex >= _name.inputName.Length - 1)
-		{
-			//make sure the char doesn't show _
-			_name.inputName[_name.nameIndex] = charToReplace; 
-			
-			//update the string to reflect that
-			UpdateString(_name, charToReplace); 
-			
-			//declare a temp array and increase the array by 1
-			char[] temp = new char[_name.inputName.Length + 1];
-			
-			//copy the elements of the name array into the temp array
-			_name.inputName.CopyTo(temp, 0);
-			
-			//have the name array point to the temp array
-			_name.inputName = temp;
-			
-			//move the index to the end of the array
-			_name.nameIndex = _name.inputName.Length - 1;
-			//have the new char be 'a'
-			_name.inputName[_name.nameIndex] = 'a';
-			
-			//set chartoreplace as the new char
-			charToReplace = _name.inputName[_name.nameIndex]; 
-			
-		}
-		//if pressing melee then change the selector back to the multiplayer menu
-		else if(Input.GetButton("Melee"))
-		{
-			currentSelection = MultiPlayerSelection; 
-			isInputting = false;
-		}
-		//if pressing bomb and the index is at the end of the array 
-		else if(Input.GetButton("Bomb") && _name.inputName.Length > 0 && _name.nameIndex >= _name.inputName.Length - 1)
-		{
-			//declare a temp array with one less element
-			char[] temp = new char[_name.inputName.Length - 1];
-			
-			//copy the content into
-			for(int i = 0; i < _name.inputName.Length - 1; i++)
-				temp[i] = _name.inputName[i];
-			
-			_name.inputName = temp;
-			
-			if(_name.nameIndex > 0)
-			{
-				_name.nameIndex--;
-				charToReplace = _name.inputName[_name.nameIndex]; 
-				
-			}
-			else
-			{
-				_name.nameHolder = "";
-				currentSelection = MultiPlayerSelection; 
-				isInputting = false;
-			}
-		}
-		
-		//Debug.Log("array length " + _charArr.Length);
-		if(_name.inputName.Length > 0)
-			UpdateString(_name, charToReplace); 
-	}*/
 
 	private void InputNameHelper(NameInput _name)
 	{
-		Debug.Log(keyBoardIndex);
+		//Debug.Log(keyBoardIndex);
 
 		//if pressing left and the index is not at the beginning of the char array
 		if(Input.GetAxis("Horizontal") < 0 && keyBoardIndex != 0 && keyBoardIndex != 10 && keyBoardIndex != 20 && keyBoardIndex != 30) 
 		{
-			Debug.Log("go left");
+			//Debug.Log("go left");
 			keyBoardIndex--;
 		}
 		//if pressing right and the index is not at the end of the array
 		else if(Input.GetAxis("Horizontal") > 0 && keyBoardIndex != 9 && keyBoardIndex != 19 && keyBoardIndex != 29 && keyBoardIndex != 39) 
 		{
-			Debug.Log("go right");
+			//Debug.Log("go right");
 			keyBoardIndex++;
 		}
 		//if pressing up
 		else if(Input.GetAxis("Vertical") > 0 && keyBoardIndex >= 10 ) 
 		{
-			Debug.Log("go up");
+			//Debug.Log("go up");
 			keyBoardIndex -= 10;
 			
 		}
 		//if pressing down
 		else if(Input.GetAxis("Vertical") < 0 && keyBoardIndex <= 29) 
 		{
-			Debug.Log("go down");
+			//Debug.Log("go down");
 			keyBoardIndex += 10;
 		}
 		//if pressing jump add a new char to the array
@@ -1290,43 +1277,72 @@ public class MenuControl : MenuLogic
 			}
 			else if(keyBoardIndex == 37)
 			{
-				//_name.nameHolder = _name.nameHolder.Substring(0, _name.nameHolder.Length - 1); 
+				isShifting = true;
+				ChangeKeyCaps();
+			}
+			else if(keyBoardIndex == 38)
+			{
+				if(!isCapsOn)
+				{
+					isShifting = true;
+					isCapsOn = true;
+				}
+				else
+				{
+					isShifting = false;
+					isCapsOn = false;
+				}
+				
+				ChangeKeyCaps();
+			}
+			else if(keyBoardIndex == 39)
+			{
+				_name.nameHolder += " ";
 			}
 			else if(keyBoardIndex != 29)
+			{
 				_name.nameHolder += charKeys[keyBoardIndex];
+				
+				if(isShifting && !isCapsOn)
+				{
+					isShifting = false;
+					ChangeKeyCaps();
+				}
+				
+			}
 			
 		}
 		//if pressing melee then change the selector back to the multiplayer menu
 		else if(Input.GetButton("Melee"))
 		{
-			currentSelection = MultiPlayerSelection; 
-			isInputting = false;
+			//isInputting = false;
+			//showKeys = false;
+			StartCoroutine(EaseKeyBoard(MultiPlayerSelection, multiPMenuBtnRect));
+			//currentSelection = MultiPlayerSelection;
+			//currentRect = multiPMenuBtnRect;
 		}
-		//if pressing bomb and the index is at the end of the array 
-		/*else if(Input.GetButton("Bomb") && _name.inputName.Length > 0 && _name.nameIndex >= _name.inputName.Length - 1)
+	}
+	
+	private void ChangeKeyCaps()
+	{
+		//Debug.Log("change key caps");
+		if(isShifting)
 		{
-			//declare a temp array with one less element
-			char[] temp = new char[_name.inputName.Length - 1];
-			
-			//copy the content into
-			for(int i = 0; i < _name.inputName.Length - 1; i++)
-				temp[i] = _name.inputName[i];
-			
-			_name.inputName = temp;
-			
-			if(_name.nameIndex > 0)
+			for(int i = 0; i < charKeys.Length; i++)
 			{
-				_name.nameIndex--;
-				charToReplace = _name.inputName[_name.nameIndex]; 
-				
+				if(i != 29 && i != 37 && i != 38 && i != 39)
+					charKeys[i] = charKeys[i].ToUpper();
 			}
-			else
+		}
+		else
+		{
+			for(int i = 0; i < charKeys.Length; i++)
 			{
-				_name.nameHolder = "";
-				currentSelection = MultiPlayerSelection; 
-				isInputting = false;
+				if(i != 29 && i != 37 && i != 38 && i != 39)
+					charKeys[i] = charKeys[i].ToLower();
 			}
-		}*/
+		}
+	
 	}
 	
 	//*************Start of Connecting Selection
@@ -1348,20 +1364,24 @@ public class MenuControl : MenuLogic
 	//***********Results Selection
 	private void ResultsSelection()
 	{
-		if(Input.GetAxis("Horizontal") < 0 && buttonIndex < 2) 
+		/*if(Input.GetAxis("Horizontal") < 0 && buttonIndex < 2) 
 		{
 			buttonIndex++;
 		}
 		else if(Input.GetAxis("Horizontal") > 0 && buttonIndex > 0) 
 		{
 			buttonIndex--;
-		}
+		}*/
 		//if pressing a button
-		else if(Input.GetButton("Jump"))
+		if(Input.GetButton("Jump"))
 		{
 			if(buttonIndex == 0)
 			{
-				LeaveGame(LobbySelection, lobbyMenuBtnRect);
+				fadeAction = LeaveGame;
+				
+				afterFadeAction = null;
+				
+				TransitionFade();
 			}
 			
 		}

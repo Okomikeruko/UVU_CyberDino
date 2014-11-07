@@ -382,7 +382,12 @@ public class HUDScript : MonoBehaviour
 
 				menuScript.enabled = true;
 
-				menuScript.SetMenuToLobby();
+				menuScript.fadeAction = menuScript.LeaveGame;
+				
+				menuScript.afterFadeAction = null;
+				
+				menuScript.TransitionFade();
+
 				Application.LoadLevel("Menu");
 			}
 		}

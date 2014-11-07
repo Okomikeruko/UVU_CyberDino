@@ -14,7 +14,7 @@ public class HUDScript : MonoBehaviour
 	public GameObject networkHandlerObject;
 	private NetworkGameHandler networkHandler;
 
-	private GameObject[] test;
+	//private GameObject[] test;
 
 	//guitextures for the hud
 	private GameObject positionObjs;
@@ -60,6 +60,8 @@ public class HUDScript : MonoBehaviour
 	private GameObject[] raceDinos;
 	private int[] racePositions;
 	private int[] currentLaps;
+	
+	private Font gameFont;
 
 	//the dino tracking script
 	public DinoTracking dinoTrackingScript;
@@ -95,14 +97,16 @@ public class HUDScript : MonoBehaviour
 	{
 		//create the hud group
 		grpObj = new GameObject("HUD Group");
-
+		
+		gameFont = (Font)Resources.Load("GUI/Materials/Glen Jan - CertaSans-MediumItalic");
+		
 		grpObj.layer = 5;
 
-		test = new GameObject[4];
+/*		test = new GameObject[4];
 		test[0] = new GameObject("test object");
 		test[1] = new GameObject("test object");
 		test[2] = new GameObject("test object");
-		test[3] = new GameObject("test object");
+		test[3] = new GameObject("test object");*/
 
 		//settings for the mini map
 		if(Application.loadedLevelName == "DumbellTrack")
@@ -196,10 +200,10 @@ public class HUDScript : MonoBehaviour
 		lapObjs[2] = CreateGUIText("Slash", "/", new Vector3(0, 0, 0));
 		lapObjs[3] = CreateGUIText("Max Lap", "0", new Vector3(0, 0, 0));
 
-		lapObjs[0].guiText.color = Color.cyan;
+		/*lapObjs[0].guiText.color = Color.cyan;
 		lapObjs[1].guiText.color = Color.cyan;
 		lapObjs[2].guiText.color = Color.cyan;
-		lapObjs[3].guiText.color = Color.cyan;
+		lapObjs[3].guiText.color = Color.cyan;*/
 
 		//create guitextures for the health bars
 		healthBarObjs = new GameObject[4];
@@ -292,7 +296,6 @@ public class HUDScript : MonoBehaviour
 			if(child.name == "HealthBar")
 			{
 				healthGrpBar = child.gameObject;
-
 			}
 			else if(child.name == "ItemIcon1")
 			{
@@ -379,7 +382,12 @@ public class HUDScript : MonoBehaviour
 
 				menuScript.enabled = true;
 
-				menuScript.SetMenuToLobby();
+				menuScript.fadeAction = menuScript.LeaveGame;
+				
+				menuScript.afterFadeAction = null;
+				
+				menuScript.TransitionFade();
+
 				Application.LoadLevel("Menu");
 			}
 		}
@@ -497,6 +505,8 @@ public class HUDScript : MonoBehaviour
 		_obj.guiText.text = _text;
 		_obj.transform.parent = grpObj.transform;
 		_obj.layer = 5;
+		_obj.guiText.color = Color.cyan;
+		_obj.guiText.font = gameFont;
 		
 		return _obj;
 	}
@@ -769,7 +779,9 @@ public class HUDScript : MonoBehaviour
 		while (i < weaponCount)
 		{
 			items[i].SetActive(true);
-			items[i].renderer.material.mainTexture = itemsGfx[0];
+			//items[i].renderer.material.mainTexture = itemsGfx[0];
+			items[i].renderer.material = (Material)Resources.Load("GUI/Item1DarkMat");
+			//Item1Mat
 			i++;
 		}
 		while (i < weaponCount + healthCount)

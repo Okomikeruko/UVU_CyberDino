@@ -674,17 +674,17 @@ public class MenuLogic : MonoBehaviour
 		networkHandler.UpdateMapInformation(gameMap);
 	}
 	
-	public void DinoSelectionDecrement(GameObject[] _models, ref GameObject _selected, string[] _names, ref Texture _banner)
+	public void DinoSelectionDecrement(GameObject[] _models, ref GameObject _selected, string[] _names)
 	{
 		if(dinoIndex <= 0)
 			dinoIndex = _models.Length - 1;
 		else
 			dinoIndex--;
 		
-		UpdateDinoInfo(_models, ref _selected, _names, ref _banner);
+		UpdateDinoInfo(_models, ref _selected, _names);
 	}
 	
-	public void DinoSelectionIncrement(GameObject[] _models, ref GameObject _selected, string[] _names, ref Texture _banner)
+	public void DinoSelectionIncrement(GameObject[] _models, ref GameObject _selected, string[] _names)
 	{
 		
 		if(dinoIndex >= _models.Length - 1)
@@ -692,20 +692,14 @@ public class MenuLogic : MonoBehaviour
 		else
 			dinoIndex++;
 
-		UpdateDinoInfo(_models, ref _selected, _names, ref _banner);
+		UpdateDinoInfo(_models, ref _selected, _names);
 
 	}
 
-	internal void UpdateDinoInfo(GameObject[] _models, ref GameObject _selected, string[] _names, ref Texture _banner)
+	internal void UpdateDinoInfo(GameObject[] _models, ref GameObject _selected, string[] _names)
 	{
 		if(_selected != null)
 			Destroy(_selected);
-		
-		//Debug.Log("the dino index " + dinoIndex);
-		//Debug.Log("the dino name " + dinos[dinoIndex]);
-		string bannerName = "GUI/Materials/Banner" + _names[dinoIndex] + "Large";
-		//Debug.Log(bannerName);
-		_banner = (Texture)Resources.Load(bannerName);
 		
 		//Debug.Log(dinoIndex);
 		
@@ -743,7 +737,7 @@ public class MenuLogic : MonoBehaviour
 	
 	public void TurnOnLoading()
 	{
-		//loadingObj.SetActive(true);
+		loadingObj.SetActive(true);
 	}
 	
 	public void TurnOffLoading()
@@ -931,8 +925,8 @@ public class MenuLogic : MonoBehaviour
 	
 	//***********Results Selection
 
-	
-	public void LeaveGame(Selector _selector, Rect[] _rect)
+
+	/*public void LeaveGame()
 	{
 		//Debug.Log("the current menu" + menuSelect.ToString());
 		if(menuSelect == Menu.resultsMenu)
@@ -950,11 +944,12 @@ public class MenuLogic : MonoBehaviour
 			
 			buttonIndex = 0;
 			
-			currentRect = _rect;
-			
-			currentSelection = _selector; 
+			menuSelect = Menu.lobbyMenu;
+			currentSelection = LobbySelection;
+			currentRect = lobbyMenuBtnRect;
+			menuOrigin[2].x = 0;
 		}
-	}
+	}*/
 	
 	public class NameInput
 	{
