@@ -743,7 +743,7 @@ public class MenuLogic : MonoBehaviour
 	
 	public void TurnOnLoading()
 	{
-		loadingObj.SetActive(true);
+		//loadingObj.SetActive(true);
 	}
 	
 	public void TurnOffLoading()
