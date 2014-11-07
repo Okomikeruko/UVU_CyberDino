@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+<COLLADA xmlns="http://www.collada.org/2005/11/COLLADASchema" version="1.4.1">
+  <asset><contributor><author></author><authoring_tool>FBX COLLADA exporter</authoring_tool><comments></comments></contributor><created>2014-11-06T00:37:23Z</created><keywords></keywords><modified>2014-11-06T00:37:23Z</modified><revision></revision><subject></subject><title></title><unit meter="0.010000" name="centimeter"></unit><up_axis>Y_UP</up_axis></asset>
+  <library_images>
+    <image id="file6-image" name="file6"><init_from>file://C:/Users/Myles/Documents/UVU_CyberDino/UnityProject-CyberDino/Assets/Resources/Environment/Track/Textures/TRACKC5.png</init_from></image>
+  </library_images>
+  <library_materials>
+    <material id="Track_C5Mat" name="Track_C5Mat">
+      <instance_effect url="#Track_C5Mat-fx"/>
+    </material>
+  </library_materials>
+  <library_effects>
+    <effect id="Track_C5Mat-fx" name="Track_C5Mat">
+      <profile_COMMON>
+        <technique sid="standard">
+          <lambert>
+            <emission>
+              <color sid="emission">0.000000  0.000000 0.000000 1.000000</color>
+            </emission>
+            <ambient>
+              <color sid="ambient">0.000000  0.000000 0.000000 1.000000</color>
+            </ambient>
+            <diffuse>
+              <texture texture="file6-image" texcoord="CHANNEL0">
+                <extra>
+                  <technique profile="MAYA">
+                    <wrapU sid="wrapU0">TRUE</wrapU>
+                    <wrapV sid="wrapV0">TRUE</wrapV>
+                    <blend_mode>NONE</blend_mode>
+                  </technique>
+                </extra>
+              </texture>
+            </diffuse>
+            <transparent opaque="RGB_ZERO">
+              <color sid="transparent">0.000000  0.000000 0.000000 1.000000</color>
+            </transparent>
+            <transparency>
+              <float sid="transparency">1.000000</float>
+            </transparency>
+          </lambert>
+        </technique>
+      </profile_COMMON>
+    </effect>
+  </library_effects>
+  <library_geometries>
+    <geometry id="Track_C5-lib" name="Track_C5Mesh">
+      <mesh>
+        <source id="Track_C5-POSITION">
+          <float_array id="Track_C5-POSITION-array" count="12">
+-69.500000 0.000000 69.500000
+69.500000 0.000000 69.500000
+-69.500000 0.000000 -69.500000
+69.500000 0.000000 -69.500000
+</float_array>
+          <technique_common>
+            <accessor source="#Track_C5-POSITION-array" count="4" stride="3">
+              <param name="X" type="float"/>
+              <param name="Y" type="float"/>
+              <param name="Z" type="float"/>
+            </accessor>
+          </technique_common>
+        </source>
+        <source id="Track_C5-Normal0">
+          <float_array id="Track_C5-Normal0-array" count="12">
+0.000000 1.000000 0.000000
+0.000000 1.000000 0.000000
+0.000000 1.000000 0.000000
+0.000000 1.000000 0.000000
+</float_array>
+          <technique_common>
+            <accessor source="#Track_C5-Normal0-array" count="4" stride="3">
+              <param name="X" type="float"/>
+              <param name="Y" type="float"/>
+              <param name="Z" type="float"/>
+            </accessor>
+          </technique_common>
+        </source>
+        <source id="Track_C5-UV0">
+          <float_array id="Track_C5-UV0-array" count="8">
+0.001992 0.001992
+0.998008 0.001992
+0.998008 0.998008
+0.001992 0.998008
+</float_array>
+          <technique_common>
+            <accessor source="#Track_C5-UV0-array" count="4" stride="2">
+              <param name="S" type="float"/>
+              <param name="T" type="float"/>
+            </accessor>
+          </technique_common>
+        </source>
+        <vertices id="Track_C5-VERTEX">
+          <input semantic="POSITION" source="#Track_C5-POSITION"/>
+          <input semantic="NORMAL" source="#Track_C5-Normal0"/>
+        </vertices>
+        <triangles count="2" material="Track_C5Mat"><input semantic="VERTEX" offset="0" source="#Track_C5-VERTEX"/><input semantic="TEXCOORD" offset="1" set="0" source="#Track_C5-UV0"/><p> 1 1 3 2 0 0 0 0 3 2 2 3</p></triangles>
+      </mesh>
+    </geometry>
+  </library_geometries>
+  <library_visual_scenes>
+    <visual_scene id="Track_C5" name="Track_C5">
+      <node name="Track_C5" id="Track_C5" sid="Track_C5"><matrix sid="matrix">1.000000 0.000000 0.000000 0.000000 0.000000 1.000000 0.000000 0.000000 0.000000 0.000000 1.000000 0.000000 0.000000 0.000000 0.000000 1.000000</matrix><instance_geometry url="#Track_C5-lib"><bind_material><technique_common><instance_material symbol="Track_C5Mat" target="#Track_C5Mat"/></technique_common></bind_material></instance_geometry><extra><technique profile="FCOLLADA"><visibility>1.000000</visibility></technique></extra></node>
+      <extra><technique profile="MAX3D"><frame_rate>24.000000</frame_rate></technique><technique profile="FCOLLADA"><start_time>0.041667</start_time><end_time>2.000000</end_time></technique></extra>
+    </visual_scene>
+  </library_visual_scenes>
+  <scene>
+    <instance_visual_scene url="#Track_C5"></instance_visual_scene>
+  </scene>
+</COLLADA>
