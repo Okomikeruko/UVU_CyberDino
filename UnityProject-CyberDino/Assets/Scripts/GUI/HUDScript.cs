@@ -816,8 +816,7 @@ public class HUDScript : MonoBehaviour
 		while (i < weaponCount)
 		{
 			items[i].SetActive(true);
-			//items[i].renderer.material.mainTexture = itemsGfx[0];
-			items[i].renderer.material = (Material)Resources.Load("GUI/Item1DarkMat");
+			items[i].renderer.material.mainTexture = itemsGfx[0];
 			//Item1Mat
 			i++;
 		}

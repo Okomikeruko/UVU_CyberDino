@@ -277,7 +277,7 @@ public class MenuControl : MenuLogic
 			
 			fadeAction = TurnOffLoading;
 			afterFadeAction = start.FadeFinishCount;
-			netView.RPC("TransitionFade", RPCMode.AllBuffered);
+			StartCoroutine(TransitionFadeHelper());
 
 			dinoTracking = GameObject.Find("Checkpoints");
 			
@@ -296,7 +296,7 @@ public class MenuControl : MenuLogic
 		xMulti = Screen.width / 100.0f;
 		yMulti = Screen.height / 100.0f;
 		
-
+		
 
 		//if not currently in the race or the menu is moving
 		if(menuSelect != Menu.goToLevel && !menuMoving)

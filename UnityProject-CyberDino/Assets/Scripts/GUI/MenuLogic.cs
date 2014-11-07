@@ -767,7 +767,7 @@ public class MenuLogic : MonoBehaviour
 		StartCoroutine(TransitionFadeHelper());
 	}
 
-	private IEnumerator TransitionFadeHelper()
+	public IEnumerator TransitionFadeHelper()
 	{
 		//a bool to know when it has reached full opacity
 		bool fadeOut = false;

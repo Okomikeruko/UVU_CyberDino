@@ -98,6 +98,7 @@ public class RaceStart : MonoBehaviour
 		
 		while(true)
 		{
+			Debug.Log(finishCount);
 			if(finishCount >= Network.connections.Length + 1)
 				break;
 			yield return null;
