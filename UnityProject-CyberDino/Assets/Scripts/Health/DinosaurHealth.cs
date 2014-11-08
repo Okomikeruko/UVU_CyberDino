@@ -2,7 +2,9 @@ using UnityEngine;
 using System.Collections;
 
 public class DinosaurHealth : Health {
-
+	
+	[SerializeField]
+	private AudioSource RespawnSoundEffect;
 	[SerializeField]
 	private float RespawnDelay = 3.0f;
 
@@ -30,7 +32,7 @@ public class DinosaurHealth : Health {
 		mc.enabled = false;
 
 		yield return new WaitForSeconds(duration);
-		
+
 		networkView.RPC("ResetRagdoll", RPCMode.AllBuffered);
 		mc.enabled = false; //ragdoll.ResetRacer enabled this, so the dino starts moving before respawn finished. 
 		var rm = GetComponent<RespawnManager> ();
@@ -50,7 +52,8 @@ public class DinosaurHealth : Health {
 
 	[RPC]
 	void ResetRagdoll()
-	{
+	{		
+		if(RespawnSoundEffect != null) RespawnSoundEffect.Play();
 		var ragdoll = GetComponent<DinoRagdoll> ();
 		if(ragdoll != null) ragdoll.ResetRacer ();
 	}

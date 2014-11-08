@@ -28,6 +28,8 @@ public class AcidSpit : Bomb {
 		{
 			NetworkAnimations netanim = GetComponentInChildren<NetworkAnimations>();
 			netanim.SetTrigger("Bomb");
+
+			networkView.RPC("PlayBombSoundEffect", RPCMode.All);
 		}
 		else 
 		{
@@ -99,6 +101,15 @@ public class AcidSpit : Bomb {
             elapsedTime += 1.0f;
 
 			health.Damage(dotTick);
+		}
+	}
+
+	[RPC]
+	void PlayBombSoundEffect()
+	{
+		if(SoundEffect != null)
+		{
+			SoundEffect.Play();
 		}
 	}
 }
