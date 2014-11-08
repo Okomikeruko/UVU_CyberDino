@@ -31,6 +31,9 @@ public abstract class Health : MonoBehaviour
 	private NetworkView netview;
 
 	[SerializeField]
+	private ParticleSystem HealVFX;
+
+	[SerializeField]
 	private float maxHealth = 100.0f; 
 	private float originalMaxHealth;
 	private float currentHealth;
@@ -107,7 +110,14 @@ public abstract class Health : MonoBehaviour
 		if (value < 0.0f)			
 			timeElapsedSinceDamaged = 0.0f;
 		else if (value > 0.0f)
+		{
 			timeElapsedSinceHealed = 0.0f;
+
+			if(HealVFX != null)
+			{
+				HealVFX.Play();
+			}
+		}
 
 		if (netview.isMine) {
 			if(currentHealth <= 0.0f) {
