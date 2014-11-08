@@ -762,13 +762,14 @@ public class MenuLogic : MonoBehaviour
 	}
 
 	[RPC]
-	public void TransitionFade()
+	public void TransitionFadeNetwork()
 	{
-		StartCoroutine(TransitionFadeHelper());
+		StartCoroutine(TransitionFade());
 	}
 
-	public IEnumerator TransitionFadeHelper()
+	public IEnumerator TransitionFade()
 	{
+	Debug.Log("start transition fade");
 		//a bool to know when it has reached full opacity
 		bool fadeOut = false;
 		
@@ -779,6 +780,7 @@ public class MenuLogic : MonoBehaviour
 		//while
 		while(true)
 		{
+			//Debug.Log("fading");
 			//Debug.Log(transNum);
 
 			//Debug.Log(tempColor.a);
@@ -786,15 +788,19 @@ public class MenuLogic : MonoBehaviour
 			{
 				if(tempColor.a >= 1)
 				{
+				//Debug.Log("midpoint");
 					fadeOut = true;
 
 					//LobbyToLevel(Menu.goToLevel);
-					fadeAction();
+					if(fadeAction != null)
+						fadeAction();
 					
 					transNum = 0;
+					//Debug.Log("end mid point");
 				}
 				else
 				{
+					//Debug.Log("fade in");
 					//use mathf.lerp to set the transparency of the temp Color
 					tempColor.a = Mathf.Lerp(0, 1, transNum);
 					
@@ -809,12 +815,16 @@ public class MenuLogic : MonoBehaviour
 				
 				if(tempColor.a <= 0)
 				{
+					//Debug.Log("end fade");
 					if(afterFadeAction != null)
 						afterFadeAction();
+						
+					//Debug.Log("end fade");
 					yield break;
 				}
 				else
 				{
+					//Debug.Log("fade out");
 					//use mathf.lerp to set the transparency of the temp Color
 					tempColor.a = Mathf.Lerp(1, 0, transNum);
 					

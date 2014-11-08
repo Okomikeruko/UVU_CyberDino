@@ -223,6 +223,7 @@ public class MenuControl : MenuLogic
 	
 	IEnumerator OnLevelWasLoaded(int _level)
 	{
+	//Debug.Log("it was loaded!!!!!!!!!!!!!!!!!!!!!");
 		if(fadeTransition == null)
 		{
 			fadeTransition = CreateGUITxtr(fadeTransition, "Fade Transition", fadeTxtr, ResizeRect(new Rect(0, 0, 100, 100)));
@@ -281,7 +282,7 @@ public class MenuControl : MenuLogic
 			
 			fadeAction = TurnOffLoading;
 			afterFadeAction = start.FadeFinishCount;
-			StartCoroutine(TransitionFadeHelper());
+			StartCoroutine(TransitionFade());
 
 			dinoTracking = GameObject.Find("Checkpoints");
 			
@@ -531,9 +532,12 @@ public class MenuControl : MenuLogic
 			{
 				startDinoPos = ResizeRect(new Rect(72, 40, 0, 0));
 				
+				GameObject loc = GameObject.Find("MenuDinoSpawnLocation");
+				
 				dinoIndex = 0;
-				dinoSelected = (GameObject)Instantiate(dinoModels[dinoIndex],
-				                GameObject.Find("MenuDinoSpawnLocation").transform.position,
+				if(loc != null)
+					dinoSelected = (GameObject)Instantiate(dinoModels[dinoIndex],
+					                loc.transform.position,
 				                Quaternion.identity);
 			}
 			//if a dino is there set it's scale and position
@@ -662,7 +666,7 @@ public class MenuControl : MenuLogic
 						afterFadeAction = LobbyToLevel;*/
 						//StartCoroutine(MoveLeftOff(2, 5, Menu.goToLevel, null, null));
 						//LobbyToLevel(Menu.goToLevel)
-						netView.RPC("TransitionFade", RPCMode.AllBuffered);
+						netView.RPC("TransitionFadeNetwork", RPCMode.AllBuffered);
 					}
 				}
 			}
@@ -869,7 +873,7 @@ public class MenuControl : MenuLogic
 
 				afterFadeAction = null;
 
-				TransitionFade();
+				StartCoroutine(TransitionFade());
 				
 				//UpdateDinoInfo(dinoModels, ref dinoSelected, dinos, ref largeDinoBanner);
 			}
@@ -972,14 +976,16 @@ public class MenuControl : MenuLogic
 		menuOrigin[2].x = 0;
 	}*/
 
+
 	public void LeaveGame()
 	{
+	Debug.Log("start leave game");
 		//Debug.Log("the current menu" + menuSelect.ToString());
-			menuSelect = Menu.lobbyMenu;
+			
 			//Debug.Log("the current menu" + menuSelect.ToString());
 			//Debug.Log("change to lobby");
+		Application.LoadLevel("Menu");
 			
-			Application.LoadLevel("Menu");
 			
 			var myInfo = networkHandler.GetMyInfo();
 			myInfo.readyState = "LobbyReady";
@@ -991,7 +997,8 @@ public class MenuControl : MenuLogic
 			currentSelection = LobbySelection;
 			currentRect = lobbyMenuBtnRect;
 			menuOrigin[2].x = 0;
-
+			
+		Debug.Log("end leave game");
 	}
 	
 	public void InstantiateMenuObj()
@@ -1104,7 +1111,7 @@ public class MenuControl : MenuLogic
 			else if(Network.isServer && readyAll == true && buttonIndex == 5)
 			{
 				netView.RPC("GroupToLevel", RPCMode.AllBuffered);
-				netView.RPC("TransitionFade", RPCMode.AllBuffered);
+				netView.RPC("TransitionFadeNetwork", RPCMode.AllBuffered);
 			}
 			//button to indicate that this player is ready
 			else if(Network.isClient && readyMe == false && buttonIndex == 5)
@@ -1383,7 +1390,7 @@ public class MenuControl : MenuLogic
 				
 				afterFadeAction = null;
 				
-				TransitionFade();
+				StartCoroutine(TransitionFade());
 			}
 			
 		}
