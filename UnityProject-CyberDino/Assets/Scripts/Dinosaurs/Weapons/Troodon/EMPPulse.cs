@@ -41,7 +41,8 @@ public class EMPPulse : MeleeAttack {
 
 		foreach (var obj in ListOfObjects) {
 			if (obj.gameObject.rigidbody != null){
-				if(obj.gameObject.tag == "Dino" && obj.gameObject.networkView.isMine == true){
+				if(obj.gameObject == this.gameObject){
+					continue;
 				}
 				else if(obj.gameObject.tag == "Dino" || obj.gameObject.tag == "Ai")
 					targets.Add(obj.gameObject);
