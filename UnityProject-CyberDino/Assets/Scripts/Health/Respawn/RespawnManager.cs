@@ -26,7 +26,7 @@ public class RespawnManager : MonoBehaviour
 	{
 		ParticleSystem[] particleSystems = gameObject.GetComponentsInChildren<ParticleSystem>();
 		foreach(var ps in particleSystems){
-			if (ps.name == "Respawn_VFX"){
+			if (ps.name == "Dino_Respawn"){
 				racerRespawnParticalSystem = ps;
 				break;	
 			}
