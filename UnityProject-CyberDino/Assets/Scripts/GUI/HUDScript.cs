@@ -214,7 +214,7 @@ public class HUDScript : MonoBehaviour
 		
 		pauseMenuGfx = new Texture[5];
 		pauseMenuGfx[0] = (Texture)Resources.Load("GUI/Materials/PauseMenuBackground");
-		pauseMenuGfx[1] = (Texture)Resources.Load("GUI/Materials/empty button");
+		pauseMenuGfx[1] = (Texture)Resources.Load("GUI/Materials/EmptyButtonSmall");
 		/*pauseMenuGfx[2] = (Texture)Resources.Load("GUI/Materials/PauseRestart");
 		pauseMenuGfx[3] = (Texture)Resources.Load("GUI/Materials/PauseSettings");
 		pauseMenuGfx[4] = (Texture)Resources.Load("GUI/Materials/QuitButton")*/;
@@ -308,10 +308,10 @@ public class HUDScript : MonoBehaviour
 		pauseMenuObjs[2] = CreateGUITxtr("RestartTxtr", pauseMenuGfx[1], new Vector3(0, 0, 2));
 		pauseMenuObjs[3] = CreateGUITxtr("SettingTxtr", pauseMenuGfx[1], new Vector3(0, 0, 2));
 		pauseMenuObjs[4] = CreateGUITxtr("QuitTxtr", pauseMenuGfx[1], new Vector3(0, 0, 2));
-		pauseMenuObjs[5] = CreateButtonText("ContinueText", "Continue", new Vector3(0, 0, 3));
-		pauseMenuObjs[6] = CreateButtonText("RestartText", "Restart", new Vector3(0, 0, 3));
-		pauseMenuObjs[7] = CreateButtonText("SettingText", "Settings", new Vector3(0, 0, 3));
-		pauseMenuObjs[8] = CreateButtonText("QuitText", "Quit", new Vector3(0, 0, 3));
+		pauseMenuObjs[5] = CreateButtonText("ContinueText", "C  o  n  t  i  n  u  e", new Vector3(0, 0, 3));
+		pauseMenuObjs[6] = CreateButtonText("RestartText", "R  e  s  t  a  r  t", new Vector3(0, 0, 3));
+		pauseMenuObjs[7] = CreateButtonText("SettingText", "S  e  t  t  i  n  g  s", new Vector3(0, 0, 3));
+		pauseMenuObjs[8] = CreateButtonText("QuitText", "Q  u  i  t", new Vector3(0, 0, 3));
 
 		foreach(GameObject _obj in pauseMenuObjs)
 			_obj.SetActive(false);
@@ -449,18 +449,23 @@ public class HUDScript : MonoBehaviour
 		/*lapObjs[1].guiTexture.texture = numGfx[currentLaps[dinoTrackingScript.playerNum]];
 		lapObjs[3].guiTexture.texture = numGfx[dinoTrackingScript.maxLap];*/
 		
+		pauseMenuObjs[5].guiText.fontSize = (int)((xMulti + yMulti) * 1);
+		pauseMenuObjs[6].guiText.fontSize = (int)((xMulti + yMulti) * 1);
+		pauseMenuObjs[7].guiText.fontSize = (int)((xMulti + yMulti) * 1);
+		pauseMenuObjs[8].guiText.fontSize = (int)((xMulti + yMulti) * 1);
+		
 
 		healthDangerObj.guiTexture.pixelInset = ResizeRect(new Rect(0, 0, 100, 100));
 		
 		pauseMenuPos[0] = ResizeRect(new Rect(0, 0, 100, 100));
-		pauseMenuPos[1] = ResizeRect( new Rect(32, 60, 35, 13));
-		pauseMenuPos[2] = ResizeRect( new Rect(32, 45, 35, 13));
-		pauseMenuPos[3] = ResizeRect( new Rect(32, 30, 35, 13));
-		pauseMenuPos[4] = ResizeRect( new Rect(32, 15, 35, 13));
-		pauseMenuTextPos[0] = ResizeVec2( new Vector2(39, 70));
-		pauseMenuTextPos[1] = ResizeVec2( new Vector2(39, 55));
-		pauseMenuTextPos[2] = ResizeVec2( new Vector2(39, 40));
-		pauseMenuTextPos[3] = ResizeVec2( new Vector2(45, 25));
+		pauseMenuPos[1] = ResizeRect( new Rect(24.5f, 69, 21, 5));
+		pauseMenuPos[2] = ResizeRect( new Rect(24.5f, 56, 21, 5));
+		pauseMenuPos[3] = ResizeRect( new Rect(24.5f, 43.5f, 21, 5));
+		pauseMenuPos[4] = ResizeRect( new Rect(24.5f, 30, 21, 5));
+		pauseMenuTextPos[0] = ResizeVec2( new Vector2(26, 73));
+		pauseMenuTextPos[1] = ResizeVec2( new Vector2(26, 60));
+		pauseMenuTextPos[2] = ResizeVec2( new Vector2(26, 47.5f));
+		pauseMenuTextPos[3] = ResizeVec2( new Vector2(30.5f, 34));
 		
 		pauseMenuObjs[0].guiTexture.pixelInset = pauseMenuPos[0];
 		pauseMenuObjs[1].guiTexture.pixelInset = pauseMenuPos[1];
@@ -495,7 +500,7 @@ public class HUDScript : MonoBehaviour
 				
 				menuScript.afterFadeAction = null;
 				
-				menuScript.TransitionFade();
+				StartCoroutine(menuScript.TransitionFade());
 
 				//Application.LoadLevel("Menu");
 			}

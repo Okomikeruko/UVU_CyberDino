@@ -50,7 +50,7 @@ public class RaceStart : MonoBehaviour
 		countDown = new GameObject("countDown");
 		countDown.transform.localScale = Vector3.zero;
 		countDown.AddComponent<GUITexture>();
-		countDown.guiTexture.pixelInset = new Rect((Screen.width / 100) * 43f, (Screen.height / 100) * 25f , (Screen.width / 100.0f) * 25f, (Screen.height / 100.0f) * 50f);
+		countDown.guiTexture.pixelInset = new Rect((Screen.width / 100) * 30f, (Screen.height / 100) * 20f , (Screen.width / 100.0f) * 50f, (Screen.height / 100.0f) * 70f);
 		countDown.guiTexture.texture = countTxtr[0];
 		countDown.SetActive(false);
 
@@ -232,9 +232,11 @@ public class RaceStart : MonoBehaviour
 					countDown.guiTexture.texture = countTxtr[index];
 
 					if(index == 2)
-						countDown.guiTexture.pixelInset = new Rect((Screen.width / 100) * 43f - (index * 20), (Screen.height / 100) * 25f - (index * 10), (Screen.width / 100.0f) * 25f + (index * 25), (Screen.height / 100.0f) * 50f + (index * 25));
+						countDown.guiTexture.pixelInset = new Rect((Screen.width / 100) * 41f, (Screen.height / 100) * 20f, (Screen.width / 100.0f) * 25f, (Screen.height / 100.0f) * 70f);
+					else if(index == 3)
+						countDown.guiTexture.pixelInset = new Rect((Screen.width / 100) * 33f, (Screen.height / 100) * 20f, (Screen.width / 100.0f) * 50f, (Screen.height / 100.0f) * 70f);
 					else
-						countDown.guiTexture.pixelInset = new Rect((Screen.width / 100) * 43f - (index * 10), (Screen.height / 100) * 25f - (index * 10), (Screen.width / 100.0f) * 25f + (index * 25), (Screen.height / 100.0f) * 50f + (index * 25));
+						countDown.guiTexture.pixelInset = new Rect((Screen.width / 100) * 30f, (Screen.height / 100) * 20f, (Screen.width / 100.0f) * 50f, (Screen.height / 100.0f) * 70f);
 					hasFadeIn = false;
 					transNumb = 0;
 				}

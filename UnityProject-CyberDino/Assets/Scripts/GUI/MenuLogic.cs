@@ -792,7 +792,7 @@ public class MenuLogic : MonoBehaviour
 			{
 				if(tempColor.a >= 1)
 				{
-				//Debug.Log("midpoint");
+				Debug.Log("midpoint");
 					fadeOut = true;
 
 					//LobbyToLevel(Menu.goToLevel);
