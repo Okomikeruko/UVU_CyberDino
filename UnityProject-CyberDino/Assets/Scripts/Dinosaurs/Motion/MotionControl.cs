@@ -67,10 +67,10 @@ public class MotionControl : MonoBehaviour {
 				
 		// Rotation
 		if (onGround) {	
-			rigidbody.angularVelocity = (new Vector3(0, TurnSpeed * inputRotationAxis, 0)); 
+			rigidbody.angularVelocity = (new Vector3(0, TurnSpeed * inputRotationAxis * 0.99f, 0)); 
 		}		
 		else {				
-			rigidbody.angularVelocity = (new Vector3(0, TurnSpeed * inputRotationAxis * AirControl, 0)); 
+			rigidbody.angularVelocity = (new Vector3(0, TurnSpeed * inputRotationAxis * AirControl * 0.99f, 0)); 
 		}
 
 		// Jumping

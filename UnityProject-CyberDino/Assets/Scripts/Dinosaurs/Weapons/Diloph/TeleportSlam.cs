@@ -23,6 +23,7 @@ public class TeleportSlam : MeleeAttack {
 	{
 		if (!isActive) {
 			networkView.RPC ("EnableVFX", RPCMode.All);
+			networkView.RPC("PlayMeleeSoundEffect", RPCMode.All);
 			StartCoroutine (slam (Duration));
 		}
 	}
@@ -111,5 +112,13 @@ public class TeleportSlam : MeleeAttack {
 		WeaponVFX.Stop ();
 		WeaponVFX.enableEmission = false;
 		isActive = false;
+	}
+	[RPC]
+	void PlayMeleeSoundEffect()
+	{
+		if(SoundEffect != null)
+		{
+			SoundEffect.Play();
+		}
 	}
 }
