@@ -12,8 +12,11 @@ public class RaceStart : MonoBehaviour
 	public GameObject[] ai;
 		
 	//hold the children of this object
-	private Texture[] childTex;
+	private Texture[] countTxtr;
+	private Texture honeyCombTxtr;
+	private Texture honeyCombGoTxtr;
 	private GameObject countDown;
+	private GameObject honeyComb;
 	private Rect countPos;
 	
 	public AnimationCurve easeIn;
@@ -35,19 +38,33 @@ public class RaceStart : MonoBehaviour
 	
 		netView = this.GetComponent<NetworkView>();
 		
-		childTex = new Texture[4];
-		childTex[0] = (Texture)Resources.Load("GUI/Materials/countDown3");
-		childTex[1] = (Texture)Resources.Load("GUI/Materials/countDown2");
-		childTex[2] = (Texture)Resources.Load("GUI/Materials/countDown1");
-		childTex[3] = (Texture)Resources.Load("GUI/Materials/countDownGo");
+		countTxtr= new Texture[4];
+		countTxtr[0] = (Texture)Resources.Load("GUI/Materials/HudCountDown3");
+		countTxtr[1] = (Texture)Resources.Load("GUI/Materials/HudCountDown2");
+		countTxtr[2] = (Texture)Resources.Load("GUI/Materials/HudCountDown1");
+		countTxtr[3] = (Texture)Resources.Load("GUI/Materials/HudCountDownGo");
+
+		honeyCombTxtr = (Texture)Resources.Load("GUI/Materials/HudHoneyComb");
+		honeyCombGoTxtr = (Texture)Resources.Load("GUI/Materials/HudHoneyCombGo");
 		
 		countDown = new GameObject("countDown");
 		countDown.transform.localScale = Vector3.zero;
 		countDown.AddComponent<GUITexture>();
-		
-		countPos = new Rect(Screen.width, (Screen.height / 100) * 45f , (Screen.width / 100.0f) * 20f, (Screen.height / 100.0f) * 35f);
-		countDown.guiTexture.pixelInset = countPos;
-		countDown.guiTexture.texture = childTex[0];
+		countDown.guiTexture.pixelInset = new Rect((Screen.width / 100) * 43f, (Screen.height / 100) * 25f , (Screen.width / 100.0f) * 25f, (Screen.height / 100.0f) * 50f);
+		countDown.guiTexture.texture = countTxtr[0];
+		countDown.SetActive(false);
+
+		honeyComb = new GameObject("honeyComb");
+		honeyComb.transform.localScale = Vector3.zero;
+		honeyComb.AddComponent<GUITexture>();
+		honeyComb.guiTexture.pixelInset = new Rect((Screen.width / 100) * 40f, (Screen.height / 100) * 10f , (Screen.width / 100.0f) * 55f, (Screen.height / 100.0f) * 75f);
+		honeyComb.guiTexture.texture = honeyCombTxtr;
+		Color tempColor = honeyComb.guiTexture.color;
+		tempColor.a = 0;
+		honeyComb.guiTexture.color = tempColor;
+		honeyComb.SetActive(false);
+
+		StartCoroutine(FadeInHoneyComb());
 		
 		//get the player dino and store in player
 		players = GameObject.FindGameObjectsWithTag("Dino");
@@ -87,7 +104,7 @@ public class RaceStart : MonoBehaviour
 		finishCount++;
 	}
 	
-	private IEnumerator CountDown()
+	/*private IEnumerator CountDown()
 	{
 		countDown.SetActive(true);
 		
@@ -106,7 +123,7 @@ public class RaceStart : MonoBehaviour
 		while(true)
 		{
 			//if the index reaches the end
-			if(index >= childTex.Length) 
+			if(index >= countTxtr.Length) 
 			{
 				//get ride of the last child
 				countDown.SetActive(false);
@@ -156,9 +173,140 @@ public class RaceStart : MonoBehaviour
 				
 				countDown.guiTexture.pixelInset = countPos;
 					
-				if(index < childTex.Length)
-					countDown.guiTexture.texture = childTex[index];
+				if(index < countTxtr.Length)
+					countDown.guiTexture.texture = countTxtr[index];
 
+			}
+			
+			yield return null;
+		}
+	}*/
+
+	private IEnumerator CountDown()
+	{
+		//a bool for when it has already faded in
+		bool hasFadeIn = false;
+
+		Color tempColor = countDown.guiTexture.color;
+
+		//index of the texture
+		int index = 0;
+
+		float transNumb = 0;
+
+		while(true)
+		{
+			if(finishCount >= Network.connections.Length + 1)
+				break;
+			yield return null;
+		}
+
+		countDown.SetActive(true);
+		honeyComb.SetActive(true);
+
+		while(true)
+		{
+			transNumb += 4f * Time.deltaTime;
+
+			if(!hasFadeIn)
+			{
+				if(transNumb >= 1)
+				{
+					hasFadeIn = true;
+					transNumb = 0;
+
+					yield return new WaitForSeconds(1f);
+				}
+				else
+				{
+					tempColor.a = Mathf.Lerp(0, 1, transNumb);
+					countDown.guiTexture.color = tempColor;
+				}
+
+				yield return null;
+			}
+			else if(hasFadeIn)
+			{
+				if(transNumb >= 1 && ++index < countTxtr.Length)
+				{
+					countDown.guiTexture.texture = countTxtr[index];
+
+					if(index == 2)
+						countDown.guiTexture.pixelInset = new Rect((Screen.width / 100) * 43f - (index * 20), (Screen.height / 100) * 25f - (index * 10), (Screen.width / 100.0f) * 25f + (index * 25), (Screen.height / 100.0f) * 50f + (index * 25));
+					else
+						countDown.guiTexture.pixelInset = new Rect((Screen.width / 100) * 43f - (index * 10), (Screen.height / 100) * 25f - (index * 10), (Screen.width / 100.0f) * 25f + (index * 25), (Screen.height / 100.0f) * 50f + (index * 25));
+					hasFadeIn = false;
+					transNumb = 0;
+				}
+				else
+				{
+					tempColor.a = Mathf.Lerp(1, 0, transNumb);
+					countDown.guiTexture.color = tempColor;
+				}
+				
+				yield return null;
+			}
+
+			if(index == 3)
+				honeyComb.guiTexture.texture = honeyCombGoTxtr;
+
+			if(index >= countTxtr.Length)
+			{
+				//get ride of the last child
+				countDown.SetActive(false);
+				
+				//reenable the motion scripts
+				foreach(var unit in players.Concat(ai))
+				{
+					unit.GetComponent<MotionControl>().enabled = true;
+				}
+
+				StartCoroutine(FadeOutHoneyComb());
+
+				break;
+			}
+		}
+	}
+
+	private IEnumerator FadeInHoneyComb()
+	{
+		Color tempColor = honeyComb.guiTexture.color;
+		float numb = 0;
+
+		while(true)
+		{
+			numb += 0.5f * Time.deltaTime;
+
+			if(numb >= 1)
+				break;
+			else
+			{
+				tempColor.a = Mathf.Lerp(0, 1, numb);
+				honeyComb.guiTexture.color = tempColor;
+			}
+
+			yield return null;
+		}
+	}
+
+	private IEnumerator FadeOutHoneyComb()
+	{
+		Color tempColor = honeyComb.guiTexture.color;
+		float numb = 0;
+		
+		while(true)
+		{
+			numb += 5f * Time.deltaTime;
+			
+			if(numb >= 1)
+			{
+				honeyComb.SetActive(false);
+				break;
+			}
+			else
+			{
+				tempColor.a = Mathf.Lerp(1, 0, numb);
+				honeyComb.guiTexture.color = tempColor;
 			}
 			
 			yield return null;

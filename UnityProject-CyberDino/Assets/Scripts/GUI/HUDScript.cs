@@ -17,15 +17,16 @@ public class HUDScript : MonoBehaviour
 	//private GameObject[] test;
 
 	//guitextures for the hud
-	private GameObject positionObjs;
-	private GameObject[] lapObjs;
+	private GameObject positionObj;
+	private GameObject positionPlaceObj;
+	//private GameObject[] lapObjs;
 	private GameObject[] healthBarObjs;
 	private GameObject[] healthBackgroundObjs;
 	private GameObject[] playerNamesObjs;
-	private GameObject mapObj;
-	private GameObject[] mapPosObjs;
-	private MapGUIInfo mapInfo;
-	private GameObject dinoIcon;
+	//private GameObject mapObj;
+	//private GameObject[] mapPosObjs;
+	//private MapGUIInfo mapInfo;
+	//private GameObject dinoIcon;
 	private GameObject healthPercent;
 	private GameObject[] items;
 	private GameObject[] pauseMenuObjs;
@@ -37,13 +38,19 @@ public class HUDScript : MonoBehaviour
 
 	private GameObject healthGrp;
 	private GameObject healthGrpBar;
-	private GameObject healthCover;
-	private Rect healthPos;
-	private Vector3 healthGrpBarRotation;
+	private GameObject healthGrpBorder;
+	private GameObject healthGrpLeftTrigger;
+	private GameObject healthGrpRightTrigger;
+	private GameObject[] progressObjs;
+	//private GameObject healthCover;
+	//private Rect healthPos;
+	//private Vector3 healthGrpBarRotation;
+	private Rect[] healthGrpPos;
+	private Rect[] progressPos;
 
 	//textures for the hud
 	private Texture[] hudGfx;
-	private Texture[] numGfx;
+	//private Texture[] numGfx;
 	private Texture healthBarGfx;
 	private Texture healthBarRedGfx;
 	private Texture healthBorderGfx;
@@ -56,6 +63,7 @@ public class HUDScript : MonoBehaviour
 	private Texture[] finishPlaceGfx;
 	private Texture healthDangerGfx;
 	//private Texture[] resultsGfx;
+	private Texture[] progressGfx;
 
 	//arrays to hold tracking information
 	private GameObject[] raceDinos;
@@ -70,6 +78,10 @@ public class HUDScript : MonoBehaviour
 
 	//the point that the map points are based from
 	public GameObject mapRelativePoint;
+
+	private float[] totalDist;
+	private Rect[] lapPos;
+	private float maxDistance;
 	
 	//the finish object
 	private GameObject finishObj;
@@ -95,12 +107,12 @@ public class HUDScript : MonoBehaviour
 	private bool[] isFading;
 
 	// Use this for initialization
-	void OnLevelWasLoaded () 
+	IEnumerator OnLevelWasLoaded () 
 	{
 		//create the hud group
 		grpObj = new GameObject("HUD Group");
 		
-		gameFont = (Font)Resources.Load("GUI/Materials/Glen Jan - CertaSans-MediumItalic");
+		gameFont = (Font)Resources.Load("GUI/Materials/Coalition_v2");
 		buttonFont = (Font)Resources.Load("GUI/Materials/Typodermic - EthnocentricRg-Italic");
 		
 		grpObj.layer = 5;
@@ -112,10 +124,10 @@ public class HUDScript : MonoBehaviour
 		test[3] = new GameObject("test object");*/
 
 		//settings for the mini map
-		if(Application.loadedLevelName == "DumbellTrack")
+		/*if(Application.loadedLevelName == "DumbellTrack")
 			mapInfo = new MapGUIInfo(105.0f, new Rect(89.5f, 24.7f, 1, 1), new Rect(85, 10, 10, 30), (Texture)Resources.Load("GUI/Materials/DumbBellmap"));
 		else
-			mapInfo = new MapGUIInfo();
+			mapInfo = new MapGUIInfo();*/
 			
 		//getting the menu script
 		menu = GameObject.FindGameObjectWithTag("Menu");
@@ -133,16 +145,33 @@ public class HUDScript : MonoBehaviour
 		yMulti = Screen.height / 100.0f;
 
 		//textures for the hub
-		hudGfx = new Texture[6];
-		hudGfx[0] = (Texture)Resources.Load("GUI/Materials/Hub1st");
+		hudGfx = new Texture[4];
+		/*hudGfx[0] = (Texture)Resources.Load("GUI/Materials/Hub1st");
 		hudGfx[1] = (Texture)Resources.Load("GUI/Materials/Hub2nd");
 		hudGfx[2] = (Texture)Resources.Load("GUI/Materials/Hub3rd");
 		hudGfx[3] = (Texture)Resources.Load("GUI/Materials/Hub4th");
 		hudGfx[4] = (Texture)Resources.Load("GUI/Materials/lapGraphic");
-		hudGfx[5] = (Texture)Resources.Load("GUI/Materials/slashGraphic");
+		hudGfx[5] = (Texture)Resources.Load("GUI/Materials/slashGraphic");*/
+		hudGfx[0] = (Texture)Resources.Load("GUI/Materials/HudHealthBar");
+		hudGfx[1] = (Texture)Resources.Load("GUI/Materials/HudBorder");
+		hudGfx[2] = (Texture)Resources.Load("GUI/Materials/HudLeftTrigger");
+		hudGfx[3] = (Texture)Resources.Load("GUI/Materials/HudRightTrigger");
+
+		progressGfx = new Texture[11];
+		progressGfx[0] = (Texture)Resources.Load("GUI/Materials/HudProgressionBar");
+		progressGfx[1] = (Texture)Resources.Load("GUI/Materials/HudDilophSmall");
+		progressGfx[2] = (Texture)Resources.Load("GUI/Materials/HudHespSmall");
+		progressGfx[3] = (Texture)Resources.Load("GUI/Materials/HudSpinoSmall");
+		progressGfx[4] = (Texture)Resources.Load("GUI/Materials/HudTRexSmall");
+		progressGfx[5] = (Texture)Resources.Load("GUI/Materials/HudTroodonSmall");
+		progressGfx[6] = (Texture)Resources.Load("GUI/Materials/HudDilophBig");
+		progressGfx[7] = (Texture)Resources.Load("GUI/Materials/HudHespBig");
+		progressGfx[8] = (Texture)Resources.Load("GUI/Materials/HudSpinoBig");
+		progressGfx[9] = (Texture)Resources.Load("GUI/Materials/HudTRexBig");
+		progressGfx[10] = (Texture)Resources.Load("GUI/Materials/HudTroodonBig");
 
 		//textures for the numbers
-		numGfx = new Texture[10];
+		/*numGfx = new Texture[10];
 		numGfx[0] = (Texture)Resources.Load("GUI/Materials/num0Graphic");
 		numGfx[1] = (Texture)Resources.Load("GUI/Materials/num1Graphic");
 		numGfx[2] = (Texture)Resources.Load("GUI/Materials/num2Graphic");
@@ -152,15 +181,15 @@ public class HUDScript : MonoBehaviour
 		numGfx[6] = (Texture)Resources.Load("GUI/Materials/num6Graphic");
 		numGfx[7] = (Texture)Resources.Load("GUI/Materials/num7Graphic");
 		numGfx[8] = (Texture)Resources.Load("GUI/Materials/num8Graphic");
-		numGfx[9] = (Texture)Resources.Load("GUI/Materials/num9Graphic");
+		numGfx[9] = (Texture)Resources.Load("GUI/Materials/num9Graphic");*/
 
 		//textures for the health bar
-		healthBarGfx = (Texture)Resources.Load("GUI/Materials/EnemyHealthBar");
-		healthBarRedGfx = (Texture)Resources.Load("GUI/Materials/EnemyHealthBarRed");
-		healthCoverGfx = (Texture)Resources.Load("GUI/Materials/HubHealthBarCover");
+		healthBarGfx = (Texture)Resources.Load("GUI/Materials/HudHealthBar");
+		//healthBarRedGfx = (Texture)Resources.Load("GUI/Materials/EnemyHealthBarRed");
+		//healthCoverGfx = (Texture)Resources.Load("GUI/Materials/HudOtherHealthBoarder");
 		
 		//texture for the health border
-		healthBorderGfx = (Texture)Resources.Load("GUI/Materials/EnemyHealthBackground");
+		healthBorderGfx = (Texture)Resources.Load("GUI/Materials/HudOtherHealthBoarder");
 		
 		//texture for weapon graphics
 		itemsGfx = new Texture[3];
@@ -172,13 +201,13 @@ public class HUDScript : MonoBehaviour
 		mapPosGfx = (Texture)Resources.Load("GUI/Materials/MapPointPosition");
 		
 		//texture for the finish object
-		finishGfx = (Texture)Resources.Load("GUI/Materials/VictoryFinish");
+		finishGfx = (Texture)Resources.Load("GUI/Materials/HudFinish");
 
 		finishPlaceGfx = new Texture[4];
-		finishPlaceGfx[0] = (Texture)Resources.Load("GUI/Materials/Victory1st");
-		finishPlaceGfx[1] = (Texture)Resources.Load("GUI/Materials/Victory2nd");
-		finishPlaceGfx[2] = (Texture)Resources.Load("GUI/Materials/Victory3rd");
-		finishPlaceGfx[3] = (Texture)Resources.Load("GUI/Materials/Victory4th");
+		finishPlaceGfx[0] = (Texture)Resources.Load("GUI/Materials/Hud1st");
+		finishPlaceGfx[1] = (Texture)Resources.Load("GUI/Materials/Hud2nd");
+		finishPlaceGfx[2] = (Texture)Resources.Load("GUI/Materials/Hud3rd");
+		finishPlaceGfx[3] = (Texture)Resources.Load("GUI/Materials/Hud4th");
 		
 		dinoIconsGfx = new Texture[1];
 		dinoIconsGfx[0] = (Texture)Resources.Load("GUI/Materials/HubIconDino");
@@ -194,14 +223,14 @@ public class HUDScript : MonoBehaviour
 
 		//************************************************************************
 
-		positionObjs = CreateGUITxtr("Current Position", hudGfx[0], new Vector3(0, 0, 0));
+		//positionObjs = CreateGUITxtr("Current Position", hudGfx[0], new Vector3(0, 0, 0));
 
 		//create guitextures for the lap info
-		lapObjs = new GameObject[4];
+		/*lapObjs = new GameObject[4];
 		lapObjs[0] = CreateGUIText("Lap", "Lap", new Vector3(0, 0, 0));
 		lapObjs[1] = CreateGUIText("Current Lap", "0", new Vector3(0, 0, 0));
 		lapObjs[2] = CreateGUIText("Slash", "/", new Vector3(0, 0, 0));
-		lapObjs[3] = CreateGUIText("Max Lap", "0", new Vector3(0, 0, 0));
+		lapObjs[3] = CreateGUIText("Max Lap", "0", new Vector3(0, 0, 0));*/
 
 		/*lapObjs[0].guiText.color = Color.cyan;
 		lapObjs[1].guiText.color = Color.cyan;
@@ -210,24 +239,24 @@ public class HUDScript : MonoBehaviour
 
 		//create guitextures for the health bars
 		healthBarObjs = new GameObject[4];
-		healthBarObjs[0] = CreateGUITxtr("Health Bar p1", healthBarGfx, new Vector3(0, 0, 0));
-		healthBarObjs[1] = CreateGUITxtr("Health Bar p2", healthBarGfx, new Vector3(0, 0, 0));
-		healthBarObjs[2] = CreateGUITxtr("Health Bar p3", healthBarGfx, new Vector3(0, 0, 0));
-		healthBarObjs[3] = CreateGUITxtr("Health Bar p4", healthBarGfx, new Vector3(0, 0, 0));
+		healthBarObjs[0] = CreateGUITxtr("Health Bar p1", healthBarGfx, new Vector3(0, 0, -6));
+		healthBarObjs[1] = CreateGUITxtr("Health Bar p2", healthBarGfx, new Vector3(0, 0, -6));
+		healthBarObjs[2] = CreateGUITxtr("Health Bar p3", healthBarGfx, new Vector3(0, 0, -6));
+		healthBarObjs[3] = CreateGUITxtr("Health Bar p4", healthBarGfx, new Vector3(0, 0, -6));
 
 		//create guitextures for the health borders
 		healthBackgroundObjs = new GameObject[4];
-		healthBackgroundObjs[0] = CreateGUITxtr("Health Border p1", healthBorderGfx, new Vector3(0, 0, -1));
-		healthBackgroundObjs[1] = CreateGUITxtr("Health Border p2", healthBorderGfx, new Vector3(0, 0, -1));
-		healthBackgroundObjs[2] = CreateGUITxtr("Health Border p3", healthBorderGfx, new Vector3(0, 0, -1));
-		healthBackgroundObjs[3] = CreateGUITxtr("Health Border p4", healthBorderGfx, new Vector3(0, 0, -1));
+		healthBackgroundObjs[0] = CreateGUITxtr("Health Border p1", healthBorderGfx, new Vector3(0, 0, -5));
+		healthBackgroundObjs[1] = CreateGUITxtr("Health Border p2", healthBorderGfx, new Vector3(0, 0, -5));
+		healthBackgroundObjs[2] = CreateGUITxtr("Health Border p3", healthBorderGfx, new Vector3(0, 0, -5));
+		healthBackgroundObjs[3] = CreateGUITxtr("Health Border p4", healthBorderGfx, new Vector3(0, 0, -5));
 		
 		//create guitextures for the player names
 		playerNamesObjs = new GameObject[4];
-		playerNamesObjs[0] = CreateGUIText("Player 1 Name", "None", new Vector3(0, 0, 0));
-		playerNamesObjs[1] = CreateGUIText("Player 2 Name", "None", new Vector3(0, 0, 0));
-		playerNamesObjs[2] = CreateGUIText("Player 3 Name", "None", new Vector3(0, 0, 0));
-		playerNamesObjs[3] = CreateGUIText("Player 4 Name", "None", new Vector3(0, 0, 0));
+		playerNamesObjs[0] = CreateGUIText("Player 1 Name", "None", new Vector3(0, 0, -4));
+		playerNamesObjs[1] = CreateGUIText("Player 2 Name", "None", new Vector3(0, 0, -4));
+		playerNamesObjs[2] = CreateGUIText("Player 3 Name", "None", new Vector3(0, 0, -4));
+		playerNamesObjs[3] = CreateGUIText("Player 4 Name", "None", new Vector3(0, 0, -4));
 		
 		playerNames = new string[4];
 		SetNames();
@@ -243,12 +272,12 @@ public class HUDScript : MonoBehaviour
 			playerNamesObjs[i].SetActive(false);
 		}
 
-		mapObj = CreateGUITxtr("Map", mapInfo.MapTxtr, new Vector3(0, 0, 0));
+		/*mapObj = CreateGUITxtr("Map", mapInfo.MapTxtr, new Vector3(0, 0, 0));
 		mapPosObjs = new GameObject[4];
 		mapPosObjs[0] = CreateGUITxtr("Position Dot p1", mapPosGfx, new Vector3(0, 0, 0.5f));
 		mapPosObjs[1] = CreateGUITxtr("Position Dot p2", mapPosGfx, new Vector3(0, 0, 0.5f));
 		mapPosObjs[2] = CreateGUITxtr("Position Dot p3", mapPosGfx, new Vector3(0, 0, 0.5f));
-		mapPosObjs[3] = CreateGUITxtr("Position Dot p4", mapPosGfx, new Vector3(0, 0, 0.5f));
+		mapPosObjs[3] = CreateGUITxtr("Position Dot p4", mapPosGfx, new Vector3(0, 0, 0.5f));*/
 		
 		finishObj = CreateGUITxtr("Finish", finishGfx, new Vector3(0, 0, 2));
 		finishObj.guiTexture.pixelInset = ResizeRect(new Rect(150, 0, 100, 100));
@@ -261,15 +290,18 @@ public class HUDScript : MonoBehaviour
 		
 		hasFinished = false;
 		
-		dinoIcon = CreateGUITxtr("Dino Icon", dinoIconsGfx[0], new Vector3(0, 0, 0));
+		//dinoIcon = CreateGUITxtr("Dino Icon", dinoIconsGfx[0], new Vector3(0, 0, 0));
 		
-		healthPercent = CreateButtonText("Health Percent", "100%", new Vector3(0, 0, 0));
+		//healthPercent = CreateButtonText("Health Percent", "100%", new Vector3(0, 0, 0));
 
 		raceDinos = dinoTrackingScript.GetDinoArray();
 
-		healthGrp = (GameObject)Instantiate(Resources.Load("GUI/HealthMaskObj"), Camera.main.transform.position, Quaternion.identity);
-		healthGrp.transform.Rotate(new Vector3(0, 90, 0));
-		
+		lapPos = new Rect[4];
+
+		//healthGrp = (GameObject)Instantiate(Resources.Load("GUI/HealthMaskObj"), Camera.main.transform.position, Quaternion.identity);
+		//healthGrp.transform.Rotate(new Vector3(0, 90, 0));
+		//healthGrp = new GameObject("HealthGroup");		
+
 		pauseMenuObjs = new GameObject[9];
 		pauseMenuObjs[0] = CreateGUITxtr("Pause Menu Background", pauseMenuGfx[0], new Vector3(0, 0, 1));
 		pauseMenuObjs[1] = CreateGUITxtr("ContinueTxtr", pauseMenuGfx[1], new Vector3(0, 0, 2));
@@ -287,7 +319,16 @@ public class HUDScript : MonoBehaviour
 		pauseMenuPos = new Rect[5];
 		pauseMenuTextPos = new Vector2[4];
 
-		items = new GameObject[3];
+		items = new GameObject[4];
+		items[0] = CreateGUITxtr("Item1", itemsGfx[0], new Vector3(0,0,-2));
+		items[1] = CreateGUITxtr("Item2", itemsGfx[0], new Vector3(0,0,-2));
+		items[2] = CreateGUITxtr("Item3", itemsGfx[1], new Vector3(0,0,-2));
+		items[3] = CreateGUITxtr("Item4", itemsGfx[2], new Vector3(0,0,-2));
+
+		items[0].SetActive(false);
+		items[1].SetActive(false);
+		items[2].SetActive(false);
+		items[3].SetActive(false);
 		
 		isFading = new bool[4];
 		isFading[0] = false;
@@ -295,7 +336,7 @@ public class HUDScript : MonoBehaviour
 		isFading[2] = false;
 		isFading[3] = false;
 
-		foreach(Transform child in healthGrp.transform)
+		/*foreach(Transform child in healthGrp.transform)
 		{
 			//Debug.Log("the mask " + healthGrp);
 			if(child.name == "HealthBar")
@@ -316,11 +357,62 @@ public class HUDScript : MonoBehaviour
 			}
 
 
+		}*/
+
+		healthGrpPos = new Rect[6];
+
+		healthGrpBar = CreateGUITxtr("PlayerHealthBar", hudGfx[0], new Vector3(0,0,-3));
+		healthGrpBorder = CreateGUITxtr("PlayerHealthBorder", hudGfx[1], new Vector3(0,0,-2));
+		healthGrpLeftTrigger = CreateGUITxtr("LeftTrigger", hudGfx[2], new Vector3(0,0,-1));
+		healthGrpRightTrigger = CreateGUITxtr("RightTrigger", hudGfx[3], new Vector3(0,0,-1));
+		healthPercent = CreateGUIText("Health Percent", "100%", new Vector3(0, 0, -3));
+		positionObj = CreateGUIText("Current Position", "", new Vector3(0, 0, 0));
+		positionObj.guiText.anchor = TextAnchor.UpperRight;
+		positionPlaceObj = CreateGUIText("Current Position Place", "", new Vector3(0, 0, 0));
+		positionPlaceObj.guiText.anchor = TextAnchor.UpperLeft;
+
+		progressPos = new Rect[5];
+
+		progressObjs = new GameObject[5];
+		progressObjs[0] = CreateGUITxtr("ProgressionBar", progressGfx[0], new Vector3(0,0,0));
+		progressObjs[1] = CreateGUITxtr("ProgressionBar", progressGfx[1], new Vector3(0,0,-1));
+		progressObjs[2] = CreateGUITxtr("ProgressionBar", progressGfx[1], new Vector3(0,0,-1));
+		progressObjs[3] = CreateGUITxtr("ProgressionBar", progressGfx[1], new Vector3(0,0,-1));
+		progressObjs[4] = CreateGUITxtr("ProgressionBar", progressGfx[1], new Vector3(0,0,-1));
+
+		raceDinos = dinoTrackingScript.GetDinoArray();
+
+		while(true)
+		{
+			if(raceDinos[3] != null)
+				break;
+
+			raceDinos = dinoTrackingScript.GetDinoArray();
+			yield return null;
 		}
 
-		healthCover = CreateGUITxtr("Health Cover", healthCoverGfx, new Vector3(0, 0, 3));
+		for(int i = 1; i < progressObjs.Length; i++)
+		{
 
-		healthGrpBarRotation = healthGrpBar.transform.localEulerAngles;
+			if(dinoTrackingScript.playerNum == i - 1)
+			{
+				string dinoName = raceDinos[i].name.Substring(0, raceDinos[i].name.IndexOf("("));
+				
+				progressObjs[i].guiTexture.texture = (Texture)Resources.Load("GUI/Materials/Hud" + dinoName + "Big");
+
+				progressObjs[i].transform.position = new Vector3(0, 0, -2);
+			}
+			else 
+			{
+				string dinoName = raceDinos[i].name.Substring(0, raceDinos[i].name.IndexOf("("));
+
+				progressObjs[i].guiTexture.texture = (Texture)Resources.Load("GUI/Materials/Hud" + dinoName + "small");
+			}
+		}
+
+		//healthCover = CreateGUITxtr("Health Cover", healthCoverGfx, new Vector3(0, 0, 3));
+
+		//healthGrpBarRotation = healthGrpBar.transform.localEulerAngles;
 		
 	}
 	
@@ -330,6 +422,8 @@ public class HUDScript : MonoBehaviour
 		raceDinos = dinoTrackingScript.GetDinoArray();
 		currentLaps = dinoTrackingScript.GetCurrentLaps();
 		racePositions = dinoTrackingScript.GetCurrentPositions();
+		totalDist = dinoTrackingScript.GetDistance();
+		maxDistance = dinoTrackingScript.maxDistance;
 
 		xMulti = Screen.width / 100.0f;
 		yMulti = Screen.height / 100.0f;
@@ -339,7 +433,7 @@ public class HUDScript : MonoBehaviour
 		lapObjs[2].guiTexture.pixelInset = ResizeRect(new Rect(88, 6, 1, 3));
 		lapObjs[3].guiTexture.pixelInset = ResizeRect(new Rect(90, 6, 1, 3));*/
 
-		lapObjs[0].guiText.pixelOffset = ResizeVec2(new Vector2(95, 5));
+		/*lapObjs[0].guiText.pixelOffset = ResizeVec2(new Vector2(95, 5));
 		lapObjs[1].guiText.pixelOffset = ResizeVec2(new Vector2(90, 7));
 		lapObjs[2].guiText.pixelOffset = ResizeVec2(new Vector2(92, 7));
 		lapObjs[3].guiText.pixelOffset = ResizeVec2(new Vector2(93, 7));
@@ -350,11 +444,12 @@ public class HUDScript : MonoBehaviour
 		lapObjs[3].guiText.fontSize = (int)(6.0f * yMulti);
 
 		lapObjs[1].guiText.text = currentLaps[dinoTrackingScript.playerNum].ToString();
-		lapObjs[3].guiText.text = dinoTrackingScript.maxLap.ToString();
+		lapObjs[3].guiText.text = dinoTrackingScript.maxLap.ToString();*/
 		
 		/*lapObjs[1].guiTexture.texture = numGfx[currentLaps[dinoTrackingScript.playerNum]];
 		lapObjs[3].guiTexture.texture = numGfx[dinoTrackingScript.maxLap];*/
 		
+
 		healthDangerObj.guiTexture.pixelInset = ResizeRect(new Rect(0, 0, 100, 100));
 		
 		pauseMenuPos[0] = ResizeRect(new Rect(0, 0, 100, 100));
@@ -406,55 +501,105 @@ public class HUDScript : MonoBehaviour
 			}
 		}
 
-		healthPos  = ResizeRect(new Rect(20, 80, 100, 100));
+		/*healthPos  = ResizeRect(new Rect(20, 80, 100, 100));
 		healthGrp.transform.position = Camera.main.ScreenToWorldPoint(new Vector3(healthPos.x, healthPos.y, 20));
 		healthGrp.transform.localRotation = Camera.main.transform.rotation;
 		healthCover.guiTexture.pixelInset = ResizeRect(new Rect(1, 75, 30, 15));
 
-		dinoIcon.guiTexture.pixelInset = ResizeRect(new Rect(2.5f, 82.5f, 7, 13));
+		dinoIcon.guiTexture.pixelInset = ResizeRect(new Rect(2.5f, 82.5f, 7, 13));*/
+
+		items[0].guiTexture.pixelInset = ResizeRect(new Rect(55.8f, 82.8f, 6.65f, 12.2f));
+		items[1].guiTexture.pixelInset = ResizeRect(new Rect(63, 82.8f, 6.65f, 12.3f));
+		items[2].guiTexture.pixelInset = ResizeRect(new Rect(70.1f, 82.8f, 6.65f, 12.3f));
+		items[3].guiTexture.pixelInset = ResizeRect(new Rect(77.3f, 82.8f, 6.65f, 12.3f));
+
+		lapPos[0] = ResizeRect(new Rect(7, 21, 10, 10));
+		lapPos[1] = ResizeRect(new Rect(7, 43, 10, 10));
+		lapPos[2] = ResizeRect(new Rect(7, 67, 10, 10));
+		lapPos[3] = ResizeRect(new Rect(7, 90, 10, 10));
+
+		progressObjs[0].guiTexture.pixelInset = ResizeRect(new Rect(1, 20, 10, 70));
 		
-		healthPercent.guiText.pixelOffset = ResizeVec2( new Vector2(16, 90));
-		healthPercent.guiText.fontSize = (int)(5.0f * yMulti);
+		/*progressObjs[1].guiTexture.pixelInset = CalculateProgPos(ResizeRect(new Rect(6, 0, 3, 2)), 0);
+		progressObjs[2].guiTexture.pixelInset = CalculateProgPos(ResizeRect(new Rect(6, 0, 3, 2)), 1);
+		progressObjs[3].guiTexture.pixelInset = CalculateProgPos(ResizeRect(new Rect(6, 0, 3, 2)), 2);
+		progressObjs[3].guiTexture.pixelInset = CalculateProgPos(ResizeRect(new Rect(6, 0, 3, 2)), 3);*/
+
+		healthPercent.guiText.pixelOffset = ResizeVec2( new Vector2(80, 75.5f));
+		healthPercent.guiText.fontSize = (int)((xMulti + yMulti) * 1);
+
+		//healthGrpBar.guiTexture.pixelInset = ResizeRect(new Rect(67,75, 19.5f, 5));
+		healthGrpBorder.guiTexture.pixelInset = ResizeRect(new Rect(55,60, 45, 40));
+		healthGrpLeftTrigger.guiTexture.pixelInset = ResizeRect(new Rect(57.5f,86.8f, 3, 5));
+		healthGrpRightTrigger.guiTexture.pixelInset = ResizeRect(new Rect(64.7f,86.8f, 3, 5));
 		
 		if(!hasFinished)
 		{
-			finishObj.guiTexture.pixelInset = ResizeRect(new Rect(150, 0, 100, 100));
-			finishPlaceObj.guiTexture.pixelInset = ResizeRect(new Rect(-80, 20, 30, 70));
+			finishObj.guiTexture.pixelInset = ResizeRect(new Rect(150, 10, 90, 90));
+			finishPlaceObj.guiTexture.pixelInset = ResizeRect(new Rect(-80, 30, 50, 60));
 		}
 				
 		if(raceDinos[dinoTrackingScript.playerNum] != null)
-			SetPlayerHealth(new Vector3( 1, 1.1f, 1), dinoTrackingScript.playerNum);
+			SetPlayerHealth(ResizeRect(new Rect(67,76, 19.5f, 4f)), dinoTrackingScript.playerNum);
 			
 		if(raceDinos[0] != null)
 		{
 			if(dinoTrackingScript.playerNum != 0)
+			{
+				progressObjs[1].guiTexture.pixelInset = CalculateProgPos(ResizeRect(new Rect(6, 0, 3, 1)), 0);
 				AttachHealth(0);
-			mapPosObjs[0].guiTexture.pixelInset = SetMapPosition(mapInfo.StartPointPos, raceDinos[0]);
+			}
+			else
+			{
+				progressObjs[1].guiTexture.pixelInset = CalculateProgPos(ResizeRect(new Rect(6, 0, 4, 3)), 0);
+			}
+			//mapPosObjs[0].guiTexture.pixelInset = SetMapPosition(mapInfo.StartPointPos, raceDinos[0]);
 		
 		}
 		if(raceDinos[1] != null)
 		{
 			if(dinoTrackingScript.playerNum != 1)
+			{
+				progressObjs[2].guiTexture.pixelInset = CalculateProgPos(ResizeRect(new Rect(6, 0, 3, 1)), 1);
 				AttachHealth(1);
-			mapPosObjs[1].guiTexture.pixelInset = SetMapPosition(mapInfo.StartPointPos, raceDinos[1]);
+			}
+			else
+			{
+				progressObjs[2].guiTexture.pixelInset = CalculateProgPos(ResizeRect(new Rect(6, 0, 4, 3)), 1);
+			}
+			//mapPosObjs[1].guiTexture.pixelInset = SetMapPosition(mapInfo.StartPointPos, raceDinos[1]);
 			
 		}
 		if(raceDinos[2] != null)
 		{
 			if(dinoTrackingScript.playerNum != 2)
+			{
+				progressObjs[3].guiTexture.pixelInset = CalculateProgPos(ResizeRect(new Rect(6, 0, 3, 1)), 2);
 				AttachHealth(2);
-			mapPosObjs[2].guiTexture.pixelInset = SetMapPosition(mapInfo.StartPointPos, raceDinos[2]);
+			}
+			else
+			{
+				progressObjs[3].guiTexture.pixelInset = CalculateProgPos(ResizeRect(new Rect(6, 0, 4, 3)), 2);
+			}
+			//mapPosObjs[2].guiTexture.pixelInset = SetMapPosition(mapInfo.StartPointPos, raceDinos[2]);
 			
 		}
 		if(raceDinos[3] != null)
 		{
 			if(dinoTrackingScript.playerNum != 3)
+			{
+				progressObjs[4].guiTexture.pixelInset = CalculateProgPos(ResizeRect(new Rect(6, 0, 3, 1)), 3);
 				AttachHealth(3);
-			mapPosObjs[3].guiTexture.pixelInset = SetMapPosition(mapInfo.StartPointPos, raceDinos[3]);
+			}
+			else
+			{
+				progressObjs[4].guiTexture.pixelInset = CalculateProgPos(ResizeRect(new Rect(6, 0, 4, 3)), 3);
+			}
+			//mapPosObjs[3].guiTexture.pixelInset = SetMapPosition(mapInfo.StartPointPos, raceDinos[3]);
 			
 		}
 
-		mapObj.guiTexture.pixelInset = ResizeRect(mapInfo.MapPos);
+		//mapObj.guiTexture.pixelInset = ResizeRect(mapInfo.MapPos);
 		
 		/*Debug.Log(positionObjs.guiTexture.texture);
 		Debug.Log(dinoTrackingScript.playerNum);
@@ -463,8 +608,28 @@ public class HUDScript : MonoBehaviour
 		//if((racePositions[dinoTrackingScript.playerNum] - 1) != null)
 		if(hudGfx[racePositions[dinoTrackingScript.playerNum] - 1] != null)
 		{
-			positionObjs.guiTexture.pixelInset = ResizeRect(new Rect(13, 77, 5, 5));
-			positionObjs.guiTexture.texture = hudGfx[racePositions[dinoTrackingScript.playerNum] - 1];
+			positionObj.guiText.pixelOffset = ResizeVec2(new Vector2(92, 89));
+			positionObj.guiText.fontSize = (int)((xMulti + yMulti) * 4);
+			positionObj.guiText.text = racePositions[dinoTrackingScript.playerNum].ToString();
+
+			positionPlaceObj.guiText.pixelOffset = ResizeVec2(new Vector2(92, 88));
+			positionPlaceObj.guiText.fontSize = (int)((xMulti + yMulti) * 1.5f);
+
+			switch(racePositions[dinoTrackingScript.playerNum])
+			{
+			case 1:
+				positionPlaceObj.guiText.text = "st";
+				break;
+			case 2:
+				positionPlaceObj.guiText.text = "nd";
+				break;
+			case 3:
+				positionPlaceObj.guiText.text = "rd";
+				break;
+			case 4:
+				positionPlaceObj.guiText.text = "th";
+				break;
+			}
 		}
 
 
@@ -526,7 +691,7 @@ public class HUDScript : MonoBehaviour
 		_obj.guiText.text = _text;
 		_obj.transform.parent = grpObj.transform;
 		_obj.layer = 5;
-		_obj.guiText.color = Color.cyan;
+		_obj.guiText.color = Color.black;
 		_obj.guiText.font = gameFont;
 		
 		return _obj;
@@ -557,33 +722,36 @@ public class HUDScript : MonoBehaviour
 		return new Rect(_pos.x, _pos.y, percentResults, _pos.height);
 	}
 	
-	private void SetPlayerHealth(Vector3 _pos, int _index)
+	private void SetPlayerHealth(Rect _pos, int _index)
 	{
 		var health = raceDinos [_index].GetComponent<Health> ();
-		float percentResults = (_pos.x * ((health == null) ? 1.0f : health.Percent)) ;
+		float percentResults = (_pos.width * ((health == null) ? 1.0f : health.Percent)) ;
 
-		float changePoint = _pos.x * .46f;
-		healthGrpBar.renderer.material.mainTexture = changePoint < percentResults ? healthBarGfx : healthBarRedGfx;
+		float changePoint = _pos.width * .46f;
+		//healthGrpBar.renderer.material.mainTexture = changePoint < percentResults ? healthBarGfx : healthBarRedGfx;
 
 		/*Debug.Log("width " + _pos.x);
 		Debug.Log("health percent " + health.Percent);
 		Debug.Log("percent results " + percentResults);*/
 		
-		float percent = percentResults / _pos.x;
+		float percent = percentResults / _pos.width;
 		int final = (int)(percent * 100.0f);
 		healthPercent.guiText.text = final.ToString();
 		healthPercent.guiText.text +=  "%";
 
-		if(changePoint < percentResults)
+		//if(changePoint < percentResults)
 			//return new Rect(_pos.x, _pos.y, percentResults, _pos.height);
-			healthGrpBar.transform.localScale = new Vector3( _pos.x * percentResults, _pos.y, _pos.z);
-		if(changePoint > percentResults)
+			//healthGrpBar.transform.localScale = new Vector3( _pos.x * percentResults, _pos.y, _pos.z);
+		/*if(changePoint > percentResults)
 		{
 			healthGrpBar.transform.localScale = new Vector3(changePoint, _pos.y, _pos.z);
 			healthGrpBar.transform.localEulerAngles = Vector3.Lerp(new Vector3(0, 180,70), healthGrpBarRotation, percentResults / changePoint);
 		}
 		else 
 			healthGrpBar.transform.localEulerAngles = healthGrpBarRotation;
+*/
+		_pos.width = percentResults;
+		healthGrpBar.guiTexture.pixelInset = _pos;
 
 		if((changePoint / 2) > percentResults)
 			//healthDangerObj.SetActive(true);
@@ -633,7 +801,7 @@ public class HUDScript : MonoBehaviour
 		}
 	}
 
-	private Rect SetMapPosition(Rect _pos, GameObject _dino)
+	/*private Rect SetMapPosition(Rect _pos, GameObject _dino)
 	{
 		//get the distance between the point and the dinos
 		Rect distance = new Rect((mapRelativePoint.transform.position.x - _dino.transform.position.x) / mapInfo.DistanceScale, (mapRelativePoint.transform.position.z - _dino.transform.position.z) / mapInfo.DistanceScale, _pos.width, _pos.height);
@@ -642,21 +810,26 @@ public class HUDScript : MonoBehaviour
 		//downsize the distance
 		//return a rect of the new distance
 		return ResizeRect(new Rect(_pos.x + distance.y, _pos.y - distance.x, _pos.width, _pos.height));
-	}
+	}*/
 
 	private void AttachHealth(int _index)
 	{
 		Vector3 normDir = Camera.main.transform.TransformDirection(Vector3.forward).normalized;
+		//float dist = Vector3.Distance(Camera.main.transform.position, raceDinos[_index].transform.position);
 		//Vector3 screenPoint = Camera.main.WorldToScreenPoint(new Vector3(raceDinos[_index].transform.position.x, raceDinos[_index].transform.position.y + 20, raceDinos[_index].transform.position.z));
-		Vector3 healthPos = raceDinos[_index].transform.localPosition + new Vector3(0 * normDir.z, 0, 0 * normDir.x);
-		Vector3 namePos = raceDinos[_index].transform.localPosition + new Vector3(9 * normDir.z, 0, -9 * normDir.x);
+		Vector3 borderPos = raceDinos[_index].transform.position + new Vector3(-15 * normDir.z, 0, 10 * normDir.x);
+		Vector3 healthPos = raceDinos[_index].transform.position + new Vector3(-13 * normDir.z, 0, 8.5f * normDir.x);
+		Vector3 namePos = raceDinos[_index].transform.position + new Vector3(-2 * normDir.z, 0, 1 * normDir.x);
 
-		Vector3 screenPoint = Camera.main.WorldToScreenPoint(new Vector3(healthPos.x, healthPos.y + 10, healthPos.z));
-		Vector3 screenPoint2 = Camera.main.WorldToScreenPoint(new Vector3(namePos.x, namePos.y + 14.4f, namePos.z));
+		//Debug.Log(dist);
+
+		Vector3 screenPointBorder = Camera.main.WorldToScreenPoint(new Vector3(borderPos.x, borderPos.y + 5, borderPos.z));
+		Vector3 screenPointHealth = Camera.main.WorldToScreenPoint(new Vector3(healthPos.x, healthPos.y + 10.5f, healthPos.z));
+		Vector3 screenPointName = Camera.main.WorldToScreenPoint(new Vector3(namePos.x, namePos.y + 15f, namePos.z));
 		float yMulti = Screen.height / 100.0f;
 		
 		//if( inSight[_index] == true && screenPoint.z > 0 && playerNamesObjs[_index].guiText.fontSize < 2000)
-		if(screenPoint.z > 40 && screenPoint.z < 400 && playerNamesObjs[_index].guiText.fontSize < 800)
+		if(screenPointBorder.z > 40 && screenPointBorder.z < 400 && playerNamesObjs[_index].guiText.fontSize < 800)
 		{	if(healthBarObjs[_index].activeSelf == false)
 			{
 				StartCoroutine(FadeInHealth(_index));
@@ -674,10 +847,10 @@ public class HUDScript : MonoBehaviour
 			}
 		}
 		
-		healthBackgroundObjs[_index].guiTexture.pixelInset = new Rect(screenPoint.x, screenPoint.y, (1500 * yMulti) / screenPoint.z, (400 * yMulti) / screenPoint.z);
-		healthBarObjs[_index].guiTexture.pixelInset = GetHealth(new Rect(screenPoint.x, screenPoint.y, (1500 * yMulti) / screenPoint.z, (400 * yMulti) / screenPoint.z), _index);
-		playerNamesObjs[_index].guiText.pixelOffset = new Vector2(screenPoint2.x, screenPoint2.y);
-		playerNamesObjs[_index].guiText.fontSize = (int)((150 * yMulti) / screenPoint2.z);
+		healthBackgroundObjs[_index].guiTexture.pixelInset = new Rect(screenPointBorder.x, screenPointBorder.y, (2000 * yMulti) / screenPointBorder.z, (1000 * yMulti) / screenPointBorder.z);
+		healthBarObjs[_index].guiTexture.pixelInset = GetHealth(new Rect(screenPointHealth.x, screenPointHealth.y, (1600 * yMulti) / screenPointHealth.z, (200 * yMulti) / screenPointHealth.z), _index);
+		playerNamesObjs[_index].guiText.pixelOffset = new Vector2(screenPointName.x, screenPointName.y);
+		playerNamesObjs[_index].guiText.fontSize = (int)((150 * yMulti) / screenPointName.z);
 		
 	}
 	
@@ -736,7 +909,8 @@ public class HUDScript : MonoBehaviour
 
 
 		}
-		
+
+		TurnOffHud();
 		menuScript.SetResults(playerNames);
 		menuScript.ShowResults();
 		
@@ -766,15 +940,16 @@ public class HUDScript : MonoBehaviour
 		Rect tempPos2 = _obj2.guiTexture.pixelInset;
 		float transNum2 = tempPos2.x;
 		
-		float thirdOfScreen = Screen.width / 5;
-		float middleOfScreen2 =  (Screen.width - thirdOfScreen) - (tempPos2.width / 2);
+		float partOfScreen = Screen.width / 10;
+		//float middleOfScreen2 =  (Screen.width - thirdOfScreen) - (tempPos2.width / 2);
+		float middleOfScreen =  (Screen.width / 2) + (Screen.width / 9) - (tempPos2.width / 2);
 		
 		while(true)
 		{
 			//Debug.Log(transNum);
 			
 			//while the the transparency variable is less than 1
-			if(transNum > 0)
+			if(transNum > partOfScreen)
 			{
 
 				//set the guiTexture's color to the temp Color
@@ -785,18 +960,18 @@ public class HUDScript : MonoBehaviour
 				
 			}
 
-			if(transNum2 < middleOfScreen2)
+			if(transNum2 < middleOfScreen)
 			{
 				_obj2.guiTexture.pixelInset = new Rect(transNum2, tempPos2.y, tempPos2.width, tempPos2.height);
 
-				transNum2 += moveSpeed * Time.deltaTime;
+				transNum2 += (moveSpeed - 500) * Time.deltaTime;
 				
 			}
 
-			if(transNum <= 0 && transNum2 >= middleOfScreen2)
+			if(transNum <= 0 && transNum2 >= middleOfScreen)
 			{
 				_obj.guiTexture.pixelInset = new Rect(0, tempPos.y, tempPos.width, tempPos.height);
-				_obj2.guiTexture.pixelInset = new Rect(middleOfScreen2, tempPos2.y, tempPos2.width, tempPos2.height);
+				_obj2.guiTexture.pixelInset = new Rect(middleOfScreen, tempPos2.y, tempPos2.width, tempPos2.height);
 				break;
 				
 			}
@@ -806,7 +981,7 @@ public class HUDScript : MonoBehaviour
 
 	}
 	
-	public void UpdateItems(Inventory inv)
+	/*public void UpdateItems(Inventory inv)
 	{
 		var weaponCount = inv.Count(PickUpTypes.Weapon);
 		var healthCount = inv.Count(PickUpTypes.Health);
@@ -835,6 +1010,41 @@ public class HUDScript : MonoBehaviour
 		while (i < 3)
 		{
 			items[i].SetActive(false);
+			i++;
+		}
+	}*/
+
+	public void UpdateItems(Inventory inv)
+	{
+		var weaponCount = inv.Count(PickUpTypes.Weapon);
+		var healthCount = inv.Count(PickUpTypes.Health);
+		var turboCount = inv.Count(PickUpTypes.Turbo);
+
+		foreach(GameObject _item in items)
+			_item.SetActive(false);
+
+		
+		int i = 0;
+
+		while (i < weaponCount)
+		{
+			items[i].SetActive(true);
+			items[i].guiTexture.texture = itemsGfx[0];
+			//Item1Mat
+			i++;
+		}
+
+		i = 0;
+		while (i < healthCount)
+		{
+			items[i + 2].SetActive(true);
+			items[i + 2].guiTexture.texture = itemsGfx[1];
+			i++;
+		}
+		while (i < healthCount + turboCount)
+		{
+			items[i + 2].SetActive(true);
+			items[i + 2].guiTexture.texture = itemsGfx[2];
 			i++;
 		}
 	}
@@ -1025,10 +1235,26 @@ public class HUDScript : MonoBehaviour
 		playerNamesObjs[_index].guiText.text = playerNames[_index];
 	}
 	
-	
+	private Rect CalculateProgPos(Rect _pos, int _index)
+	{
+		//convert the current distance to a percentage
+		float percent = (maxDistance - totalDist[_index]) / maxDistance;
+
+		//Debug.Log(percent);
+
+		if(currentLaps[_index] + 1 < lapPos.Length)
+			_pos.y = Mathf.Lerp(lapPos[currentLaps[_index]].y, lapPos[currentLaps[_index] + 1].y, percent);
+
+		return _pos;
+	}
+
+	public void TurnOffHud()
+	{
+		grpObj.SetActive(false);
+	}
 }
 
-public struct MapGUIInfo
+/*ublic struct MapGUIInfo
 {
 	public float DistanceScale{get; set;}
 	public Rect StartPointPos{get; set;}
@@ -1042,4 +1268,4 @@ public struct MapGUIInfo
 		MapPos = _mapPos;
 		MapTxtr = _txtr;
 	}
-}
+}*/

@@ -32,6 +32,8 @@ public class DinoTracking : MonoBehaviour
 	private float[] totalDist;
 	
 	private float[] finishDist;
+
+	public float maxDistance{get; private set;}
 	
 	private int[] lapCount;
 	
@@ -102,8 +104,10 @@ public class DinoTracking : MonoBehaviour
 			nextNodes[i] = currentNodes[i].NextNodes[0].GetComponent<NodeBehavior>();
 			
 			finishDist[i] = AddUpDistance(currentNodes[i].GetComponent<NodeBehavior>(), nextNodes[i].GetComponent<NodeBehavior>(), 0);
+
 		}
 		
+
 		//finishDist[0] = AddUpDistance(currentNodes[0].GetComponent<NodeBehavior>(), nextNodes[0].GetComponent<NodeBehavior>(), 0);
 		
 		
@@ -112,6 +116,7 @@ public class DinoTracking : MonoBehaviour
 			currentPositions[i] = i + 1;
 			//Debug.Log("The start pos " + currentPositions[i]);
 		}
+		
 
 	}
 	
@@ -202,6 +207,8 @@ public class DinoTracking : MonoBehaviour
 			}
 		}
 		
+		maxDistance = Vector3.Distance(nextNodes[3].transform.position, dinos[3].transform.position) + finishDist[3];
+		
 		yield return null;
 	}
 
@@ -212,14 +219,14 @@ public class DinoTracking : MonoBehaviour
 		//Debug.Log("dino2 " + totalDist[1]);
 
 		//Debug.Log(playerNum);
-		/*if(Input.GetKeyDown(KeyCode.E))
+		if(Input.GetKeyDown(KeyCode.E))
 		{
 				
 			hudScript.ShowFinish();
 
 			hudScript.EndRace();
 			//netView.RPC("EndRace", RPCMode.All);
-		}*/
+		}
 
 		//add each dinos current distance from the next nodes
 		for(int i = 0; i < finishDist.Length; i++)
@@ -487,6 +494,11 @@ public class DinoTracking : MonoBehaviour
     {
         return lapCount;
     }
+
+	public float[] GetDistance()
+	{
+		return totalDist;
+	}
 
 	private void DinoToAdd(GameObject _dino)
 	{

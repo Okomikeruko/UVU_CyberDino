@@ -6,6 +6,7 @@ public class MenuControl : MenuLogic
 	//a guiskin to change the look of the buttons
 	public GUISkin buttonSkin;
 	public GUIStyle noGfxSkin;
+	public GUIStyle largeSkin;
 	
 	//the names of the dinos
 	[HideInInspector]
@@ -38,11 +39,14 @@ public class MenuControl : MenuLogic
 	
 	//the textures of each menu
 	private Texture[] mainMenuBtnTxtr;
-	//private Texture[] mPlayerMenuBtnTxtr;
+	private Texture[] mPlayerMenuBtnTxtr;
 	private Texture[] lobbyMenuBtnTxtr;
 	private Texture[] connectingMenuTxtr;
-	private Texture[] resultsMenuTxtr;
-	private Texture buttonTxtr;
+	private Texture resultsMenuTxtr;
+	private Texture buttonBigTxtr;
+	private Texture buttonBigSelectedTxtr;
+	private Texture buttonSmallTxtr;
+	private Texture buttonSmallSelectTxtr;
 	private Texture darkButtonTxtr;
 	
 	//hold the textures of the back button texture
@@ -68,6 +72,8 @@ public class MenuControl : MenuLogic
 	private Texture lvlNameGFX;
 
 	private Texture fadeTxtr;
+	
+	private Texture loadingTxtr;
 	
 	//the main menu background
 	private GameObject mainMenuBkgd;
@@ -109,36 +115,41 @@ public class MenuControl : MenuLogic
 		dinos = new string[]{"Diloph", "Hesp", "Spino", "TRex", "Troodon"};
 		levels = new string[]{"Dumbell Track", "Night Time Track"};
 
-		buttonTxtr = (Texture)Resources.Load("GUI/Materials/empty button");;
+		buttonBigTxtr = (Texture)Resources.Load("GUI/Materials/EmptyButtonBig");
+		buttonBigSelectedTxtr = (Texture)Resources.Load("GUI/Materials/EmptyButtonSelectedBig");
+		buttonSmallTxtr = (Texture)Resources.Load("GUI/Materials/EmptyButtonSmall");
+		buttonSmallSelectTxtr = (Texture)Resources.Load("GUI/Materials/EmptyButtonSelectedSmall");
 		darkButtonTxtr = (Texture)Resources.Load("GUI/Materials/empty button dark");
 		
 		//set the textures for the main menu buttons
 		mainMenuBtnTxtr = new Texture[3];
-/*		mainMenuBtnTxtr[0] = (Texture)Resources.Load("GUI/Materials/SinglePlayerButton");
-		mainMenuBtnTxtr[1] = (Texture)Resources.Load("GUI/Materials/MultiPlayerButton");*/
-		mainMenuBtnTxtr[2] = (Texture)Resources.Load("GUI/Materials/CyberDinoLogo");
+		mainMenuBtnTxtr[0] = (Texture)Resources.Load("GUI/Materials/MainMenuBackground");
+		//mainMenuBtnTxtr[1] = (Texture)Resources.Load("GUI/Materials/MultiPlayerButton");
+		//mainMenuBtnTxtr[2] = (Texture)Resources.Load("GUI/Materials/CyberDinoLogo");
 		
 		//set the textures for the multiplayer menu buttons
-/*		mPlayerMenuBtnTxtr = new Texture[2];
-		mPlayerMenuBtnTxtr[0] = (Texture)Resources.Load("GUI/Materials/HostButton");
-		mPlayerMenuBtnTxtr[1] = (Texture)Resources.Load("GUI/Materials/JoinButton");*/
+		mPlayerMenuBtnTxtr = new Texture[3];
+		mPlayerMenuBtnTxtr[0] = (Texture)Resources.Load("GUI/Materials/MultiplayerBackground");
+		mPlayerMenuBtnTxtr[1] = (Texture)Resources.Load("GUI/Materials/MultiplayerIndicator");
+		mPlayerMenuBtnTxtr[2] = (Texture)Resources.Load("GUI/Materials/MultiplayerIndicatorSelected");
 		
 		//set the textures for the lobby menu button textures
 		lobbyMenuBtnTxtr = new Texture[6];
 		lobbyMenuBtnTxtr[0] = (Texture)Resources.Load("GUI/Materials/LeftArrow");
 		lobbyMenuBtnTxtr[1] = (Texture)Resources.Load("GUI/Materials/RightArrow");
-		//lobbyMenuBtnTxtr[2] = (Texture)Resources.Load("GUI/Materials/empty button");
+		lobbyMenuBtnTxtr[2] = (Texture)Resources.Load("GUI/Materials/LobbyBackground");
 		//lobbyMenuBtnTxtr[3] = (Texture)Resources.Load("GUI/Materials/empty button dark");
 		
 		//set the textures for the connecting menu
-		connectingMenuTxtr = new Texture[3];
+		connectingMenuTxtr = new Texture[4];
 		connectingMenuTxtr[0] = (Texture)Resources.Load("GUI/Materials/ForwardSlash");
 		connectingMenuTxtr[1] = (Texture)Resources.Load("GUI/Materials/BackwardSlash");
 		connectingMenuTxtr[2] = (Texture)Resources.Load("GUI/Materials/Icon");
+		connectingMenuTxtr[3] = (Texture)Resources.Load("GUI/Materials/ConnectingBackground");
 		
 		//set the textures for the results menu
-		resultsMenuTxtr = new Texture[4];
-		resultsMenuTxtr[0] = (Texture)Resources.Load("GUI/Materials/ResultsBackground");
+		//resultsMenuTxtr = new Texture[4];
+		resultsMenuTxtr = (Texture)Resources.Load("GUI/Materials/ResultsOfRace");
 /*		resultsMenuTxtr[1] = (Texture)Resources.Load("GUI/Materials/QuitButton");
 		resultsMenuTxtr[2] = (Texture)Resources.Load("GUI/Materials/ResultsSaveScore");
 		resultsMenuTxtr[3] = (Texture)Resources.Load("GUI/Materials/PlayAgainButton");*/
@@ -157,6 +168,8 @@ public class MenuControl : MenuLogic
 
 		fadeTxtr = (Texture)Resources.Load("GUI/Materials/BlackScreen");
 		
+		loadingTxtr = (Texture)Resources.Load("GUI/Materials/how to play");
+		
 		//set the texture for the small white boxes
 		smallBoxGFX = (Texture)Resources.Load("GUI/Materials/OtherPlayerSelection");
 		
@@ -167,7 +180,7 @@ public class MenuControl : MenuLogic
 		connectTxtr = (Texture)Resources.Load("GUI/Materials/LookingGraphic");
 		
 		//set the texture for the selector
-		selectorGfx = (Texture)Resources.Load("GUI/Materials/Selector");
+		selectorGfx = (Texture)Resources.Load("GUI/Materials/EmptyButtonSelectedSmall");
 		
 		charKeys = new string[40];
 		charKeys[0] = "1"; charKeys[1] = "2"; charKeys[2] = "3"; charKeys[3] = "4"; charKeys[4] = "5"; 
@@ -177,7 +190,7 @@ public class MenuControl : MenuLogic
 		charKeys[15] = "y"; charKeys[16] = "u"; charKeys[17] = "i"; charKeys[18] = "o"; charKeys[19] = "p";
 
 		charKeys[20] = "a"; charKeys[21] = "s"; charKeys[22] = "d"; charKeys[23] = "f"; charKeys[24] = "g"; 
-		charKeys[25] = "h"; charKeys[26] = "j"; charKeys[27] = "k"; charKeys[28] = "l"; charKeys[29] = "<--";
+		charKeys[25] = "h"; charKeys[26] = "j"; charKeys[27] = "k"; charKeys[28] = "l"; charKeys[29] = "Bksp";
 
 		charKeys[30] = "z"; charKeys[31] = "x"; charKeys[32] = "c"; charKeys[33] = "v"; charKeys[34] = "b"; 
 		charKeys[35] = "n"; charKeys[36] = "m"; charKeys[37] = "Shift"; charKeys[38] = "Caps"; charKeys[39] = "Space";
@@ -187,7 +200,7 @@ public class MenuControl : MenuLogic
 		
 		multiPMenuRect = new Rect[3];
 		
-		multiPMenuBtnRect = new Rect[5];
+		multiPMenuBtnRect = new Rect[6];
 		
 		lobbyMenuRect = new Rect[10];
 		
@@ -219,6 +232,7 @@ public class MenuControl : MenuLogic
 	
 	IEnumerator OnLevelWasLoaded(int _level)
 	{
+	//Debug.Log("it was loaded!!!!!!!!!!!!!!!!!!!!!");
 		if(fadeTransition == null)
 		{
 			fadeTransition = CreateGUITxtr(fadeTransition, "Fade Transition", fadeTxtr, ResizeRect(new Rect(0, 0, 100, 100)));
@@ -231,7 +245,7 @@ public class MenuControl : MenuLogic
 		
 		if(loadingObj == null)
 		{
-			loadingObj = CreateGUITxtr(fadeTransition, "LoadingObj", (Texture)Resources.Load("GUI/Materials/CityTrackGFX"), ResizeRect(new Rect(0, 0, 100, 100)));
+			loadingObj = CreateGUITxtr(fadeTransition, "LoadingObj", loadingTxtr, ResizeRect(new Rect(0, 0, 100, 100)));
 			loadingObj.transform.position = new Vector3(0, 0, 29);
 			loadingObj.layer = 5;
 			
@@ -277,7 +291,7 @@ public class MenuControl : MenuLogic
 			
 			fadeAction = TurnOffLoading;
 			afterFadeAction = start.FadeFinishCount;
-			netView.RPC("TransitionFade", RPCMode.AllBuffered);
+			StartCoroutine(TransitionFade());
 
 			dinoTracking = GameObject.Find("Checkpoints");
 			
@@ -296,16 +310,19 @@ public class MenuControl : MenuLogic
 		xMulti = Screen.width / 100.0f;
 		yMulti = Screen.height / 100.0f;
 		
-
+		Debug.Log(menuOrigin[3]);
+		Debug.Log((int)menuSelect);
 
 		//if not currently in the race or the menu is moving
 		if(menuSelect != Menu.goToLevel && !menuMoving)
 		{ 
 			//Debug.Log(Input.GetButtonDown("Jump"));
 			//Debug.Log(menuMoving);
-			buttonSkin.button.fontSize = (int)((xMulti + yMulti) * 2);
+			buttonSkin.button.fontSize = (int)((xMulti + yMulti) * 1);
 			buttonSkin.textField.fontSize = (int)((xMulti + yMulti) * 2);
-			noGfxSkin.fontSize = (int)((xMulti + yMulti) * 2);
+			buttonSkin.label.fontSize = (int)((xMulti + yMulti) * 1);
+			//largeSkin.fontSize = (int)((xMulti + yMulti) * 3f);
+			//noGfxSkin.fontSize = (int)((xMulti + yMulti) * 1);
 			
 			//if the joystick goes beyond the dead zone then start the pushbutton function
 			if(isHoldingBtn == false && 
@@ -339,12 +356,12 @@ public class MenuControl : MenuLogic
 	{
 		//set this skin as the active one
 		GUI.skin = buttonSkin;
-
+	
 
 		//draw the selector texture if not in the level or the menu is moving
 		if(menuSelect != Menu.goToLevel && !menuMoving && !showKeys)
 		{ 
-			GUI.DrawTexture(new Rect(menuOrigin[(int)menuSelect].x + currentRect[buttonIndex].x - (2 * xMulti) , menuOrigin[(int)menuSelect].y + currentRect[buttonIndex].y - (5 * yMulti), currentRect[buttonIndex].width + (5 * xMulti), currentRect[buttonIndex].height + (10 * yMulti)), selectorGfx); 
+			GUI.DrawTexture(new Rect(menuOrigin[(int)menuSelect].x + currentRect[buttonIndex].x, menuOrigin[(int)menuSelect].y + currentRect[buttonIndex].y, currentRect[buttonIndex].width, currentRect[buttonIndex].height), selectorGfx); 
 			//make sure that menuOrigin is supposed to be where it should be
 			if(menuOrigin[(int)menuSelect].x != 0)
 				menuOrigin[(int)menuSelect].x = 0;
@@ -354,19 +371,40 @@ public class MenuControl : MenuLogic
 			GUI.DrawTexture(new Rect(keysPos.x + currentRect[keyBoardIndex].x - (2 * xMulti) , keysPos.y + currentRect[keyBoardIndex].y - (5 * yMulti), currentRect[keyBoardIndex].width + (5 * xMulti), currentRect[keyBoardIndex].height + (10 * yMulti)), selectorGfx); 
 		}
 
+		if(menuSelect != Menu.goToLevel && menuSelect != Menu.resultsMenu)
+		{
+			if(menuBkgd != null)
+			{
+				//set the position and scale of the menu background
+				Vector3 pointInWorld = Camera.main.ScreenToWorldPoint(new Vector3(Screen.width, Screen.height, Camera.main.transform.position.z + 100));
+				menuBkgd.transform.localScale = new Vector3(pointInWorld.x / 5, 1, pointInWorld.y / 5);
+				menuBkgd.transform.position = Camera.main.ScreenToWorldPoint(new Vector3(menuOrigin[(int)menuSelect].x + menuBkgdPos.x, menuOrigin[(int)menuSelect].y + menuBkgdPos.y, 500));
+				menuBkgdPos  = ResizeRect(new Rect(50, 50, 100, 100));
+			}
+			else
+				InstantiateMenuObj();
+		}
+
 		//the main menu gui
 		if(menuSelect == Menu.mainMenu)
 		{
 			//set the rects of the textures and buttons
-			mainMenuBtnRect[0] = ResizeRect(new Rect(55, 20, 40, 13));
-			mainMenuBtnRect[1] = ResizeRect(new Rect(55, 40, 40, 13));
-			mainMenuBtnRect[2] = ResizeRect(new Rect(55, 60, 40, 13));
-			mainMenuGfxRect = ResizeRect(new Rect(10, 20, 30, 20));
+			mainMenuBtnRect[0] = ResizeRect(new Rect(70, 47, 28, 15));
+			mainMenuBtnRect[1] = ResizeRect(new Rect(68, 68, 28, 15));
+			mainMenuBtnRect[2] = ResizeRect(new Rect(65, 90, 15, 5));
+			mainMenuGfxRect = ResizeRect(new Rect(25, 20, 30, 20));
 			
 			//draw the cyberdino logo
-			GUI.DrawTexture(new Rect(menuOrigin[0].x + mainMenuGfxRect.x, menuOrigin[0].y + mainMenuGfxRect.y, mainMenuGfxRect.width, mainMenuGfxRect.height), mainMenuBtnTxtr[2]);
-			
+			//GUI.DrawTexture(new Rect(menuOrigin[0].x + mainMenuGfxRect.x, menuOrigin[0].y + mainMenuGfxRect.y, mainMenuGfxRect.width, mainMenuGfxRect.height), mainMenuBtnTxtr[2]);
+			GUI.Label(new Rect(menuOrigin[0].x + mainMenuGfxRect.x, menuOrigin[0].y + mainMenuGfxRect.y, mainMenuGfxRect.width, mainMenuGfxRect.height), "CyberDino Racing", largeSkin);
+
 			if(mainMenuBkgd != null)
+				menuBkgd.renderer.material.SetTexture(0,mainMenuBtnTxtr[0]);
+
+			noGfxSkin.fontSize = (int)((xMulti + yMulti) * 1.5f);
+			largeSkin.fontSize = (int)((xMulti + yMulti) * 3f);
+
+			/*if(mainMenuBkgd != null)
 			{
 				//set the position and the scale of the main menu background
 				Vector3 pointInWorld = Camera.main.ScreenToWorldPoint(new Vector3(Screen.width, Screen.height, Camera.main.transform.position.z + 100));
@@ -375,11 +413,12 @@ public class MenuControl : MenuLogic
 				mainMenuBkgdPos  = ResizeRect(new Rect(50, 50, 100, 100));
 			}
 			else
-				InstantiateMenuObj();
+				InstantiateMenuObj();*/
 			
 			
 			//single player button
-			if(GUI.Button(new Rect(menuOrigin[0].x + mainMenuBtnRect[0].x, menuOrigin[0].y + mainMenuBtnRect[0].y, mainMenuBtnRect[0].width, mainMenuBtnRect[0].height), "Single Player"))
+			GUI.DrawTexture(new Rect(menuOrigin[0].x + mainMenuBtnRect[0].x, menuOrigin[0].y + mainMenuBtnRect[0].y, mainMenuBtnRect[0].width, mainMenuBtnRect[0].height), buttonBigTxtr);
+			if(GUI.Button(new Rect(menuOrigin[0].x + mainMenuBtnRect[0].x, menuOrigin[0].y + mainMenuBtnRect[0].y, mainMenuBtnRect[0].width, mainMenuBtnRect[0].height), "Single Player", noGfxSkin))
 			{
 				//set the lobby for single player
 				SetLobbyOnePlayer();
@@ -391,7 +430,8 @@ public class MenuControl : MenuLogic
 				StartCoroutine(MoveLeftOff(0, 2, Menu.lobbyMenu, LobbySelection, lobbyMenuBtnRect));
 			}
 			//multiplayer button
-			if(GUI.Button(new Rect(menuOrigin[0].x + mainMenuBtnRect[1].x, menuOrigin[0].y + mainMenuBtnRect[1].y, mainMenuBtnRect[1].width, mainMenuBtnRect[1].height), "Multiplayer"))
+			GUI.DrawTexture(new Rect(menuOrigin[0].x + mainMenuBtnRect[1].x, menuOrigin[0].y + mainMenuBtnRect[1].y, mainMenuBtnRect[1].width, mainMenuBtnRect[1].height), buttonBigTxtr);
+			if(GUI.Button(new Rect(menuOrigin[0].x + mainMenuBtnRect[1].x, menuOrigin[0].y + mainMenuBtnRect[1].y, mainMenuBtnRect[1].width, mainMenuBtnRect[1].height), "Multiplayer", noGfxSkin))
 			{
 				singlePlayer = false;
 				
@@ -412,42 +452,49 @@ public class MenuControl : MenuLogic
 			
 			
 			//set the size and positions of the buttons and the graphics
-			multiPMenuRect[0] = ResizeRect(new Rect(37, 22, 27, 10));
-			multiPMenuRect[1] = ResizeRect(new Rect(37, 52, 27, 10));
+			multiPMenuRect[0] = ResizeRect(new Rect(15, 28, 43, 10));
+			multiPMenuRect[1] = ResizeRect(new Rect(19, 55, 43, 10));
 			
-			multiPMenuBtnRect[0] = ResizeRect(new Rect(10, 20, 55, 12));
-			multiPMenuBtnRect[1] = ResizeRect(new Rect(10, 50, 55, 12));
-			multiPMenuBtnRect[2] = ResizeRect(new Rect(68, 20, 25, 10));
-			multiPMenuBtnRect[3] = ResizeRect(new Rect(68, 50, 25, 10));
-			multiPMenuBtnRect[4] = ResizeRect(new Rect(10, 80, 30, 10));
+			multiPMenuBtnRect[0] = ResizeRect(new Rect(15, 15, 33, 10));
+			multiPMenuBtnRect[1] = ResizeRect(new Rect(16, 42, 33, 10));
+			multiPMenuBtnRect[2] = ResizeRect(new Rect(61, 27.5f, 15, 7));
+			multiPMenuBtnRect[3] = ResizeRect(new Rect(65, 54.5f, 15, 7));
+			multiPMenuBtnRect[4] = ResizeRect(new Rect(3, 90, 15, 5));
+			multiPMenuBtnRect[5] = ResizeRect(new Rect(6, 4.5f, 51.5f, 85.5f));
 			
-			if(menuBkgd != null)
+			/*if(menuBkgd != null)
 			{
 				//set the position and scale of the menu background
 				Vector3 pointInWorld = Camera.main.ScreenToWorldPoint(new Vector3(Screen.width, Screen.height, Camera.main.transform.position.z + 100));
 				menuBkgd.transform.localScale = new Vector3(pointInWorld.x / 5, 1, pointInWorld.y / 5);
-				menuBkgd.transform.position = Camera.main.ScreenToWorldPoint(new Vector3(menuOrigin[1].x + menuBkgdPos.x, menuOrigin[1].y + menuBkgdPos.y, 500));
+				menuBkgd.transform.position = Camera.main.ScreenToWorldPoint(new Vector3(menuOrigin[(int)menuSelect].x + menuBkgdPos.x, menuOrigin[(int)menuSelect].y + menuBkgdPos.y, 500));
 				menuBkgdPos  = ResizeRect(new Rect(50, 50, 100, 100));
 			}
 			else
-				InstantiateMenuObj();
+				InstantiateMenuObj();*/
+			largeSkin.fontSize = (int)((xMulti + yMulti) * 2f);
+
+			if(mainMenuBkgd != null)
+				menuBkgd.renderer.material.SetTexture(0, mPlayerMenuBtnTxtr[0]);
 			
 			//a label for the server name
-			GUI.DrawTexture(new Rect(menuOrigin[1].x + multiPMenuBtnRect[0].x, menuOrigin[1].y + multiPMenuBtnRect[0].y, multiPMenuBtnRect[0].width, multiPMenuBtnRect[0].height), serverNameGFX);
-			
+			GUI.Label(new Rect(menuOrigin[1].x + multiPMenuBtnRect[0].x, menuOrigin[1].y + multiPMenuBtnRect[0].y, multiPMenuBtnRect[0].width, multiPMenuBtnRect[0].height), "Server Name", largeSkin);
+
+			//Debug.Log(serverNameHelper);
 			//a text field to save the server name
-			serverName.nameHolder = GUI.TextField(new Rect(menuOrigin[1].x + multiPMenuRect[0].x, menuOrigin[1].y + multiPMenuRect[0].y, multiPMenuRect[0].width, multiPMenuRect[0].height), serverName.nameHolder);
+			serverNameInput.nameHolder  = GUI.TextField(new Rect(menuOrigin[1].x + multiPMenuRect[0].x, menuOrigin[1].y + multiPMenuRect[0].y, multiPMenuRect[0].width, multiPMenuRect[0].height), serverNameInput.nameHolder );
 			
 			//a label for the player name
-			GUI.DrawTexture(new Rect(menuOrigin[1].x + multiPMenuBtnRect[1].x, menuOrigin[1].y + multiPMenuBtnRect[1].y, multiPMenuBtnRect[1].width, multiPMenuBtnRect[1].height), playerNameGFX);
+			GUI.Label(new Rect(menuOrigin[1].x + multiPMenuBtnRect[1].x, menuOrigin[1].y + multiPMenuBtnRect[1].y, multiPMenuBtnRect[1].width, multiPMenuBtnRect[1].height), "Player Name", largeSkin);
 			
 			//a text field to save the player name
-			playerName.nameHolder = GUI.TextField(new Rect(menuOrigin[1].x + multiPMenuRect[1].x, menuOrigin[1].y + multiPMenuRect[1].y, multiPMenuRect[1].width, multiPMenuRect[1].height), playerName.nameHolder);
+			playerNameInput.nameHolder = GUI.TextField(new Rect(menuOrigin[1].x + multiPMenuRect[1].x, menuOrigin[1].y + multiPMenuRect[1].y, multiPMenuRect[1].width, multiPMenuRect[1].height), playerNameInput.nameHolder  );
 			
 			//host game button
-			if(GUI.Button(new Rect(menuOrigin[1].x + multiPMenuBtnRect[2].x, menuOrigin[1].y + multiPMenuBtnRect[2].y, multiPMenuBtnRect[2].width, multiPMenuBtnRect[2].height), "Host"))
+			GUI.DrawTexture(new Rect(menuOrigin[1].x + multiPMenuBtnRect[2].x, menuOrigin[1].y + multiPMenuBtnRect[2].y, multiPMenuBtnRect[2].width, multiPMenuBtnRect[2].height), buttonSmallTxtr);
+			if(GUI.Button(new Rect(menuOrigin[1].x + multiPMenuBtnRect[2].x, menuOrigin[1].y + multiPMenuBtnRect[2].y, multiPMenuBtnRect[2].width, multiPMenuBtnRect[2].height), "Host", largeSkin))
 			{
-				if(serverName.nameHolder != "" && playerName.nameHolder != "")
+				if(serverNameInput.nameHolder != "" && playerNameInput.nameHolder != "")
 				{
 					//set this game to be a host
 					HostToLobby();
@@ -461,9 +508,10 @@ public class MenuControl : MenuLogic
 			}
 			
 			//join game button
-			if(GUI.Button(new Rect(menuOrigin[1].x + multiPMenuBtnRect[3].x, menuOrigin[1].y + multiPMenuBtnRect[3].y, multiPMenuBtnRect[3].width, multiPMenuBtnRect[3].height), "Join"))
+			GUI.DrawTexture(new Rect(menuOrigin[1].x + multiPMenuBtnRect[3].x, menuOrigin[1].y + multiPMenuBtnRect[3].y, multiPMenuBtnRect[3].width, multiPMenuBtnRect[3].height), buttonSmallTxtr);
+			if(GUI.Button(new Rect(menuOrigin[1].x + multiPMenuBtnRect[3].x, menuOrigin[1].y + multiPMenuBtnRect[3].y, multiPMenuBtnRect[3].width, multiPMenuBtnRect[3].height), "Join", largeSkin))
 			{
-				if(serverName.nameHolder != "" && playerName.nameHolder != "")
+				if(serverNameInput.nameHolder != "" && playerNameInput.nameHolder != "")
 				{
 					//set the game to be a client
 					ClientToLobby();
@@ -472,9 +520,14 @@ public class MenuControl : MenuLogic
 					StartCoroutine(MoveLeftOff(1, 3, Menu.connecting, ConnectingSelection, connectingRect));
 				}
 			}
+
+			if(buttonIndex == 4)
+				GUI.DrawTexture(new Rect(menuOrigin[1].x + multiPMenuBtnRect[5].x, menuOrigin[1].y + multiPMenuBtnRect[5].y, multiPMenuBtnRect[5].width, multiPMenuBtnRect[5].height), mPlayerMenuBtnTxtr[2]);
+			else
+				GUI.DrawTexture(new Rect(menuOrigin[1].x + multiPMenuBtnRect[5].x, menuOrigin[1].y + multiPMenuBtnRect[5].y, multiPMenuBtnRect[5].width, multiPMenuBtnRect[5].height), mPlayerMenuBtnTxtr[1]);
 			
 			//back button
-			if(GUI.Button(new Rect(menuOrigin[1].x + multiPMenuBtnRect[4].x, menuOrigin[1].y + multiPMenuBtnRect[4].y, multiPMenuBtnRect[4].width, multiPMenuBtnRect[4].height), "Back"))
+			if(GUI.Button(new Rect(menuOrigin[1].x + multiPMenuBtnRect[4].x, menuOrigin[1].y + multiPMenuBtnRect[4].y, multiPMenuBtnRect[4].width, multiPMenuBtnRect[4].height), "B  a  c  k"))
 			{
 				buttonIndex = 1;
 				
@@ -511,9 +564,12 @@ public class MenuControl : MenuLogic
 			lvlGraphicPos = ResizeRect(new Rect(10, 25, 33, 45));
 			
 			menuBkgdPos  = ResizeRect(new Rect(50, 50, 100, 100));
+
+			if(mainMenuBkgd != null)
+				menuBkgd.renderer.material.SetTexture(0, lobbyMenuBtnTxtr[2]);
 			
 			//if the menu background is there set it's position and scale
-			if(menuBkgd != null)
+			/*if(menuBkgd != null)
 			{
 				//Debug.Log("it is not null");
 				Vector3 pointInWorld = Camera.main.ScreenToWorldPoint(new Vector3(Screen.width, Screen.height, Camera.main.transform.position.z + 100));
@@ -521,15 +577,18 @@ public class MenuControl : MenuLogic
 				menuBkgd.transform.position = Camera.main.ScreenToWorldPoint(new Vector3(menuOrigin[2].x + menuBkgdPos.x, menuOrigin[2].y + menuBkgdPos.y, 500));
 			}
 			else
-				InstantiateMenuObj();
+				InstantiateMenuObj();*/
 			
 			if(dinoSelected == null)
 			{
 				startDinoPos = ResizeRect(new Rect(72, 40, 0, 0));
 				
+				GameObject loc = GameObject.Find("MenuDinoSpawnLocation");
+				
 				dinoIndex = 0;
-				dinoSelected = (GameObject)Instantiate(dinoModels[dinoIndex],
-				                GameObject.Find("MenuDinoSpawnLocation").transform.position,
+				if(loc != null)
+					dinoSelected = (GameObject)Instantiate(dinoModels[dinoIndex],
+					                loc.transform.position,
 				                Quaternion.identity);
 			}
 			//if a dino is there set it's scale and position
@@ -553,7 +612,7 @@ public class MenuControl : MenuLogic
 				InstantiateMenuObj();
 			
 			//level name graphic
-			GUI.DrawTexture(new Rect(menuOrigin[2].x + lobbyMenuRect[4].x, menuOrigin[2].y + lobbyMenuRect[4].y, lobbyMenuRect[4].width, lobbyMenuRect[4].height), buttonTxtr);
+			GUI.DrawTexture(new Rect(menuOrigin[2].x + lobbyMenuRect[4].x, menuOrigin[2].y + lobbyMenuRect[4].y, lobbyMenuRect[4].width, lobbyMenuRect[4].height), buttonBigTxtr);
 			GUI.Label(new Rect(menuOrigin[2].x + lobbyMenuRect[4].x, menuOrigin[2].y + lobbyMenuRect[4].y, lobbyMenuRect[4].width, lobbyMenuRect[4].height), "Twin City", noGfxSkin);
 			
 			//level graphic
@@ -582,7 +641,7 @@ public class MenuControl : MenuLogic
 
 						GUI.DrawTexture(new Rect(menuOrigin[2].x + lobbyMenuRect[i].x, menuOrigin[2].y + lobbyMenuRect[i].y, lobbyMenuRect[i].width, lobbyMenuRect[i].height), smallBoxGFX);
 						GUI.DrawTexture(new Rect(menuOrigin[2].x + lobbyMenuRect[i + 5].x, menuOrigin[2].y + lobbyMenuRect[i + 5].y, lobbyMenuRect[i + 5].width, lobbyMenuRect[i + 5].height), largeDinoBanner);
-						GUI.Label(new Rect(menuOrigin[2].x + lobbyMenuRect[i + 5].x, menuOrigin[2].y + lobbyMenuRect[i + 5].y, lobbyMenuRect[i + 5].width, lobbyMenuRect[i + 5].height), dinos[i], noGfxSkin);
+						GUI.Label(new Rect(menuOrigin[2].x + lobbyMenuRect[i + 5].x, menuOrigin[2].y + lobbyMenuRect[i + 5].y, lobbyMenuRect[i + 5].width, lobbyMenuRect[i + 5].height), player.Value.dinoName, noGfxSkin);
 						GUI.Label(new Rect(menuOrigin[2].x + lobbyMenuRect[i].x, menuOrigin[2].y + lobbyMenuRect[i].y - 15, lobbyMenuRect[i].width, lobbyMenuRect[i].height), player.Value.playerName);
 						i++;
 					}
@@ -595,7 +654,7 @@ public class MenuControl : MenuLogic
 			//display the word "single player"
 			else
 			{
-				GUI.DrawTexture(new Rect(menuOrigin[2].x + lobbyMenuRect[5].x, menuOrigin[2].y + lobbyMenuRect[5].y, lobbyMenuRect[5].width, lobbyMenuRect[5].height), buttonTxtr);	
+				GUI.DrawTexture(new Rect(menuOrigin[2].x + lobbyMenuRect[5].x, menuOrigin[2].y + lobbyMenuRect[5].y, lobbyMenuRect[5].width, lobbyMenuRect[5].height), buttonBigTxtr);	
 				GUI.Label(new Rect(menuOrigin[2].x + lobbyMenuRect[5].x, menuOrigin[2].y + lobbyMenuRect[5].y, lobbyMenuRect[5].width, lobbyMenuRect[5].height), "Single Player", noGfxSkin);	
 			}
 			
@@ -649,16 +708,16 @@ public class MenuControl : MenuLogic
 				}
 				
 				if (readyAll == true){
-					GUI.DrawTexture(new Rect(menuOrigin[2].x + lobbyMenuBtnRect[5].x, menuOrigin[2].y + lobbyMenuBtnRect[5].y, lobbyMenuBtnRect[5].width, lobbyMenuBtnRect[5].height), buttonTxtr);
+					GUI.DrawTexture(new Rect(menuOrigin[2].x + lobbyMenuBtnRect[5].x, menuOrigin[2].y + lobbyMenuBtnRect[5].y, lobbyMenuBtnRect[5].width, lobbyMenuBtnRect[5].height), buttonBigTxtr);
 					
 					if(GUI.Button(new Rect(menuOrigin[2].x + lobbyMenuBtnRect[5].x, menuOrigin[2].y + lobbyMenuBtnRect[5].y, lobbyMenuBtnRect[5].width, lobbyMenuBtnRect[5].height), "Play", noGfxSkin))
 					{
-						GroupToLevel();
-						fadeAction = TurnOnLoading;
-						afterFadeAction = LobbyToLevel;
+						netView.RPC("GroupToLevel", RPCMode.AllBuffered);
+						/*fadeAction = TurnOnLoading;
+						afterFadeAction = LobbyToLevel;*/
 						//StartCoroutine(MoveLeftOff(2, 5, Menu.goToLevel, null, null));
 						//LobbyToLevel(Menu.goToLevel)
-						netView.RPC("TransitionFade", RPCMode.AllBuffered);
+						netView.RPC("TransitionFadeNetwork", RPCMode.AllBuffered);
 					}
 				}
 			}
@@ -675,7 +734,7 @@ public class MenuControl : MenuLogic
 					}
 				}
 				if (readyMe == true) {
-					GUI.DrawTexture(new Rect(menuOrigin[2].x + lobbyMenuBtnRect[5].x, menuOrigin[2].y + lobbyMenuBtnRect[5].y, lobbyMenuBtnRect[5].width, lobbyMenuBtnRect[5].height), buttonTxtr);
+					GUI.DrawTexture(new Rect(menuOrigin[2].x + lobbyMenuBtnRect[5].x, menuOrigin[2].y + lobbyMenuBtnRect[5].y, lobbyMenuBtnRect[5].width, lobbyMenuBtnRect[5].height), buttonBigTxtr);
 					
 					if(GUI.Button(new Rect(menuOrigin[2].x + lobbyMenuBtnRect[5].x, menuOrigin[2].y + lobbyMenuBtnRect[5].y, lobbyMenuBtnRect[5].width, lobbyMenuBtnRect[5].height), "Ready", noGfxSkin))
 					{
@@ -689,9 +748,9 @@ public class MenuControl : MenuLogic
 		{
 			//set the positions for all of the connectin menu graphics
 			connectingRect[0] = ResizeRect(new Rect(30, 20, 40, 40));
-			connectingRect[1] = ResizeRect(new Rect(55, 15, 25, 20));
+			connectingRect[1] = ResizeRect(new Rect(76, 10, 20, 20));
 			connectingRect[2] = ResizeRect(new Rect(70, 30, 40, 40));
-			connectingRect[3] = ResizeRect(new Rect(10, 80, 30, 10));
+			connectingRect[3] = ResizeRect(new Rect(5, 90, 15, 5));
 			connectingRect[4] = ResizeRect(new Rect(45, 45, 5, 10));
 			connectingRect[5] = ResizeRect(new Rect(50, 45, 5, 10));
 			connectingRect[6] = ResizeRect(new Rect(45, 35, 5, 10));
@@ -699,10 +758,14 @@ public class MenuControl : MenuLogic
 			
 			connectPos = ResizeRect(new Rect(31.5f, 7, 39, 75));
 			
-			menuBkgdPos  = ResizeRect(new Rect(50, 50, 100, 100));
+			//menuBkgdPos  = ResizeRect(new Rect(50, 50, 100, 100));
+			if(mainMenuBkgd != null)
+				menuBkgd.renderer.material.SetTexture(0,connectingMenuTxtr[3]);
+
+			noGfxSkin.fontSize = (int)((xMulti + yMulti) * 1f);
 			
 			//if there are no glow dashes then create them
-			if(glowDashes[0] == null)
+			/*if(glowDashes[0] == null)
 			{
 				for(int i = 0; i < 3; i++)
 				{
@@ -753,36 +816,36 @@ public class MenuControl : MenuLogic
 			glowDashes[8].guiTexture.pixelInset = ResizeRect(new Rect(50, 25, 5, 10));
 			glowDashes[9].guiTexture.pixelInset = ResizeRect(new Rect(45, 25, 5, 10));
 			glowDashes[10].guiTexture.pixelInset = ResizeRect(new Rect(40, 35, 5, 10));
-			glowDashes[11].guiTexture.pixelInset = ResizeRect(new Rect(35, 45, 5, 10));
+			glowDashes[11].guiTexture.pixelInset = ResizeRect(new Rect(35, 45, 5, 10));*/
 			
 			
 			//start making the dashes fade in and out
-			if(isDashGlowing == false && menuMoving == false)
+			/*if(isDashGlowing == false && menuMoving == false)
 			{
 				StartCoroutine("StartGlowDashes");
-			}
+			}*/
 			
 			//set the scale and position of the background menu
-			Vector3 pointInWorld = Camera.main.ScreenToWorldPoint(new Vector3(Screen.width, Screen.height, Camera.main.transform.position.z + 100));
+			/*Vector3 pointInWorld = Camera.main.ScreenToWorldPoint(new Vector3(Screen.width, Screen.height, Camera.main.transform.position.z + 100));
 			menuBkgd.transform.localScale = new Vector3(pointInWorld.x / 5, 1, pointInWorld.y / 5);
-			menuBkgd.transform.position = Camera.main.ScreenToWorldPoint(new Vector3(menuOrigin[3].x + menuBkgdPos.x, menuOrigin[3].y + menuBkgdPos.y, 500));
+			menuBkgd.transform.position = Camera.main.ScreenToWorldPoint(new Vector3(menuOrigin[3].x + menuBkgdPos.x, menuOrigin[3].y + menuBkgdPos.y, 500));*/
 			
 			//GUI.Box(new Rect(menuOrigin[3].x + connectingRect[0].x, menuOrigin[3].y + connectingRect[0].y, connectingRect[0].width, connectingRect[0].height), connectingMenuTxtr[2]);
 			
 			//draw the current state of looking for a game
-			GUI.Label(new Rect(menuOrigin[3].x + connectingRect[1].x, menuOrigin[3].y + connectingRect[1].y, connectingRect[1].width, connectingRect[1].height), GetConnectionState());
+			GUI.Label(new Rect(menuOrigin[3].x + connectingRect[1].x, menuOrigin[3].y + connectingRect[1].y, connectingRect[1].width, connectingRect[1].height), GetConnectionState(), noGfxSkin);
 			
 			//the connecting graphic
-			GUI.DrawTexture(new Rect(menuOrigin[3].x + connectPos.x, menuOrigin[3].y + connectPos.y, connectPos.width, connectPos.height), connectTxtr);
+			//GUI.DrawTexture(new Rect(menuOrigin[3].x + connectPos.x, menuOrigin[3].y + connectPos.y, connectPos.width, connectPos.height), connectTxtr);
 			
 			//draw the dashes that are in the middle
-			GUI.DrawTexture(new Rect(menuOrigin[3].x + connectingRect[4].x, menuOrigin[3].y + connectingRect[4].y, connectingRect[4].width, connectingRect[4].height), connectingMenuTxtr[1]);
+			/*GUI.DrawTexture(new Rect(menuOrigin[3].x + connectingRect[4].x, menuOrigin[3].y + connectingRect[4].y, connectingRect[4].width, connectingRect[4].height), connectingMenuTxtr[1]);
 			GUI.DrawTexture(new Rect(menuOrigin[3].x + connectingRect[5].x, menuOrigin[3].y + connectingRect[5].y, connectingRect[5].width, connectingRect[5].height), connectingMenuTxtr[0]);
 			GUI.DrawTexture(new Rect(menuOrigin[3].x + connectingRect[6].x, menuOrigin[3].y + connectingRect[6].y, connectingRect[6].width, connectingRect[6].height), connectingMenuTxtr[0]);
 			GUI.DrawTexture(new Rect(menuOrigin[3].x + connectingRect[7].x, menuOrigin[3].y + connectingRect[7].y, connectingRect[7].width, connectingRect[7].height), connectingMenuTxtr[1]);
-			
+			*/
 			//the back button
-			if (GUI.Button (new Rect(menuOrigin[3].x + connectingRect[3].x, menuOrigin[3].y + connectingRect[3].y, connectingRect[3].width, connectingRect[3].height), "Back")) 
+			if (GUI.Button (new Rect(menuOrigin[3].x + connectingRect[3].x, menuOrigin[3].y + connectingRect[3].y, connectingRect[3].width, connectingRect[3].height), "B  a  c  k")) 
 			{
 				//stop the glow dashes and stop looking for a game
 				ConnectToMulti();
@@ -819,51 +882,54 @@ public class MenuControl : MenuLogic
 		{		
 			
 			//size and positions for the numbers
-			resultsMenuRect[0] = ResizeRect(new Rect(33, 35, 10, 20));
+			/*resultsMenuRect[0] = ResizeRect(new Rect(33, 35, 10, 20));
 			resultsMenuRect[1] = ResizeRect(new Rect(33, 43, 10, 20));
 			resultsMenuRect[2] = ResizeRect(new Rect(33, 51, 10, 20));
-			resultsMenuRect[3] = ResizeRect(new Rect(33, 59, 10, 20));
+			resultsMenuRect[3] = ResizeRect(new Rect(33, 59, 10, 20));*/
 			
 			//size and positions for the names
-			resultsMenuRect[4] = ResizeRect(new Rect(17, 35, 20, 20));
-			resultsMenuRect[5] = ResizeRect(new Rect(17, 43, 20, 20));
-			resultsMenuRect[6] = ResizeRect(new Rect(17, 51, 20, 20));
-			resultsMenuRect[7] = ResizeRect(new Rect(17, 59, 20, 20));
+			resultsMenuRect[4] = ResizeRect(new Rect(38, 52, 20, 20));
+			resultsMenuRect[5] = ResizeRect(new Rect(38, 57, 20, 20));
+			resultsMenuRect[6] = ResizeRect(new Rect(38, 62.5f, 20, 20));
+			resultsMenuRect[7] = ResizeRect(new Rect(38, 68, 20, 20));
 			 
 			//size and positions for the buttons
-			resultsMenuBtnRect[0] = ResizeRect(new Rect(65, 85, 20, 10));
+			//resultsMenuBtnRect[0] = ResizeRect(new Rect(65, 85, 20, 10));
+			resultsMenuBtnRect[0] = ResizeRect(new Rect(80, 85, 15, 5));
 			resultsMenuBtnRect[1] = ResizeRect(new Rect(40, 85, 20, 10));
-			resultsMenuBtnRect[2] = ResizeRect(new Rect(15, 85, 20, 10));
+			resultsMenuBtnRect[2] = ResizeRect(new Rect(65, 85, 20, 10));
 			
 			//size and position for the window texture
 			resultsMenuRect[8] = ResizeRect(new Rect(0, 0, 100, 100));
 			
 			//window size and position
 			
-			GUI.DrawTexture(new Rect(menuOrigin[4].x + resultsMenuRect[8].x, menuOrigin[4].y + resultsMenuRect[8].y, resultsMenuRect[8].width, resultsMenuRect[8].height), resultsMenuTxtr[0]);
+			GUI.DrawTexture(new Rect(menuOrigin[4].x + resultsMenuRect[8].x, menuOrigin[4].y + resultsMenuRect[8].y, resultsMenuRect[8].width, resultsMenuRect[8].height), resultsMenuTxtr);
 			
 			//4 place numbers
-			GUI.TextField(new Rect(menuOrigin[4].x + resultsMenuRect[0].x, menuOrigin[4].y + resultsMenuRect[0].y, resultsMenuRect[0].width, resultsMenuRect[0].height), "1st");
+/*			GUI.TextField(new Rect(menuOrigin[4].x + resultsMenuRect[0].x, menuOrigin[4].y + resultsMenuRect[0].y, resultsMenuRect[0].width, resultsMenuRect[0].height), "1st");
 			GUI.TextField(new Rect(menuOrigin[4].x + resultsMenuRect[1].x, menuOrigin[4].y + resultsMenuRect[1].y, resultsMenuRect[1].width, resultsMenuRect[1].height), "2nd");
 			GUI.TextField(new Rect(menuOrigin[4].x + resultsMenuRect[2].x, menuOrigin[4].y + resultsMenuRect[2].y, resultsMenuRect[2].width, resultsMenuRect[2].height), "3rd");
-			GUI.TextField(new Rect(menuOrigin[4].x + resultsMenuRect[3].x, menuOrigin[4].y + resultsMenuRect[3].y, resultsMenuRect[3].width, resultsMenuRect[3].height), "4th");
+			GUI.TextField(new Rect(menuOrigin[4].x + resultsMenuRect[3].x, menuOrigin[4].y + resultsMenuRect[3].y, resultsMenuRect[3].width, resultsMenuRect[3].height), "4th");*/
 			
 			//the names of the players
-			GUI.TextField(new Rect(menuOrigin[4].x + resultsMenuRect[4 + racePositions[0] - 1].x, menuOrigin[4].y + resultsMenuRect[4 + racePositions[0] - 1].y, resultsMenuRect[4 + racePositions[0] - 1].width, resultsMenuRect[4 + racePositions[0] - 1].height), playerNames[0]);
-			GUI.TextField(new Rect(menuOrigin[4].x + resultsMenuRect[4 + racePositions[1] - 1].x, menuOrigin[4].y + resultsMenuRect[4 + racePositions[1] - 1].y, resultsMenuRect[4 + racePositions[1] - 1].width, resultsMenuRect[4 + racePositions[1] - 1].height), playerNames[1]);
-			GUI.TextField(new Rect(menuOrigin[4].x + resultsMenuRect[4 + racePositions[2] - 1].x, menuOrigin[4].y + resultsMenuRect[4 + racePositions[2] - 1].y, resultsMenuRect[4 + racePositions[2] - 1].width, resultsMenuRect[4 + racePositions[2] - 1].height), playerNames[2]);
-			GUI.TextField(new Rect(menuOrigin[4].x + resultsMenuRect[4 + racePositions[3] - 1].x, menuOrigin[4].y + resultsMenuRect[4 + racePositions[3] - 1].y, resultsMenuRect[4 + racePositions[3] - 1].width, resultsMenuRect[4 + racePositions[3] - 1].height), playerNames[3]);
+			GUI.Label(new Rect(menuOrigin[4].x + resultsMenuRect[4 + racePositions[0] - 1].x, menuOrigin[4].y + resultsMenuRect[4 + racePositions[0] - 1].y, resultsMenuRect[4 + racePositions[0] - 1].width, resultsMenuRect[4 + racePositions[0] - 1].height), playerNames[0]);
+			GUI.Label(new Rect(menuOrigin[4].x + resultsMenuRect[4 + racePositions[1] - 1].x, menuOrigin[4].y + resultsMenuRect[4 + racePositions[1] - 1].y, resultsMenuRect[4 + racePositions[1] - 1].width, resultsMenuRect[4 + racePositions[1] - 1].height), playerNames[1]);
+			GUI.Label(new Rect(menuOrigin[4].x + resultsMenuRect[4 + racePositions[2] - 1].x, menuOrigin[4].y + resultsMenuRect[4 + racePositions[2] - 1].y, resultsMenuRect[4 + racePositions[2] - 1].width, resultsMenuRect[4 + racePositions[2] - 1].height), playerNames[2]);
+			GUI.Label(new Rect(menuOrigin[4].x + resultsMenuRect[4 + racePositions[3] - 1].x, menuOrigin[4].y + resultsMenuRect[4 + racePositions[3] - 1].y, resultsMenuRect[4 + racePositions[3] - 1].width, resultsMenuRect[4 + racePositions[3] - 1].height), playerNames[3]);
 			
 			//the exit button
-			if(GUI.Button(new Rect(menuOrigin[4].x + resultsMenuBtnRect[0].x, menuOrigin[4].y + resultsMenuBtnRect[0].y, resultsMenuBtnRect[0].width, resultsMenuBtnRect[0].height), "Exit"))
+			//GUI.DrawTexture(new Rect(menuOrigin[4].x + resultsMenuBtnRect[0].x, menuOrigin[4].y + resultsMenuBtnRect[0].y, resultsMenuBtnRect[0].width, resultsMenuBtnRect[0].height), buttonSmallTxtr);
+			if(GUI.Button(new Rect(menuOrigin[4].x + resultsMenuBtnRect[0].x, menuOrigin[4].y + resultsMenuBtnRect[0].y, resultsMenuBtnRect[0].width, resultsMenuBtnRect[0].height), "E  x  i  t"))
 			{
 				//LeaveGame(LobbySelection, lobbyMenuBtnRect);
+				
 
 				fadeAction = LeaveGame;
 
 				afterFadeAction = null;
 
-				TransitionFade();
+				StartCoroutine(TransitionFade());
 				
 				//UpdateDinoInfo(dinoModels, ref dinoSelected, dinos, ref largeDinoBanner);
 			}
@@ -906,6 +972,7 @@ public class MenuControl : MenuLogic
 			
 			
 		}
+		
 	}
 	
 	private void KeyBoardGui()
@@ -966,17 +1033,16 @@ public class MenuControl : MenuLogic
 		menuOrigin[2].x = 0;
 	}*/
 
+
 	public void LeaveGame()
 	{
+	Debug.Log("start leave game");
 		//Debug.Log("the current menu" + menuSelect.ToString());
-		if(menuSelect == Menu.resultsMenu)
-		{
 			
-			menuSelect = Menu.lobbyMenu;
 			//Debug.Log("the current menu" + menuSelect.ToString());
 			//Debug.Log("change to lobby");
+		Application.LoadLevel("Menu");
 			
-			Application.LoadLevel("Menu");
 			
 			var myInfo = networkHandler.GetMyInfo();
 			myInfo.readyState = "LobbyReady";
@@ -988,7 +1054,8 @@ public class MenuControl : MenuLogic
 			currentSelection = LobbySelection;
 			currentRect = lobbyMenuBtnRect;
 			menuOrigin[2].x = 0;
-		}
+			
+		Debug.Log("end leave game");
 	}
 	
 	public void InstantiateMenuObj()
@@ -1100,9 +1167,8 @@ public class MenuControl : MenuLogic
 			//button to start the race
 			else if(Network.isServer && readyAll == true && buttonIndex == 5)
 			{
-				GroupToLevel();
-				fadeAction = TurnOnLoading;
-				netView.RPC("TransitionFade", RPCMode.AllBuffered);
+				netView.RPC("GroupToLevel", RPCMode.AllBuffered);
+				netView.RPC("TransitionFadeNetwork", RPCMode.AllBuffered);
 			}
 			//button to indicate that this player is ready
 			else if(Network.isClient && readyMe == false && buttonIndex == 5)
@@ -1156,15 +1222,15 @@ public class MenuControl : MenuLogic
 				//showKeys = true;
 				
 				StartCoroutine(EaseKeyBoard(InputName, keyBoardRect));
-				
+
 				//if the name is empty
-				if(serverName.inputName.Length == 0)
+				if(serverNameInput.nameHolder.Length == 0)
 				{
-					serverName.nameHolder = "";
+					serverNameInput.nameHolder = "";
 					
-					serverName.inputName = new char[1];
+					/*serverName = new char[1];
 					
-					serverName.inputName[0] = ' ';
+					serverName[0] = ' ';*/
 					
 					//charToReplace = 'a';
 				}
@@ -1187,13 +1253,13 @@ public class MenuControl : MenuLogic
 				//currentSelection = InputName;
 				
 				//if the name is empty
-				if(playerName.inputName.Length == 0)
+				if(playerNameInput.nameHolder.Length == 0)
 				{
-					playerName.nameHolder = "";
+					playerNameInput.nameHolder = "";
 					
-					playerName.inputName = new char[1];
+					/*playerName.inputName = new char[1];
 					
-					playerName.inputName[0] = 'a';
+					playerName.inputName[0] = 'a';*/
 					
 					//charToReplace = 'a';
 				}
@@ -1233,9 +1299,9 @@ public class MenuControl : MenuLogic
 	{
 		//determin which name is currently selected
 		if(buttonIndex == 0)
-			InputNameHelper(serverName);
+			InputNameHelper(serverNameInput);
 		else if(buttonIndex == 1)
-			InputNameHelper(playerName);
+			InputNameHelper(playerNameInput);
 	}
 
 	private void InputNameHelper(NameInput _name)
@@ -1273,7 +1339,7 @@ public class MenuControl : MenuLogic
 
 			if(keyBoardIndex == 29 && _name.nameHolder.Length > 0)
 			{
-				_name.nameHolder = _name.nameHolder.Substring(0, _name.nameHolder.Length - 1); 
+				_name.nameHolder  = _name.nameHolder.Substring(0, _name.nameHolder.Length - 1); 
 			}
 			else if(keyBoardIndex == 37)
 			{
@@ -1297,11 +1363,13 @@ public class MenuControl : MenuLogic
 			}
 			else if(keyBoardIndex == 39)
 			{
-				_name.nameHolder += " ";
+				_name.nameHolder  += " ";
 			}
 			else if(keyBoardIndex != 29)
 			{
-				_name.nameHolder += charKeys[keyBoardIndex];
+				_name.nameHolder  += charKeys[keyBoardIndex];
+
+				//Debug.Log(_name);
 				
 				if(isShifting && !isCapsOn)
 				{
@@ -1310,7 +1378,7 @@ public class MenuControl : MenuLogic
 				}
 				
 			}
-			
+
 		}
 		//if pressing melee then change the selector back to the multiplayer menu
 		else if(Input.GetButton("Melee"))
@@ -1381,7 +1449,7 @@ public class MenuControl : MenuLogic
 				
 				afterFadeAction = null;
 				
-				TransitionFade();
+				StartCoroutine(TransitionFade());
 			}
 			
 		}

@@ -223,6 +223,8 @@ MonoBehaviour:
   raceDinos: []
   racePositions: 
   playerNames: []
+  serverName: 
+  playerName: 
   buttonSkin: {fileID: 11400000, guid: f9cd5d6b739287443973e3770477dc1f, type: 2}
   noGfxSkin:
     m_Name: 
@@ -282,6 +284,65 @@ MonoBehaviour:
     m_FixedWidth: 0
     m_FixedHeight: 0
     m_StretchWidth: 0
+    m_StretchHeight: 0
+  largeSkin:
+    m_Name: 
+    m_Normal:
+      m_Background: {fileID: 0}
+      m_TextColor: {r: 1, g: 1, b: 1, a: 1}
+    m_Hover:
+      m_Background: {fileID: 0}
+      m_TextColor: {r: 1, g: 1, b: 1, a: 1}
+    m_Active:
+      m_Background: {fileID: 0}
+      m_TextColor: {r: 1, g: 1, b: 1, a: 1}
+    m_Focused:
+      m_Background: {fileID: 0}
+      m_TextColor: {r: 1, g: 1, b: 1, a: 1}
+    m_OnNormal:
+      m_Background: {fileID: 0}
+      m_TextColor: {r: 1, g: 1, b: 1, a: 1}
+    m_OnHover:
+      m_Background: {fileID: 0}
+      m_TextColor: {r: 1, g: 1, b: 1, a: 1}
+    m_OnActive:
+      m_Background: {fileID: 0}
+      m_TextColor: {r: 1, g: 1, b: 1, a: 1}
+    m_OnFocused:
+      m_Background: {fileID: 0}
+      m_TextColor: {r: 1, g: 1, b: 1, a: 1}
+    m_Border:
+      m_Left: 0
+      m_Right: 0
+      m_Top: 0
+      m_Bottom: 0
+    m_Margin:
+      m_Left: 0
+      m_Right: 0
+      m_Top: 0
+      m_Bottom: 0
+    m_Padding:
+      m_Left: 0
+      m_Right: 0
+      m_Top: 0
+      m_Bottom: 0
+    m_Overflow:
+      m_Left: 0
+      m_Right: 0
+      m_Top: 0
+      m_Bottom: 0
+    m_Font: {fileID: 12800000, guid: 12ab27cf45181c4479332c2f5a7e380e, type: 3}
+    m_FontSize: 0
+    m_FontStyle: 0
+    m_Alignment: 4
+    m_WordWrap: 0
+    m_RichText: 1
+    m_TextClipping: 0
+    m_ImagePosition: 0
+    m_ContentOffset: {x: 0, y: 0}
+    m_FixedWidth: 0
+    m_FixedHeight: 0
+    m_StretchWidth: 1
     m_StretchHeight: 0
   dinos:
   - Diloph
@@ -575,6 +636,111 @@ Prefab:
     - target: {fileID: 14800000, guid: 0a4699168cf361b44a4d8dc13300ad76, type: 2}
       propertyPath: m_ViewID.m_Type
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400002, guid: 0a4699168cf361b44a4d8dc13300ad76, type: 2}
+      propertyPath: largeSkin.m_Normal.m_TextColor.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400002, guid: 0a4699168cf361b44a4d8dc13300ad76, type: 2}
+      propertyPath: largeSkin.m_Normal.m_TextColor.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400002, guid: 0a4699168cf361b44a4d8dc13300ad76, type: 2}
+      propertyPath: largeSkin.m_Normal.m_TextColor.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400002, guid: 0a4699168cf361b44a4d8dc13300ad76, type: 2}
+      propertyPath: largeSkin.m_Hover.m_TextColor.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400002, guid: 0a4699168cf361b44a4d8dc13300ad76, type: 2}
+      propertyPath: largeSkin.m_Hover.m_TextColor.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400002, guid: 0a4699168cf361b44a4d8dc13300ad76, type: 2}
+      propertyPath: largeSkin.m_Hover.m_TextColor.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400002, guid: 0a4699168cf361b44a4d8dc13300ad76, type: 2}
+      propertyPath: largeSkin.m_Active.m_TextColor.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400002, guid: 0a4699168cf361b44a4d8dc13300ad76, type: 2}
+      propertyPath: largeSkin.m_Active.m_TextColor.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400002, guid: 0a4699168cf361b44a4d8dc13300ad76, type: 2}
+      propertyPath: largeSkin.m_Active.m_TextColor.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400002, guid: 0a4699168cf361b44a4d8dc13300ad76, type: 2}
+      propertyPath: largeSkin.m_Focused.m_TextColor.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400002, guid: 0a4699168cf361b44a4d8dc13300ad76, type: 2}
+      propertyPath: largeSkin.m_Focused.m_TextColor.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400002, guid: 0a4699168cf361b44a4d8dc13300ad76, type: 2}
+      propertyPath: largeSkin.m_Focused.m_TextColor.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400002, guid: 0a4699168cf361b44a4d8dc13300ad76, type: 2}
+      propertyPath: largeSkin.m_OnNormal.m_TextColor.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400002, guid: 0a4699168cf361b44a4d8dc13300ad76, type: 2}
+      propertyPath: largeSkin.m_OnNormal.m_TextColor.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400002, guid: 0a4699168cf361b44a4d8dc13300ad76, type: 2}
+      propertyPath: largeSkin.m_OnNormal.m_TextColor.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400002, guid: 0a4699168cf361b44a4d8dc13300ad76, type: 2}
+      propertyPath: largeSkin.m_OnHover.m_TextColor.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400002, guid: 0a4699168cf361b44a4d8dc13300ad76, type: 2}
+      propertyPath: largeSkin.m_OnHover.m_TextColor.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400002, guid: 0a4699168cf361b44a4d8dc13300ad76, type: 2}
+      propertyPath: largeSkin.m_OnHover.m_TextColor.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400002, guid: 0a4699168cf361b44a4d8dc13300ad76, type: 2}
+      propertyPath: largeSkin.m_OnActive.m_TextColor.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400002, guid: 0a4699168cf361b44a4d8dc13300ad76, type: 2}
+      propertyPath: largeSkin.m_OnActive.m_TextColor.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400002, guid: 0a4699168cf361b44a4d8dc13300ad76, type: 2}
+      propertyPath: largeSkin.m_OnActive.m_TextColor.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400002, guid: 0a4699168cf361b44a4d8dc13300ad76, type: 2}
+      propertyPath: largeSkin.m_OnFocused.m_TextColor.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400002, guid: 0a4699168cf361b44a4d8dc13300ad76, type: 2}
+      propertyPath: largeSkin.m_OnFocused.m_TextColor.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400002, guid: 0a4699168cf361b44a4d8dc13300ad76, type: 2}
+      propertyPath: largeSkin.m_OnFocused.m_TextColor.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400002, guid: 0a4699168cf361b44a4d8dc13300ad76, type: 2}
+      propertyPath: largeSkin.m_Font
+      value: 
+      objectReference: {fileID: 12800000, guid: 12ab27cf45181c4479332c2f5a7e380e,
+        type: 3}
+    - target: {fileID: 11400002, guid: 0a4699168cf361b44a4d8dc13300ad76, type: 2}
+      propertyPath: largeSkin.m_Alignment
+      value: 4
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 0a4699168cf361b44a4d8dc13300ad76, type: 2}

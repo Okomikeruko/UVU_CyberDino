@@ -4,7 +4,7 @@ using System.Collections;
 public class MenuLogic : MonoBehaviour 
 {
 	//an emun for which menu is currently displaying
-	public enum Menu{mainMenu, multiPMenu, lobbyMenu, goToLevel, resultsMenu, connecting};
+	public enum Menu{mainMenu, multiPMenu, lobbyMenu, connecting, resultsMenu, goToLevel};
 	[HideInInspector]
 	public Menu menuSelect;
 	
@@ -91,8 +91,10 @@ public class MenuLogic : MonoBehaviour
 	private string[] resultsFName;
 
 	//the names of the server and player
-	public NameInput serverName;
-	public NameInput playerName;
+	public string serverName;
+	public string playerName;
+	internal NameInput serverNameInput;
+	internal NameInput playerNameInput;
 
 	//a bool for when the player is currently inputting a name
 	internal bool isInputting{get;set;}
@@ -138,8 +140,8 @@ public class MenuLogic : MonoBehaviour
 		//inputPlayerName = new char[0];
 		//inputServerName = new char[0];
 		
-		serverName = new NameInput();
-		playerName = new NameInput();
+		/*serverName = new NameInput();
+		playerName = new NameInput();*/
 		
 		glowDashes = new GameObject[12];
 
@@ -150,6 +152,9 @@ public class MenuLogic : MonoBehaviour
 		keysPos = new Vector3(0, 0, 0);
 
 		//isBlinking = false;
+
+		playerNameInput = new NameInput();
+		serverNameInput = new NameInput();
 	}
 
 	//the method for when the race level is loaded
@@ -174,11 +179,10 @@ public class MenuLogic : MonoBehaviour
 
 		buttonIndex = 0;
 
-		/*sNameIndex = 0;
-		pNameIndex = 0;
+		//sNameIndex = 0;
+		//pNameIndex = 0;
 			
-		playerNameHolder = "";
-		serverNameHolder = "";*/
+
 
 	}
 
@@ -385,7 +389,7 @@ public class MenuLogic : MonoBehaviour
 			
 			while(true)
 			{
-				Debug.Log(pos);
+				//Debug.Log(pos);
 				pos += buttonMoveSpeed * Time.deltaTime;
 				
 				if(pos < 1)
@@ -848,11 +852,11 @@ public class MenuLogic : MonoBehaviour
 	
 	public void HostToLobby()
 	{
-		if(serverName.nameHolder != "" && playerName.nameHolder != "")
+		if(serverNameInput.nameHolder != "" && playerNameInput.nameHolder != "")
 		{
 			//inLobby = true;
 			
-			networkHandler.HostGame(serverName.nameHolder , playerName.nameHolder);
+			networkHandler.HostGame(serverNameInput.nameHolder, playerNameInput.nameHolder);
 			
 			var myInfo = networkHandler.GetMyInfo();
 			myInfo.readyState = "LobbyReady";
@@ -865,16 +869,16 @@ public class MenuLogic : MonoBehaviour
 	
 	public void ClientToLobby()
 	{
-		if(serverName.nameHolder != "" && playerName.nameHolder != "")
+		if(serverNameInput.nameHolder != "" && playerNameInput.nameHolder != "")
 		{
 			
-			networkHandler.JoinGame(serverName.nameHolder, playerName.nameHolder);
+			networkHandler.JoinGame(serverNameInput.nameHolder , playerNameInput.nameHolder );
 			
 			buttonIndex = 3;
 		}
 	}
 
-	public IEnumerator StartBlinking(NameInput _name)
+	/*public IEnumerator StartBlinking(NameInput _name)
 	{
 		isInputting = true;
 		
@@ -887,14 +891,14 @@ public class MenuLogic : MonoBehaviour
 			if(isInputting == false)
 				break;
 			
-			StartBlinkingHelper(_name);
+			//StartBlinkingHelper(_name);
 			
 			yield return new WaitForSeconds(1);
 		}
 		
-	}
+	}*/
 	
-	public void StartBlinkingHelper(NameInput _name)
+	/*public void StartBlinkingHelper(string _name)
 	{
 		
 		if(_name.inputName[_name.nameIndex] == charToReplace)
@@ -904,15 +908,15 @@ public class MenuLogic : MonoBehaviour
 	}
 
 	
-	public void UpdateString(NameInput _name, char _char)
+	public void UpdateString(string _name, char _char)
 	{
-		_name.inputName[_name.nameIndex] = _char;
+		_name[_name.nameIndex] = _char;
 		
-		_name.nameHolder = "";
+		_name  = "";
 		
 		for(int i = 0; i < _name.inputName.Length; i++)
-			_name.nameHolder = _name.nameHolder +  _name.inputName[i].ToString();
-	}
+			_name  = _name  +  _name.inputName[i].ToString();
+	}*/
 	
 	//*************End of Multiplayer Selection
 	
@@ -966,21 +970,15 @@ public class MenuLogic : MonoBehaviour
 	public class NameInput
 	{
 		public string nameHolder{get;set;}
-		public char[] inputName;
-		public int nameIndex{get;set;}
 		
 		public NameInput()
 		{
 			nameHolder = "";
-			inputName = new char[0];
-			nameIndex = 0;
 		}
 		
 		public NameInput(string _name, int _charLength)
 		{
 			nameHolder = _name;
-			inputName = new char[_charLength];
-			nameIndex = 0;
 		}
 	}
 }
