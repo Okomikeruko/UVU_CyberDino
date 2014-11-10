@@ -82,6 +82,7 @@ public class UserControl : MonoBehaviour {
 		}
 
 		// Debug Keybinds
+		/*
 		if (Input.GetKeyDown (KeyCode.R)) 
 		{
 			ragdoll.GoRagdoll();
@@ -102,6 +103,7 @@ public class UserControl : MonoBehaviour {
 		{
 			inv.DropAll();
 		}
+		*/
 	}
 
 
