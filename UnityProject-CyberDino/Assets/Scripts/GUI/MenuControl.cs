@@ -163,7 +163,7 @@ public class MenuControl : MenuLogic
 		//set the texture for the back button
 		//backBtnTxtr = (Texture)Resources.Load("GUI/Materials/BackButton");
 		
-		lvlSelectTxtr = new Texture[2];
+		lvlSelectTxtr = new Texture[1];
 		lvlSelectTxtr[0] = (Texture)Resources.Load("GUI/Materials/CityTrackGraphic");
 		
 		lvlNameGFX = (Texture)Resources.Load("GUI/Materials/CityTrackWord");
