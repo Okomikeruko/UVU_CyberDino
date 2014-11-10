@@ -638,7 +638,7 @@ public class HUDScript : MonoBehaviour
 		}
 
 
-		if(Input.GetKeyDown(KeyCode.Escape))
+		if(Input.GetKeyDown(KeyCode.Escape) && menuScript.singlePlayer == true)
 		{
 			if(isPaused == false)
 			{

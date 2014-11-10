@@ -269,6 +269,8 @@ public class MenuLogic : MonoBehaviour
 			{
 				pos = 0;
 				
+				buttonIndex = 0;
+				
 				//change which menu to show
 				menuSelect = _menu;
 				
@@ -340,6 +342,8 @@ public class MenuLogic : MonoBehaviour
 			{
 			
 				pos = 0;
+				
+				buttonIndex = 0;
 				
 				menuSelect = _menu;
 				

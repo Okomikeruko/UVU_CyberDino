@@ -50,7 +50,8 @@ public class RaceStart : MonoBehaviour
 		countDown = new GameObject("countDown");
 		countDown.transform.localScale = Vector3.zero;
 		countDown.AddComponent<GUITexture>();
-		countDown.guiTexture.pixelInset = new Rect((Screen.width / 100) * 30f, (Screen.height / 100) * 20f , (Screen.width / 100.0f) * 50f, (Screen.height / 100.0f) * 70f);
+		Rect temp = new Rect((Screen.width / 2) - (countTxtr[0].width / 2), (Screen.height / 2) - (countTxtr[0].height / 2), (Screen.width / 100.0f) * 50f, (Screen.height / 100.0f) * 70f);
+		countDown.guiTexture.pixelInset = new Rect((Screen.width / 2) - (temp.width / 2), (Screen.height / 2) - (temp.height / 2), temp.width, temp.height);
 		countDown.guiTexture.texture = countTxtr[0];
 		countDown.SetActive(false);
 
@@ -230,13 +231,18 @@ public class RaceStart : MonoBehaviour
 				if(transNumb >= 1 && ++index < countTxtr.Length)
 				{
 					countDown.guiTexture.texture = countTxtr[index];
+					
+					Rect holder;
 
 					if(index == 2)
-						countDown.guiTexture.pixelInset = new Rect((Screen.width / 100) * 41f, (Screen.height / 100) * 20f, (Screen.width / 100.0f) * 25f, (Screen.height / 100.0f) * 70f);
+						holder = new Rect((Screen.width / 2), (Screen.height / 2), (Screen.width / 100.0f) * 25f, (Screen.height / 100.0f) * 70f);
 					else if(index == 3)
-						countDown.guiTexture.pixelInset = new Rect((Screen.width / 100) * 33f, (Screen.height / 100) * 20f, (Screen.width / 100.0f) * 50f, (Screen.height / 100.0f) * 70f);
+						holder = new Rect((Screen.width / 2), (Screen.height / 2), (Screen.width / 100.0f) * 50f, (Screen.height / 100.0f) * 70f);
 					else
-						countDown.guiTexture.pixelInset = new Rect((Screen.width / 100) * 30f, (Screen.height / 100) * 20f, (Screen.width / 100.0f) * 50f, (Screen.height / 100.0f) * 70f);
+						holder = new Rect((Screen.width / 2), (Screen.height / 2), (Screen.width / 100.0f) * 40f, (Screen.height / 100.0f) * 60f);
+						
+					countDown.guiTexture.pixelInset = new Rect(holder.x - (holder.width / 2), holder.y - (holder.height / 2), holder.width, holder.height);
+					
 					hasFadeIn = false;
 					transNumb = 0;
 				}
