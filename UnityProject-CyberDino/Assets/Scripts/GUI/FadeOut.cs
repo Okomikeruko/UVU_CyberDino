@@ -39,7 +39,7 @@ public class FadeOut : MonoBehaviour
 		transform.position = new Vector3(0, 0, 0);
 		
 		//set the position and the size to the graphic
-		transform.guiTexture.pixelInset = new Rect((Screen.width / 2 ) - (sizeX / 2), (Screen.height / 2), sizeX, sizeY);
+		transform.guiTexture.pixelInset = new Rect((Screen.width / 2 ) - (sizeX / 2), (Screen.height / 2) - (sizeY / 2), sizeX, sizeY);
 		
 		InvokeRepeating("Fade", wait, repeat);
 
