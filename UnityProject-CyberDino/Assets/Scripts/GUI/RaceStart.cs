@@ -63,6 +63,8 @@ public class RaceStart : MonoBehaviour
 		//get the MotionControllers from the player and the cpu
 		foreach (var unit in players.Concat(ai)) {
 			var playerMotion = unit.GetComponent<MotionControl> ();
+			var aiPickup = unit.GetComponent<AIPickUp>(); //will turn on aiPickUp if prefab is cpu
+			aiPickup.enabled = true;
 			playerMotion.enabled = false;
 		}
 

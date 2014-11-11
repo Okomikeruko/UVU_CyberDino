@@ -997,6 +997,7 @@ GameObject:
   - 114: {fileID: 11400006}
   - 114: {fileID: 11400010}
   - 114: {fileID: 11400008}
+  - 114: {fileID: 11400024}
   m_Layer: 8
   m_Name: TRex
   m_TagString: Dino
@@ -2362,6 +2363,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   FirstNavNode: Respawn_Bridge_Negative05
+--- !u!114 &11400024
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100124}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 76a5d97eae16f4d44ae76e99b96a0f3e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &11400026
 MonoBehaviour:
   m_ObjectHideFlags: 1
