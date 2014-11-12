@@ -513,4 +513,17 @@ public class DinoTracking : MonoBehaviour
 				break;
 			}
 	}
+
+	public int GetDinoPosition(GameObject Dino)
+	{
+		int i = 0;
+		while (i < dinos.Length) {
+			if(Dino == dinos[i])
+				break;
+			i++;
+		}
+		if (i < dinos.Length)
+			return currentPositions[i];
+		return 0;	// Invalid Dino GameObject
+	}
 }

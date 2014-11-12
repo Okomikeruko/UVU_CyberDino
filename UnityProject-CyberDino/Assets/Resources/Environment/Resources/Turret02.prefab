@@ -791,7 +791,6 @@ GameObject:
   m_Component:
   - 4: {fileID: 400096}
   - 95: {fileID: 9500002}
-  - 54: {fileID: 5400000}
   - 135: {fileID: 13500000}
   - 114: {fileID: 11400000}
   - 82: {fileID: 8200000}
@@ -1701,7 +1700,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100096}
   m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -96.5895004, y: -25.0709209, z: 139.760193}
+  m_LocalPosition: {x: 0, y: 0, z: 200}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 400030}
@@ -2906,21 +2905,6 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100116}
   m_Mesh: {fileID: 4300072, guid: f4d0c559e42f8431b8ccf66055ce5e05, type: 3}
---- !u!54 &5400000
-Rigidbody:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 100096}
-  serializedVersion: 2
-  m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: .0500000007
-  m_UseGravity: 0
-  m_IsKinematic: 0
-  m_Interpolate: 0
-  m_Constraints: 126
-  m_CollisionDetection: 0
 --- !u!82 &8200000
 AudioSource:
   m_ObjectHideFlags: 1
@@ -2937,7 +2921,7 @@ AudioSource:
   Mute: 0
   Priority: 128
   DopplerLevel: 1
-  MinDistance: 1
+  MinDistance: 10
   MaxDistance: 500
   Pan2D: 0
   rolloffMode: 0
@@ -3024,28 +3008,20 @@ MonoBehaviour:
   pivot_tilt: {fileID: 400046}
   aim_pan: {fileID: 400030}
   aim_tilt: {fileID: 400098}
-  theDinos: []
-  thePositions: []
-  muzzlePoints:
-  - {fileID: 400124}
-  - {fileID: 400044}
-  - {fileID: 400002}
-  - {fileID: 400074}
   rotationSpeed: 20
-  setTime: .5
-  fireTime: .200000003
-  checkTime: .100000001
-  damageTime: 1
+  fireTime: 1
   damage: .100000001
-  hitThreshold: 11
-  rangeMax: 100
-  rangeMin: 0
-  dinoTopSpeed: 100
+  willSlowFirst: 1
+  willSlowSecond: 1
   firstSlowSpeed: .970000029
   secondSlowSpeed: .980000019
-  slowDuration: 1
   targets: []
-  myTarget: {fileID: 0}
+  currentTarget: {fileID: 0}
+  myTarget: {x: 0, y: 0, z: 0}
+  fireSoundEffect: {fileID: 8200000}
+  fireVisualEffects:
+  - {fileID: 19800006}
+  - {fileID: 19800000}
 --- !u!135 &13500000
 SphereCollider:
   m_ObjectHideFlags: 1
@@ -3056,8 +3032,8 @@ SphereCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 300
-  m_Center: {x: 0, y: -79.6999969, z: 0}
+  m_Radius: 200
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!148 &14800000
 NetworkView:
   m_ObjectHideFlags: 1
@@ -3065,7 +3041,7 @@ NetworkView:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100096}
   m_Enabled: 1
-  m_StateSynchronization: 1
+  m_StateSynchronization: 0
   m_Observed: {fileID: 400096}
   m_ViewID:
     m_ID: 0
@@ -3082,7 +3058,7 @@ ParticleSystem:
   randomSeed: 0
   looping: 1
   prewarm: 0
-  playOnAwake: 1
+  playOnAwake: 0
   moveWithTransform: 1
   InitialModule:
     enabled: 1
@@ -4124,7 +4100,7 @@ ParticleSystem:
   randomSeed: 0
   looping: 1
   prewarm: 0
-  playOnAwake: 1
+  playOnAwake: 0
   moveWithTransform: 1
   InitialModule:
     enabled: 1
@@ -5166,7 +5142,7 @@ ParticleSystem:
   randomSeed: 0
   looping: 1
   prewarm: 0
-  playOnAwake: 1
+  playOnAwake: 0
   moveWithTransform: 1
   InitialModule:
     enabled: 1
@@ -6208,7 +6184,7 @@ ParticleSystem:
   randomSeed: 0
   looping: 1
   prewarm: 0
-  playOnAwake: 1
+  playOnAwake: 0
   moveWithTransform: 1
   InitialModule:
     enabled: 1
