@@ -3015,9 +3015,7 @@ MonoBehaviour:
   willSlowSecond: 1
   firstSlowSpeed: .970000029
   secondSlowSpeed: .980000019
-  targets: []
   currentTarget: {fileID: 0}
-  myTarget: {x: 0, y: 0, z: 0}
   fireSoundEffect: {fileID: 8200000}
   fireVisualEffects:
   - {fileID: 19800006}
@@ -3052,11 +3050,11 @@ ParticleSystem:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100120}
-  lengthInSec: 2
+  lengthInSec: .100000001
   startDelay: 0
   speed: 1
   randomSeed: 0
-  looping: 1
+  looping: 0
   prewarm: 0
   playOnAwake: 0
   moveWithTransform: 1
@@ -3338,7 +3336,7 @@ ParticleSystem:
     time1: .5
     time2: 1
     time3: 0
-    m_BurstCount: 3
+    m_BurstCount: 1
   SizeModule:
     enabled: 0
     curve:
@@ -4094,11 +4092,11 @@ ParticleSystem:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100122}
-  lengthInSec: 2
+  lengthInSec: .100000001
   startDelay: 0
   speed: 1
   randomSeed: 0
-  looping: 1
+  looping: 0
   prewarm: 0
   playOnAwake: 0
   moveWithTransform: 1
@@ -4380,7 +4378,7 @@ ParticleSystem:
     time1: .5
     time2: 1
     time3: 0
-    m_BurstCount: 3
+    m_BurstCount: 1
   SizeModule:
     enabled: 0
     curve:
@@ -5136,11 +5134,11 @@ ParticleSystem:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100128}
-  lengthInSec: 2
+  lengthInSec: .100000001
   startDelay: 0
   speed: 1
   randomSeed: 0
-  looping: 1
+  looping: 0
   prewarm: 0
   playOnAwake: 0
   moveWithTransform: 1
@@ -5422,7 +5420,7 @@ ParticleSystem:
     time1: .5
     time2: 1
     time3: 0
-    m_BurstCount: 3
+    m_BurstCount: 1
   SizeModule:
     enabled: 0
     curve:
@@ -6178,11 +6176,11 @@ ParticleSystem:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100130}
-  lengthInSec: 2
+  lengthInSec: .100000001
   startDelay: 0
   speed: 1
   randomSeed: 0
-  looping: 1
+  looping: 0
   prewarm: 0
   playOnAwake: 0
   moveWithTransform: 1
@@ -6464,7 +6462,7 @@ ParticleSystem:
     time1: .5
     time2: 1
     time3: 0
-    m_BurstCount: 3
+    m_BurstCount: 1
   SizeModule:
     enabled: 0
     curve:

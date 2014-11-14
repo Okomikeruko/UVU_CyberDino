@@ -30,11 +30,9 @@ public class TurretFire : MonoBehaviour {
 	[SerializeField]
 	private float secondSlowSpeed = 0.98f;
 
-	[SerializeField]
-	private List<GameObject> targets = new List<GameObject>();
+	private HashSet<GameObject> targets = new HashSet<GameObject>();
 	[SerializeField]
 	private GameObject currentTarget;
-	[SerializeField]
 	private Vector3 myTarget;
 	private bool hasTarget = false;
 
@@ -66,7 +64,7 @@ public class TurretFire : MonoBehaviour {
 	}
 
 	void Update () {
-		if(hasTarget)
+		if(hasTarget && currentTarget != null)
 		{
 			Aim();
 
