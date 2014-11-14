@@ -103,7 +103,6 @@ public class TurretFire : MonoBehaviour {
 
 				currentTarget = highestPositionDino;
 				networkView.RPC("SetTarget", RPCMode.All, highestPositionDino.transform.position);
-				Debug.Log ("Turret targeting: " + DinoTracking.trackingScript.GetDinoPosition(highestPositionDino));
 			}
 			else
 			{

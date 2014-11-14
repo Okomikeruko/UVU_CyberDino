@@ -434,7 +434,8 @@ public class MenuLogic : MonoBehaviour
 		_obj.AddComponent("GUITexture");
 		_obj.guiTexture.pixelInset = _pos;
 		_obj.guiTexture.texture = _txtr;
-		
+		_obj.SetActive (false);
+
 		return _obj;
 	}
 
