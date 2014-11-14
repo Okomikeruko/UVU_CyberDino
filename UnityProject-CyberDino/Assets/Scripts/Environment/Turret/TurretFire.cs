@@ -90,6 +90,8 @@ public class TurretFire : MonoBehaviour {
 
 	IEnumerator AcquireTarget()
 	{
+		yield return new WaitForSeconds(Random.value);
+
 		while (true) {			
 			yield return new WaitForSeconds(fireTime);
 
