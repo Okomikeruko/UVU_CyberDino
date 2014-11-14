@@ -11,7 +11,7 @@ public class AIControl : MonoBehaviour {
 	
 	private MotionControl mc;
 	private Inventory inv;
-	//private MeleeAttack melee;
+	private MeleeAttack melee;
 	private Bomb bomb;
 	private Health health;
 
@@ -27,12 +27,14 @@ public class AIControl : MonoBehaviour {
 	private List<int> dinoArrayPositions;
 	//---------------------------//
 
+
+
 	// Use this for initialization
 	void Start () {
 		if (networkView.isMine) {
 			mc = GetComponent<MotionControl> ();
 			inv = GetComponent<Inventory> ();
-			//melee = GetComponent<MeleeAttack> ();
+			melee = GetComponent<MeleeAttack> ();
 			bomb = GetComponent<Bomb> ();
 			health = GetComponent<Health> ();
 
@@ -83,11 +85,22 @@ public class AIControl : MonoBehaviour {
 			}
 			//Debug.Log("AI Current Target: " + current.name);
 
-			if(inv.Count(PickUpTypes.Weapon) > 1)
-			{
-				// Use Bomb
-				if(inv.UsePickUp(PickUpTypes.Weapon, 2)) {
-					bomb.Fire();
+			if (inv.Count(PickUpTypes.Weapon) > 0){
+				if(inv.Count(PickUpTypes.Weapon) > 1)
+				{
+					//Add AI STUFF
+					if (ShouldUseBomb()){
+						// Use Bomb
+						if(inv.UsePickUp(PickUpTypes.Weapon, 2)) {
+							bomb.Fire();
+						}
+					}
+				}else{
+					if (ShouldUseMelee()){
+						if(inv.UsePickUp(PickUpTypes.Weapon, 1)){
+							melee.Fire();
+						}
+					}
 				}
 			}
 			else if(health.Current <= 30.0f && inv.Count(PickUpTypes.Health) > 0) {				
@@ -175,5 +188,53 @@ public class AIControl : MonoBehaviour {
 		MotionControl mc = GetComponent<MotionControl>();
 		mc.AIDecreaseAcceleration(bridgeAcceleration);
 		mc.AIDecreaseTopSpeed(bridgeTopSpeed);
+	}
+
+	private bool ShouldUseBomb(){
+		switch(this.gameObject.name){
+		case ("Troodon(Clone)"):
+			return TroodonBombAI();
+		default:
+			return true;
+		}
+	}
+
+	private bool ShouldUseMelee(){
+		Debug.Log(this.gameObject.name);
+		switch(this.gameObject.name){
+		case ("Troodon(Clone)"):
+			return TroodonMeleeAI();
+		default:
+			return false;
+		}
+	}
+
+	private bool TroodonMeleeAI(){
+		if (inStraightArea){
+			float range = 25;
+			List<GameObject> targets = new List<GameObject> ();
+			Collider[] ListOfObjects = Physics.OverlapSphere (this.transform.position, range);
+			Debug.Log(ListOfObjects.Length);
+			foreach (var obj in ListOfObjects) {
+				if (obj.gameObject.rigidbody != null){
+					if(obj.gameObject == this.gameObject){
+						continue;
+					}
+					else if(obj.gameObject.tag == "Dino" || obj.gameObject.tag == "Ai"){
+						targets.Add(obj.gameObject);
+					}
+				}
+			}
+			if (targets.Count > 0){
+				return true;
+			}else{
+				return false;
+			}
+		}
+		return false;
+	}
+
+	private bool TroodonBombAI(){
+		return true;
 	}
 }
