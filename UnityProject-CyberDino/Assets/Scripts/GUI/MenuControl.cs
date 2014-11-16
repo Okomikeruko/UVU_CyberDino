@@ -186,7 +186,7 @@ public class MenuControl : MenuLogic
 		connectTxtr = (Texture)Resources.Load("GUI/Materials/LookingGraphic");
 		
 		//set the texture for the selector
-		selectorGfx = (Texture)Resources.Load("GUI/Materials/EmptyButtonSelectedSmall");
+		selectorGfx = (Texture)Resources.Load("GUI/Materials/Selector");
 		
 		charKeys = new string[40];
 		charKeys[0] = "1"; charKeys[1] = "2"; charKeys[2] = "3"; charKeys[3] = "4"; charKeys[4] = "5"; 
@@ -568,10 +568,10 @@ public class MenuControl : MenuLogic
 			lobbyMenuRect[11] = ResizeRect(new Rect(90, 50, 6, 13));
 			
 			lobbyMenuBtnRect[0] = ResizeRect(new Rect(3, 90, 18, 6));
-			lobbyMenuBtnRect[1] = ResizeRect(new Rect(16, 48, 3, 8));
-			lobbyMenuBtnRect[2] = ResizeRect(new Rect(16, 56, 3, 8));
-			lobbyMenuBtnRect[3] = ResizeRect(new Rect(91, 49, 3, 8));
-			lobbyMenuBtnRect[4] = ResizeRect(new Rect(91, 57, 3, 8)); 
+			lobbyMenuBtnRect[1] = ResizeRect(new Rect(16.3f, 48.3f, 3, 8));
+			lobbyMenuBtnRect[2] = ResizeRect(new Rect(16.3f, 56.3f, 3, 8));
+			lobbyMenuBtnRect[3] = ResizeRect(new Rect(91.3f, 48.5f, 3, 8));
+			lobbyMenuBtnRect[4] = ResizeRect(new Rect(91.3f, 56.5f, 3, 8)); 
 			lobbyMenuBtnRect[5] = ResizeRect(new Rect(25, 90, 18, 6));
 			
 			lvlGraphicPos = ResizeRect(new Rect(10, 25, 33, 45));
@@ -582,6 +582,9 @@ public class MenuControl : MenuLogic
 				menuBkgd.renderer.material.SetTexture(0, lobbyMenuBtnTxtr[2]);
 				
 			largeSkin.fontSize = (int)((xMulti + yMulti) * 1f);
+
+			if(buttonIndex >= 1 && buttonIndex <= 4)
+				GUI.DrawTexture(new Rect(menuOrigin[2].x + lobbyMenuBtnRect[buttonIndex].x, menuOrigin[2].y + lobbyMenuBtnRect[buttonIndex].y, lobbyMenuBtnRect[buttonIndex].width, lobbyMenuBtnRect[buttonIndex].height), selectorGfx);
 			
 			//if the menu background is there set it's position and scale
 			/*if(menuBkgd != null)
@@ -652,9 +655,7 @@ public class MenuControl : MenuLogic
 			{
 				GUI.Label(new Rect(menuOrigin[2].x + lvlGraphicPos.x, menuOrigin[2].y + lvlGraphicPos.y, lvlGraphicPos.width, lvlGraphicPos.height), levels[levelIndex]);
 			}*/
-			
-			if(buttonIndex >= 1 && buttonIndex <= 4)
-				GUI.DrawTexture(new Rect(menuOrigin[2].x + lobbyMenuBtnRect[buttonIndex].x, menuOrigin[2].y + lobbyMenuBtnRect[buttonIndex].y, lobbyMenuBtnRect[buttonIndex].width, lobbyMenuBtnRect[buttonIndex].height), selectorGfx);
+
 			
 			//display the names of the other players and the dinos that they have chosen
 			if(singlePlayer == false)
@@ -1168,21 +1169,34 @@ public class MenuControl : MenuLogic
 	{
 		//joystick movement
 		if(Input.GetAxis("Vertical") > 0 && buttonIndex == 0)
-			buttonIndex = 1;
+			buttonIndex = 2;
 		else if(Input.GetAxis("Horizontal") > 0 && buttonIndex == 0)
 			buttonIndex = currentRect.Length - 1;
-		else if(Input.GetAxis("Vertical") < 0 && buttonIndex <= 2)
+		else if(Input.GetAxis("Vertical") > 0 && buttonIndex == 2)
+			buttonIndex = 1;
+		else if(Input.GetAxis("Vertical") < 0 && buttonIndex == 2)
 			buttonIndex = 0;
-		else if(Input.GetAxis("Horizontal") > 0 && buttonIndex >= 1 && buttonIndex <= 4)
-			buttonIndex++;
-		else if(Input.GetAxis("Horizontal") < 0 && buttonIndex >= 1 && buttonIndex <= 4)
-			buttonIndex--;
-		else if(Input.GetAxis("Vertical") < 0 && buttonIndex >= 3)
-			buttonIndex = currentRect.Length - 1;
-		else if(Input.GetAxis("Vertical") > 0 && buttonIndex == currentRect.Length - 1)
+		else if(Input.GetAxis("Horizontal") > 0 && buttonIndex == 2)
 			buttonIndex = 4;
-		else if(Input.GetAxis("Horizontal") < 0 && buttonIndex == currentRect.Length - 1)
+		else if(Input.GetAxis("Vertical") < 0 && buttonIndex == 1)
+			buttonIndex = 2;
+		else if(Input.GetAxis("Horizontal") > 0 && buttonIndex == 1)
+			buttonIndex = 3;
+		else if(Input.GetAxis("Vertical") > 0 && buttonIndex == 4)
+			buttonIndex = 3;
+		else if(Input.GetAxis("Vertical") < 0 && buttonIndex == 4)
+			buttonIndex = 5;
+		else if(Input.GetAxis("Horizontal") < 0 && buttonIndex == 4)
+			buttonIndex = 2;
+		else if(Input.GetAxis("Vertical") < 0 && buttonIndex == 3)
+			buttonIndex = 4;
+		else if(Input.GetAxis("Horizontal") < 0 && buttonIndex == 3)
+			buttonIndex = 1;
+		else if(Input.GetAxis("Vertical") > 0 && buttonIndex == 5)
+			buttonIndex = 4;
+		else if(Input.GetAxis("Horizontal") < 0 && buttonIndex == 5)
 			buttonIndex = 0;
+
 		//if pressing the action button
 		else if(Input.GetButton("Jump"))
 		{
