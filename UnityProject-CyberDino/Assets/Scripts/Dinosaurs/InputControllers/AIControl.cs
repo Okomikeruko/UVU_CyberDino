@@ -114,7 +114,7 @@ public class AIControl : MonoBehaviour {
 		}
 	}
 
-	float CalculateAngleToObject(GameObject target)
+	public float CalculateAngleToObject(GameObject target)
 	{
 		// Adjust turn axis
 		var toTarget = target.transform.position - transform.position;
@@ -200,7 +200,7 @@ public class AIControl : MonoBehaviour {
 	}
 
 	private bool ShouldUseMelee(){
-		Debug.Log(this.gameObject.name);
+		//Debug.Log(this.gameObject.name);
 		switch(this.gameObject.name){
 		case ("Troodon(Clone)"):
 			return TroodonMeleeAI();

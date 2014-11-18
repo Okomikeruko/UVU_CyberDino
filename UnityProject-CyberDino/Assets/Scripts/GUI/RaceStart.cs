@@ -84,6 +84,13 @@ public class RaceStart : MonoBehaviour
 			var aiPickup = unit.GetComponent<AIPickUp>(); //will turn on aiPickUp if prefab is cpu
 			aiPickup.enabled = true;
 			playerMotion.enabled = false;
+
+            if (unit.name == "Hesp(Clone)") // Enable the hesp's ai script
+            {
+                Debug.Log("There is an AI: " + unit.name);
+                var AIHesp = unit.GetComponent<AIHesp>();
+                AIHesp.enabled = true;
+            }
 		}
 
 		StartCoroutine("CountDown");

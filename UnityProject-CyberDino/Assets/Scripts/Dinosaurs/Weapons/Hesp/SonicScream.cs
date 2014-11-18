@@ -67,4 +67,9 @@ public class SonicScream : MeleeAttack {
 
 		WeaponVFX.emit = false;
 	}
+
+    public float getRange()
+    {
+        return range;
+    }
 }
