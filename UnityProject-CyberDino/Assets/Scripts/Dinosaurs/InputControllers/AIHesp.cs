@@ -20,12 +20,10 @@ public class AIHesp : MonoBehaviour {
     private MotionControl mc;
     private Inventory inv;
     private Health health;
-    private DinoTracking dinoTracking;
 
     private GameObject[] players;
     private GameObject closest;
     private GameObject playerTarget;
-    private List<int> dinoArrayPositions;
 
 	void Start () {
         if (networkView.isMine)
@@ -42,15 +40,7 @@ public class AIHesp : MonoBehaviour {
             {
                 players = GameObject.FindGameObjectsWithTag("Dino");
             }
-
-            if (current == null)
-            {
-                current = GameObject.Find(FirstNavNode).GetComponent<RespawnNode>();
-                current = current.nextNodes[0];
-            }
-            
-            Debug.Log("AI Current Target: " + current.name);
-            dinoTracking = GameObject.Find("Checkpoints").GetComponent<DinoTracking>();
+            Debug.Log(players[0]);
             meleeRange = ss.getRange();
             //bombRange = es.getRange();
             myLoc = new Vector3();
@@ -98,9 +88,12 @@ public class AIHesp : MonoBehaviour {
         /*aic.CalculateAngleToObject(target);
         Debug.Log("Hesp Target: " + target.name);
         StartCoroutine(turnTime());*/
-        inv.AddPickUp(PickUpTypes.Weapon); // Just give him a Weapon pickup **DEBUG PURPOSES**
-        ss.Fire();
-        Debug.Log("Hesp AI Fired");
+        //inv.AddPickUp(PickUpTypes.Weapon); // Just give him a Weapon pickup **DEBUG PURPOSES**
+        if (inv.UsePickUp(PickUpTypes.Weapon, 1))
+        {
+            ss.Fire();
+            Debug.Log("Hesp AI Fired");
+        }
         //aic.CalculateAngleToObject(current.gameObject);
     }
 
