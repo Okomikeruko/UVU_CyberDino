@@ -992,7 +992,6 @@ GameObject:
   - 114: {fileID: 11400012}
   - 114: {fileID: 11400016}
   - 114: {fileID: 11400014}
-  - 114: {fileID: 11400018}
   m_Layer: 8
   m_Name: Spino
   m_TagString: Dino
@@ -2423,17 +2422,6 @@ MonoBehaviour:
   ColliderRadius: 10
   WeaponVFX: {fileID: 100020}
   mesh: {fileID: 100036}
---- !u!114 &11400018
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 100114}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 76a5d97eae16f4d44ae76e99b96a0f3e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &11400020
 MonoBehaviour:
   m_ObjectHideFlags: 1
