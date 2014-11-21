@@ -212,7 +212,7 @@ public class AIControl : MonoBehaviour {
 	private bool TroodonMeleeAI(){
 		if (inStraightArea){
 			float range = 25;
-			List<GameObject> targets = new List<GameObject> ();
+			HashSet<GameObject> targets = new HashSet<GameObject> ();
 			Collider[] ListOfObjects = Physics.OverlapSphere (this.transform.position, range);
 			Debug.Log(ListOfObjects.Length);
 			foreach (var obj in ListOfObjects) {
