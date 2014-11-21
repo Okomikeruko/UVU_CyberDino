@@ -16,7 +16,7 @@ public class AIPickUp : MonoBehaviour
         int randy = Random.Range(1, 10);
         // 1 in 10 chance of getting a weapon pickup
         // If they get a weapon every time the game becomes pure MADNESS! :-D Is fun though
-        if (other.tag == "Ai" && randy == 3)
+		if (other.tag == "Ai" && randy == 3) //&& randy == 3
         {
             inv = other.gameObject.GetComponent<Inventory>();
             inv.AddPickUp(PickUpTypes.Weapon);
