@@ -14,14 +14,14 @@ public class AIStraightTrigger : MonoBehaviour {
 	}
 
 	void OnTriggerEnter(Collider other){
-		if (other.tag == "Ai"){
+		if (other.tag == "Ai" || other.tag == "Dino") {
 			AIControl aiControl = other.GetComponent<AIControl>();
 			aiControl.EnterStraight();
 		}
 	}
 
 	void OnTriggerExit(Collider other){
-		if (other.tag == "Ai"){
+		if (other.tag == "Ai" || other.tag == "Dino") {
 			AIControl aiControl = other.GetComponent<AIControl>();
 			aiControl.ExitStraight();
 		}

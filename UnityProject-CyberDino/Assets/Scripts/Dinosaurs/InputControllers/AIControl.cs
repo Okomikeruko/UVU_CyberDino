@@ -77,42 +77,63 @@ public class AIControl : MonoBehaviour {
 		}
 	}
 
-	IEnumerator AITick()
-	{
-		while (true) {
-			if (Vector3.Distance(transform.position, current.transform.position) < TriggerRadius) {
-				current = current.nextNodes[Random.Range(0, current.nextNodes.Count)];
-			}
-			//Debug.Log("AI Current Target: " + current.name);
+    IEnumerator AITick()
+    {
+        while (true)
+        {
+            if (Vector3.Distance(transform.position, current.transform.position) < TriggerRadius) {
+                current = current.nextNodes[Random.Range(0, current.nextNodes.Count)];
+            }
+            //Debug.Log("AI Current Target: " + current.name);
 
-			if (inv.Count(PickUpTypes.Weapon) > 0){
-				if(inv.Count(PickUpTypes.Weapon) > 1)
-				{
-					//Add AI STUFF
-					if (ShouldUseBomb()){
-						// Use Bomb
-						if(inv.UsePickUp(PickUpTypes.Weapon, 2)) {
-							bomb.Fire();
-						}
-					}
-				}else{
-					if (ShouldUseMelee()){
-						if(inv.UsePickUp(PickUpTypes.Weapon, 1)){
-							melee.Fire();
-						}
-					}
-				}
-			}
-			else if(health.Current <= 30.0f && inv.Count(PickUpTypes.Health) > 0) {				
-				inv.UsePickUp(PickUpTypes.Health);
-			}
-			else if(inv.Count(PickUpTypes.Turbo) > 0) {				
-				inv.UsePickUp(PickUpTypes.Turbo);
-			}
+            if (inv.Count(PickUpTypes.Weapon) > 1) {
+                // Use bomb
+                if (this.name == "Hesp(Clone)") {
+                    HespBomb();
+                }
+                if (this.name == "Diloph(Clone)") {
+                    DilophBomb();
+                }
+                if (this.name == "TRex(Clone)") {
+                    TRexBomb();
+                }
+                if (this.name == "Spino(Clone)") {
+                    SpinoBomb();
+                }
+                if (this.name == "Troodon(Clone)") {
+                    TroodonBomb();
+                }
+            }
 
-			yield return new WaitForSeconds(NavTick);
-		}
-	}
+            if (inv.Count(PickUpTypes.Weapon) > 0) {
+                // Use melee
+                if (this.name == "Hesp(Clone)") {
+                    HespMelee();
+                }
+                if (this.name == "Diloph(Clone)") {
+                    DilophMelee();
+                }
+                if (this.name == "TRex(Clone)") {
+                    TRexMelee();
+                }
+                if (this.name == "Spino(Clone)") {
+                    SpinoMelee();
+                }
+                if (this.name == "Troodon(Clone)") {
+                    TroodonMelee();
+                }
+            }
+
+            if (health.Current <= 30.0f && inv.Count(PickUpTypes.Health) > 0) {
+                inv.UsePickUp(PickUpTypes.Health);
+            }
+            if (inv.Count(PickUpTypes.Turbo) > 0) {
+                inv.UsePickUp(PickUpTypes.Turbo);
+            }
+
+            yield return new WaitForSeconds(NavTick);
+        }
+    }
 
 	public float CalculateAngleToObject(GameObject target)
 	{
@@ -126,18 +147,15 @@ public class AIControl : MonoBehaviour {
 
 	public void EnterStraight(){
 		inStraightArea = true;
-
 	}
 
 	public void ExitStraight(){
 		inStraightArea = false;
-
 	}
 
-	private void HandleBridgeCheating(){
+	private void HandleBridgeCheating(){ // NOTE TO SELF: Only rubberbanding on bridge...Why? Change
 		if (dinos == null || dinos.Length == 0){
 			dinos = dinoTracking.GetDinoArray();
-				
 		}
 		if (dinos.Length != 0 && !hasValidDinoArray){
 			if (dinos[0] != null){
@@ -190,51 +208,127 @@ public class AIControl : MonoBehaviour {
 		mc.AIDecreaseTopSpeed(bridgeTopSpeed);
 	}
 
-	private bool ShouldUseBomb(){
-		switch(this.gameObject.name){
-		case ("Troodon(Clone)"):
-			return TroodonBombAI();
-		default:
-			return true;
-		}
-	}
+    private void HespMelee()
+    {
+        float range = 100;
+        float arcDegree = 30;
+        HashSet<GameObject> playerTargets = new HashSet<GameObject>();
+        Collider[] ListOfObjects = Physics.OverlapSphere(transform.position, range);
 
-	private bool ShouldUseMelee(){
-		//Debug.Log(this.gameObject.name);
-		switch(this.gameObject.name){
-		case ("Troodon(Clone)"):
-			return TroodonMeleeAI();
-		default:
-			return false;
-		}
-	}
+        foreach (var obj in ListOfObjects) {
+            float angle = Vector3.Angle(obj.gameObject.transform.position - transform.position, transform.forward);
+            if (angle < arcDegree) {
+                if (obj.tag == "Dino") {
+                    playerTargets.Add(obj.gameObject);
+                    melee.Fire();
+                    inv.UsePickUp(PickUpTypes.Weapon, 1);
+                    Debug.Log("Hesp AI Fired Melee");
+                }
+            }
+        }
+    }
 
-	private bool TroodonMeleeAI(){
-		if (inStraightArea){
+    private void DilophMelee()
+    {
+        if (inv.UsePickUp(PickUpTypes.Weapon, 1)) {
+            melee.Fire();
+        }
+    }
+
+    private void TRexMelee()
+    {
+        float range = 100;
+        float arcDegree = 30;
+        HashSet<GameObject> playerTargets = new HashSet<GameObject>();
+        Collider[] ListOfObjects = Physics.OverlapSphere(transform.position, range);
+
+        foreach (var obj in ListOfObjects) {
+            float angle = Vector3.Angle(obj.gameObject.transform.position - transform.position, transform.forward);
+            if (angle < arcDegree) {
+                if (obj.tag == "Dino") {
+                    playerTargets.Add(obj.gameObject);
+                    melee.Fire();
+                    inv.UsePickUp(PickUpTypes.Weapon, 1);
+                    Debug.Log("TRex AI Fired Melee");
+                }
+            }
+        }
+    }
+
+    private void SpinoMelee()
+    {
+        if (inv.UsePickUp(PickUpTypes.Weapon, 1)) {
+            melee.Fire();
+        }
+    }
+
+	private void TroodonMelee()
+    {
+		if (inStraightArea) {
 			float range = 25;
 			HashSet<GameObject> targets = new HashSet<GameObject> ();
 			Collider[] ListOfObjects = Physics.OverlapSphere (this.transform.position, range);
 			Debug.Log(ListOfObjects.Length);
 			foreach (var obj in ListOfObjects) {
 				if (obj.gameObject.rigidbody != null){
-					if(obj.gameObject == this.gameObject){
+					if(obj.gameObject == this.gameObject) {
 						continue;
 					}
-					else if(obj.gameObject.tag == "Dino" || obj.gameObject.tag == "Ai"){
+					else if(obj.gameObject.tag == "Dino" || obj.gameObject.tag == "Ai") {
 						targets.Add(obj.gameObject);
 					}
 				}
 			}
-			if (targets.Count > 0){
-				return true;
-			}else{
-				return false;
+			if (targets.Count > 0) {
+				melee.Fire();
+                inv.UsePickUp(PickUpTypes.Weapon, 1);
 			}
 		}
-		return false;
 	}
 
-	private bool TroodonBombAI(){
-		return true;
+    /* Hesp will use the his bomb, EpicScream, if a player dino is on the bridge
+     * of the dumbell track. */
+    private void HespBomb() {
+        
+        GameObject[] dinos = GameObject.FindGameObjectsWithTag("Dino");
+        GameObject[] ais = GameObject.FindGameObjectsWithTag("Ai");
+        ais.CopyTo(dinos, dinos.Length);
+        HashSet<GameObject> targets = new HashSet<GameObject>();
+        foreach (GameObject dino in dinos)
+        {
+            if (dino.gameObject.tag == "Dino") //go.gameObject.tag == "Ai" || 
+            {
+                if (inStraightArea)
+                    targets.Add(dino);
+            }
+        }
+        if (targets.Count > 0) {
+            bomb.Fire();
+            inv.UsePickUp(PickUpTypes.Weapon, 2);
+        }
+    }
+
+    private void DilophBomb() {
+        if (inv.UsePickUp(PickUpTypes.Weapon, 2)) {
+            bomb.Fire();
+        }
+    }
+
+    private void TRexBomb() {
+        if (inv.UsePickUp(PickUpTypes.Weapon, 2)) {
+            bomb.Fire();
+        }
+    }
+
+    private void SpinoBomb() {
+        if (inv.UsePickUp(PickUpTypes.Weapon, 2)) {
+            bomb.Fire();
+        }
+    }
+
+	private void TroodonBomb() {
+        if (inv.UsePickUp(PickUpTypes.Weapon, 2)) {
+            bomb.Fire();
+        }
 	}
 }

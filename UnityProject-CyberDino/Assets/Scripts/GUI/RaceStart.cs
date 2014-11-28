@@ -83,12 +83,12 @@ public class RaceStart : MonoBehaviour
 			var playerMotion = unit.GetComponent<MotionControl> ();
 
 
-            if (unit.name == "Hesp(Clone)") // Enable the hesp's ai script
+            /*if (unit.name == "Hesp(Clone)") // Enable the hesp's ai script
             {
                 Debug.Log("There is an AI: " + unit.name);
                 var AIHesp = unit.GetComponent<AIHesp>();
                 AIHesp.enabled = true;
-            }
+            }*/
 		}
 
 		StartCoroutine("CountDown");

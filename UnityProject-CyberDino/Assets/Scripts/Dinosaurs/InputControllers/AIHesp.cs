@@ -10,6 +10,8 @@ public class AIHesp : MonoBehaviour {
     private float meleeRange;
     private float distance;
     private Vector3 myLoc;
+    private float arcDegree = 30.0f;
+    private float range = 500;
     //private float bombRange; // no range on Hesp bomb, but there is on others
 
     // "borrowed" game objects
@@ -33,14 +35,6 @@ public class AIHesp : MonoBehaviour {
             inv = GetComponent<Inventory>();
             ss = GetComponent<SonicScream>();
             es = GetComponent<EpicScream>();
-            aipu = GetComponent<AIPickUp>();
-            health = GetComponent<Health>();
-
-            if (players == null)
-            {
-                players = GameObject.FindGameObjectsWithTag("Dino");
-            }
-            Debug.Log(players[0]);
             meleeRange = ss.getRange();
             //bombRange = es.getRange();
             myLoc = new Vector3();
@@ -49,22 +43,42 @@ public class AIHesp : MonoBehaviour {
 	}
 
 	void Update () {
-        if (networkView.isMine)
-        {
-            playerTarget = findClosestPlayer();
-            //if (Physics.Raycast(Vector3.zero, Vector3.forward, Mathf.Infinity))
-            if (distance < 500)
+        if (networkView.isMine) {
+
+            if (inv.Count(PickUpTypes.Weapon) == 2)
             {
-                fireMeleeTowardsIt(playerTarget);
+                playerTarget = findBombTarget();
+            }
+            if (inv.Count(PickUpTypes.Weapon) == 1) {
+                findMeleeTarget();
             }
         }
 	}
 
-    public GameObject findClosestPlayer()
+    public void findMeleeTarget()
     {
+        HashSet<GameObject> playerTargets = new HashSet<GameObject>();
+        Collider[] ListOfObjects = Physics.OverlapSphere(transform.position, range);
+
+        foreach (var obj in ListOfObjects) {
+            float angle = Vector3.Angle(obj.gameObject.transform.position - transform.position, transform.forward);
+            if (angle < arcDegree) {
+                if (obj.tag == "Dino") {
+                    playerTargets.Add(obj.gameObject);
+                    ss.Fire();
+                    Debug.Log("Hesp AI Fired Melee");
+                }
+            }
+        }
+    }
+
+    public GameObject findBombTarget()
+    {
+        HashSet<GameObject> targets = new HashSet<GameObject>();
         GameObject[] gos;
         gos = GameObject.FindGameObjectsWithTag("Dino");
         distance = Mathf.Infinity;
+        //if (Physics.Raycast(Vector3.zero, Vector3.forward, Mathf.Infinity))
         Vector3 myPosition = transform.position;
         foreach (GameObject go in gos)
         {
@@ -79,22 +93,39 @@ public class AIHesp : MonoBehaviour {
         //Debug.Log(closest.name);
         return closest;
     }
-
+    /*// where players = GameObject.FindGameObjectsWithTag("Dino");
+     * // or can take no parameter and create player array inside function
+    public GameObject findClosestPlayer(players)
+    {
+        GameObject[] gos;
+        gos = GameObject.FindGameObjectsWithTag("Dino");
+        distance = Mathf.Infinity;
+        //if (Physics.Raycast(Vector3.zero, Vector3.forward, Mathf.Infinity))
+        Vector3 myPosition = transform.position;
+        foreach (GameObject go in gos)
+        {
+            Vector3 diff = go.transform.position - myPosition;
+            float curDistance = diff.sqrMagnitude;
+            if (curDistance < distance)
+            {
+                closest = go;
+                distance = curDistance;
+            }
+        }
+        //Debug.Log(closest.name);
+        return closest;
+    }*/
     // For melee fire
     public void fireMeleeTowardsIt(GameObject target)
     {
         //float angle = Vector3.Angle(myLoc, target.transform.position);
         //transform.Rotate(angle,0,0,Space.Self);
-        /*aic.CalculateAngleToObject(target);
-        Debug.Log("Hesp Target: " + target.name);
-        StartCoroutine(turnTime());*/
         //inv.AddPickUp(PickUpTypes.Weapon); // Just give him a Weapon pickup **DEBUG PURPOSES**
         if (inv.UsePickUp(PickUpTypes.Weapon, 1))
         {
             ss.Fire();
             Debug.Log("Hesp AI Fired");
         }
-        //aic.CalculateAngleToObject(current.gameObject);
     }
 
     private IEnumerator turnTime()
