@@ -230,8 +230,18 @@ public class AIControl : MonoBehaviour {
 
     private void DilophMelee()
     {
-        if (inv.UsePickUp(PickUpTypes.Weapon, 1)) {
-            melee.Fire();
+        float range = 20.0f;
+        float radius = 10.0f;
+        HashSet<GameObject> targets = new HashSet<GameObject>();
+        RaycastHit[] hits = Physics.SphereCastAll(this.transform.position, radius, transform.forward, range);
+
+        foreach (RaycastHit hit in hits)
+        {
+            if (hit.transform.tag == "Dino" /*|| hit.transform.tag == "Ai"*/)
+            {
+                melee.Fire();
+                inv.UsePickUp(PickUpTypes.Weapon, 1);
+            }
         }
     }
 
@@ -245,7 +255,8 @@ public class AIControl : MonoBehaviour {
         foreach (var obj in ListOfObjects) {
             float angle = Vector3.Angle(obj.gameObject.transform.position - transform.position, transform.forward);
             if (angle < arcDegree) {
-                if (obj.tag == "Dino") {
+                if (obj.transform.tag == "Dino" /*|| obj.transform.tag == "Ai"*/)
+                {
                     playerTargets.Add(obj.gameObject);
                     melee.Fire();
                     inv.UsePickUp(PickUpTypes.Weapon, 1);
@@ -257,8 +268,18 @@ public class AIControl : MonoBehaviour {
 
     private void SpinoMelee()
     {
-        if (inv.UsePickUp(PickUpTypes.Weapon, 1)) {
-            melee.Fire();
+        float range = 20.0f;
+        float radius = 10.0f;
+        HashSet<GameObject> targets = new HashSet<GameObject>();
+        RaycastHit[] hits = Physics.SphereCastAll(this.transform.position, radius, transform.forward, range);
+
+        foreach (RaycastHit hit in hits)
+        {
+            if (hit.transform.tag == "Dino" /*|| hit.transform.tag == "Ai"*/)
+            {
+                melee.Fire();
+                inv.UsePickUp(PickUpTypes.Weapon, 1);
+            }
         }
     }
 
@@ -268,7 +289,7 @@ public class AIControl : MonoBehaviour {
 			float range = 25;
 			HashSet<GameObject> targets = new HashSet<GameObject> ();
 			Collider[] ListOfObjects = Physics.OverlapSphere (this.transform.position, range);
-			Debug.Log(ListOfObjects.Length);
+			//Debug.Log(ListOfObjects.Length);
 			foreach (var obj in ListOfObjects) {
 				if (obj.gameObject.rigidbody != null){
 					if(obj.gameObject == this.gameObject) {
