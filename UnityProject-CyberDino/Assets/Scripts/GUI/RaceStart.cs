@@ -81,14 +81,6 @@ public class RaceStart : MonoBehaviour
 		//get the MotionControllers from the player and the cpu
 		foreach (var unit in players.Concat(ai)) {
 			var playerMotion = unit.GetComponent<MotionControl> ();
-
-
-            /*if (unit.name == "Hesp(Clone)") // Enable the hesp's ai script
-            {
-                Debug.Log("There is an AI: " + unit.name);
-                var AIHesp = unit.GetComponent<AIHesp>();
-                AIHesp.enabled = true;
-            }*/
 		}
 
 		StartCoroutine("CountDown");

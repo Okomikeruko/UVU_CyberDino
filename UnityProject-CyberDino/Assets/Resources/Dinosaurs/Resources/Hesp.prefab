@@ -1093,7 +1093,6 @@ GameObject:
   - 114: {fileID: 11400004}
   - 114: {fileID: 11400008}
   - 114: {fileID: 11400006}
-  - 114: {fileID: 11400030}
   m_Layer: 8
   m_Name: Hesp
   m_TagString: Dino
@@ -3103,17 +3102,6 @@ MonoBehaviour:
   TurnSpeed: 1.5
   JumpHeight: 35
   AirControl: .25
---- !u!114 &11400030
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 100166}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3dfe850b239cd244982b022f8aaf5e60, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!136 &13600000
 CapsuleCollider:
   m_ObjectHideFlags: 1

@@ -208,6 +208,12 @@ public class AIControl : MonoBehaviour {
 		mc.AIDecreaseTopSpeed(bridgeTopSpeed);
 	}
 
+    /******************************************************************
+     ******************************************************************
+     ************AI MELEE WEAPON DECISION MAKING FUNCTIONS*************
+     ******************************************************************
+     ******************************************************************/
+
     private void HespMelee()
     {
         float range = 100;
@@ -218,7 +224,8 @@ public class AIControl : MonoBehaviour {
         foreach (var obj in ListOfObjects) {
             float angle = Vector3.Angle(obj.gameObject.transform.position - transform.position, transform.forward);
             if (angle < arcDegree) {
-                if (obj.tag == "Dino") {
+                if (obj.tag == "Dino"/*|| obj.tag == "Ai"*/)// Uncomment 'OR Ai' side to make Ai attack 
+                {                                           // each other also, not just the players
                     playerTargets.Add(obj.gameObject);
                     melee.Fire();
                     inv.UsePickUp(PickUpTypes.Weapon, 1);
@@ -237,8 +244,8 @@ public class AIControl : MonoBehaviour {
 
         foreach (RaycastHit hit in hits)
         {
-            if (hit.transform.tag == "Dino" /*|| hit.transform.tag == "Ai"*/)
-            {
+            if (hit.transform.tag == "Dino" /*|| hit.transform.tag == "Ai"*/) // Uncomment 'OR Ai' side to make Ai attack 
+            {                                                                 // each other also, not just the players
                 melee.Fire();
                 inv.UsePickUp(PickUpTypes.Weapon, 1);
             }
@@ -255,8 +262,8 @@ public class AIControl : MonoBehaviour {
         foreach (var obj in ListOfObjects) {
             float angle = Vector3.Angle(obj.gameObject.transform.position - transform.position, transform.forward);
             if (angle < arcDegree) {
-                if (obj.transform.tag == "Dino" /*|| obj.transform.tag == "Ai"*/)
-                {
+                if (obj.transform.tag == "Dino" /*|| obj.transform.tag == "Ai"*/) // Uncomment 'OR Ai' side to make Ai attack 
+                {                                                                 // each other also, not just the players
                     playerTargets.Add(obj.gameObject);
                     melee.Fire();
                     inv.UsePickUp(PickUpTypes.Weapon, 1);
@@ -275,8 +282,8 @@ public class AIControl : MonoBehaviour {
 
         foreach (RaycastHit hit in hits)
         {
-            if (hit.transform.tag == "Dino" /*|| hit.transform.tag == "Ai"*/)
-            {
+            if (hit.transform.tag == "Dino" /*|| hit.transform.tag == "Ai"*/) // Uncomment 'OR Ai' side to make Ai attack 
+            {                                                                 // each other also, not just the players
                 melee.Fire();
                 inv.UsePickUp(PickUpTypes.Weapon, 1);
             }
@@ -307,6 +314,13 @@ public class AIControl : MonoBehaviour {
 		}
 	}
 
+
+    /******************************************************************
+     ******************************************************************
+     *************AI BOMB WEAPON DECISION MAKING FUNCTIONS*************
+     ******************************************************************
+     ******************************************************************/
+
     /* Hesp will use the his bomb, EpicScream, if a player dino is on the bridge
      * of the dumbell track. */
     private void HespBomb() {
@@ -317,7 +331,7 @@ public class AIControl : MonoBehaviour {
         HashSet<GameObject> targets = new HashSet<GameObject>();
         foreach (GameObject dino in dinos)
         {
-            if (dino.gameObject.tag == "Dino") //go.gameObject.tag == "Ai" || 
+            if (dino.gameObject.tag == "Dino") // Ai dinos are not affected by EpicScream as of yet
             {
                 if (inStraightArea)
                     targets.Add(dino);
@@ -336,8 +350,19 @@ public class AIControl : MonoBehaviour {
     }
 
     private void TRexBomb() {
-        if (inv.UsePickUp(PickUpTypes.Weapon, 2)) {
-            bomb.Fire();
+
+        float range = 150.0f;
+        float radius = 10.0f;
+        HashSet<GameObject> targets = new HashSet<GameObject>();
+        RaycastHit[] hits = Physics.SphereCastAll(this.transform.position, radius, -transform.forward, range);
+
+        foreach (RaycastHit hit in hits)
+        {
+            if (hit.transform.tag == "Dino" /*|| hit.transform.tag == "Ai"*/) // Uncomment 'OR Ai' side to make Ai attack 
+            {                                                                 // each other also, not just the players
+                bomb.Fire();
+                inv.UsePickUp(PickUpTypes.Weapon, 2);
+            }
         }
     }
 
