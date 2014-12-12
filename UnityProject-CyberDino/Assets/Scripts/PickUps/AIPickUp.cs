@@ -4,6 +4,8 @@ using System.Collections.Generic;
 
 public class AIPickUp : MonoBehaviour
 {
+    [SerializeField]
+    private int WeaponOddsOneIn = 8;
 
     private Inventory inv;
 
@@ -13,9 +15,9 @@ public class AIPickUp : MonoBehaviour
     // This will happen automatically for all Ai dinos- love Darren
     void OnTriggerEnter(Collider other)
     {
-        int randy = Random.Range(1, 8); // 1 in N chance of getting a weapon pickup
+        int randy = Random.Range(1, WeaponOddsOneIn); // 1 in N chance of getting a weapon pickup
         // If they get a weapon every time, the game becomes pure MADNESS! :-D Is fun though
-		if (other.tag == "Ai" && randy == 3) //&& randy == 3, is a number I randomly picked 
+		if (other.tag == "Ai" && randy == 1) //&& randy == 3, is a number I randomly picked 
         {
             inv = other.gameObject.GetComponent<Inventory>();
             inv.AddPickUp(PickUpTypes.Weapon);
