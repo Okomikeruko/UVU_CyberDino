@@ -15,7 +15,7 @@ public class StickyBomb : Bomb {
 
 		if(nearest == null)
 		{
-			Debug.Log ("Couldn't find valid sticky bomb target.");
+			//Debug.Log ("Couldn't find valid sticky bomb target.");
 
 			// Replace expended weapon pickups
 			var inv = GetComponent<Inventory>();
